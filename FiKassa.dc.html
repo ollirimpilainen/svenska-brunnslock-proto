@@ -129,8 +129,9 @@ a{color:#111111}a:hover{color:#474747}
 <h2 id="sum-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">Tilauksesi</h2>
 <a href="FiOstoskori.dc.html" style="font-size: 14px; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Muuta</a>
 </div>
-<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>Kevyt kaivonkansi Ø 600, A15<span style="display: block; font-size: 13px; color: #5c5c5c">1 kpl</span></span><b>{{ p1 }}</b></div>
-<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>Lukko ja avain<span style="display: block; font-size: 13px; color: #5c5c5c">1 kpl</span></span><b>{{ p2 }}</b></div>
+<sc-for list="{{ sumLines }}" as="l" hint-placeholder-count="2">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>{{ l.name }}<span style="display: block; font-size: 13px; color: #5c5c5c">{{ l.qtyLabel }}</span></span><b>{{ l.sum }}</b></div>
+</sc-for>
 <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px; border-top: 1px solid #e2e2e0; padding-top: 12px"><span>Rahti postinumeroon {{ zipShown }}</span><b>[X] kr</b></div>
 <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: #474747"><span>Josta alv 25 %</span><span>{{ vatSum }}</span></div>
 <div style="display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 18px; color: #111111"><span>Yhteensä</span><span>[X] kr</span></div>
@@ -144,8 +145,10 @@ a{color:#111111}a:hover{color:#474747}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
+    const SB = typeof window !== 'undefined' ? window.SBCart : null;
+    const z0 = SB ? SB.zip() : '';
     this.state = { who: 'privat', ship: 'ombud', pay: 'klarna', showErr: false, f: {
-      company: '', orgnr: '', ref: '', email: 'anna@esimerkki.fi', phone: '070-123 45 67', name: 'Anna Esimerkki', street: 'Esimerkkitie 1', zip: '123 45', city: 'Esimerkkilä', msg: '', noSign: false, terms: false } };
+      company: '', orgnr: '', ref: '', email: 'anna@esimerkki.fi', phone: '070-123 45 67', name: 'Anna Esimerkki', street: 'Esimerkkitie 1', zip: z0 || '123 45', city: 'Esimerkkilä', msg: '', noSign: false, terms: false } };
   }
   renderVals() {
     const S = this.state, F = S.f, fo = S.who === 'foretag';
@@ -166,7 +169,9 @@ class Component extends DCLogic {
       ? [ { id: 'faktura', label: 'Lasku yrityksille', text: '30 päivää, luottotietojen tarkistuksen jälkeen. Viite näkyy laskussa.' } ]
       : [ { id: 'klarna', label: 'Klarna tai Qliro', text: 'Kortti, Swish, lasku tai osamaksu.' }, { id: 'pfaktura', label: 'Lasku', text: 'Laskutuslisä [X] kr.' } ];
     const payNow = pays.find((p) => p.id === S.pay) ? S.pay : pays[0].id;
-    const sum = 1495 + 295;
+    const SBc = typeof window !== 'undefined' ? window.SBCart : null;
+    const cl = SBc && SBc.items().length ? SBc.lines('fi') : [{ name: 'Kevyt kaivonkansi Ø 600, A15', price: 1495, qty: 1 }, { name: 'Lukko ja avain', price: 295, qty: 1 }];
+    const sum = cl.reduce((t, l) => t + l.price * l.qty, 0);
     const fmt = (n) => Math.round(fo ? n / 1.25 : n).toLocaleString('fi-FI') + ' kr';
     const inp = {};
     ['company', 'orgnr', 'ref', 'email', 'phone', 'name', 'street', 'zip', 'city', 'msg'].forEach((k) => { inp[k] = set(k); });
@@ -182,7 +187,7 @@ class Component extends DCLogic {
       toggleTerms: () => this.setState({ f: { ...F, terms: !F.terms } }),
       valid: valid, invalid: !valid, showErr: S.showErr,
       submit: (e) => { e.preventDefault(); this.setState({ showErr: true }); },
-      p1: fmt(1495), p2: fmt(295),
+      sumLines: cl.map((l) => ({ name: l.name, qtyLabel: l.qty + ' kpl', sum: fmt(l.price * l.qty) })),
       vatSum: Math.round(sum - sum / 1.25).toLocaleString('fi-FI') + ' kr',
       vatNote: fo ? 'Hinnat näytetään yrityksille alv 0.' : 'Hinnat sisältävät alv:n.'
     };

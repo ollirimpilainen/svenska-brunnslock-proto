@@ -97,7 +97,7 @@ summary::-webkit-details-marker{display:none}
 <span aria-live="polite" style="width: 40px; text-align: center; font-weight: 600">{{ qty }}</span>
 <button type="button" onClick="{{ more }}" aria-label="Öka antal" style="width: 44px; min-height: 48px; border: 0; background: transparent; font: inherit; font-size: 20px; cursor: pointer">+</button>
 </div>
-<a href="SvVarukorg.dc.html" style="min-height: 52px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 4h2l2.5 11h10l2-7H7"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>Lägg i varukorgen</a>
+<a href="SvVarukorg.dc.html" onClick="{{ addToCart }}" style="min-height: 52px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 4h2l2.5 11h10l2-7H7"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>Lägg i varukorgen</a>
 </div>
 <div style="background: #f5f5f4; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px; font-size: 15px">
 <div style="display: flex; justify-content: space-between; gap: 10px"><span>{{ prodLabel }}</span><b>{{ prodSum }}</b></div>
@@ -268,7 +268,7 @@ summary::-webkit-details-marker{display:none}
 <div style="display: flex; flex-direction: column; gap: 2px">
 <a href="#" style="font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 16px; text-decoration: none">{{ r.title }}</a>
 <span style="font-size: 13px; color: #5c5c5c">{{ r.text }}</span>
-<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px"><b>{{ r.price }}</b><a href="SvVarukorg.dc.html" style="font-size: 14px; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Lägg till</a></div>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px"><b>{{ r.price }}</b><a href="SvVarukorg.dc.html" onClick="{{ r.add }}" style="font-size: 14px; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Lägg till</a></div>
 </div>
 </div>
 </sc-for>
@@ -281,7 +281,7 @@ summary::-webkit-details-marker{display:none}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4300}}'>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { vat: 'inkl', qty: 1, addons: {}, zip: '', zipDone: false, zipErr: false, inMm: '', outMm: '', checkMsg: '', about: false, copied: false }; }
+  constructor(props) { super(props); const SB = typeof window !== 'undefined' ? window.SBCart : null; const z0 = SB ? SB.zip() : ''; this.state = { vat: 'inkl', qty: 1, addons: {}, zip: z0, zipDone: /^\d{5}$/.test(z0.replace(/\s/g, '')), zipErr: false, inMm: '', outMm: '', checkMsg: '', about: false, copied: false }; }
   renderVals() {
     const S = this.state, base = 1495;
     const ex = S.vat === 'exkl';
@@ -304,7 +304,7 @@ class Component extends DCLogic {
       qty: S.qty, less: () => this.setState({ qty: Math.max(1, S.qty - 1) }), more: () => this.setState({ qty: S.qty + 1 }),
       prodLabel: 'Produkter, ' + S.qty + ' st', prodSum: fmt(unit * S.qty),
       zip: S.zip, typeZip: (e) => this.setState({ zip: e.target.value, zipErr: false }),
-      submitZip: (e) => { e.preventDefault(); const v = S.zip.replace(/\s/g, ''); if (/^\d{5}$/.test(v)) this.setState({ zipDone: true, zipErr: false }); else this.setState({ zipErr: true }); },
+      submitZip: (e) => { e.preventDefault(); const v = S.zip.replace(/\s/g, ''); if (/^\d{5}$/.test(v)) { if (typeof window !== 'undefined' && window.SBCart) window.SBCart.setZip(S.zip); this.setState({ zipDone: true, zipErr: false }); } else this.setState({ zipErr: true }); },
       noZip: !S.zipDone, hasZip: S.zipDone, zipErr: S.zipErr,
       zipShown: S.zip.replace(/\s/g, '').replace(/^(\d{3})(\d{2})$/, '$1 $2'),
       changeZip: () => this.setState({ zipDone: false }),
@@ -325,11 +325,12 @@ class Component extends DCLogic {
         if (bad) out.push('Jämför storlekarna ovan.');
         this.setState({ checkMsg: out.join(' ') });
       },
+      addToCart: () => { const SB = typeof window !== 'undefined' ? window.SBCart : null; if (!SB) return; SB.add('kansi600a15', S.qty); addonDefs.forEach((a) => { if (S.addons[a.key]) SB.add(a.key, S.qty); }); if (S.zipDone) SB.setZip(S.zip); },
       related: [
-        { title: 'Betongring Ø 600', text: 'Höjd 500 mm. Levereras på pall.', price: fmt(890), img: 'Bild: betongring' },
-        { title: 'Förhöjningsring Ø 600', text: 'Höjer locket till marknivå.', price: fmt(645), img: 'Bild: förhöjningsring' },
-        { title: 'Lås med nyckel', text: 'Passar alla lätta lock.', price: fmt(295), img: 'Bild: lås' }
-      ]
+        { title: 'Betongring Ø 600', text: 'Höjd 500 mm. Levereras på pall.', price: fmt(890), id: 'betonirengas', img: 'Bild: betongring' },
+        { title: 'Förhöjningsring Ø 600', text: 'Höjer locket till marknivå.', price: fmt(645), id: 'korotus', img: 'Bild: förhöjningsring' },
+        { title: 'Lås med nyckel', text: 'Passar alla lätta lock.', price: fmt(295), id: 'las', img: 'Bild: lås' }
+      ].map((r) => ({ ...r, add: () => { if (typeof window !== 'undefined' && window.SBCart) window.SBCart.add(r.id, 1); } }))
     };
   }
 }

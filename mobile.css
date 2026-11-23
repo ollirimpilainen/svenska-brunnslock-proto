@@ -1,0 +1,40 @@
+/* Mobiilikerros protolle. Canvaksen artboardit ovat 1440 px, joten nämä säännöt koskevat vain protoa. */
+@media (max-width: 760px) {
+  /* Header */
+  .m-hide { display: none !important; }
+  .m-topright { margin-left: 0 !important; width: 100%; justify-content: space-between; gap: 8px !important; }
+  .m-mainrow { gap: 12px !important; padding: 10px 16px !important; }
+  .m-logo { width: 132px !important; height: 36px !important; }
+  .m-search { order: 3; flex: 1 1 100% !important; max-width: none !important; }
+  .m-mega { grid-template-columns: 1fr 1fr !important; gap: 20px 16px !important; }
+
+  /* Yleiset */
+  [style*="max-width: 1240px"] { padding-left: 16px !important; padding-right: 16px !important; }
+  .m-sec { padding-top: 40px !important; padding-bottom: 40px !important; }
+  .m-sec h2 { font-size: 26px !important; }
+
+  /* Etusivu */
+  .m-h1 { font-size: 36px !important; max-width: none !important; }
+  .m-heroimg { aspect-ratio: 16 / 10 !important; }
+  .m-usp { grid-template-columns: 1fr 1fr !important; gap: 20px 0 !important; padding: 24px 0 !important; }
+  .m-usp > li { border-left: 0 !important; padding: 0 16px !important; }
+  .m-usp h3 { font-size: 16px !important; }
+  .m-usp p { font-size: 14px !important; }
+
+  /* Kategoria */
+  .m-stack { grid-template-columns: minmax(0, 1fr) !important; gap: 16px !important; }
+  .m-cats { border: 0 !important; padding: 0 !important; }
+  .m-cats > h2, .m-cats > a:last-child { display: none !important; }
+  .m-cats > ul { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+  .m-cats > ul > li { flex: none; border: 0 !important; }
+  .m-cats > ul > li > a { padding: 6px 14px !important; border: 1px solid #bdbdbb; border-radius: 999px; white-space: nowrap; min-height: 40px !important; }
+  .m-cats > ul > li > a[aria-current="page"] { border-color: #111111; background: #111111 !important; color: #ffffff !important; box-shadow: none !important; }
+  .m-cats > ul > li > a > span:last-child { display: none; }
+  .m-only { display: flex !important; }
+  .m-filters { display: none !important; }
+  .m-filters[data-open="true"] { display: flex !important; position: fixed; inset: 0; z-index: 50; border-radius: 0 !important; border: 0 !important; overflow-y: auto; background: #ffffff; padding: 16px 16px 0 !important; }
+  .m-fhead + div h2 { display: none !important; }
+  .m-fshow { position: sticky; bottom: 0; background: #ffffff; padding: 12px 0 16px; margin-top: auto; border-top: 1px solid #e2e2e0; }
+  .m-fbtn { flex: 0 0 auto; align-items: center; }
+  .m-stack form[role="search"] { order: -1; flex: 1 1 100% !important; max-width: none !important; }
+}

@@ -98,16 +98,20 @@ a{color:#111111}a:hover{color:#474747}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { vat: 'inkl', zip: '', zipDone: false, zipErr: false, lines: [
-      { id: 'lock', name: 'Lätt brunnslock Ø 600, A15', meta: 'Art.nr 10354 · Komposit, 6 kg · Passar ring 580 till 640 mm', price: 1495, qty: 1, href: 'SvProdukt.dc.html' },
+    const SB = typeof window !== 'undefined' ? window.SBCart : null;
+    const z0 = SB ? SB.zip() : '';
+    this.state = { vat: 'inkl', zip: z0, zipDone: /^\d{5}$/.test(z0.replace(/\s/g, '')), zipErr: false, lines: [
+      { id: 'kansi600a15', name: 'Lätt brunnslock Ø 600, A15', meta: 'Art.nr 10354 · Komposit, 6 kg · Passar ring 580 till 640 mm', price: 1495, qty: 1, href: 'SvProdukt.dc.html' },
       { id: 'las', name: 'Lås med nyckel', meta: 'Tillval till lätta lock', price: 295, qty: 1, href: '#' }
     ] };
+    if (SB) this.state.lines = SB.lines('sv');
   }
   renderVals() {
     const S = this.state, ex = S.vat === 'exkl';
+    const save = (lines) => { this.setState({ lines: lines }); if (typeof window !== 'undefined' && window.SBCart) window.SBCart.setItems(lines); };
     const fmt = (n) => Math.round(ex ? n / 1.25 : n).toLocaleString('sv-SE') + ' kr';
-    const setQty = (id, d) => this.setState({ lines: S.lines.map((l) => l.id === id ? { ...l, qty: Math.max(1, l.qty + d) } : l) });
-    const add = (item) => { const has = S.lines.find((l) => l.id === item.id); this.setState({ lines: has ? S.lines.map((l) => l.id === item.id ? { ...l, qty: l.qty + 1 } : l) : S.lines.concat([{ ...item, qty: 1 }]) }); };
+    const setQty = (id, d) => save(S.lines.map((l) => l.id === id ? { ...l, qty: Math.max(1, l.qty + d) } : l));
+    const add = (item) => { const has = S.lines.find((l) => l.id === item.id); save(has ? S.lines.map((l) => l.id === item.id ? { ...l, qty: l.qty + 1 } : l) : S.lines.concat([{ ...item, qty: 1 }])); };
     const sum = S.lines.reduce((s, l) => s + l.price * l.qty, 0);
     const count = S.lines.reduce((s, l) => s + l.qty, 0);
     return {
@@ -116,14 +120,14 @@ class Component extends DCLogic {
       lines: S.lines.map((l) => ({ ...l, sum: fmt(l.price * l.qty), img: 'Bild: ' + l.name,
         less: () => setQty(l.id, -1), more: () => setQty(l.id, 1),
         lessLabel: 'Minska antal, ' + l.name, moreLabel: 'Öka antal, ' + l.name,
-        remove: () => this.setState({ lines: S.lines.filter((x) => x.id !== l.id) }) })),
+        remove: () => save(S.lines.filter((x) => x.id !== l.id)) })),
       ringPrice: '+ ' + fmt(495), ventPrice: '+ ' + fmt(349),
       addRing: () => add({ id: 'ring', name: 'Tätningsring Ø 600', meta: 'Tillval till lätta lock', price: 495, href: '#' }),
       addVent: () => add({ id: 'ventil', name: 'Ventilationsventil', meta: 'Tillval till lätta lock', price: 349, href: '#' }),
       prodLabel: 'Produkter, ' + count + ' st', prodSum: fmt(sum),
       vatSum: Math.round(sum - sum / 1.25).toLocaleString('sv-SE') + ' kr',
       zip: S.zip, typeZip: (e) => this.setState({ zip: e.target.value, zipErr: false }),
-      submitZip: (e) => { e.preventDefault(); const v = S.zip.replace(/\s/g, ''); if (/^\d{5}$/.test(v)) this.setState({ zipDone: true, zipErr: false }); else this.setState({ zipErr: true }); },
+      submitZip: (e) => { e.preventDefault(); const v = S.zip.replace(/\s/g, ''); if (/^\d{5}$/.test(v)) { if (typeof window !== 'undefined' && window.SBCart) window.SBCart.setZip(S.zip); this.setState({ zipDone: true, zipErr: false }); } else this.setState({ zipErr: true }); },
       noZip: !S.zipDone, hasZip: S.zipDone, zipErr: S.zipErr,
       zipShown: S.zip.replace(/\s/g, '').replace(/^(\d{3})(\d{2})$/, '$1 $2'),
       changeZip: () => this.setState({ zipDone: false }),

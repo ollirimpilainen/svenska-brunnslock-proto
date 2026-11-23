@@ -16,6 +16,11 @@
   robots.content = 'noindex, nofollow';
   document.head.appendChild(robots);
 
+  var mcss = document.createElement('link');
+  mcss.rel = 'stylesheet';
+  mcss.href = 'mobile.css';
+  document.head.appendChild(mcss);
+
   if (!document.querySelector('meta[name="viewport"]')) {
     var vp = document.createElement('meta');
     vp.name = 'viewport';
@@ -38,6 +43,43 @@
   };
   DCLogic.prototype.renderVals = function () { return {}; };
   window.DCLogic = DCLogic;
+
+
+  // ---------- ostoskori (yhteinen kaikille sivuille, localStorage) ----------
+  var CART_KEY = 'sb-proto-cart-v1';
+  var CATALOG = {
+    kansi600a15: { price: 1495, fi: ['Kevyt kaivonkansi Ø 600, A15', 'Tuotenro 10354 · Komposiitti, 6 kg · Sopii renkaaseen 580 ja 640 mm:n välillä', 'FiTuote.dc.html'], sv: ['Lätt brunnslock Ø 600, A15', 'Art.nr 10354 · Komposit, 6 kg · Passar ring 580 till 640 mm', 'SvProdukt.dc.html'] },
+    las: { price: 295, fi: ['Lukko ja avain', 'Lisävaruste kevyisiin kansiin', '#'], sv: ['Lås med nyckel', 'Tillval till lätta lock', '#'] },
+    ring: { price: 495, fi: ['Tiivisterengas Ø 600', 'Lisävaruste kevyisiin kansiin', '#'], sv: ['Tätningsring Ø 600', 'Tillval till lätta lock', '#'] },
+    ventil: { price: 349, fi: ['Tuuletusventtiili', 'Lisävaruste kevyisiin kansiin', '#'], sv: ['Ventilationsventil', 'Tillval till lätta lock', '#'] },
+    betonirengas: { price: 890, fi: ['Betonirengas Ø 600', 'Korkeus 500 mm. Toimitetaan lavalla.', '#'], sv: ['Betongring Ø 600', 'Höjd 500 mm. Levereras på pall.', '#'] },
+    korotus: { price: 645, fi: ['Korotusrengas Ø 600', 'Nostaa kannen maanpinnan tasolle.', '#'], sv: ['Förhöjningsring Ø 600', 'Höjer locket till marknivå.', '#'] }
+  };
+  function readCart() {
+    try { var c = JSON.parse(localStorage.getItem(CART_KEY) || 'null'); if (c && c.items) return c; } catch (e) {}
+    return { items: [], zip: '' };
+  }
+  function writeCart(c) { try { localStorage.setItem(CART_KEY, JSON.stringify(c)); } catch (e) {} }
+  window.SBCart = {
+    catalog: CATALOG,
+    items: function () { return readCart().items; },
+    lines: function (lang) {
+      return readCart().items.filter(function (i) { return CATALOG[i.id]; }).map(function (i) {
+        var p = CATALOG[i.id], t = p[lang] || p.fi;
+        return { id: i.id, name: t[0], meta: t[1], href: t[2], price: p.price, qty: i.qty };
+      });
+    },
+    add: function (id, qty) {
+      var c = readCart(), found = c.items.filter(function (i) { return i.id === id; })[0];
+      if (found) found.qty += qty || 1; else c.items.push({ id: id, qty: qty || 1 });
+      writeCart(c); schedule();
+    },
+    setItems: function (items) { var c = readCart(); c.items = items.map(function (i) { return { id: i.id, qty: i.qty }; }); writeCart(c); schedule(); },
+    count: function () { return readCart().items.reduce(function (s, i) { return s + i.qty; }, 0); },
+    zip: function () { return readCart().zip || ''; },
+    setZip: function (z) { var c = readCart(); c.zip = z; writeCart(c); },
+    clear: function () { writeCart({ items: [], zip: readCart().zip }); schedule(); }
+  };
 
   // ---------- definitions ----------
   var defs = {};
@@ -90,7 +132,7 @@
 
   function loadDef(name) {
     if (defs[name]) return Promise.resolve(defs[name]);
-    return fetch(name + '.dc.html').then(function (r) { return r.text(); }).then(function (txt) {
+    return fetch(name + '.dc.html', { cache: 'no-cache' }).then(function (r) { return r.text(); }).then(function (txt) {
       var doc = new DOMParser().parseFromString(txt, 'text/html');
       var def = readDef(doc, name);
       defs[name] = def;

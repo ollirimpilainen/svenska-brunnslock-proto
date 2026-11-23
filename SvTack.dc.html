@@ -56,10 +56,11 @@ a{color:#111111}a:hover{color:#474747}
 <aside style="flex: 1 1 340px; min-width: 0; max-width: 420px; display: flex; flex-direction: column; gap: 16px">
 <div style="border: 1px solid #bdbdbb; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
 <h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">Din beställning</h2>
-<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>Lätt brunnslock Ø 600, A15, 1 st</span><b>1 495 kr</b></div>
-<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>Lås med nyckel, 1 st</span><b>295 kr</b></div>
+<sc-for list="{{ lines }}" as="l" hint-placeholder-count="2">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>{{ l.label }}</span><b>{{ l.sum }}</b></div>
+</sc-for>
 <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>Frakt, paket till ombud</span><b>[X] kr</b></div>
-<div style="display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 17px; color: #111111"><span>Totalt inkl. moms</span><span>[X] kr</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 17px; color: #111111"><span>Totalt inkl. moms</span><span>{{ total }}</span></div>
 <p style="margin: 0; font-size: 14px; color: #474747">Leveransadress: Anna Exempel, Exempelvägen 1, 123 45 Exempelstad</p>
 <p style="margin: 0; font-size: 14px; color: #474747">Betalning: Klarna eller Qliro</p>
 </div>
@@ -76,7 +77,17 @@ a{color:#111111}a:hover{color:#474747}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
 class Component extends DCLogic {
-  renderVals() { return { zero: 0 }; }
+  constructor(props) {
+    super(props);
+    const SB = typeof window !== 'undefined' ? window.SBCart : null;
+    this.lines = SB && SB.items().length ? SB.lines('sv') : [{ name: 'Lätt brunnslock Ø 600, A15', price: 1495, qty: 1 }, { name: 'Lås med nyckel', price: 295, qty: 1 }];
+    if (SB && SB.items().length) SB.clear();
+  }
+  renderVals() {
+    const f = (n) => Math.round(n).toLocaleString('sv-SE') + ' kr';
+    const sum = this.lines.reduce((t, l) => t + l.price * l.qty, 0);
+    return { zero: 0, lines: this.lines.map((l) => ({ label: l.name + ', ' + l.qty + ' st', sum: f(l.price * l.qty) })), total: f(sum) + ' + frakt' };
+  }
 }
 </script>
 </body>
