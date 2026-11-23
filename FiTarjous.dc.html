@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<title>Tarjouspyyntö</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#111111}a:hover{color:#474747}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 100vh; background: #ffffff; color: #1a1a1a; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.55">
+<header style="border-bottom: 1px solid #e2e2e0">
+<div style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 16px 24px; flex-wrap: wrap">
+<a href="FiEtusivu.dc.html" aria-label="Svenska Brunnslock, etusivulle" style="width: 168px; height: 42px; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #474747; font-size: 11px; font-weight: 700; letter-spacing: 0.6px; text-decoration: none">SVENSKA BRUNNSLOCK</a>
+<a href="FiOstoskori.dc.html" style="font-weight: 600; font-size: 15px; min-height: 44px; display: inline-flex; align-items: center">Takaisin ostoskoriin</a>
+<a href="SvOffert.dc.html" lang="sv" style="margin-left: auto; font-size: 14px; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">På svenska</a>
+<a href="tel:+46920520056" style="display: flex; flex-direction: column; line-height: 1.2; text-decoration: none; min-height: 44px; justify-content: center"><small style="font-size: 12px; color: #5c5c5c">Kysyttävää tarjouksesta?</small><b style="font-size: 15px">0920-52 00 56</b></a>
+</div>
+</header>
+
+<main style="max-width: 1240px; margin: 0 auto; padding: 40px 24px 80px; display: flex; flex-direction: column; gap: 28px">
+
+<sc-if value="{{ isForm }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 760px">
+<h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 40px; color: #111111">Tarjouspyyntö</h1>
+<p style="margin: 0; font-size: 18px; color: #474747">Saat tarjouksen, jossa ovat tuotteet, rahti ja purku. Vastaamme arkisin [X] arkipäivän kuluessa, ja voit hyväksyä tarjouksen yhdellä klikkauksella.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start">
+
+<form onSubmit="{{ submit }}" novalidate style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 32px">
+<section aria-labelledby="t1" style="display: flex; flex-direction: column; gap: 16px">
+<h2 id="t1" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">1. Yritys ja yhteyshenkilö</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Yritys tai organisaatio
+<input value="{{ f.company }}" onInput="{{ inp.company }}" autocomplete="organization" style="{{ st.company }}">
+<sc-if value="{{ er.company }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Täytä yrityksen nimi.</span></sc-if>
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Y-tunnus <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">yksityiselle ei tarvita</span>
+<input value="{{ f.orgnr }}" onInput="{{ inp.orgnr }}" inputmode="numeric" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Yhteyshenkilö
+<input value="{{ f.name }}" onInput="{{ inp.name }}" autocomplete="name" style="{{ st.name }}">
+<sc-if value="{{ er.name }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Täytä nimi.</span></sc-if>
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Puhelin
+<input value="{{ f.phone }}" onInput="{{ inp.phone }}" type="tel" autocomplete="tel" style="{{ st.phone }}">
+<sc-if value="{{ er.phone }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Täytä puhelinnumero.</span></sc-if>
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; grid-column: 1 / -1">Sähköposti <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">tarjous lähetetään tähän</span>
+<input value="{{ f.email }}" onInput="{{ inp.email }}" type="email" autocomplete="email" style="{{ st.email }}">
+<sc-if value="{{ er.email }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Täytä sähköpostiosoite.</span></sc-if>
+</label>
+</div>
+</section>
+
+<section aria-labelledby="t2" style="display: flex; flex-direction: column; gap: 16px; border-top: 1px solid #e2e2e0; padding-top: 28px">
+<h2 id="t2" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">2. Toimitus</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; grid-column: 1 / -1">Toimitusosoite tai työmaa
+<input value="{{ f.street }}" onInput="{{ inp.street }}" autocomplete="street-address" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Postinumero <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">rahti lasketaan tämän mukaan</span>
+<input value="{{ f.zip }}" onInput="{{ inp.zip }}" inputmode="numeric" autocomplete="postal-code" style="{{ st.zip }}">
+<sc-if value="{{ er.zip }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Kirjoita viisinumeroinen postinumero.</span></sc-if>
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Toivottu toimitusviikko
+<select value="{{ week }}" onChange="{{ pickWeek }}" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit; background: #ffffff">
+<option value="asap">Mahdollisimman pian</option>
+<option value="w50">Viikko 50</option>
+<option value="w51">Viikko 51</option>
+<option value="w2">Viikko 2</option>
+<option value="later">Sovitaan myöhemmin</option>
+</select>
+</label>
+</div>
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+<legend style="font-size: 14px; font-weight: 600; margin-bottom: 8px">Miten tavara puretaan perillä?</legend>
+<sc-for list="{{ unloads }}" as="u" hint-placeholder-count="3">
+<label style="{{ u.style }}"><input type="radio" name="unload" checked="{{ u.on }}" onChange="{{ u.pick }}" style="width: 18px; height: 18px; margin: 0; accent-color: #111111"><span><b style="display: block">{{ u.label }}</b><span style="font-size: 13px; color: #5c5c5c">{{ u.text }}</span></span></label>
+</sc-for>
+</fieldset>
+</section>
+
+<section aria-labelledby="t3" style="display: flex; flex-direction: column; gap: 16px; border-top: 1px solid #e2e2e0; padding-top: 28px">
+<h2 id="t3" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">3. Lisätiedot</h2>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Projektiviite <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">näkyy tarjouksessa ja laskussa</span>
+<input value="{{ f.ref }}" onInput="{{ inp.ref }}" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Viesti <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">esimerkiksi renkaan mitat tai erityistoiveet</span>
+<textarea onInput="{{ inp.msg }}" style="min-height: 96px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 12px; font: inherit; resize: vertical">{{ f.msg }}</textarea>
+</label>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 14px; font-weight: 600">Liite <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">piirustus, määräluettelo tai kuva kaivosta</span></span>
+<sc-if value="{{ noAttach }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ attach }}" style="align-self: flex-start; min-height: 44px; padding: 0 16px; border: 1.5px dashed #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">Liitä tiedosto</button></sc-if>
+<sc-if value="{{ hasAttach }}" hint-placeholder-val="{{ false }}"><span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 12px; min-height: 40px; padding: 0 12px; border: 1px solid #bdbdbb; border-radius: 6px; font-size: 14px">maaraluettelo.pdf, 240 kt<button type="button" onClick="{{ detach }}" style="border: 0; background: none; font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 0">Poista</button></span></sc-if>
+</div>
+<button type="submit" style="min-height: 56px; border: 0; border-radius: 6px; background: #111111; color: #ffffff; font: inherit; font-weight: 600; font-size: 18px; cursor: pointer">Lähetä tarjouspyyntö</button>
+<sc-if value="{{ showErr }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 0; font-size: 15px; font-weight: 600">Joitakin tietoja puuttuu. Katso merkityt kentät yllä.</p></sc-if>
+<p style="margin: 0; font-size: 14px; color: #5c5c5c">Tarjouspyyntö ei sido sinua mihinkään.</p>
+</section>
+</form>
+
+<aside aria-labelledby="ts-h" style="flex: 1 1 340px; min-width: 0; max-width: 420px; border: 1px solid #bdbdbb; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px">
+<h2 id="ts-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">Tarjouspyynnön tuotteet</h2>
+<a href="FiOstoskori.dc.html" style="font-size: 14px; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Muuta</a>
+</div>
+<sc-for list="{{ rows }}" as="r" hint-placeholder-count="2">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>{{ r.name }}<span style="display: block; font-size: 13px; color: #5c5c5c">{{ r.qtyLabel }}</span></span><b style="white-space: nowrap">{{ r.price }}</b></div>
+</sc-for>
+<p style="margin: 0; font-size: 13px; color: #5c5c5c; border-top: 1px solid #e2e2e0; padding-top: 12px">Verkkohinnalliset tuotteet näkyvät verkkohinnoin. Tarjouksessa voi olla määräalennus, ja siinä on aina rahti ja purku.</p>
+</aside>
+</div>
+</sc-if>
+
+<sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
+<div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 999px; background: #111111; color: #ffffff; font-size: 14px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Tarjouspyyntö on lähetetty</span>
+<h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 40px; line-height: 1.1; color: #111111">Kiitos, palaamme asiaan pian</h1>
+<p style="margin: 0; font-size: 18px; color: #474747">Tarjouspyynnön numero <b style="color: #111111">TP-[numero]</b>. Vahvistus lähti osoitteeseen {{ f.email }}.</p>
+</div>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0"><span style="width: 32px; height: 32px; border-radius: 50%; background: #111111; color: #ffffff; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700">1</span><span><b style="display: block; color: #111111">Tarkistamme mitat ja saatavuuden</b><span style="color: #474747">Soitamme, jos jokin mitta tai toive pitää varmistaa.</span></span></li>
+<li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0"><span style="width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid #111111; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700">2</span><span><b style="display: block; color: #111111">Tarjous sähköpostiin [X] arkipäivässä</b><span style="color: #474747">Siinä ovat hinnat, rahti, purku ja toimitusviikko.</span></span></li>
+<li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0"><span style="width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid #111111; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700">3</span><span><b style="display: block; color: #111111">Hyväksyt yhdellä klikkauksella</b><span style="color: #474747">Tilaus siirtyy kassalle sovituin hinnoin. Yrityksenä voit maksaa laskulla.</span></span></li>
+</ol>
+<a href="FiEtusivu.dc.html" style="align-self: flex-start; min-height: 48px; display: inline-flex; align-items: center; padding: 0 20px; border-radius: 6px; border: 1.5px solid #bdbdbb; font-weight: 600; text-decoration: none">Etusivulle</a>
+</div>
+
+<aside aria-labelledby="demo-h" style="flex: 1 1 380px; min-width: 0; max-width: 460px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; font-weight: 600; color: #5c5c5c">Esimerkki: tältä tarjous näyttää, kun se saapuu</span>
+<div style="border: 1px solid #111111; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px; background: #ffffff">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><h2 id="demo-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">Tarjous TP-[numero]</h2><span style="font-size: 13px; color: #5c5c5c">Voimassa 30 päivää</span></div>
+<sc-for list="{{ offer }}" as="o" hint-placeholder-count="2">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>{{ o.name }}<span style="display: block; font-size: 13px; color: #5c5c5c">{{ o.qtyLabel }}</span></span><b style="white-space: nowrap">{{ o.sum }}</b></div>
+</sc-for>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px; border-top: 1px solid #e2e2e0; padding-top: 12px"><span>Rahti ja purku, {{ unloadShort }}<span style="display: block; font-size: 13px; color: #5c5c5c">postinumeroon {{ f.zip }}, {{ weekLabel }}</span></span><b>[X] kr</b></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 18px; color: #111111"><span>Tuotteet yhteensä</span><span>{{ offerTotal }}</span></div>
+<a href="FiKassa.dc.html" onClick="{{ accept }}" style="min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">Hyväksy ja tilaa</a>
+<a href="tel:+46920520056" style="align-self: center; font-size: 14px; font-weight: 600">Pyydä muutosta</a>
+</div>
+</aside>
+</div>
+</sc-if>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2200}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const SB = typeof window !== 'undefined' ? window.SBCart : null;
+    const z0 = SB ? SB.zip() : '';
+    this.state = { view: 'form', showErr: false, attached: false, week: 'asap', unload: 'crane', f: {
+      company: 'Esimerkki Rakennus Oy', orgnr: '', name: 'Anna Esimerkki', phone: '040 123 4567', email: 'anna@esimerkki.fi', street: '', zip: z0 || '', ref: '', msg: '' } };
+  }
+  renderVals() {
+    const S = this.state, F = S.f;
+    const SB = typeof window !== 'undefined' ? window.SBCart : null;
+    const EX = [
+      { id: 'kansi600a15', name: 'Kevyt kaivonkansi Ø 600, A15', price: 1495, qty: 10 },
+      { id: 'mittakansi', name: 'Kevyt kaivonkansi mittatilauksena', price: null, qty: 2 }
+    ];
+    const lines = SB && SB.items().length ? SB.lines('fi') : EX;
+    const fmt = (n) => Math.round(n).toLocaleString('fi-FI') + ' kr';
+    const set = (k) => (e) => this.setState({ f: { ...S.f, [k]: e.target.value } });
+    const inp = {};
+    ['company', 'orgnr', 'name', 'phone', 'email', 'street', 'zip', 'ref', 'msg'].forEach((k) => { inp[k] = set(k); });
+    const need = ['company', 'name', 'phone', 'email'];
+    const er = {};
+    need.forEach((k) => { er[k] = S.showErr && !String(F[k]).trim(); });
+    const zipOk = /^\d{5}$/.test(String(F.zip).replace(/\s/g, ''));
+    er.zip = S.showErr && !zipOk;
+    const valid = need.every((k) => String(F[k]).trim()) && zipOk;
+    const base = 'min-height: 48px; border-radius: 6px; padding: 0 12px; font: inherit; ';
+    const st = {};
+    ['company', 'name', 'phone', 'email', 'zip'].forEach((k) => { st[k] = base + (er[k] ? 'border: 2px solid #111111; background: #f5f5f4' : 'border: 1.5px solid #bdbdbb'); });
+    const opt = (on) => 'display: flex; gap: 10px; align-items: center; min-height: 56px; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-size: 15px; ' + (on ? 'border: 2px solid #111111; background: #f5f5f4' : 'border: 1px solid #e2e2e0; background: #ffffff');
+    const unloadDefs = [
+      { id: 'crane', label: 'Tarvitsemme nosturiauton', text: 'Valitsemme kuljetuksen, jossa on nosturi tai nostolaita.', short: 'nosturiauto' },
+      { id: 'own', label: 'Meillä on trukki tai kurottaja', text: 'Riittää tavallinen lavakuljetus.', short: 'oma purku' },
+      { id: 'hand', label: 'Puretaan käsin', text: 'Sopii paketeille ja kevyille tuotteille.', short: 'käsin' }
+    ];
+    const weekLabels = { asap: 'mahdollisimman pian', w50: 'viikko 50', w51: 'viikko 51', w2: 'viikko 2', later: 'viikko sovitaan' };
+    const agreedPrice = (l) => l.price == null ? 4900 : Math.round(l.price * 0.92 / 5) * 5;
+    const offer = lines.map((l) => ({ ...l, agreedP: agreedPrice(l) }));
+    return {
+      isForm: S.view === 'form', isSent: S.view === 'sent',
+      f: F, inp: inp, er: er, st: st, showErr: S.showErr,
+      week: S.week, pickWeek: (e) => this.setState({ week: e.target.value }), weekLabel: weekLabels[S.week],
+      unloads: unloadDefs.map((u) => ({ ...u, on: S.unload === u.id, style: opt(S.unload === u.id), pick: () => this.setState({ unload: u.id }) })),
+      unloadShort: unloadDefs.find((u) => u.id === S.unload).short,
+      noAttach: !S.attached, hasAttach: S.attached, attach: () => this.setState({ attached: true }), detach: () => this.setState({ attached: false }),
+      rows: lines.map((l) => ({ name: l.name, qtyLabel: l.qty + ' kpl', price: l.price == null ? 'Tarjouksella' : fmt(l.price * l.qty) })),
+      submit: (e) => { e.preventDefault(); if (valid) { if (SB) SB.setZip(F.zip); this.setState({ view: 'sent', showErr: false }); if (typeof window !== 'undefined') window.scrollTo(0, 0); } else this.setState({ showErr: true }); },
+      offer: offer.map((o) => ({ name: o.name, qtyLabel: o.qty + ' kpl à ' + fmt(o.agreedP), sum: fmt(o.agreedP * o.qty) })),
+      offerTotal: fmt(offer.reduce((t, o) => t + o.agreedP * o.qty, 0)),
+      accept: () => { if (SB) { SB.setItems(offer.map((o) => ({ id: o.id, qty: o.qty, price: o.agreedP, agreed: true }))); SB.setZip(F.zip); } }
+    };
+  }
+}
+</script>
+</body>
+</html>

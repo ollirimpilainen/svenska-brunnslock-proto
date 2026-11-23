@@ -53,6 +53,7 @@
     ring: { price: 495, fi: ['Tiivisterengas Ø 600', 'Lisävaruste kevyisiin kansiin', '#'], sv: ['Tätningsring Ø 600', 'Tillval till lätta lock', '#'] },
     ventil: { price: 349, fi: ['Tuuletusventtiili', 'Lisävaruste kevyisiin kansiin', '#'], sv: ['Ventilationsventil', 'Tillval till lätta lock', '#'] },
     betonirengas: { price: 890, fi: ['Betonirengas Ø 600', 'Korkeus 500 mm. Toimitetaan lavalla.', '#'], sv: ['Betongring Ø 600', 'Höjd 500 mm. Levereras på pall.', '#'] },
+    mittakansi: { price: null, fi: ['Kevyt kaivonkansi mittatilauksena', 'Renkaille yli 1 200 mm tai erikoismuotoon. Hinta tarjouksella.', '#'], sv: ['Lätt brunnslock på mått', 'För ringar över 1 200 mm eller specialform. Pris på offert.', '#'] },
     korotus: { price: 645, fi: ['Korotusrengas Ø 600', 'Nostaa kannen maanpinnan tasolle.', '#'], sv: ['Förhöjningsring Ø 600', 'Höjer locket till marknivå.', '#'] }
   };
   function readCart() {
@@ -66,7 +67,8 @@
     lines: function (lang) {
       return readCart().items.filter(function (i) { return CATALOG[i.id]; }).map(function (i) {
         var p = CATALOG[i.id], t = p[lang] || p.fi;
-        return { id: i.id, name: t[0], meta: t[1], href: t[2], price: p.price, qty: i.qty };
+        var price = i.agreed != null ? i.agreed : p.price;
+        return { id: i.id, name: t[0], meta: t[1], href: t[2], price: price, qty: i.qty, quote: price == null, agreed: i.agreed != null };
       });
     },
     add: function (id, qty) {
@@ -74,7 +76,8 @@
       if (found) found.qty += qty || 1; else c.items.push({ id: id, qty: qty || 1 });
       writeCart(c); schedule();
     },
-    setItems: function (items) { var c = readCart(); c.items = items.map(function (i) { return { id: i.id, qty: i.qty }; }); writeCart(c); schedule(); },
+    setItems: function (items) { var c = readCart(); c.items = items.map(function (i) { var o = { id: i.id, qty: i.qty }; if (i.agreed) o.agreed = i.price; return o; }); writeCart(c); schedule(); },
+    hasQuote: function () { return readCart().items.some(function (i) { return CATALOG[i.id] && CATALOG[i.id].price == null && i.agreed == null; }); },
     count: function () { return readCart().items.reduce(function (s, i) { return s + i.qty; }, 0); },
     zip: function () { return readCart().zip || ''; },
     setZip: function (z) { var c = readCart(); c.zip = z; writeCart(c); },

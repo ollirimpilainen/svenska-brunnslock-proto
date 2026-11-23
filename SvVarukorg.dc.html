@@ -82,12 +82,22 @@ a{color:#111111}a:hover{color:#474747}
 </sc-if>
 <div style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: #474747"><span>Varav moms 25 %</span><span>{{ vatSum }}</span></div>
 <div style="display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 18px; color: #111111"><span>Totalt</span><span>{{ totalLabel }}</span></div>
+<sc-if value="{{ noQuote }}" hint-placeholder-val="{{ true }}">
 <a href="{{ checkoutHref }}" style="min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">Till kassan</a>
+</sc-if>
+<sc-if value="{{ hasQuote }}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 14px; color: #1a1a1a; background: #f5f5f4; border-radius: 8px; padding: 12px">Varukorgen innehåller produkter med pris på offert. Vi skickar hela varukorgen som offertförfrågan, och offerten innehåller även frakt och lossning.</p>
+<a href="SvOffert.dc.html" style="min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">Skicka offertförfrågan</a>
+<sc-if value="{{ hasPriced }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ stripQuote }}" style="border: 0; background: none; font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; cursor: pointer; min-height: 44px; padding: 0">Ta bort offertprodukterna och betala resten nu</button></sc-if>
+</sc-if>
 <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: #474747">
 <li>Klarna eller Qliro, faktura för företag</li>
 <li>14 dagars ångerrätt</li>
 </ul>
-<p style="margin: 0; font-size: 14px; color: #474747; border-top: 1px solid #e2e2e0; padding-top: 12px">Köper du till ett projekt? Över [minimivärde] kan du <a href="#" style="font-weight: 600">skicka varukorgen som offertförfrågan</a>.</p>
+<sc-if value="{{ noQuote }}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{ overLimit }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 14px; color: #474747; border-top: 1px solid #e2e2e0; padding-top: 12px">Köper du till ett projekt eller en hel pall? <a href="SvOffert.dc.html" style="font-weight: 600">Skicka varukorgen som offertförfrågan</a>. Offerten innehåller frakt och lossning, och du godkänner den med ett klick.</p></sc-if>
+<sc-if value="{{ underLimit }}" hint-placeholder-val="{{ true }}"><p style="margin: 0; font-size: 14px; color: #474747; border-top: 1px solid #e2e2e0; padding-top: 12px">Över 5 000 kr kan du skicka varukorgen som offertförfrågan.</p></sc-if>
+</sc-if>
 </aside>
 </div>
 </main>
@@ -112,19 +122,23 @@ class Component extends DCLogic {
     const fmt = (n) => Math.round(ex ? n / 1.25 : n).toLocaleString('sv-SE') + ' kr';
     const setQty = (id, d) => save(S.lines.map((l) => l.id === id ? { ...l, qty: Math.max(1, l.qty + d) } : l));
     const add = (item) => { const has = S.lines.find((l) => l.id === item.id); save(has ? S.lines.map((l) => l.id === item.id ? { ...l, qty: l.qty + 1 } : l) : S.lines.concat([{ ...item, qty: 1 }])); };
-    const sum = S.lines.reduce((s, l) => s + l.price * l.qty, 0);
+    const priced = S.lines.filter((l) => l.price != null);
+    const sum = priced.reduce((s, l) => s + l.price * l.qty, 0);
     const count = S.lines.reduce((s, l) => s + l.qty, 0);
+    const pCount = priced.reduce((s, l) => s + l.qty, 0);
+    const hasQuote = S.lines.some((l) => l.price == null);
     return {
       vat: S.vat, setVat: (v) => this.setState({ vat: v }),
       count: count, empty: S.lines.length === 0,
-      lines: S.lines.map((l) => ({ ...l, sum: fmt(l.price * l.qty), img: 'Bild: ' + l.name,
+      lines: S.lines.map((l) => ({ ...l, sum: l.price == null ? 'Pris på offert' : fmt(l.price * l.qty), meta: l.agreed ? l.meta + ' · avtalat pris' : l.meta, img: 'Bild: ' + l.name,
         less: () => setQty(l.id, -1), more: () => setQty(l.id, 1),
         lessLabel: 'Minska antal, ' + l.name, moreLabel: 'Öka antal, ' + l.name,
         remove: () => save(S.lines.filter((x) => x.id !== l.id)) })),
       ringPrice: '+ ' + fmt(495), ventPrice: '+ ' + fmt(349),
       addRing: () => add({ id: 'ring', name: 'Tätningsring Ø 600', meta: 'Tillval till lätta lock', price: 495, href: '#' }),
       addVent: () => add({ id: 'ventil', name: 'Ventilationsventil', meta: 'Tillval till lätta lock', price: 349, href: '#' }),
-      prodLabel: 'Produkter, ' + count + ' st', prodSum: fmt(sum),
+      hasQuote: hasQuote, noQuote: !hasQuote, hasPriced: priced.length > 0, stripQuote: () => save(priced), overLimit: sum >= 5000, underLimit: sum < 5000,
+      prodLabel: 'Produkter, ' + pCount + ' st' + (hasQuote ? ' + offertprodukter' : ''), prodSum: fmt(sum),
       vatSum: Math.round(sum - sum / 1.25).toLocaleString('sv-SE') + ' kr',
       zip: S.zip, typeZip: (e) => this.setState({ zip: e.target.value, zipErr: false }),
       submitZip: (e) => { e.preventDefault(); const v = S.zip.replace(/\s/g, ''); if (/^\d{5}$/.test(v)) { if (typeof window !== 'undefined' && window.SBCart) window.SBCart.setZip(S.zip); this.setState({ zipDone: true, zipErr: false }); } else this.setState({ zipErr: true }); },

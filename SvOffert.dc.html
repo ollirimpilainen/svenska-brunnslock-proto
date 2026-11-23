@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<title>Offertförfrågan</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#111111}a:hover{color:#474747}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 100vh; background: #ffffff; color: #1a1a1a; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.55">
+<header style="border-bottom: 1px solid #e2e2e0">
+<div style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 16px 24px; flex-wrap: wrap">
+<a href="SvStartsida.dc.html" aria-label="Svenska Brunnslock, till startsidan" style="width: 168px; height: 42px; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #474747; font-size: 11px; font-weight: 700; letter-spacing: 0.6px; text-decoration: none">SVENSKA BRUNNSLOCK</a>
+<a href="SvVarukorg.dc.html" style="font-weight: 600; font-size: 15px; min-height: 44px; display: inline-flex; align-items: center">Tillbaka till varukorgen</a>
+<a href="FiTarjous.dc.html" lang="fi" style="margin-left: auto; font-size: 14px; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Suomeksi</a>
+<a href="tel:+46920520056" style="display: flex; flex-direction: column; line-height: 1.2; text-decoration: none; min-height: 44px; justify-content: center"><small style="font-size: 12px; color: #5c5c5c">Frågor om offerten?</small><b style="font-size: 15px">0920-52 00 56</b></a>
+</div>
+</header>
+
+<main style="max-width: 1240px; margin: 0 auto; padding: 40px 24px 80px; display: flex; flex-direction: column; gap: 28px">
+
+<sc-if value="{{ isForm }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 760px">
+<h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 40px; color: #111111">Offertförfrågan</h1>
+<p style="margin: 0; font-size: 18px; color: #474747">Du får en offert med produkter, frakt och lossning. Vi svarar inom [X] arbetsdagar, och du godkänner offerten med ett klick.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start">
+
+<form onSubmit="{{ submit }}" novalidate style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 32px">
+<section aria-labelledby="t1" style="display: flex; flex-direction: column; gap: 16px">
+<h2 id="t1" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">1. Företag och kontaktperson</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Företag eller organisation
+<input value="{{ f.company }}" onInput="{{ inp.company }}" autocomplete="organization" style="{{ st.company }}">
+<sc-if value="{{ er.company }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Fyll i företagsnamn.</span></sc-if>
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Organisationsnummer <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">behövs inte för privatpersoner</span>
+<input value="{{ f.orgnr }}" onInput="{{ inp.orgnr }}" inputmode="numeric" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Kontaktperson
+<input value="{{ f.name }}" onInput="{{ inp.name }}" autocomplete="name" style="{{ st.name }}">
+<sc-if value="{{ er.name }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Fyll i namn.</span></sc-if>
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Telefon
+<input value="{{ f.phone }}" onInput="{{ inp.phone }}" type="tel" autocomplete="tel" style="{{ st.phone }}">
+<sc-if value="{{ er.phone }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Fyll i telefonnummer.</span></sc-if>
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; grid-column: 1 / -1">E-post <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">offerten skickas hit</span>
+<input value="{{ f.email }}" onInput="{{ inp.email }}" type="email" autocomplete="email" style="{{ st.email }}">
+<sc-if value="{{ er.email }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Fyll i en e-postadress.</span></sc-if>
+</label>
+</div>
+</section>
+
+<section aria-labelledby="t2" style="display: flex; flex-direction: column; gap: 16px; border-top: 1px solid #e2e2e0; padding-top: 28px">
+<h2 id="t2" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">2. Leverans</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; grid-column: 1 / -1">Leveransadress eller arbetsplats
+<input value="{{ f.street }}" onInput="{{ inp.street }}" autocomplete="street-address" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Postnummer <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">frakten räknas på detta</span>
+<input value="{{ f.zip }}" onInput="{{ inp.zip }}" inputmode="numeric" autocomplete="postal-code" style="{{ st.zip }}">
+<sc-if value="{{ er.zip }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Skriv ett postnummer med fem siffror.</span></sc-if>
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Önskad leveransvecka
+<select value="{{ week }}" onChange="{{ pickWeek }}" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit; background: #ffffff">
+<option value="asap">Så snart som möjligt</option>
+<option value="w50">Vecka 50</option>
+<option value="w51">Vecka 51</option>
+<option value="w2">Vecka 2</option>
+<option value="later">Bestäms senare</option>
+</select>
+</label>
+</div>
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+<legend style="font-size: 14px; font-weight: 600; margin-bottom: 8px">Hur lossas godset på plats?</legend>
+<sc-for list="{{ unloads }}" as="u" hint-placeholder-count="3">
+<label style="{{ u.style }}"><input type="radio" name="unload" checked="{{ u.on }}" onChange="{{ u.pick }}" style="width: 18px; height: 18px; margin: 0; accent-color: #111111"><span><b style="display: block">{{ u.label }}</b><span style="font-size: 13px; color: #5c5c5c">{{ u.text }}</span></span></label>
+</sc-for>
+</fieldset>
+</section>
+
+<section aria-labelledby="t3" style="display: flex; flex-direction: column; gap: 16px; border-top: 1px solid #e2e2e0; padding-top: 28px">
+<h2 id="t3" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">3. Mer information</h2>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Projektreferens <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">syns på offerten och fakturan</span>
+<input value="{{ f.ref }}" onInput="{{ inp.ref }}" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Meddelande <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">till exempel ringens mått eller särskilda önskemål</span>
+<textarea onInput="{{ inp.msg }}" style="min-height: 96px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 12px; font: inherit; resize: vertical">{{ f.msg }}</textarea>
+</label>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 14px; font-weight: 600">Bilaga <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">ritning, mängdförteckning eller bild på brunnen</span></span>
+<sc-if value="{{ noAttach }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ attach }}" style="align-self: flex-start; min-height: 44px; padding: 0 16px; border: 1.5px dashed #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">Bifoga fil</button></sc-if>
+<sc-if value="{{ hasAttach }}" hint-placeholder-val="{{ false }}"><span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 12px; min-height: 40px; padding: 0 12px; border: 1px solid #bdbdbb; border-radius: 6px; font-size: 14px">mangdforteckning.pdf, 240 kB<button type="button" onClick="{{ detach }}" style="border: 0; background: none; font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 0">Ta bort</button></span></sc-if>
+</div>
+<button type="submit" style="min-height: 56px; border: 0; border-radius: 6px; background: #111111; color: #ffffff; font: inherit; font-weight: 600; font-size: 18px; cursor: pointer">Skicka offertförfrågan</button>
+<sc-if value="{{ showErr }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 0; font-size: 15px; font-weight: 600">Några uppgifter saknas. Se de markerade fälten ovan.</p></sc-if>
+<p style="margin: 0; font-size: 14px; color: #5c5c5c">Offertförfrågan är inte bindande.</p>
+</section>
+</form>
+
+<aside aria-labelledby="ts-h" style="flex: 1 1 340px; min-width: 0; max-width: 420px; border: 1px solid #bdbdbb; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px">
+<h2 id="ts-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">Produkter i förfrågan</h2>
+<a href="SvVarukorg.dc.html" style="font-size: 14px; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Ändra</a>
+</div>
+<sc-for list="{{ rows }}" as="r" hint-placeholder-count="2">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>{{ r.name }}<span style="display: block; font-size: 13px; color: #5c5c5c">{{ r.qtyLabel }}</span></span><b style="white-space: nowrap">{{ r.price }}</b></div>
+</sc-for>
+<p style="margin: 0; font-size: 13px; color: #5c5c5c; border-top: 1px solid #e2e2e0; padding-top: 12px">Produkter med webbpris visas till webbpris. Offerten kan ha mängdrabatt och innehåller alltid frakt och lossning.</p>
+</aside>
+</div>
+</sc-if>
+
+<sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
+<div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 999px; background: #111111; color: #ffffff; font-size: 14px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Offertförfrågan är skickad</span>
+<h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 40px; line-height: 1.1; color: #111111">Tack, vi återkommer snart</h1>
+<p style="margin: 0; font-size: 18px; color: #474747">Förfrågans nummer <b style="color: #111111">OF-[nummer]</b>. Bekräftelsen skickades till {{ f.email }}.</p>
+</div>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0"><span style="width: 32px; height: 32px; border-radius: 50%; background: #111111; color: #ffffff; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700">1</span><span><b style="display: block; color: #111111">Vi kontrollerar mått och tillgång</b><span style="color: #474747">Vi ringer om något mått eller önskemål behöver bekräftas.</span></span></li>
+<li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0"><span style="width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid #111111; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700">2</span><span><b style="display: block; color: #111111">Offert på e-post inom [X] arbetsdagar</b><span style="color: #474747">Den innehåller priser, frakt, lossning och leveransvecka.</span></span></li>
+<li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0"><span style="width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid #111111; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700">3</span><span><b style="display: block; color: #111111">Du godkänner med ett klick</b><span style="color: #474747">Beställningen går till kassan med avtalade priser. Som företag kan du betala mot faktura.</span></span></li>
+</ol>
+<a href="SvStartsida.dc.html" style="align-self: flex-start; min-height: 48px; display: inline-flex; align-items: center; padding: 0 20px; border-radius: 6px; border: 1.5px solid #bdbdbb; font-weight: 600; text-decoration: none">Till startsidan</a>
+</div>
+
+<aside aria-labelledby="demo-h" style="flex: 1 1 380px; min-width: 0; max-width: 460px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; font-weight: 600; color: #5c5c5c">Exempel: så här ser offerten ut när den kommer</span>
+<div style="border: 1px solid #111111; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px; background: #ffffff">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><h2 id="demo-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">Offert OF-[nummer]</h2><span style="font-size: 13px; color: #5c5c5c">Giltig i 30 dagar</span></div>
+<sc-for list="{{ offer }}" as="o" hint-placeholder-count="2">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>{{ o.name }}<span style="display: block; font-size: 13px; color: #5c5c5c">{{ o.qtyLabel }}</span></span><b style="white-space: nowrap">{{ o.sum }}</b></div>
+</sc-for>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px; border-top: 1px solid #e2e2e0; padding-top: 12px"><span>Frakt och lossning, {{ unloadShort }}<span style="display: block; font-size: 13px; color: #5c5c5c">till postnummer {{ f.zip }}, {{ weekLabel }}</span></span><b>[X] kr</b></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 18px; color: #111111"><span>Produkter totalt</span><span>{{ offerTotal }}</span></div>
+<a href="SvKassa.dc.html" onClick="{{ accept }}" style="min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">Godkänn och beställ</a>
+<a href="tel:+46920520056" style="align-self: center; font-size: 14px; font-weight: 600">Be om ändring</a>
+</div>
+</aside>
+</div>
+</sc-if>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2200}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const SB = typeof window !== 'undefined' ? window.SBCart : null;
+    const z0 = SB ? SB.zip() : '';
+    this.state = { view: 'form', showErr: false, attached: false, week: 'asap', unload: 'crane', f: {
+      company: 'Exempel Bygg AB', orgnr: '', name: 'Anna Exempel', phone: '070-123 45 67', email: 'anna@exempel.se', street: '', zip: z0 || '', ref: '', msg: '' } };
+  }
+  renderVals() {
+    const S = this.state, F = S.f;
+    const SB = typeof window !== 'undefined' ? window.SBCart : null;
+    const EX = [
+      { id: 'kansi600a15', name: 'Lätt brunnslock Ø 600, A15', price: 1495, qty: 10 },
+      { id: 'mittakansi', name: 'Lätt brunnslock på mått', price: null, qty: 2 }
+    ];
+    const lines = SB && SB.items().length ? SB.lines('sv') : EX;
+    const fmt = (n) => Math.round(n).toLocaleString('sv-SE') + ' kr';
+    const set = (k) => (e) => this.setState({ f: { ...S.f, [k]: e.target.value } });
+    const inp = {};
+    ['company', 'orgnr', 'name', 'phone', 'email', 'street', 'zip', 'ref', 'msg'].forEach((k) => { inp[k] = set(k); });
+    const need = ['company', 'name', 'phone', 'email'];
+    const er = {};
+    need.forEach((k) => { er[k] = S.showErr && !String(F[k]).trim(); });
+    const zipOk = /^\d{5}$/.test(String(F.zip).replace(/\s/g, ''));
+    er.zip = S.showErr && !zipOk;
+    const valid = need.every((k) => String(F[k]).trim()) && zipOk;
+    const base = 'min-height: 48px; border-radius: 6px; padding: 0 12px; font: inherit; ';
+    const st = {};
+    ['company', 'name', 'phone', 'email', 'zip'].forEach((k) => { st[k] = base + (er[k] ? 'border: 2px solid #111111; background: #f5f5f4' : 'border: 1.5px solid #bdbdbb'); });
+    const opt = (on) => 'display: flex; gap: 10px; align-items: center; min-height: 56px; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-size: 15px; ' + (on ? 'border: 2px solid #111111; background: #f5f5f4' : 'border: 1px solid #e2e2e0; background: #ffffff');
+    const unloadDefs = [
+      { id: 'crane', label: 'Vi behöver kranbil', text: 'Vi väljer åkeri med kran eller bakgavellyft.', short: 'kranbil' },
+      { id: 'own', label: 'Vi har truck eller teleskoplastare', text: 'Vanlig pallfrakt räcker.', short: 'egen lossning' },
+      { id: 'hand', label: 'Lossas för hand', text: 'Passar paket och lätta produkter.', short: 'för hand' }
+    ];
+    const weekLabels = { asap: 'så snart som möjligt', w50: 'vecka 50', w51: 'vecka 51', w2: 'vecka 2', later: 'vecka bestäms' };
+    const agreedPrice = (l) => l.price == null ? 4900 : Math.round(l.price * 0.92 / 5) * 5;
+    const offer = lines.map((l) => ({ ...l, agreedP: agreedPrice(l) }));
+    return {
+      isForm: S.view === 'form', isSent: S.view === 'sent',
+      f: F, inp: inp, er: er, st: st, showErr: S.showErr,
+      week: S.week, pickWeek: (e) => this.setState({ week: e.target.value }), weekLabel: weekLabels[S.week],
+      unloads: unloadDefs.map((u) => ({ ...u, on: S.unload === u.id, style: opt(S.unload === u.id), pick: () => this.setState({ unload: u.id }) })),
+      unloadShort: unloadDefs.find((u) => u.id === S.unload).short,
+      noAttach: !S.attached, hasAttach: S.attached, attach: () => this.setState({ attached: true }), detach: () => this.setState({ attached: false }),
+      rows: lines.map((l) => ({ name: l.name, qtyLabel: l.qty + ' st', price: l.price == null ? 'På offert' : fmt(l.price * l.qty) })),
+      submit: (e) => { e.preventDefault(); if (valid) { if (SB) SB.setZip(F.zip); this.setState({ view: 'sent', showErr: false }); if (typeof window !== 'undefined') window.scrollTo(0, 0); } else this.setState({ showErr: true }); },
+      offer: offer.map((o) => ({ name: o.name, qtyLabel: o.qty + ' st à ' + fmt(o.agreedP), sum: fmt(o.agreedP * o.qty) })),
+      offerTotal: fmt(offer.reduce((t, o) => t + o.agreedP * o.qty, 0)),
+      accept: () => { if (SB) { SB.setItems(offer.map((o) => ({ id: o.id, qty: o.qty, price: o.agreedP, agreed: true }))); SB.setZip(F.zip); } }
+    };
+  }
+}
+</script>
+</body>
+</html>

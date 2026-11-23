@@ -171,7 +171,7 @@ class Component extends DCLogic {
     const payNow = pays.find((p) => p.id === S.pay) ? S.pay : pays[0].id;
     const SBc = typeof window !== 'undefined' ? window.SBCart : null;
     const cl = SBc && SBc.items().length ? SBc.lines('fi') : [{ name: 'Kevyt kaivonkansi Ø 600, A15', price: 1495, qty: 1 }, { name: 'Lukko ja avain', price: 295, qty: 1 }];
-    const sum = cl.reduce((t, l) => t + l.price * l.qty, 0);
+    const sum = cl.reduce((t, l) => t + (l.price || 0) * l.qty, 0);
     const fmt = (n) => Math.round(fo ? n / 1.25 : n).toLocaleString('fi-FI') + ' kr';
     const inp = {};
     ['company', 'orgnr', 'ref', 'email', 'phone', 'name', 'street', 'zip', 'city', 'msg'].forEach((k) => { inp[k] = set(k); });
@@ -187,7 +187,7 @@ class Component extends DCLogic {
       toggleTerms: () => this.setState({ f: { ...F, terms: !F.terms } }),
       valid: valid, invalid: !valid, showErr: S.showErr,
       submit: (e) => { e.preventDefault(); this.setState({ showErr: true }); },
-      sumLines: cl.map((l) => ({ name: l.name, qtyLabel: l.qty + ' kpl', sum: fmt(l.price * l.qty) })),
+      sumLines: cl.map((l) => ({ name: l.name, qtyLabel: l.qty + ' kpl', sum: l.price == null ? 'Tarjouksella' : fmt(l.price * l.qty) })),
       vatSum: Math.round(sum - sum / 1.25).toLocaleString('fi-FI') + ' kr',
       vatNote: fo ? 'Hinnat näytetään yrityksille alv 0.' : 'Hinnat sisältävät alv:n.'
     };

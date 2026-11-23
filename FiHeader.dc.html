@@ -100,7 +100,7 @@ class Component extends DCLogic {
       { title: 'Rakentaminen', href: '#', subs: L(['Betoniplintit', 'Pylväsperustukset ja pylväskengät', 'Maaruuvit', 'Lasikuitutikkaat', 'Putoamissuojaus']) },
       { title: 'Liikenne', href: '#', subs: L(['Valurautakannet ja katuvalut', 'Lentokenttien ja satamien kannet', 'Kanavaritilät', 'Rumpusilmät', 'Meluesteiden pylväät', 'Perustukset 60 mm:n putkille']) }
     ];
-    const PAIRS = [['FiEtusivu', 'SvStartsida'], ['FiKategoria', 'SvKategori'], ['FiTuote', 'SvProdukt'], ['FiOstoskori', 'SvVarukorg'], ['FiKassa', 'SvKassa'], ['FiKiitos', 'SvTack']];
+    const PAIRS = [['FiEtusivu', 'SvStartsida'], ['FiKategoria', 'SvKategori'], ['FiTuote', 'SvProdukt'], ['FiOstoskori', 'SvVarukorg'], ['FiKassa', 'SvKassa'], ['FiKiitos', 'SvTack'], ['FiTarjous', 'SvOffert']];
     const page = (typeof location !== 'undefined' ? location.pathname.split('/').pop() : '').replace('.dc.html', '');
     const pair = PAIRS.find((p) => p[0] === page || p[1] === page) || PAIRS[0];
     const ME = 'fi';

@@ -82,12 +82,22 @@ a{color:#111111}a:hover{color:#474747}
 </sc-if>
 <div style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: #474747"><span>Josta alv 25 %</span><span>{{ vatSum }}</span></div>
 <div style="display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 18px; color: #111111"><span>Yhteensä</span><span>{{ totalLabel }}</span></div>
+<sc-if value="{{ noQuote }}" hint-placeholder-val="{{ true }}">
 <a href="{{ checkoutHref }}" style="min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">Kassalle</a>
+</sc-if>
+<sc-if value="{{ hasQuote }}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 14px; color: #1a1a1a; background: #f5f5f4; border-radius: 8px; padding: 12px">Korissa on tuotteita, joiden hinta annetaan tarjouksella. Lähetämme koko korin tarjouspyyntönä, ja tarjouksessa on myös rahti ja purku.</p>
+<a href="FiTarjous.dc.html" style="min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">Lähetä tarjouspyyntö</a>
+<sc-if value="{{ hasPriced }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ stripQuote }}" style="border: 0; background: none; font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; cursor: pointer; min-height: 44px; padding: 0">Poista tarjoustuotteet ja maksa loput nyt</button></sc-if>
+</sc-if>
 <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: #474747">
 <li>Klarna tai Qliro, lasku yrityksille</li>
 <li>14 päivän peruutusoikeus</li>
 </ul>
-<p style="margin: 0; font-size: 14px; color: #474747; border-top: 1px solid #e2e2e0; padding-top: 12px">Ostatko projektiin? Yli [minimiarvo] tilauksissa voit <a href="#" style="font-weight: 600">lähettää ostoskorin tarjouspyyntönä</a>.</p>
+<sc-if value="{{ noQuote }}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{ overLimit }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 14px; color: #474747; border-top: 1px solid #e2e2e0; padding-top: 12px">Ostatko projektiin tai lavallisen? <a href="FiTarjous.dc.html" style="font-weight: 600">Lähetä kori tarjouspyyntönä</a>. Tarjouksessa on rahti ja purku, ja sen voi hyväksyä yhdellä klikkauksella.</p></sc-if>
+<sc-if value="{{ underLimit }}" hint-placeholder-val="{{ true }}"><p style="margin: 0; font-size: 14px; color: #474747; border-top: 1px solid #e2e2e0; padding-top: 12px">Yli 5 000 kr:n tilauksissa voit lähettää korin tarjouspyyntönä.</p></sc-if>
+</sc-if>
 </aside>
 </div>
 </main>
@@ -112,19 +122,23 @@ class Component extends DCLogic {
     const fmt = (n) => Math.round(ex ? n / 1.25 : n).toLocaleString('fi-FI') + ' kr';
     const setQty = (id, d) => save(S.lines.map((l) => l.id === id ? { ...l, qty: Math.max(1, l.qty + d) } : l));
     const add = (item) => { const has = S.lines.find((l) => l.id === item.id); save(has ? S.lines.map((l) => l.id === item.id ? { ...l, qty: l.qty + 1 } : l) : S.lines.concat([{ ...item, qty: 1 }])); };
-    const sum = S.lines.reduce((s, l) => s + l.price * l.qty, 0);
+    const priced = S.lines.filter((l) => l.price != null);
+    const sum = priced.reduce((s, l) => s + l.price * l.qty, 0);
     const count = S.lines.reduce((s, l) => s + l.qty, 0);
+    const pCount = priced.reduce((s, l) => s + l.qty, 0);
+    const hasQuote = S.lines.some((l) => l.price == null);
     return {
       vat: S.vat, setVat: (v) => this.setState({ vat: v }),
       count: count, empty: S.lines.length === 0,
-      lines: S.lines.map((l) => ({ ...l, sum: fmt(l.price * l.qty), img: 'Kuva: ' + l.name,
+      lines: S.lines.map((l) => ({ ...l, sum: l.price == null ? 'Hinta tarjouksella' : fmt(l.price * l.qty), meta: l.agreed ? l.meta + ' · sovittu hinta' : l.meta, img: 'Kuva: ' + l.name,
         less: () => setQty(l.id, -1), more: () => setQty(l.id, 1),
         lessLabel: 'Vähennä määrää, ' + l.name, moreLabel: 'Lisää määrää, ' + l.name,
         remove: () => save(S.lines.filter((x) => x.id !== l.id)) })),
       ringPrice: '+ ' + fmt(495), ventPrice: '+ ' + fmt(349),
       addRing: () => add({ id: 'ring', name: 'Tiivisterengas Ø 600', meta: 'Lisävaruste kevyisiin kansiin', price: 495, href: '#' }),
       addVent: () => add({ id: 'ventil', name: 'Tuuletusventtiili', meta: 'Lisävaruste kevyisiin kansiin', price: 349, href: '#' }),
-      prodLabel: 'Tuotteet, ' + count + ' kpl', prodSum: fmt(sum),
+      hasQuote: hasQuote, noQuote: !hasQuote, hasPriced: priced.length > 0, stripQuote: () => save(priced), overLimit: sum >= 5000, underLimit: sum < 5000,
+      prodLabel: 'Tuotteet, ' + pCount + ' kpl' + (hasQuote ? ' + tarjoustuotteet' : ''), prodSum: fmt(sum),
       vatSum: Math.round(sum - sum / 1.25).toLocaleString('fi-FI') + ' kr',
       zip: S.zip, typeZip: (e) => this.setState({ zip: e.target.value, zipErr: false }),
       submitZip: (e) => { e.preventDefault(); const v = S.zip.replace(/\s/g, ''); if (/^\d{5}$/.test(v)) { if (typeof window !== 'undefined' && window.SBCart) window.SBCart.setZip(S.zip); this.setState({ zipDone: true, zipErr: false }); } else this.setState({ zipErr: true }); },
