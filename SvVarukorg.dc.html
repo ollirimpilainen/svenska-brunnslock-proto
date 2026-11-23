@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<title>Varukorg</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#111111}a:hover{color:#474747}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 100vh; background: #ffffff; color: #1a1a1a; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.55">
+<dc-import name="SvHeader" cart="{{ count }}" vat="{{ vat }}" on-vat="{{ setVat }}" hint-size="100%,180px"></dc-import>
+<main style="max-width: 1240px; margin: 0 auto; padding: 40px 24px 80px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap">
+<h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 40px; color: #111111">Varukorg</h1>
+<a href="SvKategori.dc.html" style="font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Fortsätt handla</a>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start">
+
+<section aria-label="Produkter i varukorgen" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
+<sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+<div style="border: 1.5px dashed #bdbdbb; border-radius: 12px; padding: 32px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start">
+<b style="font-size: 18px; color: #111111">Varukorgen är tom.</b>
+<a href="SvKategori.dc.html" style="min-height: 44px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 6px; border: 1.5px solid #bdbdbb; font-weight: 600; text-decoration: none">Till lätta brunnslock</a>
+</div>
+</sc-if>
+<sc-for list="{{ lines }}" as="l" hint-placeholder-count="2">
+<div style="display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; gap: 20px; align-items: start; padding: 20px 0; border-bottom: 1px solid #e2e2e0">
+<div role="img" aria-label="{{ l.img }}" style="aspect-ratio: 1; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #474747">Bild</div>
+<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+<a href="{{ l.href }}" style="font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 18px; text-decoration: none; color: #111111">{{ l.name }}</a>
+<span style="font-size: 14px; color: #474747">{{ l.meta }}</span>
+<div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 6px">
+<div style="display: inline-flex; align-items: center; border: 1.5px solid #bdbdbb; border-radius: 6px">
+<button type="button" onClick="{{ l.less }}" aria-label="{{ l.lessLabel }}" style="width: 44px; min-height: 44px; border: 0; background: transparent; font: inherit; font-size: 20px; cursor: pointer">−</button>
+<span style="width: 36px; text-align: center; font-weight: 600">{{ l.qty }}</span>
+<button type="button" onClick="{{ l.more }}" aria-label="{{ l.moreLabel }}" style="width: 44px; min-height: 44px; border: 0; background: transparent; font: inherit; font-size: 20px; cursor: pointer">+</button>
+</div>
+<button type="button" onClick="{{ l.remove }}" style="border: 0; background: none; font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; cursor: pointer; min-height: 44px; padding: 0">Ta bort</button>
+</div>
+</div>
+<b style="font-size: 17px; white-space: nowrap">{{ l.sum }}</b>
+</div>
+</sc-for>
+<div style="margin-top: 24px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">Passar ihop med locket</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 12px">
+<div style="border: 1px solid #e2e2e0; border-radius: 10px; padding: 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<span><b style="display: block">Tätningsring Ø 600</b><span style="font-size: 13px; color: #5c5c5c">För dricksvattenbrunn. {{ ringPrice }}</span></span>
+<button type="button" onClick="{{ addRing }}" style="min-height: 44px; padding: 0 14px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">Lägg till</button>
+</div>
+<div style="border: 1px solid #e2e2e0; border-radius: 10px; padding: 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<span><b style="display: block">Ventilationsventil</b><span style="font-size: 13px; color: #5c5c5c">Om kommunen kräver luftning. {{ ventPrice }}</span></span>
+<button type="button" onClick="{{ addVent }}" style="min-height: 44px; padding: 0 14px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">Lägg till</button>
+</div>
+</div>
+</div>
+</section>
+
+<aside aria-labelledby="sum-h" style="flex: 1 1 340px; min-width: 0; max-width: 420px; border: 1px solid #bdbdbb; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<h2 id="sum-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">Sammanställning</h2>
+<div style="display: flex; justify-content: space-between; gap: 10px; font-size: 15px"><span>{{ prodLabel }}</span><b>{{ prodSum }}</b></div>
+<sc-if value="{{ noZip }}" hint-placeholder-val="{{ true }}">
+<form onSubmit="{{ submitZip }}" style="display: flex; flex-direction: column; gap: 8px; background: #f5f5f4; border-radius: 10px; padding: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Postnummer <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">frakten räknas på postnumret</span>
+<input value="{{ zip }}" onInput="{{ typeZip }}" inputmode="numeric" autocomplete="postal-code" placeholder="123 45" style="min-height: 44px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit; background: #ffffff">
+</label>
+<sc-if value="{{ zipErr }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px; font-weight: 600">Skriv ett postnummer med fem siffror.</span></sc-if>
+<button type="submit" style="min-height: 44px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">Visa frakt och totalpris</button>
+</form>
+</sc-if>
+<sc-if value="{{ hasZip }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; justify-content: space-between; gap: 10px; font-size: 15px"><span>Frakt till {{ zipShown }}, paket</span><b>[X] kr</b></div>
+<button type="button" onClick="{{ changeZip }}" style="align-self: flex-start; border: 0; background: none; font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; cursor: pointer; min-height: 44px; padding: 0">Ändra postnummer</button>
+</sc-if>
+<div style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: #474747"><span>Varav moms 25 %</span><span>{{ vatSum }}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 18px; color: #111111"><span>Totalt</span><span>{{ totalLabel }}</span></div>
+<a href="{{ checkoutHref }}" style="min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">Till kassan</a>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: #474747">
+<li>Klarna eller Qliro, faktura för företag</li>
+<li>14 dagars ångerrätt</li>
+</ul>
+<p style="margin: 0; font-size: 14px; color: #474747; border-top: 1px solid #e2e2e0; padding-top: 12px">Köper du till ett projekt? Över [minimivärde] kan du <a href="#" style="font-weight: 600">skicka varukorgen som offertförfrågan</a>.</p>
+</aside>
+</div>
+</main>
+<dc-import name="SvFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1700}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { vat: 'inkl', zip: '', zipDone: false, zipErr: false, lines: [
+      { id: 'lock', name: 'Lätt brunnslock Ø 600, A15', meta: 'Art.nr 10354 · Komposit, 6 kg · Passar ring 580 till 640 mm', price: 1495, qty: 1, href: 'SvProdukt.dc.html' },
+      { id: 'las', name: 'Lås med nyckel', meta: 'Tillval till lätta lock', price: 295, qty: 1, href: '#' }
+    ] };
+  }
+  renderVals() {
+    const S = this.state, ex = S.vat === 'exkl';
+    const fmt = (n) => Math.round(ex ? n / 1.25 : n).toLocaleString('sv-SE') + ' kr';
+    const setQty = (id, d) => this.setState({ lines: S.lines.map((l) => l.id === id ? { ...l, qty: Math.max(1, l.qty + d) } : l) });
+    const add = (item) => { const has = S.lines.find((l) => l.id === item.id); this.setState({ lines: has ? S.lines.map((l) => l.id === item.id ? { ...l, qty: l.qty + 1 } : l) : S.lines.concat([{ ...item, qty: 1 }]) }); };
+    const sum = S.lines.reduce((s, l) => s + l.price * l.qty, 0);
+    const count = S.lines.reduce((s, l) => s + l.qty, 0);
+    return {
+      vat: S.vat, setVat: (v) => this.setState({ vat: v }),
+      count: count, empty: S.lines.length === 0,
+      lines: S.lines.map((l) => ({ ...l, sum: fmt(l.price * l.qty), img: 'Bild: ' + l.name,
+        less: () => setQty(l.id, -1), more: () => setQty(l.id, 1),
+        lessLabel: 'Minska antal, ' + l.name, moreLabel: 'Öka antal, ' + l.name,
+        remove: () => this.setState({ lines: S.lines.filter((x) => x.id !== l.id) }) })),
+      ringPrice: '+ ' + fmt(495), ventPrice: '+ ' + fmt(349),
+      addRing: () => add({ id: 'ring', name: 'Tätningsring Ø 600', meta: 'Tillval till lätta lock', price: 495, href: '#' }),
+      addVent: () => add({ id: 'ventil', name: 'Ventilationsventil', meta: 'Tillval till lätta lock', price: 349, href: '#' }),
+      prodLabel: 'Produkter, ' + count + ' st', prodSum: fmt(sum),
+      vatSum: Math.round(sum - sum / 1.25).toLocaleString('sv-SE') + ' kr',
+      zip: S.zip, typeZip: (e) => this.setState({ zip: e.target.value, zipErr: false }),
+      submitZip: (e) => { e.preventDefault(); const v = S.zip.replace(/\s/g, ''); if (/^\d{5}$/.test(v)) this.setState({ zipDone: true, zipErr: false }); else this.setState({ zipErr: true }); },
+      noZip: !S.zipDone, hasZip: S.zipDone, zipErr: S.zipErr,
+      zipShown: S.zip.replace(/\s/g, '').replace(/^(\d{3})(\d{2})$/, '$1 $2'),
+      changeZip: () => this.setState({ zipDone: false }),
+      totalLabel: S.zipDone ? '[X] kr' : fmt(sum) + ' + frakt',
+      checkoutHref: S.lines.length ? 'SvKassa.dc.html' : '#'
+    };
+  }
+}
+</script>
+</body>
+</html>

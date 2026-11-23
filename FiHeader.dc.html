@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<title>Header</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#111111}a:hover{color:#474747}
+</style>
+</helmet>
+<header style="width: 100%; font-family: Inter, system-ui, sans-serif; color: #1a1a1a; background: #ffffff; border-bottom: 1px solid #e2e2e0">
+<div style="background: #111111; color: #e6e6e6; font-size: 14px">
+<div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; min-height: 44px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap">
+<span style="display: inline-flex; gap: 6px; align-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.5"/><circle cx="17" cy="17.5" r="1.5"/></svg>Toimitus suoraan toimittajiltamme</span>
+<span style="display: inline-flex; gap: 6px; align-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>Lasku yrityksille</span>
+<span style="display: inline-flex; gap: 6px; align-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v4h-3v-5h3M4 17v-5h3v5z"/></svg>Vastaamme myös viikonloppuisin</span>
+<div style="margin-left: auto; display: flex; align-items: center; gap: 16px">
+<span style="font-size: 13px; color: #c9c9c9">Hinnat</span>
+<div role="group" aria-label="Hinnat" style="display: inline-flex; border: 1px solid rgba(255,255,255,0.35); border-radius: 999px; padding: 2px">
+<button type="button" onClick="{{ setInkl }}" aria-pressed="{{ inklPressed }}" style="{{ inklStyle }}">sis. alv</button>
+<button type="button" onClick="{{ setExkl }}" aria-pressed="{{ exklPressed }}" style="{{ exklStyle }}">alv 0</button>
+</div>
+<div role="group" aria-label="Kieli / Språk" style="display: inline-flex; gap: 2px">
+<a href="{{ fiHref }}" lang="fi" aria-current="{{ fiCur }}" style="{{ fiStyle }}">FI</a>
+<a href="{{ svHref }}" lang="sv" aria-current="{{ svCur }}" style="{{ svStyle }}">SV</a>
+</div>
+<a href="#" style="color: #ffffff; font-weight: 600; text-decoration: none; display: inline-flex; gap: 6px; align-items: center; min-height: 44px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Kirjaudu</a>
+</div>
+</div>
+</div>
+<div style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap">
+<a href="FiEtusivu.dc.html" aria-label="Svenska Brunnslock, etusivulle" style="width: 168px; height: 42px; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #474747; font-size: 11px; font-weight: 700; letter-spacing: 0.6px; text-decoration: none; flex: none">SVENSKA BRUNNSLOCK</a>
+<form role="search" style="flex: 1 1 320px; max-width: 560px; display: flex; align-items: center; border: 1.5px solid #bdbdbb; border-radius: 10px; padding-left: 12px; background: #ffffff">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#474747" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+<label for="hdr-q-fi" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Hae valikoimasta</label>
+<input id="hdr-q-fi" type="search" placeholder="Hae tuotetta, mittaa tai tuotenumeroa" style="flex: 1; min-width: 0; border: 0; background: transparent; padding: 0 8px; min-height: 44px; font: inherit; font-size: 15px; outline: none">
+<button type="submit" style="min-height: 44px; padding: 0 18px; border: 0; border-left: 1px solid #e2e2e0; background: #f5f5f4; font: inherit; font-weight: 600; cursor: pointer; border-radius: 0 10px 10px 0">Hae</button>
+</form>
+<div style="margin-left: auto; display: flex; align-items: center; gap: 8px">
+<a href="tel:+46920520056" style="display: flex; flex-direction: column; line-height: 1.2; text-decoration: none; padding: 4px 12px; min-height: 44px; justify-content: center"><small style="font-size: 12px; color: #5c5c5c">Soita meille</small><b style="font-size: 15px">0920-52 00 56</b></a>
+<a href="FiOstoskori.dc.html" aria-label="{{ cartLabel }}" style="min-height: 44px; padding: 0 10px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border-radius: 6px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 4h2l2.5 11h10l2-7H7"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>Ostoskori<span style="background: #5f5f5f; color: #ffffff; font-size: 11px; font-weight: 700; line-height: 20px; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 10px; text-align: center">{{ cart }}</span></a>
+</div>
+</div>
+<nav aria-label="Päävalikko" style="border-top: 1px solid #e2e2e0">
+<div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; display: flex; gap: 4px; overflow-x: auto">
+<button type="button" onClick="{{ toggleMenu }}" aria-expanded="{{ menuOpen }}" aria-controls="mega-fi" style="{{ navSortiment }}">Valikoima<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="{{ chevron }}"><path d="m6 9 6 6 6-6"/></svg></button>
+<a href="#" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid transparent">Apu valintaan</a>
+<a href="#" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid transparent">Oppaat</a>
+<a href="#" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid transparent">Yritykset ja hankkeet</a>
+<a href="#" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid transparent">Asiakaspalvelu</a>
+</div>
+</nav>
+<sc-if value="{{ isOpen }}" hint-placeholder-val="{{ false }}">
+<div id="mega-fi" style="border-top: 1px solid #e2e2e0; background: #ffffff; box-shadow: 0 12px 24px rgba(0,0,0,0.08)">
+<div style="max-width: 1240px; margin: 0 auto; padding: 28px 24px 32px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px">
+<sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<a href="{{ c.href }}" style="font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 16px; line-height: 1.3; text-decoration: none; color: #111111; padding: 4px 0 8px">{{ c.title }}</a>
+<sc-for list="{{ c.subs }}" as="s" hint-placeholder-count="6">
+<a href="{{ s.href }}" style="font-size: 14px; line-height: 1.35; text-decoration: none; color: #474747; padding: 5px 0">{{ s.label }}</a>
+</sc-for>
+<a href="{{ c.href }}" style="font-size: 14px; font-weight: 600; padding: 8px 0 0">Kaikki</a>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; gap: 12px 32px; flex-wrap: wrap; align-items: center; border-top: 1px solid #e2e2e0; padding-top: 16px; font-size: 14px">
+<span style="color: #474747">Etkö tiedä, mitä tarvitset?</span>
+<a href="#" style="font-weight: 600">Apu valintaan</a>
+<a href="#" style="font-weight: 600">Kaivon mittaaminen</a>
+<a href="tel:+46920520056" style="font-weight: 600">Soita 0920-52 00 56</a>
+</div>
+</div>
+</div>
+</sc-if>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"cart":{"editor":"int","default":0},"current":{"editor":"enum","options":["","sortiment"],"default":""},"vat":{"editor":null},"onVat":{"editor":null},"$preview":{"width":1440,"height":180}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { vat: 'inkl', menu: false }; }
+  renderVals() {
+    const vat = this.props.vat ?? this.state.vat;
+    const set = (v) => { if (this.props.onVat) this.props.onVat(v); else this.setState({ vat: v }); };
+    const on = 'border: 0; background: #ffffff; color: #111111; font: inherit; font-weight: 600; font-size: 13px; padding: 0 12px; min-height: 32px; border-radius: 999px; cursor: pointer';
+    const off = 'border: 0; background: transparent; color: #e6e6e6; font: inherit; font-weight: 600; font-size: 13px; padding: 0 12px; min-height: 32px; border-radius: 999px; cursor: pointer';
+    const nav = 'display: inline-flex; align-items: center; gap: 6px; border-top: 0; border-left: 0; border-right: 0; background: none; font-family: inherit; color: #111111; cursor: pointer; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid ' + (this.props.current === 'sortiment' ? '#111111' : 'transparent');
+    const cart = this.props.cart ?? 0;
+    const L = (a) => a.map((x) => ({ label: x, href: x === 'Kevyet kaivonkannet' ? 'FiKategoria.dc.html' : '#' }));
+    const cats = [
+      { title: 'Kaivonkannet ja luukut', href: '#', subs: L(['Kevyet kaivonkannet', 'Kevyet kannet muovikaivoihin', 'Muovikannet', 'Betonikannet', 'Valurautakannet ja sihdit', 'Luukut', 'Lattia- ja ryömintätilan luukut', 'Turva- ja poistumisluukut', 'Mittatilausluukut', 'Kannennostimet ja tarvikkeet']) },
+      { title: 'Sähköinfra', href: '#', subs: L(['Kaapelikaivot', 'Jatkos- ja optokaivot', 'Kaapelikourut', 'Kaapelinsuojaputket', 'Monikanavaputket', 'Kaapelikaapin jalustat', 'Merkkikilvet']) },
+      { title: 'Rautatie', href: '#', subs: L(['Alumiini- ja ruutulevykannet', 'Betoniperustukset ja pylväsputket', 'Sepelilaatikot', 'Kiipeilyraudat ja laskeutumistikkaat', 'Profiilit', 'Sammakko- ja matelijaesteet']) },
+      { title: 'Urakointi ja maarakennus', href: '#', subs: L(['Vesi- ja viemärikaivot', 'Pumppaamot ja pumput', 'Rasva- ja öljynerottimet', 'Lasikuitusäiliöt', 'Paineputket', 'Korotusrenkaat', 'Tukimuurit', 'Geotekstiilit ja maaritilät']) },
+      { title: 'Rakentaminen', href: '#', subs: L(['Betoniplintit', 'Pylväsperustukset ja pylväskengät', 'Maaruuvit', 'Lasikuitutikkaat', 'Putoamissuojaus']) },
+      { title: 'Liikenne', href: '#', subs: L(['Valurautakannet ja katuvalut', 'Lentokenttien ja satamien kannet', 'Kanavaritilät', 'Rumpusilmät', 'Meluesteiden pylväät', 'Perustukset 60 mm:n putkille']) }
+    ];
+    const PAIRS = [['FiEtusivu', 'SvStartsida'], ['FiKategoria', 'SvKategori'], ['FiTuote', 'SvProdukt'], ['FiOstoskori', 'SvVarukorg'], ['FiKassa', 'SvKassa'], ['FiKiitos', 'SvTack']];
+    const page = (typeof location !== 'undefined' ? location.pathname.split('/').pop() : '').replace('.dc.html', '');
+    const pair = PAIRS.find((p) => p[0] === page || p[1] === page) || PAIRS[0];
+    const ME = 'fi';
+    const langOn = 'display: inline-flex; align-items: center; min-height: 32px; padding: 0 8px; border-radius: 4px; font-size: 13px; font-weight: 700; text-decoration: none; background: #ffffff; color: #111111';
+    const langOff = 'display: inline-flex; align-items: center; min-height: 32px; padding: 0 8px; border-radius: 4px; font-size: 13px; font-weight: 600; text-decoration: none; color: #e6e6e6';
+    return {
+      cart: cart, cartLabel: 'Ostoskori, ' + cart + ' kpl',
+      inklPressed: String(vat === 'inkl'), exklPressed: String(vat === 'exkl'),
+      inklStyle: vat === 'inkl' ? on : off, exklStyle: vat === 'exkl' ? on : off,
+      setInkl: () => set('inkl'), setExkl: () => set('exkl'),
+      navSortiment: nav, cats: cats,
+      fiHref: pair[0] + '.dc.html', svHref: pair[1] + '.dc.html', fiCur: ME === 'fi' ? 'true' : 'false', svCur: ME === 'sv' ? 'true' : 'false', fiStyle: ME === 'fi' ? langOn : langOff, svStyle: ME === 'sv' ? langOn : langOff,
+      isOpen: this.state.menu, menuOpen: String(this.state.menu),
+      chevron: this.state.menu ? 'transform: rotate(180deg)' : '',
+      toggleMenu: () => this.setState({ menu: !this.state.menu })
+    };
+  }
+}
+</script>
+</body>
+</html>

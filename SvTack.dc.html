@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<title>Tack för din beställning</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#111111}a:hover{color:#474747}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 100vh; background: #ffffff; color: #1a1a1a; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.55">
+<dc-import name="SvHeader" cart="{{ zero }}" hint-size="100%,180px"></dc-import>
+<main style="max-width: 1240px; margin: 0 auto; padding: 56px 24px 80px; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
+
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 999px; background: #111111; color: #ffffff; font-size: 14px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Beställningen är mottagen</span>
+<h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 44px; line-height: 1.1; color: #111111">Tack för din beställning!</h1>
+<p style="margin: 0; font-size: 18px; color: #474747; max-width: 60ch">Ordernummer <b style="color: #111111">SB-[ordernummer]</b>. Vi har skickat en bekräftelse till anna@exempel.se.</p>
+</div>
+
+<section aria-labelledby="next-h" style="display: flex; flex-direction: column; gap: 16px">
+<h2 id="next-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 24px; color: #111111">Så går det till nu</h2>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0">
+<li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0">
+<span style="width: 32px; height: 32px; border-radius: 50%; background: #111111; color: #ffffff; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700">1</span>
+<span><b style="display: block; color: #111111">Orderbekräftelse</b><span style="color: #474747">Du har fått den på e-post. Där ser du vad du har beställt och vad det kostar med frakt.</span></span>
+</li>
+<li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0">
+<span style="width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid #111111; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700">2</span>
+<span><b style="display: block; color: #111111">Vi beställer från leverantören</b><span style="color: #474747">Locket skickas direkt från vår leverantör i Sverige. Lagervaror levereras normalt inom [3 till 6] arbetsdagar.</span></span>
+</li>
+<li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0">
+<span style="width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid #111111; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700">3</span>
+<span><b style="display: block; color: #111111">Spårningskod när paketet skickas</b><span style="color: #474747">Du får den med sms och e-post, så att du kan följa paketet hos transportören.</span></span>
+</li>
+<li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0">
+<span style="width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid #111111; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700">4</span>
+<span><b style="display: block; color: #111111">Paketet kommer till ditt ombud</b><span style="color: #474747">Om något dröjer hör vi av oss så tidigt vi kan.</span></span>
+</li>
+</ol>
+</section>
+
+<div style="display: flex; gap: 16px 24px; flex-wrap: wrap; align-items: center">
+<a href="SvStartsida.dc.html" style="min-height: 48px; display: inline-flex; align-items: center; padding: 0 20px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; text-decoration: none">Till startsidan</a>
+<a href="#" style="font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Skapa konto och se dina ordrar</a>
+</div>
+</div>
+
+<aside style="flex: 1 1 340px; min-width: 0; max-width: 420px; display: flex; flex-direction: column; gap: 16px">
+<div style="border: 1px solid #bdbdbb; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">Din beställning</h2>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>Lätt brunnslock Ø 600, A15, 1 st</span><b>1 495 kr</b></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>Lås med nyckel, 1 st</span><b>295 kr</b></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>Frakt, paket till ombud</span><b>[X] kr</b></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 17px; color: #111111"><span>Totalt inkl. moms</span><span>[X] kr</span></div>
+<p style="margin: 0; font-size: 14px; color: #474747">Leveransadress: Anna Exempel, Exempelvägen 1, 123 45 Exempelstad</p>
+<p style="margin: 0; font-size: 14px; color: #474747">Betalning: Klarna eller Qliro</p>
+</div>
+<div style="background: #f5f5f4; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 6px">
+<b style="color: #111111">Frågor om beställningen?</b>
+<span style="font-size: 15px; color: #474747">Ring oss och uppge ordernumret.</span>
+<a href="tel:+46920520056" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 26px; text-decoration: none; color: #111111">0920-52 00 56</a>
+</div>
+</aside>
+
+</main>
+<dc-import name="SvFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() { return { zero: 0 }; }
+}
+</script>
+</body>
+</html>
