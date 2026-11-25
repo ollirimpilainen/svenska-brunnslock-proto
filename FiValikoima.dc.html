@@ -215,10 +215,10 @@ const GUIDE_OF = { latta: 'brunnslock', plastbrunn: 'brunnslock', plast: 'brunns
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    let kat = '', sub = '';
+    let kat = '', sub = '', q0 = '';
     const f = {};
     try {
-      const qp = new URLSearchParams(location.search); kat = qp.get('kat') || ''; sub = qp.get('sub') || '';
+      const qp = new URLSearchParams(location.search); kat = qp.get('kat') || ''; sub = qp.get('sub') || ''; q0 = qp.get('q') || '';
       // Tuoteapurin "Visa i listan": mm = renkaan sisämitta, klass = vähintään tämä luokka, lock = materiaali
       const mm = parseInt(qp.get('mm'), 10); if (mm) f.ring = String(mm);
       const k = CLS_ORDER.indexOf(qp.get('klass') || ''); if (k >= 0) f.cls = CLS_ORDER.slice(k);
@@ -226,12 +226,14 @@ class Component extends DCLogic {
       // Luukkuapurin aukon mitta: b = leveys, l = pituus (Fri öppning, Annat mått ±50 mm)
       const b = parseInt(qp.get('b'), 10), l = parseInt(qp.get('l'), 10); if (b || l) f.open = { other: true, w: b ? String(b) : '', l: l ? String(l) : '' };
     } catch (e) {}
-    this.state = { kat: kat, sub: sub, vat: (typeof window !== 'undefined' && window.SBVat ? window.SBVat.get() : 'inkl'), q: '', f: f, other: f.open ? { open: true } : {}, fOpen: false, limit: 24 };
+    this.state = { kat: kat, sub: sub, vat: (typeof window !== 'undefined' && window.SBVat ? window.SBVat.get() : 'inkl'), q: q0, f: f, other: f.open ? { open: true } : {}, fOpen: false, limit: 24 };
   }
   renderVals() {
     const S = this.state, T = TXT[LANG], li = LANG === 'fi' ? 1 : 0;
     const C = (typeof window !== 'undefined' && window.SB_CATALOG) || { cats: [], fams: {}, items: [] };
-    const cat = C.cats.find((c) => c.id === S.kat);
+    // Yläpalkin haku (?q=): hakutulokset koko valikoimasta nimen ja artikelnumeron mukaan
+    const SEARCH = !S.kat && !!S.q.trim();
+    const cat = SEARCH ? { id: '*', sv: 'Sökresultat', fi: 'Hakutulokset', subs: [] } : C.cats.find((c) => c.id === S.kat);
     const sub = cat && cat.subs.find((s) => s.id === S.sub) ? S.sub : '';
     const ex = S.vat === 'exkl';
     const fmt = (n) => Math.round(ex ? n / 1.25 : n).toLocaleString(LANG === 'fi' ? 'fi-FI' : 'sv-SE') + ' kr';
@@ -240,7 +242,7 @@ class Component extends DCLogic {
     const base = { cart: 0, vat: S.vat, setVat: (v) => { if (typeof window !== 'undefined' && window.SBVat) window.SBVat.set(v); this.setState({ vat: v }); }, t: T };
     // kortit: yksi kortti per kokoperhe
     const cardsOf = (items) => { const m = {}, out = []; items.forEach((it) => { const k = it.fam || ('p' + it.id); if (!m[k]) { m[k] = { key: k, fam: it.fam, items: [] }; out.push(m[k]); } m[k].items.push(it); }); return out; };
-    const catItems = (k) => C.items.filter((i) => i.cat === k);
+    const catItems = (k) => (k === '*' ? C.items : C.items.filter((i) => i.cat === k));
     if (!cat) {
       if (typeof document !== 'undefined') document.title = T.all;
       return Object.assign(base, { isHome: true, isCat: false, title: T.all, lead: T.homeLead, crumbs: [{ label: T.home, href: HOME }],
@@ -249,7 +251,9 @@ class Component extends DCLogic {
     const group = groupOf(cat.id, sub), FIDS = GROUPS[group];
     const scopeAll = catItems(cat.id).filter((i) => !sub || i.sub === sub);
     const ql = S.q.trim().toLowerCase();
-    const scope = ql ? scopeAll.filter((i) => (i.n + ' ' + (i.sku || '')).toLowerCase().indexOf(ql) >= 0) : scopeAll;
+    // Jokaisen hakusanan on löydyttävä nimestä tai artikelnumerosta
+    const qt = ql.split(/\s+/).filter(Boolean);
+    const scope = qt.length ? scopeAll.filter((i) => { const h = (i.n + ' ' + (i.sku || '')).toLowerCase(); return qt.every((w) => h.indexOf(w) >= 0); }) : scopeAll;
     // ---------- suodattimet ----------
     const pair = (a, b) => (a && b ? a + '×' + b : '');
     const DEF = {
@@ -356,7 +360,7 @@ class Component extends DCLogic {
       };
     };
     const subList = [{ id: '', label: T.allIn + ' ' + cat[LANG].toLowerCase() }].concat(cat.subs.map((s) => ({ id: s.id, label: s[LANG] })))
-      .map((s) => ({ ...s, n: famCount(catItems(cat.id).filter((i) => !s.id || i.sub === s.id)) })).filter((s) => s.n > 0)
+      .map((s) => ({ ...s, n: SEARCH ? famCount(scope) : famCount(catItems(cat.id).filter((i) => !s.id || i.sub === s.id)) })).filter((s) => s.n > 0)
       .map((s) => { const on = s.id === sub; return { label: s.label, count: String(s.n), href: href(cat.id, s.id), current: on ? 'page' : 'false', pick: go(cat.id, s.id),
         style: 'display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 34px; padding: 6px 0; text-decoration: none; font-size: 14px; line-height: 1.35; color: ' + (on ? '#111111; font-weight: 700;' : '#474747; font-weight: 400;') }; });
     const subObj = sub && cat.subs.find((s) => s.id === sub);
@@ -379,7 +383,7 @@ class Component extends DCLogic {
     return Object.assign(base, {
       isHome: false, isCat: true, title: title, catLabel: cat[LANG],
       hasGuide: !!gId, guideHref: GUIDE + '?g=' + gId, guideTitle: gId === 'luckor' ? T.guideLu : T.guideBl, guideText: T.guideText,
-      lead: subObj ? T.leadSub(nAll) : T.lead(nAll, subList.length - 1),
+      lead: SEARCH ? (LANG === 'fi' ? 'Haku: "' + S.q.trim() + '"' : 'Sökning: "' + S.q.trim() + '"') : subObj ? T.leadSub(nAll) : T.lead(nAll, subList.length - 1),
       crumbs: [{ label: T.home, href: HOME }, { label: T.all, href: PAGE }].concat(subObj ? [{ label: cat[LANG], href: href(cat.id) }] : []),
       subs: subList, homeHref: PAGE,
       hasFilters: filters.length > 0, filters: filters, fOpen: String(S.fOpen), openF: () => this.setState({ fOpen: true }), closeF: () => this.setState({ fOpen: false }),

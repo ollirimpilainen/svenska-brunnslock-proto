@@ -36,10 +36,10 @@ a{color:#111111}a:hover{color:#474747}
 </div>
 <div class="m-mainrow" style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap">
 <a class="m-logo" href="SvStartsida.dc.html" aria-label="Svenska Brunnslock, till startsidan" style="width: 168px; height: 42px; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #474747; font-size: 11px; font-weight: 700; letter-spacing: 0.6px; text-decoration: none; flex: none">SVENSKA BRUNNSLOCK</a>
-<form class="m-search" role="search" style="flex: 1 1 320px; max-width: 560px; display: flex; align-items: center; border: 1.5px solid #bdbdbb; border-radius: 10px; padding-left: 12px; background: #ffffff">
+<form class="m-search" role="search" action="SvSortiment.dc.html" method="get" style="flex: 1 1 320px; max-width: 560px; display: flex; align-items: center; border: 1.5px solid #bdbdbb; border-radius: 10px; padding-left: 12px; background: #ffffff">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#474747" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
 <label for="hdr-q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Sök i sortimentet</label>
-<input id="hdr-q" type="search" placeholder="Sök produkt, mått eller artikelnummer" style="flex: 1; min-width: 0; border: 0; background: transparent; padding: 0 8px; min-height: 44px; font: inherit; font-size: 15px; outline: none">
+<input id="hdr-q" name="q" type="search" placeholder="Sök produkt, mått eller artikelnummer" style="flex: 1; min-width: 0; border: 0; background: transparent; padding: 0 8px; min-height: 44px; font: inherit; font-size: 15px; outline: none">
 <button type="submit" style="min-height: 44px; padding: 0 18px; border: 0; border-left: 1px solid #e2e2e0; background: #f5f5f4; font: inherit; font-weight: 600; cursor: pointer; border-radius: 0 10px 10px 0">Sök</button>
 </form>
 <div style="margin-left: auto; display: flex; align-items: center; gap: 8px">
@@ -51,7 +51,7 @@ a{color:#111111}a:hover{color:#474747}
 <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; display: flex; gap: 4px; overflow-x: auto">
 <button type="button" onClick="{{ toggleMenu }}" aria-expanded="{{ menuOpen }}" aria-controls="mega-sv" style="{{ navSortiment }}">Sortiment<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="{{ chevron }}"><path d="m6 9 6 6 6-6"/></svg></button>
 <a href="SvProduktguide.dc.html" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid transparent">Hitta rätt produkt</a>
-<a href="#" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid transparent">Guider</a>
+<a href="SvProduktguide.dc.html" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid transparent">Guider</a>
 <a href="#" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid transparent">Företag och projekt</a>
 <a href="#" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid transparent">Kundservice</a>
 </div>
@@ -73,7 +73,7 @@ a{color:#111111}a:hover{color:#474747}
 <div style="display: flex; gap: 12px 32px; flex-wrap: wrap; align-items: center; border-top: 1px solid #e2e2e0; padding-top: 16px; font-size: 14px">
 <span style="color: #474747">Vet du inte vad du behöver?</span>
 <a href="SvProduktguide.dc.html" style="font-weight: 600">Hitta rätt produkt</a>
-<a href="#" style="font-weight: 600">Mäta brunnen</a>
+<a href="SvProduktguide.dc.html" style="font-weight: 600">Mäta brunnen</a>
 <a href="tel:+46920520056" style="font-weight: 600">Ring 0920-52 00 56</a>
 </div>
 </div>

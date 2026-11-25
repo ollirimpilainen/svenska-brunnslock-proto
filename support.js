@@ -642,6 +642,8 @@
     });
     mount.addEventListener('submit', function (e) {
       var h = findHandler(e.target, 'submit');
+      // Lomake ilman käsittelijää mutta action-osoitteella (yläpalkin haku) lähtee tavalliseen tapaan
+      if (!h && e.target.getAttribute && e.target.getAttribute('action')) return;
       e.preventDefault();
       if (h) h(e);
     });
