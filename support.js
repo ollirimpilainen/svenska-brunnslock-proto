@@ -240,25 +240,39 @@
       lang = lang || 'fi';
       var ls = (lines || this.lines(lang)).filter(function (l) { return !l.quote; });
       if (!ls.length) return { price: 0, label: '', options: [] };
-      var pallKg = 0, pallets = 0, has = {};
-      ['pall', 'plint'].forEach(function (k) {
-        var q = ls.filter(function (l) { return l.fr === k; });
-        if (!q.length) return;
-        has[k] = true;
-        pallKg += q.reduce(function (s, l) { return s + (l.kg || 40) * l.qty; }, 0);
-        pallets += Math.ceil(q.reduce(function (s, l) { return s + l.qty; }, 0) / FR[k].per);
+      // Painoportaat koko korille (rahtimalli.md 3.2, esimerkkiarvot, SB vahvistaa):
+      // ombud enintään 20 kg, kotiinkuljetus enintään 70 kg, sen yli lava; lava enintään 1 000 kg; yli 5 lavaa tarjoukseen.
+      var OMB_KG = 20, HOME_KG = 70, PALL_KG = 1000, MAX_PALL = 5;
+      var W = 0, unknown = false, has = {}, byType = {};
+      ls.forEach(function (l) {
+        has[l.fr] = true;
+        if (l.kg == null) unknown = true; else W += l.kg * l.qty;
+        if (l.fr === 'pall' || l.fr === 'plint') byType[l.fr] = (byType[l.fr] || 0) + l.qty;
       });
-      ls.forEach(function (l) { has[l.fr] = true; });
       var T = function (sv, fi) { return lang === 'sv' ? sv : fi; };
       var same = T('Samma pris i hela Sverige.', 'Sama hinta koko Ruotsiin.');
-      if (has.pall || has.plint) {
-        // Kevyt lavatilaus (oletusraja 70 kg) menee kotiinkuljetuksena
-        if (pallKg <= 70) return { price: 590, key: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), options: [{ id: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), text: same, price: 590 }] };
-        var pp = (has.plint ? FR.plint.price : FR.pall.price) * pallets;
+      var kgTxt = Math.round(W).toLocaleString('sv-SE') + ' kg';
+      var home = function (txt) { return { price: 590, key: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), options: [{ id: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), text: txt + same, price: 590 }] }; };
+      var hasPall = has.pall || has.plint;
+      // 1 Koko kori enintään 70 kg: kotiinkuljetus, myös lavatuotteilla (kevyt lavatilaus)
+      if (W <= HOME_KG && (unknown ? (!hasPall && W > OMB_KG) : (hasPall || has.skrym || W > OMB_KG))) return home(T('Ordern väger ' + kgTxt + '. ', 'Tilaus painaa ' + kgTxt + '. '));
+      if (hasPall || W > HOME_KG) {
+        // 2 Lavat: lavatuotteet kappaleosuuksina lavatyypeittäin, muut kulkevat niiden mukana.
+        // Jos lavatuotteita ei ole, yli 70 kg:n kori menee yleislavoille painon mukaan (enintään 1 000 kg per lava).
+        var n = {};
+        Object.keys(byType).forEach(function (k) { n[k] = Math.ceil(byType[k] / FR[k].per); });
+        var cnt = (n.pall || 0) + (n.plint || 0), byKg = hasPall ? 0 : Math.ceil(W / PALL_KG);
+        if (byKg > cnt) n.pall = (n.pall || 0) + byKg - cnt;
+        var pallets = (n.pall || 0) + (n.plint || 0);
+        var pp = (n.pall || 0) * FR.pall.price + (n.plint || 0) * FR.plint.price;
         var pl = pallets + ' ' + T(pallets === 1 ? 'pall' : 'pallar', pallets === 1 ? 'lava' : 'lavaa');
-        return { price: pp, key: 'pall', label: T('Pall, ', 'Lava, ') + pl, options: [{ id: 'pall', label: T('Pallfrakt, ', 'Lavarahti, ') + pl, text: T('Lättare produkter följer med pallen utan extra kostnad. ', 'Kevyemmät tuotteet kulkevat lavan mukana ilman lisähintaa. ') + same, price: pp }] };
+        var why = hasPall ? T('Lättare produkter följer med pallen utan extra kostnad. ', 'Kevyemmät tuotteet kulkevat lavan mukana ilman lisähintaa. ')
+          : T('Ordern väger ' + kgTxt + ', så den skickas på pall. ', 'Tilaus painaa ' + kgTxt + ', joten se lähtee lavalla. ');
+        // 3 Yli 5 lavaa: rahti vahvistetaan tarjouksessa
+        if (pallets > MAX_PALL) return { price: pp, key: 'offert', label: T(pl + ', frakten bekräftas i offerten', pl + ', rahti vahvistetaan tarjouksessa'), options: [{ id: 'offert', label: T('Frakt offereras, ', 'Rahti tarjouksessa, ') + pl, text: T('Över ' + MAX_PALL + ' pallar räknar vi frakten åt dig. ', 'Yli ' + MAX_PALL + ' lavan rahdin laskemme puolestasi. ') + same, price: pp }] };
+        return { price: pp, key: 'pall', label: T('Pall, ', 'Lava, ') + pl, options: [{ id: 'pall', label: T('Pallfrakt, ', 'Lavarahti, ') + pl, text: why + same, price: pp }] };
       }
-      if (has.skrym) return { price: 590, key: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), options: [{ id: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), text: T('Stora lock levereras hem. ', 'Isot kannet toimitetaan kotiin. ') + same, price: 590 }] };
+      if (has.skrym) return home(T('Stora lock levereras hem. ', 'Isot kannet toimitetaan kotiin. '));
       return { price: 172, key: 'ombud', label: T('Paket till ombud', 'Paketti noutopisteeseen'), options: [
         { id: 'ombud', label: T('Paket till ombud', 'Paketti noutopisteeseen'), text: T('Hämta hos närmaste utlämningsställe.', 'Nouda lähimmästä noutopisteestä.'), price: 172 },
         { id: 'dorr', label: T('Paket hem till dörren', 'Paketti kotiovelle'), text: T('Lämnas vid dörren eller kvitteras.', 'Jätetään ovelle tai kuitataan.'), price: 590 } ] };
