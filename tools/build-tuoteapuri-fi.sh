@@ -1,9 +1,9 @@
 #!/bin/sh
-# Generoi suomiversion tuoteapurista ruotsin lähdetiedostosta.
+# Generoi suomiversion tuoteapureista ruotsin lähdetiedostosta.
 # Logiikka ja molempien kielten tekstit ovat SvProduktguide.dc.html:ssä; FI-tiedosto eroaa vain kielen, otsikon ja headerin osalta.
 cd "$(dirname "$0")/.." || exit 1
 sed -e 's/<html lang="sv">/<html lang="fi">/' \
-    -e 's#<title>Produktguide: brunnslock</title>#<title>Tuoteapuri: kaivonkansi</title>#' \
+    -e 's#<title>Hitta rätt produkt</title>#<title>Löydä oikea tuote</title>#' \
     -e 's/name="SvHeader"/name="FiHeader"/' \
     -e 's/name="SvFooter"/name="FiFooter"/' \
     -e "s/const LANG = 'sv';/const LANG = 'fi';/" \

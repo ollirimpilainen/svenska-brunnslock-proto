@@ -112,7 +112,7 @@ class Component extends DCLogic {
       inklStyle: vat === 'inkl' ? on : off, exklStyle: vat === 'exkl' ? on : off,
       setInkl: () => set('inkl'), setExkl: () => set('exkl'),
       navSortiment: nav, cats: cats,
-      fiHref: pair[0] + '.dc.html', svHref: pair[1] + '.dc.html', fiCur: ME === 'fi' ? 'true' : 'false', svCur: ME === 'sv' ? 'true' : 'false', fiStyle: ME === 'fi' ? langOn : langOff, svStyle: ME === 'sv' ? langOn : langOff,
+      fiHref: pair[0] + '.dc.html' + (typeof location !== 'undefined' ? location.search : ''), svHref: pair[1] + '.dc.html' + (typeof location !== 'undefined' ? location.search : ''), fiCur: ME === 'fi' ? 'true' : 'false', svCur: ME === 'sv' ? 'true' : 'false', fiStyle: ME === 'fi' ? langOn : langOff, svStyle: ME === 'sv' ? langOn : langOff,
       isOpen: this.state.menu, menuOpen: String(this.state.menu),
       chevron: this.state.menu ? 'transform: rotate(180deg)' : '',
       toggleMenu: () => this.setState({ menu: !this.state.menu })
