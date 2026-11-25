@@ -30,7 +30,7 @@ a{color:#111111}a:hover{color:#474747}
 <a href="{{ fiHref }}" lang="fi" aria-current="{{ fiCur }}" style="{{ fiStyle }}">FI</a>
 <a href="{{ svHref }}" lang="sv" aria-current="{{ svCur }}" style="{{ svStyle }}">SV</a>
 </div>
-<a href="#" style="color: #ffffff; font-weight: 600; text-decoration: none; display: inline-flex; gap: 6px; align-items: center; min-height: 44px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Logga in</a>
+<a href="SvKonto.dc.html" aria-current="{{ accCur }}" style="color: #ffffff; font-weight: 600; text-decoration: none; display: inline-flex; gap: 6px; align-items: center; min-height: 44px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>{{ accLabel }}</a>
 </div>
 </div>
 </div>
@@ -114,6 +114,8 @@ class Component extends DCLogic {
     const langOff = 'display: inline-flex; align-items: center; min-height: 32px; padding: 0 8px; border-radius: 4px; font-size: 13px; font-weight: 600; text-decoration: none; color: #e6e6e6';
     return {
       cart: cart, cartLabel: 'Varukorg, ' + cart + ' st',
+      // Inloggad (prototyp: SBAccount i support.js) visar Mitt konto i stället för Logga in
+      accLabel: typeof window !== 'undefined' && window.SBAccount && window.SBAccount.get() ? 'Mitt konto' : 'Logga in', accCur: page === 'SvKonto' ? 'page' : 'false',
       inklPressed: String(vat === 'inkl'), exklPressed: String(vat === 'exkl'),
       inklStyle: vat === 'inkl' ? on : off, exklStyle: vat === 'exkl' ? on : off,
       setInkl: () => set('inkl'), setExkl: () => set('exkl'),

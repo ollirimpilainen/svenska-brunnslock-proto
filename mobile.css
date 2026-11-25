@@ -37,4 +37,17 @@
   .m-fshow { position: sticky; bottom: 0; background: #ffffff; padding: 12px 0 16px; margin-top: auto; border-top: 1px solid #e2e2e0; }
   .m-fbtn { flex: 0 0 auto; align-items: center; }
   .m-stack form[role="search"] { order: -1; flex: 1 1 100% !important; max-width: none !important; }
+
+  /* Mitt konto (SvKonto): kontonavigering som vågrät rad, tabeller som kort (WooCommerce shop_table_responsive) */
+  .m-acc-nav { flex: 1 1 100% !important; }
+  .m-acc-nav ul { flex-direction: row !important; overflow-x: auto; gap: 8px !important; padding-bottom: 4px !important; -webkit-overflow-scrolling: touch; }
+  .m-acc-nav a { white-space: nowrap; border: 1px solid #bdbdbb !important; border-radius: 999px !important; padding: 0 14px !important; min-height: 40px !important; }
+  .m-acc-nav a[aria-current="page"] { background: #111111 !important; color: #ffffff !important; border-color: #111111 !important; }
+  .m-rt { border-top: 0 !important; }
+  .m-rt [role="row"] { display: flex !important; flex-direction: column; gap: 6px !important; border: 1px solid #e2e2e0 !important; border-radius: 10px !important; padding: 12px 14px !important; margin: 0 0 10px !important; align-items: stretch !important; }
+  .m-rt [role="row"].m-rt-head { display: none !important; }
+  .m-rt [role="cell"] { display: flex !important; justify-content: space-between; align-items: center; gap: 12px; text-align: right !important; }
+  .m-rt [role="cell"]::before { content: attr(data-title); font-weight: 600; color: #474747; text-align: left; font-size: 14px; }
+  .m-rt [role="cell"][data-title=""]::before { content: none; }
+  .m-rt [role="cell"][data-title=""] { justify-content: flex-end; }
 }

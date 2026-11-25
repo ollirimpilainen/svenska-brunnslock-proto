@@ -35,7 +35,8 @@ a{color:#111111}a:hover{color:#474747}
 <section aria-labelledby="k1" style="display: flex; flex-direction: column; gap: 16px">
 <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap">
 <h2 id="k1" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">1. Dina uppgifter</h2>
-<span style="font-size: 14px; color: #474747">Har du konto? <a href="#" style="font-weight: 600">Logga in</a></span>
+<sc-if value="{{ noAcc }}" hint-placeholder-val="{{ true }}"><span style="font-size: 14px; color: #474747">Har du konto? <a href="SvKonto.dc.html?from=kassa" style="font-weight: 600">Logga in</a></span></sc-if>
+<sc-if value="{{ accName }}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: #474747">Inloggad som <b style="color: #111111">{{ accName }}</b>. <a href="SvKonto.dc.html" style="font-weight: 600">Mitt konto</a></span></sc-if>
 </div>
 <div role="group" aria-label="Jag handlar som" style="display: inline-flex; align-self: flex-start; border: 1.5px solid #bdbdbb; border-radius: 999px; padding: 3px">
 <button type="button" onClick="{{ setPrivat }}" aria-pressed="{{ privatPressed }}" style="{{ privatStyle }}">Privatperson</button>
@@ -161,6 +162,14 @@ class Component extends DCLogic {
     // Hintanäkymä (exkl. moms) muistetaan muilta sivuilta: exkl. avaa kassan yritysnäkymässä
     this.state = { who: typeof window !== 'undefined' && window.SBVat && window.SBVat.get() === 'exkl' ? 'foretag' : 'privat', ship: 'ombud', pay: 'klarna', showErr: false, f: {
       company: '', orgnr: '', ref: '', email: 'anna@exempel.se', phone: '070-123 45 67', name: 'Anna Exempel', street: 'Exempelvägen 1', zip: z0 || '123 45', city: 'Exempelstad', msg: '', noSign: false, terms: false } };
+    // Inloggad kund (prototyp: SBAccount): kassan förifylls från kontot (WooCommerce fyller billing/shipping från kundens adresser)
+    const acc = typeof window !== 'undefined' && window.SBAccount ? window.SBAccount.profile() : null;
+    this.acc = acc;
+    if (acc) {
+      const sh = acc.shipping;
+      this.state.who = acc.type;
+      Object.assign(this.state.f, { company: acc.company, orgnr: acc.orgnr, email: acc.email, phone: acc.phone, name: sh.name, street: sh.street, zip: z0 || sh.zip, city: sh.city });
+    }
   }
   renderVals() {
     const S = this.state, F = S.f, fo = S.who === 'foretag';
@@ -204,7 +213,7 @@ class Component extends DCLogic {
       setPrivat: () => { if (typeof window !== 'undefined' && window.SBVat) window.SBVat.set('inkl'); this.setState({ who: 'privat' }); }, setForetag: () => { if (typeof window !== 'undefined' && window.SBVat) window.SBVat.set('exkl'); this.setState({ who: 'foretag' }); },
       zipShown: String(F.zip).trim() || 'ditt postnummer',
       ships: ships.map((s) => ({ ...s, priceTxt: s.price == null ? fr.priceTxt : fmt(s.price), on: ship.id === s.id, style: opt(ship.id === s.id), pick: () => this.setState({ ship: s.id }) })),
-      empty: empty, quoteOnly: quoteOnly,
+      empty: empty, quoteOnly: quoteOnly, noAcc: !this.acc, accName: this.acc ? (this.acc.company || (this.acc.first + ' ' + this.acc.last)) : '',
       frLabel: ship.id === 'none' ? 'Frakt' : 'Frakt, ' + ((ship.id === 'pall' || ship.id === 'offert' ? fr.label : ship.label) || '').toLowerCase(), frSum: ship.id === 'none' ? (quoteOnly ? 'Ingår i offerten' : '0 kr') : fq ? fr.priceTxt : fmt(ship.price), totalSum: fmt(gross), paySum: kr(gross), frQuote: fq, frNote: fr.note || '', notForetag: !fo,
       finish: () => { if (SBc && SBc.setMeta) { SBc.setMeta('pay', payLabel); SBc.setMeta('ship', ship.id); SBc.setMeta('vat', fo ? 'exkl' : 'inkl'); } },
       pays: pays.map((p) => ({ ...p, on: payNow === p.id, style: opt(payNow === p.id), pick: () => this.setState({ pay: p.id }) })),

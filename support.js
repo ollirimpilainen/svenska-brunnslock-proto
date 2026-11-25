@@ -222,6 +222,40 @@
     set: function (v) { try { localStorage.setItem(VAT_KEY, v === 'exkl' ? 'exkl' : 'inkl'); } catch (e) {} }
   };
 
+  // ---------- asiakastili (Mitt konto): demoasiakas ja kirjautumistila, localStorage ----------
+  // WooCommercen My Account vastaa: kirjautunut käyttäjä + billing/shipping-osoitteet (user meta).
+  // Kaksi demoasiakasta: privat ja foretag (?demo= SvKonto-sivulla). Muokatut osoitteet ja tiedot tallentuvat päälle.
+  var ACC_KEY = 'sb-proto-konto', ACC_EDIT_KEY = 'sb-proto-konto-edit';
+  var ACC_DEMO = {
+    privat: { type: 'privat', first: 'Anna', last: 'Exempel', email: 'anna@exempel.se', phone: '070-123 45 67', company: '', orgnr: '', custNo: '',
+      billing: { name: 'Anna Exempel', street: 'Exempelvägen 1', zip: '123 45', city: 'Exempelstad' },
+      shipping: { name: 'Anna Exempel', street: 'Exempelvägen 1', zip: '123 45', city: 'Exempelstad' } },
+    foretag: { type: 'foretag', first: 'Erik', last: 'Exempel', email: 'inkop@exempelbygg.se', phone: '070-765 43 21', company: 'Exempel Bygg AB', orgnr: '556677-8899', custNo: '1234',
+      billing: { name: 'Exempel Bygg AB', street: 'Box 123', zip: '123 45', city: 'Exempelstad' },
+      shipping: { name: 'Exempel Bygg AB, Erik Exempel', street: 'Arbetsplats Ängsgården, Exempelgatan 5', zip: '123 46', city: 'Exempelstad' } }
+  };
+  window.SBAccount = {
+    get: function () { try { var t = localStorage.getItem(ACC_KEY); return ACC_DEMO[t] ? t : null; } catch (e) { return null; } },
+    set: function (t) { try { if (ACC_DEMO[t]) localStorage.setItem(ACC_KEY, t); } catch (e) {} },
+    clear: function () { try { localStorage.removeItem(ACC_KEY); } catch (e) {} },
+    profile: function (t) {
+      t = t || this.get();
+      if (!ACC_DEMO[t]) return null;
+      var ed = {};
+      try { ed = (JSON.parse(localStorage.getItem(ACC_EDIT_KEY) || '{}') || {})[t] || {}; } catch (e) {}
+      var p = JSON.parse(JSON.stringify(ACC_DEMO[t]));
+      Object.keys(ed).forEach(function (k) { p[k] = (k === 'billing' || k === 'shipping') ? Object.assign(p[k], ed[k]) : ed[k]; });
+      return p;
+    },
+    save: function (t, patch) {
+      try {
+        var all = JSON.parse(localStorage.getItem(ACC_EDIT_KEY) || '{}') || {};
+        all[t] = Object.assign({}, all[t], patch);
+        localStorage.setItem(ACC_EDIT_KEY, JSON.stringify(all));
+      } catch (e) {}
+    }
+  };
+
   // ---------- ostoskori (yhteinen kaikille sivuille, localStorage) ----------
   var CART_KEY = 'sb-proto-cart-v1';
   var CATALOG_ = null;

@@ -50,7 +50,8 @@ a{color:#111111}a:hover{color:#474747}
 
 <div style="display: flex; gap: 16px 24px; flex-wrap: wrap; align-items: center">
 <a href="SvStartsida.dc.html" style="min-height: 48px; display: inline-flex; align-items: center; padding: 0 20px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; text-decoration: none">Till startsidan</a>
-<a href="#" style="font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Skapa konto och se dina ordrar</a>
+<sc-if value="{{ noAcc }}" hint-placeholder-val="{{ true }}"><a href="SvKonto.dc.html?from=tack#skapa-konto" style="font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Skapa konto och se dina ordrar</a></sc-if>
+<sc-if value="{{ hasAcc }}" hint-placeholder-val="{{ false }}"><a href="SvKonto.dc.html?e=orders" style="font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Se beställningen i Mitt konto</a></sc-if>
 </div>
 </div>
 
@@ -114,6 +115,7 @@ class Component extends DCLogic {
     const n = this.fr.pallets || 1;
     return {
       zero: 0,
+      noAcc: !(typeof window !== 'undefined' && window.SBAccount && window.SBAccount.get()), hasAcc: !!(typeof window !== 'undefined' && window.SBAccount && window.SBAccount.get()),
       lines: this.lines.map((l) => ({ label: l.name + ', ' + l.qty + ' st', sum: l.price == null ? 'Offereras' : f(l.price * l.qty) })),
       frLabel: 'Frakt, ' + String((ship.id === 'pall' || ship.id === 'offert' ? this.fr.label : ship.label) || '').toLowerCase(), frSum: fq ? 'Offereras' : f(ship.price),
       total: f(sum + (fq ? 0 : ship.price)) + (fq ? ' + frakt' : ''), incl: !ex, ex: ex,

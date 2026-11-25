@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<title>Mitt konto</title>
+<script src="./support.js"></script>
+<script src="./catalog.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#111111}a:hover{color:#474747}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 100vh; background: #ffffff; color: #1a1a1a; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.55">
+<dc-import name="SvHeader" cart="{{ zero }}" hint-size="100%,180px"></dc-import>
+<main style="max-width: 1240px; margin: 0 auto; padding: 32px 24px 80px; display: flex; flex-direction: column; gap: 24px">
+
+<div style="align-self: flex-start; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; background: #f5f5f4; border: 1px dashed #bdbdbb; border-radius: 8px; padding: 6px 12px; font-size: 13px; color: #474747">
+<span>Prototyp, demokund:</span>
+<a href="{{ demoPrivatHref }}" aria-current="{{ demoPrivatCur }}" style="{{ demoPrivatStyle }}">Privatperson</a>
+<a href="{{ demoForetagHref }}" aria-current="{{ demoForetagCur }}" style="{{ demoForetagStyle }}">Företag (Exempel Bygg AB)</a>
+<a href="SvKonto.dc.html?e=customer-logout" style="{{ demoOutStyle }}">Utloggad</a>
+</div>
+
+<h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 40px; line-height: 1.15; color: #111111">Mitt konto</h1>
+
+<sc-if value="{{ notice }}" hint-placeholder-val="{{ false }}">
+<p role="status" style="margin: 0; display: flex; gap: 10px; align-items: flex-start; border-left: 4px solid #111111; background: #f5f5f4; border-radius: 6px; padding: 14px 16px; font-size: 15px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="m5 12 5 5 9-10"/></svg><span>{{ notice }}</span></p>
+</sc-if>
+
+<!-- ================= UTLOGGAD: Logga in + Skapa konto (WooCommerce form-login.php) ================= -->
+<sc-if value="{{ vLogin }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+
+<section aria-labelledby="li-h" style="flex: 1 1 360px; min-width: 0; border: 1px solid #bdbdbb; border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 16px">
+<h2 id="li-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 26px; color: #111111">Logga in</h2>
+<sc-if value="{{ fromKassa }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 15px; color: #474747">Du kommer tillbaka till kassan när du har loggat in. Varukorgen sparas.</p></sc-if>
+<form onSubmit="{{ doLogin }}" novalidate style="display: flex; flex-direction: column; gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Användarnamn eller e-postadress *
+<input value="{{ lg.user }}" onInput="{{ lgInp.user }}" type="text" autocomplete="username" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Lösenord *
+<input value="{{ lg.pw }}" onInput="{{ lgInp.pw }}" type="password" autocomplete="current-password" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+<label style="display: inline-flex; gap: 10px; align-items: center; font-size: 15px; min-height: 44px"><input type="checkbox" style="width: 18px; height: 18px; margin: 0; accent-color: #111111">Kom ihåg mig</label>
+<button type="submit" style="min-height: 52px; border: 0; border-radius: 6px; background: #111111; color: #ffffff; font: inherit; font-weight: 600; font-size: 17px; cursor: pointer">Logga in</button>
+<a href="SvKonto.dc.html?e=lost-password" style="align-self: flex-start; font-size: 15px; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Glömt ditt lösenord?</a>
+</form>
+<div style="background: #f5f5f4; border-radius: 10px; padding: 14px 16px; font-size: 14px; color: #474747; display: flex; flex-direction: column; gap: 6px">
+<b style="color: #111111">Demo: logga in som</b>
+<a href="{{ loginPrivatHref }}" style="font-weight: 600; min-height: 36px; display: inline-flex; align-items: center">Anna Exempel, privatperson</a>
+<a href="{{ loginForetagHref }}" style="font-weight: 600; min-height: 36px; display: inline-flex; align-items: center">Erik Exempel, Exempel Bygg AB (företag)</a>
+</div>
+</section>
+
+<section id="skapa-konto" aria-labelledby="reg-h" style="flex: 1 1 360px; min-width: 0; border: 1px solid #bdbdbb; border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 16px">
+<h2 id="reg-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 26px; color: #111111">Skapa konto</h2>
+<p style="margin: 0; font-size: 15px; color: #474747">Kontot är gratis för alla, privatpersoner och företag. Du kan alltid handla utan konto. Med konto ser du dina beställningar, och företag även sina fakturor.</p>
+<sc-if value="{{ fromTack }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 15px; background: #f5f5f4; border-radius: 8px; padding: 12px 14px">Beställningar du har gjort med samma e-postadress kopplas till kontot.</p></sc-if>
+<form onSubmit="{{ doRegister }}" novalidate style="display: flex; flex-direction: column; gap: 14px">
+<div role="group" aria-label="Jag är" style="display: inline-flex; align-self: flex-start; border: 1.5px solid #bdbdbb; border-radius: 999px; padding: 3px">
+<button type="button" onClick="{{ regPrivat }}" aria-pressed="{{ regPrivatPressed }}" style="{{ regPrivatStyle }}">Privatperson</button>
+<button type="button" onClick="{{ regForetag }}" aria-pressed="{{ regForetagPressed }}" style="{{ regForetagStyle }}">Företag</button>
+</div>
+<sc-if value="{{ isRegForetag }}" hint-placeholder-val="{{ false }}">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Företagsnamn *
+<input value="{{ rg.company }}" onInput="{{ rgInp.company }}" autocomplete="organization" style="{{ rgSt.company }}">
+<sc-if value="{{ rgEr.company }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Fyll i företagsnamn.</span></sc-if>
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Organisationsnummer *
+<input value="{{ rg.orgnr }}" onInput="{{ rgInp.orgnr }}" inputmode="numeric" placeholder="556677-8899" style="{{ rgSt.orgnr }}">
+<sc-if value="{{ rgEr.orgnr }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Fyll i organisationsnummer.</span></sc-if>
+</label>
+</sc-if>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">E-postadress *
+<input value="{{ rg.email }}" onInput="{{ rgInp.email }}" type="email" autocomplete="email" style="{{ rgSt.email }}">
+<sc-if value="{{ rgEr.email }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Fyll i en e-postadress.</span></sc-if>
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Lösenord *
+<input value="{{ rg.pw }}" onInput="{{ rgInp.pw }}" type="password" autocomplete="new-password" style="{{ rgSt.pw }}">
+<sc-if value="{{ rgEr.pw }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Välj ett lösenord.</span></sc-if>
+</label>
+<sc-if value="{{ isRegForetag }}" hint-placeholder-val="{{ false }}">
+<div style="border: 1.5px solid #111111; border-radius: 10px; padding: 14px 16px; font-size: 15px; display: flex; flex-direction: column; gap: 4px">
+<b style="color: #111111">Faktura för företag kräver kreditprövning</b>
+<span style="color: #474747">Vill ni handla mot faktura gör vi en kreditprövning av företaget. En fakturaorder som väntar på godkännande syns som Pausad under Beställningar.</span>
+</div>
+</sc-if>
+<p style="margin: 0; font-size: 13px; color: #5c5c5c">Dina personuppgifter används för att hantera ditt konto och dina beställningar, enligt vår <a href="#">integritetspolicy</a>.</p>
+<button type="submit" style="min-height: 52px; border: 1.5px solid #111111; border-radius: 6px; background: #ffffff; color: #111111; font: inherit; font-weight: 600; font-size: 17px; cursor: pointer">Skapa konto</button>
+</form>
+</section>
+
+</div>
+</sc-if>
+
+<!-- ================= Glömt lösenord (lost-password) ================= -->
+<sc-if value="{{ vLost }}" hint-placeholder-val="{{ false }}">
+<section aria-labelledby="lp-h" style="max-width: 560px; border: 1px solid #bdbdbb; border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 16px">
+<h2 id="lp-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 26px; color: #111111">Glömt lösenord</h2>
+<sc-if value="{{ lostSent }}" hint-placeholder-val="{{ false }}"><p role="status" style="margin: 0; font-size: 15px; background: #f5f5f4; border-radius: 8px; padding: 12px 14px">Om adressen finns hos oss har vi skickat en länk för att välja ett nytt lösenord.</p></sc-if>
+<p style="margin: 0; font-size: 15px; color: #474747">Ange ditt användarnamn eller din e-postadress. Du får en länk via e-post för att skapa ett nytt lösenord.</p>
+<form onSubmit="{{ doLost }}" novalidate style="display: flex; flex-direction: column; gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Användarnamn eller e-postadress
+<input type="text" autocomplete="username" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+<button type="submit" style="min-height: 52px; border: 0; border-radius: 6px; background: #111111; color: #ffffff; font: inherit; font-weight: 600; font-size: 17px; cursor: pointer">Återställ lösenord</button>
+</form>
+<a href="SvKonto.dc.html" style="align-self: flex-start; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Tillbaka till inloggningen</a>
+</section>
+</sc-if>
+
+<!-- ================= INLOGGAD: navigation + endpoint ================= -->
+<sc-if value="{{ vAccount }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: flex-start">
+
+<nav class="m-acc-nav" aria-label="Mitt konto" style="flex: 0 0 240px; min-width: 0">
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px">
+<sc-for list="{{ nav }}" as="n" hint-placeholder-count="6">
+<li style="flex: none"><a href="{{ n.href }}" aria-current="{{ n.cur }}" style="{{ n.st }}">{{ n.label }}</a></li>
+</sc-for>
+</ul>
+</nav>
+
+<div style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+
+<!-- Översikt (dashboard) -->
+<sc-if value="{{ vDash }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 10px; font-size: 16px">
+<p style="margin: 0; font-size: 18px">Hej <b>{{ me.first }}</b>{{ me.companyTxt }} (inte {{ me.first }}? <a href="SvKonto.dc.html?e=customer-logout" style="font-weight: 600">Logga ut</a>)</p>
+<p style="margin: 0; color: #474747">Här ser du dina <a href="{{ href.orders }}">senaste beställningar</a>{{ dashInvTxt1 }}<sc-if value="{{ isForetag }}" hint-placeholder-val="{{ false }}"><a href="{{ href.inv }}">fakturor</a></sc-if>, hanterar dina <a href="{{ href.addr }}">leverans- och faktureringsadresser</a> och ändrar <a href="{{ href.acct }}">lösenord och kontouppgifter</a>.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px">
+<section aria-labelledby="d-o" style="border: 1px solid #bdbdbb; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 8px">
+<h2 id="d-o" style="margin: 0 0 4px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">Senaste beställningar</h2>
+<sc-for list="{{ dashOrders }}" as="o" hint-placeholder-count="3">
+<a href="{{ o.href }}" style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 10px 0; border-top: 1px solid #e2e2e0; text-decoration: none">
+<b style="color: #111111">{{ o.no }}</b><span style="{{ o.badge }}">{{ o.status }}</span>
+<span style="font-size: 14px; color: #5c5c5c">{{ o.date }}{{ o.refTxt }}</span><span style="font-size: 14px; text-align: right">{{ o.total }}</span>
+</a>
+</sc-for>
+<a href="{{ href.orders }}" style="font-weight: 600; font-size: 15px; min-height: 44px; display: inline-flex; align-items: center">Alla beställningar</a>
+</section>
+<section aria-labelledby="d-f" style="border: 1px solid #bdbdbb; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 8px">
+<h2 id="d-f" style="margin: 0 0 4px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">Öppna fakturor</h2>
+<sc-if value="{{ isForetag }}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{ openInv }}" as="f" hint-placeholder-count="2">
+<a href="{{ f.href }}" style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 10px 0; border-top: 1px solid #e2e2e0; text-decoration: none">
+<b style="color: #111111">Faktura {{ f.no }}</b><span style="{{ f.badge }}">{{ f.status }}</span>
+<span style="font-size: 14px; color: #5c5c5c">Förfaller {{ f.due }}</span><span style="font-size: 14px; text-align: right">{{ f.amount }}</span>
+</a>
+</sc-for>
+<p style="margin: 0; padding-top: 10px; border-top: 1px solid #e2e2e0; font-size: 15px">Att betala: <b>{{ invOpenSum }}</b>{{ invOverdueTxt }}</p>
+<a href="{{ href.inv }}" style="font-weight: 600; font-size: 15px; min-height: 44px; display: inline-flex; align-items: center">Alla fakturor</a>
+</sc-if>
+<sc-if value="{{ isPrivat }}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 15px; color: #474747">Du har inga fakturor från oss. Betalar du med kort eller via Qliro eller Resurs finns kvittot på beställningen.</p>
+<a href="{{ href.inv }}" style="font-weight: 600; font-size: 15px; min-height: 44px; display: inline-flex; align-items: center">Om fakturor</a>
+</sc-if>
+</section>
+</div>
+</sc-if>
+
+<!-- Beställningar (orders) -->
+<sc-if value="{{ vOrders }}" hint-placeholder-val="{{ false }}">
+<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 28px; color: #111111">Beställningar</h2>
+<div role="table" aria-label="Beställningar" class="m-rt" style="display: flex; flex-direction: column; border-top: 1px solid #e2e2e0; font-size: 15px">
+<div role="row" class="m-rt-head" style="{{ tOrders.grid }}; font-weight: 600; color: #474747; font-size: 14px; border-bottom: 1px solid #e2e2e0; padding: 10px 0">
+<sc-for list="{{ tOrders.cols }}" as="h"><span role="columnheader" style="{{ h.st }}">{{ h.v }}</span></sc-for>
+</div>
+<sc-for list="{{ tOrders.rows }}" as="r">
+<div role="row" style="{{ tOrders.grid }}; border-bottom: 1px solid #e2e2e0; padding: 12px 0; align-items: center">
+<sc-for list="{{ r.cells }}" as="c"><span role="cell" data-title="{{ c.t }}" style="{{ c.st }}"><sc-if value="{{ c.a }}"><a href="{{ c.a }}" style="font-weight: 700">{{ c.v }}</a></sc-if><sc-if value="{{ c.b }}"><span style="{{ c.b }}">{{ c.v }}</span></sc-if><sc-if value="{{ c.p }}">{{ c.v }}</sc-if><sc-if value="{{ c.btn }}"><a href="{{ c.btn }}" style="min-height: 40px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; text-decoration: none; font-size: 14px">{{ c.v }}</a></sc-if></span></sc-for>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<!-- Visa beställning (view-order) -->
+<sc-if value="{{ vOrder }}" hint-placeholder-val="{{ false }}">
+<a href="{{ href.orders }}" style="align-self: flex-start; font-weight: 600; font-size: 15px; min-height: 44px; display: inline-flex; align-items: center; gap: 6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>Alla beställningar</a>
+<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 28px; color: #111111">Beställning {{ o.no }}</h2>
+<p style="margin: 0; font-size: 17px">Beställning <b>{{ o.no }}</b> gjordes den <b>{{ o.dateLong }}</b> och är för närvarande <span style="{{ o.badge }}">{{ o.status }}</span>.</p>
+
+<sc-if value="{{ o.track }}" hint-placeholder-val="{{ false }}">
+<div style="background: #111111; color: #ffffff; border-radius: 14px; padding: 20px 24px; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between">
+<span style="display: flex; flex-direction: column; gap: 2px"><b style="font-size: 17px">Skickad {{ o.track.date }}</b><span style="font-size: 15px; color: #e6e6e6">Spårningsnummer {{ o.track.no }}</span></span>
+<a href="#" style="min-height: 48px; display: inline-flex; align-items: center; gap: 8px; padding: 0 20px; border-radius: 6px; background: #ffffff; color: #111111; font-weight: 600; text-decoration: none">Spåra försändelsen<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a>
+</div>
+</sc-if>
+<sc-if value="{{ o.paused }}" hint-placeholder-val="{{ false }}">
+<div style="border: 1.5px dashed #111111; border-radius: 14px; padding: 16px 20px; font-size: 15px; display: flex; flex-direction: column; gap: 4px">
+<b style="color: #111111">Fakturaordern väntar på godkännande</b>
+<span style="color: #474747">Ordern behandlas när fakturan är godkänd efter kreditprövningen. Frågor? Ring <a href="tel:+46920520056" style="font-weight: 600">0920-52 00 56</a>.</span>
+</div>
+</sc-if>
+
+<section aria-labelledby="oh-h" style="display: flex; flex-direction: column; gap: 8px">
+<h3 id="oh-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">Beställningshistorik</h3>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<sc-for list="{{ o.hist }}" as="h" hint-placeholder-count="2">
+<li style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid #e2e2e0">
+<span style="{{ h.dot }}" aria-hidden="true"></span>
+<span style="display: flex; flex-direction: column; gap: 4px">
+<span style="display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center"><span style="{{ h.badge }}">{{ h.status }}</span><span style="font-size: 14px; color: #5c5c5c">{{ h.when }}</span></span>
+<span style="font-size: 15px">{{ h.text }}<sc-if value="{{ h.track }}" hint-placeholder-val="{{ false }}"> <a href="#" style="font-weight: 600">Spåra försändelsen</a></sc-if></span>
+</span>
+</li>
+</sc-for>
+</ol>
+</section>
+
+<section aria-labelledby="od-h" style="display: flex; flex-direction: column; gap: 10px">
+<h3 id="od-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">Beställningsdetaljer</h3>
+<div style="border: 1px solid #bdbdbb; border-radius: 14px; padding: 8px 24px; display: flex; flex-direction: column; font-size: 15px">
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid #e2e2e0; font-weight: 600; color: #474747; font-size: 14px"><span>Produkt</span><span>{{ o.sumHead }}</span></div>
+<sc-for list="{{ o.lines }}" as="l" hint-placeholder-count="2">
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid #e2e2e0"><span>{{ l.name }} <b>× {{ l.qty }}</b></span><b style="white-space: nowrap">{{ l.sum }}</b></div>
+</sc-for>
+<sc-for list="{{ o.foot }}" as="f" hint-placeholder-count="4">
+<div style="{{ f.st }}"><span>{{ f.k }}</span><span style="text-align: right">{{ f.v }}</span></div>
+</sc-for>
+</div>
+</section>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px">
+<section aria-labelledby="ob-h" style="background: #f5f5f4; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 6px; font-size: 15px">
+<h3 id="ob-h" style="margin: 0 0 4px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 18px; color: #111111">{{ o.docHead }}</h3>
+<sc-if value="{{ o.invHref }}" hint-placeholder-val="{{ false }}"><a href="{{ o.invHref }}" style="font-weight: 600">Faktura {{ o.invNo }}, {{ o.invStatus }}</a><span style="color: #474747">PDF och betalstatus under Fakturor.</span></sc-if>
+<sc-if value="{{ o.receipt }}" hint-placeholder-val="{{ false }}"><a href="#" style="font-weight: 600">Kvitto (PDF)</a><span style="color: #474747">{{ o.receipt }}</span></sc-if>
+<sc-if value="{{ o.docNone }}" hint-placeholder-val="{{ false }}"><span style="color: #474747">{{ o.docNone }}</span></sc-if>
+<sc-if value="{{ o.ref }}" hint-placeholder-val="{{ false }}"><span style="margin-top: 8px"><b>Er referens:</b> {{ o.ref }}</span></sc-if>
+</section>
+<section aria-labelledby="oa1" style="border: 1px solid #bdbdbb; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 2px; font-size: 15px">
+<h3 id="oa1" style="margin: 0 0 6px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 18px; color: #111111">Faktureringsadress</h3>
+<sc-for list="{{ o.billing }}" as="x"><span>{{ x }}</span></sc-for>
+</section>
+<section aria-labelledby="oa2" style="border: 1px solid #bdbdbb; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 2px; font-size: 15px">
+<h3 id="oa2" style="margin: 0 0 6px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 18px; color: #111111">Leveransadress</h3>
+<sc-for list="{{ o.shipping }}" as="x"><span>{{ x }}</span></sc-for>
+</section>
+</div>
+</sc-if>
+
+<!-- Fakturor (eget endpoint, Fortnox) -->
+<sc-if value="{{ vInv }}" hint-placeholder-val="{{ false }}">
+<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 28px; color: #111111">Fakturor</h2>
+<div style="background: #f5f5f4; border-radius: 14px; padding: 16px 20px; font-size: 15px; color: #474747; display: flex; flex-direction: column; gap: 6px">
+<span>Här ser du fakturor från Svenska Brunnslock. De hämtas direkt från vårt ekonomisystem (Fortnox){{ custNoTxt }}.</span>
+<span>Betalar du med kort, eller med faktura eller delbetalning via Qliro eller Resurs, finns kvittot på beställningen under <a href="{{ href.orders }}" style="font-weight: 600">Beställningar</a>. Fakturor från Qliro eller Resurs hittar du i deras app.</span>
+</div>
+<sc-if value="{{ isForetag }}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 16px">Att betala: <b>{{ invOpenSum }}</b>{{ invOverdueTxt }}</p>
+<div role="table" aria-label="Fakturor" class="m-rt" style="display: flex; flex-direction: column; border-top: 1px solid #e2e2e0; font-size: 15px">
+<div role="row" class="m-rt-head" style="{{ tInv.grid }}; font-weight: 600; color: #474747; font-size: 14px; border-bottom: 1px solid #e2e2e0; padding: 10px 0">
+<sc-for list="{{ tInv.cols }}" as="h"><span role="columnheader" style="{{ h.st }}">{{ h.v }}</span></sc-for>
+</div>
+<sc-for list="{{ tInv.rows }}" as="r">
+<div role="row" id="{{ r.id }}" style="{{ r.rowSt }}">
+<sc-for list="{{ r.cells }}" as="c"><span role="cell" data-title="{{ c.t }}" style="{{ c.st }}"><sc-if value="{{ c.a }}"><a href="{{ c.a }}" style="font-weight: 600">{{ c.v }}</a></sc-if><sc-if value="{{ c.b }}"><span style="{{ c.b }}">{{ c.v }}</span></sc-if><sc-if value="{{ c.p }}">{{ c.v }}</sc-if><sc-if value="{{ c.btn }}"><a href="#" style="min-height: 40px; display: inline-flex; align-items: center; gap: 6px; padding: 0 14px; border-radius: 6px; border: 1.5px solid #111111; font-weight: 600; text-decoration: none; font-size: 14px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>{{ c.v }}</a></sc-if></span></sc-for>
+</div>
+</sc-for>
+</div>
+<p style="margin: 0; font-size: 14px; color: #5c5c5c">Frågor om en faktura? Ring <a href="tel:+46920520056" style="font-weight: 600">0920-52 00 56</a> och uppge fakturanumret.</p>
+</sc-if>
+<sc-if value="{{ isPrivat }}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 16px; border: 1px solid #bdbdbb; border-radius: 14px; padding: 20px 24px">Du har inga fakturor från oss.</p>
+</sc-if>
+</sc-if>
+
+<!-- Adresser (edit-address) -->
+<sc-if value="{{ vAddr }}" hint-placeholder-val="{{ false }}">
+<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 28px; color: #111111">Adresser</h2>
+<p style="margin: 0; color: #474747">Följande adresser används som standard i kassan.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
+<sc-for list="{{ addrCards }}" as="a" hint-placeholder-count="2">
+<section style="border: 1px solid #bdbdbb; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 2px; font-size: 15px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px"><h3 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">{{ a.title }}</h3><a href="{{ a.href }}" style="font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Redigera</a></div>
+<sc-for list="{{ a.lines }}" as="x"><span>{{ x }}</span></sc-for>
+</section>
+</sc-for>
+</div>
+<sc-if value="{{ isForetag }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 14px; color: #5c5c5c">Levererar ni till olika arbetsplatser? Leveransadressen kan ändras i kassan för varje beställning.</p></sc-if>
+</sc-if>
+
+<sc-if value="{{ vAddrEdit }}" hint-placeholder-val="{{ false }}">
+<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 28px; color: #111111">{{ addrEditTitle }}</h2>
+<form onSubmit="{{ saveAddr }}" novalidate style="max-width: 640px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<sc-for list="{{ addrFields }}" as="fl" hint-placeholder-count="4">
+<label style="{{ fl.lst }}">{{ fl.label }}
+<input value="{{ fl.v }}" onInput="{{ fl.on }}" autocomplete="{{ fl.ac }}" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+</sc-for>
+<div style="grid-column: 1 / -1; display: flex; gap: 16px; flex-wrap: wrap; align-items: center">
+<button type="submit" style="min-height: 52px; padding: 0 28px; border: 0; border-radius: 6px; background: #111111; color: #ffffff; font: inherit; font-weight: 600; font-size: 17px; cursor: pointer">Spara adress</button>
+<a href="{{ href.addr }}" style="font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Avbryt</a>
+</div>
+</form>
+</sc-if>
+
+<!-- Kontouppgifter (edit-account) -->
+<sc-if value="{{ vAcct }}" hint-placeholder-val="{{ false }}">
+<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 28px; color: #111111">Kontouppgifter</h2>
+<form onSubmit="{{ saveAcct }}" novalidate style="max-width: 640px; display: flex; flex-direction: column; gap: 24px">
+<sc-if value="{{ isForetag }}" hint-placeholder-val="{{ false }}">
+<fieldset style="border: 0; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<legend style="padding: 0 0 10px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">Företag</legend>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; grid-column: 1 / -1">Företagsnamn *
+<input value="{{ ac.company }}" onInput="{{ acInp.company }}" autocomplete="organization" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Organisationsnummer
+<input value="{{ me.orgnr }}" readonly style="min-height: 48px; border: 1.5px solid #e2e2e0; background: #f5f5f4; border-radius: 6px; padding: 0 12px; font: inherit">
+<span style="font-weight: 400; font-size: 13px; color: #5c5c5c">Kreditprövningen gäller organisationsnumret. Ring oss om det ska ändras.</span>
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Kundnummer
+<input value="{{ me.custNo }}" readonly style="min-height: 48px; border: 1.5px solid #e2e2e0; background: #f5f5f4; border-radius: 6px; padding: 0 12px; font: inherit">
+<span style="font-weight: 400; font-size: 13px; color: #5c5c5c">Samma nummer som på fakturorna.</span>
+</label>
+</fieldset>
+</sc-if>
+<fieldset style="border: 0; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<legend style="padding: 0 0 10px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">{{ personLegend }}</legend>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Förnamn *
+<input value="{{ ac.first }}" onInput="{{ acInp.first }}" autocomplete="given-name" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Efternamn *
+<input value="{{ ac.last }}" onInput="{{ acInp.last }}" autocomplete="family-name" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; grid-column: 1 / -1">E-postadress *
+<input value="{{ ac.email }}" onInput="{{ acInp.email }}" type="email" autocomplete="email" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+</fieldset>
+<fieldset style="border: 0; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<legend style="padding: 0 0 10px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">Byt lösenord</legend>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; grid-column: 1 / -1">Nuvarande lösenord <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">lämna tomt om du inte vill byta</span>
+<input type="password" autocomplete="current-password" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Nytt lösenord
+<input type="password" autocomplete="new-password" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Bekräfta nytt lösenord
+<input type="password" autocomplete="new-password" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
+</label>
+</fieldset>
+<button type="submit" style="align-self: flex-start; min-height: 52px; padding: 0 28px; border: 0; border-radius: 6px; background: #111111; color: #ffffff; font: inherit; font-weight: 600; font-size: 17px; cursor: pointer">Spara ändringar</button>
+</form>
+</sc-if>
+
+</div>
+</div>
+</sc-if>
+
+</main>
+<dc-import name="SvFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const W = typeof window !== 'undefined' ? window : null;
+    const SA = W && W.SBAccount;
+    const P = new URLSearchParams(W ? W.location.search : '');
+    // WooCommerce My Account: endpoint = ?e= (orders, view-order, fakturor, edit-address, edit-account, customer-logout, lost-password)
+    const d = P.get('demo');
+    if (SA && (d === 'privat' || d === 'foretag')) SA.set(d);
+    let e = P.get('e') || '';
+    this.out = false;
+    if (e === 'customer-logout') { if (SA) SA.clear(); this.out = true; e = ''; }
+    this.t = SA ? SA.get() : null;
+    this.e = e;
+    this.order = P.get('order') || '';
+    this.addrKind = P.get('a') === 'shipping' ? 'shipping' : 'billing';
+    this.from = P.get('from') || '';
+    this.ok = P.get('ok') || '';
+    const me = SA && this.t ? SA.profile(this.t) : null;
+    this.me = me;
+    this.state = {
+      lg: { user: '', pw: '' },
+      rgType: P.get('typ') === 'foretag' ? 'foretag' : 'privat',
+      rg: { company: '', orgnr: '', email: this.from === 'tack' ? 'anna@exempel.se' : '', pw: '' },
+      rgErr: false, lostSent: false,
+      ad: me ? Object.assign({}, me[this.addrKind]) : {},
+      ac: me ? { first: me.first, last: me.last, email: me.email, company: me.company } : {}
+    };
+  }
+
+  data() {
+    // Exempeldata. Priser inkl. moms från prototypens katalog (support.js SB_LIDS, SB_DURK). Frakt enligt prototypens fraktnivåer.
+    const L = (name, qty, price) => ({ name, qty, price });
+    const H = (when, status, text, track) => ({ when, status, text, track: !!track });
+    const ORD = {
+      privat: [
+        { no: 'OF-1059', date: '2026-11-25', status: 'Behandlas', pay: 'Kort', lines: [L('Durkplåtslucka 300×300 Golv/vägg', 1, 1968)], fr: ['Ombud', 172],
+          hist: [H('25 nov. 2026, 08:15', 'Behandlas', 'Betalningen är klar. Vi beställer från leverantören.')] },
+        { no: 'OF-1056', date: '2026-11-21', status: 'Skickad', pay: 'Kort', lines: [L('Lätt Brunnslock 1050 Composite', 1, 2645), L('Avluftningsventil', 1, 569)], fr: ['Hemleverans', 590],
+          track: { date: '24 november 2026', no: 'EX555666777SE' },
+          hist: [H('21 nov. 2026, 19:02', 'Behandlas', 'Betalningen är klar. Vi beställer från leverantören.'), H('24 nov. 2026, 11:40', 'Skickad', 'Skickad från leverantören. Spårningsnummer EX555666777SE.', true)] },
+        { no: 'OF-1033', date: '2026-09-14', status: 'Slutförd', pay: 'Faktura via Qliro', lines: [L('Lätt Brunnslock 800 PE', 1, 2223)], fr: ['Hemleverans', 590],
+          hist: [H('14 sep. 2026, 12:30', 'Behandlas', 'Köpet är godkänt av Qliro. Vi beställer från leverantören.'), H('16 sep. 2026, 10:05', 'Skickad', 'Skickad från leverantören. Spårningsnummer EX111222333SE.', true), H('19 sep. 2026, 14:00', 'Slutförd', 'Levererad.')] }
+      ],
+      foretag: [
+        { no: 'OF-1058', date: '2026-11-24', status: 'Pausad', pay: 'Faktura', ref: 'Ängsgården etapp 2', lines: [L('Lätt Brunnslock 1050 Composite', 8, 2645), L('Avluftningsventil', 8, 569)], fr: ['Hemleverans, tungt gods', 1240],
+          hist: [H('24 nov. 2026, 10:12', 'Pausad', 'Beställningen är mottagen. Fakturaordern väntar på godkännande.')] },
+        { no: 'OF-1053', date: '2026-11-19', status: 'Behandlas', pay: 'Faktura', ref: 'Servicebyggnad, Exempelgatan 9', lines: [L('Durkplåtslucka 400×500 Golv/vägg', 2, 3150)], fr: ['Hemleverans', 590],
+          hist: [H('19 nov. 2026, 15:05', 'Pausad', 'Beställningen är mottagen. Fakturaordern väntar på godkännande.'), H('20 nov. 2026, 08:30', 'Behandlas', 'Fakturan är godkänd. Vi beställer från leverantören.')] },
+        { no: 'OF-1049', date: '2026-11-12', status: 'Skickad', pay: 'Faktura', ref: 'Brf Exempelgården', inv: '2058', lines: [L('Lätt Brunnslock 930 Composite', 4, 2150)], fr: ['Hemleverans, tungt gods', 1240],
+          track: { date: '14 november 2026', no: 'EX123456789SE' },
+          hist: [H('12 nov. 2026, 09:41', 'Behandlas', 'Beställningen är mottagen. Faktura godkänd.'), H('14 nov. 2026, 13:20', 'Skickad', 'Skickad från leverantören. Spårningsnummer EX123456789SE.', true)] },
+        { no: 'OF-1042', date: '2026-10-28', status: 'Slutförd', pay: 'Faktura', ref: 'Ängsgården etapp 1', inv: '2044', lines: [L('Lätt Brunnslock 1150 Composite', 3, 2845), L('Avluftningsventil', 3, 569)], fr: ['Hemleverans, tungt gods', 1240],
+          hist: [H('28 okt. 2026, 14:22', 'Behandlas', 'Beställningen är mottagen. Faktura godkänd.'), H('30 okt. 2026, 09:10', 'Skickad', 'Skickad från leverantören. Spårningsnummer EX987654321SE.', true), H('3 nov. 2026, 15:45', 'Slutförd', 'Levererad.')] },
+        { no: 'OF-1037', date: '2026-09-30', status: 'Slutförd', pay: 'Faktura', ref: 'Lager', inv: '2031', lines: [L('Lätt Brunnslock 590 KÖRBART Composite 12,5 ton', 2, 1749)], fr: ['Hemleverans', 590],
+          hist: [H('30 sep. 2026, 11:02', 'Behandlas', 'Beställningen är mottagen. Faktura godkänd.'), H('2 okt. 2026, 08:55', 'Skickad', 'Skickad från leverantören. Spårningsnummer EX444555666SE.', true), H('6 okt. 2026, 13:30', 'Slutförd', 'Levererad.')] }
+      ]
+    };
+    // Fortnox-fakturor kundnummer 1234: nummer, datum, förfallodatum, belopp (= orderns total inkl. moms), status
+    const INV = [
+      { no: '2058', order: 'OF-1049', date: '2026-11-14', due: '2026-12-14', status: 'obetald' },
+      { no: '2044', order: 'OF-1042', date: '2026-10-30', due: '2026-11-29', status: 'betald' },
+      { no: '2031', order: 'OF-1037', date: '2026-10-02', due: '2026-11-01', status: 'förfallen' }
+    ];
+    return { ORD, INV };
+  }
+
+  renderVals() {
+    const W = typeof window !== 'undefined' ? window : null;
+    const SA = W && W.SBAccount;
+    const S = this.state;
+    const t = this.t, me = this.me;
+    const fo = t === 'foretag';
+    const go = (u) => { if (W) W.location.href = u; };
+    const kr = (n) => Math.round(n).toLocaleString('sv-SE') + ' kr';
+    const MON = ['jan.', 'feb.', 'mars', 'apr.', 'maj', 'juni', 'juli', 'aug.', 'sep.', 'okt.', 'nov.', 'dec.'];
+    const MONL = ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli', 'augusti', 'september', 'oktober', 'november', 'december'];
+    const dShort = (iso) => { const p = iso.split('-'); return Number(p[2]) + ' ' + MON[Number(p[1]) - 1] + ' ' + p[0]; };
+    const dLong = (iso) => { const p = iso.split('-'); return Number(p[2]) + ' ' + MONL[Number(p[1]) - 1] + ' ' + p[0]; };
+    const pill = 'display: inline-flex; align-items: center; white-space: nowrap; font-size: 13px; font-weight: 600; line-height: 1; padding: 6px 10px; border-radius: 999px; ';
+    const BADGE = {
+      'Väntar på betalning': pill + 'background: #f5f5f4; border: 1px solid #bdbdbb; color: #111111',
+      'Behandlas': pill + 'background: #e2e2e0; border: 1px solid #e2e2e0; color: #111111',
+      'Pausad': pill + 'background: #ffffff; border: 1.5px dashed #111111; color: #111111',
+      'Skickad': pill + 'background: #111111; border: 1px solid #111111; color: #ffffff',
+      'Slutförd': pill + 'background: #ffffff; border: 1.5px solid #111111; color: #111111',
+      'Avbruten': pill + 'background: #ffffff; border: 1px solid #bdbdbb; color: #5c5c5c; text-decoration: line-through',
+      'Misslyckad': pill + 'background: #ffffff; border: 1px solid #bdbdbb; color: #5c5c5c',
+      'Återbetald': pill + 'background: #ffffff; border: 1px solid #bdbdbb; color: #474747',
+      'betald': pill + 'background: #e2e2e0; border: 1px solid #e2e2e0; color: #111111',
+      'obetald': pill + 'background: #ffffff; border: 1.5px solid #111111; color: #111111',
+      'förfallen': pill + 'background: #111111; border: 1px solid #111111; color: #ffffff'
+    };
+    const DOT = (st) => 'width: 12px; height: 12px; margin-top: 8px; border-radius: 50%; ' + (st === 'Skickad' || st === 'Slutförd' ? 'background: #111111' : st === 'Pausad' ? 'border: 2px dashed #111111' : 'border: 2px solid #111111');
+
+    const base = 'SvKonto.dc.html?demo=' + (t || 'privat');
+    const href = { dash: base, orders: base + '&e=orders', inv: base + '&e=fakturor', addr: base + '&e=edit-address', acct: base + '&e=edit-account' };
+    const oHref = (no) => base + '&e=view-order&order=' + no;
+
+    // Demorad (prototyp): byt demokund på samma endpoint
+    const keep = (this.e && this.e !== 'lost-password' ? '&e=' + this.e : '') + (this.order ? '&order=' + this.order : '');
+    const dOn = 'font-weight: 700; color: #ffffff; background: #111111; border-radius: 999px; padding: 2px 10px; text-decoration: none; min-height: 28px; display: inline-flex; align-items: center';
+    const dOff = 'font-weight: 600; padding: 2px 10px; min-height: 28px; display: inline-flex; align-items: center';
+    const demoOrderOk = (k) => !this.order || ((this.data().ORD[k] || []).some((o) => o.no === this.order));
+    const demoHref = (k) => 'SvKonto.dc.html?demo=' + k + (demoOrderOk(k) ? keep : (this.e === 'view-order' ? '&e=orders' : keep.replace(/&order=.*/, '')));
+
+    const loggedIn = !!(t && me);
+    const view = !loggedIn ? (this.e === 'lost-password' ? 'lost' : 'login') : (this.e || 'dash');
+
+    const vals = {
+      zero: 0,
+      demoPrivatHref: demoHref('privat'), demoForetagHref: demoHref('foretag'),
+      demoPrivatCur: String(t === 'privat'), demoForetagCur: String(t === 'foretag'),
+      demoPrivatStyle: t === 'privat' ? dOn : dOff, demoForetagStyle: t === 'foretag' ? dOn : dOff, demoOutStyle: !t ? dOn : dOff,
+      vLogin: view === 'login', vLost: view === 'lost', vAccount: loggedIn,
+      fromKassa: this.from === 'kassa', fromTack: this.from === 'tack',
+      notice: this.out ? 'Du är nu utloggad.' : this.ok === 'reg' ? 'Ditt konto är skapat. Demo: här visas ett exempelkonto med tidigare beställningar.' : this.ok === 'addr' ? 'Adressen har ändrats.' : this.ok === 'acct' ? 'Kontouppgifterna har ändrats.' : '',
+      href: href, isForetag: fo, isPrivat: !fo
+    };
+
+    // ---------- utloggad ----------
+    const target = (k) => this.from === 'kassa' ? 'SvKassa.dc.html' : 'SvKonto.dc.html?demo=' + k;
+    vals.loginPrivatHref = this.from === 'kassa' ? 'SvKonto.dc.html?demo=privat&e=go-kassa' : 'SvKonto.dc.html?demo=privat';
+    vals.loginForetagHref = this.from === 'kassa' ? 'SvKonto.dc.html?demo=foretag&e=go-kassa' : 'SvKonto.dc.html?demo=foretag';
+    vals.lg = S.lg;
+    vals.lgInp = { user: (e) => this.setState({ lg: { ...this.state.lg, user: e.target.value } }), pw: (e) => this.setState({ lg: { ...this.state.lg, pw: e.target.value } }) };
+    vals.doLogin = () => {
+      const k = /bygg|ab\b|foretag|företag/i.test(this.state.lg.user) ? 'foretag' : 'privat';
+      if (SA) SA.set(k);
+      go(target(k));
+    };
+    const rgF = S.rgType === 'foretag';
+    const tOn = 'border: 0; background: #111111; color: #ffffff; font: inherit; font-weight: 600; font-size: 15px; padding: 0 18px; min-height: 40px; border-radius: 999px; cursor: pointer';
+    const tOff = 'border: 0; background: transparent; color: #111111; font: inherit; font-weight: 600; font-size: 15px; padding: 0 18px; min-height: 40px; border-radius: 999px; cursor: pointer';
+    vals.isRegForetag = rgF;
+    vals.regPrivat = () => this.setState({ rgType: 'privat' }); vals.regForetag = () => this.setState({ rgType: 'foretag' });
+    vals.regPrivatPressed = String(!rgF); vals.regForetagPressed = String(rgF);
+    vals.regPrivatStyle = rgF ? tOff : tOn; vals.regForetagStyle = rgF ? tOn : tOff;
+    vals.rg = S.rg;
+    const rgNeed = ['email', 'pw'].concat(rgF ? ['company', 'orgnr'] : []);
+    vals.rgEr = {}; vals.rgSt = {}; vals.rgInp = {};
+    ['company', 'orgnr', 'email', 'pw'].forEach((k) => {
+      const bad = S.rgErr && rgNeed.indexOf(k) >= 0 && !String(S.rg[k]).trim();
+      vals.rgEr[k] = bad;
+      vals.rgSt[k] = 'min-height: 48px; border-radius: 6px; padding: 0 12px; font: inherit; ' + (bad ? 'border: 2px solid #111111; background: #f5f5f4' : 'border: 1.5px solid #bdbdbb');
+      vals.rgInp[k] = (e) => this.setState({ rg: { ...this.state.rg, [k]: e.target.value } });
+    });
+    vals.doRegister = () => {
+      const ok = rgNeed.every((k) => String(this.state.rg[k]).trim());
+      if (!ok) { this.setState({ rgErr: true }); return; }
+      if (SA) SA.set(S.rgType);
+      go(this.from === 'kassa' ? 'SvKassa.dc.html' : 'SvKonto.dc.html?demo=' + S.rgType + '&ok=reg');
+    };
+    vals.lostSent = S.lostSent;
+    vals.doLost = () => this.setState({ lostSent: true });
+
+    if (!loggedIn) return vals;
+    if (this.e === 'go-kassa') { go('SvKassa.dc.html'); }
+
+    // ---------- inloggad ----------
+    const { ORD, INV } = this.data();
+    const orders = ORD[t];
+    const calc = (o) => {
+      const sub = o.lines.reduce((s, l) => s + l.price * l.qty, 0);
+      const tot = sub + o.fr[1];
+      const n = o.lines.reduce((s, l) => s + l.qty, 0);
+      return { sub, tot, n, ex: tot / 1.25, vat: tot - tot / 1.25 };
+    };
+    const totTxt = (o) => { const c = calc(o); return (fo ? kr(c.ex) : kr(c.tot)) + ' för ' + c.n + (c.n === 1 ? ' artikel' : ' artiklar'); };
+    const invOf = (o) => INV.find((f) => f.order === o.no);
+    const invAmt = (f) => calc(orders.find((o) => o.no === f.order) || ORD.foretag.find((o) => o.no === f.order)).tot;
+
+    vals.me = { first: me.first, companyTxt: fo ? ', ' + me.company : '', orgnr: me.orgnr, custNo: me.custNo };
+    vals.dashInvTxt1 = fo ? ', era ' : '';
+    vals.custNoTxt = fo ? ' med ert kundnummer ' + me.custNo : '';
+
+    const NAV = [['dash', 'Översikt', href.dash], ['orders', 'Beställningar', href.orders], ['fakturor', 'Fakturor', href.inv], ['edit-address', 'Adresser', href.addr], ['edit-account', 'Kontouppgifter', href.acct], ['customer-logout', 'Logga ut', 'SvKonto.dc.html?e=customer-logout']];
+    const curKey = view === 'view-order' ? 'orders' : view;
+    vals.nav = NAV.map((n) => {
+      const on = n[0] === curKey;
+      return { href: n[2], label: n[1], cur: on ? 'page' : 'false',
+        st: 'display: flex; align-items: center; min-height: 48px; padding: 0 16px; text-decoration: none; font-weight: 600; font-size: 15px; border-radius: 6px; border-left: 3px solid ' + (on ? '#111111; background: #f5f5f4; color: #111111' : 'transparent; color: #474747') };
+    });
+
+    vals.vDash = view === 'dash';
+    vals.vOrders = view === 'orders';
+    vals.vOrder = view === 'view-order';
+    vals.vInv = view === 'fakturor';
+    vals.vAddr = view === 'edit-address' && !new URLSearchParams(W ? W.location.search : '').get('a');
+    vals.vAddrEdit = view === 'edit-address' && !vals.vAddr;
+    vals.vAcct = view === 'edit-account';
+
+    // Översikt
+    vals.dashOrders = orders.slice(0, 3).map((o) => ({ href: oHref(o.no), no: o.no, status: o.status, badge: BADGE[o.status], date: dShort(o.date), refTxt: o.ref ? ', ' + o.ref : '', total: fo ? kr(calc(o).ex) + ' exkl. moms' : kr(calc(o).tot) }));
+    const open = fo ? INV.filter((f) => f.status !== 'betald') : [];
+    vals.openInv = open.map((f) => ({ href: href.inv + '#f' + f.no, no: f.no, status: f.status, badge: BADGE[f.status], due: dShort(f.due), amount: kr(invAmt(f)) }));
+    const over = open.filter((f) => f.status === 'förfallen');
+    vals.invOpenSum = kr(open.reduce((s, f) => s + invAmt(f), 0));
+    vals.invOverdueTxt = over.length ? ', varav ' + kr(over.reduce((s, f) => s + invAmt(f), 0)) + ' har förfallit' : '';
+
+    // Beställningar
+    const C = (t1, v, k, st) => { const c = { t: t1, v: v, st: st || '' }; c[k] = k === 'p' ? true : k === 'b' ? BADGE[v] : k; return c; };
+    const right = 'text-align: right';
+    const oCols = fo ? 'minmax(90px, 0.8fr) minmax(100px, 0.9fr) minmax(110px, 1fr) minmax(120px, 1.3fr) minmax(130px, 1.2fr) auto' : 'minmax(90px, 0.8fr) minmax(100px, 0.9fr) minmax(110px, 1fr) minmax(150px, 1.4fr) auto';
+    vals.tOrders = {
+      grid: 'display: grid; grid-template-columns: ' + oCols + '; gap: 12px',
+      cols: [{ v: 'Beställning' }, { v: 'Datum' }, { v: 'Status' }].concat(fo ? [{ v: 'Er referens' }] : []).concat([{ v: fo ? 'Totalt exkl. moms' : 'Totalt', st: right }, { v: '' }]),
+      rows: orders.map((o) => {
+        const c = [{ t: 'Beställning', v: o.no, a: oHref(o.no), st: '' }, C('Datum', dShort(o.date), 'p'), C('Status', o.status, 'b')];
+        if (fo) c.push(C('Er referens', o.ref, 'p'));
+        c.push(C(fo ? 'Totalt exkl. moms' : 'Totalt', totTxt(o), 'p', right));
+        c.push({ t: '', v: 'Visa', btn: oHref(o.no), st: right });
+        return { cells: c };
+      })
+    };
+
+    // Visa beställning
+    const o = orders.find((x) => x.no === this.order) || orders[0];
+    if (vals.vOrder && o) {
+      const c = calc(o);
+      const row = 'display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid #e2e2e0';
+      const big = 'display: flex; justify-content: space-between; gap: 12px; padding: 12px 0 10px; font-weight: 700; font-size: 17px; color: #111111';
+      const f = (n) => kr(fo ? n / 1.25 : n);
+      const foot = [{ k: fo ? 'Delsumma exkl. moms' : 'Delsumma', v: f(c.sub), st: row }, { k: 'Frakt, ' + o.fr[0].toLowerCase(), v: f(o.fr[1]), st: row }];
+      if (fo) foot.push({ k: 'Moms 25 %', v: kr(c.vat), st: row });
+      foot.push({ k: 'Betalningsmetod', v: o.pay === 'Faktura' ? 'Faktura för företag' : o.pay, st: row });
+      foot.push(fo ? { k: 'Totalt att betala', v: kr(c.tot), st: big } : { k: 'Totalt', v: kr(c.tot) + ' (varav moms ' + kr(c.vat) + ')', st: big });
+      const inv = invOf(o);
+      const bl = me.billing, sh = me.shipping;
+      vals.o = {
+        no: o.no, dateLong: dLong(o.date), status: o.status, badge: BADGE[o.status], track: o.track || null, paused: o.status === 'Pausad',
+        hist: o.hist.map((h) => ({ ...h, badge: BADGE[h.status], dot: DOT(h.status) })),
+        sumHead: fo ? 'Summa exkl. moms' : 'Summa',
+        lines: o.lines.map((l) => ({ name: l.name, qty: l.qty, sum: f(l.price * l.qty) })), foot: foot,
+        docHead: fo ? 'Faktura' : 'Kvitto och betalning',
+        invHref: inv ? href.inv + '#f' + inv.no : '', invNo: inv ? inv.no : '', invStatus: inv ? inv.status : '',
+        receipt: !fo ? (o.pay === 'Kort' ? 'Betalt med kort.' : 'Fakturan från Qliro hittar du i Qliros app.') : '',
+        docNone: fo && !inv ? 'Ingen faktura än. Den visas här och under Fakturor när den finns.' : '',
+        ref: o.ref || '',
+        billing: [bl.name, bl.street, bl.zip + ' ' + bl.city, me.email, me.phone].concat(fo ? ['Org.nr ' + me.orgnr] : []),
+        shipping: [sh.name, sh.street, sh.zip + ' ' + sh.city]
+      };
+    } else vals.o = { hist: [], lines: [], foot: [], billing: [], shipping: [] };
+
+    // Fakturor
+    const iCols = 'minmax(70px, 0.7fr) minmax(100px, 1fr) minmax(100px, 1fr) minmax(100px, 1fr) minmax(90px, 0.9fr) minmax(80px, 0.8fr) auto';
+    const hash = W ? W.location.hash.slice(1) : '';
+    vals.tInv = {
+      grid: 'display: grid; grid-template-columns: ' + iCols + '; gap: 12px',
+      cols: [{ v: 'Faktura' }, { v: 'Fakturadatum' }, { v: 'Förfallodatum' }, { v: 'Belopp', st: right }, { v: 'Status' }, { v: 'Order' }, { v: '' }],
+      rows: INV.map((fv) => ({
+        id: 'f' + fv.no,
+        rowSt: 'display: grid; grid-template-columns: ' + iCols + '; gap: 12px; border-bottom: 1px solid #e2e2e0; padding: 12px 8px; margin: 0 -8px; align-items: center; border-radius: 6px' + (hash === 'f' + fv.no ? '; background: #f5f5f4; outline: 2px solid #111111' : ''),
+        cells: [{ t: 'Faktura', v: fv.no, p: true, st: 'font-weight: 700' }, C('Fakturadatum', dShort(fv.date), 'p'), C('Förfallodatum', dShort(fv.due), 'p'), C('Belopp', kr(invAmt(fv)), 'p', right), C('Status', fv.status, 'b'), { t: 'Order', v: fv.order, a: oHref(fv.order), st: '' }, { t: '', v: 'PDF', btn: true, st: right }]
+      }))
+    };
+
+    // Adresser
+    const adrLines = (a, bill) => [a.name, a.street, a.zip + ' ' + a.city].concat(bill ? [me.email, me.phone] : []);
+    vals.addrCards = [
+      { title: 'Faktureringsadress', href: href.addr + '&a=billing', lines: adrLines(me.billing, true) },
+      { title: 'Leveransadress', href: href.addr + '&a=shipping', lines: adrLines(me.shipping, false) }
+    ];
+    vals.addrEditTitle = this.addrKind === 'shipping' ? 'Leveransadress' : 'Faktureringsadress';
+    const lbl = 'display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600';
+    const AF = [['name', fo ? 'Namn eller företag *' : 'Namn *', 'name', true], ['street', 'Gatuadress *', 'street-address', true], ['zip', 'Postnummer *', 'postal-code', false], ['city', 'Ort *', 'address-level2', false]];
+    vals.addrFields = AF.map((a) => ({ label: a[1], v: S.ad[a[0]] || '', ac: a[2], lst: lbl + (a[3] ? '; grid-column: 1 / -1' : ''), on: (e) => this.setState({ ad: { ...this.state.ad, [a[0]]: e.target.value } }) }));
+    vals.saveAddr = () => { if (SA) SA.save(t, { [this.addrKind]: this.state.ad }); go(href.addr + '&ok=addr'); };
+
+    // Kontouppgifter
+    vals.ac = S.ac;
+    vals.personLegend = fo ? 'Kontaktperson' : 'Dina uppgifter';
+    vals.acInp = {};
+    ['first', 'last', 'email', 'company'].forEach((k) => { vals.acInp[k] = (e) => this.setState({ ac: { ...this.state.ac, [k]: e.target.value } }); });
+    vals.saveAcct = () => { if (SA) SA.save(t, fo ? this.state.ac : { first: this.state.ac.first, last: this.state.ac.last, email: this.state.ac.email }); go(href.acct + '&ok=acct'); };
+
+    return vals;
+  }
+}
+</script>
+</body>
+</html>
