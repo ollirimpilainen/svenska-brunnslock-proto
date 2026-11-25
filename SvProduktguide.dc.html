@@ -24,7 +24,38 @@ a{color:#111111}a:hover{color:#474747}
 .pg-hub{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:16px}
 .pg-hubcard:hover,.pg-tile:hover{border-color:#111111 !important}
 .pg-tile:focus-visible,.pg-hubcard:focus-visible{outline:3px solid #111111;outline-offset:2px}
+.hb-page{display:flex;flex-direction:column;gap:80px;padding-top:8px}
+.hb-hero{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:32px;align-items:end}
+.hb-call{display:flex;flex-direction:column;gap:2px;justify-self:end;text-align:right}
+.hb-feat{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:56px;align-items:start;margin-top:-24px}
+.hb-photo{width:100%;aspect-ratio:1 / 1;border-radius:14px;background-blend-mode:multiply}
+.hb-wells{display:flex;flex-direction:column;border:1px solid #d4d4d2;border-radius:12px;overflow:hidden;background:#ffffff}
+.hb-well{display:grid;grid-template-columns:52px minmax(0,1fr) 18px;gap:16px;align-items:center;min-height:72px;padding:12px 20px;text-decoration:none;color:#111111;border-top:1px solid #e2e2e0;transition:background-color 160ms cubic-bezier(.25,1,.5,1)}
+.hb-well:first-child{border-top:0}
+.hb-well:hover{background:#f5f5f4}
+.hb-well:focus-visible,.hb-guide:focus-visible,.hb-row:focus-visible{outline:3px solid #111111;outline-offset:-3px}
+.hb-guides{display:flex;flex-direction:column;border-top:1.5px solid #111111}
+.hb-guide{display:grid;grid-template-columns:220px minmax(0,1fr) auto;gap:32px;align-items:center;padding:24px 0;border-bottom:1px solid #e2e2e0;text-decoration:none;color:#111111}
+.hb-thumb{width:100%;aspect-ratio:4 / 3;border-radius:10px;background-blend-mode:multiply}
+.hb-go{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:6px;border:1.5px solid #111111;font-weight:600;font-size:15px;white-space:nowrap;transition:background-color 160ms cubic-bezier(.25,1,.5,1),color 160ms cubic-bezier(.25,1,.5,1)}
+.hb-guide:hover .hb-go{background:#111111;color:#ffffff}
+.hb-mat{display:grid;grid-template-columns:260px minmax(0,1fr);gap:56px;align-items:center;padding:40px 48px;border-radius:16px;background:#f5f5f4}
+.hb-steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px;max-width:62ch}
+.hb-end{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start;border-top:1px solid #e2e2e0;padding-top:48px}
+.hb-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid #e2e2e0;text-decoration:none;color:#111111}
+.hb-row:hover b{text-decoration:underline}
 @media (max-width:760px){
+  .hb-page{gap:56px}
+  .hb-hero{grid-template-columns:minmax(0,1fr);gap:16px}
+  .hb-call{justify-self:start;text-align:left}
+  .hb-feat{grid-template-columns:minmax(0,1fr);gap:20px;margin-top:-16px}
+  .hb-photo{aspect-ratio:16 / 9;border-radius:12px}
+  .hb-well{min-height:68px;padding:10px 14px;gap:12px;grid-template-columns:44px minmax(0,1fr) 16px}
+  .hb-guide{grid-template-columns:104px minmax(0,1fr);gap:16px;padding:16px 0;align-items:start}
+  .hb-go{display:none}
+  .hb-mat{grid-template-columns:minmax(0,1fr);gap:20px;padding:24px 20px}
+  .hb-mat svg{max-width:220px}
+  .hb-end{grid-template-columns:minmax(0,1fr);gap:40px;padding-top:32px}
   .pg-grid{grid-template-columns:minmax(0,1fr);gap:24px}
   .pg-side{position:static}
   .pg-mrow{grid-template-columns:minmax(0,1fr);gap:16px}
@@ -61,94 +92,109 @@ a{color:#111111}a:hover{color:#474747}
 </nav>
 
 <sc-if value="{{ isHub }}" hint-placeholder-val="{{ false }}">
-<header style="display: flex; flex-direction: column; gap: 12px; max-width: 760px">
-<h1 class="pg-h1" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 44px; line-height: 1.08; letter-spacing: -0.015em; color: #111111">{{ h.h1 }}</h1>
-<p style="margin: 0; font-size: 18px; color: #474747">{{ h.lead }}</p>
-<p style="margin: 0; font-size: 15px; color: #474747">{{ h.callPre }} <a href="tel:+46920520056" style="font-weight: 600">0920-52 00 56</a>. {{ h.callPost }}</p>
+<div class="hb-page">
+
+<header class="hb-hero">
+<div style="display: flex; flex-direction: column; gap: 14px; max-width: 640px">
+<h1 class="pg-h1" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 48px; line-height: 1.04; letter-spacing: -0.02em; color: #111111">{{ h.h1 }}</h1>
+<p style="margin: 0; font-size: 19px; line-height: 1.5; color: #474747">{{ h.lead }}</p>
+</div>
+<div class="hb-call">
+<span style="font-size: 14px; color: #5c5c5c">{{ h.callPre }}</span>
+<a href="tel:+46920520056" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 26px; line-height: 1.2; text-decoration: none; color: #111111">0920-52 00 56</a>
+<span style="font-size: 14px; color: #5c5c5c">{{ h.callPost }}</span>
+</div>
 </header>
 
-<section aria-labelledby="hb-feat" class="pg-feat" style="border: 1px solid #d4d4d2; border-radius: 14px; padding: 32px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px; align-items: start; background: #ffffff">
-<div style="display: flex; flex-direction: column; gap: 12px">
-<div role="img" aria-label="{{ h.featAlt }}" style="{{ h.featImgStyle }}"></div>
-<span style="align-self: flex-start; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #474747">{{ h.featEyebrow }}</span>
-<h2 id="hb-feat" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 32px; line-height: 1.12">{{ h.featTitle }}</h2>
-<p style="margin: 0; color: #474747">{{ h.featText }}</p>
-<p style="margin: 0; padding: 12px 16px; border-radius: 10px; background: #f5f5f4; font-size: 15px; color: #1a1a1a">{{ h.featStat }}</p>
-<a href="{{ h.featHref }}" style="align-self: flex-start; min-height: 48px; display: inline-flex; align-items: center; gap: 8px; padding: 0 20px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; text-decoration: none">{{ h.featCta }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-</div>
+<section aria-labelledby="hb-feat" class="hb-feat">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 12px">
+<div role="img" aria-label="{{ h.featAlt }}" class="hb-photo" style="{{ h.featImgStyle }}"></div>
+<figcaption style="font-size: 14px; line-height: 1.45; color: #474747; max-width: 44ch">{{ h.featStat }}</figcaption>
+</figure>
+<div style="display: flex; flex-direction: column; gap: 20px; min-width: 0">
 <div style="display: flex; flex-direction: column; gap: 10px">
-<span style="font-weight: 700; color: #111111">{{ h.tilesTitle }}</span>
-<div class="pg-tiles" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr)); gap: 10px">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #5c5c5c">{{ h.featEyebrow }}</span>
+<h2 id="hb-feat" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 34px; line-height: 1.1; letter-spacing: -0.01em">{{ h.featTitle }}</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #474747; max-width: 56ch">{{ h.featText }}</p>
+</div>
+<nav aria-label="{{ h.featTitle }}" class="hb-wells">
 <sc-for list="{{ h.tiles }}" as="c" hint-placeholder-count="5">
-<a href="{{ c.href }}" class="pg-tile" style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-height: 132px; padding: 14px 16px; border: 1px solid #d4d4d2; border-radius: 10px; text-decoration: none; color: #111111; background: #ffffff">
-<span aria-hidden="true" style="width: 64px; height: 56px; display: flex; align-items: center; justify-content: center"><sc-if value="{{ c.i_betong }}"><svg width="60" height="54" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="14" rx="24" ry="8" fill="#ececea"/><ellipse cx="30" cy="14" rx="14" ry="4.5" fill="#ffffff"/><path d="M6 14v26c0 4.4 10.7 8 24 8s24-3.6 24-8V14"/><path d="M6 27c0 4.4 10.7 8 24 8s24-3.6 24-8" stroke-dasharray="3 3"/></svg></sc-if><sc-if value="{{ c.i_slat }}"><svg width="60" height="54" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="10" rx="13" ry="4.5" fill="#ececea"/><ellipse cx="30" cy="10" rx="9" ry="2.8" fill="#ffffff"/><path d="M17 10v34c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5V10"/></svg></sc-if><sc-if value="{{ c.i_korr }}"><svg width="60" height="54" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="10" rx="13" ry="4.5" fill="#ececea"/><ellipse cx="30" cy="10" rx="9" ry="2.8" fill="#ffffff"/><path d="M17 10v34c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5V10"/><path d="M17 18c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5M17 25c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5M17 32c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5M17 39c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5"/></svg></sc-if><sc-if value="{{ c.i_hal }}"><svg width="60" height="54" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="22" rx="27" ry="10" fill="#ececea"/><ellipse cx="30" cy="21" rx="9" ry="3.4" fill="#ffffff"/><path d="M3 22v8c0 5.5 12 10 27 10s27-4.5 27-10v-8"/></svg></sc-if><sc-if value="{{ c.i_vet }}"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M9.2 9.3a2.9 2.9 0 0 1 5.6 1c0 2-2.8 2.4-2.8 4.2"/><circle cx="12" cy="17.6" r="0.6" fill="currentColor"/></svg></sc-if></span>
-<span style="display: flex; flex-direction: column; gap: 2px"><b style="font-size: 15px; line-height: 1.3">{{ c.title }}</b><span style="font-size: 13px; color: #474747">{{ c.sub }}</span></span>
+<a href="{{ c.href }}" class="hb-well">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; color: #111111"><sc-if value="{{ c.i_betong }}"><svg width="48" height="44" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="14" rx="24" ry="8" fill="#ececea"/><ellipse cx="30" cy="14" rx="14" ry="4.5" fill="#ffffff"/><path d="M6 14v26c0 4.4 10.7 8 24 8s24-3.6 24-8V14"/><path d="M6 27c0 4.4 10.7 8 24 8s24-3.6 24-8" stroke-dasharray="3 3"/></svg></sc-if><sc-if value="{{ c.i_slat }}"><svg width="48" height="44" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="10" rx="13" ry="4.5" fill="#ececea"/><ellipse cx="30" cy="10" rx="9" ry="2.8" fill="#ffffff"/><path d="M17 10v34c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5V10"/></svg></sc-if><sc-if value="{{ c.i_korr }}"><svg width="48" height="44" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="10" rx="13" ry="4.5" fill="#ececea"/><ellipse cx="30" cy="10" rx="9" ry="2.8" fill="#ffffff"/><path d="M17 10v34c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5V10"/><path d="M17 18c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5M17 25c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5M17 32c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5M17 39c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5"/></svg></sc-if><sc-if value="{{ c.i_hal }}"><svg width="48" height="44" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="22" rx="27" ry="10" fill="#ececea"/><ellipse cx="30" cy="21" rx="9" ry="3.4" fill="#ffffff"/><path d="M3 22v8c0 5.5 12 10 27 10s27-4.5 27-10v-8"/></svg></sc-if><sc-if value="{{ c.i_vet }}"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M9.2 9.3a2.9 2.9 0 0 1 5.6 1c0 2-2.8 2.4-2.8 4.2"/><circle cx="12" cy="17.6" r="0.6" fill="currentColor"/></svg></sc-if></span>
+<span style="display: flex; flex-direction: column; gap: 1px; min-width: 0"><b style="font-size: 16px; line-height: 1.3">{{ c.title }}</b><span style="font-size: 14px; color: #5c5c5c">{{ c.sub }}</span></span>
+<span aria-hidden="true" style="color: #5c5c5c; display: flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span>
 </a>
 </sc-for>
-</div>
+</nav>
+<a href="{{ h.featHref }}" style="align-self: flex-start; font-size: 15px; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">{{ h.featCta }}</a>
 </div>
 </section>
 
-<section aria-labelledby="hb-other" style="display: flex; flex-direction: column; gap: 16px">
+<section aria-labelledby="hb-other" style="display: flex; flex-direction: column; gap: 20px">
 <h2 id="hb-other" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 28px">{{ h.otherTitle }}</h2>
-<div class="pg-hub">
+<div class="hb-guides">
 <sc-for list="{{ h.guides }}" as="c" hint-placeholder-count="3">
-<a href="{{ c.href }}" class="pg-hubcard" style="border: 1px solid #d4d4d2; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 10px; text-decoration: none; background: #ffffff; min-height: 230px; color: #111111; overflow: hidden">
-<div role="img" aria-label="{{ c.alt }}" style="{{ c.imgStyle }}"></div>
-<h3 style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 22px">{{ c.title }}</h3>
-<span style="font-size: 15px; color: #474747">{{ c.text }}</span>
+<a href="{{ c.href }}" class="hb-guide">
+<div role="img" aria-label="{{ c.alt }}" class="hb-thumb" style="{{ c.thumbStyle }}"></div>
+<span style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+<b style="font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; line-height: 1.2">{{ c.title }}</b>
+<span style="font-size: 15px; line-height: 1.5; color: #474747; max-width: 60ch">{{ c.text }}</span>
 <span style="font-size: 14px; color: #5c5c5c">{{ c.meta }}</span>
-<span style="margin-top: auto; align-self: flex-start; min-height: 44px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; text-decoration: underline">{{ t.hubStart }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+</span>
+<span class="hb-go">{{ t.hubStart }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
 </a>
 </sc-for>
 </div>
 </section>
 
-<section aria-labelledby="hb-mat" class="pg-mrow" style="border-radius: 14px; padding: 32px; background: #ececea">
-<svg viewBox="0 0 300 220" width="100%" role="img" aria-label="{{ h.matSvg }}" style="display: block; max-width: 300px">
+<section aria-labelledby="hb-mat" class="hb-mat">
+<svg viewBox="0 0 300 220" width="100%" role="img" aria-label="{{ h.matSvg }}" style="display: block">
 <circle cx="150" cy="96" r="84" fill="#ffffff" stroke="#111111" stroke-width="2"/>
-<circle cx="150" cy="96" r="56" fill="#ececea" stroke="#111111" stroke-width="2"/>
+<circle cx="150" cy="96" r="56" fill="#f5f5f4" stroke="#111111" stroke-width="2"/>
 <path d="M98 96h104" stroke="#111111" stroke-width="2"/><path d="M98 96l9-5v10zM202 96l-9-5v10z" fill="#111111"/>
 <text x="150" y="86" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#111111">{{ h.matInner }}</text>
 <path d="M66 196h168M66 188v16M234 188v16" stroke="#474747" stroke-width="1.6"/>
 <path d="M66 180v-84M234 180v-84" stroke="#474747" stroke-width="1" stroke-dasharray="3 4"/>
 <text x="150" y="216" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#474747">{{ h.matOuter }}</text>
 </svg>
-<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 14px; min-width: 0">
 <h2 id="hb-mat" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 28px">{{ h.matTitle }}</h2>
-<ol style="margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px">
+<ol class="hb-steps">
 <sc-for list="{{ h.matSteps }}" as="s" hint-placeholder-count="3"><li>{{ s }}</li></sc-for>
 </ol>
-<p style="margin: 0; font-size: 15px; color: #474747">{{ h.matNote }}</p>
-<a href="{{ h.featHref }}" style="align-self: flex-start; min-height: 44px; display: inline-flex; align-items: center; font-weight: 600">{{ h.matCta }}</a>
+<p style="margin: 0; font-size: 15px; color: #474747; max-width: 60ch">{{ h.matNote }}</p>
+<a href="{{ h.featHref }}" style="align-self: flex-start; min-height: 44px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600">{{ h.matCta }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 </div>
 </section>
 
+<div class="hb-end">
+<div style="display: flex; flex-direction: column; gap: 32px">
 <section aria-labelledby="hb-none" style="display: flex; flex-direction: column; gap: 12px">
-<h2 id="hb-none" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 24px">{{ h.noneTitle }}</h2>
+<h2 id="hb-none" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 22px">{{ h.noneTitle }}</h2>
 <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-top: 1px solid #e2e2e0">
 <sc-for list="{{ h.none }}" as="x" hint-placeholder-count="3">
-<li><a href="#" style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid #e2e2e0; text-decoration: none; color: #111111"><span style="display: flex; flex-direction: column; gap: 2px"><b>{{ x.title }}</b><span style="font-size: 15px; color: #474747">{{ x.text }}</span></span><span style="font-weight: 600; white-space: nowrap">{{ x.cta }}</span></a></li>
+<li><a href="#" class="hb-row"><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><b>{{ x.title }}</b><span style="font-size: 14px; color: #474747">{{ x.text }}</span></span><span style="font-size: 14px; font-weight: 600; white-space: nowrap">{{ x.cta }}</span></a></li>
 </sc-for>
 </ul>
 </section>
-
-<section aria-labelledby="hb-help" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 32px; border-top: 1px solid #e2e2e0; padding-top: 32px">
-<div style="border-radius: 12px; padding: 24px; border: 1.5px solid #111111; display: flex; flex-direction: column; gap: 10px">
+<section aria-labelledby="hb-help" style="display: flex; flex-direction: column; gap: 12px; padding: 24px; border-radius: 12px; background: #f5f5f4">
 <h2 id="hb-help" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 22px">{{ h.helpTitle }}</h2>
-<span style="color: #474747">{{ h.helpText }}</span>
+<p style="margin: 0; color: #474747; max-width: 56ch">{{ h.helpText }}</p>
 <div style="display: flex; gap: 10px; flex-wrap: wrap">
 <a href="tel:+46920520056" style="min-height: 48px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; text-decoration: none">{{ t.call }}</a>
-<a href="{{ h.featHref }}" style="min-height: 48px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 6px; border: 1.5px solid #111111; font-weight: 600; text-decoration: none">{{ h.helpPhoto }}</a>
-</div>
-</div>
-<div style="display: flex; flex-direction: column; gap: 4px">
-<h2 style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 22px; margin-bottom: 8px">{{ h.faqTitle }}</h2>
-<sc-for list="{{ h.faq }}" as="f" hint-placeholder-count="3">
-<details style="border-bottom: 1px solid #e2e2e0"><summary style="cursor: pointer; min-height: 48px; display: flex; align-items: center; font-weight: 600">{{ f.q }}</summary><p style="margin: 0 0 14px; color: #474747">{{ f.a }}</p></details>
-</sc-for>
+<a href="{{ h.featHref }}" style="min-height: 48px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 6px; border: 1.5px solid #111111; background: #ffffff; font-weight: 600; text-decoration: none">{{ h.helpPhoto }}</a>
 </div>
 </section>
+</div>
+<section aria-labelledby="hb-faq" style="display: flex; flex-direction: column; gap: 4px">
+<h2 id="hb-faq" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 22px; margin-bottom: 8px">{{ h.faqTitle }}</h2>
+<sc-for list="{{ h.faq }}" as="f" hint-placeholder-count="4">
+<details style="border-bottom: 1px solid #e2e2e0"><summary style="cursor: pointer; min-height: 52px; display: flex; align-items: center; font-weight: 600">{{ f.q }}</summary><p style="margin: 0 0 16px; color: #474747; max-width: 60ch">{{ f.a }}</p></details>
+</sc-for>
+</section>
+</div>
+
+</div>
 </sc-if>
 
 <sc-if value="{{ isGuide }}" hint-placeholder-val="{{ true }}">
@@ -1110,15 +1156,15 @@ class Component extends DCLogic {
         h: {
           h1: L('Hitta rätt produkt', 'Löydä oikea tuote'),
           lead: L('Svara på några frågor, samma som våra säljare ställer i telefon. Varje svar filtrerar sortimentet, så du ser direkt vad som passar. Är något oklart hjälper vi dig.', 'Vastaa muutamaan kysymykseen, samoihin kuin myyjämme kysyvät puhelimessa. Jokainen vastaus rajaa valikoimaa, joten näet heti, mikä sopii. Jos jokin on epäselvää, autamme.'),
-          callPre: L('Hellre prata? Ring', 'Mieluummin puhelimessa? Soita'), callPost: L('Vi svarar även på helger.', 'Vastaamme myös viikonloppuisin.'),
+          callPre: L('Hellre prata med någon?', 'Mieluummin puhelimessa?'), callPost: L('Vi svarar även på helger.', 'Vastaamme myös viikonloppuisin.'),
           featEyebrow: L('Vanligast: byta brunnslock', 'Yleisin: kaivonkannen vaihto'),
           featTitle: L('Vilken typ av brunn har du?', 'Millainen kaivo sinulla on?'),
           featText: L('Börja här. Ditt svar blir första filtret, sedan frågar guiden vad som går över locket och hur du mäter. Det tar ungefär en minut.', 'Aloita tästä. Vastauksesi on ensimmäinen suodatin, sitten apuri kysyy, mitä kannen yli kulkee ja miten mitataan. Se vie noin minuutin.'),
           featStat: L('6 av 10 som köper lock hos oss på nätet väljer ett lätt lock som de lyfter själva.', '6/10 verkosta kannen ostavista valitsee kevyen kannen, jonka he nostavat itse.'),
-          featCta: L('Starta brunnslocksguiden', 'Aloita kaivonkansiapuri'), featHref: guideHref('brunnslock'),
+          featCta: L('Vet du inte? Starta guiden utan att välja brunnstyp', 'Et tiedä? Aloita apuri valitsematta kaivotyyppiä'), featHref: guideHref('brunnslock'),
           // Tuotekuvat: kaupan omat kuvat (svenskabrunnslock.se), näytetään värillisinä.
           featImg: 'https://www.svenskabrunnslock.se/wp-content/uploads/IsoLockSt%C3%A4ngdRakBrunn.jpg', featAlt: L('Lätt brunnslock på en betongbrunn', 'Kevyt kaivonkansi betonikaivon päällä'),
-          featImgStyle: 'width: 100%; aspect-ratio: 16 / 10; border-radius: 10px; background: #f5f5f4 url("https://www.svenskabrunnslock.se/wp-content/uploads/IsoLockSt%C3%A4ngdRakBrunn.jpg") center / cover no-repeat',
+          featImgStyle: 'background: #efeeec url("https://www.svenskabrunnslock.se/wp-content/uploads/IsoLockSt%C3%A4ngdRakBrunn.jpg") center / cover no-repeat',
           tilesTitle: L('Välj det som liknar din brunn', 'Valitse kaivoasi muistuttava'),
           tiles: [
             ['betong', 'betong', L('Betongbrunn', 'Betonikaivo'), L('Betongring eller kona', 'Betonirengas tai kartio')],
@@ -1128,7 +1174,7 @@ class Component extends DCLogic {
             ['vet', 'vet', L('Annan brunn eller vet inte', 'Muu kaivo tai en tiedä'), L('Skicka ett foto i slutet', 'Lähetä kuva lopussa')]
           ].map((x) => ({ href: guideHref('brunnslock') + '&typ=' + x[0], title: x[2], sub: x[3], i_betong: x[1] === 'betong', i_slat: x[1] === 'slat', i_korr: x[1] === 'korr', i_hal: x[1] === 'hal', i_vet: x[1] === 'vet' })),
           otherTitle: L('Fler produktguider', 'Muut tuoteapurit'),
-          guides: [['luckor', 'https://www.svenskabrunnslock.se/wp-content/uploads/overfalsad_lucka_1.png', L('Överfalsad lucka i varmförzinkat stål', 'Kuumasinkitty limiluukku')], ['kabel', 'https://www.svenskabrunnslock.se/wp-content/uploads/oxpro_2.jpg', L('Kompositbrunn OXPRO', 'Komposiittikaivo OXPRO')], ['fundament', 'https://www.svenskabrunnslock.se/wp-content/uploads/Betongplint-TP-400-1.jpg', L('Betongplint TP', 'Betoniplintti TP')]].map((x) => ({ href: guideHref(x[0]), title: GUIDES[x[0]].hub[0], text: GUIDES[x[0]].hub[1], meta: GUIDES[x[0]].hub[2], img: x[1], alt: x[2], imgStyle: 'width: calc(100% + 48px); margin: -24px -24px 6px; aspect-ratio: 16 / 10; background: #f5f5f4 url("' + x[1] + '") center / cover no-repeat; border-bottom: 1px solid #e2e2e0' })),
+          guides: [['luckor', 'https://www.svenskabrunnslock.se/wp-content/uploads/overfalsad_lucka_1.png', L('Överfalsad lucka i varmförzinkat stål', 'Kuumasinkitty limiluukku')], ['kabel', 'https://www.svenskabrunnslock.se/wp-content/uploads/oxpro_2.jpg', L('Kompositbrunn OXPRO', 'Komposiittikaivo OXPRO')], ['fundament', 'https://www.svenskabrunnslock.se/wp-content/uploads/Betongplint-TP-400-1.jpg', L('Betongplint TP', 'Betoniplintti TP')]].map((x) => ({ href: guideHref(x[0]), title: GUIDES[x[0]].hub[0], text: GUIDES[x[0]].hub[1], meta: GUIDES[x[0]].hub[2], img: x[1], alt: x[2], thumbStyle: 'background: #efeeec url("' + x[1] + '") center / cover no-repeat' })),
           matTitle: L('Mäta brunnen: ett mått räcker', 'Mittaa kaivo: yksi mitta riittää'), matSvg: L('Ring sedd ovanifrån: innermåttet är hålet, yttermåttet är ringens ytterkant', 'Rengas ylhäältä: sisämitta on aukko, ulkomitta on renkaan ulkoreuna'),
           matInner: L('Innermått', 'Sisämitta'), matOuter: L('Yttermått', 'Ulkomitta'),
           matSteps: brunnslock.mg.steps, matNote: L('Innermåttet räcker för att hitta ett lätt lock. Med yttermåttet blir förslaget säkrare.', 'Sisämitta riittää kevyen kannen löytämiseen. Ulkomitan kanssa ehdotus on varmempi.'),
