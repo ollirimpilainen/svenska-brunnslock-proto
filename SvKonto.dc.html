@@ -59,7 +59,7 @@ a{color:#111111}a:hover{color:#474747}
 
 <section id="skapa-konto" aria-labelledby="reg-h" style="flex: 1 1 360px; min-width: 0; border: 1px solid #bdbdbb; border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 16px">
 <h2 id="reg-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 26px; color: #111111">Skapa konto</h2>
-<p style="margin: 0; font-size: 15px; color: #474747">Kontot är gratis för alla, privatpersoner och företag. Du kan alltid handla utan konto. Med konto ser du dina beställningar, och företag även sina fakturor.</p>
+<p style="margin: 0; font-size: 15px; color: #474747">Kontot är gratis för alla, privatpersoner och företag. Du kan alltid handla utan konto. Med konto ser du dina beställningar, fakturor och kvitton.</p>
 <sc-if value="{{ fromTack }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 15px; background: #f5f5f4; border-radius: 8px; padding: 12px 14px">Beställningar du har gjort med samma e-postadress kopplas till kontot.</p></sc-if>
 <form onSubmit="{{ doRegister }}" novalidate style="display: flex; flex-direction: column; gap: 14px">
 <div role="group" aria-label="Jag är" style="display: inline-flex; align-self: flex-start; border: 1.5px solid #bdbdbb; border-radius: 999px; padding: 3px">
@@ -132,7 +132,7 @@ a{color:#111111}a:hover{color:#474747}
 <sc-if value="{{ vDash }}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; gap: 10px; font-size: 16px">
 <p style="margin: 0; font-size: 18px">Hej <b>{{ me.first }}</b>{{ me.companyTxt }} (inte {{ me.first }}? <a href="SvKonto.dc.html?e=customer-logout" style="font-weight: 600">Logga ut</a>)</p>
-<p style="margin: 0; color: #474747">Här ser du dina <a href="{{ href.orders }}">senaste beställningar</a>{{ dashInvTxt1 }}<sc-if value="{{ isForetag }}" hint-placeholder-val="{{ false }}"><a href="{{ href.inv }}">fakturor</a></sc-if>, hanterar dina <a href="{{ href.addr }}">leverans- och faktureringsadresser</a> och ändrar <a href="{{ href.acct }}">lösenord och kontouppgifter</a>.</p>
+<p style="margin: 0; color: #474747">Här ser du dina <a href="{{ href.orders }}">senaste beställningar</a>, <a href="{{ href.inv }}">fakturor och kvitton</a>, hanterar dina <a href="{{ href.addr }}">leverans- och faktureringsadresser</a> och ändrar <a href="{{ href.acct }}">lösenord och kontouppgifter</a>.</p>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px">
 <section aria-labelledby="d-o" style="border: 1px solid #bdbdbb; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 8px">
@@ -146,8 +146,8 @@ a{color:#111111}a:hover{color:#474747}
 <a href="{{ href.orders }}" style="font-weight: 600; font-size: 15px; min-height: 44px; display: inline-flex; align-items: center">Alla beställningar</a>
 </section>
 <section aria-labelledby="d-f" style="border: 1px solid #bdbdbb; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 8px">
-<h2 id="d-f" style="margin: 0 0 4px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">Öppna fakturor</h2>
-<sc-if value="{{ isForetag }}" hint-placeholder-val="{{ false }}">
+<h2 id="d-f" style="margin: 0 0 4px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">{{ dashDocHead }}</h2>
+<sc-if value="{{ hasOpen }}" hint-placeholder-val="{{ false }}">
 <sc-for list="{{ openInv }}" as="f" hint-placeholder-count="2">
 <a href="{{ f.href }}" style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 10px 0; border-top: 1px solid #e2e2e0; text-decoration: none">
 <b style="color: #111111">Faktura {{ f.no }}</b><span style="{{ f.badge }}">{{ f.status }}</span>
@@ -155,12 +155,17 @@ a{color:#111111}a:hover{color:#474747}
 </a>
 </sc-for>
 <p style="margin: 0; padding-top: 10px; border-top: 1px solid #e2e2e0; font-size: 15px">Att betala: <b>{{ invOpenSum }}</b>{{ invOverdueTxt }}</p>
-<a href="{{ href.inv }}" style="font-weight: 600; font-size: 15px; min-height: 44px; display: inline-flex; align-items: center">Alla fakturor</a>
 </sc-if>
-<sc-if value="{{ isPrivat }}" hint-placeholder-val="{{ true }}">
-<p style="margin: 0; font-size: 15px; color: #474747">Du har inga fakturor från oss. Betalar du med kort eller via Qliro eller Resurs finns kvittot på beställningen.</p>
-<a href="{{ href.inv }}" style="font-weight: 600; font-size: 15px; min-height: 44px; display: inline-flex; align-items: center">Om fakturor</a>
+<sc-if value="{{ noOpen }}" hint-placeholder-val="{{ true }}">
+<sc-for list="{{ lastDocs }}" as="f" hint-placeholder-count="2">
+<a href="{{ f.href }}" style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 10px 0; border-top: 1px solid #e2e2e0; text-decoration: none">
+<b style="color: #111111">{{ f.kind }} {{ f.no }}</b><span style="{{ f.badge }}">{{ f.status }}</span>
+<span style="font-size: 14px; color: #5c5c5c">{{ f.date }}, {{ f.order }}</span><span style="font-size: 14px; text-align: right">{{ f.amount }}</span>
+</a>
+</sc-for>
+<p style="margin: 0; padding-top: 10px; border-top: 1px solid #e2e2e0; font-size: 15px; color: #474747">Inga obetalda fakturor.</p>
 </sc-if>
+<a href="{{ href.inv }}" style="font-weight: 600; font-size: 15px; min-height: 44px; display: inline-flex; align-items: center">Alla fakturor och kvitton</a>
 </section>
 </div>
 </sc-if>
@@ -230,8 +235,7 @@ a{color:#111111}a:hover{color:#474747}
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px">
 <section aria-labelledby="ob-h" style="background: #f5f5f4; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 6px; font-size: 15px">
 <h3 id="ob-h" style="margin: 0 0 4px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 18px; color: #111111">{{ o.docHead }}</h3>
-<sc-if value="{{ o.invHref }}" hint-placeholder-val="{{ false }}"><a href="{{ o.invHref }}" style="font-weight: 600">Faktura {{ o.invNo }}, {{ o.invStatus }}</a><span style="color: #474747">PDF och betalstatus under Fakturor.</span></sc-if>
-<sc-if value="{{ o.receipt }}" hint-placeholder-val="{{ false }}"><a href="#" style="font-weight: 600">Kvitto (PDF)</a><span style="color: #474747">{{ o.receipt }}</span></sc-if>
+<sc-if value="{{ o.invHref }}" hint-placeholder-val="{{ false }}"><a href="{{ o.invHref }}" style="font-weight: 600">{{ o.invKind }} {{ o.invNo }}, {{ o.invStatus }}</a><span style="color: #474747">{{ o.invTxt }}</span></sc-if>
 <sc-if value="{{ o.docNone }}" hint-placeholder-val="{{ false }}"><span style="color: #474747">{{ o.docNone }}</span></sc-if>
 <sc-if value="{{ o.ref }}" hint-placeholder-val="{{ false }}"><span style="margin-top: 8px"><b>Er referens:</b> {{ o.ref }}</span></sc-if>
 </section>
@@ -248,14 +252,15 @@ a{color:#111111}a:hover{color:#474747}
 
 <!-- Fakturor (eget endpoint, Fortnox) -->
 <sc-if value="{{ vInv }}" hint-placeholder-val="{{ false }}">
-<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 28px; color: #111111">Fakturor</h2>
+<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 28px; color: #111111">Fakturor och kvitton</h2>
 <div style="background: #f5f5f4; border-radius: 14px; padding: 16px 20px; font-size: 15px; color: #474747; display: flex; flex-direction: column; gap: 6px">
-<span>Här ser du fakturor från Svenska Brunnslock. De hämtas direkt från vårt ekonomisystem (Fortnox){{ custNoTxt }}.</span>
-<span>Betalar du med kort, eller med faktura eller delbetalning via Qliro eller Resurs, finns kvittot på beställningen under <a href="{{ href.orders }}" style="font-weight: 600">Beställningar</a>. Fakturor från Qliro eller Resurs hittar du i deras app.</span>
+<span>Här finns ett dokument för varje beställning. De hämtas direkt från vårt ekonomisystem (Fortnox) med {{ custNoTxt }}.</span>
+<span>Handlar du mot faktura får du en faktura med förfallodatum. Har du betalat direkt i kassan, med kort, Swish, Klarna, Qliro eller Resurs, får du en betald faktura som är ditt kvitto.</span>
 </div>
-<sc-if value="{{ isForetag }}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{ hasOpen }}" hint-placeholder-val="{{ false }}">
 <p style="margin: 0; font-size: 16px">Att betala: <b>{{ invOpenSum }}</b>{{ invOverdueTxt }}</p>
-<div role="table" aria-label="Fakturor" class="m-rt" style="display: flex; flex-direction: column; border-top: 1px solid #e2e2e0; font-size: 15px">
+</sc-if>
+<div role="table" aria-label="Fakturor och kvitton" class="m-rt" style="display: flex; flex-direction: column; border-top: 1px solid #e2e2e0; font-size: 15px">
 <div role="row" class="m-rt-head" style="{{ tInv.grid }}; font-weight: 600; color: #474747; font-size: 14px; border-bottom: 1px solid #e2e2e0; padding: 10px 0">
 <sc-for list="{{ tInv.cols }}" as="h"><span role="columnheader" style="{{ h.st }}">{{ h.v }}</span></sc-for>
 </div>
@@ -265,11 +270,7 @@ a{color:#111111}a:hover{color:#474747}
 </div>
 </sc-for>
 </div>
-<p style="margin: 0; font-size: 14px; color: #5c5c5c">Frågor om en faktura? Ring <a href="tel:+46920520056" style="font-weight: 600">0920-52 00 56</a> och uppge fakturanumret.</p>
-</sc-if>
-<sc-if value="{{ isPrivat }}" hint-placeholder-val="{{ true }}">
-<p style="margin: 0; font-size: 16px; border: 1px solid #bdbdbb; border-radius: 14px; padding: 20px 24px">Du har inga fakturor från oss.</p>
-</sc-if>
+<p style="margin: 0; font-size: 14px; color: #5c5c5c">Frågor om en faktura eller ett kvitto? Ring <a href="tel:+46920520056" style="font-weight: 600">0920-52 00 56</a> och uppge numret.</p>
 </sc-if>
 
 <!-- Adresser (edit-address) -->
@@ -417,12 +418,20 @@ class Component extends DCLogic {
           hist: [H('30 sep. 2026, 11:02', 'Behandlas', 'Beställningen är mottagen. Faktura godkänd.'), H('2 okt. 2026, 08:55', 'Skickad', 'Skickad från leverantören. Spårningsnummer EX444555666SE.', true), H('6 okt. 2026, 13:30', 'Slutförd', 'Levererad.')] }
       ]
     };
-    // Fortnox-fakturor kundnummer 1234: nummer, datum, förfallodatum, belopp (= orderns total inkl. moms), status
-    const INV = [
-      { no: '2058', order: 'OF-1049', date: '2026-11-14', due: '2026-12-14', status: 'obetald' },
-      { no: '2044', order: 'OF-1042', date: '2026-10-30', due: '2026-11-29', status: 'betald' },
-      { no: '2031', order: 'OF-1037', date: '2026-10-02', due: '2026-11-01', status: 'förfallen' }
-    ];
+    // Fortnox: ett dokument per beställning, hämtat med kundnumret. Belopp = orderns total inkl. moms.
+    // Fakturaorder: vanlig faktura (obetald, förfallen, betald). Betalt i kassan (kort, Swish, Klarna, Qliro, Resurs): faktura markerad betald = kvitto.
+    const INV = {
+      foretag: [
+        { no: '2058', kind: 'Faktura', order: 'OF-1049', date: '2026-11-14', due: '2026-12-14', status: 'obetald' },
+        { no: '2044', kind: 'Faktura', order: 'OF-1042', date: '2026-10-30', due: '2026-11-29', status: 'betald' },
+        { no: '2031', kind: 'Faktura', order: 'OF-1037', date: '2026-10-02', due: '2026-11-01', status: 'förfallen' }
+      ],
+      privat: [
+        { no: '2062', kind: 'Kvitto', order: 'OF-1059', date: '2026-11-25', due: null, status: 'betald' },
+        { no: '2060', kind: 'Kvitto', order: 'OF-1056', date: '2026-11-21', due: null, status: 'betald' },
+        { no: '2011', kind: 'Kvitto', order: 'OF-1033', date: '2026-09-14', due: null, status: 'betald' }
+      ]
+    };
     return { ORD, INV };
   }
 
@@ -519,8 +528,9 @@ class Component extends DCLogic {
     if (this.e === 'go-kassa') { go('SvKassa.dc.html'); }
 
     // ---------- inloggad ----------
-    const { ORD, INV } = this.data();
+    const { ORD } = this.data();
     const orders = ORD[t];
+    const INV = this.data().INV[t];
     const calc = (o) => {
       const sub = o.lines.reduce((s, l) => s + l.price * l.qty, 0);
       const tot = sub + o.fr[1];
@@ -529,13 +539,12 @@ class Component extends DCLogic {
     };
     const totTxt = (o) => { const c = calc(o); return (fo ? kr(c.ex) : kr(c.tot)) + ' för ' + c.n + (c.n === 1 ? ' artikel' : ' artiklar'); };
     const invOf = (o) => INV.find((f) => f.order === o.no);
-    const invAmt = (f) => calc(orders.find((o) => o.no === f.order) || ORD.foretag.find((o) => o.no === f.order)).tot;
+    const invAmt = (f) => calc(orders.find((o) => o.no === f.order)).tot;
 
     vals.me = { first: me.first, companyTxt: fo ? ', ' + me.company : '', orgnr: me.orgnr, custNo: me.custNo };
-    vals.dashInvTxt1 = fo ? ', era ' : '';
-    vals.custNoTxt = fo ? ' med ert kundnummer ' + me.custNo : '';
+    vals.custNoTxt = (fo ? 'ert' : 'ditt') + ' kundnummer ' + me.custNo;
 
-    const NAV = [['dash', 'Översikt', href.dash], ['orders', 'Beställningar', href.orders], ['fakturor', 'Fakturor', href.inv], ['edit-address', 'Adresser', href.addr], ['edit-account', 'Kontouppgifter', href.acct], ['customer-logout', 'Logga ut', 'SvKonto.dc.html?e=customer-logout']];
+    const NAV = [['dash', 'Översikt', href.dash], ['orders', 'Beställningar', href.orders], ['fakturor', 'Fakturor och kvitton', href.inv], ['edit-address', 'Adresser', href.addr], ['edit-account', 'Kontouppgifter', href.acct], ['customer-logout', 'Logga ut', 'SvKonto.dc.html?e=customer-logout']];
     const curKey = view === 'view-order' ? 'orders' : view;
     vals.nav = NAV.map((n) => {
       const on = n[0] === curKey;
@@ -553,7 +562,10 @@ class Component extends DCLogic {
 
     // Översikt
     vals.dashOrders = orders.slice(0, 3).map((o) => ({ href: oHref(o.no), no: o.no, status: o.status, badge: BADGE[o.status], date: dShort(o.date), refTxt: o.ref ? ', ' + o.ref : '', total: fo ? kr(calc(o).ex) + ' exkl. moms' : kr(calc(o).tot) }));
-    const open = fo ? INV.filter((f) => f.status !== 'betald') : [];
+    const open = INV.filter((f) => f.status !== 'betald');
+    vals.hasOpen = open.length > 0; vals.noOpen = !open.length;
+    vals.dashDocHead = open.length ? 'Öppna fakturor' : 'Fakturor och kvitton';
+    vals.lastDocs = INV.slice(0, 2).map((f) => ({ href: href.inv + '#f' + f.no, kind: f.kind, no: f.no, status: f.status, badge: BADGE[f.status], date: dShort(f.date), order: f.order, amount: kr(invAmt(f)) }));
     vals.openInv = open.map((f) => ({ href: href.inv + '#f' + f.no, no: f.no, status: f.status, badge: BADGE[f.status], due: dShort(f.due), amount: kr(invAmt(f)) }));
     const over = open.filter((f) => f.status === 'förfallen');
     vals.invOpenSum = kr(open.reduce((s, f) => s + invAmt(f), 0));
@@ -593,10 +605,10 @@ class Component extends DCLogic {
         hist: o.hist.map((h) => ({ ...h, badge: BADGE[h.status], dot: DOT(h.status) })),
         sumHead: fo ? 'Summa exkl. moms' : 'Summa',
         lines: o.lines.map((l) => ({ name: l.name, qty: l.qty, sum: f(l.price * l.qty) })), foot: foot,
-        docHead: fo ? 'Faktura' : 'Kvitto och betalning',
-        invHref: inv ? href.inv + '#f' + inv.no : '', invNo: inv ? inv.no : '', invStatus: inv ? inv.status : '',
-        receipt: !fo ? (o.pay === 'Kort' ? 'Betalt med kort.' : 'Fakturan från Qliro hittar du i Qliros app.') : '',
-        docNone: fo && !inv ? 'Ingen faktura än. Den visas här och under Fakturor när den finns.' : '',
+        docHead: fo ? 'Faktura' : 'Kvitto',
+        invHref: inv ? href.inv + '#f' + inv.no : '', invNo: inv ? inv.no : '', invStatus: inv ? inv.status : '', invKind: inv ? inv.kind : '',
+        invTxt: inv ? (inv.kind === 'Kvitto' ? 'Betald faktura från Fortnox, fungerar som kvitto. PDF under Fakturor och kvitton.' : 'PDF och betalstatus under Fakturor och kvitton.') : '',
+        docNone: !inv ? 'Ingen faktura än. Den visas här och under Fakturor och kvitton när den finns.' : '',
         ref: o.ref || '',
         billing: [bl.name, bl.street, bl.zip + ' ' + bl.city, me.email, me.phone].concat(fo ? ['Org.nr ' + me.orgnr] : []),
         shipping: [sh.name, sh.street, sh.zip + ' ' + sh.city]
@@ -604,15 +616,15 @@ class Component extends DCLogic {
     } else vals.o = { hist: [], lines: [], foot: [], billing: [], shipping: [] };
 
     // Fakturor
-    const iCols = 'minmax(70px, 0.7fr) minmax(100px, 1fr) minmax(100px, 1fr) minmax(100px, 1fr) minmax(90px, 0.9fr) minmax(80px, 0.8fr) auto';
+    const iCols = 'minmax(110px, 1fr) minmax(100px, 1fr) minmax(100px, 1fr) minmax(100px, 1fr) minmax(90px, 0.9fr) minmax(80px, 0.8fr) auto';
     const hash = W ? W.location.hash.slice(1) : '';
     vals.tInv = {
       grid: 'display: grid; grid-template-columns: ' + iCols + '; gap: 12px',
-      cols: [{ v: 'Faktura' }, { v: 'Fakturadatum' }, { v: 'Förfallodatum' }, { v: 'Belopp', st: right }, { v: 'Status' }, { v: 'Order' }, { v: '' }],
+      cols: [{ v: 'Dokument' }, { v: 'Datum' }, { v: 'Förfallodatum' }, { v: 'Belopp', st: right }, { v: 'Status' }, { v: 'Order' }, { v: '' }],
       rows: INV.map((fv) => ({
         id: 'f' + fv.no,
         rowSt: 'display: grid; grid-template-columns: ' + iCols + '; gap: 12px; border-bottom: 1px solid #e2e2e0; padding: 12px 8px; margin: 0 -8px; align-items: center; border-radius: 6px' + (hash === 'f' + fv.no ? '; background: #f5f5f4; outline: 2px solid #111111' : ''),
-        cells: [{ t: 'Faktura', v: fv.no, p: true, st: 'font-weight: 700' }, C('Fakturadatum', dShort(fv.date), 'p'), C('Förfallodatum', dShort(fv.due), 'p'), C('Belopp', kr(invAmt(fv)), 'p', right), C('Status', fv.status, 'b'), { t: 'Order', v: fv.order, a: oHref(fv.order), st: '' }, { t: '', v: 'PDF', btn: true, st: right }]
+        cells: [{ t: 'Dokument', v: fv.kind + ' ' + fv.no, p: true, st: 'font-weight: 700; white-space: nowrap' }, C('Datum', dShort(fv.date), 'p'), C('Förfallodatum', fv.due ? dShort(fv.due) : 'Betald vid köp', 'p'), C('Belopp', kr(invAmt(fv)), 'p', right), C('Status', fv.status, 'b'), { t: 'Order', v: fv.order, a: oHref(fv.order), st: '' }, { t: '', v: fv.kind, btn: true, st: right }]
       }))
     };
 

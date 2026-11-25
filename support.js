@@ -227,7 +227,7 @@
   // Kaksi demoasiakasta: privat ja foretag (?demo= SvKonto-sivulla). Muokatut osoitteet ja tiedot tallentuvat päälle.
   var ACC_KEY = 'sb-proto-konto', ACC_EDIT_KEY = 'sb-proto-konto-edit';
   var ACC_DEMO = {
-    privat: { type: 'privat', first: 'Anna', last: 'Exempel', email: 'anna@exempel.se', phone: '070-123 45 67', company: '', orgnr: '', custNo: '',
+    privat: { type: 'privat', first: 'Anna', last: 'Exempel', email: 'anna@exempel.se', phone: '070-123 45 67', company: '', orgnr: '', custNo: '5678',
       billing: { name: 'Anna Exempel', street: 'Exempelvägen 1', zip: '123 45', city: 'Exempelstad' },
       shipping: { name: 'Anna Exempel', street: 'Exempelvägen 1', zip: '123 45', city: 'Exempelstad' } },
     foretag: { type: 'foretag', first: 'Erik', last: 'Exempel', email: 'inkop@exempelbygg.se', phone: '070-765 43 21', company: 'Exempel Bygg AB', orgnr: '556677-8899', custNo: '1234',
