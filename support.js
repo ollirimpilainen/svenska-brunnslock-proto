@@ -61,6 +61,9 @@
     return { items: [], zip: '' };
   }
   function writeCart(c) { try { localStorage.setItem(CART_KEY, JSON.stringify(c)); } catch (e) {} }
+  if (/[?&]demo\b/.test(location.search) && !readCart().items.length) {
+    writeCart({ items: [{ id: 'kansi600a15', qty: 1 }, { id: 'las', qty: 1 }], zip: '' });
+  }
   window.SBCart = {
     catalog: CATALOG,
     items: function () { return readCart().items; },
