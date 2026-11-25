@@ -103,8 +103,9 @@ class Component extends DCLogic {
     const PAIRS = [['FiEtusivu', 'SvStartsida'], ['FiKategoria', 'SvKategori'], ['FiTuote', 'SvProdukt'], ['FiOstoskori', 'SvVarukorg'], ['FiKassa', 'SvKassa'], ['FiKiitos', 'SvTack'], ['FiTarjous', 'SvOffert'], ['FiTuoteapuri', 'SvProduktguide']];
     // Tuotesivun koko näkyy osoitteessa kaupan slugina (/butik/...), joten kielilinkki päätellään siitä
     const slug = typeof location !== 'undefined' ? location.pathname.match(/\/butik\/.*latt-brunnslock-(\d+)-composite/) : null;
-    const page = slug ? 'SvProdukt' : (typeof location !== 'undefined' ? location.pathname.split('/').pop() : '').replace('.dc.html', '');
-    const qs = slug ? '?size=' + slug[1] : (typeof location !== 'undefined' ? location.search : '');
+    const dslug = typeof location !== 'undefined' ? location.pathname.match(/\/butik\/.*durkplatslucka-(\d+x\d+)-golv-vagg/) : null;
+    const page = slug || dslug ? 'SvProdukt' : (typeof location !== 'undefined' ? location.pathname.split('/').pop() : '').replace('.dc.html', '');
+    const qs = dslug ? '?p=durk&size=' + dslug[1] : slug ? '?size=' + slug[1] : (typeof location !== 'undefined' ? location.search : '');
     const pair = PAIRS.find((p) => p[0] === page || p[1] === page) || PAIRS[0];
     const ME = 'fi';
     const langOn = 'display: inline-flex; align-items: center; min-height: 32px; padding: 0 8px; border-radius: 4px; font-size: 13px; font-weight: 700; text-decoration: none; background: #ffffff; color: #111111';

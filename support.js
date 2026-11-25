@@ -84,6 +84,14 @@
     ]
   };
 
+  // ---------- luukkuperhe SF02 Durkplåtslucka golv/vägg (tuotedata-master.xlsx, Products) ----------
+  // 400×400 on nykyisessä kaupassa tarjoustuote (Offert-tagi, tuotetyyppi Quote), muut koot ostettavia.
+  // fr = rahtiprofiili nykyisen rahtiluokan mukaan: ei luokkaa = Ombud, Paket = Skrymmande, Pall = Pall.
+  window.SB_DURK = {
+    sv: 'Durkplåtslucka Golv/vägg', fi: 'Durkplåtiluukku lattiaan ja seinään', def: '300x300',
+    items: [{"id": "durk-300x300", "key": "300x300", "label": "300×300", "w": 300, "l": 300, "sku": "236200", "price": 1968, "quote": false, "kg": 5, "fr": "ombud", "sold": 19, "def": true, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-300x300-golv-vagg", "sv": "Durkplåtslucka 300×300 Golv/vägg", "fi": "Durkplåtiluukku 300×300, lattia/seinä"}, {"id": "durk-300x400", "key": "300x400", "label": "300×400", "w": 300, "l": 400, "sku": "236340", "price": 2625, "quote": false, "kg": 8, "fr": "ombud", "sold": 6, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-300x400-golv-vagg", "sv": "Durkplåtslucka 300×400 Golv/vägg", "fi": "Durkplåtiluukku 300×400, lattia/seinä"}, {"id": "durk-400x400", "key": "400x400", "label": "400×400", "w": 400, "l": 400, "sku": "236400", "price": null, "quote": true, "kg": 9, "fr": "offert", "sold": 14, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-400x400-golv-vagg", "sv": "Durkplåtslucka 400×400 Golv/vägg", "fi": "Durkplåtiluukku 400×400, lattia/seinä"}, {"id": "durk-400x500", "key": "400x500", "label": "400×500", "w": 400, "l": 500, "sku": "236500", "price": 3150, "quote": false, "kg": 14, "fr": "skrym", "sold": 15, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-400x500-golv-vagg", "sv": "Durkplåtslucka 400×500 Golv/vägg", "fi": "Durkplåtiluukku 400×500, lattia/seinä"}, {"id": "durk-400x600", "key": "400x600", "label": "400×600", "w": 400, "l": 600, "sku": "236600", "price": 3750, "quote": false, "kg": 16, "fr": "skrym", "sold": 2, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-400x600-golv-vagg", "sv": "Durkplåtslucka 400×600 Golv/vägg", "fi": "Durkplåtiluukku 400×600, lattia/seinä"}, {"id": "durk-500x500", "key": "500x500", "label": "500×500", "w": 500, "l": 500, "sku": "236550", "price": 3750, "quote": false, "kg": 14, "fr": "skrym", "sold": 3, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-500x500-golv-vagg", "sv": "Durkplåtslucka 500×500 Golv/vägg", "fi": "Durkplåtiluukku 500×500, lattia/seinä"}, {"id": "durk-600x600", "key": "600x600", "label": "600×600", "w": 600, "l": 600, "sku": "236700", "price": 3976, "quote": false, "kg": 21, "fr": "pall", "sold": 9, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-600x600-golv-vagg", "sv": "Durkplåtslucka 600×600 Golv/vägg", "fi": "Durkplåtiluukku 600×600, lattia/seinä"}, {"id": "durk-600x700", "key": "600x700", "label": "600×700", "w": 600, "l": 700, "sku": "236770", "price": 4595, "quote": false, "kg": 23, "fr": "pall", "sold": 2, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-600x700-golv-vagg", "sv": "Durkplåtslucka 600×700 Golv/vägg", "fi": "Durkplåtiluukku 600×700, lattia/seinä"}, {"id": "durk-600x800", "key": "600x800", "label": "600×800", "w": 600, "l": 800, "sku": "236800", "price": 5157, "quote": false, "kg": 27, "fr": "pall", "sold": 14, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-600x800-golv-vagg", "sv": "Durkplåtslucka 600×800 Golv/vägg", "fi": "Durkplåtiluukku 600×800, lattia/seinä"}, {"id": "durk-800x1000", "key": "800x1000", "label": "800×1000", "w": 800, "l": 1000, "sku": "236900", "price": 7406, "quote": false, "kg": 41, "fr": "pall", "sold": 5, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-800x1000-golv-vagg", "sv": "Durkplåtslucka 800×1000 Golv/vägg", "fi": "Durkplåtiluukku 800×1000, lattia/seinä"}]
+  };
+
   // ---------- rahtiprofiili (service-design/rahtimalli.md, kohdat 3.1 ja 3.3) ----------
   // Rahti määräytyy tuotteen profiilin mukaan ja on sama koko Ruotsissa, joten postinumeroa ei tarvita.
   // Hinnat ovat nykyisen kaupan esimerkkejä: Ombud 172 kr, Skrymmande 590 kr, yleislava 1 480 kr / 8 kpl, plinttilava 2 400 kr.
@@ -118,6 +126,12 @@
       if (it.seal) c['seal-' + it.d] = { price: it.seal, fr: 'ombud', kg: 1,
         fi: [it.sealName ? 'Tiivisterengas ' + it.sealName : 'Tiivisterengas koolle ' + it.d, 'Lisävaruste kanteen ' + it.d, '#'],
         sv: [it.sealName ? 'Tätningsring ' + it.sealName : 'Tätningsring till ' + it.d, 'Tillval till lock ' + it.d, '#'] };
+    });
+    window.SB_DURK.items.forEach(function (it) {
+      var q = 'p=durk&size=' + it.key;
+      c[it.id] = { price: it.quote ? null : it.price, fr: it.fr, kg: it.kg,
+        fi: [it.fi, 'Tuotenro ' + it.sku + ' · Vapaa aukko ' + it.label + ' mm', 'FiTuote.dc.html?' + q],
+        sv: [it.sv, 'Art.nr ' + it.sku + ' · Fri öppning ' + it.label + ' mm', 'SvProdukt.dc.html?' + q] };
     });
     L.acc.forEach(function (a) { c[a.id] = { price: a.price, fr: 'ombud', kg: 1, fi: [a.fi, 'Lisävaruste kevyisiin kansiin', '#'], sv: [a.sv, 'Tillval till lätta lock', '#'] }; });
     return c;

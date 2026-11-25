@@ -5,15 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sidan hittades inte</title>
 <script>
-// GitHub Pages näyttää tämän sivun, kun osoitetta ei löydy. Tuotesivun koko-osoitteet (/butik/...latt-brunnslock-1050-composite)
+// GitHub Pages näyttää tämän sivun, kun osoitetta ei löydy. Tuotesivun koko-osoitteet (/butik/...latt-brunnslock-1050-composite,
+// /butik/luckor/durkplatsluckor/durkplatslucka-400x400-golv-vagg)
 // ohjataan takaisin tuotesivulle oikealla koolla, ja sivu vaihtaa osoiteriville saman slugin. /fi/butik/... avaa suomenkielisen sivun.
 (function () {
   var p = location.pathname, i = p.indexOf('/butik/');
   if (i < 0) return;
   var pre = p.slice(0, i), fi = /\/fi$/.test(pre);
   if (fi) pre = pre.slice(0, -3);
-  var m = p.match(/latt-brunnslock-(\d+)-composite/);
-  location.replace(pre + '/' + (fi ? 'FiTuote' : 'SvProdukt') + '.dc.html' + (m ? '?size=' + m[1] : '') + location.hash);
+  var m = p.match(/latt-brunnslock-(\d+)-composite/), d = p.match(/durkplatslucka-(\d+x\d+)-golv-vagg/);
+  var q = d ? '?p=durk&size=' + d[1] : m ? '?size=' + m[1] : '';
+  location.replace(pre + '/' + (fi ? 'FiTuote' : 'SvProdukt') + '.dc.html' + q + location.hash);
 })();
 </script>
 <style>

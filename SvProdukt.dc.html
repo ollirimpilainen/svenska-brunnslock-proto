@@ -24,18 +24,17 @@ summary::-webkit-details-marker{display:none}
 <nav aria-label="Du är här" style="font-size: 14px; color: #474747; display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px">
 <a href="SvStartsida.dc.html" style="text-decoration: none; padding: 10px 0">Startsida</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
 <a href="#" style="text-decoration: none; padding: 10px 0">Brunnslock och luckor</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
-<a href="SvKategori.dc.html" style="text-decoration: none; padding: 10px 0">Lätta brunnslock</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
+<a href="{{ crumbHref }}" style="text-decoration: none; padding: 10px 0">{{ crumbCat }}</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
 <span aria-current="page" style="padding: 10px 0; color: #111111; font-weight: 600">{{ name }}</span>
 </nav>
 <div style="display: flex; flex-wrap: wrap; gap: 64px; align-items: flex-start">
 
 <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
-<div role="img" aria-label="Produktbild: locket på en betongring i gräsmatta" style="aspect-ratio: 1 / 1; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #474747; font-size: 14px; text-align: center; padding: 16px">Produktbild: locket på en betongring i gräsmatta</div>
+<div role="img" aria-label="{{ imgAlt }}" style="aspect-ratio: 1 / 1; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #474747; font-size: 14px; text-align: center; padding: 16px">{{ imgAlt }}</div>
 <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
-<button type="button" aria-pressed="true" style="aspect-ratio: 1; border: 2px solid #111111; background: #ececea; border-radius: 10px; font: inherit; font-size: 12px; color: #474747; cursor: pointer">På brunnen</button>
-<button type="button" aria-pressed="false" style="aspect-ratio: 1; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 10px; font: inherit; font-size: 12px; color: #474747; cursor: pointer">Måttskiss</button>
-<button type="button" aria-pressed="false" style="aspect-ratio: 1; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 10px; font: inherit; font-size: 12px; color: #474747; cursor: pointer">Lås och undersida</button>
-<button type="button" aria-pressed="false" style="aspect-ratio: 1; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 10px; font: inherit; font-size: 12px; color: #474747; cursor: pointer">Lyfts med en hand</button>
+<sc-for list="{{ thumbs }}" as="th" hint-placeholder-count="4">
+<button type="button" aria-pressed="{{ th.on }}" style="{{ th.style }}">{{ th.label }}</button>
+</sc-for>
 </div>
 </div>
 
@@ -44,17 +43,16 @@ summary::-webkit-details-marker{display:none}
 <h1 id="p-title" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 40px; line-height: 1.1; letter-spacing: -0.015em; color: #111111">{{ name }}</h1>
 <p style="margin: 0; font-size: 17px; color: #474747">{{ sub }}</p>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 14px; color: #5c5c5c">
-<span style="border: 1.5px solid #111111; border-radius: 4px; padding: 0 8px; font-family: Archivo, Inter, sans-serif; font-weight: 700; color: #111111">A15</span>
+<sc-if value="{{ hasCls }}" hint-placeholder-val="{{ true }}"><span style="border: 1.5px solid #111111; border-radius: 4px; padding: 0 8px; font-family: Archivo, Inter, sans-serif; font-weight: 700; color: #111111">{{ cls }}</span></sc-if>
 <span>Art.nr {{ art }}</span>
 <button type="button" onClick="{{ copyArt }}" style="border: 0; background: none; font: inherit; font-weight: 600; color: #111111; text-decoration: underline; cursor: pointer; min-height: 44px">{{ copyLabel }}</button>
 </div>
 </div>
 
 <ul style="margin: 0; padding: 16px 0; list-style: none; border-top: 1px solid #e2e2e0; border-bottom: 1px solid #e2e2e0; display: flex; flex-direction: column; gap: 10px; font-size: 15px">
-<li style="display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.2" aria-hidden="true" style="margin-top: 2px"><path d="m5 12 5 5 9-10"/></svg><span>{{ fitText }}</span></li>
-<li style="display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.2" aria-hidden="true" style="margin-top: 2px"><path d="m5 12 5 5 9-10"/></svg><span>Klarar gång och gräsmatta (A15), men inte bil.</span></li>
-<li style="display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.2" aria-hidden="true" style="margin-top: 2px"><path d="m5 12 5 5 9-10"/></svg><span>{{ kgText }}</span></li>
-<li style="display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.2" aria-hidden="true" style="margin-top: 2px"><path d="m5 12 5 5 9-10"/></svg><span>Barnsäkert och låsbart, så att barn inte kan öppna locket.</span></li>
+<sc-for list="{{ bullets }}" as="b" hint-placeholder-count="4">
+<li style="display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.2" aria-hidden="true" style="margin-top: 2px"><path d="m5 12 5 5 9-10"/></svg><span>{{ b.t }}</span></li>
+</sc-for>
 </ul>
 
 <div style="display: flex; flex-direction: column; gap: 8px">
@@ -70,14 +68,12 @@ summary::-webkit-details-marker{display:none}
 <details style="margin-top: 4px">
 <summary style="cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; font-size: 14px; font-weight: 600; text-decoration: underline">{{ T.compare }}</summary>
 <div style="overflow-x: auto; margin-top: 6px">
-<table style="width: 100%; border-collapse: collapse; font-size: 14px; white-space: nowrap">
-<thead><tr><th style="text-align: left; padding: 8px 10px 8px 0; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0">{{ T.cSize }}</th><th style="text-align: left; padding: 8px 10px; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0">{{ T.cIn }}</th><th style="text-align: left; padding: 8px 10px; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0">{{ T.cOut }}</th><th style="text-align: right; padding: 8px 0 8px 10px; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0">{{ T.cPrice }}</th></tr></thead>
-<tbody>
+<div role="table" style="display: grid; grid-template-columns: repeat(4, auto); font-size: 14px; white-space: nowrap; min-width: max-content">
+<div role="row" style="display: contents"><span role="columnheader" style="padding: 8px 10px; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0; padding-left: 0">{{ T.cSize }}</span><span role="columnheader" style="padding: 8px 10px; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0">{{ T.cIn }}</span><span role="columnheader" style="padding: 8px 10px; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0">{{ T.cOut }}</span><span role="columnheader" style="padding: 8px 10px; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0; padding-right: 0; text-align: right">{{ T.cPrice }}</span></div>
 <sc-for list="{{ sizes }}" as="z" hint-placeholder-count="5">
-<tr style="{{ z.rowStyle }}"><td style="padding: 8px 10px 8px 0; border-bottom: 1px solid #e2e2e0"><a href="{{ z.href }}" onClick="{{ z.pick }}" style="font-weight: 600">{{ z.label }}</a></td><td style="padding: 8px 10px; border-bottom: 1px solid #e2e2e0">{{ z.inTxt }}</td><td style="padding: 8px 10px; border-bottom: 1px solid #e2e2e0">{{ z.outTxt }}</td><td style="padding: 8px 0 8px 10px; border-bottom: 1px solid #e2e2e0; text-align: right">{{ z.price }}</td></tr>
+<div role="row" style="display: contents"><span role="cell" style="padding: 8px 10px; border-bottom: 1px solid #e2e2e0; {{ z.rowStyle }}; padding-left: 0"><a href="{{ z.href }}" onClick="{{ z.pick }}" style="font-weight: 600">{{ z.label }}</a></span><span role="cell" style="padding: 8px 10px; border-bottom: 1px solid #e2e2e0; {{ z.rowStyle }}">{{ z.inTxt }}</span><span role="cell" style="padding: 8px 10px; border-bottom: 1px solid #e2e2e0; {{ z.rowStyle }}">{{ z.outTxt }}</span><span role="cell" style="padding: 8px 10px; border-bottom: 1px solid #e2e2e0; {{ z.rowStyle }}; padding-right: 0; text-align: right">{{ z.price }}</span></div>
 </sc-for>
-</tbody>
-</table>
+</div>
 </div>
 </details>
 </div>
@@ -88,6 +84,7 @@ summary::-webkit-details-marker{display:none}
 <span style="font-size: 15px; color: #474747">{{ vatLabel }}</span>
 <span style="width: 100%; font-size: 13px; color: #5c5c5c">{{ altPrice }}</span>
 </div>
+<sc-if value="{{ hasAddons }}" hint-placeholder-val="{{ true }}">
 <details style="border: 1px solid #e2e2e0; border-radius: 6px">
 <summary style="cursor: pointer; min-height: 44px; padding: 0 12px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 15px">Lägg till tätningsring eller ventil <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
 <div style="padding: 0 8px 8px; display: flex; flex-direction: column; gap: 2px">
@@ -100,24 +97,42 @@ summary::-webkit-details-marker{display:none}
 </sc-for>
 </div>
 </details>
+</sc-if>
 <div style="display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px">
 <div style="display: inline-flex; align-items: center; border: 1.5px solid #bdbdbb; border-radius: 6px">
 <button type="button" onClick="{{ less }}" aria-label="Minska antal" style="width: 44px; min-height: 48px; border: 0; background: transparent; font: inherit; font-size: 20px; cursor: pointer">−</button>
 <span aria-live="polite" style="width: 40px; text-align: center; font-weight: 600">{{ qty }}</span>
 <button type="button" onClick="{{ more }}" aria-label="Öka antal" style="width: 44px; min-height: 48px; border: 0; background: transparent; font: inherit; font-size: 20px; cursor: pointer">+</button>
 </div>
+<sc-if value="{{ isBuy }}" hint-placeholder-val="{{ true }}">
 <a href="SvVarukorg.dc.html" onClick="{{ addToCart }}" style="min-height: 52px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 4h2l2.5 11h10l2-7H7"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>Lägg i varukorgen</a>
+</sc-if>
 </div>
+<sc-if value="{{ isQuote }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<a href="{{ Q.offertHref }}" onClick="{{ addQuote }}" style="min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">{{ Q.cta }}</a>
+<button type="button" onClick="{{ addQuoteStay }}" style="min-height: 48px; border: 1.5px solid #111111; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; font-size: 16px; color: #111111; cursor: pointer">{{ Q.add }}</button>
+</div>
+</sc-if>
+<sc-if value="{{ isBuy }}" hint-placeholder-val="{{ true }}">
 <div style="background: #f5f5f4; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px; font-size: 15px">
 <div style="display: flex; justify-content: space-between; gap: 10px"><span>{{ prodLabel }}</span><b>{{ prodSum }}</b></div>
 <div style="display: flex; justify-content: space-between; gap: 10px"><span>{{ frLabel }}<small style="display: block; font-size: 13px; color: #5c5c5c">{{ frNote }}</small></span><b>{{ frSum }}</b></div>
 <div style="display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid #bdbdbb; padding-top: 10px; font-weight: 700; color: #111111"><span>Totalt med frakt</span><span>{{ totalSum }}</span></div>
 </div>
+</sc-if>
+<sc-if value="{{ isQuote }}" hint-placeholder-val="{{ false }}">
+<div style="background: #f5f5f4; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 6px; font-size: 15px">
+<b style="color: #111111">{{ Q.fr }}</b>
+<span style="font-size: 14px; color: #474747">{{ Q.frNote }}</span>
+<sc-if value="{{ quoteAdded }}" hint-placeholder-val="{{ false }}"><p role="status" style="margin: 6px 0 0; font-weight: 600; color: #111111">{{ Q.added }} <a href="{{ Q.cartHref }}">{{ Q.view }}</a></p></sc-if>
+</div>
+</sc-if>
 <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 14px; color: #474747">
 <li>14 dagars ångerrätt</li>
 <li>Klarna eller Qliro, faktura för företag</li>
 </ul>
-<p style="margin: 0; font-size: 15px; color: #474747">Köper du fler eller till ett projekt? <a href="#" style="font-weight: 600">Begär offert</a></p>
+<sc-if value="{{ isBuy }}" hint-placeholder-val="{{ true }}"><p style="margin: 0; font-size: 15px; color: #474747">Köper du fler eller till ett projekt? <a href="#" style="font-weight: 600">Begär offert</a></p></sc-if>
 </div>
 
 <div style="border: 1px solid #bdbdbb; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
@@ -134,6 +149,7 @@ summary::-webkit-details-marker{display:none}
 </div>
 </section>
 
+<sc-if value="{{ isLid }}" hint-placeholder-val="{{ true }}">
 <section aria-labelledby="about-h" style="border-top: 1px solid #e2e2e0">
 <div style="max-width: 1240px; margin: 0 auto; padding: 64px 24px 0">
 <div style="max-width: 920px; display: flex; flex-direction: column; gap: 12px">
@@ -272,6 +288,38 @@ summary::-webkit-details-marker{display:none}
 </div>
 </section>
 
+</sc-if>
+<sc-if value="{{ isDurk }}" hint-placeholder-val="{{ false }}">
+<section aria-labelledby="about-h" style="border-top: 1px solid #e2e2e0">
+<div style="max-width: 1240px; margin: 0 auto; padding: 64px 24px 80px">
+<div style="max-width: 920px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h2 id="about-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 26px; color: #111111">{{ D.aboutH }}</h2>
+<p style="margin: 0; font-size: 18px; color: #1a1a1a; max-width: 68ch">{{ D.lead }}</p>
+<h3 style="margin: 16px 0 6px; font-size: 17px; color: #111111">{{ D.useH }}</h3>
+<p style="margin: 0; color: #474747; max-width: 68ch">{{ D.use }}</p>
+<h3 style="margin: 16px 0 6px; font-size: 17px; color: #111111">{{ D.mountH }}</h3>
+<p style="margin: 0; color: #474747; max-width: 68ch">{{ D.mount }}</p>
+</div>
+<div id="sec-fit" style="display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 26px; color: #111111">{{ D.specH }}</h2>
+<div role="table" style="display: grid; grid-template-columns: minmax(0, 45%) minmax(0, 1fr); font-size: 15px">
+<sc-for list="{{ D.spec }}" as="r" hint-placeholder-count="6">
+<div role="row" style="display: contents"><span role="rowheader" style="font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">{{ r.k }}</span><span role="cell" style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">{{ r.v }}</span></div>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 26px; color: #111111">{{ D.delH }}</h2>
+<sc-for list="{{ D.del }}" as="d" hint-placeholder-count="2">
+<div><b style="display: block; color: #111111">{{ d.h }}</b><span style="font-size: 15px; color: #474747">{{ d.t }}</span></div>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+</sc-if>
+
 </main>
 <dc-import name="SvFooter" hint-size="100%,420px"></dc-import>
 </div>
@@ -292,11 +340,52 @@ function sbSizeUrl(c, mode) {
   try { if (location.href.replace(/#.*$/, '') !== target) history[mode === 'push' ? 'pushState' : 'replaceState']({ size: c.d }, '', target + location.hash); } catch (e) {}
   document.title = c['sv'] || document.title;
 }
+const sbDurkFromPath = () => { try { const m = location.pathname.match(/durkplatslucka-(\d+x\d+)-golv-vagg/); return m ? m[1] : ''; } catch (e) { return ''; } };
 const sbSizeFromPath = () => { try { const m = location.pathname.match(/latt-brunnslock-(\d+)-composite/); return m ? parseInt(m[1], 10) : 0; } catch (e) { return 0; } };
 class Component extends DCLogic {
-  constructor(props) { super(props); const SB = typeof window !== 'undefined' ? window.SBCart : null; const z0 = SB ? SB.zip() : ''; let s0 = 0; try { s0 = parseInt(new URLSearchParams(location.search).get('size'), 10) || sbSizeFromPath(); } catch (e) {} this.state = { size: s0, vat: 'inkl', qty: 1, addons: {}, zip: z0, zipDone: /^\d{5}$/.test(z0.replace(/\s/g, '')), zipErr: false, inMm: '', outMm: '', checkMsg: '', about: false, copied: false }; this.__url = false; if (typeof window !== 'undefined') window.addEventListener('popstate', () => { const d = sbSizeFromPath(); if (d) this.setState({ size: d, addons: {} }); }); }
+  constructor(props) { super(props); const SB = typeof window !== 'undefined' ? window.SBCart : null; const z0 = SB ? SB.zip() : ''; let s0 = 0, fam0 = 'comp'; try { const qp = new URLSearchParams(location.search); fam0 = qp.get('p') === 'durk' || sbDurkFromPath() ? 'durk' : 'comp'; s0 = fam0 === 'durk' ? (qp.get('size') || sbDurkFromPath() || '') : (parseInt(qp.get('size'), 10) || sbSizeFromPath()); } catch (e) {} this.state = { fam: fam0, quoteAdded: false, size: s0, vat: 'inkl', qty: 1, addons: {}, zip: z0, zipDone: /^\d{5}$/.test(z0.replace(/\s/g, '')), zipErr: false, inMm: '', outMm: '', checkMsg: '', about: false, copied: false }; this.__url = false; if (typeof window !== 'undefined') window.addEventListener('popstate', () => { const k = sbDurkFromPath(), d = sbSizeFromPath(); if (k) this.setState({ fam: 'durk', size: k, quoteAdded: false }); else if (d) this.setState({ fam: 'comp', size: d, addons: {} }); }); }
+  // Luukkuperhe SF02: sama sivu, oma data. Tarjouskoossa (quote) ostopainikkeen tilalla tarjouspyyntö ja rahti tarjouksessa.
+  durkVals() {
+    const S = this.state, W = typeof window !== 'undefined' ? window : {};
+    const DK = W.SB_DURK || { items: [], def: '' };
+    const fam = DK.items;
+    const c = fam.find((i) => i.key === S.size) || fam.find((i) => i.key === DK.def) || fam[0] || { key: '', label: '', kg: 0, sku: '', price: 0, quote: false, fr: 'ombud', sv: '', fi: '' };
+    if (!this.__url) { this.__url = true; sbSizeUrl(c, 'replace'); } else if (typeof document !== 'undefined' && c['sv']) document.title = c['sv'];
+    const ex = S.vat === 'exkl', q = !!c.quote;
+    const fmt = (n) => Math.round(ex ? n / 1.25 : n).toLocaleString('sv-SE') + ' kr';
+    const fmtRaw = (n) => Math.round(n).toLocaleString('sv-SE') + ' kr';
+    const SB = W.SBCart || null;
+    const ls = [{ fr: c.fr, kg: c.kg, qty: S.qty }];
+    const f = !q && SB && SB.freight ? SB.freight(ls, 'sv') : { price: 0, label: '' };
+    const frText = W.SBFreight ? (W.SBFreight.profiles[c.fr] || {})['sv'] : '';
+    const addQ = () => { if (SB) SB.add(c.id, S.qty); };
+    return {
+      cart: 0, vat: S.vat, setVat: (v) => this.setState({ vat: v }),
+      isLid: false, isDurk: true, isBuy: !q, isQuote: q, hasAddons: false, hasCls: false, cls: '',
+      crumbCat: 'Durkplåtsluckor', crumbHref: '#', imgAlt: 'Produktbild: durkplåtslucka i ett betonggolv',
+      thumbs: ['I golvet', 'Måttskiss', 'Ram och skruvar', 'Öppen lucka'].map((l, i) => ({ label: l, on: String(i === 0), style: i === 0 ? 'aspect-ratio: 1; border: 2px solid #111111; background: #ececea; border-radius: 10px; font: inherit; font-size: 12px; color: #474747; cursor: pointer' : 'aspect-ratio: 1; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 10px; font: inherit; font-size: 12px; color: #474747; cursor: pointer' })),
+      T: { compare: 'Jämför storlekar', cSize: 'Storlek', cIn: 'Fri öppning', cOut: 'Vikt', cPrice: 'Pris' }, name: c['sv'], art: c.sku, sub: 'Fri öppning ' + c.label + ' mm. För golv och vägg, inomhus och utomhus.',
+      bullets: ['Fri öppning ' + c.label + ' mm.', 'Pulverlackerad i svart, för inomhus och utomhus.', 'Locket låses med infällda skruvar.', 'Väger ' + c.kg + ' kg.'].map((x) => ({ t: x })),
+      copyLabel: S.copied ? 'Kopierat' : 'Kopiera', copyArt: () => { try { navigator.clipboard.writeText(c.sku); } catch (e) {} this.setState({ copied: true }); },
+      sizes: fam.map((z) => { const on = z.key === c.key; return { label: z.label, href: SB_URL_PREFIX + z.url.replace(/^\//, ''), cur: on ? 'page' : 'false', inTxt: z.label + ' mm', outTxt: z.kg + ' kg', price: z.quote ? 'Offert' : fmt(z.price),
+        rowStyle: on ? 'background: #f5f5f4; font-weight: 600' : '', style: 'min-height: 44px; min-width: 64px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: 600; font-size: 15px; text-decoration: none; ' + (on ? 'border: 1.5px solid #111111; background: #111111; color: #ffffff' : 'border: 1.5px solid #bdbdbb; color: #111111'),
+        pick: (e) => { if (e && e.preventDefault) e.preventDefault(); if (on) return; sbSizeUrl(z, 'push'); this.setState({ size: z.key, quoteAdded: false }); } }; }),
+      price: q ? 'Pris enligt offert' : fmt(c.price), vatLabel: q ? '' : (ex ? 'exkl. moms' : 'inkl. moms'),
+      altPrice: q ? 'Den här storleken säljer vi på offert. Du får pris och leveranstid i offerten.' : (ex ? fmtRaw(c.price) + ' ' + 'inkl. moms' : fmtRaw(c.price / 1.25) + ' ' + 'exkl. moms'),
+      qty: S.qty, less: () => this.setState({ qty: Math.max(1, S.qty - 1) }), more: () => this.setState({ qty: S.qty + 1 }),
+      addToCart: () => { if (SB) SB.add(c.id, S.qty); },
+      prodLabel: 'Produkter, ' + S.qty + ' st', prodSum: q ? '' : fmt(c.price * S.qty),
+      frLabel: 'Frakt' + (f.label ? ', ' + f.label.toLowerCase() : ''), frNote: 'Samma pris i hela Sverige.', frSum: fmt(f.price), totalSum: q ? '' : fmt(c.price * S.qty + f.price),
+      Q: { cta: 'Begär offert', add: 'Lägg till i offertförfrågan', added: 'Tillagd i offertförfrågan.', view: 'Visa förfrågan', fr: 'Frakt ingår i offerten', frNote: 'Vi räknar frakten när du skickar förfrågan. Samma pris i hela Sverige.', offertHref: 'SvOffert.dc.html', cartHref: 'SvVarukorg.dc.html' },
+      quoteAdded: S.quoteAdded, addQuote: addQ, addQuoteStay: () => { addQ(); this.setState({ quoteAdded: true }); },
+      D: { aboutH: 'Om ' + c.sv, lead: 'Durkplåtslucka för golv och vägg. Pulverlackerad i svart kulör, lämplig för både inomhus- och utomhusbruk. Locket låses med infällda skruvar.', useH: 'Användning', use: 'För golv och vägg, inomhus och utomhus. Vi kan även tillverka luckor i andra storlekar enligt önskemål.', mountH: 'Montering', mount: 'Luckan är försedd med en nedsänkt ram som möjliggör montering i både golv och vägg. Ramen har förborrade hål på insidan, vilket gör att den enkelt kan monteras med skruvar i trä- eller betongbjälklag, eller gjutas in i betong.', specH: 'Mått och material', delH: 'Leverans',
+        spec: [['Fri öppning', c.label + ' mm'], ['Vikt', c.kg + ' kg'], ['Material', 'Stål, pulverlackerad i svart'], ['Placering', 'Golv och vägg, inomhus och utomhus'], ['Lås', 'Infällda skruvar'], ['Artikelnummer', c.sku]].map((r) => ({ k: r[0], v: r[1] })),
+        del: [{ h: 'Frakt', t: q ? 'Frakt ingår i offerten' + '. ' + 'Vi räknar frakten när du skickar förfrågan. Samma pris i hela Sverige.' : frText + ', samma pris i hela Sverige.' }, { h: 'Andra storlekar', t: 'Vi tillverkar luckor i andra storlekar enligt önskemål. Begär offert med dina mått.' }] }
+    };
+  }
   renderVals() {
     const S = this.state;
+    if (S.fam === 'durk') return this.durkVals();
     const LD = (typeof window !== 'undefined' && window.SB_LIDS) || { families: { comp: { def: 1050 } }, items: [] };
     const fam = LD.items.filter((i) => i.fam === 'comp').sort((a, b) => a.d - b.d);
     const c = fam.find((i) => i.d === S.size) || fam.find((i) => i.d === LD.families.comp.def) || fam[0] || { d: 1050, sku: '', price: 0, lo: 0, hi: 0, olo: 0, ohi: 0, kg: 0, seal: 0 };
@@ -314,7 +403,9 @@ class Component extends DCLogic {
     ];
     const unit = base + addonDefs.reduce((s, a) => s + (S.addons[a.key] ? a.price : 0), 0);
     const ok = (v) => v >= 200 && v <= 2000;
-    return {
+    const OUT = {
+      crumbCat: 'Lätta brunnslock', crumbHref: 'SvKategori.dc.html', imgAlt: 'Produktbild: locket på en betongring i gräsmatta', hasCls: true, cls: 'A15', hasAddons: true, isBuy: true, isQuote: false, isLid: true, isDurk: false, quoteAdded: false,
+      thumbs: ['På brunnen', 'Måttskiss', 'Lås och undersida', 'Lyfts med en hand'].map((l, i) => ({ label: l, on: String(i === 0), style: i === 0 ? 'aspect-ratio: 1; border: 2px solid #111111; background: #ececea; border-radius: 10px; font: inherit; font-size: 12px; color: #474747; cursor: pointer' : 'aspect-ratio: 1; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 10px; font: inherit; font-size: 12px; color: #474747; cursor: pointer' })),
       cart: 0, vat: S.vat, setVat: (v) => this.setState({ vat: v }),
       T: T, name: c['sv'] || '', art: c.sku, sub: 'För betongring med ' + c.lo + ' till ' + c.hi + ' mm innermått. Du lyfter det själv vid slamtömningen.', fitText: 'Passar betongring med ' + c.lo + ' till ' + c.hi + ' mm innermått och ' + c.olo + ' till ' + c.ohi + ' mm yttermått.', kgText: 'Väger ' + c.kg + ' kg och är lätt att lyfta av vid slamtömning.', lead: 'Ett lätt och barnsäkert lock för betongbrunnar med ' + c.lo + ' till ' + c.hi + ' mm innermått, till exempel trekammarbrunnar och slambrunnar. Locket väger ' + c.kg + ' kg, så det går att lyfta av för hand när brunnen töms.', rangeText: 'Locket passar ringar med insida A ' + c.lo + ' till ' + c.hi + ' mm och utsida B ' + c.olo + ' till ' + c.ohi + ' mm.',
       inTxt: rng(c.lo, c.hi), outTxt: rng(c.olo, c.ohi), dTxt: String(c.d), kgTxt: c.kg + ' kg (enligt beskrivningen)',
@@ -359,6 +450,8 @@ class Component extends DCLogic {
         { title: 'Hänglåsadapter', text: 'När du vill låsa locket med hänglås.', price: fmt(279), id: 'hanglas', img: 'Bild: hänglåsadapter' }
       ].map((r) => ({ ...r, add: () => { if (typeof window !== 'undefined' && window.SBCart) window.SBCart.add(r.id, 1); } }))
     };
+    OUT.bullets = [OUT.fitText, 'Klarar gång och gräsmatta (A15), men inte bil.', OUT.kgText, 'Barnsäkert och låsbart, så att barn inte kan öppna locket.'].map((x) => ({ t: x }));
+    return OUT;
   }
 }
 </script>
