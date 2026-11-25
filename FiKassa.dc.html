@@ -170,7 +170,7 @@ class Component extends DCLogic {
       : [ { id: 'klarna', label: 'Klarna tai Qliro', text: 'Kortti, Swish, lasku tai osamaksu.' }, { id: 'pfaktura', label: 'Lasku', text: 'Laskutuslisä [X] kr.' } ];
     const payNow = pays.find((p) => p.id === S.pay) ? S.pay : pays[0].id;
     const SBc = typeof window !== 'undefined' ? window.SBCart : null;
-    const cl = SBc && SBc.items().length ? SBc.lines('fi') : [{ name: 'Kevyt kaivonkansi Ø 600, A15', price: 1495, qty: 1 }, { name: 'Lukko ja avain', price: 295, qty: 1 }];
+    const cl = SBc && SBc.items().length ? SBc.lines('fi') : [{ name: 'Kevyt kaivonkansi 1050 komposiitti', price: 2645, qty: 1 }, { name: 'Ilmanpoistoventtiili', price: 569, qty: 1 }];
     const sum = cl.reduce((t, l) => t + (l.price || 0) * l.qty, 0);
     const fmt = (n) => Math.round(fo ? n / 1.25 : n).toLocaleString('fi-FI') + ' kr';
     const inp = {};

@@ -45,24 +45,68 @@
   window.DCLogic = DCLogic;
 
 
+
+  // ---------- kansidata (oikea kauppa, tuotedata-master.xlsx 25.11.2026) ----------
+  // Kokoperheet: comp (Composite), pe (PE), gap (GAP). Hinta = nykyinen hinta (alennus jos on), reg = normaalihinta.
+  window.SB_LIDS = {
+    families: {
+      comp: { sv: 'Lätt brunnslock Composite', fi: 'Kevyt kaivonkansi Composite', def: 1050, page: true },
+      pe: { sv: 'Lätt brunnslock PE', fi: 'Kevyt kaivonkansi PE', def: 800 },
+      gap: { sv: 'Lätt brunnslock GAP', fi: 'Kevyt kaivonkansi GAP', def: 950 }
+    },
+    items: [{"id": "comp-1050", "fam": "comp", "d": 1050, "sku": "1055", "price": 2645, "reg": null, "lo": 870, "hi": 930, "olo": 1020, "ohi": 1100, "kg": 10, "cls": "A15", "mat": "comp", "sold": 1259, "url": "/butik/brunnslock/latta-brunnslock-for-betongbrunnar/latt-brunnslock-1050-composite", "seal": 875, "sealName": "900/1100", "sv": "Lätt Brunnslock 1050 Composite", "fi": "Kevyt kaivonkansi 1050 komposiitti"},
+      {"id": "comp-1150", "fam": "comp", "d": 1150, "sku": "10065", "price": 2845, "reg": null, "lo": 960, "hi": 1050, "olo": 1120, "ohi": 1250, "kg": 11, "cls": "A15", "mat": "comp", "sold": 710, "url": "/butik/brunnslock/latta-brunnslock-for-betongbrunnar/latt-brunnslock-1150-composite", "seal": 975, "sealName": "1000/1200", "sv": "Lätt Brunnslock 1150 Composite", "fi": "Kevyt kaivonkansi 1150 komposiitti"},
+      {"id": "comp-930", "fam": "comp", "d": 930, "sku": "1304", "price": 2150, "reg": null, "lo": 780, "hi": 860, "olo": 850, "ohi": 989, "kg": 8, "cls": "A15", "mat": "comp", "sold": 492, "url": "/butik/brunnslock/latta-brunnslock-for-betongbrunnar/latt-brunnslock-930-composite", "seal": 695, "sealName": null, "sv": "Lätt Brunnslock 930 Composite", "fi": "Kevyt kaivonkansi 930 komposiitti"},
+      {"id": "pe-800", "fam": "pe", "d": 800, "sku": "1003", "price": 2223, "reg": 2595, "lo": 580, "hi": 640, "olo": null, "ohi": null, "kg": null, "cls": null, "mat": "pe", "sold": 343, "url": "/butik/brunnslock/latta-brunnslock-for-betongbrunnar/latt-brunnslock-800-pe", "sv": "Lätt Brunnslock 800 PE", "fi": "Kevyt kaivonkansi 800 PE"},
+      {"id": "pe-1100", "fam": "pe", "d": 1100, "sku": "1005", "price": 2700, "reg": 3395, "lo": 880, "hi": 930, "olo": null, "ohi": null, "kg": null, "cls": null, "mat": "pe", "sold": 336, "url": "/butik/brunnslock/latta-brunnslock-for-betongbrunnar/latt-brunnslock-1100-pe", "sv": "Lätt Brunnslock 1100 PE", "fi": "Kevyt kaivonkansi 1100 PE"},
+      {"id": "p99780", "fam": null, "d": null, "sku": "99780", "price": 2895, "reg": null, "lo": 551, "hi": 670, "olo": 750, "ohi": 849, "kg": 15, "cls": "B125", "mat": "comp", "sold": 191, "url": "/butik/betackningar/betackningar-for-betongbrunnar/latt-brunnslock-780-korbart-composite-125-ton", "sv": "Lätt brunnslock 780 KÖRBART Composite 12,5 ton", "fi": "Kevyt ajettava kaivonkansi 780 komposiitti, 12,5 t"},
+      {"id": "p99590", "fam": null, "d": null, "sku": "99590", "price": 1749, "reg": null, "lo": 451, "hi": 550, "olo": 500, "ohi": 615, "kg": 10, "cls": "B125", "mat": "comp", "sold": 163, "url": "/butik/brunnslock/latta-brunnslock-for-betongbrunnar/latt-brunnslock-590-korbart-composite-125-ton", "sv": "Lätt Brunnslock 590 KÖRBART Composite 12,5 ton", "fi": "Kevyt ajettava kaivonkansi 590 komposiitti, 12,5 t"},
+      {"id": "comp-1340", "fam": "comp", "d": 1340, "sku": "1305", "price": 4395, "reg": null, "lo": 1180, "hi": 1290, "olo": 1280, "ohi": 1450, "kg": 14, "cls": "A15", "mat": "comp", "sold": 162, "url": "/butik/brunnslock/latta-brunnslock-for-betongbrunnar/latt-brunnslock-1340-composite", "seal": 1075, "sealName": "1200/1340", "sv": "Lätt Brunnslock 1340 Composite", "fi": "Kevyt kaivonkansi 1340 komposiitti"},
+      {"id": "pe-1210", "fam": "pe", "d": 1210, "sku": "1006", "price": 2900, "reg": 3695, "lo": 980, "hi": 1020, "olo": null, "ohi": null, "kg": null, "cls": null, "mat": "pe", "sold": 151, "url": "/butik/brunnslock/latta-brunnslock-for-betongbrunnar/latt-brunnslock-1210-pe", "sv": "Lätt Brunnslock 1210 PE", "fi": "Kevyt kaivonkansi 1210 PE"},
+      {"id": "pe-660", "fam": "pe", "d": 660, "sku": "1002", "price": 1823, "reg": 1995, "lo": 570, "hi": 670, "olo": null, "ohi": null, "kg": null, "cls": null, "mat": "pe", "sold": 150, "url": "/butik/brunnslock/latta-brunnslock-for-betongbrunnar/latt-brunnslock-660-pe", "sv": "Lätt Brunnslock 660 PE", "fi": "Kevyt kaivonkansi 660 PE"},
+      {"id": "p7015067", "fam": null, "d": null, "sku": "7015067", "price": 2895, "reg": null, "lo": 600, "hi": 640, "olo": null, "ohi": null, "kg": 31, "cls": "A15", "mat": "iron", "sold": 107, "url": "/butik/betackningar/betackningar-for-betongbrunnar/latt-brunnslock-i-gjutjarn", "sv": "Lätt brunnslock 580-670 A15 i gjutjärn", "fi": "Kevyt kaivonkansi 580-670, valurauta, A15"},
+      {"id": "pe-850", "fam": "pe", "d": 850, "sku": "10032", "price": 2323, "reg": 2595, "lo": 590, "hi": 640, "olo": null, "ohi": null, "kg": null, "cls": null, "mat": "pe", "sold": 66, "url": "/butik/brunnslock/latta-brunnslock-for-betongbrunnar/latt-brunnslock-850-pe", "sv": "Lätt Brunnslock 850 PE", "fi": "Kevyt kaivonkansi 850 PE"},
+      {"id": "gap-950", "fam": "gap", "d": 950, "sku": "1004", "price": 2410, "reg": 2695, "lo": 780, "hi": 820, "olo": null, "ohi": null, "kg": null, "cls": null, "mat": null, "sold": 52, "url": "/butik/brunnslock/latta-brunnslock-for-betongbrunnar/latt-brunnslock-950-gap", "sv": "Lätt Brunnslock 950 GAP", "fi": "Kevyt kaivonkansi 950 GAP"},
+      {"id": "gap-1420", "fam": "gap", "d": 1420, "sku": "1007", "price": 4595, "reg": 4995, "lo": 1200, "hi": 1270, "olo": null, "ohi": null, "kg": null, "cls": null, "mat": null, "sold": 41, "url": "/butik/brunnslock/latta-brunnslock-for-betongbrunnar/latt-brunnslock-1420-gap", "sv": "Lätt Brunnslock 1420 GAP", "fi": "Kevyt kaivonkansi 1420 GAP"},
+      {"id": "p11200", "fam": null, "d": null, "sku": "11200", "price": 3885, "reg": null, "lo": 640, "hi": 700, "olo": null, "ohi": null, "kg": null, "cls": null, "mat": "pe", "sold": 33, "url": "/butik/brunnslock/latta-brunnslock-for-betongbrunnar/forhojningsring-625-med-lock-pe", "sv": "Förhöjningsring 625 med lock PE", "fi": "Korotusrengas 625 ja kansi, PE"},
+      {"id": "p99770", "fam": null, "d": null, "sku": "99770", "price": 2415, "reg": null, "lo": 551, "hi": 670, "olo": 750, "ohi": 849, "kg": 15, "cls": "A15", "mat": "comp", "sold": 31, "url": "/butik/betackningar/betackningar-for-betongbrunnar/latt-brunnslock-780-composite-15-ton", "sv": "Lätt brunnslock 780 Composite 1,5 ton", "fi": "Kevyt kaivonkansi 780 komposiitti, 1,5 t"},
+      {"id": "p125050030085", "fam": null, "d": null, "sku": "125050030085", "price": 3957, "reg": null, "lo": 551, "hi": 670, "olo": 750, "ohi": 849, "kg": 25, "cls": "D400", "mat": "comp", "sold": 19, "url": "/butik/betackningar/betackningar-for-betongbrunnar/latt-brunnslock-790-korbart-composite-d400-40ton", "sv": "Lätt brunnslock 790 KÖRBART Composite D400 (40ton)", "fi": "Kevyt ajettava kaivonkansi 790 komposiitti, D400 (40 t)"},
+      {"id": "p1019250", "fam": null, "d": null, "sku": "1019250", "price": 9900, "reg": null, "lo": 900, "hi": 900, "olo": 1065, "ohi": 1065, "kg": 55, "cls": "C250", "mat": "comp", "sold": 8, "url": "/butik/betackningar/betackningar-for-betongbrunnar/latt-korbart-brunnslock-900-composite-c250", "sv": "Lätt körbart Brunnslock 900 Composite C250", "fi": "Kevyt ajettava kaivonkansi 900 komposiitti, C250"},
+      {"id": "p11210", "fam": null, "d": null, "sku": "11210", "price": 3785, "reg": null, "lo": 600, "hi": 600, "olo": null, "ohi": null, "kg": null, "cls": null, "mat": "pe", "sold": 5, "url": "/butik/brunnslock/latta-brunnslock-for-betongbrunnar/forhojningsring-590-med-brunnslock-pe", "sv": "Förhöjningsring 590 med brunnslock PE", "fi": "Korotusrengas 590 ja kaivonkansi, PE"},
+      {"id": "p1019600", "fam": null, "d": null, "sku": "1019600", "price": 4495, "reg": null, "lo": 900, "hi": 900, "olo": 1020, "ohi": 1020, "kg": 42, "cls": "A15", "mat": "comp", "sold": 3, "url": "/butik/betackningar/betackningar-for-betongbrunnar/brunnslock-900-composite-a15-gronomrade", "sv": "Brunnslock 900 Composite A15 (grönområde)", "fi": "Kaivonkansi 900 komposiitti, A15 (viheralue)"},
+      {"id": "p1019700", "fam": null, "d": null, "sku": "1019700", "price": 7722, "reg": null, "lo": 900, "hi": 900, "olo": 1020, "ohi": 1020, "kg": 69, "cls": "B125", "mat": "comp", "sold": 2, "url": "/butik/betackningar/betackningar-for-betongbrunnar/brunnslock-900-composite-b125-125-ton", "sv": "Brunnslock 900 Composite B125 (12,5 ton)", "fi": "Kaivonkansi 900 komposiitti, B125 (12,5 t)"},
+      {"id": "comp-750", "fam": "comp", "d": 750, "sku": "1303", "price": 1495, "reg": null, "lo": 551, "hi": 670, "olo": 710, "ohi": 849, "kg": 8, "cls": "A15", "mat": "comp", "sold": 0, "url": "/butik/brunnslock/latta-brunnslock-for-betongbrunnar/latt-brunnslock-750-composite-2", "seal": 595, "sealName": "600/750", "sv": "Lätt Brunnslock 750 Composite", "fi": "Kevyt kaivonkansi 750 komposiitti"},
+      {"id": "p1019", "fam": null, "d": null, "sku": "1019", "price": 17690, "reg": null, "lo": 900, "hi": 1000, "olo": null, "ohi": null, "kg": null, "cls": "D400", "mat": "comp", "sold": 0, "url": "/butik/betackningar/betackningar-for-betongbrunnar/latt-korbart-brunnslock-1100-composite", "sv": "Lätt körbart Brunnslock 1000 Composite D400", "fi": "Kevyt ajettava kaivonkansi 1000 komposiitti, D400"}],
+    acc: [
+      { id: 'ventil', sku: '1008', price: 569, sv: 'Avluftningsventil', fi: 'Ilmanpoistoventtiili' },
+      { id: 'hal', sku: '', price: 58, sv: 'Förborrat hål för avluftningsventil', fi: 'Esiporattu reikä ilmanpoistoventtiilille' },
+      { id: 'hanglas', sku: '1009', price: 279, sv: 'Hänglåsadapter', fi: 'Riippulukkosovitin' }
+    ]
+  };
+
   // ---------- ostoskori (yhteinen kaikille sivuille, localStorage) ----------
   var CART_KEY = 'sb-proto-cart-v1';
-  var CATALOG = {
-    kansi600a15: { price: 1495, fi: ['Kevyt kaivonkansi Ø 600, A15', 'Tuotenro 10354 · Komposiitti, 6 kg · Sopii renkaaseen 580 ja 640 mm:n välillä', 'FiTuote.dc.html'], sv: ['Lätt brunnslock Ø 600, A15', 'Art.nr 10354 · Komposit, 6 kg · Passar ring 580 till 640 mm', 'SvProdukt.dc.html'] },
-    las: { price: 295, fi: ['Lukko ja avain', 'Lisävaruste kevyisiin kansiin', '#'], sv: ['Lås med nyckel', 'Tillval till lätta lock', '#'] },
-    ring: { price: 495, fi: ['Tiivisterengas Ø 600', 'Lisävaruste kevyisiin kansiin', '#'], sv: ['Tätningsring Ø 600', 'Tillval till lätta lock', '#'] },
-    ventil: { price: 349, fi: ['Tuuletusventtiili', 'Lisävaruste kevyisiin kansiin', '#'], sv: ['Ventilationsventil', 'Tillval till lätta lock', '#'] },
-    betonirengas: { price: 890, fi: ['Betonirengas Ø 600', 'Korkeus 500 mm. Toimitetaan lavalla.', '#'], sv: ['Betongring Ø 600', 'Höjd 500 mm. Levereras på pall.', '#'] },
-    mittakansi: { price: null, fi: ['Kevyt kaivonkansi mittatilauksena', 'Renkaille yli 1 200 mm tai erikoismuotoon. Hinta tarjouksella.', '#'], sv: ['Lätt brunnslock på mått', 'För ringar över 1 200 mm eller specialform. Pris på offert.', '#'] },
-    korotus: { price: 645, fi: ['Korotusrengas Ø 600', 'Nostaa kannen maanpinnan tasolle.', '#'], sv: ['Förhöjningsring Ø 600', 'Höjer locket till marknivå.', '#'] }
-  };
+  var CATALOG = (function () {
+    var c = {}, L = window.SB_LIDS;
+    L.items.forEach(function (it) {
+      var pg = it.fam === 'comp';
+      c[it.id] = { price: it.price,
+        fi: [it.fi, 'Tuotenro ' + it.sku + (it.lo ? ' · Sopii renkaaseen ' + it.lo + ' ja ' + it.hi + ' mm:n välillä' : ''), pg ? 'FiTuote.dc.html?size=' + it.d : '#'],
+        sv: [it.sv, 'Art.nr ' + it.sku + (it.lo ? ' · Passar ring ' + it.lo + ' till ' + it.hi + ' mm' : ''), pg ? 'SvProdukt.dc.html?size=' + it.d : '#'] };
+      if (it.seal) c['seal-' + it.d] = { price: it.seal,
+        fi: [it.sealName ? 'Tiivisterengas ' + it.sealName : 'Tiivisterengas koolle ' + it.d, 'Lisävaruste kanteen ' + it.d, '#'],
+        sv: [it.sealName ? 'Tätningsring ' + it.sealName : 'Tätningsring till ' + it.d, 'Tillval till lock ' + it.d, '#'] };
+    });
+    L.acc.forEach(function (a) { c[a.id] = { price: a.price, fi: [a.fi, 'Lisävaruste kevyisiin kansiin', '#'], sv: [a.sv, 'Tillval till lätta lock', '#'] }; });
+    return c;
+  })();
   function readCart() {
     try { var c = JSON.parse(localStorage.getItem(CART_KEY) || 'null'); if (c && c.items) return c; } catch (e) {}
     return { items: [], zip: '' };
   }
   function writeCart(c) { try { localStorage.setItem(CART_KEY, JSON.stringify(c)); } catch (e) {} }
   if (/[?&]demo\b/.test(location.search) && !readCart().items.length) {
-    writeCart({ items: [{ id: 'kansi600a15', qty: 1 }, { id: 'las', qty: 1 }], zip: '' });
+    writeCart({ items: [{ id: 'comp-1050', qty: 1 }, { id: 'ventil', qty: 1 }], zip: '' });
   }
   window.SBCart = {
     catalog: CATALOG,

@@ -2,7 +2,7 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<title>Lätt brunnslock Ø 600, A15</title>
+<title>Lätt brunnslock Composite</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -25,7 +25,7 @@ summary::-webkit-details-marker{display:none}
 <a href="SvStartsida.dc.html" style="text-decoration: none; padding: 10px 0">Startsida</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
 <a href="#" style="text-decoration: none; padding: 10px 0">Brunnslock och luckor</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
 <a href="SvKategori.dc.html" style="text-decoration: none; padding: 10px 0">Lätta brunnslock</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
-<span aria-current="page" style="padding: 10px 0; color: #111111; font-weight: 600">Lätt brunnslock Ø 600, A15</span>
+<span aria-current="page" style="padding: 10px 0; color: #111111; font-weight: 600">{{ name }}</span>
 </nav>
 <div style="display: flex; flex-wrap: wrap; gap: 64px; align-items: flex-start">
 
@@ -41,36 +41,45 @@ summary::-webkit-details-marker{display:none}
 
 <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
 <div style="display: flex; flex-direction: column; gap: 8px">
-<h1 id="p-title" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 40px; line-height: 1.1; letter-spacing: -0.015em; color: #111111">Lätt brunnslock Ø 600, A15</h1>
-<p style="margin: 0; font-size: 17px; color: #474747">För betongbrunn med 600 mm ring. Du lyfter det själv vid slamtömningen.</p>
+<h1 id="p-title" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 40px; line-height: 1.1; letter-spacing: -0.015em; color: #111111">{{ name }}</h1>
+<p style="margin: 0; font-size: 17px; color: #474747">{{ sub }}</p>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 14px; color: #5c5c5c">
 <span style="border: 1.5px solid #111111; border-radius: 4px; padding: 0 8px; font-family: Archivo, Inter, sans-serif; font-weight: 700; color: #111111">A15</span>
-<span>Art.nr 10354</span>
+<span>Art.nr {{ art }}</span>
 <button type="button" onClick="{{ copyArt }}" style="border: 0; background: none; font: inherit; font-weight: 600; color: #111111; text-decoration: underline; cursor: pointer; min-height: 44px">{{ copyLabel }}</button>
 </div>
 </div>
 
 <ul style="margin: 0; padding: 16px 0; list-style: none; border-top: 1px solid #e2e2e0; border-bottom: 1px solid #e2e2e0; display: flex; flex-direction: column; gap: 10px; font-size: 15px">
-<li style="display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.2" aria-hidden="true" style="margin-top: 2px"><path d="m5 12 5 5 9-10"/></svg><span>Passar betongring med 580 till 640 mm innermått och 700 till 760 mm yttermått.</span></li>
+<li style="display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.2" aria-hidden="true" style="margin-top: 2px"><path d="m5 12 5 5 9-10"/></svg><span>{{ fitText }}</span></li>
 <li style="display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.2" aria-hidden="true" style="margin-top: 2px"><path d="m5 12 5 5 9-10"/></svg><span>Klarar gång och gräsmatta (A15), men inte bil.</span></li>
-<li style="display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.2" aria-hidden="true" style="margin-top: 2px"><path d="m5 12 5 5 9-10"/></svg><span>Väger 6 kg och är lätt att lyfta av vid slamtömning.</span></li>
-<li style="display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.2" aria-hidden="true" style="margin-top: 2px"><path d="m5 12 5 5 9-10"/></svg><span>Kan låsas med tillvalslås, så att barn inte kan öppna.</span></li>
+<li style="display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.2" aria-hidden="true" style="margin-top: 2px"><path d="m5 12 5 5 9-10"/></svg><span>{{ kgText }}</span></li>
+<li style="display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.2" aria-hidden="true" style="margin-top: 2px"><path d="m5 12 5 5 9-10"/></svg><span>Barnsäkert och låsbart, så att barn inte kan öppna locket.</span></li>
 </ul>
 
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
-<b id="size-l" style="font-size: 15px">Ringens innermått</b>
+<b id="size-l" style="font-size: 15px">Storlek</b>
 <a href="#sec-fit" style="font-size: 14px; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Så mäter du</a>
 </div>
 <div role="group" aria-labelledby="size-l" style="display: flex; flex-wrap: wrap; gap: 8px">
-<a href="#" style="min-height: 44px; min-width: 56px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid #bdbdbb; border-radius: 6px; font-weight: 600; font-size: 15px; text-decoration: none">Ø 400</a>
-<a href="#" style="min-height: 44px; min-width: 56px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid #bdbdbb; border-radius: 6px; font-weight: 600; font-size: 15px; text-decoration: none">Ø 500</a>
-<a href="#" aria-current="true" style="min-height: 44px; min-width: 56px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid #111111; background: #111111; color: #ffffff; border-radius: 6px; font-weight: 600; font-size: 15px; text-decoration: none">Ø 600</a>
-<a href="#" style="min-height: 44px; min-width: 56px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid #bdbdbb; border-radius: 6px; font-weight: 600; font-size: 15px; text-decoration: none">Ø 750</a>
-<a href="#" style="min-height: 44px; min-width: 56px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid #bdbdbb; border-radius: 6px; font-weight: 600; font-size: 15px; text-decoration: none">Ø 930</a>
-<a href="#" style="min-height: 44px; min-width: 56px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid #bdbdbb; border-radius: 6px; font-weight: 600; font-size: 15px; text-decoration: none">Ø 1050</a>
-<a href="#" style="min-height: 44px; min-width: 56px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid #bdbdbb; border-radius: 6px; font-weight: 600; font-size: 15px; text-decoration: none">Ø 1150</a>
+<sc-for list="{{ sizes }}" as="z" hint-placeholder-count="5">
+<a href="{{ z.href }}" onClick="{{ z.pick }}" aria-current="{{ z.cur }}" style="{{ z.style }}">{{ z.label }}</a>
+</sc-for>
 </div>
+<details style="margin-top: 4px">
+<summary style="cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; font-size: 14px; font-weight: 600; text-decoration: underline">{{ T.compare }}</summary>
+<div style="overflow-x: auto; margin-top: 6px">
+<table style="width: 100%; border-collapse: collapse; font-size: 14px; white-space: nowrap">
+<thead><tr><th style="text-align: left; padding: 8px 10px 8px 0; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0">{{ T.cSize }}</th><th style="text-align: left; padding: 8px 10px; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0">{{ T.cIn }}</th><th style="text-align: left; padding: 8px 10px; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0">{{ T.cOut }}</th><th style="text-align: right; padding: 8px 0 8px 10px; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0">{{ T.cPrice }}</th></tr></thead>
+<tbody>
+<sc-for list="{{ sizes }}" as="z" hint-placeholder-count="5">
+<tr style="{{ z.rowStyle }}"><td style="padding: 8px 10px 8px 0; border-bottom: 1px solid #e2e2e0"><a href="{{ z.href }}" onClick="{{ z.pick }}" style="font-weight: 600">{{ z.label }}</a></td><td style="padding: 8px 10px; border-bottom: 1px solid #e2e2e0">{{ z.inTxt }}</td><td style="padding: 8px 10px; border-bottom: 1px solid #e2e2e0">{{ z.outTxt }}</td><td style="padding: 8px 0 8px 10px; border-bottom: 1px solid #e2e2e0; text-align: right">{{ z.price }}</td></tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</details>
 </div>
 
 <div style="display: flex; flex-direction: column; gap: 16px">
@@ -80,7 +89,7 @@ summary::-webkit-details-marker{display:none}
 <span style="width: 100%; font-size: 13px; color: #5c5c5c">{{ altPrice }}</span>
 </div>
 <details style="border: 1px solid #e2e2e0; border-radius: 6px">
-<summary style="cursor: pointer; min-height: 44px; padding: 0 12px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 15px">Lägg till lås eller tätning <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+<summary style="cursor: pointer; min-height: 44px; padding: 0 12px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 15px">Lägg till tätningsring eller ventil <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
 <div style="padding: 0 8px 8px; display: flex; flex-direction: column; gap: 2px">
 <sc-for list="{{ addons }}" as="a" hint-placeholder-count="3">
 <label style="display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 10px; align-items: center; min-height: 44px; padding: 4px 6px; border-radius: 6px; cursor: pointer; font-size: 15px">
@@ -102,11 +111,11 @@ summary::-webkit-details-marker{display:none}
 <div style="background: #f5f5f4; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px; font-size: 15px">
 <div style="display: flex; justify-content: space-between; gap: 10px"><span>{{ prodLabel }}</span><b>{{ prodSum }}</b></div>
 <sc-if value="{{ noZip }}" hint-placeholder-val="{{ true }}">
-<form onSubmit="{{ submitZip }}" style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: end">
-<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Postnummer <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">frakten räknas på postnumret</span>
+<form onSubmit="{{ submitZip }}" style="display: flex; flex-wrap: wrap; gap: 8px; align-items: end">
+<label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Postnummer <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">frakten räknas på postnumret</span>
 <input value="{{ zip }}" onInput="{{ typeZip }}" inputmode="numeric" autocomplete="postal-code" placeholder="123 45" style="min-height: 44px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit; background: #ffffff">
 </label>
-<button type="submit" style="min-height: 44px; padding: 0 16px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">Visa frakt och totalpris</button>
+<button type="submit" style="flex: 1 1 auto; min-height: 44px; padding: 0 16px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">Visa frakt och totalpris</button>
 </form>
 <sc-if value="{{ zipErr }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px; font-weight: 600">Skriv ett postnummer med fem siffror.</span></sc-if>
 </sc-if>
@@ -140,15 +149,15 @@ summary::-webkit-details-marker{display:none}
 <section aria-labelledby="about-h" style="border-top: 1px solid #e2e2e0">
 <div style="max-width: 1240px; margin: 0 auto; padding: 64px 24px 0">
 <div style="max-width: 920px; display: flex; flex-direction: column; gap: 12px">
-<h2 id="about-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 26px; color: #111111">Om Lätt brunnslock Ø 600, A15</h2>
+<h2 id="about-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 26px; color: #111111">Om {{ name }}</h2>
 <div style="{{ aboutStyle }}">
-<p style="margin: 0 0 12px; font-size: 18px; color: #1a1a1a; max-width: 68ch">Ett lätt lock i glasfiberarmerad komposit för betongbrunnar med 600 mm ring, till exempel trekammarbrunnar och slambrunnar. Locket väger 6 kg, så det går att lyfta av för hand när brunnen töms.</p>
+<p style="margin: 0 0 12px; font-size: 18px; color: #1a1a1a; max-width: 68ch">{{ lead }}</p>
 <h3 style="margin: 16px 0 6px; font-size: 17px; color: #111111">Användning</h3>
 <p style="margin: 0; color: #474747; max-width: 68ch">Locket är gjort för brunnar i trädgård och gräsmatta där ingen kör över, belastningsklass A15. Med tätningsring passar det även dricksvattenbrunnar. Ska bil köra över brunnen behöver du ett körbart lock.</p>
 <h3 style="margin: 16px 0 6px; font-size: 17px; color: #111111">Montering</h3>
 <p style="margin: 0; color: #474747; max-width: 68ch">Locket läggs direkt på ringen och behöver inga verktyg. Låset fästs i lockets egen ram, så du borrar inte i betongen. Sitter ringen för lågt kan du höja den med en förhöjningsring.</p>
 <h3 style="margin: 16px 0 6px; font-size: 17px; color: #111111">Material och skötsel</h3>
-<p style="margin: 0; color: #474747; max-width: 68ch">Kompositen rostar inte och tål frost. Använder du lås, smörj det på hösten. Lämna locket olåst inför slamtömningen.</p>
+<p style="margin: 0; color: #474747; max-width: 68ch">Locket rostar inte och tål frost. Använder du lås, smörj det på hösten. Lämna locket olåst inför slamtömningen.</p>
 </div>
 <button type="button" onClick="{{ toggleAbout }}" aria-expanded="{{ aboutOpen }}" style="align-self: flex-start; border: 0; background: none; font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer; min-height: 44px; padding: 0">{{ aboutLabel }}</button>
 </div>
@@ -174,7 +183,7 @@ summary::-webkit-details-marker{display:none}
 <rect x="487" y="-1" width="230" height="78" rx="39" fill="#ffd60a" stroke="#111111" stroke-width="3"/><text x="602" y="52" text-anchor="middle" font-size="41" font-family="Inter, sans-serif" font-weight="700" fill="#111111">B  Utsida</text>
 </svg>
 </figure>
-<p style="margin: 0; font-size: 15px">Locket passar ringar med insida A 580 till 640 mm och utsida B 700 till 760 mm.</p>
+<p style="margin: 0; font-size: 15px">{{ rangeText }}</p>
 </div>
 <form onSubmit="{{ check }}" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
 <h3 style="margin: 0; font-size: 18px; color: #111111">Kontrollera dina mått</h3>
@@ -202,14 +211,14 @@ summary::-webkit-details-marker{display:none}
 <table style="width: 100%; border-collapse: collapse; font-size: 15px; margin-bottom: 32px">
 <caption style="text-align: left; font-weight: 700; padding: 0 0 6px">Mått, last och material</caption>
 <tbody>
-<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0; width: 45%">Passar ring, invändigt</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">580 till 640 mm</td></tr>
-<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Passar ring, utvändigt</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">700 till 760 mm</td></tr>
-<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Lockets diameter</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">Ø 790 mm</td></tr>
-<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Vikt</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">6 kg</td></tr>
+<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0; width: 45%">Passar ring, invändigt</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">{{ inTxt }}</td></tr>
+<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Passar ring, utvändigt</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">{{ outTxt }}</td></tr>
+<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Storlek</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">{{ dTxt }}</td></tr>
+<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Vikt</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">{{ kgTxt }}</td></tr>
 <tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Belastningsklass</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">A15 (15 kN), EN 124</td></tr>
-<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Material</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">Glasfiberarmerad komposit</td></tr>
-<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Lås och ventilation</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">Förberett, som tillval</td></tr>
-<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Artikelnummer</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">10354</td></tr>
+<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Material</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">Komposit eller HD-PE (bekräftas)</td></tr>
+<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Lås och ventilation</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">Barnsäkert lås, avluftningsventil som tillval</td></tr>
+<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Artikelnummer</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">{{ art }}</td></tr>
 </tbody>
 </table>
 </details>
@@ -281,25 +290,37 @@ summary::-webkit-details-marker{display:none}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4300}}'>
 class Component extends DCLogic {
-  constructor(props) { super(props); const SB = typeof window !== 'undefined' ? window.SBCart : null; const z0 = SB ? SB.zip() : ''; this.state = { vat: 'inkl', qty: 1, addons: {}, zip: z0, zipDone: /^\d{5}$/.test(z0.replace(/\s/g, '')), zipErr: false, inMm: '', outMm: '', checkMsg: '', about: false, copied: false }; }
+  constructor(props) { super(props); const SB = typeof window !== 'undefined' ? window.SBCart : null; const z0 = SB ? SB.zip() : ''; let s0 = 0; try { s0 = parseInt(new URLSearchParams(location.search).get('size'), 10) || 0; } catch (e) {} this.state = { size: s0, vat: 'inkl', qty: 1, addons: {}, zip: z0, zipDone: /^\d{5}$/.test(z0.replace(/\s/g, '')), zipErr: false, inMm: '', outMm: '', checkMsg: '', about: false, copied: false }; }
   renderVals() {
-    const S = this.state, base = 1495;
+    const S = this.state;
+    const LD = (typeof window !== 'undefined' && window.SB_LIDS) || { families: { comp: { def: 1050 } }, items: [] };
+    const fam = LD.items.filter((i) => i.fam === 'comp').sort((a, b) => a.d - b.d);
+    const c = fam.find((i) => i.d === S.size) || fam.find((i) => i.d === LD.families.comp.def) || fam[0] || { d: 1050, sku: '', price: 0, lo: 0, hi: 0, olo: 0, ohi: 0, kg: 0, seal: 0 };
+    const base = c.price;
+    const rng = (a, b) => a + ' till ' + b + ' mm';
+    const T = { compare: 'Jämför storlekar', cSize: 'Storlek', cIn: 'Insida', cOut: 'Utsida', cPrice: 'Pris' };
     const ex = S.vat === 'exkl';
     const fmt = (n) => Math.round(ex ? n / 1.25 : n).toLocaleString('sv-SE') + ' kr';
     const fmtRaw = (n) => Math.round(n).toLocaleString('sv-SE') + ' kr';
     const addonDefs = [
-      { key: 'las', label: 'Lås med nyckel', text: 'Lämna olåst inför tömning.', price: 295 },
-      { key: 'ring', label: 'Tätningsring Ø 600', text: 'För dricksvattenbrunn.', price: 495 },
-      { key: 'ventil', label: 'Ventilationsventil', text: 'Om kommunen kräver luftning.', price: 349 }
+      { key: 'seal', id: 'seal-' + c.d, label: c.sealName ? 'Tätningsring ' + c.sealName : 'Tätningsring', text: 'För dricksvattenbrunn.', price: c.seal },
+      { key: 'ventil', id: 'ventil', label: 'Avluftningsventil', text: 'Om kommunen kräver luftning.', price: 569 },
+      { key: 'hal', id: 'hal', label: 'Förborrat hål för avluftningsventil', text: 'Om du monterar ventilen senare.', price: 58 }
     ];
     const unit = base + addonDefs.reduce((s, a) => s + (S.addons[a.key] ? a.price : 0), 0);
     const ok = (v) => v >= 200 && v <= 2000;
     return {
       cart: 0, vat: S.vat, setVat: (v) => this.setState({ vat: v }),
+      T: T, name: c['sv'] || '', art: c.sku, sub: 'För betongring med ' + c.lo + ' till ' + c.hi + ' mm innermått. Du lyfter det själv vid slamtömningen.', fitText: 'Passar betongring med ' + c.lo + ' till ' + c.hi + ' mm innermått och ' + c.olo + ' till ' + c.ohi + ' mm yttermått.', kgText: 'Väger ' + c.kg + ' kg och är lätt att lyfta av vid slamtömning.', lead: 'Ett lätt och barnsäkert lock för betongbrunnar med ' + c.lo + ' till ' + c.hi + ' mm innermått, till exempel trekammarbrunnar och slambrunnar. Locket väger ' + c.kg + ' kg, så det går att lyfta av för hand när brunnen töms.', rangeText: 'Locket passar ringar med insida A ' + c.lo + ' till ' + c.hi + ' mm och utsida B ' + c.olo + ' till ' + c.ohi + ' mm.',
+      inTxt: rng(c.lo, c.hi), outTxt: rng(c.olo, c.ohi), dTxt: String(c.d), kgTxt: c.kg + ' kg (enligt beskrivningen)',
+      sizes: fam.map((z) => { const on = z.d === c.d; return { label: String(z.d), href: 'SvProdukt.dc.html?size=' + z.d, cur: on ? 'page' : 'false', inTxt: rng(z.lo, z.hi), outTxt: rng(z.olo, z.ohi), price: fmt(z.price),
+        rowStyle: on ? 'background: #f5f5f4; font-weight: 600' : '',
+        style: 'min-height: 44px; min-width: 64px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: 600; font-size: 15px; text-decoration: none; ' + (on ? 'border: 1.5px solid #111111; background: #111111; color: #ffffff' : 'border: 1.5px solid #bdbdbb; color: #111111'),
+        pick: (e) => { if (e && e.preventDefault) e.preventDefault(); if (on) return; try { const u = new URL(location.href); u.searchParams.set('size', z.d); history.replaceState(null, '', u); } catch (er) {} this.setState({ size: z.d, addons: {} }); } }; }),
       price: fmt(base), vatLabel: ex ? 'exkl. moms' : 'inkl. moms',
       altPrice: ex ? fmtRaw(base) + ' inkl. moms' : fmtRaw(base / 1.25) + ' exkl. moms',
       copyLabel: S.copied ? 'Kopierat' : 'Kopiera',
-      copyArt: () => { try { navigator.clipboard.writeText('10354'); } catch (e) {} this.setState({ copied: true }); },
+      copyArt: () => { try { navigator.clipboard.writeText(c.sku); } catch (e) {} this.setState({ copied: true }); },
       addons: addonDefs.map((a) => ({ ...a, price: '+ ' + fmt(a.price), on: !!S.addons[a.key], toggle: () => this.setState({ addons: { ...S.addons, [a.key]: !S.addons[a.key] } }) })),
       qty: S.qty, less: () => this.setState({ qty: Math.max(1, S.qty - 1) }), more: () => this.setState({ qty: S.qty + 1 }),
       prodLabel: 'Produkter, ' + S.qty + ' st', prodSum: fmt(unit * S.qty),
@@ -316,20 +337,20 @@ class Component extends DCLogic {
       check: (e) => {
         e.preventDefault();
         const vi = parseInt(S.inMm, 10), vo = parseInt(S.outMm, 10);
-        if (!ok(vi) && !ok(vo)) { this.setState({ checkMsg: 'Skriv minst ett mått i millimeter, till exempel 600.' }); return; }
+        if (!ok(vi) && !ok(vo)) { this.setState({ checkMsg: 'Skriv minst ett mått i millimeter, till exempel 900.' }); return; }
         const out = [];
         let bad = false;
-        if (ok(vi)) { const inside = vi >= 580 && vi <= 640; if (!inside) bad = true; out.push(vi + ' mm på insidan A ' + (inside ? 'ligger inom lockets mått.' : 'ligger utanför lockets mått (580 till 640 mm).')); }
-        if (ok(vo)) { const inside = vo >= 700 && vo <= 760; if (!inside) bad = true; out.push(vo + ' mm på utsidan B ' + (inside ? 'ligger inom lockets mått.' : 'ligger utanför lockets mått (700 till 760 mm).')); }
+        if (ok(vi)) { const inside = vi >= c.lo && vi <= c.hi; if (!inside) bad = true; out.push(vi + ' mm på insidan A ' + (inside ? 'ligger inom lockets mått.' : 'ligger utanför lockets mått (' + c.lo + ' till ' + c.hi + ' mm).')); }
+        if (ok(vo)) { const inside = vo >= c.olo && vo <= c.ohi; if (!inside) bad = true; out.push(vo + ' mm på utsidan B ' + (inside ? 'ligger inom lockets mått.' : 'ligger utanför lockets mått (' + c.olo + ' till ' + c.ohi + ' mm).')); }
         if (!bad && ok(vi) !== ok(vo)) out.push('Mät gärna även ' + (ok(vi) ? 'utsidan B' : 'insidan A') + ' för att vara säker.');
         if (bad) out.push('Jämför storlekarna ovan.');
         this.setState({ checkMsg: out.join(' ') });
       },
-      addToCart: () => { const SB = typeof window !== 'undefined' ? window.SBCart : null; if (!SB) return; SB.add('kansi600a15', S.qty); addonDefs.forEach((a) => { if (S.addons[a.key]) SB.add(a.key, S.qty); }); if (S.zipDone) SB.setZip(S.zip); },
+      addToCart: () => { const SB = typeof window !== 'undefined' ? window.SBCart : null; if (!SB) return; SB.add('comp-' + c.d, S.qty); addonDefs.forEach((a) => { if (S.addons[a.key]) SB.add(a.id, S.qty); }); if (S.zipDone) SB.setZip(S.zip); },
       related: [
-        { title: 'Betongring Ø 600', text: 'Höjd 500 mm. Levereras på pall.', price: fmt(890), id: 'betonirengas', img: 'Bild: betongring' },
-        { title: 'Förhöjningsring Ø 600', text: 'Höjer locket till marknivå.', price: fmt(645), id: 'korotus', img: 'Bild: förhöjningsring' },
-        { title: 'Lås med nyckel', text: 'Passar alla lätta lock.', price: fmt(295), id: 'las', img: 'Bild: lås' }
+        { title: c.sealName ? 'Tätningsring ' + c.sealName : 'Tätningsring till ' + c.d, text: 'Tätar locket mot ringen, för dricksvattenbrunn.', price: fmt(c.seal), id: 'seal-' + c.d, img: 'Bild: tätningsring' },
+        { title: 'Avluftningsventil', text: 'Om kommunen kräver luftning av brunnen.', price: fmt(569), id: 'ventil', img: 'Bild: avluftningsventil' },
+        { title: 'Hänglåsadapter', text: 'När du vill låsa locket med hänglås.', price: fmt(279), id: 'hanglas', img: 'Bild: hänglåsadapter' }
       ].map((r) => ({ ...r, add: () => { if (typeof window !== 'undefined' && window.SBCart) window.SBCart.add(r.id, 1); } }))
     };
   }

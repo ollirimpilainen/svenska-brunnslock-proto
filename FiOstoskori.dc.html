@@ -49,19 +49,19 @@ a{color:#111111}a:hover{color:#474747}
 <b style="font-size: 17px; white-space: nowrap">{{ l.sum }}</b>
 </div>
 </sc-for>
+<sc-if value="{{ hasSugg }}" hint-placeholder-val="{{ true }}">
 <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 12px">
 <h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">Sopii yhteen kannen kanssa</h2>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 12px">
+<sc-for list="{{ sugg }}" as="g" hint-placeholder-count="2">
 <div style="border: 1px solid #e2e2e0; border-radius: 10px; padding: 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px">
-<span><b style="display: block">Tiivisterengas Ø 600</b><span style="font-size: 13px; color: #5c5c5c">Juomavesikaivoon. {{ ringPrice }}</span></span>
-<button type="button" onClick="{{ addRing }}" style="min-height: 44px; padding: 0 14px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">Lisää</button>
+<span><b style="display: block">{{ g.name }}</b><span style="font-size: 13px; color: #5c5c5c">{{ g.text }} {{ g.price }}</span></span>
+<button type="button" onClick="{{ g.add }}" style="min-height: 44px; padding: 0 14px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">Lisää</button>
 </div>
-<div style="border: 1px solid #e2e2e0; border-radius: 10px; padding: 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px">
-<span><b style="display: block">Tuuletusventtiili</b><span style="font-size: 13px; color: #5c5c5c">Jos kunta vaatii tuuletuksen. {{ ventPrice }}</span></span>
-<button type="button" onClick="{{ addVent }}" style="min-height: 44px; padding: 0 14px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">Lisää</button>
+</sc-for>
 </div>
 </div>
-</div>
+</sc-if>
 </section>
 
 <aside aria-labelledby="sum-h" style="flex: 1 1 340px; min-width: 0; max-width: 420px; border: 1px solid #bdbdbb; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
@@ -111,8 +111,8 @@ class Component extends DCLogic {
     const SB = typeof window !== 'undefined' ? window.SBCart : null;
     const z0 = SB ? SB.zip() : '';
     this.state = { vat: 'inkl', zip: z0, zipDone: /^\d{5}$/.test(z0.replace(/\s/g, '')), zipErr: false, lines: [
-      { id: 'kansi600a15', name: 'Kevyt kaivonkansi Ø 600, A15', meta: 'Tuotenro 10354 · Komposiitti, 6 kg · Sopii renkaaseen 580 ja 640 mm:n välillä', price: 1495, qty: 1, href: 'FiTuote.dc.html' },
-      { id: 'las', name: 'Lukko ja avain', meta: 'Lisävaruste kevyisiin kansiin', price: 295, qty: 1, href: '#' }
+      { id: 'comp-1050', name: 'Kevyt kaivonkansi 1050 komposiitti', meta: 'Tuotenro 1055 · Sopii renkaaseen 870 ja 930 mm:n välillä', price: 2645, qty: 1, href: 'FiTuote.dc.html?size=1050' },
+      { id: 'ventil', name: 'Ilmanpoistoventtiili', meta: 'Lisävaruste kevyisiin kansiin', price: 569, qty: 1, href: '#' }
     ] };
     if (SB) this.state.lines = SB.lines('fi');
   }
@@ -127,6 +127,11 @@ class Component extends DCLogic {
     const count = S.lines.reduce((s, l) => s + l.qty, 0);
     const pCount = priced.reduce((s, l) => s + l.qty, 0);
     const hasQuote = S.lines.some((l) => l.price == null);
+    const CAT = (typeof window !== 'undefined' && window.SBCart && window.SBCart.catalog) || {};
+    const lid = S.lines.find((l) => /^comp-/.test(l.id));
+    const suggIds = (lid ? ['seal-' + lid.id.slice(5)] : []).concat(['ventil', 'hanglas']);
+    const suggText = { seal: 'Juomavesikaivoon.', ventil: 'Jos kunta vaatii tuuletuksen.', hanglas: 'Lukitse kansi riippulukolla.' };
+    const sugg = suggIds.filter((id) => CAT[id] && !S.lines.find((l) => l.id === id)).slice(0, 2).map((id) => ({ id: id, name: CAT[id].fi[0], meta: CAT[id].fi[1], price: CAT[id].price, text: suggText[id.split('-')[0]] }));
     return {
       vat: S.vat, setVat: (v) => this.setState({ vat: v }),
       count: count, empty: S.lines.length === 0,
@@ -134,9 +139,8 @@ class Component extends DCLogic {
         less: () => setQty(l.id, -1), more: () => setQty(l.id, 1),
         lessLabel: 'Vähennä määrää, ' + l.name, moreLabel: 'Lisää määrää, ' + l.name,
         remove: () => save(S.lines.filter((x) => x.id !== l.id)) })),
-      ringPrice: '+ ' + fmt(495), ventPrice: '+ ' + fmt(349),
-      addRing: () => add({ id: 'ring', name: 'Tiivisterengas Ø 600', meta: 'Lisävaruste kevyisiin kansiin', price: 495, href: '#' }),
-      addVent: () => add({ id: 'ventil', name: 'Tuuletusventtiili', meta: 'Lisävaruste kevyisiin kansiin', price: 349, href: '#' }),
+      hasSugg: sugg.length > 0,
+      sugg: sugg.map((g) => ({ name: g.name, text: g.text, price: '+ ' + fmt(g.price), add: () => add({ id: g.id, name: g.name, meta: g.meta, price: g.price, href: '#' }) })),
       hasQuote: hasQuote, noQuote: !hasQuote, hasPriced: priced.length > 0, stripQuote: () => save(priced), overLimit: sum >= 5000, underLimit: sum < 5000,
       prodLabel: 'Tuotteet, ' + pCount + ' kpl' + (hasQuote ? ' + tarjoustuotteet' : ''), prodSum: fmt(sum),
       vatSum: Math.round(sum - sum / 1.25).toLocaleString('fi-FI') + ' kr',

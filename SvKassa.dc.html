@@ -170,7 +170,7 @@ class Component extends DCLogic {
       : [ { id: 'klarna', label: 'Klarna eller Qliro', text: 'Kort, Swish, faktura eller delbetalning.' }, { id: 'pfaktura', label: 'Faktura', text: 'Fakturaavgift [X] kr.' } ];
     const payNow = pays.find((p) => p.id === S.pay) ? S.pay : pays[0].id;
     const SBc = typeof window !== 'undefined' ? window.SBCart : null;
-    const cl = SBc && SBc.items().length ? SBc.lines('sv') : [{ name: 'Lätt brunnslock Ø 600, A15', price: 1495, qty: 1 }, { name: 'Lås med nyckel', price: 295, qty: 1 }];
+    const cl = SBc && SBc.items().length ? SBc.lines('sv') : [{ name: 'Lätt Brunnslock 1050 Composite', price: 2645, qty: 1 }, { name: 'Avluftningsventil', price: 569, qty: 1 }];
     const sum = cl.reduce((t, l) => t + (l.price || 0) * l.qty, 0);
     const fmt = (n) => Math.round(fo ? n / 1.25 : n).toLocaleString('sv-SE') + ' kr';
     const inp = {};

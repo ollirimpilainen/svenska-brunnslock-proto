@@ -167,8 +167,8 @@ class Component extends DCLogic {
     const S = this.state, F = S.f;
     const SB = typeof window !== 'undefined' ? window.SBCart : null;
     const EX = [
-      { id: 'kansi600a15', name: 'Kevyt kaivonkansi Ø 600, A15', price: 1495, qty: 10 },
-      { id: 'mittakansi', name: 'Kevyt kaivonkansi mittatilauksena', price: null, qty: 2 }
+      { id: 'comp-1050', name: 'Kevyt kaivonkansi 1050 komposiitti', price: 2645, qty: 10 },
+      { id: 'seal-1050', name: 'Tiivisterengas 900/1100', price: 875, qty: 10 }
     ];
     const lines = SB && SB.items().length ? SB.lines('fi') : EX;
     const fmt = (n) => Math.round(n).toLocaleString('fi-FI') + ' kr';

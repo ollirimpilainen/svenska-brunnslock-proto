@@ -80,7 +80,7 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     const SB = typeof window !== 'undefined' ? window.SBCart : null;
-    this.lines = SB && SB.items().length ? SB.lines('fi') : [{ name: 'Kevyt kaivonkansi Ø 600, A15', price: 1495, qty: 1 }, { name: 'Lukko ja avain', price: 295, qty: 1 }];
+    this.lines = SB && SB.items().length ? SB.lines('fi') : [{ name: 'Kevyt kaivonkansi 1050 komposiitti', price: 2645, qty: 1 }, { name: 'Ilmanpoistoventtiili', price: 569, qty: 1 }];
     if (SB && SB.items().length) SB.clear();
   }
   renderVals() {
