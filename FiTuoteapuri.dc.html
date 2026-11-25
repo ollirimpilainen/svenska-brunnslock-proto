@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<title>Tuoteapuri: kaivonkansi</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#111111}a:hover{color:#474747}
+.pg-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:40px;align-items:start}
+.pg-side{position:sticky;top:16px}
+.pg-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:12px}
+.pg-opt:hover{border-color:#111111 !important}
+.pg-opt:focus-visible,.pg-btn:focus-visible{outline:3px solid #111111;outline-offset:2px}
+.pg-mrow{display:grid;grid-template-columns:300px minmax(0,1fr);gap:32px;align-items:start}
+.pg-bar{display:none}
+.pg-recs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:16px}
+@media (max-width:760px){
+  .pg-grid{grid-template-columns:minmax(0,1fr);gap:24px}
+  .pg-side{position:static}
+  .pg-mrow{grid-template-columns:minmax(0,1fr);gap:16px}
+  .pg-mrow svg{max-width:260px}
+  .pg-h1{font-size:32px !important}
+  .pg-card{padding:20px 16px !important}
+  .pg-bar{display:flex;position:sticky;bottom:0;z-index:20;background:#ffffff;border-top:1px solid #e2e2e0;padding:10px 16px;gap:12px;align-items:center;justify-content:space-between;box-shadow:0 -6px 16px rgba(0,0,0,0.06)}
+  .pg-bar[data-show="false"]{display:none}
+  .pg-tabs{flex-wrap:nowrap !important;overflow-x:auto}
+  .pg-opts{grid-template-columns:minmax(0,1fr);gap:8px}
+  .pg-img{aspect-ratio:16 / 7 !important}
+  .pg-opt{flex-direction:row !important;align-items:center !important;min-height:64px !important;padding:12px 14px !important;gap:12px !important}
+  .pg-opt > span:first-child[aria-hidden]{width:44px !important;height:44px !important;flex:none}
+  .pg-opt > span:first-child[aria-hidden] svg{width:44px;height:40px}
+  .pg-opt > span:nth-last-child(2){flex:1}
+  .pg-opt > span:last-child{margin:0 !important;padding:0 !important;flex-direction:column;align-items:flex-end !important;text-align:right;max-width:38%}
+}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 100vh; background: #ffffff; color: #1a1a1a; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.55">
+<dc-import name="FiHeader" cart="{{ cart }}" vat="{{ vat }}" on-vat="{{ setVat }}" hint-size="100%,180px"></dc-import>
+<main style="max-width: 1240px; margin: 0 auto; padding: 16px 24px 72px; display: flex; flex-direction: column; gap: 28px">
+
+<nav aria-label="{{ t.crumbLabel }}" style="font-size: 14px; color: #474747; display: flex; gap: 6px; flex-wrap: wrap">
+<a href="{{ homeHref }}" style="text-decoration: none; padding: 10px 0">{{ t.crumbHome }}</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
+<a href="#" style="text-decoration: none; padding: 10px 0">{{ t.crumbSection }}</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
+<span aria-current="page" style="padding: 10px 0; color: #111111; font-weight: 600">{{ t.crumbHere }}</span>
+</nav>
+
+<header style="display: flex; flex-direction: column; gap: 18px">
+<div role="group" aria-label="{{ t.tabsLabel }}" class="pg-tabs" style="display: flex; gap: 8px; flex-wrap: wrap">
+<sc-for list="{{ tabs }}" as="g" hint-placeholder-count="4">
+<a href="{{ g.href }}" aria-current="{{ g.current }}" style="{{ g.style }}">{{ g.label }}</a>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px 48px; align-items: flex-end; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 720px">
+<h1 class="pg-h1" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 44px; line-height: 1.08; letter-spacing: -0.015em; color: #111111">{{ t.h1 }}</h1>
+<p style="margin: 0; font-size: 18px; color: #474747">{{ t.lead }}</p>
+</div>
+<a href="{{ catHref }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; font-weight: 600; font-size: 15px">{{ t.proSkip }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>
+</header>
+
+<div class="pg-grid">
+
+<section id="pg-q" aria-live="polite" style="min-width: 0; display: flex; flex-direction: column; gap: 20px">
+
+<sc-if value="{{ inQuestion }}" hint-placeholder-val="{{ true }}">
+<div class="pg-card" style="border: 1px solid #e2e2e0; border-radius: 12px; padding: 32px; display: flex; flex-direction: column; gap: 24px; background: #ffffff">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; color: #474747">
+<span style="font-weight: 600">{{ progressLabel }}</span>
+<span>{{ optionalLabel }}</span>
+</div>
+<div role="progressbar" aria-label="{{ progressLabel }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ progressPct }}" style="height: 6px; border-radius: 3px; background: #ececea; overflow: hidden"><div style="{{ progressStyle }}"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h2 id="pg-qh" tabindex="-1" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 28px; line-height: 1.15; color: #111111; outline: none">{{ q.title }}</h2>
+<p style="margin: 0; color: #474747">{{ q.help }}</p>
+</div>
+
+<sc-if value="{{ q.hasOpts }}" hint-placeholder-val="{{ true }}">
+<div class="pg-opts" role="group" aria-label="{{ q.title }}">
+<sc-for list="{{ q.opts }}" as="o" hint-placeholder-count="6">
+<button type="button" class="pg-opt" onClick="{{ o.pick }}" aria-pressed="{{ o.pressed }}" aria-label="{{ o.aria }}" style="{{ o.style }}">
+<sc-if value="{{ o.hasIcon }}" hint-placeholder-val="{{ false }}">
+<span aria-hidden="true" style="width: 64px; height: 56px; display: flex; align-items: center; justify-content: center; color: #111111">
+<sc-if value="{{ o.iBetong }}"><svg width="60" height="54" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="14" rx="24" ry="8" fill="#ececea"/><ellipse cx="30" cy="14" rx="14" ry="4.5" fill="#ffffff"/><path d="M6 14v26c0 4.4 10.7 8 24 8s24-3.6 24-8V14"/><path d="M6 27c0 4.4 10.7 8 24 8s24-3.6 24-8" stroke-dasharray="3 3"/></svg></sc-if>
+<sc-if value="{{ o.iSlat }}"><svg width="60" height="54" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="10" rx="13" ry="4.5" fill="#ececea"/><ellipse cx="30" cy="10" rx="9" ry="2.8" fill="#ffffff"/><path d="M17 10v34c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5V10"/></svg></sc-if>
+<sc-if value="{{ o.iKorr }}"><svg width="60" height="54" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="10" rx="13" ry="4.5" fill="#ececea"/><ellipse cx="30" cy="10" rx="9" ry="2.8" fill="#ffffff"/><path d="M17 10v34c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5V10"/><path d="M17 18c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5M17 25c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5M17 32c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5M17 39c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5"/></svg></sc-if>
+<sc-if value="{{ o.iMuff }}"><svg width="60" height="54" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="9" rx="16" ry="5" fill="#ececea"/><ellipse cx="30" cy="9" rx="10" ry="3" fill="#ffffff"/><path d="M14 9v10c0 2 3 3.5 6 4.2M46 9v10c0 2-3 3.5-6 4.2"/><path d="M20 23v22c0 2 4.5 3.5 10 3.5s10-1.5 10-3.5V23"/></svg></sc-if>
+<sc-if value="{{ o.iHal }}"><svg width="60" height="54" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="22" rx="27" ry="10" fill="#ececea"/><ellipse cx="30" cy="21" rx="9" ry="3.4" fill="#ffffff"/><path d="M3 22v8c0 5.5 12 10 27 10s27-4.5 27-10v-8"/></svg></sc-if>
+<sc-if value="{{ o.iRor }}"><svg width="60" height="54" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="12" rx="7" ry="2.6" fill="#ececea"/><ellipse cx="30" cy="12" rx="4.5" ry="1.5" fill="#ffffff"/><path d="M23 12v32c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V12"/><path d="M8 47h44" stroke-dasharray="2 3"/></svg></sc-if>
+<sc-if value="{{ o.iVet }}"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M9.2 9.3a2.9 2.9 0 0 1 5.6 1c0 2-2.8 2.4-2.8 4.2"/><circle cx="12" cy="17.6" r="0.6" fill="currentColor"/></svg></sc-if>
+</span>
+</sc-if>
+<span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<b style="font-size: 16px; line-height: 1.3; color: #111111">{{ o.title }}</b>
+<span style="font-size: 14px; color: #474747">{{ o.sub }}</span>
+</span>
+<span style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: auto; padding-top: 4px">
+<span style="font-size: 13px; color: #5c5c5c">{{ o.count }}</span>
+<sc-if value="{{ o.badge }}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; font-weight: 700; padding: 1px 8px; border-radius: 999px; background: #111111; color: #ffffff">{{ o.badge }}</span></sc-if>
+</span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ q.isMatt }}" hint-placeholder-val="{{ false }}">
+<div class="pg-mrow">
+<svg viewBox="0 0 300 220" width="100%" role="img" aria-label="{{ t.mSvgLabel }}" style="display: block">
+<circle cx="150" cy="96" r="84" fill="#ececea" stroke="#111111" stroke-width="2"/>
+<circle cx="150" cy="96" r="56" fill="#ffffff" stroke="#111111" stroke-width="2"/>
+<path d="M98 96h104" stroke="#111111" stroke-width="2"/><path d="M98 96l9-5v10zM202 96l-9-5v10z" fill="#111111"/>
+<text x="150" y="86" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#111111">{{ t.mInner }}</text>
+<path d="M66 196h168M66 188v16M234 188v16" stroke="#474747" stroke-width="1.6"/>
+<path d="M66 180v-84M234 180v-84" stroke="#474747" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="150" y="216" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#474747">{{ t.mOuter }}</text>
+</svg>
+<div style="display: flex; flex-direction: column; gap: 14px; min-width: 0">
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">{{ m.label1 }}
+<input value="{{ m.v1 }}" onInput="{{ m.type1 }}" inputmode="numeric" placeholder="{{ t.mPlaceholder }}" style="min-height: 48px; max-width: 240px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit; font-weight: 400; font-size: 17px; background: #ffffff">
+</label>
+<div role="group" aria-label="{{ t.mQuick }}" style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{ m.quick }}" as="b" hint-placeholder-count="4">
+<button type="button" onClick="{{ b.pick }}" aria-pressed="{{ b.pressed }}" style="{{ b.style }}">{{ b.label }}</button>
+</sc-for>
+</div>
+<sc-if value="{{ m.hasSecond }}" hint-placeholder-val="{{ true }}">
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">{{ m.label2 }}
+<input value="{{ m.v2 }}" onInput="{{ m.type2 }}" inputmode="numeric" placeholder="{{ t.mPlaceholder2 }}" style="min-height: 48px; max-width: 240px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit; font-weight: 400; font-size: 17px; background: #ffffff">
+</label>
+</sc-if>
+<span style="{{ m.noteStyle }}">{{ m.note }}</span>
+</div>
+</div>
+<sc-if value="{{ m.guideOpen }}" hint-placeholder-val="{{ false }}">
+<div style="border: 1.5px solid #111111; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px; background: #f5f5f4">
+<h3 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">{{ t.gTitle }}</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 20px; align-items: start">
+<div role="img" aria-label="{{ t.gImg }}" style="aspect-ratio: 4 / 3; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 10px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 12px; font-size: 14px; color: #474747">{{ t.gImg }}</div>
+<ol style="margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{ t.gSteps }}" as="s" hint-placeholder-count="3"><li>{{ s }}</li></sc-for>
+</ol>
+</div>
+<p style="margin: 0; font-size: 15px; color: #474747">{{ t.gNote }}</p>
+<div style="display: flex; gap: 10px; flex-wrap: wrap">
+<button type="button" class="pg-btn" onClick="{{ m.closeGuide }}" style="min-height: 48px; padding: 0 20px; border: 0; border-radius: 6px; background: #111111; color: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ t.gDone }}</button>
+<button type="button" class="pg-btn" onClick="{{ m.skipMeasure }}" style="min-height: 48px; padding: 0 20px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ t.gSkip }}</button>
+</div>
+</div>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{ q.isHojd }}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{ h.showInput }}" hint-placeholder-val="{{ false }}">
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">{{ t.hInput }}
+<input value="{{ h.mm }}" onInput="{{ h.typeMm }}" inputmode="numeric" placeholder="{{ t.hPlaceholder }}" style="min-height: 48px; max-width: 240px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit; font-weight: 400; font-size: 17px; background: #ffffff">
+<span style="font-size: 14px; font-weight: 400; color: #474747">{{ t.hNote }}</span>
+</label>
+</sc-if>
+</sc-if>
+
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border-top: 1px solid #e2e2e0; padding-top: 20px">
+<div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center">
+<sc-if value="{{ canBack }}" hint-placeholder-val="{{ true }}"><button type="button" class="pg-btn" onClick="{{ back }}" style="min-height: 48px; padding: 0 16px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>{{ t.back }}</button></sc-if>
+<sc-if value="{{ q.vetLabel }}" hint-placeholder-val="{{ true }}"><button type="button" class="pg-btn" onClick="{{ q.vet }}" aria-pressed="{{ q.vetPressed }}" style="min-height: 48px; padding: 0 12px; border: 0; background: none; font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer">{{ q.vetLabel }}</button></sc-if>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center">
+<sc-if value="{{ q.skipLabel }}" hint-placeholder-val="{{ false }}"><button type="button" class="pg-btn" onClick="{{ q.skip }}" style="min-height: 48px; padding: 0 16px; border: 0; background: none; font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer">{{ q.skipLabel }}</button></sc-if>
+<sc-if value="{{ q.nextLabel }}" hint-placeholder-val="{{ true }}"><button type="button" class="pg-btn" onClick="{{ q.next }}" disabled="{{ q.nextDisabled }}" style="{{ q.nextStyle }}">{{ q.nextLabel }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></sc-if>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isResult }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 24px">
+
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h2 id="pg-rh" tabindex="-1" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 30px; line-height: 1.15; color: #111111; outline: none">{{ r.title }}</h2>
+<p style="margin: 0; color: #474747">{{ r.lead }}</p>
+</div>
+
+<sc-if value="{{ r.none }}" hint-placeholder-val="{{ false }}">
+<div style="border: 1.5px dashed #111111; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start">
+<b style="font-family: Archivo, Inter, sans-serif; font-size: 22px; color: #111111">{{ t.noneTitle }}</b>
+<span style="color: #474747; max-width: 620px">{{ t.noneText }}</span>
+<div style="display: flex; gap: 10px; flex-wrap: wrap">
+<a href="{{ cartHref }}" onClick="{{ r.addCustom }}" style="min-height: 48px; display: inline-flex; align-items: center; padding: 0 20px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; text-decoration: none">{{ t.noneCustom }}</a>
+<button type="button" class="pg-btn" onClick="{{ r.openKontakt }}" style="min-height: 48px; padding: 0 20px; border: 1.5px solid #111111; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ t.noneContact }}</button>
+</div>
+<span style="font-size: 14px; color: #474747">{{ t.noneRelax }}</span>
+<div style="display: flex; gap: 8px; flex-wrap: wrap">
+<sc-for list="{{ r.relax }}" as="x" hint-placeholder-count="2">
+<button type="button" class="pg-btn" onClick="{{ x.go }}" style="min-height: 40px; padding: 0 14px; border: 1px solid #bdbdbb; border-radius: 999px; background: #ffffff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer">{{ x.label }}</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ r.hasRecs }}" hint-placeholder-val="{{ true }}">
+<div class="pg-recs">
+<sc-for list="{{ r.recs }}" as="p" hint-placeholder-count="3">
+<article style="{{ p.cardStyle }}">
+<div role="img" aria-label="{{ p.imgAlt }}" class="pg-img" style="aspect-ratio: 4 / 3; background: #ececea; border-bottom: 1.5px dashed #b9b9b7; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #474747; position: relative">{{ t.imgPh }}<sc-if value="{{ p.badge }}" hint-placeholder-val="{{ true }}"><span style="position: absolute; top: 12px; left: 12px; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: #111111; color: #ffffff">{{ p.badge }}</span></sc-if></div>
+<div style="padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 12px; flex: 1">
+<span style="align-self: flex-start; border: 1.5px solid #111111; border-radius: 4px; padding: 0 8px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 13px; line-height: 1.6; color: #111111">{{ p.cls }}</span>
+<h3 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-size: 18px; line-height: 1.25; color: #111111">{{ p.name }}</h3>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #1a1a1a">
+<sc-for list="{{ p.reasons }}" as="w" hint-placeholder-count="4"><li style="display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 8px; align-items: start"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.4" aria-hidden="true" style="margin-top: 2px"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>{{ w }}</span></li></sc-for>
+</ul>
+<div style="margin-top: auto; padding-top: 12px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">{{ p.price }} <span style="font-family: Inter, sans-serif; font-weight: 400; font-size: 13px; color: #474747">{{ vatLabel }}</span></span>
+<a href="{{ productHref }}" style="{{ p.ctaStyle }}">{{ t.viewProduct }}</a>
+</div>
+</div>
+</article>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ r.help }}" hint-placeholder-val="{{ false }}">
+<div style="border: 1.5px solid #111111; border-radius: 12px; padding: 20px 24px; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; background: #f5f5f4">
+<div style="display: flex; flex-direction: column; gap: 4px; max-width: 560px">
+<b style="font-size: 18px; color: #111111">{{ t.helpTitle }}</b>
+<span style="font-size: 15px; color: #474747">{{ r.helpText }}</span>
+</div>
+<button type="button" class="pg-btn" onClick="{{ r.openFoto }}" style="min-height: 48px; padding: 0 20px; border: 0; border-radius: 6px; background: #111111; color: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ t.helpBtn }}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ r.offert }}" hint-placeholder-val="{{ false }}">
+<div style="border: 1px solid #e2e2e0; border-radius: 12px; padding: 20px 24px; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 4px; max-width: 560px">
+<b style="font-size: 18px; color: #111111">{{ t.offTitle }}</b>
+<span style="font-size: 15px; color: #474747">{{ t.offText }}</span>
+</div>
+<button type="button" class="pg-btn" onClick="{{ r.openOffert }}" style="min-height: 48px; padding: 0 20px; border: 1.5px solid #111111; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ t.offBtn }}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ formOpen }}" hint-placeholder-val="{{ false }}">
+<div id="pg-form" class="pg-card" style="border: 1.5px solid #111111; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 18px; background: #ffffff">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
+<h3 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; line-height: 1.2; color: #111111">{{ f.title }}</h3>
+<button type="button" class="pg-btn" onClick="{{ f.close }}" style="min-height: 40px; padding: 0 12px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ t.fClose }}</button>
+</div>
+<sc-if value="{{ f.sent }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; gap: 14px; align-items: flex-start; padding: 16px; border-radius: 10px; background: #f5f5f4">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.2" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="10"/><path d="m7.5 12.5 3 3 6-6.5"/></svg>
+<div style="display: flex; flex-direction: column; gap: 4px"><b style="color: #111111">{{ t.fSentTitle }}</b><span style="color: #474747">{{ f.sentText }}</span></div>
+</div>
+</sc-if>
+<sc-if value="{{ f.editing }}" hint-placeholder-val="{{ true }}">
+<form onSubmit="{{ f.submit }}" style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 10px; background: #f5f5f4">
+<b style="font-size: 14px; color: #111111">{{ t.fCarry }}</b>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; font-size: 14px">
+<sc-for list="{{ f.summary }}" as="s" hint-placeholder-count="4"><li><span style="color: #474747">{{ s.group }}:</span> <b style="color: #111111; font-weight: 600">{{ s.value }}</b></li></sc-for>
+</ul>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">{{ t.fName }}<input value="{{ f.name }}" onInput="{{ f.typeName }}" autocomplete="name" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit; font-weight: 400; background: #ffffff"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">{{ t.fContact }}<input value="{{ f.contact }}" onInput="{{ f.typeContact }}" required="{{ true }}" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit; font-weight: 400; background: #ffffff"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">{{ t.fZip }}<input value="{{ f.zip }}" onInput="{{ f.typeZip }}" inputmode="numeric" autocomplete="postal-code" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit; font-weight: 400; background: #ffffff"></label>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-weight: 600; font-size: 15px">{{ t.fPhoto }}</span>
+<label style="align-self: flex-start; min-height: 48px; display: inline-flex; align-items: center; gap: 8px; padding: 0 16px; border: 1.5px dashed #111111; border-radius: 6px; font-weight: 600; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>{{ f.photoLabel }}<input type="file" accept="image/*" onChange="{{ f.pickPhoto }}" style="position: absolute; width: 1px; height: 1px; opacity: 0"></label>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">{{ t.fMsg }}<textarea onInput="{{ f.typeMsg }}" rows="3" placeholder="{{ t.fMsgPh }}" style="border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 10px 12px; font: inherit; font-weight: 400; background: #ffffff; resize: vertical">{{ f.msg }}</textarea></label>
+<button type="submit" class="pg-btn" style="align-self: flex-start; min-height: 52px; padding: 0 28px; border: 0; border-radius: 6px; background: #111111; color: #ffffff; font: inherit; font-weight: 600; font-size: 16px; cursor: pointer">{{ f.submitLabel }}</button>
+</form>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ r.hasAcc }}" hint-placeholder-val="{{ true }}">
+<section aria-labelledby="pg-acc" style="display: flex; flex-direction: column; gap: 12px">
+<h3 id="pg-acc" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">{{ t.accTitle }}</h3>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-top: 1px solid #e2e2e0">
+<sc-for list="{{ r.acc }}" as="a" hint-placeholder-count="2">
+<li style="display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid #e2e2e0">
+<div role="img" aria-label="{{ a.imgAlt }}" style="width: 56px; height: 56px; border-radius: 8px; background: #ececea; border: 1px dashed #b9b9b7"></div>
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><b style="color: #111111; font-size: 15px">{{ a.name }}</b><span style="font-size: 14px; color: #474747">{{ a.why }}</span></div>
+<div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px"><b style="white-space: nowrap; color: #111111">{{ a.price }}</b><a href="#" style="font-size: 14px; font-weight: 600; min-height: 32px; display: inline-flex; align-items: center">{{ t.view }}</a></div>
+</li>
+</sc-for>
+</ul>
+</section>
+</sc-if>
+
+<sc-if value="{{ r.hasAll }}" hint-placeholder-val="{{ true }}">
+<section aria-labelledby="pg-all" style="display: flex; flex-direction: column; gap: 14px; border-top: 1px solid #e2e2e0; padding-top: 24px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap">
+<h3 id="pg-all" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">{{ r.allTitle }}</h3>
+<a href="{{ catHref }}" style="font-weight: 600; font-size: 15px; min-height: 44px; display: inline-flex; align-items: center">{{ t.openCat }}</a>
+</div>
+<div role="group" aria-label="{{ t.chipsLabel }}" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+<button type="button" onClick="{{ c.remove }}" aria-label="{{ c.aria }}" style="min-height: 36px; display: inline-flex; align-items: center; gap: 8px; padding: 0 12px; border: 1px solid #111111; border-radius: 999px; background: #ffffff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer">{{ c.label }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+</sc-for>
+</div>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-top: 1px solid #e2e2e0">
+<sc-for list="{{ r.all }}" as="p" hint-placeholder-count="4">
+<li style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid #e2e2e0">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><a href="#" style="font-weight: 600; color: #111111">{{ p.name }}</a><span style="font-size: 14px; color: #474747">{{ p.line }}</span></div>
+<b style="white-space: nowrap; color: #111111">{{ p.price }}</b>
+</li>
+</sc-for>
+</ul>
+</section>
+</sc-if>
+
+<div style="display: flex; gap: 12px 24px; flex-wrap: wrap; align-items: center; border-top: 1px solid #e2e2e0; padding-top: 20px">
+<button type="button" class="pg-btn" onClick="{{ backFromResult }}" style="min-height: 48px; padding: 0 16px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ t.changeAnswers }}</button>
+<button type="button" class="pg-btn" onClick="{{ restart }}" style="min-height: 48px; padding: 0 4px; border: 0; background: none; font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer">{{ t.restart }}</button>
+<sc-if value="{{ r.showFotoLink }}" hint-placeholder-val="{{ true }}"><button type="button" class="pg-btn" onClick="{{ r.openFoto }}" style="min-height: 48px; padding: 0 4px; border: 0; background: none; font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer">{{ t.fotoLink }}</button></sc-if>
+</div>
+
+</div>
+</sc-if>
+</section>
+
+<aside class="pg-side" aria-labelledby="pg-sh" style="display: flex; flex-direction: column; gap: 16px">
+<div style="border: 1px solid #e2e2e0; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px; background: #ffffff">
+<div aria-live="polite" style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 34px; line-height: 1.1; color: #111111">{{ countBig }}</span>
+<span style="font-size: 14px; color: #474747">{{ countSub }}</span>
+</div>
+<div style="height: 6px; border-radius: 3px; background: #ececea; overflow: hidden"><div style="{{ countBarStyle }}"></div></div>
+<h2 id="pg-sh" style="margin: 8px 0 0; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #111111">{{ t.yourAnswers }}</h2>
+<sc-if value="{{ noAnswers }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 14px; color: #474747">{{ t.noAnswers }}</p></sc-if>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<sc-for list="{{ answers }}" as="a" hint-placeholder-count="3">
+<li style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 8px 0; border-bottom: 1px solid #ececea">
+<span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #5c5c5c">{{ a.group }}</span><span style="font-size: 15px; color: #111111">{{ a.value }}</span></span>
+<button type="button" onClick="{{ a.edit }}" aria-label="{{ a.aria }}" style="min-height: 36px; padding: 0 6px; border: 0; background: none; font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; cursor: pointer">{{ t.edit }}</button>
+</li>
+</sc-for>
+</ul>
+<a href="{{ catHref }}" style="min-height: 48px; display: inline-flex; align-items: center; justify-content: center; padding: 0 16px; border: 1.5px solid #111111; border-radius: 6px; font-weight: 600; text-decoration: none; text-align: center">{{ showInList }}</a>
+</div>
+<div style="border-radius: 12px; padding: 20px 24px; background: #ececea; display: flex; flex-direction: column; gap: 6px">
+<b style="color: #111111">{{ t.stuckTitle }}</b>
+<span style="font-size: 14px; color: #474747">{{ t.stuckText }}</span>
+<a href="tel:+46920520056" style="font-weight: 600; min-height: 40px; display: inline-flex; align-items: center">{{ t.call }}</a>
+</div>
+</aside>
+
+</div>
+</main>
+<div class="pg-bar" data-show="{{ barShow }}">
+<span style="display: flex; flex-direction: column; line-height: 1.25"><b style="font-family: Archivo, Inter, sans-serif; font-size: 18px; color: #111111">{{ countBig }}</b><span style="font-size: 13px; color: #474747">{{ barSub }}</span></span>
+<a href="{{ catHref }}" style="min-height: 44px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; text-decoration: none; white-space: nowrap">{{ t.barShow }}</a>
+</div>
+<dc-import name="FiFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1600}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { step: 'typ', typ: null, last: null, mat: null, inner: '', outer: '', mmSkip: false, guideOpen: false, extras: [], extrasDone: false, hojd: null, hojdMm: '', vat: 'inkl', form: null, sent: false, fName: '', fContact: '', fZip: '', fMsg: '', fPhoto: '' };
+  }
+  renderVals() {
+    const LANG = 'fi';
+    const PAGES = { sv: { home: 'SvStartsida.dc.html', cat: 'SvKategori.dc.html', product: 'SvProdukt.dc.html', cart: 'SvVarukorg.dc.html', locale: 'sv-SE' }, fi: { home: 'FiEtusivu.dc.html', cat: 'FiKategoria.dc.html', product: 'FiTuote.dc.html', cart: 'FiOstoskori.dc.html', locale: 'fi-FI' } };
+    const P = PAGES[LANG];
+    const S = this.state;
+    const TX = {
+      sv: {
+        crumbLabel: 'Du är här', crumbHome: 'Startsida', crumbSection: 'Hitta rätt produkt', crumbHere: 'Brunnslock',
+        tabsLabel: 'Produktguider', tabs: ['Brunnslock', 'Luckor', 'Kabelbrunnar', 'Fundament'],
+        h1: 'Hitta rätt brunnslock', lead: 'Svara på några frågor om din brunn. Varje svar filtrerar sortimentet, så du ser direkt hur många lock som passar. Mätningen kommer sist, och vi visar hur du gör.',
+        proSkip: 'Vet du redan mått och klass? Gå direkt till filtren',
+        progress: (i, n) => 'Fråga ' + i + ' av ' + n, optional: 'Frivillig', back: 'Tillbaka', next: 'Nästa', toResult: 'Visa förslag', skip: 'Hoppa över', vet: 'Vet inte',
+        count: (n) => n + (n === 1 ? ' produkt passar' : ' produkter passar'), countSub: (n) => 'av ' + n + ' brunnslock i sortimentet', barSub: 'passar dina svar', barShow: 'Visa i listan',
+        showInList: (n) => 'Visa ' + n + ' i produktlistan',
+        yourAnswers: 'Dina svar', noAnswers: 'Inga svar än. Varje svar blir ett filter i produktlistan.', edit: 'Ändra', editAria: (g) => 'Ändra ' + g,
+        stuckTitle: 'Fastnat?', stuckText: 'Ring oss, eller svara Vet inte och skicka ett foto i slutet.', call: 'Ring 0920-52 00 56',
+        groups: { typ: 'Typ av brunn', last: 'Belastningsklass', mat: 'Material och vikt', mm: 'Passar din brunn', extras: 'Egenskaper', hojd: 'Höjning' },
+        q: {
+          typ: ['Vilken typ av brunn har du?', 'Titta på brunnen ovanifrån och på sidan. Bilderna hjälper dig.'],
+          last: ['Vad finns på eller runt brunnen?', 'Det avgör hur mycket locket måste tåla.'],
+          mat: ['Vilket lock vill du ha?', 'Tänk på vem som lyfter locket när brunnen töms.'],
+          matt: ['Mät brunnen', ''],
+          extras: ['Behöver locket något extra?', 'Välj allt som gäller, eller hoppa över frågan.'],
+          hojd: ['Behöver brunnen höjas?', 'Hamnar locket under marknivå kan du höja brunnen med en förhöjningsring.']
+        },
+        typ: { betong: ['Betongbrunn', 'Betongring eller kona'], slat: ['Plastbrunn med släta rör', 'Slät yta på utsidan'], korr: ['Plastbrunn med korrugerade rör', 'Räfflad yta på utsidan'], muff: ['Betongbrunn med muffrör', 'Smalt betongrör med vidgad ände'], hal600: ['Stort betonglock med hål 600 mm', 'Du byter bara det lilla locket'], ror: ['Litet rör, Ø 110-250 mm', 'Till exempel inspektionsrör'] },
+        vetSub: 'Vi hoppar över frågan. I slutet kan du skicka ett foto.',
+        last: { A15: ['Gräs, rabatt, ingen trafik', 'A15, klarar 1,5 ton'], B125: ['Gångväg, garageuppfart, personbil', 'B125, klarar 12,5 ton'], C250: ['Parkering, lätt lastbil', 'C250, klarar 25 ton'], D400: ['Väg, tung trafik', 'D400, klarar 40 ton'] },
+        mat: { latt: ['Lätt lock som en person lyfter', 'Plast eller komposit, under 25 kg'], betong: ['Betonglock', 'Tungt och permanent, lyfts med maskin'], gjut: ['Gjutjärn', 'Klassiskt material, finns i lätt utförande'], any: ['Spelar ingen roll', 'Visa alla material'] },
+        popular: 'Vanligaste valet',
+        extras: { las: ['Låsbart och barnsäkert', 'Barn kan inte öppna locket'], iso: ['Isolerat mot frost', 'För vattenbrunnar som inte får frysa'], vent: ['Avluftningsventil', 'Luftar brunnen, till exempel vattenbrunn'], pump: ['Hål för gårdspump', 'Förborrat hål 160 mm'], manhal: ['Manhål för nedstigning', 'Öppning 646 mm i locket'], tat: ['Tätt mot lukt', 'Packning eller tätningsring'] },
+        hojd: { nej: ['Nej', 'Brunnen når marknivå'], ja: ['Ja, ungefär så här mycket', 'Skriv höjningen i millimeter'], vet: ['Vet inte', 'Vi tar det i slutet'] },
+        optCount: (n) => n === 0 ? 'Inget lock, vi gör ett på mått' : n + (n === 1 ? ' produkt' : ' produkter'),
+        mHelp: { betong: 'Mät innermåttet, alltså hålet, från kant till kant. Mät gärna yttermåttet också, ringens ytterkant.', plast: 'Mät rörets innermått, från insida till insida.', hal600: 'Hålet i ett stort betonglock är oftast 600 mm. Vi har fyllt i det. Ändra om ditt mått är ett annat.', ror: 'Mät rörets yttermått, från utsida till utsida.' },
+        mInnerLabel: 'Innermått (hålet), mm', mOuterLabel: 'Yttermått (ringens ytterkant), mm, frivilligt', mRorLabel: 'Rörets yttermått, mm',
+        mInner: 'Innermått', mOuter: 'Yttermått', mSvgLabel: 'Ring sedd ovanifrån: innermåttet är hålet, yttermåttet är ringens ytterkant', mPlaceholder: 't.ex. 600', mPlaceholder2: 't.ex. 800', mQuick: 'Vanliga mått',
+        mEmpty: 'Skriv måttet, så ser du direkt hur många lock som passar.', mBad: 'Skriv måttet i millimeter, till exempel 600.',
+        mFit: (n, v) => n + (n === 1 ? ' produkt passar ' : ' produkter passar ') + v + '.', mNone: (v) => 'Inget lock i sortimentet passar ' + v + '. Fortsätt ändå, så visar vi lock på mått.',
+        mVet: 'Vet inte hur jag mäter',
+        gTitle: 'Så mäter du brunnen', gImg: 'Bild: tumstock över betongringen, innermått och yttermått',
+        gSteps: ['Lyft av det gamla locket och borsta rent kanten.', 'Lägg tumstocken över hålet, rakt genom mitten. Det är innermåttet.', 'Mät från ytterkant till ytterkant på ringen. Det är yttermåttet.'],
+        gNote: 'Ett mått räcker för att börja. Med båda blir förslaget säkrare.', gDone: 'Jag har mätt', gSkip: 'Jag kan inte mäta nu',
+        hInput: 'Höjning, mm', hPlaceholder: 't.ex. 100', hNote: 'Förhöjningsringar finns i 50, 75, 100 och 150 mm.',
+        mmValue: (i, o, ror) => ror ? 'Ytter ' + o + ' mm' : (i ? 'Inner ' + i + ' mm' : '') + (i && o ? ', ' : '') + (o ? 'ytter ' + o + ' mm' : ''), mmLater: 'Mäter senare', noExtras: 'Inga extra', hojdJa: (v) => v ? 'Ja, cirka ' + v + ' mm' : 'Ja',
+        resTitle: 'Det här passar din brunn', resLead: (n) => n === 1 ? '1 produkt passar dina svar.' : n + ' produkter passar dina svar. Här är de vi föreslår först.', resNoneTitle: 'Vi hittar inget färdigt lock', resNoneLead: 'Inget lock i sortimentet passar alla dina svar, men vi har en lösning.',
+        best: 'Bäst match', viewProduct: 'Visa produkten', imgPh: 'Produktbild', view: 'Visa',
+        helpTitle: 'Osäker på något? Skicka foto och mått, vi hjälper dig', helpText: (k) => 'Du svarade Vet inte på ' + k + (k === 1 ? ' fråga' : ' frågor') + '. Förslagen bygger på det du visste. Dina svar följer med, så du skriver ingenting två gånger.', helpBtn: 'Skicka foto och mått',
+        noneTitle: 'Inget lock i sortimentet passar exakt', noneText: 'Vi tillverkar lätta lock på mått, eller hjälper dig hitta en lösning. Dina svar är redan ifyllda.', noneCustom: 'Beställ lock på mått', noneContact: 'Kontakta oss med dina svar', noneRelax: 'Eller ändra ett svar:', relax: (g) => 'Ta bort: ' + g,
+        offTitle: 'Körbart lock för tung trafik? Begär offert', offText: 'Vi räknar frakt och lossning för tunga lock och kan föreslå alternativ. Dina svar följer med i förfrågan.', offBtn: 'Begär offert',
+        accTitle: 'Behöver du också?', allTitle: (n) => 'Övriga ' + n + ' som också passar', openCat: 'Öppna i kategorin med samma filter', chipsLabel: 'Valda filter', removeAria: (l) => 'Ta bort filter ' + l,
+        changeAnswers: 'Ändra svaren', restart: 'Börja om', fotoLink: 'Osäker? Skicka foto och mått',
+        fTitle: { foto: 'Skicka foto och mått, vi hjälper dig', offert: 'Begär offert', kontakt: 'Kontakta oss med dina svar' }, fClose: 'Stäng', fCarry: 'Dina svar följer med',
+        fName: 'Namn', fContact: 'Telefon eller e-post', fZip: 'Postnummer', fPhoto: 'Foto på brunnen, frivilligt', fPhotoBtn: 'Välj bild', fPhotoPicked: (n) => 'Vald bild: ' + n, fMsg: 'Meddelande, frivilligt', fMsgPh: 'Till exempel hur brunnen ser ut eller när du behöver locket',
+        fSend: { foto: 'Skicka foto och mått', offert: 'Skicka offertförfrågan', kontakt: 'Skicka' }, fSentTitle: 'Tack, vi har fått dina uppgifter.', fSentText: (c) => 'Vi hör av oss till ' + c + ' inom en arbetsdag. Vi svarar även på helger.',
+        why: { typ: { betong: 'Passar betongbrunn', slat: 'Passar plastbrunn med släta rör', korr: 'Passar plastbrunn med korrugerade rör', muff: 'Passar betongbrunn med muffrör', hal600: 'Passar hålet i ett stort betonglock', ror: 'Passar litet rör' },
+          range: (lo, hi) => 'Passar innermått ' + lo + ' till ' + hi + ' mm', nom: (n) => 'Passar invändig diameter ' + n + ' mm', rorNom: (n) => 'Passar rör med yttermått ' + n + ' mm', you: (v) => ', du mätte ' + v,
+          load: (t, c) => 'Klarar ' + t + ' ton (' + c + ')', kgLight: (k) => 'Väger ' + k + ' kg, du lyfter det själv', kgMid: (k) => 'Väger ' + k + ' kg, en person lyfter det', kgHeavy: (k) => 'Väger ' + k + ' kg, kräver maskin. Levereras på pall.',
+          las: 'Låsbart och barnsäkert', iso: 'Isolerat mot frost', vent: 'Med avluftningsventil', ventOpt: 'Avluftningsventil som tillval, se nedan', pump: 'Förborrat hål 160 mm för gårdspump', manhal: 'Manhål 646 mm för nedstigning', tat: 'Helt tätt med packning', tatOpt: 'Tätas mot lukt med tätningsring, se nedan' },
+        mats: { komposit: 'Komposit', pe: 'PE-plast', plast: 'Plast', gjutjarn: 'Segjärn', betong: 'Betong' },
+        acc: { tat600: ['Tätningsring 600/750', 'Tätar mellan ring och lock, mot lukt och smådjur. Passar innermått 570 till 640 mm.'], tat900: ['Tätningsring 900/1100', 'Tätar mellan ring och lock, mot lukt och smådjur. Passar innermått 880 till 920 mm.'], vent: ['Avluftningsventil', 'Monteras ovanpå locket. Justerbar höjd 100 till 700 mm.'], hang: ['Hänglåsadapter', 'Lås locket med hänglås i stället för säkerhetsmutter.'], hojd600: ['Förhöjningsring B6 800/600x100 mm', 'Höjer brunnen till marknivå. Passdelar finns i 50, 75 och 100 mm.'], hojd640: ['Förhöjningsring B6 800/640x100 mm', 'För brunnskonor med innermått 640 mm. Finns i 50, 75, 100 och 150 mm.'], hojdVet: ['Förhöjningsringar och passdelar', 'Osäker på höjden? Skicka ett foto så hjälper vi dig välja.'] }
+      },
+      fi: {
+        crumbLabel: 'Olet tässä', crumbHome: 'Etusivu', crumbSection: 'Löydä oikea tuote', crumbHere: 'Kaivonkansi',
+        tabsLabel: 'Tuoteapurit', tabs: ['Kaivonkansi', 'Luukut', 'Kaapelikaivot', 'Perustukset'],
+        h1: 'Löydä oikea kaivonkansi', lead: 'Vastaa muutamaan kysymykseen kaivostasi. Jokainen vastaus rajaa valikoimaa, joten näet heti, montako kantta sopii. Mittaus tulee viimeisenä, ja näytämme, miten se tehdään.',
+        proSkip: 'Tiedätkö jo mitat ja luokan? Siirry suoraan suodattimiin',
+        progress: (i, n) => 'Kysymys ' + i + ' / ' + n, optional: 'Vapaaehtoinen', back: 'Takaisin', next: 'Seuraava', toResult: 'Näytä ehdotukset', skip: 'Ohita', vet: 'En tiedä',
+        count: (n) => n + (n === 1 ? ' tuote sopii' : ' tuotetta sopii'), countSub: (n) => 'valikoiman ' + n + ' kaivonkannesta', barSub: 'sopii vastauksiisi', barShow: 'Näytä listana',
+        showInList: (n) => 'Näytä ' + n + ' tuotelistassa',
+        yourAnswers: 'Vastauksesi', noAnswers: 'Ei vielä vastauksia. Jokaisesta vastauksesta tulee suodatin tuotelistaan.', edit: 'Muuta', editAria: (g) => 'Muuta: ' + g,
+        stuckTitle: 'Jumissa?', stuckText: 'Soita meille, tai vastaa En tiedä ja lähetä kuva lopussa.', call: 'Soita 0920-52 00 56',
+        groups: { typ: 'Kaivotyyppi', last: 'Kuormitusluokka', mat: 'Materiaali ja paino', mm: 'Sopii kaivoosi', extras: 'Ominaisuudet', hojd: 'Korotus' },
+        q: {
+          typ: ['Millainen kaivo sinulla on?', 'Katso kaivoa ylhäältä ja sivulta. Kuvat auttavat.'],
+          last: ['Mitä kaivon päällä tai ympärillä on?', 'Se ratkaisee, kuinka paljon kannen pitää kestää.'],
+          mat: ['Millaisen kannen haluat?', 'Mieti, kuka nostaa kannen, kun kaivo tyhjennetään.'],
+          matt: ['Mittaa kaivo', ''],
+          extras: ['Tarvitseeko kansi jotain lisää?', 'Valitse kaikki sopivat, tai ohita kysymys.'],
+          hojd: ['Pitääkö kaivoa korottaa?', 'Jos kansi jää maanpinnan alle, kaivoa voi korottaa korotusrenkaalla.']
+        },
+        typ: { betong: ['Betonikaivo', 'Betonirengas tai kartio'], slat: ['Muovikaivo, sileä putki', 'Ulkopinta on sileä'], korr: ['Muovikaivo, korrugoitu putki', 'Ulkopinta on uritettu'], muff: ['Betonikaivo, muhviputki', 'Kapea betoniputki, jonka pää on levennetty'], hal600: ['Iso betonikansi, jossa 600 mm:n aukko', 'Vaihdat vain pienen kannen'], ror: ['Pieni putki, Ø 110-250 mm', 'Esimerkiksi tarkastusputki'] },
+        vetSub: 'Ohitamme kysymyksen. Lopussa voit lähettää kuvan.',
+        last: { A15: ['Nurmikko, kukkapenkki, ei liikennettä', 'A15, kestää 1,5 tonnia'], B125: ['Kävelytie, autotallin edusta, henkilöauto', 'B125, kestää 12,5 tonnia'], C250: ['Pysäköintialue, kevyt kuorma-auto', 'C250, kestää 25 tonnia'], D400: ['Tie, raskas liikenne', 'D400, kestää 40 tonnia'] },
+        mat: { latt: ['Kevyt kansi, jonka yksi ihminen nostaa', 'Muovia tai komposiittia, alle 25 kg'], betong: ['Betonikansi', 'Raskas ja pysyvä, nostetaan koneella'], gjut: ['Valurauta', 'Perinteinen materiaali, myös kevyenä mallina'], any: ['Ei väliä', 'Näytä kaikki materiaalit'] },
+        popular: 'Yleisin valinta',
+        extras: { las: ['Lukittava ja lapsiturvallinen', 'Lapset eivät saa kantta auki'], iso: ['Eristetty pakkasta vastaan', 'Vesikaivoon, joka ei saa jäätyä'], vent: ['Tuuletusventtiili', 'Tuulettaa kaivon, esimerkiksi vesikaivon'], pump: ['Reikä pihapumpulle', 'Valmiiksi porattu 160 mm:n reikä'], manhal: ['Huoltoaukko kaivoon laskeutumiseen', 'Kannessa 646 mm:n aukko'], tat: ['Tiivis hajuja vastaan', 'Tiiviste tai tiivisterengas'] },
+        hojd: { nej: ['Ei', 'Kaivo ulottuu maanpintaan'], ja: ['Kyllä, suunnilleen näin paljon', 'Kirjoita korotus millimetreinä'], vet: ['En tiedä', 'Palataan tähän lopussa'] },
+        optCount: (n) => n === 0 ? 'Ei kantta, teemme mittatilauksena' : n + (n === 1 ? ' tuote' : ' tuotetta'),
+        mHelp: { betong: 'Mittaa sisämitta eli aukko reunasta reunaan. Mittaa myös ulkomitta, renkaan ulkoreuna, jos voit.', plast: 'Mittaa putken sisämitta, sisäpinnasta sisäpintaan.', hal600: 'Ison betonikannen aukko on yleensä 600 mm. Täytimme sen valmiiksi. Muuta, jos mittasi on eri.', ror: 'Mittaa putken ulkomitta, ulkopinnasta ulkopintaan.' },
+        mInnerLabel: 'Sisämitta (aukko), mm', mOuterLabel: 'Ulkomitta (renkaan ulkoreuna), mm, vapaaehtoinen', mRorLabel: 'Putken ulkomitta, mm',
+        mInner: 'Sisämitta', mOuter: 'Ulkomitta', mSvgLabel: 'Rengas ylhäältä: sisämitta on aukko, ulkomitta on renkaan ulkoreuna', mPlaceholder: 'esim. 600', mPlaceholder2: 'esim. 800', mQuick: 'Yleiset mitat',
+        mEmpty: 'Kirjoita mitta, niin näet heti, montako kantta sopii.', mBad: 'Kirjoita mitta millimetreinä, esimerkiksi 600.',
+        mFit: (n, v) => n + (n === 1 ? ' tuote sopii: ' : ' tuotetta sopii: ') + v + '.', mNone: (v) => 'Mikään valikoiman kansi ei sovi: ' + v + '. Jatka silti, niin näytämme mittatilauskannen.',
+        mVet: 'En tiedä, miten mitataan',
+        gTitle: 'Näin mittaat kaivon', gImg: 'Kuva: mittakeppi betonirenkaan päällä, sisämitta ja ulkomitta',
+        gSteps: ['Nosta vanha kansi pois ja harjaa reuna puhtaaksi.', 'Aseta mittakeppi aukon yli, suoraan keskeltä. Se on sisämitta.', 'Mittaa renkaan ulkoreunasta ulkoreunaan. Se on ulkomitta.'],
+        gNote: 'Yksi mitta riittää alkuun. Kahdella mitalla ehdotus on varmempi.', gDone: 'Olen mitannut', gSkip: 'En pysty mittaamaan nyt',
+        hInput: 'Korotus, mm', hPlaceholder: 'esim. 100', hNote: 'Korotusrenkaita on 50, 75, 100 ja 150 mm:n korkuisina.',
+        mmValue: (i, o, ror) => ror ? 'Ulko ' + o + ' mm' : (i ? 'Sisä ' + i + ' mm' : '') + (i && o ? ', ' : '') + (o ? 'ulko ' + o + ' mm' : ''), mmLater: 'Mittaan myöhemmin', noExtras: 'Ei lisäominaisuuksia', hojdJa: (v) => v ? 'Kyllä, noin ' + v + ' mm' : 'Kyllä',
+        resTitle: 'Nämä sopivat kaivoosi', resLead: (n) => n === 1 ? '1 tuote sopii vastauksiisi.' : n + ' tuotetta sopii vastauksiisi. Nämä ehdotamme ensin.', resNoneTitle: 'Valmista kantta ei löytynyt', resNoneLead: 'Mikään valikoiman kansi ei sovi kaikkiin vastauksiisi, mutta ratkaisu löytyy.',
+        best: 'Paras vastine', viewProduct: 'Näytä tuote', imgPh: 'Tuotekuva', view: 'Näytä',
+        helpTitle: 'Epävarma jostain? Lähetä kuva ja mitat, autamme', helpText: (k) => 'Vastasit En tiedä ' + k + ' kysymykseen' + '. Ehdotukset perustuvat siihen, mitä tiesit. Vastauksesi kulkevat mukana, joten mitään ei tarvitse kirjoittaa kahdesti.', helpBtn: 'Lähetä kuva ja mitat',
+        noneTitle: 'Mikään valikoiman kansi ei sovi täsmälleen', noneText: 'Valmistamme kevyitä kansia mittatilauksena tai autamme löytämään ratkaisun. Vastauksesi on jo täytetty.', noneCustom: 'Tilaa kansi mittatilauksena', noneContact: 'Ota yhteyttä vastauksillasi', noneRelax: 'Tai muuta yhtä vastausta:', relax: (g) => 'Poista: ' + g,
+        offTitle: 'Ajettava kansi raskaalle liikenteelle? Pyydä tarjous', offText: 'Laskemme raskaiden kansien rahdin ja purun ja voimme ehdottaa vaihtoehtoja. Vastauksesi kulkevat pyynnön mukana.', offBtn: 'Pyydä tarjous',
+        accTitle: 'Tarvitsetko myös?', allTitle: (n) => 'Muut ' + n + ' sopivaa', openCat: 'Avaa kategoriassa samoilla suodattimilla', chipsLabel: 'Valitut suodattimet', removeAria: (l) => 'Poista suodatin ' + l,
+        changeAnswers: 'Muuta vastauksia', restart: 'Aloita alusta', fotoLink: 'Epävarma? Lähetä kuva ja mitat',
+        fTitle: { foto: 'Lähetä kuva ja mitat, autamme', offert: 'Pyydä tarjous', kontakt: 'Ota yhteyttä vastauksillasi' }, fClose: 'Sulje', fCarry: 'Vastauksesi kulkevat mukana',
+        fName: 'Nimi', fContact: 'Puhelin tai sähköposti', fZip: 'Postinumero', fPhoto: 'Kuva kaivosta, vapaaehtoinen', fPhotoBtn: 'Valitse kuva', fPhotoPicked: (n) => 'Valittu kuva: ' + n, fMsg: 'Viesti, vapaaehtoinen', fMsgPh: 'Esimerkiksi miltä kaivo näyttää tai milloin tarvitset kannen',
+        fSend: { foto: 'Lähetä kuva ja mitat', offert: 'Lähetä tarjouspyyntö', kontakt: 'Lähetä' }, fSentTitle: 'Kiitos, saimme tietosi.', fSentText: (c) => 'Otamme yhteyttä (' + c + ') yhden työpäivän kuluessa. Vastaamme myös viikonloppuisin.',
+        why: { typ: { betong: 'Sopii betonikaivoon', slat: 'Sopii sileään muovikaivoon', korr: 'Sopii korrugoituun muovikaivoon', muff: 'Sopii muhviputkikaivoon', hal600: 'Sopii ison betonikannen aukkoon', ror: 'Sopii pieneen putkeen' },
+          range: (lo, hi) => 'Sopii sisämittaan ' + lo + ' ja ' + hi + ' mm:n välillä', nom: (n) => 'Sopii sisähalkaisijaan ' + n + ' mm', rorNom: (n) => 'Sopii putkeen, jonka ulkomitta on ' + n + ' mm', you: (v) => ', mittasit ' + v,
+          load: (t, c) => 'Kestää ' + t + ' tonnia (' + c + ')', kgLight: (k) => 'Painaa ' + k + ' kg, nostat sen itse', kgMid: (k) => 'Painaa ' + k + ' kg, yksi ihminen nostaa sen', kgHeavy: (k) => 'Painaa ' + k + ' kg, vaatii koneen. Toimitetaan lavalla.',
+          las: 'Lukittava ja lapsiturvallinen', iso: 'Eristetty pakkasta vastaan', vent: 'Tuuletusventtiili valmiina', ventOpt: 'Tuuletusventtiili lisävarusteena, katso alta', pump: 'Valmis 160 mm:n reikä pihapumpulle', manhal: '646 mm:n huoltoaukko', tat: 'Täysin tiivis tiivisteen ansiosta', tatOpt: 'Tiivisterengas estää hajut, katso alta' },
+        mats: { komposit: 'Komposiitti', pe: 'PE-muovi', plast: 'Muovi', gjutjarn: 'Valurauta', betong: 'Betoni' },
+        acc: { tat600: ['Tiivisterengas 600/750', 'Tiivistää renkaan ja kannen välin hajuja ja pieneläimiä vastaan. Sisämitta 570-640 mm.'], tat900: ['Tiivisterengas 900/1100', 'Tiivistää renkaan ja kannen välin hajuja ja pieneläimiä vastaan. Sisämitta 880-920 mm.'], vent: ['Tuuletusventtiili', 'Asennetaan kannen päälle. Korkeus säädettävissä 100-700 mm.'], hang: ['Riippulukkoadapteri', 'Kannen voi lukita riippulukolla turvamutterin sijaan.'], hojd600: ['Korotusrengas B6 800/600x100 mm', 'Nostaa kaivon maanpinnan tasolle. Myös 50 ja 75 mm.'], hojd640: ['Korotusrengas B6 800/640x100 mm', 'Kaivokartioille, joiden sisämitta on 640 mm. Myös 50, 75 ja 150 mm.'], hojdVet: ['Korotusrenkaat ja sovitusosat', 'Etkö tiedä korotuksen tarvetta? Lähetä kuva, niin autamme valitsemaan.'] }
+      }
+    };
+    const T = TX[LANG];
+    const loc = P.locale;
+
+    // Otos oikeista tuotteista (Store API 25.11.2026). Painot osin arvioita, hinnat sis. alv.
+    const ALL = [
+      { id: 14430, sv: 'Lätt brunnslock 780 Composite 1,5 ton', fi: 'Kevyt kaivonkansi 780 komposiitti, 1,5 t', w: ['betong', 'hal600'], cls: 'A15', mat: 'komposit', kg: 15, price: 2415, lo: 580, hi: 670, f: ['las', 'tat'], pop: 1 },
+      { id: 1120, sv: 'Lätt Brunnslock 800 PE', fi: 'Kevyt kaivonkansi 800 PE', w: ['betong', 'hal600'], cls: 'A15', mat: 'pe', kg: 7, price: 2223, lo: 580, hi: 640, olo: 710, ohi: 800, f: ['las'], opt: ['vent', 'tat'], pop: 2 },
+      { id: 1263, sv: 'Lätt Brunnslock 750 Composite', fi: 'Kevyt kaivonkansi 750 komposiitti', w: ['betong', 'hal600'], cls: 'A15', mat: 'komposit', kg: 8, price: 1495, lo: 550, hi: 680, olo: 710, ohi: 840, f: ['las'], opt: ['tat'], pop: 3 },
+      { id: 1706, sv: 'Lätt brunnslock 580-670 A15 i gjutjärn', fi: 'Kevyt kaivonkansi 580-670 A15, valurauta', w: ['betong', 'slat', 'hal600'], cls: 'A15', mat: 'gjutjarn', kg: 14, price: 2895, lo: 580, hi: 670, f: ['las', 'tat'], pop: 4 },
+      { id: 1236, sv: 'Lätt Brunnslock 850 PE', fi: 'Kevyt kaivonkansi 850 PE', w: ['betong'], cls: 'A15', mat: 'pe', kg: 7, price: 2323, lo: 590, hi: 640, olo: 810, ohi: 860, f: ['las'], opt: ['vent', 'tat'], pop: 5 },
+      { id: 1116, sv: 'Lätt Brunnslock 660 PE', fi: 'Kevyt kaivonkansi 660 PE', w: ['betong'], cls: 'A15', mat: 'pe', kg: 6, price: 1823, lo: 550, hi: 600, olo: 590, ohi: 660, f: ['las'], opt: ['tat'], pop: 8 },
+      { id: 1287, sv: 'Lätt Brunnslock 930 Composite', fi: 'Kevyt kaivonkansi 930 komposiitti', w: ['betong'], cls: 'A15', mat: 'komposit', kg: 8, price: 2150, lo: 780, hi: 860, olo: 850, ohi: 990, f: ['las'], pop: 6 },
+      { id: 1266, sv: 'Lätt Brunnslock 1050 Composite', fi: 'Kevyt kaivonkansi 1050 komposiitti', w: ['betong'], cls: 'A15', mat: 'komposit', kg: 10, price: 2645, lo: 870, hi: 930, olo: 1000, ohi: 1100, f: ['las'], opt: ['tat'], pop: 6 },
+      { id: 1122, sv: 'Lätt Brunnslock 1100 PE', fi: 'Kevyt kaivonkansi 1100 PE', w: ['betong'], cls: 'A15', mat: 'pe', kg: 9, price: 2700, lo: 880, hi: 930, olo: 1000, ohi: 1100, f: ['las'], opt: ['vent', 'tat'], pop: 7 },
+      { id: 1286, sv: 'Lätt Brunnslock 1340 Composite', fi: 'Kevyt kaivonkansi 1340 komposiitti', w: ['betong'], cls: 'A15', mat: 'komposit', kg: 14, price: 4395, lo: 1115, hi: 1300, olo: 1250, ohi: 1450, f: ['las'], pop: 8 },
+      { id: 5484, sv: 'Lätt Brunnslock 590 KÖRBART Composite 12,5 ton', fi: 'Kevyt ajettava kaivonkansi 590 komposiitti, 12,5 t', w: ['betong'], cls: 'B125', mat: 'komposit', kg: 10, price: 1749, lo: 400, hi: 550, f: ['las'], pop: 4 },
+      { id: 5470, sv: 'Lätt brunnslock 780 KÖRBART Composite 12,5 ton', fi: 'Kevyt ajettava kaivonkansi 780 komposiitti, 12,5 t', w: ['betong', 'hal600'], cls: 'B125', mat: 'komposit', kg: 15, price: 2895, lo: 580, hi: 670, f: ['las', 'tat'], pop: 3 },
+      { id: 9598, sv: 'Brunnslock 900 Composite B125 (12,5 ton)', fi: 'Kaivonkansi 900 komposiitti B125, 12,5 t', w: ['betong', 'slat', 'korr'], cls: 'B125', mat: 'komposit', kg: 22, price: 7722, lo: 870, hi: 930, f: ['las', 'tat'], pop: 6 },
+      { id: 5663, sv: 'Lätt körbart Brunnslock 900 Composite C250', fi: 'Kevyt ajettava kaivonkansi 900 komposiitti C250', w: ['betong', 'slat', 'korr'], cls: 'C250', mat: 'komposit', kg: 55, price: 9900, lo: 870, hi: 930, f: ['las'], pop: 7 },
+      { id: 6744, sv: 'Lätt brunnslock 790 KÖRBART Composite D400 (40 ton)', fi: 'Kevyt ajettava kaivonkansi 790 komposiitti D400, 40 t', w: ['betong', 'slat', 'korr', 'hal600'], cls: 'D400', mat: 'komposit', kg: 25, price: 3957, lo: 580, hi: 640, f: ['las', 'tat'], pop: 5 },
+      { id: 14355, sv: 'Brunnslock 600 till släta rör', fi: 'Kaivonkansi 600 sileään putkeen', w: ['slat'], cls: 'A15', mat: 'plast', kg: 4, price: 1995, lo: 574, hi: 604, f: ['las'], pop: 2 },
+      { id: 14413, sv: 'Brunnslock 400 till släta rör', fi: 'Kaivonkansi 400 sileään putkeen', w: ['slat'], cls: 'A15', mat: 'plast', kg: 2, price: 419, lo: 395, hi: 405, f: ['las'], pop: 3 },
+      { id: 16491, sv: 'Brunnslock 600 till korrugerat rör', fi: 'Kaivonkansi 600 korrugoituun putkeen', w: ['korr'], cls: 'A15', mat: 'plast', kg: 4, price: 986, lo: 560, hi: 620, f: ['las'], pop: 2 },
+      { id: 14332, sv: 'Brunnslock 400 till korrugerat rör', fi: 'Kaivonkansi 400 korrugoituun putkeen', w: ['korr'], cls: 'A15', mat: 'plast', kg: 2, price: 389, lo: 390, hi: 410, f: ['las'], pop: 3 },
+      { id: 7615, sv: 'Lock D600 HD-PE', fi: 'Kansi D600 HD-PE', w: ['slat', 'korr'], cls: 'A15', mat: 'pe', kg: 10, price: 1785, lo: 600, hi: 640, f: [], pop: 1 },
+      { id: 12011, sv: 'Lock D600 HD-PE isolerat', fi: 'Kansi D600 HD-PE, eristetty', w: ['slat', 'korr'], cls: 'A15', mat: 'pe', kg: 11, price: 2685, lo: 600, hi: 640, f: ['iso'], pop: 4 },
+      { id: 8334, sv: 'Lock 110 HD-PE', fi: 'Kansi 110 HD-PE', w: ['ror'], cls: 'A15', mat: 'pe', kg: 1, price: 96, olo: 105, ohi: 115, nomO: 110, f: [], pop: 3 },
+      { id: 1249, sv: 'Lock/Botten 200 HD-PE', fi: 'Kansi tai pohja 200 HD-PE', w: ['ror'], cls: 'A15', mat: 'pe', kg: 1, price: 147, olo: 190, ohi: 210, nomO: 200, f: ['las'], pop: 1 },
+      { id: 1248, sv: 'Lock/Botten 250 HD-PE', fi: 'Kansi tai pohja 250 HD-PE', w: ['ror'], cls: 'A15', mat: 'pe', kg: 1, price: 207, olo: 240, ohi: 260, nomO: 250, f: ['las'], pop: 2 },
+      { id: 2560, sv: 'Betonglock 600 till brunnsring', fi: 'Betonikansi 600 kaivonrenkaaseen', w: ['betong'], cls: 'A15', mat: 'betong', kg: 80, price: 1590, lo: 585, hi: 615, nom: 600, f: [], pop: 10 },
+      { id: 2562, sv: 'Betonglock 900 till brunnsring', fi: 'Betonikansi 900 kaivonrenkaaseen', w: ['betong'], cls: 'A15', mat: 'betong', kg: 155, price: 2990, lo: 885, hi: 915, nom: 900, f: [], pop: 10 },
+      { id: 2565, sv: 'Betonglock 900 körbart', fi: 'Betonikansi 900, ajettava', w: ['betong'], cls: 'D400', mat: 'betong', kg: 260, price: 5695, lo: 885, hi: 915, nom: 900, f: [], pop: 11 },
+      { id: 7356, sv: 'Betonglock 900 med luftningsventil', fi: 'Betonikansi 900 tuuletusventtiilillä', w: ['betong'], cls: 'A15', mat: 'betong', kg: 160, price: 3290, lo: 885, hi: 915, nom: 900, f: ['vent'], pop: 11 },
+      { id: 7158, sv: 'Betonglock 900 till gårdspump', fi: 'Betonikansi 900 pihapumpulle', w: ['betong'], cls: 'A15', mat: 'betong', kg: 160, price: 2990, lo: 885, hi: 915, nom: 900, f: ['pump'], pop: 11 },
+      { id: 2570, sv: 'Betonglock 900 med manhål', fi: 'Betonikansi 900 huoltoaukolla', w: ['betong'], cls: 'A15', mat: 'betong', kg: 120, price: 4295, lo: 885, hi: 915, nom: 900, f: ['manhal'], pop: 11 },
+      { id: 2559, sv: 'Betonglock 600 till muffrör', fi: 'Betonikansi 600 muhviputkeen', w: ['muff'], cls: 'A15', mat: 'betong', kg: 81, price: 1590, lo: 585, hi: 615, nom: 600, f: [], pop: 10 },
+      { id: 2558, sv: 'Betonglock 500 till muffrör', fi: 'Betonikansi 500 muhviputkeen', w: ['muff'], cls: 'A15', mat: 'betong', kg: 52, price: 1050, lo: 485, hi: 515, nom: 500, f: [], pop: 10 }
+    ];
+    const ACC = { tat600: 595, tat900: 875, vent: 569, hang: 279, hojd600: 895, hojd640: 895, hojdVet: null };
+    const TYPES = ['betong', 'slat', 'korr', 'muff', 'hal600', 'ror'];
+    const LOADS = ['A15', 'B125', 'C250', 'D400'];
+    const TONS = { A15: '1,5', B125: '12,5', C250: '25', D400: '40' };
+    const MATS = ['latt', 'betong', 'gjut', 'any'];
+    const EXTRAS = ['las', 'iso', 'vent', 'pump', 'manhal', 'tat'];
+    const CONCRETE = ['betong', 'muff', 'hal600'];
+
+    const num = (v) => { const n = parseInt(String(v).replace(/\s/g, ''), 10); return n >= 100 && n <= 2000 ? n : null; };
+    const fmtN = (n) => n.toLocaleString(loc);
+    const fmt = (n) => n == null ? '' : Math.round(S.vat === 'exkl' ? n / 1.25 : n).toLocaleString(loc) + ' kr';
+    const known = (v) => v && v !== 'vet';
+    const isRor = S.typ === 'ror';
+
+    // ---------- suodattimet (samat kuin kategoriasivulla) ----------
+    const inner = num(S.inner), outer = num(S.outer);
+    const tests = {
+      typ: (p, a) => !known(a.typ) || p.w.indexOf(a.typ) >= 0,
+      last: (p, a) => !known(a.last) || LOADS.indexOf(p.cls) >= LOADS.indexOf(a.last),
+      mat: (p, a) => !known(a.mat) || a.mat === 'any' || (a.mat === 'latt' ? (p.kg <= 25 && p.mat !== 'betong') : a.mat === 'betong' ? p.mat === 'betong' : p.mat === 'gjutjarn'),
+      mm: (p, a) => {
+        if (a.mmSkip) return true;
+        if (a.typ === 'ror') return a.outer == null || (p.olo != null && a.outer >= p.olo && a.outer <= p.ohi);
+        if (a.inner != null && !(p.lo != null && a.inner >= p.lo && a.inner <= p.hi)) return false;
+        if (a.outer != null && p.olo != null && !(a.outer >= p.olo && a.outer <= p.ohi)) return false;
+        if (a.inner == null && a.outer != null && p.olo == null) return false;
+        return true;
+      },
+      extras: (p, a) => a.extras.every((x) => p.f.indexOf(x) >= 0 || (p.opt || []).indexOf(x) >= 0)
+    };
+    // Putkessa ainoa mitta on ulkomitta, joka tallentuu ensimmäiseen kenttään.
+    const A = { typ: S.typ, last: S.last, mat: S.mat, inner: isRor ? null : inner, outer: isRor ? inner : outer, mmSkip: S.mmSkip, extras: S.extras };
+    const passWith = (p, a) => Object.keys(tests).every((k) => tests[k](p, a));
+    const matchesFor = (patch) => { const a = Object.assign({}, A, patch); return ALL.filter((p) => passWith(p, a)); };
+    const matches = matchesFor({});
+
+    // ---------- askeleet ----------
+    const steps = ['typ', 'last', 'mat', 'matt', 'extras'].concat(CONCRETE.indexOf(S.typ) >= 0 ? ['hojd'] : []);
+    const idx = steps.indexOf(S.step);
+    const inQuestion = idx >= 0;
+    const go = (step) => { this.setState({ step: step, guideOpen: false }); setTimeout(() => { const h = document.getElementById(step === 'result' ? 'pg-rh' : 'pg-qh'); const box = document.getElementById('pg-q'); if (box && box.getBoundingClientRect().top < 0) box.scrollIntoView({ behavior: 'smooth' }); if (h) h.focus({ preventScroll: true }); }, 30); };
+    const nextOf = (step) => { const i = steps.indexOf(step); return i >= 0 && i < steps.length - 1 ? steps[i + 1] : 'result'; };
+    const advance = (patch) => { this.setState(patch); go(nextOf(S.step)); };
+
+    const optStyle = (on, dim) => 'display: flex; flex-direction: column; align-items: flex-start; gap: 8px; text-align: left; min-height: 96px; padding: 16px; border-radius: 10px; font: inherit; color: #111111; cursor: pointer; ' + (on ? 'border: 2px solid #111111; background: #f5f5f4; box-shadow: inset 0 0 0 1px #111111;' : 'border: 1px solid #d4d4d2; background: #ffffff;') + (dim ? ' opacity: 0.6;' : '');
+    const optStyleRow = (on, dim) => optStyle(on, dim).replace('min-height: 96px;', 'min-height: 72px;');
+    const icon = (id) => ({ hasIcon: true, iBetong: id === 'betong', iSlat: id === 'slat', iKorr: id === 'korr', iMuff: id === 'muff', iHal: id === 'hal600', iRor: id === 'ror', iVet: id === 'vet' });
+
+    let q = { title: '', help: '', hasOpts: false, opts: [], isMatt: false, isHojd: false, vetLabel: '', skipLabel: '', nextLabel: '' };
+    let m = {}, h = {};
+    if (inQuestion) {
+      const QT = T.q[S.step];
+      q.title = QT[0]; q.help = QT[1];
+      if (S.step === 'typ') {
+        q.hasOpts = true;
+        q.opts = TYPES.map((id) => { const n = matchesFor({ typ: id }).length; const on = S.typ === id; return Object.assign(icon(id), { title: T.typ[id][0], sub: T.typ[id][1], count: T.optCount(n), pressed: String(on), style: optStyle(on, n === 0), pick: () => advance({ typ: id, inner: id === 'hal600' && !S.inner ? '600' : (S.typ === 'hal600' && id !== 'hal600' && S.inner === '600' ? '' : S.inner), outer: id === 'ror' ? '' : S.outer, mmSkip: false }) }); });
+        q.opts.push(Object.assign(icon('vet'), { title: T.vet, sub: T.vetSub, count: '', pressed: String(S.typ === 'vet'), style: optStyle(S.typ === 'vet', false), pick: () => advance({ typ: 'vet' }) }));
+      } else if (S.step === 'last') {
+        q.hasOpts = true;
+        q.opts = LOADS.map((id) => { const n = matchesFor({ last: id }).length; const on = S.last === id; return { title: T.last[id][0], sub: T.last[id][1], count: T.optCount(n), pressed: String(on), style: optStyleRow(on, n === 0), pick: () => advance({ last: id }) }; });
+        q.vetLabel = T.vet; q.vetPressed = String(S.last === 'vet'); q.vet = () => advance({ last: 'vet' });
+      } else if (S.step === 'mat') {
+        q.hasOpts = true;
+        q.opts = MATS.map((id) => { const n = matchesFor({ mat: id }).length; const on = S.mat === id; return { title: T.mat[id][0], sub: T.mat[id][1], count: T.optCount(n), badge: id === 'latt' ? T.popular : '', pressed: String(on), style: optStyleRow(on, n === 0), pick: () => advance({ mat: id }) }; });
+        q.vetLabel = T.vet; q.vetPressed = String(S.mat === 'vet'); q.vet = () => advance({ mat: 'vet' });
+      } else if (S.step === 'matt') {
+        q.isMatt = true;
+        const kind = isRor ? 'ror' : S.typ === 'hal600' ? 'hal600' : (S.typ === 'slat' || S.typ === 'korr' || S.typ === 'muff') ? 'plast' : 'betong';
+        q.help = T.mHelp[kind];
+        const v1 = num(S.inner), v2 = num(S.outer);
+        const raw1 = String(S.inner).trim(), raw2 = String(S.outer).trim();
+        const bad = (raw1 && v1 == null) || (raw2 && v2 == null);
+        const n = matches.length;
+        const shown = isRor ? v1 : (v1 || v2);
+        const measured = !shown ? '' : isRor || !v2 ? fmtN(shown) + ' mm' : T.mmValue(v1 ? fmtN(v1) : '', fmtN(v2), false).toLowerCase();
+        const quickSets = { betong: [600, 800, 900, 1000], plast: [315, 400, 600], hal600: [600], ror: [110, 200, 250] };
+        const qb = (on) => 'min-height: 40px; min-width: 56px; padding: 0 10px; border-radius: 6px; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; ' + (on ? 'border: 1.5px solid #111111; background: #111111; color: #ffffff;' : 'border: 1.5px solid #bdbdbb; background: #ffffff; color: #111111;');
+        m = {
+          label1: isRor ? T.mRorLabel : T.mInnerLabel, v1: S.inner, type1: (e) => this.setState({ inner: e.target.value, mmSkip: false }),
+          hasSecond: kind === 'betong', label2: T.mOuterLabel, v2: S.outer, type2: (e) => this.setState({ outer: e.target.value, mmSkip: false }),
+          quick: quickSets[kind].map((v) => ({ label: String(v), pressed: String(v1 === v), style: qb(v1 === v), pick: () => this.setState({ inner: v1 === v ? '' : String(v), mmSkip: false }) })),
+          note: bad ? T.mBad : !shown ? T.mEmpty : n ? T.mFit(n, measured) : T.mNone(measured),
+          noteStyle: 'font-size: 15px; ' + (shown && !bad ? 'font-weight: 600; color: #111111;' : 'color: #474747;'),
+          guideOpen: S.guideOpen,
+          closeGuide: () => { this.setState({ guideOpen: false }); setTimeout(() => { const i = document.querySelector('#pg-q input'); if (i) i.focus(); }, 30); },
+          skipMeasure: () => advance({ mmSkip: true, inner: S.typ === 'hal600' ? S.inner : '', outer: '', guideOpen: false })
+        };
+        q.vetLabel = T.mVet; q.vetPressed = String(S.guideOpen); q.vet = () => this.setState({ guideOpen: !S.guideOpen });
+        q.nextLabel = T.next; q.nextDisabled = !shown || bad; q.next = () => advance({ mmSkip: false });
+      } else if (S.step === 'extras') {
+        q.hasOpts = true;
+        q.opts = EXTRAS.map((id) => { const on = S.extras.indexOf(id) >= 0; const n = matchesFor({ extras: on ? S.extras : S.extras.concat([id]) }).length; return { title: T.extras[id][0], sub: T.extras[id][1], count: T.optCount(n), pressed: String(on), style: optStyleRow(on, !on && n === 0), pick: () => this.setState({ extras: on ? S.extras.filter((x) => x !== id) : S.extras.concat([id]) }) }; });
+        q.skipLabel = S.extras.length ? '' : T.skip; q.skip = () => advance({ extras: [], extrasDone: true });
+        q.nextLabel = nextOf('extras') === 'result' ? T.toResult : T.next; q.next = () => advance({ extrasDone: true });
+      } else if (S.step === 'hojd') {
+        q.hasOpts = true; q.isHojd = true;
+        q.opts = ['nej', 'ja', 'vet'].map((id) => { const on = S.hojd === id; return { title: T.hojd[id][0], sub: T.hojd[id][1], count: '', pressed: String(on), style: optStyleRow(on, false), pick: () => id === 'ja' ? this.setState({ hojd: 'ja' }) : advance({ hojd: id }) }; });
+        h = { showInput: S.hojd === 'ja', mm: S.hojdMm, typeMm: (e) => this.setState({ hojdMm: e.target.value }) };
+        q.nextLabel = S.hojd === 'ja' ? T.toResult : ''; q.next = () => go('result');
+      }
+      q.opts = q.opts.map((o) => Object.assign({}, o, { aria: [o.title, o.sub, o.count].filter(Boolean).join(', ') }));
+      q.nextStyle = 'min-height: 48px; padding: 0 20px; border: 0; border-radius: 6px; font: inherit; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; ' + (q.nextDisabled ? 'background: #d4d4d2; color: #5c5c5c; cursor: not-allowed;' : 'background: #111111; color: #ffffff; cursor: pointer;');
+    }
+
+    // ---------- vastaukset = suodattimet ----------
+    const G = T.groups;
+    const answers = [];
+    const chips = [];
+    if (S.typ) { answers.push({ key: 'typ', group: G.typ, value: S.typ === 'vet' ? T.vet : T.typ[S.typ][0] }); if (known(S.typ)) chips.push({ label: T.typ[S.typ][0], group: G.typ, remove: () => this.setState({ typ: null }) }); }
+    if (S.last) { answers.push({ key: 'last', group: G.last, value: S.last === 'vet' ? T.vet : S.last + ', ' + T.last[S.last][0].toLowerCase() }); if (known(S.last)) chips.push({ label: S.last, group: G.last, remove: () => this.setState({ last: null }) }); }
+    if (S.mat) { answers.push({ key: 'mat', group: G.mat, value: S.mat === 'vet' ? T.vet : T.mat[S.mat][0] }); if (known(S.mat) && S.mat !== 'any') chips.push({ label: T.mat[S.mat][0], group: G.mat, remove: () => this.setState({ mat: null }) }); }
+    const mmTxt = isRor ? (A.outer ? T.mmValue(null, fmtN(A.outer), true) : '') : T.mmValue(inner ? fmtN(inner) : '', outer ? fmtN(outer) : '', false);
+    if (S.mmSkip) answers.push({ key: 'matt', group: G.mm, value: T.mmLater });
+    else if (mmTxt && (idx > steps.indexOf('matt') || S.step === 'result')) { answers.push({ key: 'matt', group: G.mm, value: mmTxt }); chips.push({ label: mmTxt, group: G.mm, remove: () => this.setState({ inner: '', outer: '' }) }); }
+    if (S.extras.length) { answers.push({ key: 'extras', group: G.extras, value: S.extras.map((x) => T.extras[x][0]).join(', ') }); S.extras.forEach((x) => chips.push({ label: T.extras[x][0], group: G.extras, remove: () => this.setState({ extras: S.extras.filter((y) => y !== x) }) })); }
+    else if (S.extrasDone) answers.push({ key: 'extras', group: G.extras, value: T.noExtras });
+    if (S.hojd && steps.indexOf('hojd') >= 0) answers.push({ key: 'hojd', group: G.hojd, value: S.hojd === 'ja' ? T.hojdJa(num(S.hojdMm) || String(S.hojdMm).trim()) : T.hojd[S.hojd][0] });
+
+    const catParams = [];
+    if (known(S.typ)) catParams.push('typ=' + S.typ);
+    if (known(S.last)) catParams.push('klass=' + S.last);
+    if (known(S.mat) && S.mat !== 'any') catParams.push('lock=' + S.mat);
+    if (inner) catParams.push('mm=' + inner);
+    if (S.extras.length) catParams.push('egenskaper=' + S.extras.join(','));
+    const catHref = P.cat + (catParams.length ? '?' + catParams.join('&') : '');
+
+    // ---------- tulos ----------
+    const unknownN = ['typ', 'last', 'mat'].filter((k) => S[k] === 'vet').length + (S.mmSkip ? 1 : 0) + (S.hojd === 'vet' && steps.indexOf('hojd') >= 0 ? 1 : 0);
+    const ranked = matches.slice().sort((a, b) => a.pop - b.pop || a.price - b.price);
+    const recsRaw = ranked.slice(0, 3);
+    const top = recsRaw[0];
+    const reasons = (p) => {
+      const W = T.why, out = [];
+      if (known(S.typ)) out.push(W.typ[S.typ]);
+      if (p.w.indexOf('ror') >= 0) out.push(W.rorNom(fmtN(p.nomO)) + (A.outer ? W.you(fmtN(A.outer)) : ''));
+      else if (p.nom) out.push(W.nom(fmtN(p.nom)) + (inner ? W.you(fmtN(inner)) : ''));
+      else if (p.lo) out.push(W.range(fmtN(p.lo), fmtN(p.hi)) + (inner ? W.you(fmtN(inner)) : ''));
+      out.push(W.load(TONS[p.cls], p.cls));
+      out.push(p.kg <= 15 ? W.kgLight(p.kg) : p.kg <= 25 ? W.kgMid(p.kg) : W.kgHeavy(p.kg));
+      const feats = S.extras.length ? S.extras : p.f.filter((x) => x === 'las');
+      feats.forEach((x) => { if (p.f.indexOf(x) >= 0) out.push(W[x]); else if ((p.opt || []).indexOf(x) >= 0) out.push(W[x + 'Opt']); });
+      return out;
+    };
+    const acc = [];
+    if (top && !S.form) {
+      const concreteWell = CONCRETE.indexOf(S.typ) >= 0 || (!known(S.typ) && top.w.indexOf('betong') >= 0);
+      const addAcc = (k) => acc.push({ name: T.acc[k][0], why: T.acc[k][1], price: ACC[k] == null ? '' : fmt(ACC[k]), imgAlt: T.acc[k][0] });
+      if (concreteWell && top.mat !== 'betong' && top.f.indexOf('tat') < 0) { if (top.lo && top.hi <= 700) addAcc('tat600'); else if (top.lo && top.lo >= 850 && top.hi <= 940) addAcc('tat900'); }
+      if (S.extras.indexOf('vent') >= 0 && top.f.indexOf('vent') < 0) addAcc('vent');
+      if (S.extras.indexOf('las') >= 0 && top.mat === 'pe' && top.w.indexOf('betong') >= 0) addAcc('hang');
+      if (steps.indexOf('hojd') >= 0 && S.hojd === 'ja') addAcc(inner && inner >= 630 && inner <= 660 ? 'hojd640' : 'hojd600');
+      if (steps.indexOf('hojd') >= 0 && S.hojd === 'vet') addAcc('hojdVet');
+    }
+    const offert = known(S.last) && LOADS.indexOf(S.last) > LOADS.indexOf('B125');
+    const relax = chips.slice(0, 4).map((c) => ({ label: T.relax(c.group), go: c.remove }));
+
+    // ---------- lomake: vastaukset kulkevat mukana ----------
+    const openForm = (mode) => { this.setState({ form: mode, sent: false }); setTimeout(() => { const el = document.getElementById('pg-form'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 30); };
+    const summary = answers.map((a) => ({ group: a.group, value: a.value }));
+    if (top) summary.push({ group: T.best, value: top[LANG] });
+
+    const total = ALL.length;
+    const n = matches.length;
+    const answered = answers.length > 0;
+
+    return {
+      t: T, cart: 0, vat: S.vat, setVat: (v) => this.setState({ vat: v }), vatLabel: S.vat === 'exkl' ? (LANG === 'fi' ? 'alv 0' : 'exkl. moms') : (LANG === 'fi' ? 'sis. alv' : 'inkl. moms'),
+      homeHref: P.home, catHref: catHref, productHref: P.product, cartHref: P.cart,
+      tabs: T.tabs.map((l, i) => ({ label: l, href: i === 0 ? '#' : '#', current: i === 0 ? 'page' : 'false', style: 'min-height: 40px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 999px; font-size: 15px; font-weight: 600; text-decoration: none; white-space: nowrap; ' + (i === 0 ? 'background: #111111; color: #ffffff; border: 1px solid #111111;' : 'border: 1px solid #d4d4d2; color: #111111;') })),
+      inQuestion: inQuestion, isResult: S.step === 'result',
+      progressLabel: inQuestion ? T.progress(idx + 1, steps.length) : '', progressPct: String(inQuestion ? Math.round((idx + 1) / steps.length * 100) : 100),
+      progressStyle: 'height: 100%; background: #111111; border-radius: 3px; transition: width 200ms ease; width: ' + (inQuestion ? Math.round((idx + 1) / steps.length * 100) : 100) + '%',
+      optionalLabel: S.step === 'extras' || S.step === 'hojd' ? T.optional : '',
+      q: q, m: m, h: h,
+      canBack: idx > 0, back: () => go(steps[idx - 1]),
+      countBig: T.count(n), countSub: T.countSub(total), barSub: T.countSub(total), barShow: String(S.step !== 'result'),
+      countBarStyle: 'height: 100%; background: #111111; border-radius: 3px; transition: width 200ms ease; width: ' + Math.max(n ? 3 : 0, Math.round(n / total * 100)) + '%',
+      showInList: T.showInList(n),
+      noAnswers: !answered,
+      answers: answers.map((a) => ({ group: a.group, value: a.value, aria: T.editAria(a.group), edit: () => go(a.key) })),
+      chips: chips.map((c) => ({ label: c.label, aria: T.removeAria(c.label), remove: c.remove })),
+      backFromResult: () => go(steps[steps.length - 1]),
+      restart: () => { this.setState({ typ: null, last: null, mat: null, inner: '', outer: '', mmSkip: false, extras: [], extrasDone: false, hojd: null, hojdMm: '', form: null, sent: false }); go('typ'); },
+      r: {
+        title: n ? T.resTitle : T.resNoneTitle, lead: n ? T.resLead(n) : T.resNoneLead,
+        help: unknownN > 0, helpText: T.helpText(unknownN), openFoto: () => openForm('foto'),
+        none: n === 0, relax: relax, addCustom: () => { if (typeof window !== 'undefined' && window.SBCart) window.SBCart.add('mittakansi', 1); }, openKontakt: () => openForm('kontakt'),
+        offert: offert && n > 0, openOffert: () => openForm('offert'),
+        hasRecs: recsRaw.length > 0,
+        recs: recsRaw.map((p, i) => ({ name: p[LANG], cls: p.cls + ' · ' + T.mats[p.mat], reasons: reasons(p), price: fmt(p.price), badge: i === 0 ? T.best : '', imgAlt: T.imgPh + ': ' + p[LANG],
+          cardStyle: 'border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; background: #ffffff; ' + (i === 0 ? 'border: 2px solid #111111;' : 'border: 1px solid #e2e2e0;'),
+          ctaStyle: 'min-height: 48px; display: inline-flex; align-items: center; justify-content: center; padding: 0 16px; border-radius: 6px; font-weight: 600; font-size: 15px; text-decoration: none; ' + (i === 0 ? 'background: #111111; color: #ffffff;' : 'border: 1.5px solid #111111; color: #111111;') })),
+        hasAcc: acc.length > 0, acc: acc,
+        hasAll: n > 3, allTitle: T.allTitle(n - 3),
+        all: ranked.slice(3).map((p) => ({ name: p[LANG], price: fmt(p.price), line: p.cls + ' · ' + T.mats[p.mat] + ' · ' + p.kg + ' kg' + (p.lo ? ' · ' + fmtN(p.lo) + (p.hi !== p.lo ? '-' + fmtN(p.hi) : '') + ' mm' : p.nomO ? ' · Ø ' + p.nomO + ' mm' : '') })),
+        showFotoLink: unknownN === 0 && n > 0
+      },
+      formOpen: !!S.form,
+      f: S.form ? {
+        title: T.fTitle[S.form], close: () => this.setState({ form: null, sent: false }), sent: S.sent, editing: !S.sent,
+        sentText: T.fSentText(String(S.fContact).trim() || '...'),
+        summary: summary, name: S.fName, contact: S.fContact, zip: S.fZip, msg: S.fMsg,
+        typeName: (e) => this.setState({ fName: e.target.value }), typeContact: (e) => this.setState({ fContact: e.target.value }), typeZip: (e) => this.setState({ fZip: e.target.value }), typeMsg: (e) => this.setState({ fMsg: e.target.value }),
+        photoLabel: S.fPhoto ? T.fPhotoPicked(S.fPhoto) : T.fPhotoBtn, pickPhoto: (e) => { const fl = e.target.files && e.target.files[0]; this.setState({ fPhoto: fl ? fl.name : '' }); },
+        submitLabel: T.fSend[S.form], submit: () => this.setState({ sent: true })
+      } : {}
+    };
+  }
+}
+</script>
+</body>
+</html>

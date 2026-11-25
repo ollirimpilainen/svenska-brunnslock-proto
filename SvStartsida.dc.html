@@ -25,7 +25,7 @@ a{color:#111111}a:hover{color:#474747}
 <p style="margin: 0; font-size: 19px; color: #474747; max-width: 34em">Vi levererar direkt från våra leverantörer i Sverige och Europa. När du inte är säker på vad som passar, ring oss så hjälper vi dig att välja.</p>
 <div style="display: flex; gap: 12px 16px; flex-wrap: wrap; align-items: center">
 <a href="#sortiment" style="min-height: 52px; display: inline-flex; align-items: center; padding: 0 24px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">Se sortimentet</a>
-<a href="#" style="min-height: 52px; display: inline-flex; align-items: center; padding: 0 24px; border-radius: 6px; border: 1.5px solid #bdbdbb; background: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">Hjälp att välja</a>
+<a href="SvProduktguide.dc.html" style="min-height: 52px; display: inline-flex; align-items: center; padding: 0 24px; border-radius: 6px; border: 1.5px solid #bdbdbb; background: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">Hjälp att välja</a>
 </div>
 <p style="margin: 0; font-size: 15px; color: #474747">Ring <a href="tel:+46920520056" style="font-weight: 600">0920-52 00 56</a>. Vi svarar även på helger.</p>
 </div>
@@ -96,7 +96,7 @@ a{color:#111111}a:hover{color:#474747}
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px">
 <sc-for list="{{ guides }}" as="g" hint-placeholder-count="4">
-<a href="#" style="border: 1px solid #e2e2e0; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; background: #ffffff">
+<a href="{{ g.href }}" style="border: 1px solid #e2e2e0; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; background: #ffffff">
 <h3 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 19px; color: #111111">{{ g.title }}</h3>
 <span style="font-size: 14px; color: #474747">{{ g.text }}</span>
 <span style="margin-top: auto; padding-top: 8px; font-size: 14px; font-weight: 600">{{ g.steps }}</span>
@@ -186,10 +186,10 @@ class Component extends DCLogic {
         { name: 'Betongring Ø 600', cls: '', fit: 'Höjd 500 mm. Levereras på pall.', price: popFmt(890), href: '#', img: 'Bild: Betongring Ø 600' }
       ],
       guides: [
-        { title: 'Brunnslock', text: 'Brunnstyp, mått och vad som går över locket.', steps: '4 frågor' },
-        { title: 'Lucka', text: 'Var luckan sitter, öppningens mått och last.', steps: '4 frågor' },
-        { title: 'Plintar', text: 'Vad du bygger, ytan och marken.', steps: '3 frågor' },
-        { title: 'Kabelbrunn', text: 'Nät, modell, belastning och innermått.', steps: '4 frågor' }
+        { href: 'SvProduktguide.dc.html', title: 'Brunnslock', text: 'Brunnstyp, mått och vad som går över locket.', steps: '4 frågor' },
+        { href: '#', title: 'Lucka', text: 'Var luckan sitter, öppningens mått och last.', steps: '4 frågor' },
+        { href: '#', title: 'Plintar', text: 'Vad du bygger, ytan och marken.', steps: '3 frågor' },
+        { href: '#', title: 'Kabelbrunn', text: 'Nät, modell, belastning och innermått.', steps: '4 frågor' }
       ]
     };
   }

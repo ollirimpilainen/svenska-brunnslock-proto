@@ -50,7 +50,7 @@ a{color:#111111}a:hover{color:#474747}
 <nav aria-label="Päävalikko" style="border-top: 1px solid #e2e2e0">
 <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; display: flex; gap: 4px; overflow-x: auto">
 <button type="button" onClick="{{ toggleMenu }}" aria-expanded="{{ menuOpen }}" aria-controls="mega-fi" style="{{ navSortiment }}">Valikoima<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="{{ chevron }}"><path d="m6 9 6 6 6-6"/></svg></button>
-<a href="#" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid transparent">Apu valintaan</a>
+<a href="FiTuoteapuri.dc.html" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid transparent">Löydä oikea tuote</a>
 <a href="#" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid transparent">Oppaat</a>
 <a href="#" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid transparent">Yritykset ja hankkeet</a>
 <a href="#" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid transparent">Asiakaspalvelu</a>
@@ -72,7 +72,7 @@ a{color:#111111}a:hover{color:#474747}
 </div>
 <div style="display: flex; gap: 12px 32px; flex-wrap: wrap; align-items: center; border-top: 1px solid #e2e2e0; padding-top: 16px; font-size: 14px">
 <span style="color: #474747">Etkö tiedä, mitä tarvitset?</span>
-<a href="#" style="font-weight: 600">Apu valintaan</a>
+<a href="FiTuoteapuri.dc.html" style="font-weight: 600">Löydä oikea tuote</a>
 <a href="#" style="font-weight: 600">Kaivon mittaaminen</a>
 <a href="tel:+46920520056" style="font-weight: 600">Soita 0920-52 00 56</a>
 </div>
@@ -100,7 +100,7 @@ class Component extends DCLogic {
       { title: 'Rakentaminen', href: '#', subs: L(['Betoniplintit', 'Pylväsperustukset ja pylväskengät', 'Maaruuvit', 'Lasikuitutikkaat', 'Putoamissuojaus']) },
       { title: 'Liikenne', href: '#', subs: L(['Valurautakannet ja katuvalut', 'Lentokenttien ja satamien kannet', 'Kanavaritilät', 'Rumpusilmät', 'Meluesteiden pylväät', 'Perustukset 60 mm:n putkille']) }
     ];
-    const PAIRS = [['FiEtusivu', 'SvStartsida'], ['FiKategoria', 'SvKategori'], ['FiTuote', 'SvProdukt'], ['FiOstoskori', 'SvVarukorg'], ['FiKassa', 'SvKassa'], ['FiKiitos', 'SvTack'], ['FiTarjous', 'SvOffert']];
+    const PAIRS = [['FiEtusivu', 'SvStartsida'], ['FiKategoria', 'SvKategori'], ['FiTuote', 'SvProdukt'], ['FiOstoskori', 'SvVarukorg'], ['FiKassa', 'SvKassa'], ['FiKiitos', 'SvTack'], ['FiTarjous', 'SvOffert'], ['FiTuoteapuri', 'SvProduktguide']];
     const page = (typeof location !== 'undefined' ? location.pathname.split('/').pop() : '').replace('.dc.html', '');
     const pair = PAIRS.find((p) => p[0] === page || p[1] === page) || PAIRS[0];
     const ME = 'fi';
