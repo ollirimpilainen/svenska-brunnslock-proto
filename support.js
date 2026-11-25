@@ -298,7 +298,7 @@
       // ombud enintään 20 kg, kotiinkuljetus pakettina enintään 30 kg, tung kotiinkuljetus enintään 150 kg, sen yli lava;
       // lavalla kulkee muita tuotteita enintään 1 000 kg; yli 5 lavaa tarjoukseen.
       var OMB_KG = FREIGHT_OMBUD_MAX_KG, HOME_KG = FREIGHT_HOME_MAX_KG, HEAVY_KG = FREIGHT_HEAVY_MAX_KG, RIDER_KG = FREIGHT_RIDER_MAX_KG, PALL_KG = FREIGHT_PALLET_MAX_KG, MAX_PALL = FREIGHT_MAX_PALLETS, PT = PALLET_TYPES;
-      var W = 0, riderKg = 0, unknownPall = false, noKg = [], has = {}, share = {};
+      var W = 0, riderKg = 0, hasGeneral = false, unknownPall = false, noKg = [], has = {}, share = {};
       ls.forEach(function (l) {
         var kg = l.kg == null ? 0 : l.kg * l.qty, pa = null;
         has[l.fr] = true;
@@ -306,7 +306,9 @@
         if (l.fr === 'pall' || l.fr === 'plint') {
           var c = l.id ? catalog()[l.id] : null;
           pa = l.pt ? { type: l.pt, per: l.per } : c && c.pt ? { type: c.pt, per: c.per } : palletOf({ fr: l.fr, n: l.name });
-          share[pa.type] = (share[pa.type] || 0) + l.qty / pa.per;
+          // Vain omat lavatyypit (plintit, betonikannet) lasketaan kappaleina. Muu lavatavara lasketaan painona kuten muut tuotteet.
+          if (pa.type === 'general') { riderKg += kg; hasGeneral = true; }
+          else share[pa.type] = (share[pa.type] || 0) + l.qty / pa.per;
           // Lavatuote ilman painoa ei pääse kotiinkuljetukseen (3.2 kohta 6). Muu tuote ilman painoa lasketaan 0 kg:ksi.
           if (l.kg == null) unknownPall = true;
         } else {
@@ -324,7 +326,8 @@
       var home = function (txt) { return { price: FREIGHT_HOME_PRICE, key: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), note: same + nk, options: [{ id: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), text: txt + same + nk, price: FREIGHT_HOME_PRICE }] }; };
       var heavyLbl = T('Hemleverans, tungt gods', 'Kotiinkuljetus, raskas tavara');
       var heavy = function (txt) { return { price: FREIGHT_HEAVY_PRICE, key: 'tung', label: heavyLbl, note: same + nk, options: [{ id: 'tung', label: heavyLbl, text: txt + same + nk, price: FREIGHT_HEAVY_PRICE }] }; };
-      var hasPall = Object.keys(share).length > 0;
+      var hasPall = Object.keys(share).length > 0 || hasGeneral;   // lavatavaraa korissa
+      var hasOwn = Object.keys(share).length > 0;                    // omia lavatyyppejä (plintit, betonikannet)
       var wTxt = T('Ordern väger ' + kgTxt + '. ', 'Tilaus painaa ' + kgTxt + '. ');
       // 1 Koko kori enintään 30 kg: kotiinkuljetus pakettina, myös lavatuotteilla (kevyt lavatilaus)
       if (W <= HOME_KG && !unknownPall && (hasPall || has.skrym || W > OMB_KG)) return home(wTxt);
@@ -336,12 +339,12 @@
         // Ilman lavatuotteita yli 150 kg:n kori menee yleislavoille painon mukaan (enintään 1 000 kg per lava).
         var n = {};
         Object.keys(share).forEach(function (k) { n[k] = Math.ceil(share[k] - 1e-9); });
-        var extra = hasPall ? (riderKg > RIDER_KG ? Math.ceil((riderKg - RIDER_KG) / PALL_KG) : 0) : Math.ceil(W / PALL_KG);
+        var extra = hasOwn ? (riderKg > RIDER_KG ? Math.ceil((riderKg - RIDER_KG) / PALL_KG) : 0) : Math.max(1, Math.ceil(W / PALL_KG));
         if (extra) n.general = (n.general || 0) + extra;
         var pallets = 0, pp = 0;
         Object.keys(n).forEach(function (k) { pallets += n[k]; pp += n[k] * PT[k].price; });
         var pl = pallets + ' ' + T(pallets === 1 ? 'pall' : 'pallar', pallets === 1 ? 'lava' : 'lavaa');
-        var why = hasPall ? (riderKg > RIDER_KG ? T('Övriga produkter väger ' + Math.round(riderKg).toLocaleString('sv-SE') + ' kg och behöver egna pallar. ', 'Muut tuotteet painavat ' + Math.round(riderKg).toLocaleString('sv-SE') + ' kg ja tarvitsevat omat lavat. ')
+        var why = hasOwn ? (riderKg > RIDER_KG ? T('Övriga produkter väger ' + Math.round(riderKg).toLocaleString('sv-SE') + ' kg och behöver egna pallar. ', 'Muut tuotteet painavat ' + Math.round(riderKg).toLocaleString('sv-SE') + ' kg ja tarvitsevat omat lavat. ')
             : riderKg > 0 ? T('Lättare produkter följer med pallen utan extra kostnad. ', 'Kevyemmät tuotteet kulkevat lavan mukana ilman lisähintaa. ') : '')
           : T('Ordern väger ' + kgTxt + ', så den skickas på pall. ', 'Tilaus painaa ' + kgTxt + ', joten se lähtee lavalla. ');
         // 3 Yli 5 lavaa: rahti offeroidaan, eikä sitä lisätä summaan
