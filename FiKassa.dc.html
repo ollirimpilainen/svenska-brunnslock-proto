@@ -172,7 +172,7 @@ class Component extends DCLogic {
     const cl = SBc && SBc.items().length ? SBc.lines('fi') : [{ name: 'Kevyt kaivonkansi 1050 komposiitti', price: 2645, qty: 1 }, { name: 'Ilmanpoistoventtiili', price: 569, qty: 1 }];
     const sum = cl.reduce((t, l) => t + (l.price || 0) * l.qty, 0);
     // Rahti rahtiprofiilin mukaan (support.js SBCart.freight), sama hinta koko Ruotsiin: postinumero on vain toimitusosoite
-    const fr = SBc ? SBc.freight(cl.map((l) => ({ fr: l.fr || 'skrym', kg: l.kg, qty: l.qty, quote: l.price == null })), 'fi') : { options: [{ id: 'skrym', label: 'Kotiinkuljetus', text: '', price: 590 }] };
+    const fr = SBc && SBc.freight ? SBc.freight(cl.map((l) => ({ fr: l.fr || 'skrym', kg: l.kg, qty: l.qty, quote: l.price == null })), 'fi') : { options: [{ id: 'skrym', label: 'Kotiinkuljetus', text: '', price: 590 }] };
     const ships = fr.options.length ? fr.options : [{ id: 'skrym', label: 'Kotiinkuljetus', text: '', price: 590 }];
     const ship = ships.find((x) => x.id === S.ship) || ships[0];
     const fmt = (n) => Math.round(fo ? n / 1.25 : n).toLocaleString('fi-FI') + ' kr';
