@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>Löydä oikea tuote</title>
 <script src="./support.js"></script>
+<script src="./catalog.js"></script>
 </head>
 <body>
 <x-dc>
@@ -141,7 +142,7 @@ a{color:#111111}a:hover{color:#474747}
 <span style="font-size: 15px; line-height: 1.5; color: #474747; max-width: 60ch">{{ c.text }}</span>
 <span style="font-size: 14px; color: #5c5c5c">{{ c.meta }}</span>
 </span>
-<span class="hb-go">{{ t.hubStart }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+<span class="hb-go">{{ c.go }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
 </a>
 </sc-for>
 </div>
@@ -1132,8 +1133,84 @@ class Component extends DCLogic {
       }
     };
 
-    const GUIDES = { brunnslock: brunnslock, luckor: luckor, kabel: kabel, fundament: fundament };
-    const ORDER = ['brunnslock', 'luckor', 'kabel', 'fundament'];
+    // ---------- yksinkertaistetut apurit (25.11.): vain must have -data, jokainen vastaus = yksi kategoriasuodatin ----------
+    // Data on sama kuin kategoriasivulla (catalog.js). Vanhat apurit (brunnslock, luckor, kabel, fundament) jäävät koodiin myöhempää käyttöä varten.
+    const CATI = (typeof window !== 'undefined' && window.SB_CATALOG ? window.SB_CATALOG.items : []);
+    const MATL = { 'Cast iron': L('Gjutjärn', 'Valurauta'), Concrete: L('Betong', 'Betoni'), 'Galvanised steel': L('Varmförzinkat stål', 'Kuumasinkitty teräs'), Plastic: L('Plast', 'Muovi'), Composite: L('Komposit', 'Komposiitti'), 'Glass fibre': L('Glasfiber', 'Lasikuitu'), 'Stainless steel': L('Rostfritt stål', 'Ruostumaton teräs'), Aluminium: L('Aluminium', 'Alumiini'), Steel: L('Stål', 'Teräs') };
+    const fromCat = (it) => ({ id: it.id, n: [it.n, it.n], price: it.price, kg: it.kg, clsList: (it.cls || []).filter(() => (it.nc || []).indexOf('cls') < 0), matList: it.mat || [], rlo: it.rlo, rhi: it.rhi, ow: it.ow, ol: it.ol, sub: it.sub, fam: it.fam, sku: it.sku, fr: it.fr, pop: -(it.sold || 0), href: P.product + '?id=' + it.id });
+    // Kuormaluokka: A15 on pienin luokka, joten "ei liikennettä" ei rajaa. Raskaammat vaativat luokan datassa (kuten kategoriasuodatin).
+    const clsAtLeast = (p, k) => k === 'A15' || p.clsList.some((c) => rank(c) >= rank(k));
+    const clsLabel2 = (p) => { const c = p.clsList.slice().sort((a, b) => rank(a) - rank(b)); return !c.length ? '' : c.length > 3 ? c[0] + L(' till ', '-') + c[c.length - 1] : c.join(', '); };
+    const metaCat = (p) => [p.matList.map((m) => MATL[m] || m).join(', '), p.kg != null ? String(p.kg).replace('.', ',') + ' kg' : ''].filter(Boolean).join(', ');
+    // "Behöver du också?": tuoteperheen lisävarusteet katalogista nimellä (sama lista kuin tuotesivun Passar ihop med)
+    const accCat = (rows, top) => rows.map((r) => { const hits = CATI.filter((x) => r[0].test(x.n) && x.price != null); const ring = (x) => { const m = String(x.sz || x.n).match(/(\d{3,4})\s*\//); return m ? +m[1] : null; }; const fits = top.rlo != null && hits.find((x) => ring(x) && ring(x) >= top.rlo - 30 && ring(x) <= (top.rhi != null ? top.rhi : top.rlo) + 30); const pick = r[2] ? fits : fits || hits[0]; return pick ? { name: pick.n, why: r[1], price: pick.price } : null; }).filter(Boolean);
+    const lastOpts = (rows) => rows.map((r) => ({ id: r[0], t: r[1], chip: r[2], test: (p) => clsAtLeast(p, r[0]) }));
+    const blSimple = Object.assign({}, brunnslock, {
+      cat: 'kat=lock', gate: undefined, sort: undefined,
+      lead: L('Tre frågor: brunnens typ, vad som kör över locket och ringens mått. Varje svar är ett filter, så du ser direkt hur många lock som passar.', 'Kolme kysymystä: kaivon tyyppi, mitä kannen yli ajetaan ja renkaan mitta. Jokainen vastaus on suodatin, joten näet heti, montako kantta sopii.'),
+      hub: [L('Brunnslock', 'Kaivonkansi'), L('Brunnstyp, vad som kör över locket och ringens mått.', 'Kaivotyyppi, mitä kannen yli ajetaan ja renkaan mitta.'), L('3 frågor', '3 kysymystä')],
+      products: CATI.filter((i) => i.cat === 'lock' && ['latta', 'plastbrunn', 'plast'].indexOf(i.sub) >= 0).map(fromCat),
+      questions: [
+        { id: 'typ', kind: 'single', vetCard: true, group: L('Typ av brunn', 'Kaivotyyppi'), title: L('Vilken typ av brunn har du?', 'Millainen kaivo sinulla on?'), help: L('Svaret väljer produktgrupp: lätta lock för betongbrunnar eller lock för plastbrunnar.', 'Vastaus valitsee tuoteryhmän: kevyet kannet betonikaivoihin tai kannet muovikaivoihin.'),
+          opts: [
+            { id: 'betong', icon: 'betong', t: L(['Betongbrunn', 'Betongring eller kona'], ['Betonikaivo', 'Betonirengas tai kartio']), test: (p) => p.sub === 'latta' },
+            { id: 'plast', icon: 'slat', t: L(['Plastbrunn', 'Slätt eller korrugerat plaströr'], ['Muovikaivo', 'Sileä tai korrugoitu muoviputki']), test: (p) => p.sub !== 'latta' }
+          ] },
+        { id: 'last', kind: 'single', vet: true, group: L('Belastningsklass', 'Kuormitusluokka'), title: L('Vad ska köra över locket?', 'Mitä kannen yli ajetaan?'), help: L('Det avgör belastningsklassen.', 'Se ratkaisee kuormitusluokan.'),
+          opts: lastOpts([
+            ['A15', L(['Ingenting, gräs eller rabatt', 'A15, gång och gräsmatta'], ['Ei mitään, nurmikko tai kukkapenkki', 'A15, kävely ja nurmikko']), 'A15'],
+            ['B125', L(['Personbil, uppfart', 'B125'], ['Henkilöauto, piha', 'B125']), 'B125'],
+            ['C250', L(['Lätt lastbil, parkering', 'C250'], ['Kevyt kuorma-auto, pysäköinti', 'C250']), 'C250'],
+            ['D400', L(['Tung trafik, väg', 'D400'], ['Raskas liikenne, tie', 'D400']), 'D400']]) },
+        { id: 'matt', kind: 'measure', vet: true, ill: 'ring', group: L('Passar ring', 'Sopii renkaaseen'), title: L('Mät ringen', 'Mittaa rengas'),
+          help: L('Mät ringens innermått, alltså hålet, från kant till kant.', 'Mittaa renkaan sisämitta eli aukko reunasta reunaan.'),
+          illText: brunnslock.questions.find((q) => q.id === 'matt').illText,
+          fields: () => [{ k: 'a', label: L('Innermått (hålet), mm', 'Sisämitta (aukko), mm'), ph: L('t.ex. 600', 'esim. 600') }],
+          has: (p) => p.rlo != null,
+          quick: (A) => (A.typ === 'plast' ? [315, 400, 600] : [600, 800, 900, 1000]),
+          match: (p, v) => v.a == null || (p.rlo != null && v.a >= p.rlo && v.a <= (p.rhi != null ? p.rhi : p.rlo)),
+          display: (v) => (v.a != null ? L('Inner ', 'Sisä ') + fmtN(v.a) + ' mm' : '') }
+      ],
+      fit: (p, c) => { const v = c.mv.matt || {}; if (p.rlo == null) return ''; const hi = p.rhi != null ? p.rhi : p.rlo; return L('Passar ring med innermått ', 'Sopii renkaaseen, sisämitta ') + (p.rlo === hi ? fmtN(p.rlo) : LANG === 'fi' ? fmtN(p.rlo) + '-' + fmtN(hi) : fmtN(p.rlo) + ' till ' + fmtN(hi)) + ' mm' + (v.a != null ? L(', du mätte ', ', mittasit ') + fmtN(v.a) + ' mm' : ''); },
+      meta: metaCat, cls: clsLabel2,
+      acc: (top) => accCat([[/^Tätningsring/, L('Tätar mellan ring och lock, mot lukt och smådjur.', 'Tiivistää renkaan ja kannen välin hajuja ja pieneläimiä vastaan.'), 'ring'], [/^Avluftningsventil/i, L('Om brunnen behöver luftas.', 'Jos kaivo tarvitsee tuuletuksen.')], [/Hänglås/i, L('Lås locket med hänglås.', 'Kansi lukitaan riippulukolla.')]], top),
+      offer: (c, matches) => matches.every((p) => p.price == null),
+      catParams: (c) => { const A = c.A, ask = (k) => c.asked.indexOf(k) >= 0, v = ask('matt') ? c.mv.matt || {} : {}, o = []; if (A.typ === 'betong') o.push('sub=latta'); else if (A.typ === 'plast') o.push('sub=' + (c.top && c.top.sub === 'plast' ? 'plast' : 'plastbrunn')); if (ask('last') && known(A.last) && A.last !== 'A15') o.push('klass=' + A.last); if (v.a != null) o.push('mm=' + v.a); return o; }
+    });
+    const luSimple = Object.assign({}, luckor, {
+      cat: 'kat=lock', gate: undefined, sort: undefined,
+      lead: L('Tre frågor: var luckan sitter, vad som passerar över den och hur stor öppningen är. Varje svar är ett filter.', 'Kolme kysymystä: mihin luukku tulee, mitä sen yli kulkee ja kuinka suuri aukko on. Jokainen vastaus on suodatin.'),
+      hub: [L('Luckor', 'Luukku'), L('Var luckan sitter, vad som passerar över den och öppningens mått.', 'Mihin luukku tulee, mitä sen yli kulkee ja aukon mitat.'), L('3 frågor', '3 kysymystä')],
+      products: CATI.filter((i) => i.cat === 'lock' && ['luckor', 'golv', 'sakerhet'].indexOf(i.sub) >= 0).map(fromCat),
+      questions: [
+        { id: 'plats', kind: 'single', group: L('Placering', 'Sijainti'), title: L('Var ska luckan sitta?', 'Mihin luukku tulee?'), help: L('Svaret väljer produktgrupp.', 'Vastaus valitsee tuoteryhmän.'),
+          opts: [
+            { id: 'mark', t: L(['Utomhus i mark', 'Gård, väg, brunn eller grönyta'], ['Ulos maahan', 'Piha, tie, kaivo tai viheralue']), test: (p) => p.sub === 'luckor' },
+            { id: 'golv', t: L(['Golv, vägg eller krypgrund', 'Inspektions- och golvluckor'], ['Lattia, seinä tai ryömintätila', 'Tarkastus- ja lattialuukut']), test: (p) => p.sub === 'golv' },
+            { id: 'sakerhet', t: L(['Säkerhet och utrymning', 'Evakueringslucka'], ['Turva ja poistuminen', 'Evakuointiluukku']), test: (p) => p.sub === 'sakerhet' }
+          ] },
+        { id: 'last', kind: 'single', vet: true, group: L('Belastningsklass', 'Kuormitusluokka'), title: L('Vad ska passera över luckan?', 'Mitä luukun yli kulkee?'), help: L('Välj det tyngsta som kan hamna på luckan.', 'Valitse raskain, mitä luukun päälle voi tulla.'),
+          opts: lastOpts([
+            ['A15', L(['Bara personer', 'A15'], ['Vain ihmisiä', 'A15']), 'A15'], ['B125', L(['Personbil', 'B125'], ['Henkilöauto', 'B125']), 'B125'],
+            ['C250', L(['Lastbil, gata', 'C250 och uppåt'], ['Kuorma-auto, katu', 'C250 ja raskaammat']), 'C250+'], ['E600', L(['Truck, industri', 'E600'], ['Trukki, teollisuus', 'E600']), 'E600'], ['F900', L(['Hamn, flygplats', 'F900'], ['Satama, lentokenttä', 'F900']), 'F900']]) },
+        Object.assign({}, luckor.questions.find((q) => q.id === 'storlek'), {
+          group: L('Fri öppning', 'Vapaa aukko'),
+          shapes: [{ id: 'sq', label: L('Fyrkantig', 'Neliö') }, { id: 'rect', label: L('Rektangulär', 'Suorakaide') }],
+          fields: (A, raw) => ((raw.shape || 'sq') === 'rect' ? [{ k: 'a', label: L('Bredd, mm', 'Leveys, mm'), ph: L('t.ex. 600', 'esim. 600') }, { k: 'b', label: L('Längd, mm', 'Pituus, mm'), ph: L('t.ex. 800', 'esim. 800') }] : [{ k: 'a', label: L('Sida, mm', 'Sivu, mm'), ph: L('t.ex. 600', 'esim. 600') }]),
+          has: (p) => !!(p.ow && p.ol),
+          quick: (A, raw) => ((raw.shape || 'sq') === 'sq' ? [500, 600, 700, 800, 900] : []),
+          // Sama toleranssi kuin kategoriasivun "Annat mått": ±50 mm kumpaankin suuntaan
+          match: (p, v) => { if (v.a == null) return true; if (!p.ow || !p.ol) return false; const b = v.shape === 'rect' && v.b != null ? v.b : v.a; const ok = (x, y) => Math.abs(x - v.a) <= 50 && Math.abs(y - b) <= 50; return ok(p.ow, p.ol) || ok(p.ol, p.ow); },
+          display: (v) => (v.a == null ? '' : v.shape === 'rect' && v.b != null ? fmtN(v.a) + ' × ' + fmtN(v.b) + ' mm' : fmtN(v.a) + ' × ' + fmtN(v.a) + ' mm') })
+      ],
+      fit: (p, c) => (p.ow && p.ol ? L('Fri öppning ', 'Vapaa aukko ') + fmtN(p.ow) + ' × ' + fmtN(p.ol) + ' mm' + (c.mDisplay.storlek ? L(', du mätte ', ', mittasit ') + c.mDisplay.storlek : '') : ''),
+      meta: metaCat, cls: clsLabel2,
+      acc: (top) => accCat([[/Universalok|Locköppnare/i, L('Lyfter tunga lock utan att belasta ryggen.', 'Nostaa raskaat kannet selkää kuormittamatta.')], [/TK-nyckel/i, L('Öppnar luckor med TK-lås.', 'Avaa luukut, joissa on TK-lukko.')]], top),
+      offer: (c, matches) => matches.every((p) => p.price == null),
+      catParams: (c) => { const A = c.A, ask = (k) => c.asked.indexOf(k) >= 0, v = ask('storlek') ? c.mv.storlek || {} : {}, o = []; const sub = { mark: 'luckor', golv: 'golv', sakerhet: 'sakerhet' }[A.plats]; if (sub) o.push('sub=' + sub); if (ask('last') && known(A.last) && A.last !== 'A15') o.push('klass=' + A.last); if (v.a != null) { o.push('b=' + v.a); o.push('l=' + (v.shape === 'rect' && v.b != null ? v.b : v.a)); } return o; }
+    });
+    const GUIDES = { brunnslock: blSimple, luckor: luSimple };
+    const ORDER = ['brunnslock', 'luckor'];
     const params = typeof location !== 'undefined' ? new URLSearchParams(location.search) : null;
     const gid = params && GUIDES[params.get('g')] ? params.get('g') : null;
     const guideHref = (id) => P.self + '?g=' + id;
@@ -1157,14 +1234,17 @@ class Component extends DCLogic {
           featImgStyle: 'background: #efeeec url("https://www.svenskabrunnslock.se/wp-content/uploads/IsoLockSt%C3%A4ngdRakBrunn.jpg") center / cover no-repeat',
           tilesTitle: L('Välj det som liknar din brunn', 'Valitse kaivoasi muistuttava'),
           tiles: [
-            ['betong', 'betong', L('Betongbrunn', 'Betonikaivo'), L('Betongring eller kona', 'Betonirengas tai kartio')],
-            ['slat', 'slat', L('Plastbrunn, släta rör', 'Muovikaivo, sileä putki'), L('Slät yta på utsidan', 'Ulkopinta on sileä')],
-            ['korr', 'korr', L('Plastbrunn, korrugerade rör', 'Muovikaivo, korrugoitu'), L('Räfflad yta på utsidan', 'Ulkopinta on uritettu')],
-            ['hal600', 'hal', L('Stort betonglock med hål', 'Iso betonikansi ja aukko'), L('Byt bara det lilla locket', 'Vaihda vain pieni kansi')],
-            ['vet', 'vet', L('Annan brunn eller vet inte', 'Muu kaivo tai en tiedä'), L('Skicka ett foto i slutet', 'Lähetä kuva lopussa')]
+            ['betong', 'betong', L('Betongbrunn', 'Betonikaivo'), L('Lätta brunnslock', 'Kevyet kaivonkannet')],
+            ['plast', 'slat', L('Plastbrunn', 'Muovikaivo'), L('Lock för plastbrunnar', 'Kannet muovikaivoihin')],
+            ['vet', 'vet', L('Vet inte', 'En tiedä'), L('Skicka ett foto i slutet', 'Lähetä kuva lopussa')]
           ].map((x) => ({ href: guideHref('brunnslock') + '&typ=' + x[0], title: x[2], sub: x[3], i_betong: x[1] === 'betong', i_slat: x[1] === 'slat', i_korr: x[1] === 'korr', i_hal: x[1] === 'hal', i_vet: x[1] === 'vet' })),
-          otherTitle: L('Fler produktguider', 'Muut tuoteapurit'),
-          guides: [['luckor', 'https://www.svenskabrunnslock.se/wp-content/uploads/overfalsad_lucka_1.png', L('Överfalsad lucka i varmförzinkat stål', 'Kuumasinkitty limiluukku')], ['kabel', 'https://www.svenskabrunnslock.se/wp-content/uploads/oxpro_2.jpg', L('Kompositbrunn OXPRO', 'Komposiittikaivo OXPRO')], ['fundament', 'https://www.svenskabrunnslock.se/wp-content/uploads/Betongplint-TP-400-1.jpg', L('Betongplint TP', 'Betoniplintti TP')]].map((x) => ({ href: guideHref(x[0]), title: GUIDES[x[0]].hub[0], text: GUIDES[x[0]].hub[1], meta: GUIDES[x[0]].hub[2], img: x[1], alt: x[2], thumbStyle: 'background: #efeeec url("' + x[1] + '") center / cover no-repeat' })),
+          otherTitle: L('Luckor, kabelbrunnar och plintar', 'Luukut, kaapelikaivot ja plintit'),
+          // Kaapelikaivoille ja perustuksille ei ole apuria julkaisussa: suorat linkit kategorioihin, joissa on suodattimet
+          guides: [
+            { href: guideHref('luckor'), title: GUIDES.luckor.hub[0], text: GUIDES.luckor.hub[1], meta: GUIDES.luckor.hub[2], go: T.hubStart, img: 'https://www.svenskabrunnslock.se/wp-content/uploads/overfalsad_lucka_1.png', alt: L('Överfalsad lucka i varmförzinkat stål', 'Kuumasinkitty limiluukku') },
+            { href: P.cat + '?kat=el&sub=kabelbrunn', title: L('Kabelbrunnar', 'Kaapelikaivot'), text: L('Filtrera på invändigt mått, belastningsklass och material.', 'Suodata sisämitan, kuormitusluokan ja materiaalin mukaan.'), meta: L('Kategori med filter', 'Kategoria ja suodattimet'), go: L('Till kabelbrunnar', 'Kaapelikaivoihin'), img: 'https://www.svenskabrunnslock.se/wp-content/uploads/oxpro_2.jpg', alt: L('Kompositbrunn OXPRO', 'Komposiittikaivo OXPRO') },
+            { href: P.cat + '?kat=bygg&sub=plintar', title: L('Betongplintar', 'Betoniplintit'), text: L('Filtrera på modell och höjd. Räkna åt mig: ring oss eller skicka uppgifter, så räknar vi lasten.', 'Suodata mallin ja korkeuden mukaan. Laske puolestani: soita tai lähetä tiedot, niin laskemme kuorman.'), meta: L('Kategori med filter', 'Kategoria ja suodattimet'), go: L('Till betongplintar', 'Betoniplintteihin'), img: 'https://www.svenskabrunnslock.se/wp-content/uploads/Betongplint-TP-400-1.jpg', alt: L('Betongplint TP', 'Betoniplintti TP') }
+          ].map((x) => Object.assign(x, { thumbStyle: 'background: #efeeec url("' + x.img + '") center / cover no-repeat' })),
           matTitle: L('Mäta brunnen: ett mått räcker', 'Mittaa kaivo: yksi mitta riittää'), matSvg: L('Ring sedd ovanifrån: innermåttet är hålet, yttermåttet är ringens ytterkant', 'Rengas ylhäältä: sisämitta on aukko, ulkomitta on renkaan ulkoreuna'),
           matInner: L('Innermått', 'Sisämitta'), matOuter: L('Yttermått', 'Ulkomitta'),
           matSteps: brunnslock.mg.steps, matNote: L('Innermåttet räcker för att hitta ett lätt lock. Med yttermåttet blir förslaget säkrare.', 'Sisämitta riittää kevyen kannen löytämiseen. Ulkomitan kanssa ehdotus on varmempi.'),
@@ -1193,8 +1273,8 @@ class Component extends DCLogic {
     // ?step=<kysymys-id|result> täyttää esimerkkivastaukset ennen kyseistä vaihetta
     // (kuvakaappauksia ja jaettavia linkkejä varten). &open=guide avaa mittausohjeen.
     const DEMO = {
-      brunnslock: { ans: { typ: 'betong', last: 'B125', mat: 'latt', extras: ['las', 'tat'] }, m: { matt: { a: '620', b: '780' } } },
-      luckor: { ans: { plats: 'mark', last: 'B125', mont: 'plan', miljo: 'vanlig', krav: ['las'] }, m: { storlek: { shape: 'rect', a: '690', b: '690' } } },
+      brunnslock: { ans: { typ: 'betong', last: 'B125' }, m: { matt: { a: '620' } } },
+      luckor: { ans: { plats: 'mark', last: 'B125' }, m: { storlek: { shape: 'sq', a: '700' } } },
       kabel: { ans: { anv: 'el', plac: 'vag', matt: '900x600', djup: '900' }, m: { ror: { a: '4', b: '110' } } },
       fundament: { ans: { bygg: 'carport', tyngd: '7000', hojd: 'mid', grav: 'ja', fast: 's90' }, m: {} }
     };
@@ -1235,6 +1315,7 @@ class Component extends DCLogic {
       const kept = [];
       G.questions.forEach((qq) => {
         if (qq.show && !qq.show(ans)) return;
+        if (qq.kind === 'measure' && qq.has && !ALL.filter((p) => gate(p, ans) && kept.every((k) => passQ(k, p, ans, mm, skipM))).some(qq.has)) return;
         if (qq.kind === 'single' || qq.kind === 'multi') {
           const pass = (a2, list) => ALL.filter((p) => gate(p, a2) && list.every((k) => passQ(k, p, a2, mm, skipM)));
           const base = pass(Object.assign({}, ans, { [qq.id]: qq.kind === 'multi' ? [] : undefined }), kept).map((p) => p.id).join();
@@ -1370,7 +1451,7 @@ class Component extends DCLogic {
       }
     });
 
-    const ctx = { A: A, mv: mv, mDisplay: mDisplay, g: G, asked: steps };
+    const ctx = { A: A, mv: mv, mDisplay: mDisplay, g: G, asked: steps, top: matches.slice().sort(G.sort || ((a, b) => a.pop - b.pop || (a.price || 1e9) - (b.price || 1e9)))[0] };
     // "Visa i listan" avaa yleisen kategorianäkymän; kansiapurin vastaukset (mitta, luokka, materiaali) kulkevat suodattimiksi
     const catHref = G.cat ? P.cat + '?' + G.cat + ((G.catParams ? G.catParams(ctx) : []).map((x) => '&' + x).join('')) : '#';
 

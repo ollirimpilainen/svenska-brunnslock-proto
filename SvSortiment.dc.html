@@ -31,6 +31,7 @@ a{color:#111111}a:hover{color:#474747}
 <header style="display: flex; flex-direction: column; gap: 10px; max-width: 760px">
 <h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 44px; line-height: 1.08; letter-spacing: -0.015em; color: #111111">{{ title }}</h1>
 <p style="margin: 0; font-size: 18px; color: #474747">{{ lead }}</p>
+<sc-if value="{{ hasGuide }}" hint-placeholder-val="{{ false }}"><a href="{{ guideHref }}" style="align-self: flex-start; display: flex; align-items: center; gap: 16px; min-height: 56px; margin-top: 6px; padding: 8px 12px 8px 16px; border-radius: 10px; border: 1.5px solid #111111; text-decoration: none; background: #f5f5f4"><span style="display: flex; flex-direction: column; line-height: 1.35"><b style="font-size: 16px; color: #111111">{{ guideTitle }}</b><span style="font-size: 14px; color: #474747">{{ guideText }}</span></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></sc-if>
 </header>
 
 <sc-if value="{{ isHome }}" hint-placeholder-val="{{ false }}">
@@ -167,6 +168,7 @@ a{color:#111111}a:hover{color:#474747}
 const LANG = 'sv';
 const TXT = {
   sv: { home: 'Startsida', all: 'Sortiment', crumbAria: 'Du är här', asideAria: 'Kategorier och filter', allCats: 'Alla kategorier', allIn: 'Alla', filter: 'Filtrera', close: 'Stäng', clear: 'Rensa', clearAll: 'Rensa alla', clearF: 'Rensa filtren', search: 'Sök', searchIn: (x) => 'Sök i ' + x.toLowerCase(), sorted: 'Populärast först', activeAria: 'Valda filter', img: 'Produktbild', otherSize: 'Annat mått', how: 'Så mäter du',
+    guideBl: 'Osäker? Hitta rätt brunnslock', guideLu: 'Osäker? Hitta rätt lucka', guideText: 'Svara på 3 frågor, så filtrerar vi åt dig',
     count: (n) => n + (n === 1 ? ' produkt' : ' produkter'), show: (n) => 'Visa ' + n + (n === 1 ? ' produkt' : ' produkter'), more: (n) => 'Visa fler (' + n + ' till)',
     lead: (n, s) => n + ' produkter i ' + s + ' produktgrupper. Välj en produktgrupp eller sök.', leadSub: (n) => n + (n === 1 ? ' produkt' : ' produkter') + '. Filtrera eller sök.', homeLead: 'Sex kategorier efter användning. Välj en kategori.',
     missing: (n, f) => n + (n === 1 ? ' produkt saknar uppgift om ' : ' produkter saknar uppgift om ') + f.toLowerCase() + ' och visas inte med filtret.',
@@ -177,6 +179,7 @@ const TXT = {
     kg: (a, b) => (a === b ? a : a + ' till ' + b) + ' kg', ph: { w: 'Bredd', l: 'Längd', mm: 'mm, t.ex. 600' }, chipH: (v) => 'Höjd ' + v + ' mm', chipRing: (v) => 'Passar ' + v + ' mm',
     removeAria: (x) => 'Ta bort filter ' + x },
   fi: { home: 'Etusivu', all: 'Valikoima', crumbAria: 'Olet tässä', asideAria: 'Kategoriat ja suodattimet', allCats: 'Kaikki kategoriat', allIn: 'Kaikki', filter: 'Suodata', close: 'Sulje', clear: 'Tyhjennä', clearAll: 'Tyhjennä kaikki', clearF: 'Tyhjennä suodattimet', search: 'Hae', searchIn: (x) => 'Hae: ' + x.toLowerCase(), sorted: 'Suosituimmat ensin', activeAria: 'Valitut suodattimet', img: 'Tuotekuva', otherSize: 'Muu mitta', how: 'Näin mittaat',
+    guideBl: 'Epävarma? Löydä oikea kaivonkansi', guideLu: 'Epävarma? Löydä oikea luukku', guideText: 'Vastaa 3 kysymykseen, niin suodatamme puolestasi',
     count: (n) => n + ' tuotetta', show: (n) => 'Näytä ' + n + ' tuotetta', more: (n) => 'Näytä lisää (' + n + ' jäljellä)',
     lead: (n, s) => n + ' tuotetta, ' + s + ' tuoteryhmää. Valitse tuoteryhmä tai hae.', leadSub: (n) => n + ' tuotetta. Suodata tai hae.', homeLead: 'Kuusi kategoriaa käyttötarkoituksen mukaan. Valitse kategoria.',
     missing: (n, f) => n + ' tuotteelta puuttuu tieto: ' + f.toLowerCase() + '. Niitä ei näytetä suodattimen kanssa.',
@@ -205,6 +208,9 @@ const groupOf = (cat, sub) => {
 const PAGE = { sv: 'SvSortiment.dc.html', fi: 'FiValikoima.dc.html' }[LANG];
 const HOME = { sv: 'SvStartsida.dc.html', fi: 'FiEtusivu.dc.html' }[LANG];
 const PROD = { sv: 'SvProdukt.dc.html', fi: 'FiTuote.dc.html' }[LANG];
+const GUIDE = { sv: 'SvProduktguide.dc.html', fi: 'FiTuoteapuri.dc.html' }[LANG];
+// Apurimainos: kansien ja luukkujen näkymissä (apurit kysyvät 3 kysymystä, jokainen vastaus = yksi suodatin)
+const GUIDE_OF = { latta: 'brunnslock', plastbrunn: 'brunnslock', plast: 'brunnslock', luckor: 'luckor', golv: 'luckor', sakerhet: 'luckor' };
 
 class Component extends DCLogic {
   constructor(props) {
@@ -217,8 +223,10 @@ class Component extends DCLogic {
       const mm = parseInt(qp.get('mm'), 10); if (mm) f.ring = String(mm);
       const k = CLS_ORDER.indexOf(qp.get('klass') || ''); if (k >= 0) f.cls = CLS_ORDER.slice(k);
       const LOCK = { latt: ['Composite', 'Plastic'], betong: ['Concrete'], gjut: ['Cast iron'] }; if (LOCK[qp.get('lock')]) f.mat = LOCK[qp.get('lock')];
+      // Luukkuapurin aukon mitta: b = leveys, l = pituus (Fri öppning, Annat mått ±50 mm)
+      const b = parseInt(qp.get('b'), 10), l = parseInt(qp.get('l'), 10); if (b || l) f.open = { other: true, w: b ? String(b) : '', l: l ? String(l) : '' };
     } catch (e) {}
-    this.state = { kat: kat, sub: sub, vat: 'inkl', q: '', f: f, other: {}, fOpen: false, limit: 24 };
+    this.state = { kat: kat, sub: sub, vat: 'inkl', q: '', f: f, other: f.open ? { open: true } : {}, fOpen: false, limit: 24 };
   }
   renderVals() {
     const S = this.state, T = TXT[LANG], li = LANG === 'fi' ? 1 : 0;
@@ -364,8 +372,10 @@ class Component extends DCLogic {
     });
     const shown = cards.slice(0, S.limit);
     const nAll = famCount(scopeAll);
+    const gId = cat.id === 'lock' ? GUIDE_OF[sub] || (sub ? '' : 'brunnslock') : '';
     return Object.assign(base, {
       isHome: false, isCat: true, title: title, catLabel: cat[LANG],
+      hasGuide: !!gId, guideHref: GUIDE + '?g=' + gId, guideTitle: gId === 'luckor' ? T.guideLu : T.guideBl, guideText: T.guideText,
       lead: subObj ? T.leadSub(nAll) : T.lead(nAll, subList.length - 1),
       crumbs: [{ label: T.home, href: HOME }, { label: T.all, href: PAGE }].concat(subObj ? [{ label: cat[LANG], href: href(cat.id) }] : []),
       subs: subList, homeHref: PAGE,
