@@ -217,12 +217,21 @@ a{color:#111111}a:hover{color:#474747}
 <form onSubmit="{{ check }}" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
 <h3 style="margin: 0; font-size: 18px; color: #111111">{{ t.checkH }}</h3>
 <p style="margin: 0; font-size: 15px; color: #474747">{{ checkIntro }}</p>
+<sc-if value="{{ isRing }}" hint-placeholder-val="{{ true }}">
+<div role="group" aria-label="{{ t.checkH }}" style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{ ringBtns }}" as="r" hint-placeholder-count="8">
+<button type="button" onClick="{{ r.pick }}" aria-pressed="{{ r.on }}" aria-label="{{ r.aria }}" style="{{ r.style }}">{{ r.label }}</button>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ notRing }}" hint-placeholder-val="{{ false }}">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px">
 <sc-for list="{{ checkFields }}" as="x" hint-placeholder-count="1">
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">{{ x.label }}<input value="{{ x.value }}" onInput="{{ x.onInput }}" inputmode="numeric" placeholder="{{ x.ph }}" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit; background: #ffffff"></label>
 </sc-for>
 </div>
 <button type="submit" style="align-self: flex-start; min-height: 44px; padding: 0 18px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ t.checkBtn }}</button>
+</sc-if>
 <p role="status" aria-live="polite" style="margin: 0; font-size: 15px; font-weight: 600; color: #111111">{{ checkMsg }}</p>
 </form>
 </div>
@@ -546,16 +555,23 @@ class Component extends DCLogic {
     const mask = (open) => open ? 'max-width: 68ch' : 'max-width: 68ch; max-height: 9.5em; overflow: hidden; -webkit-mask-image: linear-gradient(#000 55%, transparent); mask-image: linear-gradient(#000 55%, transparent)';
     // mittatarkistin (P + T)
     const chkOk = P.check && ((it.tpl === 'kannet' && fv.ring(it)) || (it.tpl === 'luukut' && fv.open(it)) || (it.tpl === 'kabel' && fv.inner(it)));
-    const check = (e) => {
-      e.preventDefault();
-      const v = {}; (P.check.fields || []).forEach((fd) => { const n = parseInt(St.chk[fd[0]], 10); if (n >= 50 && n <= 5000) v[fd[0]] = n; });
-      if (!Object.keys(v).length) { this.setState({ checkMsg: T.checkNone }); return; }
+    const evalChk = (chk) => {
+      const v = {}; (P.check.fields || []).forEach((fd) => { const n = parseInt(chk[fd[0]], 10); if (n >= 50 && n <= 5000) v[fd[0]] = n; });
+      if (!Object.keys(v).length) return T.checkNone;
       let ok = false, msg = '';
       if (it.tpl === 'kannet') { const hi = it.rhi != null ? it.rhi : it.rlo; ok = v.a >= it.rlo && v.a <= hi; msg = ok ? L2(v.a + ' mm ligger inom lockets mått (' + T.range(it.rlo, hi) + ').', v.a + ' mm on kannen mittojen sisällä (' + T.range(it.rlo, hi) + ').') : L2(v.a + ' mm ligger utanför lockets mått (' + T.range(it.rlo, hi) + '). Jämför storlekarna ovan.', v.a + ' mm on kannen mittojen ulkopuolella (' + T.range(it.rlo, hi) + '). Vertaa kokoja yllä.'); }
       if (it.tpl === 'luukut') { const fit = (a, b) => (!v.b || Math.abs(a - v.b) <= 20) && (!v.l || Math.abs(b - v.l) <= 20); ok = fit(it.ow, it.ol) || fit(it.ol, it.ow); msg = ok ? L2('Luckans fria öppning ' + pair(it.ow, it.ol) + ' passar ditt mått.', 'Luukun vapaa aukko ' + pair(it.ow, it.ol) + ' sopii mittaasi.') : L2('Luckans fria öppning är ' + pair(it.ow, it.ol) + '. Jämför storlekarna ovan.', 'Luukun vapaa aukko on ' + pair(it.ow, it.ol) + '. Vertaa kokoja yllä.'); }
       if (it.tpl === 'kabel') { const fit = (a, b) => (!v.l || a >= v.l) && (!v.b || b >= v.b); ok = fit(it.il, it.iw) || fit(it.iw, it.il); msg = ok ? L2('Invändigt mått ' + pair(it.il, it.iw) + ' räcker.', 'Sisämitta ' + pair(it.il, it.iw) + ' riittää.') : L2('Invändigt mått är ' + pair(it.il, it.iw) + '. Välj en större storlek.', 'Sisämitta on ' + pair(it.il, it.iw) + '. Valitse suurempi koko.'); }
-      this.setState({ checkMsg: msg });
+      return msg;
     };
+    const check = (e) => { e.preventDefault(); this.setState({ checkMsg: evalChk(St.chk) }); };
+    // Kansille sama rengaskokovalitsin kuin kategoriasivun suodattimessa, esivalittuna tuotteen mittoihin sopiva rengas
+    const RING_STD = [400, 500, 600, 700, 800, 900, 1000, 1200];
+    const isRing = !!(chkOk && it.tpl === 'kannet');
+    const ringHi = it.rhi != null ? it.rhi : it.rlo;
+    const ringDef = isRing ? RING_STD.filter((x) => x >= it.rlo && x <= ringHi)[0] || null : null;
+    const ringSel = St.chk.a != null && St.chk.a !== '' ? Number(St.chk.a) : ringDef;
+    const ringBtn = (onB) => 'min-height: 40px; min-width: 56px; padding: 0 10px; border-radius: 6px; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; ' + (onB ? 'border: 1.5px solid #111111; background: #111111; color: #ffffff;' : 'border: 1.5px solid #bdbdbb; background: #ffffff; color: #111111;');
     // Välj ett annat om (P), kuormitusluokka (Y)
     const alt = P.alt ? P.alt.items.map((a) => ({ t: a[0], l: a[1], href: a[2] })) : [];
     const clsInfo = okv('cls') ? it.cls.slice().sort((a, b) => CLS_ORDER.indexOf(a) - CLS_ORDER.indexOf(b)).map((k) => (EN124[k] ? EN124[k][li] : k)) : [];
@@ -599,7 +615,9 @@ class Component extends DCLogic {
       prodLabel: T.prod(St.qty), prodSum: q ? '' : fmt(unit * St.qty), frLabel: T.fr + (f.label ? ', ' + f.label.toLowerCase() : ''), frSum: f.quote ? f.priceTxt : fmt(f.price), totalSum: q ? '' : fmt(unit * St.qty + (f.quote ? 0 : f.price)),
       hasAbout: about.length > 0, aboutH: T.about(it.n), about: about, aboutLong: len(about) > 600, aboutOpen: String(St.aboutOpen), aboutStyle: len(about) > 600 ? mask(St.aboutOpen) : 'max-width: 68ch', aboutLabel: St.aboutOpen ? T.aboutLess : T.aboutMore, toggleAbout: () => this.setState({ aboutOpen: !St.aboutOpen }),
       hasFitSec: !!(chkOk || alt.length || clsInfo.length), fitH: chkOk ? P.fitH : clsInfo.length ? T.fitDefault : T.altH,
-      hasCheck: !!chkOk, hasFigure: !!(chkOk && P.check.figure), checkIntro: chkOk ? P.check.intro : '', check: check, checkMsg: St.checkMsg,
+      hasCheck: !!chkOk, hasFigure: !!(chkOk && P.check.figure), checkIntro: chkOk ? (isRing ? L2('Välj ringens insida A, rakt över hålet.', 'Valitse renkaan sisäpuoli A suoraan aukon yli.') : P.check.intro) : '', check: check,
+      checkMsg: St.checkMsg || (isRing && ringSel ? evalChk({ a: String(ringSel) }) : ''), isRing: isRing, notRing: !isRing,
+      ringBtns: isRing ? RING_STD.map((x) => ({ label: String(x), aria: x + ' mm', on: String(x === ringSel), style: ringBtn(x === ringSel), pick: () => this.setState({ chk: Object.assign({}, St.chk, { a: String(x) }), checkMsg: evalChk({ a: String(x) }) }) })) : [],
       checkFields: chkOk ? P.check.fields.map((fd) => ({ label: fd[1], ph: fd[2], value: St.chk[fd[0]] || '', onInput: (e) => this.setState({ chk: Object.assign({}, St.chk, { [fd[0]]: e.target.value }) }) })) : [],
       hasAlt: alt.length > 0, altTitle: P.alt ? P.alt.title : '', alt: alt, hasClsInfo: clsInfo.length > 0, clsInfo: clsInfo,
       hasTech: tech.length > 0, tech: tech, hasDocs: docs.length > 0, docs: docs, delivery: delivery,

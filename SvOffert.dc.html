@@ -30,22 +30,28 @@ a{color:#111111}a:hover{color:#474747}
 <sc-if value="{{ isForm }}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; gap: 10px; max-width: 760px">
 <h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 40px; color: #111111">Offertförfrågan</h1>
-<p style="margin: 0; font-size: 18px; color: #474747">Du får en offert med produkter, frakt och lossning. Vi svarar inom [X] arbetsdagar, och du godkänner offerten med ett klick.</p>
+<p style="margin: 0; font-size: 18px; color: #474747">Du får en offert med produkter, frakt och lossning på e-post, och du godkänner offerten med ett klick.</p>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start">
 
 <form onSubmit="{{ submit }}" novalidate style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 32px">
 <section aria-labelledby="t1" style="display: flex; flex-direction: column; gap: 16px">
-<h2 id="t1" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">1. Företag och kontaktperson</h2>
+<h2 id="t1" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">1. Dina uppgifter</h2>
+<div role="group" aria-label="Jag frågar som" style="display: inline-flex; align-self: flex-start; border: 1.5px solid #bdbdbb; border-radius: 999px; padding: 3px">
+<button type="button" onClick="{{ setPrivat }}" aria-pressed="{{ privatPressed }}" style="{{ privatStyle }}">Privatperson</button>
+<button type="button" onClick="{{ setForetag }}" aria-pressed="{{ foretagPressed }}" style="{{ foretagStyle }}">Företag</button>
+</div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<sc-if value="{{ isForetag }}" hint-placeholder-val="{{ true }}">
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Företag eller organisation
 <input value="{{ f.company }}" onInput="{{ inp.company }}" autocomplete="organization" style="{{ st.company }}">
 <sc-if value="{{ er.company }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Fyll i företagsnamn.</span></sc-if>
 </label>
-<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Organisationsnummer <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">behövs inte för privatpersoner</span>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Organisationsnummer
 <input value="{{ f.orgnr }}" onInput="{{ inp.orgnr }}" inputmode="numeric" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
 </label>
-<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Kontaktperson
+</sc-if>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">{{ nameLabel }}
 <input value="{{ f.name }}" onInput="{{ inp.name }}" autocomplete="name" style="{{ st.name }}">
 <sc-if value="{{ er.name }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Fyll i namn.</span></sc-if>
 </label>
@@ -112,6 +118,7 @@ a{color:#111111}a:hover{color:#474747}
 <h2 id="ts-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">Produkter i förfrågan</h2>
 <a href="SvVarukorg.dc.html" style="font-size: 14px; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Ändra</a>
 </div>
+<sc-if value="{{ noRows }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 15px; color: #474747">Inga produkter i varukorgen. Beskriv vad du behöver i meddelandet eller bifoga en mängdförteckning.</p></sc-if>
 <sc-for list="{{ rows }}" as="r" hint-placeholder-count="2">
 <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>{{ r.name }}<span style="display: block; font-size: 13px; color: #5c5c5c">{{ r.qtyLabel }}</span></span><b style="white-space: nowrap">{{ r.price }}</b></div>
 </sc-for>
@@ -126,7 +133,7 @@ a{color:#111111}a:hover{color:#474747}
 <div style="display: flex; flex-direction: column; gap: 12px">
 <span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 999px; background: #111111; color: #ffffff; font-size: 14px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Offertförfrågan är skickad</span>
 <h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 40px; line-height: 1.1; color: #111111">Tack, vi återkommer snart</h1>
-<p style="margin: 0; font-size: 18px; color: #474747">Förfrågans nummer <b style="color: #111111">OF-[nummer]</b>. Bekräftelsen skickades till {{ f.email }}.</p>
+<p style="margin: 0; font-size: 18px; color: #474747">Förfrågans nummer <b style="color: #111111">OF-1042</b> (exempelnummer). Bekräftelsen skickades till {{ f.email }}.</p>
 </div>
 <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
 <li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0"><span style="width: 32px; height: 32px; border-radius: 50%; background: #111111; color: #ffffff; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700">1</span><span><b style="display: block; color: #111111">Vi kontrollerar mått och tillgång</b><span style="color: #474747">Vi ringer om något mått eller önskemål behöver bekräftas.</span></span></li>
@@ -139,11 +146,11 @@ a{color:#111111}a:hover{color:#474747}
 <aside aria-labelledby="demo-h" style="flex: 1 1 380px; min-width: 0; max-width: 460px; display: flex; flex-direction: column; gap: 8px">
 <span style="font-size: 13px; font-weight: 600; color: #5c5c5c">Exempel: så här ser offerten ut när den kommer</span>
 <div style="border: 1px solid #111111; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px; background: #ffffff">
-<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><h2 id="demo-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">Offert OF-[nummer]</h2><span style="font-size: 13px; color: #5c5c5c">Giltig i 30 dagar</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><h2 id="demo-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">Offert OF-1042</h2><span style="font-size: 13px; color: #5c5c5c">Giltig i 30 dagar</span></div>
 <sc-for list="{{ offer }}" as="o" hint-placeholder-count="2">
 <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>{{ o.name }}<span style="display: block; font-size: 13px; color: #5c5c5c">{{ o.qtyLabel }}</span></span><b style="white-space: nowrap">{{ o.sum }}</b></div>
 </sc-for>
-<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px; border-top: 1px solid #e2e2e0; padding-top: 12px"><span>Frakt och lossning, {{ unloadShort }}<span style="display: block; font-size: 13px; color: #5c5c5c">till postnummer {{ f.zip }}, {{ weekLabel }}</span></span><b>[X] kr</b></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px; border-top: 1px solid #e2e2e0; padding-top: 12px"><span>Frakt och lossning, {{ unloadShort }}<span style="display: block; font-size: 13px; color: #5c5c5c">till postnummer {{ f.zip }}, {{ weekLabel }}</span></span><b>Anges i offerten</b></div>
 <div style="display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 18px; color: #111111"><span>Produkter totalt</span><span>{{ offerTotal }}</span></div>
 <a href="SvKassa.dc.html" onClick="{{ accept }}" style="min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">Godkänn och beställ</a>
 <a href="tel:+46920520056" style="align-self: center; font-size: 14px; font-weight: 600">Be om ändring</a>
@@ -161,7 +168,7 @@ class Component extends DCLogic {
     super(props);
     const SB = typeof window !== 'undefined' ? window.SBCart : null;
     const z0 = SB ? SB.zip() : '';
-    this.state = { view: 'form', showErr: false, attached: false, week: 'asap', unload: 'crane', f: {
+    this.state = { who: typeof window !== 'undefined' && window.SBVat && window.SBVat.get() === 'exkl' ? 'foretag' : 'privat', view: 'form', showErr: false, attached: false, week: 'asap', unload: 'crane', f: {
       company: 'Exempel Bygg AB', orgnr: '', name: 'Anna Exempel', phone: '070-123 45 67', email: 'anna@exempel.se', street: '', zip: z0 || '', ref: '', msg: '' } };
   }
   renderVals() {
@@ -171,12 +178,15 @@ class Component extends DCLogic {
       { id: 'comp-1050', name: 'Lätt Brunnslock 1050 Composite', price: 2645, qty: 10 },
       { id: 'seal-1050', name: 'Tätningsring 900/1100', price: 875, qty: 10 }
     ];
-    const lines = SB && SB.items().length ? SB.lines('sv') : EX;
-    const fmt = (n) => Math.round(n).toLocaleString('sv-SE') + ' kr';
+    // Korin tuotteet välittyvät pyyntöön; esimerkkirivit vain ilman koria (esikatselu)
+    const lines = SB ? SB.lines('sv') : EX;
+    const fo = S.who === 'foretag', ex = typeof window !== 'undefined' && window.SBVat && window.SBVat.get() === 'exkl';
+    const fmt = (n) => Math.round(ex ? n / 1.25 : n).toLocaleString('sv-SE') + ' kr' + (ex ? ' exkl. moms' : '');
+    const seg = (on) => 'border: 0; font: inherit; font-weight: 600; font-size: 15px; padding: 0 18px; min-height: 40px; border-radius: 999px; cursor: pointer; ' + (on ? 'background: #111111; color: #ffffff' : 'background: transparent; color: #111111');
     const set = (k) => (e) => this.setState({ f: { ...S.f, [k]: e.target.value } });
     const inp = {};
     ['company', 'orgnr', 'name', 'phone', 'email', 'street', 'zip', 'ref', 'msg'].forEach((k) => { inp[k] = set(k); });
-    const need = ['company', 'name', 'phone', 'email'];
+    const need = (fo ? ['company'] : []).concat(['name', 'phone', 'email']);
     const er = {};
     need.forEach((k) => { er[k] = S.showErr && !String(F[k]).trim(); });
     const zipOk = /^\d{5}$/.test(String(F.zip).replace(/\s/g, ''));
@@ -192,10 +202,15 @@ class Component extends DCLogic {
       { id: 'hand', label: 'Lossas för hand', text: 'Passar paket och lätta produkter.', short: 'för hand' }
     ];
     const weekLabels = { asap: 'så snart som möjligt', w50: 'vecka 50', w51: 'vecka 51', w2: 'vecka 2', later: 'vecka bestäms' };
-    const agreedPrice = (l) => l.price == null ? 4900 : Math.round(l.price * 0.92 / 5) * 5;
+    // Esimerkkioffertti: webbhintaiset 8 % alennuksella; offertituotteista vain Durkplåtslucka 400×400 saa hinnan (nykyinen listahinta 2 716 kr), muut "Pris i offerten"
+    const agreedPrice = (l) => l.price == null ? (/400×400/.test(l.name) ? 2716 : null) : Math.round(l.price * 0.92 / 5) * 5;
     const offer = lines.map((l) => ({ ...l, agreedP: agreedPrice(l) }));
     return {
-      isForm: S.view === 'form', isSent: S.view === 'sent',
+      isForm: S.view === 'form', isSent: S.view === 'sent', noRows: lines.length === 0,
+      isForetag: fo, nameLabel: fo ? 'Kontaktperson' : 'Namn',
+      privatPressed: String(!fo), foretagPressed: String(fo), privatStyle: seg(!fo), foretagStyle: seg(fo),
+      setPrivat: () => { if (typeof window !== 'undefined' && window.SBVat) window.SBVat.set('inkl'); this.setState({ who: 'privat' }); },
+      setForetag: () => { if (typeof window !== 'undefined' && window.SBVat) window.SBVat.set('exkl'); this.setState({ who: 'foretag' }); },
       f: F, inp: inp, er: er, st: st, showErr: S.showErr,
       week: S.week, pickWeek: (e) => this.setState({ week: e.target.value }), weekLabel: weekLabels[S.week],
       unloads: unloadDefs.map((u) => ({ ...u, on: S.unload === u.id, style: opt(S.unload === u.id), pick: () => this.setState({ unload: u.id }) })),
@@ -203,9 +218,9 @@ class Component extends DCLogic {
       noAttach: !S.attached, hasAttach: S.attached, attach: () => this.setState({ attached: true }), detach: () => this.setState({ attached: false }),
       rows: lines.map((l) => ({ name: l.name, qtyLabel: l.qty + ' st', price: l.price == null ? 'På offert' : fmt(l.price * l.qty) })),
       submit: (e) => { e.preventDefault(); if (valid) { if (SB) SB.setZip(F.zip); this.setState({ view: 'sent', showErr: false }); if (typeof window !== 'undefined') window.scrollTo(0, 0); } else this.setState({ showErr: true }); },
-      offer: offer.map((o) => ({ name: o.name, qtyLabel: o.qty + ' st à ' + fmt(o.agreedP), sum: fmt(o.agreedP * o.qty) })),
-      offerTotal: fmt(offer.reduce((t, o) => t + o.agreedP * o.qty, 0)),
-      accept: () => { if (SB) { SB.setItems(offer.map((o) => ({ id: o.id, qty: o.qty, price: o.agreedP, agreed: true }))); SB.setZip(F.zip); } }
+      offer: offer.map((o) => ({ name: o.name, qtyLabel: o.agreedP == null ? o.qty + ' st' : o.qty + ' st à ' + fmt(o.agreedP), sum: o.agreedP == null ? 'Pris i offerten' : fmt(o.agreedP * o.qty) })),
+      offerTotal: fmt(offer.reduce((t, o) => t + (o.agreedP || 0) * o.qty, 0)),
+      accept: () => { if (SB) { SB.setItems(offer.map((o) => (o.agreedP == null ? { id: o.id, qty: o.qty } : { id: o.id, qty: o.qty, price: o.agreedP, agreed: true }))); SB.setZip(F.zip); } }
     };
   }
 }
