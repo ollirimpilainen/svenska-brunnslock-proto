@@ -22,7 +22,8 @@ a{color:#111111}a:hover{color:#474747}
 .pg-bar{display:none}
 .pg-recs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:16px}
 .pg-hub{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:16px}
-.pg-hubcard:hover{border-color:#111111 !important}
+.pg-hubcard:hover,.pg-tile:hover{border-color:#111111 !important}
+.pg-tile:focus-visible,.pg-hubcard:focus-visible{outline:3px solid #111111;outline-offset:2px}
 @media (max-width:760px){
   .pg-grid{grid-template-columns:minmax(0,1fr);gap:24px}
   .pg-side{position:static}
@@ -33,6 +34,12 @@ a{color:#111111}a:hover{color:#474747}
   .pg-bar{display:flex;position:sticky;bottom:0;z-index:20;background:#ffffff;border-top:1px solid #e2e2e0;padding:10px 16px;gap:12px;align-items:center;justify-content:space-between;box-shadow:0 -6px 16px rgba(0,0,0,0.06)}
   .pg-bar[data-show="false"]{display:none}
   .pg-tabs{flex-wrap:nowrap !important;overflow-x:auto}
+  .pg-feat{grid-template-columns:minmax(0,1fr) !important;padding:20px 16px !important;gap:20px !important}
+  .pg-tiles{grid-template-columns:minmax(0,1fr) !important;gap:8px !important}
+  .pg-tile{flex-direction:row !important;align-items:center !important;min-height:64px !important;gap:12px !important}
+  .pg-tile > span:first-child{width:48px !important;height:44px !important;flex:none}
+  .pg-tile > span:first-child svg{width:44px;height:40px}
+  section.pg-mrow{padding:20px 16px !important}
   .pg-opts{grid-template-columns:minmax(0,1fr);gap:8px}
   .pg-img{aspect-ratio:16 / 7 !important}
   .pg-opt{flex-direction:row !important;align-items:center !important;min-height:64px !important;padding:12px 14px !important;gap:12px !important}
@@ -54,32 +61,94 @@ a{color:#111111}a:hover{color:#474747}
 </nav>
 
 <sc-if value="{{ isHub }}" hint-placeholder-val="{{ false }}">
-<header style="display: flex; flex-direction: column; gap: 10px; max-width: 760px">
-<h1 class="pg-h1" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 44px; line-height: 1.08; letter-spacing: -0.015em; color: #111111">{{ t.hubH1 }}</h1>
-<p style="margin: 0; font-size: 18px; color: #474747">{{ t.hubLead }}</p>
+<header style="display: flex; flex-direction: column; gap: 12px; max-width: 760px">
+<h1 class="pg-h1" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 44px; line-height: 1.08; letter-spacing: -0.015em; color: #111111">{{ h.h1 }}</h1>
+<p style="margin: 0; font-size: 18px; color: #474747">{{ h.lead }}</p>
+<p style="margin: 0; font-size: 15px; color: #474747">{{ h.callPre }} <a href="tel:+46920520056" style="font-weight: 600">0920-52 00 56</a>. {{ h.callPost }}</p>
 </header>
-<div class="pg-hub">
-<sc-for list="{{ hub }}" as="c" hint-placeholder-count="4">
-<a href="{{ c.href }}" class="pg-hubcard" style="border: 1px solid #d4d4d2; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 10px; text-decoration: none; background: #ffffff; min-height: 210px">
-<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">{{ c.title }}</h2>
-<span style="font-size: 15px; color: #474747">{{ c.text }}</span>
-<span style="font-size: 14px; color: #5c5c5c">{{ c.meta }}</span>
-<span style="margin-top: auto; align-self: flex-start; min-height: 44px; display: inline-flex; align-items: center; gap: 8px; padding: 0 16px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 15px">{{ t.hubStart }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+
+<section aria-labelledby="hb-feat" class="pg-feat" style="border: 1px solid #d4d4d2; border-radius: 14px; padding: 32px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px; align-items: start; background: #ffffff">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div role="img" aria-label="{{ h.featAlt }}" style="{{ h.featImgStyle }}"></div>
+<span style="align-self: flex-start; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #474747">{{ h.featEyebrow }}</span>
+<h2 id="hb-feat" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 32px; line-height: 1.12">{{ h.featTitle }}</h2>
+<p style="margin: 0; color: #474747">{{ h.featText }}</p>
+<p style="margin: 0; padding: 12px 16px; border-radius: 10px; background: #f5f5f4; font-size: 15px; color: #1a1a1a">{{ h.featStat }}</p>
+<a href="{{ h.featHref }}" style="align-self: flex-start; min-height: 48px; display: inline-flex; align-items: center; gap: 8px; padding: 0 20px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; text-decoration: none">{{ h.featCta }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-weight: 700; color: #111111">{{ h.tilesTitle }}</span>
+<div class="pg-tiles" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr)); gap: 10px">
+<sc-for list="{{ h.tiles }}" as="c" hint-placeholder-count="5">
+<a href="{{ c.href }}" class="pg-tile" style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-height: 132px; padding: 14px 16px; border: 1px solid #d4d4d2; border-radius: 10px; text-decoration: none; color: #111111; background: #ffffff">
+<span aria-hidden="true" style="width: 64px; height: 56px; display: flex; align-items: center; justify-content: center"><sc-if value="{{ c.i_betong }}"><svg width="60" height="54" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="14" rx="24" ry="8" fill="#ececea"/><ellipse cx="30" cy="14" rx="14" ry="4.5" fill="#ffffff"/><path d="M6 14v26c0 4.4 10.7 8 24 8s24-3.6 24-8V14"/><path d="M6 27c0 4.4 10.7 8 24 8s24-3.6 24-8" stroke-dasharray="3 3"/></svg></sc-if><sc-if value="{{ c.i_slat }}"><svg width="60" height="54" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="10" rx="13" ry="4.5" fill="#ececea"/><ellipse cx="30" cy="10" rx="9" ry="2.8" fill="#ffffff"/><path d="M17 10v34c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5V10"/></svg></sc-if><sc-if value="{{ c.i_korr }}"><svg width="60" height="54" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="10" rx="13" ry="4.5" fill="#ececea"/><ellipse cx="30" cy="10" rx="9" ry="2.8" fill="#ffffff"/><path d="M17 10v34c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5V10"/><path d="M17 18c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5M17 25c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5M17 32c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5M17 39c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5"/></svg></sc-if><sc-if value="{{ c.i_hal }}"><svg width="60" height="54" viewBox="0 0 60 54" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="30" cy="22" rx="27" ry="10" fill="#ececea"/><ellipse cx="30" cy="21" rx="9" ry="3.4" fill="#ffffff"/><path d="M3 22v8c0 5.5 12 10 27 10s27-4.5 27-10v-8"/></svg></sc-if><sc-if value="{{ c.i_vet }}"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M9.2 9.3a2.9 2.9 0 0 1 5.6 1c0 2-2.8 2.4-2.8 4.2"/><circle cx="12" cy="17.6" r="0.6" fill="currentColor"/></svg></sc-if></span>
+<span style="display: flex; flex-direction: column; gap: 2px"><b style="font-size: 15px; line-height: 1.3">{{ c.title }}</b><span style="font-size: 13px; color: #474747">{{ c.sub }}</span></span>
 </a>
 </sc-for>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 16px">
-<div style="border-radius: 12px; padding: 24px; background: #ececea; display: flex; flex-direction: column; gap: 8px">
-<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">{{ t.hubMeasureTitle }}</h2>
-<span style="font-size: 15px; color: #474747">{{ t.hubMeasureText }}</span>
-<a href="{{ measureHref }}" style="align-self: flex-start; min-height: 44px; display: inline-flex; align-items: center; font-weight: 600">{{ t.hubMeasureLink }}</a>
 </div>
-<div style="border-radius: 12px; padding: 24px; border: 1px solid #e2e2e0; display: flex; flex-direction: column; gap: 8px">
-<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">{{ t.stuckTitle }}</h2>
-<span style="font-size: 15px; color: #474747">{{ t.hubCallText }}</span>
-<a href="tel:+46920520056" style="align-self: flex-start; min-height: 44px; display: inline-flex; align-items: center; font-weight: 600">{{ t.call }}</a>
+</section>
+
+<section aria-labelledby="hb-other" style="display: flex; flex-direction: column; gap: 16px">
+<h2 id="hb-other" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 28px">{{ h.otherTitle }}</h2>
+<div class="pg-hub">
+<sc-for list="{{ h.guides }}" as="c" hint-placeholder-count="3">
+<a href="{{ c.href }}" class="pg-hubcard" style="border: 1px solid #d4d4d2; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 10px; text-decoration: none; background: #ffffff; min-height: 230px; color: #111111; overflow: hidden">
+<div role="img" aria-label="{{ c.alt }}" style="{{ c.imgStyle }}"></div>
+<h3 style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 22px">{{ c.title }}</h3>
+<span style="font-size: 15px; color: #474747">{{ c.text }}</span>
+<span style="font-size: 14px; color: #5c5c5c">{{ c.meta }}</span>
+<span style="margin-top: auto; align-self: flex-start; min-height: 44px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; text-decoration: underline">{{ t.hubStart }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+</a>
+</sc-for>
+</div>
+</section>
+
+<section aria-labelledby="hb-mat" class="pg-mrow" style="border-radius: 14px; padding: 32px; background: #ececea">
+<svg viewBox="0 0 300 220" width="100%" role="img" aria-label="{{ h.matSvg }}" style="display: block; max-width: 300px">
+<circle cx="150" cy="96" r="84" fill="#ffffff" stroke="#111111" stroke-width="2"/>
+<circle cx="150" cy="96" r="56" fill="#ececea" stroke="#111111" stroke-width="2"/>
+<path d="M98 96h104" stroke="#111111" stroke-width="2"/><path d="M98 96l9-5v10zM202 96l-9-5v10z" fill="#111111"/>
+<text x="150" y="86" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#111111">{{ h.matInner }}</text>
+<path d="M66 196h168M66 188v16M234 188v16" stroke="#474747" stroke-width="1.6"/>
+<path d="M66 180v-84M234 180v-84" stroke="#474747" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="150" y="216" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#474747">{{ h.matOuter }}</text>
+</svg>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h2 id="hb-mat" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 28px">{{ h.matTitle }}</h2>
+<ol style="margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{ h.matSteps }}" as="s" hint-placeholder-count="3"><li>{{ s }}</li></sc-for>
+</ol>
+<p style="margin: 0; font-size: 15px; color: #474747">{{ h.matNote }}</p>
+<a href="{{ h.featHref }}" style="align-self: flex-start; min-height: 44px; display: inline-flex; align-items: center; font-weight: 600">{{ h.matCta }}</a>
+</div>
+</section>
+
+<section aria-labelledby="hb-none" style="display: flex; flex-direction: column; gap: 12px">
+<h2 id="hb-none" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 24px">{{ h.noneTitle }}</h2>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-top: 1px solid #e2e2e0">
+<sc-for list="{{ h.none }}" as="x" hint-placeholder-count="3">
+<li><a href="#" style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid #e2e2e0; text-decoration: none; color: #111111"><span style="display: flex; flex-direction: column; gap: 2px"><b>{{ x.title }}</b><span style="font-size: 15px; color: #474747">{{ x.text }}</span></span><span style="font-weight: 600; white-space: nowrap">{{ x.cta }}</span></a></li>
+</sc-for>
+</ul>
+</section>
+
+<section aria-labelledby="hb-help" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 32px; border-top: 1px solid #e2e2e0; padding-top: 32px">
+<div style="border-radius: 12px; padding: 24px; border: 1.5px solid #111111; display: flex; flex-direction: column; gap: 10px">
+<h2 id="hb-help" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 22px">{{ h.helpTitle }}</h2>
+<span style="color: #474747">{{ h.helpText }}</span>
+<div style="display: flex; gap: 10px; flex-wrap: wrap">
+<a href="tel:+46920520056" style="min-height: 48px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; text-decoration: none">{{ t.call }}</a>
+<a href="{{ h.featHref }}" style="min-height: 48px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 6px; border: 1.5px solid #111111; font-weight: 600; text-decoration: none">{{ h.helpPhoto }}</a>
 </div>
 </div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 22px; margin-bottom: 8px">{{ h.faqTitle }}</h2>
+<sc-for list="{{ h.faq }}" as="f" hint-placeholder-count="3">
+<details style="border-bottom: 1px solid #e2e2e0"><summary style="cursor: pointer; min-height: 48px; display: flex; align-items: center; font-weight: 600">{{ f.q }}</summary><p style="margin: 0 0 14px; color: #474747">{{ f.a }}</p></details>
+</sc-for>
+</div>
+</section>
 </sc-if>
 
 <sc-if value="{{ isGuide }}" hint-placeholder-val="{{ true }}">
@@ -253,7 +322,6 @@ a{color:#111111}a:hover{color:#474747}
 <b style="font-family: Archivo, Inter, sans-serif; font-size: 22px; color: #111111">{{ g.none.title }}</b>
 <span style="color: #474747; max-width: 620px">{{ g.none.text }}</span>
 <div style="display: flex; gap: 10px; flex-wrap: wrap">
-<sc-if value="{{ r.noneCart }}" hint-placeholder-val="{{ true }}"><a href="{{ cartHref }}" onClick="{{ r.addCustom }}" style="min-height: 48px; display: inline-flex; align-items: center; padding: 0 20px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; text-decoration: none">{{ g.none.cta }}</a></sc-if>
 <sc-if value="{{ r.noneOffert }}" hint-placeholder-val="{{ false }}"><button type="button" class="pg-btn" onClick="{{ r.openOffert }}" style="min-height: 48px; padding: 0 20px; border: 0; border-radius: 6px; background: #111111; color: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ g.none.cta }}</button></sc-if>
 <button type="button" class="pg-btn" onClick="{{ r.openKontakt }}" style="min-height: 48px; padding: 0 20px; border: 1.5px solid #111111; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ t.noneContact }}</button>
 </div>
@@ -269,26 +337,39 @@ a{color:#111111}a:hover{color:#474747}
 <sc-if value="{{ r.hasRecs }}" hint-placeholder-val="{{ true }}">
 <div class="pg-recs">
 <sc-for list="{{ r.recs }}" as="p" hint-placeholder-count="3">
-<article style="{{ p.cardStyle }}">
-<div role="img" aria-label="{{ p.imgAlt }}" class="pg-img" style="aspect-ratio: 4 / 3; background: #ececea; border-bottom: 1.5px dashed #b9b9b7; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #474747; position: relative">{{ t.imgPh }}<sc-if value="{{ p.badge }}" hint-placeholder-val="{{ true }}"><span style="position: absolute; top: 12px; left: 12px; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: #111111; color: #ffffff">{{ p.badge }}</span></sc-if></div>
-<div style="padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 12px; flex: 1">
-<span style="align-self: flex-start; border: 1.5px solid #111111; border-radius: 4px; padding: 0 8px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 13px; line-height: 1.6; color: #111111">{{ p.tag }}</span>
-<h3 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-size: 18px; line-height: 1.25; color: #111111">{{ p.name }}</h3>
-<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #1a1a1a">
-<sc-for list="{{ p.reasons }}" as="w" hint-placeholder-count="4"><li style="display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 8px; align-items: start"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.4" aria-hidden="true" style="margin-top: 2px"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>{{ w }}</span></li></sc-for>
-</ul>
-<div style="margin-top: auto; padding-top: 12px; display: flex; flex-direction: column; gap: 10px">
 <sc-if value="{{ p.priced }}" hint-placeholder-val="{{ true }}">
+<a href="{{ p.href }}" style="border: 1px solid #e2e2e0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; background: #ffffff">
+<div role="img" aria-label="{{ p.imgAlt }}" class="pg-img" style="aspect-ratio: 4 / 3; background: #ececea; border-bottom: 1.5px dashed #b9b9b7; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #474747; position: relative">{{ t.imgPh }}<sc-if value="{{ p.badge }}" hint-placeholder-val="{{ false }}"><span style="position: absolute; top: 12px; left: 12px; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: #111111; color: #ffffff">{{ p.badge }}</span></sc-if></div>
+<div style="padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1">
+<span style="{{ p.clsStyle }}">{{ p.clsLabel }}</span>
+<b style="font-family: Archivo, Inter, sans-serif; font-size: 18px; line-height: 1.25; color: #111111">{{ p.name }}</b>
+<span style="font-size: 14px; color: #474747">{{ p.fit }}</span>
+<span style="font-size: 14px; color: #474747">{{ p.meta }}</span>
+<span style="font-size: 14px; color: #474747">{{ p.sizesTxt }}</span>
+<div style="margin-top: auto; padding-top: 16px; display: flex; flex-direction: column; gap: 4px">
 <span style="font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">{{ p.price }} <span style="font-family: Inter, sans-serif; font-weight: 400; font-size: 13px; color: #474747">{{ vatLabel }}</span></span>
-<a href="{{ productHref }}" style="{{ p.ctaStyle }}">{{ t.viewProduct }}</a>
+<span style="font-size: 13px; color: #5c5c5c; text-decoration: line-through">{{ p.wasTxt }}</span>
+<span style="font-size: 13px; color: #5c5c5c">{{ t.freight }}</span>
+</div>
+</div>
+</a>
 </sc-if>
 <sc-if value="{{ p.quote }}" hint-placeholder-val="{{ false }}">
+<div style="border: 1px dashed #111111; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; background: #ffffff">
+<div role="img" aria-label="{{ p.imgAlt }}" class="pg-img" style="aspect-ratio: 4 / 3; background: #ececea; border-bottom: 1.5px dashed #b9b9b7; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #474747; position: relative">{{ t.imgPh }}<sc-if value="{{ p.badge }}" hint-placeholder-val="{{ false }}"><span style="position: absolute; top: 12px; left: 12px; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: #111111; color: #ffffff">{{ p.badge }}</span></sc-if></div>
+<div style="padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1">
+<span style="{{ p.clsStyle }}">{{ p.clsLabel }}</span>
+<b style="font-family: Archivo, Inter, sans-serif; font-size: 18px; line-height: 1.25; color: #111111">{{ p.name }}</b>
+<span style="font-size: 14px; color: #474747">{{ p.fit }}</span>
+<span style="font-size: 14px; color: #474747">{{ p.meta }}</span>
+<span style="font-size: 14px; color: #474747">{{ p.sizesTxt }}</span>
+<div style="margin-top: auto; padding-top: 16px; display: flex; flex-direction: column; gap: 10px">
 <span style="font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 20px; color: #111111">{{ t.quotePrice }}</span>
-<button type="button" class="pg-btn" onClick="{{ r.openOffert }}" style="{{ p.ctaStyle }}">{{ t.quoteCta }}</button>
+<button type="button" class="pg-btn" onClick="{{ r.openOffert }}" style="min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0 16px; border: 1.5px solid #111111; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; font-size: 15px; color: #111111; cursor: pointer">{{ t.quoteAdd }}</button>
+</div>
+</div>
+</div>
 </sc-if>
-</div>
-</div>
-</article>
 </sc-for>
 </div>
 </sc-if>
@@ -379,14 +460,43 @@ a{color:#111111}a:hover{color:#474747}
 <button type="button" onClick="{{ c.remove }}" aria-label="{{ c.aria }}" style="min-height: 36px; display: inline-flex; align-items: center; gap: 8px; padding: 0 12px; border: 1px solid #111111; border-radius: 999px; background: #ffffff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer">{{ c.label }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
 </sc-for>
 </div>
-<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-top: 1px solid #e2e2e0">
-<sc-for list="{{ r.all }}" as="p" hint-placeholder-count="4">
-<li style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid #e2e2e0">
-<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><a href="#" style="font-weight: 600; color: #111111">{{ p.name }}</a><span style="font-size: 14px; color: #474747">{{ p.line }}</span></div>
-<b style="white-space: nowrap; color: #111111">{{ p.price }}</b>
-</li>
+<div class="pg-recs">
+<sc-for list="{{ r.all }}" as="p" hint-placeholder-count="3">
+<sc-if value="{{ p.priced }}" hint-placeholder-val="{{ true }}">
+<a href="{{ p.href }}" style="border: 1px solid #e2e2e0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; background: #ffffff">
+<div role="img" aria-label="{{ p.imgAlt }}" class="pg-img" style="aspect-ratio: 4 / 3; background: #ececea; border-bottom: 1.5px dashed #b9b9b7; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #474747; position: relative">{{ t.imgPh }}<sc-if value="{{ p.badge }}" hint-placeholder-val="{{ false }}"><span style="position: absolute; top: 12px; left: 12px; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: #111111; color: #ffffff">{{ p.badge }}</span></sc-if></div>
+<div style="padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1">
+<span style="{{ p.clsStyle }}">{{ p.clsLabel }}</span>
+<b style="font-family: Archivo, Inter, sans-serif; font-size: 18px; line-height: 1.25; color: #111111">{{ p.name }}</b>
+<span style="font-size: 14px; color: #474747">{{ p.fit }}</span>
+<span style="font-size: 14px; color: #474747">{{ p.meta }}</span>
+<span style="font-size: 14px; color: #474747">{{ p.sizesTxt }}</span>
+<div style="margin-top: auto; padding-top: 16px; display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">{{ p.price }} <span style="font-family: Inter, sans-serif; font-weight: 400; font-size: 13px; color: #474747">{{ vatLabel }}</span></span>
+<span style="font-size: 13px; color: #5c5c5c; text-decoration: line-through">{{ p.wasTxt }}</span>
+<span style="font-size: 13px; color: #5c5c5c">{{ t.freight }}</span>
+</div>
+</div>
+</a>
+</sc-if>
+<sc-if value="{{ p.quote }}" hint-placeholder-val="{{ false }}">
+<div style="border: 1px dashed #111111; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; background: #ffffff">
+<div role="img" aria-label="{{ p.imgAlt }}" class="pg-img" style="aspect-ratio: 4 / 3; background: #ececea; border-bottom: 1.5px dashed #b9b9b7; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #474747; position: relative">{{ t.imgPh }}<sc-if value="{{ p.badge }}" hint-placeholder-val="{{ false }}"><span style="position: absolute; top: 12px; left: 12px; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: #111111; color: #ffffff">{{ p.badge }}</span></sc-if></div>
+<div style="padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1">
+<span style="{{ p.clsStyle }}">{{ p.clsLabel }}</span>
+<b style="font-family: Archivo, Inter, sans-serif; font-size: 18px; line-height: 1.25; color: #111111">{{ p.name }}</b>
+<span style="font-size: 14px; color: #474747">{{ p.fit }}</span>
+<span style="font-size: 14px; color: #474747">{{ p.meta }}</span>
+<span style="font-size: 14px; color: #474747">{{ p.sizesTxt }}</span>
+<div style="margin-top: auto; padding-top: 16px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 20px; color: #111111">{{ t.quotePrice }}</span>
+<button type="button" class="pg-btn" onClick="{{ r.openOffert }}" style="min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0 16px; border: 1.5px solid #111111; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; font-size: 15px; color: #111111; cursor: pointer">{{ t.quoteAdd }}</button>
+</div>
+</div>
+</div>
+</sc-if>
 </sc-for>
-</ul>
+</div>
 </section>
 </sc-if>
 
@@ -470,7 +580,7 @@ class Component extends DCLogic {
       mQuick: 'Yleiset mitat', mEmpty: 'Kirjoita mitta, niin näet heti, montako tuotetta sopii.', mBad: 'Kirjoita mitta millimetreinä, esimerkiksi 600.', mFit: (n, v) => n + (n === 1 ? ' tuote sopii: ' : ' tuotetta sopii: ') + v + '.', mNone: (v) => 'Mikään valikoiman tuote ei sovi: ' + v + '. Jatka silti, niin etsimme ratkaisun.',
       gDone: 'Olen mitannut', gSkip: 'En pysty mittaamaan nyt',
       resTitle: 'Nämä sopivat vastauksiisi', resLead: (n) => (n === 1 ? '1 tuote sopii vastauksiisi.' : n + ' tuotetta sopii vastauksiisi. Nämä ehdotamme ensin.'), resNoneTitle: 'Valmista tuotetta ei löytynyt', resNoneLead: 'Mikään valikoiman tuote ei sovi kaikkiin vastauksiisi, mutta ratkaisu löytyy.', resExitTitle: 'Tähän on oma polkunsa',
-      best: 'Paras vastine', viewProduct: 'Näytä tuote', imgPh: 'Tuotekuva', view: 'Näytä', quotePrice: 'Hinta tarjouksella', quoteCta: 'Pyydä tarjous tästä',
+      best: 'Paras vastine', freight: 'Rahti lasketaan postinumerostasi', quoteAdd: 'Lisää tarjouspyyntöön', was: 'Norm. ', noCls: 'Luokka vahvistetaan', viewProduct: 'Näytä tuote', imgPh: 'Tuotekuva', view: 'Näytä', quotePrice: 'Hinta tarjouksella', quoteCta: 'Pyydä tarjous tästä',
       helpTitle: 'Epävarma jostain? Lähetä kuva ja mitat, autamme', helpText: (k) => 'Vastasit En tiedä ' + k + ' kysymykseen. Ehdotukset perustuvat siihen, mitä tiesit. Vastauksesi kulkevat mukana, joten mitään ei tarvitse kirjoittaa kahdesti.', helpBtn: 'Lähetä kuva ja mitat',
       noneContact: 'Ota yhteyttä vastauksillasi', noneRelax: 'Tai muuta yhtä vastausta:', relax: (g) => 'Poista: ' + g,
       allTitle: (n) => 'Muut ' + n + ' sopivaa', openCat: 'Avaa kategoriassa samoilla suodattimilla', chipsLabel: 'Valitut suodattimet', removeAria: (l) => 'Poista suodatin ' + l,
@@ -490,7 +600,7 @@ class Component extends DCLogic {
       mQuick: 'Vanliga mått', mEmpty: 'Skriv måttet, så ser du direkt hur många produkter som passar.', mBad: 'Skriv måttet i millimeter, till exempel 600.', mFit: (n, v) => n + (n === 1 ? ' produkt passar ' : ' produkter passar ') + v + '.', mNone: (v) => 'Ingen produkt i sortimentet passar ' + v + '. Fortsätt ändå, så hittar vi en lösning.',
       gDone: 'Jag har mätt', gSkip: 'Jag kan inte mäta nu',
       resTitle: 'Det här passar dina svar', resLead: (n) => (n === 1 ? '1 produkt passar dina svar.' : n + ' produkter passar dina svar. Här är de vi föreslår först.'), resNoneTitle: 'Vi hittar ingen färdig produkt', resNoneLead: 'Ingen produkt i sortimentet passar alla dina svar, men vi har en lösning.', resExitTitle: 'Det här har en egen väg',
-      best: 'Bäst match', viewProduct: 'Visa produkten', imgPh: 'Produktbild', view: 'Visa', quotePrice: 'Pris på offert', quoteCta: 'Begär offert på den här',
+      best: 'Bäst match', freight: 'Frakt räknas på ditt postnummer', quoteAdd: 'Lägg till i offertförfrågan', was: 'Ord. ', noCls: 'Klass bekräftas', viewProduct: 'Visa produkten', imgPh: 'Produktbild', view: 'Visa', quotePrice: 'Pris på offert', quoteCta: 'Begär offert på den här',
       helpTitle: 'Osäker på något? Skicka foto och mått, vi hjälper dig', helpText: (k) => 'Du svarade Vet inte på ' + k + (k === 1 ? ' fråga' : ' frågor') + '. Förslagen bygger på det du visste. Dina svar följer med, så du skriver ingenting två gånger.', helpBtn: 'Skicka foto och mått',
       noneContact: 'Kontakta oss med dina svar', noneRelax: 'Eller ändra ett svar:', relax: (g) => 'Ta bort: ' + g,
       allTitle: (n) => 'Övriga ' + n + ' som också passar', openCat: 'Öppna i kategorin med samma filter', chipsLabel: 'Valda filter', removeAria: (l) => 'Ta bort filter ' + l,
@@ -510,6 +620,30 @@ class Component extends DCLogic {
     // ---------- 1. brunnslock ----------
     const BL_CONCRETE = ['betong', 'muff', 'hal600'];
     const blKind = (A) => (A.typ === 'ror' ? 'ror' : A.typ === 'hal600' ? 'hal600' : ['slat', 'korr', 'muff'].indexOf(A.typ) >= 0 ? 'plast' : 'betong');
+    // Kevyet betonikaivon kannet tulevat yhteisestä datasta window.SB_LIDS (support.js, tuotedata-master.xlsx),
+    // jotta apuri, kategoria ja tuotesivu näyttävät samat nimet, hinnat, mitat, painot ja luokat.
+    // Apurin omat kentät: w (kaivotyypit), f ja opt (ominaisuudet), pop (suosio myynnin mukaan).
+    // Kun masterissa arvo puuttuu (null), käytetään arviota ja merkitään se (kgEst).
+    const SBL = typeof window !== 'undefined' && window.SB_LIDS ? window.SB_LIDS : null;
+    const BL_OWN = {
+      p99770: { f: ['las', 'tat'], hal: true }, p99780: { f: ['las', 'tat'], hal: true }, p125050030085: { w: ['slat', 'korr'], f: ['las', 'tat'], hal: true },
+      p1019700: { w: ['slat', 'korr'], f: ['las', 'tat'] }, p1019250: { w: ['slat', 'korr'] }, p1019600: { w: ['slat', 'korr'] },
+      p7015067: { w: ['slat'], f: ['las', 'tat'], hal: true }, 'comp-750': { hal: true }, 'pe-800': { hal: true }
+    };
+    const BL_MAT = { comp: 'komposit', pe: 'pe', iron: 'gjutjarn' };
+    const BL_KG_EST = { pe: 7, gap: 8 }; // arvio: PE- ja GAP-kansien paino puuttuu masterista
+    const BL_SB = !SBL ? [] : SBL.items.slice().sort((x, y) => (y.sold || 0) - (x.sold || 0)).map((it, i) => {
+      const own = BL_OWN[it.id] || {};
+      const mat = BL_MAT[it.mat] || (it.fam === 'gap' ? 'gap' : 'pe');
+      const kgEst = it.kg == null;
+      // Composite: venttiili esiporatulla reiällä (SB_LIDS.acc 'hal') ja oma tiiviste; PE ja GAP: venttiili ja tiiviste lisävarusteena
+      const opt = it.fam === 'comp' ? ['vent', 'tat'] : (it.fam === 'pe' || it.fam === 'gap') ? ['vent', 'tat'] : [];
+      return { id: it.id, sku: it.sku, n: [it.sv, it.fi], w: ['betong'].concat(own.w || []).concat(own.hal || (it.lo <= 600 && it.hi >= 600 && it.fam) ? ['hal600'] : []),
+        cls: it.cls, mat: mat, kg: kgEst ? (BL_KG_EST[it.fam] || BL_KG_EST[it.mat] || 8) : it.kg, kgEst: kgEst, price: it.price, reg: it.reg,
+        lo: it.lo, hi: it.hi, olo: it.olo, ohi: it.ohi, f: own.f || ['las'], opt: opt.filter((x) => (own.f || []).indexOf(x) < 0), seal: it.seal, sealName: it.sealName, d: it.d,
+        href: it.fam === 'comp' && SBL.families.comp.page ? P.product + '?size=' + it.d : null, pop: i + 1 };
+    });
+    const ACC_SB = {}; (SBL ? SBL.acc : []).forEach((a) => { ACC_SB[a.id] = a; });
     const brunnslock = {
       id: 'brunnslock', tab: L('Brunnslock', 'Kaivonkansi'), crumb: L('Brunnslock', 'Kaivonkansi'),
       h1: L('Hitta rätt brunnslock', 'Löydä oikea kaivonkansi'),
@@ -521,25 +655,10 @@ class Component extends DCLogic {
         steps: L(['Lyft av det gamla locket och borsta rent kanten.', 'Lägg tumstocken över hålet, rakt genom mitten. Det är innermåttet.', 'Mät från ytterkant till ytterkant på ringen. Det är yttermåttet.'], ['Nosta vanha kansi pois ja harjaa reuna puhtaaksi.', 'Aseta mittakeppi aukon yli, suoraan keskeltä. Se on sisämitta.', 'Mittaa renkaan ulkoreunasta ulkoreunaan. Se on ulkomitta.']),
         note: L('Ett mått räcker för att börja. Med båda blir förslaget säkrare.', 'Yksi mitta riittää alkuun. Kahdella mitalla ehdotus on varmempi.'), later: L('Mäter senare', 'Mittaan myöhemmin') },
       zero: L('Inget lock, vi gör ett på mått', 'Ei kantta, teemme mittatilauksena'),
-      none: { action: 'cart', title: L('Inget lock i sortimentet passar exakt', 'Mikään valikoiman kansi ei sovi täsmälleen'), text: L('Vi tillverkar lätta lock på mått, eller hjälper dig hitta en lösning. Dina svar är redan ifyllda.', 'Valmistamme kevyitä kansia mittatilauksena tai autamme löytämään ratkaisun. Vastauksesi on jo täytetty.'), cta: L('Beställ lock på mått', 'Tilaa kansi mittatilauksena') },
+      none: { action: 'offert', title: L('Inget lock i sortimentet passar exakt', 'Mikään valikoiman kansi ei sovi täsmälleen'), text: L('Vi tillverkar lätta lock på mått, eller hjälper dig hitta en lösning. Dina svar är redan ifyllda.', 'Valmistamme kevyitä kansia mittatilauksena tai autamme löytämään ratkaisun. Vastauksesi on jo täytetty.'), cta: L('Beställ lock på mått', 'Tilaa kansi mittatilauksena') },
       off: { title: L('Körbart lock för tung trafik? Begär offert', 'Ajettava kansi raskaalle liikenteelle? Pyydä tarjous'), text: L('Vi räknar frakt och lossning för tunga lock och kan föreslå alternativ. Dina svar följer med i förfrågan.', 'Laskemme raskaiden kansien rahdin ja purun ja voimme ehdottaa vaihtoehtoja. Vastauksesi kulkevat pyynnön mukana.'), btn: L('Begär offert', 'Pyydä tarjous') },
       accTitle: L('Behöver du också?', 'Tarvitsetko myös?'),
-      products: [
-        { id: 14430, n: ['Lätt brunnslock 780 Composite 1,5 ton', 'Kevyt kaivonkansi 780 komposiitti, 1,5 t'], w: ['betong', 'hal600'], cls: 'A15', mat: 'komposit', kg: 15, price: 2415, lo: 580, hi: 670, f: ['las', 'tat'], pop: 1 },
-        { id: 1120, n: ['Lätt Brunnslock 800 PE', 'Kevyt kaivonkansi 800 PE'], w: ['betong', 'hal600'], cls: 'A15', mat: 'pe', kg: 7, price: 2223, lo: 580, hi: 640, olo: 710, ohi: 800, f: ['las'], opt: ['vent', 'tat'], pop: 2 },
-        { id: 1263, n: ['Lätt Brunnslock 750 Composite', 'Kevyt kaivonkansi 750 komposiitti'], w: ['betong', 'hal600'], cls: 'A15', mat: 'komposit', kg: 8, price: 1495, lo: 550, hi: 680, olo: 710, ohi: 840, f: ['las'], opt: ['tat'], pop: 3 },
-        { id: 1706, n: ['Lätt brunnslock 580-670 A15 i gjutjärn', 'Kevyt kaivonkansi 580-670 A15, valurauta'], w: ['betong', 'slat', 'hal600'], cls: 'A15', mat: 'gjutjarn', kg: 14, price: 2895, lo: 580, hi: 670, f: ['las', 'tat'], pop: 4 },
-        { id: 1236, n: ['Lätt Brunnslock 850 PE', 'Kevyt kaivonkansi 850 PE'], w: ['betong'], cls: 'A15', mat: 'pe', kg: 7, price: 2323, lo: 590, hi: 640, olo: 810, ohi: 860, f: ['las'], opt: ['vent', 'tat'], pop: 5 },
-        { id: 1116, n: ['Lätt Brunnslock 660 PE', 'Kevyt kaivonkansi 660 PE'], w: ['betong'], cls: 'A15', mat: 'pe', kg: 6, price: 1823, lo: 550, hi: 600, olo: 590, ohi: 660, f: ['las'], opt: ['tat'], pop: 8 },
-        { id: 1287, n: ['Lätt Brunnslock 930 Composite', 'Kevyt kaivonkansi 930 komposiitti'], w: ['betong'], cls: 'A15', mat: 'komposit', kg: 8, price: 2150, lo: 780, hi: 860, olo: 850, ohi: 990, f: ['las'], pop: 6 },
-        { id: 1266, n: ['Lätt Brunnslock 1050 Composite', 'Kevyt kaivonkansi 1050 komposiitti'], w: ['betong'], cls: 'A15', mat: 'komposit', kg: 10, price: 2645, lo: 870, hi: 930, olo: 1000, ohi: 1100, f: ['las'], opt: ['tat'], pop: 6 },
-        { id: 1122, n: ['Lätt Brunnslock 1100 PE', 'Kevyt kaivonkansi 1100 PE'], w: ['betong'], cls: 'A15', mat: 'pe', kg: 9, price: 2700, lo: 880, hi: 930, olo: 1000, ohi: 1100, f: ['las'], opt: ['vent', 'tat'], pop: 7 },
-        { id: 1286, n: ['Lätt Brunnslock 1340 Composite', 'Kevyt kaivonkansi 1340 komposiitti'], w: ['betong'], cls: 'A15', mat: 'komposit', kg: 14, price: 4395, lo: 1115, hi: 1300, olo: 1250, ohi: 1450, f: ['las'], pop: 8 },
-        { id: 5484, n: ['Lätt Brunnslock 590 KÖRBART Composite 12,5 ton', 'Kevyt ajettava kaivonkansi 590 komposiitti, 12,5 t'], w: ['betong'], cls: 'B125', mat: 'komposit', kg: 10, price: 1749, lo: 400, hi: 550, f: ['las'], pop: 4 },
-        { id: 5470, n: ['Lätt brunnslock 780 KÖRBART Composite 12,5 ton', 'Kevyt ajettava kaivonkansi 780 komposiitti, 12,5 t'], w: ['betong', 'hal600'], cls: 'B125', mat: 'komposit', kg: 15, price: 2895, lo: 580, hi: 670, f: ['las', 'tat'], pop: 3 },
-        { id: 9598, n: ['Brunnslock 900 Composite B125 (12,5 ton)', 'Kaivonkansi 900 komposiitti B125, 12,5 t'], w: ['betong', 'slat', 'korr'], cls: 'B125', mat: 'komposit', kg: 22, price: 7722, lo: 870, hi: 930, f: ['las', 'tat'], pop: 6 },
-        { id: 5663, n: ['Lätt körbart Brunnslock 900 Composite C250', 'Kevyt ajettava kaivonkansi 900 komposiitti C250'], w: ['betong', 'slat', 'korr'], cls: 'C250', mat: 'komposit', kg: 55, price: 9900, lo: 870, hi: 930, f: ['las'], pop: 7 },
-        { id: 6744, n: ['Lätt brunnslock 790 KÖRBART Composite D400 (40 ton)', 'Kevyt ajettava kaivonkansi 790 komposiitti D400, 40 t'], w: ['betong', 'slat', 'korr', 'hal600'], cls: 'D400', mat: 'komposit', kg: 25, price: 3957, lo: 580, hi: 640, f: ['las', 'tat'], pop: 5 },
+      products: BL_SB.concat([
         { id: 14355, n: ['Brunnslock 600 till släta rör', 'Kaivonkansi 600 sileään putkeen'], w: ['slat'], cls: 'A15', mat: 'plast', kg: 4, price: 1995, lo: 574, hi: 604, f: ['las'], pop: 2 },
         { id: 14413, n: ['Brunnslock 400 till släta rör', 'Kaivonkansi 400 sileään putkeen'], w: ['slat'], cls: 'A15', mat: 'plast', kg: 2, price: 419, lo: 395, hi: 405, f: ['las'], pop: 3 },
         { id: 16491, n: ['Brunnslock 600 till korrugerat rör', 'Kaivonkansi 600 korrugoituun putkeen'], w: ['korr'], cls: 'A15', mat: 'plast', kg: 4, price: 986, lo: 560, hi: 620, f: ['las'], pop: 2 },
@@ -549,16 +668,17 @@ class Component extends DCLogic {
         { id: 8334, n: ['Lock 110 HD-PE', 'Kansi 110 HD-PE'], w: ['ror'], cls: 'A15', mat: 'pe', kg: 1, price: 96, olo: 105, ohi: 115, nomO: 110, f: [], pop: 3 },
         { id: 1249, n: ['Lock/Botten 200 HD-PE', 'Kansi tai pohja 200 HD-PE'], w: ['ror'], cls: 'A15', mat: 'pe', kg: 1, price: 147, olo: 190, ohi: 210, nomO: 200, f: ['las'], pop: 1 },
         { id: 1248, n: ['Lock/Botten 250 HD-PE', 'Kansi tai pohja 250 HD-PE'], w: ['ror'], cls: 'A15', mat: 'pe', kg: 1, price: 207, olo: 240, ohi: 260, nomO: 250, f: ['las'], pop: 2 },
-        { id: 2560, n: ['Betonglock 600 till brunnsring', 'Betonikansi 600 kaivonrenkaaseen'], w: ['betong'], cls: 'A15', mat: 'betong', kg: 80, price: 1590, lo: 585, hi: 615, nom: 600, f: [], pop: 10 },
-        { id: 2562, n: ['Betonglock 900 till brunnsring', 'Betonikansi 900 kaivonrenkaaseen'], w: ['betong'], cls: 'A15', mat: 'betong', kg: 155, price: 2990, lo: 885, hi: 915, nom: 900, f: [], pop: 10 },
-        { id: 2565, n: ['Betonglock 900 körbart', 'Betonikansi 900, ajettava'], w: ['betong'], cls: 'D400', mat: 'betong', kg: 260, price: 5695, lo: 885, hi: 915, nom: 900, f: [], pop: 11 },
-        { id: 7356, n: ['Betonglock 900 med luftningsventil', 'Betonikansi 900 tuuletusventtiilillä'], w: ['betong'], cls: 'A15', mat: 'betong', kg: 160, price: 3290, lo: 885, hi: 915, nom: 900, f: ['vent'], pop: 11 },
-        { id: 7158, n: ['Betonglock 900 till gårdspump', 'Betonikansi 900 pihapumpulle'], w: ['betong'], cls: 'A15', mat: 'betong', kg: 160, price: 2990, lo: 885, hi: 915, nom: 900, f: ['pump'], pop: 11 },
-        { id: 2570, n: ['Betonglock 900 med manhål', 'Betonikansi 900 huoltoaukolla'], w: ['betong'], cls: 'A15', mat: 'betong', kg: 120, price: 4295, lo: 885, hi: 915, nom: 900, f: ['manhal'], pop: 11 },
-        { id: 2559, n: ['Betonglock 600 till muffrör', 'Betonikansi 600 muhviputkeen'], w: ['muff'], cls: 'A15', mat: 'betong', kg: 81, price: 1590, lo: 585, hi: 615, nom: 600, f: [], pop: 10 },
-        { id: 2558, n: ['Betonglock 500 till muffrör', 'Betonikansi 500 muhviputkeen'], w: ['muff'], cls: 'A15', mat: 'betong', kg: 52, price: 1050, lo: 485, hi: 515, nom: 500, f: [], pop: 10 }
-      ],
-      mats: { komposit: L('Komposit', 'Komposiitti'), pe: L('PE-plast', 'PE-muovi'), plast: L('Plast', 'Muovi'), gjutjarn: L('Segjärn', 'Valurauta'), betong: L('Betong', 'Betoni') },
+        { id: 2560, n: ['Betonglock 600 till brunnsring', 'Betonikansi 600 kaivonrenkaaseen'], w: ['betong'], cls: 'A15', mat: 'betong', kg: 80, price: 1590, lo: 585, hi: 615, nom: 600, f: [], pop: 40 },
+        { id: 2562, n: ['Betonglock 900 till brunnsring', 'Betonikansi 900 kaivonrenkaaseen'], w: ['betong'], cls: 'A15', mat: 'betong', kg: 155, price: 2990, lo: 885, hi: 915, nom: 900, f: [], pop: 40 },
+        { id: 2565, n: ['Betonglock 900 körbart', 'Betonikansi 900, ajettava'], w: ['betong'], cls: 'D400', mat: 'betong', kg: 260, price: 5695, lo: 885, hi: 915, nom: 900, f: [], pop: 41 },
+        { id: 7356, n: ['Betonglock 900 med luftningsventil', 'Betonikansi 900 tuuletusventtiilillä'], w: ['betong'], cls: 'A15', mat: 'betong', kg: 160, price: 3290, lo: 885, hi: 915, nom: 900, f: ['vent'], pop: 41 },
+        { id: 7158, n: ['Betonglock 900 till gårdspump', 'Betonikansi 900 pihapumpulle'], w: ['betong'], cls: 'A15', mat: 'betong', kg: 160, price: 2990, lo: 885, hi: 915, nom: 900, f: ['pump'], pop: 41 },
+        { id: 2570, n: ['Betonglock 900 med manhål', 'Betonikansi 900 huoltoaukolla'], w: ['betong'], cls: 'A15', mat: 'betong', kg: 120, price: 4295, lo: 885, hi: 915, nom: 900, f: ['manhal'], pop: 41 },
+        { id: 2559, n: ['Betonglock 600 till muffrör', 'Betonikansi 600 muhviputkeen'], w: ['muff'], cls: 'A15', mat: 'betong', kg: 81, price: 1590, lo: 585, hi: 615, nom: 600, f: [], pop: 40 },
+        { id: 2558, n: ['Betonglock 500 till muffrör', 'Betonikansi 500 muhviputkeen'], w: ['muff'], cls: 'A15', mat: 'betong', kg: 52, price: 1050, lo: 485, hi: 515, nom: 500, f: [], pop: 40 }
+     
+      ]),
+      mats: { komposit: L('Komposit', 'Komposiitti'), pe: L('PE-plast', 'PE-muovi'), gap: L('GAP-plast', 'GAP-muovi'), plast: L('Plast', 'Muovi'), gjutjarn: L('Segjärn', 'Valurauta'), betong: L('Betong', 'Betoni') },
       questions: [
         { id: 'typ', kind: 'single', vetCard: true, group: L('Typ av brunn', 'Kaivotyyppi'), title: L('Vilken typ av brunn har du?', 'Millainen kaivo sinulla on?'), help: L('Titta på brunnen ovanifrån och på sidan. Bilderna hjälper dig.', 'Katso kaivoa ylhäältä ja sivulta. Kuvat auttavat.'),
           vetSub: L('Vi hoppar över frågan. I slutet kan du skicka ett foto.', 'Ohitamme kysymyksen. Lopussa voit lähettää kuvan.'),
@@ -576,7 +696,7 @@ class Component extends DCLogic {
             { id: 'B125', t: L(['Gångväg, garageuppfart, personbil', 'B125, klarar 12,5 ton'], ['Kävelytie, autotallin edusta, henkilöauto', 'B125, kestää 12,5 tonnia']) },
             { id: 'C250', t: L(['Parkering, lätt lastbil', 'C250, klarar 25 ton'], ['Pysäköintialue, kevyt kuorma-auto', 'C250, kestää 25 tonnia']) },
             { id: 'D400', t: L(['Väg, tung trafik', 'D400, klarar 40 ton'], ['Tie, raskas liikenne', 'D400, kestää 40 tonnia']) }
-          ].map((o) => Object.assign(o, { chip: o.id, test: (p) => rank(p.cls) >= rank(o.id) })) },
+          ].map((o) => Object.assign(o, { chip: o.id, test: (p) => rank(p.cls || 'A15') >= rank(o.id) })) },
         { id: 'mat', kind: 'single', vet: true, group: L('Material och vikt', 'Materiaali ja paino'), title: L('Vilket lock vill du ha?', 'Millaisen kannen haluat?'), help: L('Tänk på vem som lyfter locket när brunnen töms.', 'Mieti, kuka nostaa kannen, kun kaivo tyhjennetään.'),
           opts: [
             { id: 'latt', badge: L('Vanligaste valet', 'Yleisin valinta'), t: L(['Lätt lock som en person lyfter', 'Plast eller komposit, under 25 kg'], ['Kevyt kansi, jonka yksi ihminen nostaa', 'Muovia tai komposiittia, alle 25 kg']), test: (p) => p.kg <= 25 && p.mat !== 'betong' },
@@ -613,34 +733,36 @@ class Component extends DCLogic {
             { id: 'vet', t: L(['Vet inte', 'Vi tar det i slutet'], ['En tiedä', 'Palataan tähän lopussa']), vetLike: true }
           ].map((o) => Object.assign(o, { noChip: true })) }
       ],
-      reasons: (p, c) => {
-        const A = c.A, v = c.mv.matt || {}, out = [];
-        const typW = { betong: L('Passar betongbrunn', 'Sopii betonikaivoon'), slat: L('Passar plastbrunn med släta rör', 'Sopii sileään muovikaivoon'), korr: L('Passar plastbrunn med korrugerade rör', 'Sopii korrugoituun muovikaivoon'), muff: L('Passar betongbrunn med muffrör', 'Sopii muhviputkikaivoon'), hal600: L('Passar hålet i ett stort betonglock', 'Sopii ison betonikannen aukkoon'), ror: L('Passar litet rör', 'Sopii pieneen putkeen') };
-        const you = (x) => (x != null ? L(', du mätte ', ', mittasit ') + fmtN(x) : '');
-        if (known(A.typ)) out.push(typW[A.typ]);
-        if (p.nomO) out.push(L('Passar rör med yttermått ', 'Sopii putkeen, jonka ulkomitta on ') + p.nomO + ' mm' + you(v.a));
-        else if (p.nom) out.push(L('Passar invändig diameter ', 'Sopii sisähalkaisijaan ') + p.nom + ' mm' + you(v.a));
-        else if (p.lo) out.push(L('Passar innermått ' + fmtN(p.lo) + ' till ' + fmtN(p.hi) + ' mm', 'Sopii sisämittaan ' + fmtN(p.lo) + ' ja ' + fmtN(p.hi) + ' mm:n välillä') + you(v.a));
-        out.push(L('Klarar ' + TONS[p.cls] + ' ton (' + p.cls + ')', 'Kestää ' + TONS[p.cls] + ' tonnia (' + p.cls + ')'));
-        out.push(p.kg <= 15 ? L('Väger ' + p.kg + ' kg, du lyfter det själv', 'Painaa ' + p.kg + ' kg, nostat sen itse') : p.kg <= 25 ? L('Väger ' + p.kg + ' kg, en person lyfter det', 'Painaa ' + p.kg + ' kg, yksi ihminen nostaa sen') : L('Väger ' + p.kg + ' kg, kräver maskin. Levereras på pall.', 'Painaa ' + p.kg + ' kg, vaatii koneen. Toimitetaan lavalla.'));
-        const FW = { las: L('Låsbart och barnsäkert', 'Lukittava ja lapsiturvallinen'), iso: L('Isolerat mot frost', 'Eristetty pakkasta vastaan'), vent: L('Med avluftningsventil', 'Tuuletusventtiili valmiina'), ventOpt: L('Avluftningsventil som tillval, se nedan', 'Tuuletusventtiili lisävarusteena, katso alta'), pump: L('Förborrat hål 160 mm för gårdspump', 'Valmis 160 mm:n reikä pihapumpulle'), manhal: L('Manhål 646 mm för nedstigning', '646 mm:n huoltoaukko'), tat: L('Helt tätt med packning', 'Täysin tiivis tiivisteen ansiosta'), tatOpt: L('Tätas mot lukt med tätningsring, se nedan', 'Tiivisterengas estää hajut, katso alta') };
+      // Kortti: sama kuin kategoriasivulla. Sopivuusrivi kertoo mitan ja oman mittauksen, ominaisuusrivi materiaalin, painon ja valitut lisät.
+      fit: (p, c) => {
+        const v = c.mv.matt || {}, you = v.a != null ? L(', du mätte ', ', mittasit ') + fmtN(v.a) + ' mm' : '';
+        const ring = p.w.indexOf('betong') >= 0 || p.w.indexOf('muff') >= 0;
+        if (p.nomO) return L('Passar rör med yttermått ' + p.nomO + ' mm', 'Sopii putkeen, ulkomitta ' + p.nomO + ' mm') + you;
+        const r = p.nom ? p.nom + ' mm' : (LANG === 'fi' ? fmtN(p.lo) + ' ja ' + fmtN(p.hi) + ' mm:n välillä' : fmtN(p.lo) + ' till ' + fmtN(p.hi) + ' mm');
+        return (ring ? L('Passar ring med innermått ', 'Sopii renkaaseen, sisämitta ') : L('Passar rör med innermått ', 'Sopii putkeen, sisämitta ')) + r + you;
+      },
+      meta: (p, c) => {
+        const A = c.A, out = [c.g.mats[p.mat] + ', ' + (p.kgEst ? L('cirka ', 'noin ') : '') + p.kg + ' kg'];
+        out.push(p.kg <= 15 ? L('du lyfter det själv', 'nostat itse') : p.kg <= 25 ? L('en person lyfter det', 'yksi ihminen nostaa') : L('lyfts med maskin', 'nostetaan koneella'));
+        const FW = { las: L('låsbart', 'lukittava'), iso: L('isolerat', 'eristetty'), vent: L('med ventil', 'venttiili valmiina'), ventOpt: L('ventil som tillval', 'venttiili lisävarusteena'), pump: L('hål för gårdspump', 'reikä pihapumpulle'), manhal: L('manhål', 'huoltoaukko'), tat: L('tätt med packning', 'tiivis'), tatOpt: L('tätningsring som tillval', 'tiivisterengas lisävarusteena') };
         const ex = (A.extras || []).length ? A.extras : p.f.filter((x) => x === 'las');
         ex.forEach((x) => { if (p.f.indexOf(x) >= 0) out.push(FW[x]); else if ((p.opt || []).indexOf(x) >= 0) out.push(FW[x + 'Opt']); });
-        return out;
+        return out.join(', ');
       },
-      tag: (p, g) => p.cls + ' · ' + g.mats[p.mat],
-      line: (p, g) => p.cls + ' · ' + g.mats[p.mat] + ' · ' + p.kg + ' kg' + (p.lo ? ' · ' + fmtN(p.lo) + (p.hi !== p.lo ? '-' + fmtN(p.hi) : '') + ' mm' : p.nomO ? ' · Ø ' + p.nomO + ' mm' : ''),
+      cls: (p) => p.cls,
       acc: (top, c) => {
         const A = c.A, v = c.mv.matt || {}, out = [];
         const add = (n, why, price) => out.push({ name: n, why: why, price: price });
         const concreteWell = BL_CONCRETE.indexOf(A.typ) >= 0 || (!known(A.typ) && top.w.indexOf('betong') >= 0);
         if (concreteWell && top.mat !== 'betong' && top.f.indexOf('tat') < 0) {
-          if (top.lo && top.hi <= 700) add(L('Tätningsring 600/750', 'Tiivisterengas 600/750'), L('Tätar mellan ring och lock, mot lukt och smådjur. Passar innermått 570 till 640 mm.', 'Tiivistää renkaan ja kannen välin hajuja ja pieneläimiä vastaan. Sisämitta 570-640 mm.'), 595);
+          if (top.seal) add(L('Tätningsring ', 'Tiivisterengas ') + (top.sealName || top.d), L('Tätar mellan ring och lock, mot lukt och smådjur. Passar ' + top.d + ' Composite.', 'Tiivistää renkaan ja kannen välin hajuja ja pieneläimiä vastaan. Sopii kanteen ' + top.d + ' Composite.'), top.seal);
+          else if (top.lo && top.hi <= 700) add(L('Tätningsring 600/750', 'Tiivisterengas 600/750'), L('Tätar mellan ring och lock, mot lukt och smådjur. Passar innermått 570 till 640 mm.', 'Tiivistää renkaan ja kannen välin hajuja ja pieneläimiä vastaan. Sisämitta 570-640 mm.'), 595);
           else if (top.lo && top.lo >= 850 && top.hi <= 940) add(L('Tätningsring 900/1100', 'Tiivisterengas 900/1100'), L('Tätar mellan ring och lock, mot lukt och smådjur. Passar innermått 880 till 920 mm.', 'Tiivistää renkaan ja kannen välin hajuja ja pieneläimiä vastaan. Sisämitta 880-920 mm.'), 875);
         }
         const ex = A.extras || [];
-        if (ex.indexOf('vent') >= 0 && top.f.indexOf('vent') < 0) add(L('Avluftningsventil', 'Tuuletusventtiili'), L('Monteras ovanpå locket. Justerbar höjd 100 till 700 mm.', 'Asennetaan kannen päälle. Korkeus säädettävissä 100-700 mm.'), 569);
-        if (ex.indexOf('las') >= 0 && top.mat === 'pe' && top.w.indexOf('betong') >= 0) add(L('Hänglåsadapter', 'Riippulukkoadapteri'), L('Lås locket med hänglås i stället för säkerhetsmutter.', 'Kannen voi lukita riippulukolla turvamutterin sijaan.'), 279);
+        if (ex.indexOf('vent') >= 0 && top.f.indexOf('vent') < 0) add(L('Avluftningsventil', 'Ilmanpoistoventtiili'), L('Monteras ovanpå locket. Justerbar höjd 100 till 700 mm.', 'Asennetaan kannen päälle. Korkeus säädettävissä 100-700 mm.'), ACC_SB.ventil ? ACC_SB.ventil.price : 569);
+        if (ex.indexOf('vent') >= 0 && top.seal && ACC_SB.hal) add(L('Förborrat hål för avluftningsventil', 'Esiporattu reikä ilmanpoistoventtiilille'), L('Vi borrar hålet i locket innan leverans.', 'Poraamme reiän kanteen ennen toimitusta.'), ACC_SB.hal.price);
+        if (ex.indexOf('las') >= 0 && top.mat === 'pe' && top.w.indexOf('betong') >= 0) add(L('Hänglåsadapter', 'Riippulukkosovitin'), L('Lås locket med hänglås i stället för säkerhetsmutter.', 'Kannen voi lukita riippulukolla turvamutterin sijaan.'), ACC_SB.hanglas ? ACC_SB.hanglas.price : 279);
         if (BL_CONCRETE.indexOf(A.typ) >= 0 && A.hojd === 'ja') add(v.a && v.a >= 630 && v.a <= 660 ? L('Förhöjningsring B6 800/640x100 mm', 'Korotusrengas B6 800/640x100 mm') : L('Förhöjningsring B6 800/600x100 mm', 'Korotusrengas B6 800/600x100 mm'), L('Höjer brunnen till marknivå. Passdelar finns i 50, 75, 100 och 150 mm.', 'Nostaa kaivon maanpinnan tasolle. Myös 50, 75 ja 150 mm.'), 895);
         if (BL_CONCRETE.indexOf(A.typ) >= 0 && A.hojd === 'vet') add(L('Förhöjningsringar och passdelar', 'Korotusrenkaat ja sovitusosat'), L('Osäker på höjden? Skicka ett foto så hjälper vi dig välja.', 'Etkö tiedä korotuksen tarvetta? Lähetä kuva, niin autamme valitsemaan.'), null);
         return out;
@@ -757,23 +879,22 @@ class Component extends DCLogic {
       ],
       gate: (p, A) => !p.req || (A.krav || []).indexOf(p.req) >= 0,
       sort: (a, b) => (a.custom ? 1 : 0) - (b.custom ? 1 : 0) || (a.sizes ? 1 : 0) - (b.sizes ? 1 : 0) || a.pop - b.pop || (a.price || 1e9) - (b.price || 1e9),
-      reasons: (p, c) => {
-        const A = c.A, v = c.mv.storlek || {}, out = [];
-        const PW = { mark: L('Passar i mark utomhus', 'Sopii maahan ulos'), golv: L('Passar i golv inomhus', 'Sopii lattiaan sisälle'), vagg: L('För vägg och tak inomhus', 'Seinään ja kattoon sisälle'), kryp: L('För krypgrund och torpargrund', 'Ryömintätilaan ja torppaperustukseen'), tank: L('Passar på pumpstation, tank eller betonglock', 'Sopii pumppaamoon, säiliöön tai betonikanteen') };
-        if (p.custom) { out.push(L('Tillverkas efter dina mått och krav', 'Valmistetaan mittojesi ja vaatimustesi mukaan')); out.push(L('Klass A15 till F900 enligt EN 124', 'Luokat A15-F900, EN 124')); out.push(L('Dina svar följer med i offertförfrågan', 'Vastauksesi kulkevat tarjouspyynnön mukana')); return out; }
-        if (known(A.plats)) out.push(PW[A.plats]);
-        if (p.sizes) out.push(L('Finns i flera storlekar, vi offererar ditt mått', 'Useita kokoja, tarjoamme mittasi mukaan'));
-        else out.push(L('Öppning ', 'Aukko ') + (p.shape === 'round' ? 'Ø ' + fmtN(p.od) : fmtN(p.ow) + ' × ' + fmtN(p.ol)) + ' mm' + (v.a != null ? L(', du mätte ', ', mittasit ') + c.mDisplay.storlek : ''));
-        if (p.cls) out.push(L('Klarar ' + TONS[p.cls] + ' ton (' + p.cls + ')', 'Kestää ' + TONS[p.cls] + ' tonnia (' + p.cls + ')'));
-        const MW = { plan: L('Plan, i nivå med ytan', 'Tasainen, pinnan tasossa'), over: L('Överfalsad, leder bort regnvatten', 'Limiluukku, ohjaa sadeveden pois'), infill: L('Infill, fylls med plattor eller sten', 'Infill, täytetään laatoilla tai kivellä') };
-        if (MW[p.mont]) out.push(MW[p.mont]);
-        out.push(c.g.mats[p.mat] + (p.kg ? L(', locket väger cirka ' + p.kg + ' kg', ', kansi painaa noin ' + p.kg + ' kg') : ''));
-        const KW = { las: L('Låsbar', 'Lukittava'), lyft: L('Lyfthjälp med gasfjäder eller stag', 'Nostoapu, kaasujousi tai tukitanko'), iso: L('Isolerad', 'Eristetty'), tat: L('Vatten- och gastät', 'Vesi- ja kaasutiivis'), fall: L('Med fallskyddsgaller', 'Putoamissuojalla'), brand: L('Brandklassad', 'Paloluokiteltu'), inbrott: L('Inbrottsskydd RC4', 'Murtosuoja RC4'), utrym: L('Evakueringslucka för utrymning', 'Evakuointiluukku hätäpoistumiseen') };
-        (A.krav || []).forEach((x) => { if (p.f.indexOf(x) >= 0) out.push(KW[x]); });
-        return out;
+      fit: (p, c) => {
+        const v = c.mv.storlek || {}, you = v.a != null ? L(', du mätte ', ', mittasit ') + c.mDisplay.storlek : '';
+        if (p.custom) return L('Tillverkas efter dina mått', 'Valmistetaan mittojesi mukaan');
+        if (p.sizes) return L('Flera storlekar, vi offererar ditt mått', 'Useita kokoja, tarjoamme mittasi mukaan');
+        return L('Fri öppning ', 'Vapaa aukko ') + (p.shape === 'round' ? 'Ø ' + fmtN(p.od) : fmtN(p.ow) + ' × ' + fmtN(p.ol)) + ' mm' + you;
       },
-      tag: (p, g) => (p.cls || L('Inomhus', 'Sisätilat')) + ' · ' + (g.mats[p.mat] || L('Valfritt material', 'Vapaa materiaali')),
-      line: (p, g) => [p.cls || L('inomhus', 'sisätilat'), g.mats[p.mat] || L('valfritt material', 'vapaa materiaali'), p.sizes ? L('flera storlekar', 'useita kokoja') : (p.shape === 'round' ? 'Ø ' + fmtN(p.od) : fmtN(p.ow) + ' × ' + fmtN(p.ol)) + ' mm'].join(' · '),
+      meta: (p, c) => {
+        const A = c.A, out = [];
+        out.push((c.g.mats[p.mat] || L('Valfritt material', 'Vapaa materiaali')) + (p.kg ? ', ' + L('locket ', 'kansi ') + p.kg + ' kg' : ''));
+        const MW = { plan: L('plan', 'tasainen'), over: L('överfalsad', 'limiluukku'), infill: 'infill' };
+        if (MW[p.mont]) out.push(MW[p.mont]);
+        const KW = { las: L('låsbar', 'lukittava'), lyft: L('lyfthjälp', 'nostoapu'), iso: L('isolerad', 'eristetty'), tat: L('vatten- och gastät', 'vesi- ja kaasutiivis'), fall: L('fallskyddsgaller', 'putoamissuoja'), brand: L('brandklassad', 'paloluokiteltu'), inbrott: L('inbrottsskydd RC4', 'murtosuoja RC4'), utrym: L('utrymning', 'evakuointi') };
+        (A.krav || []).forEach((x) => { if (p.f.indexOf(x) >= 0) out.push(KW[x]); });
+        return out.join(', ');
+      },
+      cls: (p) => p.cls || L('Inomhus', 'Sisätilat'),
       acc: (top, c) => {
         const A = c.A, out = [];
         if (top.mat === 'gjut' || (known(A.last) && rank(A.last) >= rank('C250'))) out.push({ name: L('TK-nyckel', 'TK-avain'), why: L('Öppnar körbara luckor med TK-lås.', 'Avaa ajettavat luukut, joissa on TK-lukko.'), price: 1195 });
@@ -849,20 +970,21 @@ class Component extends DCLogic {
           ] }
       ],
       sort: (a, b) => (a.custom ? 1 : 0) - (b.custom ? 1 : 0) || a.pop - b.pop,
-      reasons: (p, c) => {
-        const A = c.A, out = [];
-        const UW = { el: L('För drag- och skarvbrunn, elkabel', 'Veto- ja jatkokaivoksi, sähkökaapeli'), fiber: L('För fiber, koppling och slinga', 'Kuidulle, kytkentä ja lenkki'), jord: L('För jordning och åskledare', 'Maadoitukseen ja ukkosenjohtimeen') };
-        if (p.custom) { out.push(L('Byggs i moduler efter ditt mått', 'Rakennetaan moduuleista mittasi mukaan')); out.push(L('Klarar upp till 90 ton (F900) med motgjutning', 'Kestää jopa 90 tonnia (F900) vastavalulla')); out.push(L('Dina svar följer med i offertförfrågan', 'Vastauksesi kulkevat tarjouspyynnön mukana')); return out; }
-        if (known(A.anv) && UW[A.anv]) out.push(UW[A.anv]);
-        out.push(p.series === 'OXPRO' ? L('Klarar 90 ton (F900) utan motgjutning', 'Kestää 90 tonnia (F900) ilman vastavalua') : p.series === 'UC' ? L('Klarar 60 ton (E600), 90 ton med motgjutning', 'Kestää 60 tonnia (E600), 90 tonnia vastavalulla') : L('Klarar ' + TONS[p.cls] + ' ton (' + p.cls + ')', 'Kestää ' + TONS[p.cls] + ' tonnia (' + p.cls + ')'));
-        if (p.size) { const [a, b] = p.size.split('x'); out.push(p.round ? L('Invändig diameter 600 mm', 'Sisähalkaisija 600 mm') : L('Invändigt ' + a + ' × ' + b + ' mm', 'Sisämitta ' + a + ' × ' + b + ' mm')); }
-        else out.push(L('Mått enligt förfrågan', 'Mitat pyynnön mukaan'));
-        out.push(p.modular ? L('Byggs i varv om 150 mm, valfritt djup', 'Rakennetaan 150 mm:n kerroksista, vapaa syvyys') : (p.hs || []).length ? L('Höjd ' + p.hs.join(', ') + ' mm', 'Korkeus ' + p.hs.join(', ') + ' mm') : L('Höjd enligt förfrågan', 'Korkeus pyynnön mukaan'));
-        out.push(p.mat === 'betong' ? L('Betong, kräver kran vid montage', 'Betonia, asennus vaatii nosturin') : L('Lätt material, ingen kran behövs', 'Kevyt materiaali, nosturia ei tarvita'));
-        return out;
+      fit: (p) => {
+        if (p.custom) return L('Byggs i moduler efter ditt mått', 'Rakennetaan moduuleista mittasi mukaan');
+        if (!p.size) return L('Mått enligt förfrågan', 'Mitat pyynnön mukaan');
+        const [a, b] = p.size.split('x');
+        const size = p.round ? L('Invändig diameter 600 mm', 'Sisähalkaisija 600 mm') : L('Invändigt ', 'Sisämitta ') + a + ' × ' + b + ' mm';
+        return size + (p.modular ? L(', valfritt djup', ', vapaa syvyys') : (p.hs || []).length ? L(', höjd ', ', korkeus ') + p.hs.join(', ') + ' mm' : '');
       },
-      tag: (p) => p.cls + ' · ' + p.series,
-      line: (p, g) => [p.cls, g.mats[p.mat], p.size ? p.size.replace('x', ' × ') + ' mm' : L('efter mått', 'mittojen mukaan')].join(' · '),
+      meta: (p, c) => {
+        const out = [c.g.mats[p.mat]];
+        if (p.series === 'OXPRO') out.push(L('90 ton utan motgjutning', '90 tonnia ilman vastavalua'));
+        else if (p.series === 'UC') out.push(L('90 ton med motgjutning', '90 tonnia vastavalulla'));
+        out.push(p.mat === 'betong' ? L('kräver kran', 'vaatii nosturin') : L('ingen kran behövs', 'nosturia ei tarvita'));
+        return out.join(', ');
+      },
+      cls: (p) => p.cls,
       acc: (top, c) => {
         const out = [{ name: L('Monteringsanvisning (PDF)', 'Asennusohje (PDF)'), why: L('Skickas med offerten och finns på produktsidan.', 'Lähetetään tarjouksen mukana ja löytyy tuotesivulta.'), price: null }, { name: L('Produktblad (PDF)', 'Tuote-esite (PDF)'), why: L('Mått, laster och material.', 'Mitat, kuormat ja materiaalit.'), price: null }];
         if (c.A.mont === 'betackning') { out.push({ name: L('Betäckning med låsgaller', 'Kansi ja lukkoritilä'), why: L('Läggs till i förfrågan i rätt klass.', 'Lisätään pyyntöön oikeassa luokassa.'), price: null }); out.push({ name: L('TK-nyckel', 'TK-avain'), why: L('Öppnar lock med TK-lås.', 'Avaa kannet, joissa on TK-lukko.'), price: 1195 }); }
@@ -948,21 +1070,15 @@ class Component extends DCLogic {
           ].map((o) => (o.test ? o : Object.assign(o, { test: (p) => ['m20', 'platta', 'topp'].indexOf(p.fix) >= 0 }))) }
       ],
       sort: (a, b) => (a.cap || 0) - (b.cap || 0) || a.pop - b.pop || (a.h || 0) - (b.h || 0),
-      reasons: (p, c) => {
-        const A = c.A, out = [];
-        const BW = { altan: L('Passar altan och trädäck', 'Sopii terassille ja puukannelle'), friggebod: L('Passar friggebod, bastu och förråd', 'Sopii vajaan, saunaan ja varastoon'), carport: L('Passar carport, garage och attefallshus', 'Sopii autokatokseen, autotalliin ja piharakennukseen'), teknik: L('Passar teknikhus, modulhus och stål', 'Sopii tekniseen rakennukseen, moduulitaloon ja teräkseen'), brygga: L('Passar bullerplank och brygga', 'Sopii meluaitaan ja laituriin'), staket: L('Passar staket och plank', 'Sopii aitaan'), skylt: L('Passar skylt, laddstolpe och belysning', 'Sopii kylttiin, latauspylvääseen ja valaistukseen') };
-        if (known(A.bygg)) out.push(BW[A.bygg]);
-        if (p.cap) out.push(L('Bär upp till ' + fmtN(p.cap) + ' kg per stödpunkt', 'Kantaa enintään ' + fmtN(p.cap) + ' kg tukipistettä kohti') + (p.series === L('Markskruv', 'Maaruuvi') ? L(' (arvio, beror på marken)', ' (arvio, riippuu maaperästä)') : ''));
-        if (p.h) out.push(L('Höjd ' + fmtN(p.h) + ' mm', 'Korkeus ' + fmtN(p.h) + ' mm'));
-        if (!p.dig) out.push(L('Skruvas ner utan grävning', 'Ruuvataan maahan ilman kaivamista'));
-        else if (p.fix === 'ror') out.push(L('Grävs ner, öppningar för kabeldragning', 'Kaivetaan maahan, aukot kaapeleille'));
-        out.push(p.kg <= 70 ? L('Väger ' + p.kg + ' kg, kan bäras för hand', 'Painaa ' + p.kg + ' kg, voidaan kantaa käsin') : p.fix === 'ror' ? L('Väger ' + p.kg + ' kg, två personer eller maskin', 'Painaa ' + p.kg + ' kg, kaksi ihmistä tai kone') : L('Väger ' + p.kg + ' kg, kräver maskin. Lyftögla M20 finns.', 'Painaa ' + p.kg + ' kg, vaatii koneen. Nostosilmukka M20 saatavana.'));
-        const FW = { m20: L('Gänga M20 för stolpsko eller balksko', 'M20-kierre pylväs- tai palkkikengälle'), svets: L('Fastgjuten svetsplatta för stålpelare', 'Valettu hitsauslevy teräspilarille'), platta: L('Fast platta för infästning', 'Kiinteä levy kiinnitykseen'), topp: L('Förlängningsbar, topp för stolpe', 'Jatkettava, yläosa pylväälle'), ror: L('För stolprör eller stolpe', 'Pylväsputkelle tai pylväälle') };
-        out.push(FW[p.fix]);
-        return out;
+      fit: (p) => {
+        if (p.cap) return L('Bär ' + fmtN(p.cap) + ' kg per stödpunkt', 'Kantaa ' + fmtN(p.cap) + ' kg tukipistettä kohti') + (p.h ? L(', höjd ', ', korkeus ') + fmtN(p.h) + ' mm' : '') + (!p.dig ? L(', utan grävning', ', ilman kaivamista') : '');
+        return p.dig ? L('Grävs ner, öppningar för kabel', 'Kaivetaan maahan, aukot kaapeleille') : L('Skruvas ner utan grävning', 'Ruuvataan maahan ilman kaivamista');
       },
-      tag: (p) => p.series + (p.cap ? ' · ' + fmtN(p.cap) + ' kg' : ''),
-      line: (p, g) => [p.series, p.cap ? L('bär ', 'kantaa ') + fmtN(p.cap) + ' kg' : '', p.h ? L('höjd ', 'korkeus ') + fmtN(p.h) + ' mm' : '', L('väger ', 'painaa ') + p.kg + ' kg'].filter(Boolean).join(' · '),
+      meta: (p, c) => {
+        const FW = { m20: L('gänga M20', 'M20-kierre'), svets: L('svetsplatta', 'hitsauslevy'), platta: L('fast platta', 'kiinteä levy'), topp: L('förlängningsbar', 'jatkettava'), ror: L('för stolprör', 'pylväsputkelle') };
+        return [c.g.mats[p.mat] + ', ' + p.kg + ' kg', p.kg <= 70 ? L('bärs för hand', 'kannetaan käsin') : L('kräver maskin', 'vaatii koneen'), FW[p.fix]].join(', ');
+      },
+      cls: (p) => p.series,
       acc: (top, c) => {
         const A = c.A, out = [], screw = !top.dig;
         if (A.fast === 's50') out.push(screw ? { name: L('Stolpsko justerbar 62-77 mm', 'Pylväskenkä säädettävä 62-77 mm'), why: L('För markskruv, stolpe 62 till 77 mm.', 'Maaruuviin, pylväs 62-77 mm.'), price: 64 } : { name: L('Stolpsko 50-70 mm M20', 'Pylväskenkä 50-70 mm M20'), why: L('Skruvas i plintens M20-gänga, justerbar i höjd och sidled.', 'Ruuvataan plintin M20-kierteeseen, säädettävä korkeus- ja sivusuunnassa.'), price: 252 });
@@ -991,7 +1107,47 @@ class Component extends DCLogic {
     if (!gid) {
       return Object.assign(base, {
         isHub: true, isGuide: false, inQuestion: false, isResult: false, barShow: 'false', catHref: '#', countBig: '', countSub: '',
-        hub: ORDER.map((id) => ({ href: guideHref(id), title: GUIDES[id].hub[0], text: GUIDES[id].hub[1], meta: GUIDES[id].hub[2] })),
+        h: {
+          h1: L('Hitta rätt produkt', 'Löydä oikea tuote'),
+          lead: L('Svara på några frågor, samma som våra säljare ställer i telefon. Varje svar filtrerar sortimentet, så du ser direkt vad som passar. Är något oklart hjälper vi dig.', 'Vastaa muutamaan kysymykseen, samoihin kuin myyjämme kysyvät puhelimessa. Jokainen vastaus rajaa valikoimaa, joten näet heti, mikä sopii. Jos jokin on epäselvää, autamme.'),
+          callPre: L('Hellre prata? Ring', 'Mieluummin puhelimessa? Soita'), callPost: L('Vi svarar även på helger.', 'Vastaamme myös viikonloppuisin.'),
+          featEyebrow: L('Vanligast: byta brunnslock', 'Yleisin: kaivonkannen vaihto'),
+          featTitle: L('Vilken typ av brunn har du?', 'Millainen kaivo sinulla on?'),
+          featText: L('Börja här. Ditt svar blir första filtret, sedan frågar guiden vad som går över locket och hur du mäter. Det tar ungefär en minut.', 'Aloita tästä. Vastauksesi on ensimmäinen suodatin, sitten apuri kysyy, mitä kannen yli kulkee ja miten mitataan. Se vie noin minuutin.'),
+          featStat: L('6 av 10 som köper lock hos oss på nätet väljer ett lätt lock som de lyfter själva.', '6/10 verkosta kannen ostavista valitsee kevyen kannen, jonka he nostavat itse.'),
+          featCta: L('Starta brunnslocksguiden', 'Aloita kaivonkansiapuri'), featHref: guideHref('brunnslock'),
+          // Tuotekuvat: kaupan omat kuvat (svenskabrunnslock.se), näytetään värillisinä.
+          featImg: 'https://www.svenskabrunnslock.se/wp-content/uploads/IsoLockSt%C3%A4ngdRakBrunn.jpg', featAlt: L('Lätt brunnslock på en betongbrunn', 'Kevyt kaivonkansi betonikaivon päällä'),
+          featImgStyle: 'width: 100%; aspect-ratio: 16 / 10; border-radius: 10px; background: #f5f5f4 url("https://www.svenskabrunnslock.se/wp-content/uploads/IsoLockSt%C3%A4ngdRakBrunn.jpg") center / cover no-repeat',
+          tilesTitle: L('Välj det som liknar din brunn', 'Valitse kaivoasi muistuttava'),
+          tiles: [
+            ['betong', 'betong', L('Betongbrunn', 'Betonikaivo'), L('Betongring eller kona', 'Betonirengas tai kartio')],
+            ['slat', 'slat', L('Plastbrunn, släta rör', 'Muovikaivo, sileä putki'), L('Slät yta på utsidan', 'Ulkopinta on sileä')],
+            ['korr', 'korr', L('Plastbrunn, korrugerade rör', 'Muovikaivo, korrugoitu'), L('Räfflad yta på utsidan', 'Ulkopinta on uritettu')],
+            ['hal600', 'hal', L('Stort betonglock med hål', 'Iso betonikansi ja aukko'), L('Byt bara det lilla locket', 'Vaihda vain pieni kansi')],
+            ['vet', 'vet', L('Annan brunn eller vet inte', 'Muu kaivo tai en tiedä'), L('Skicka ett foto i slutet', 'Lähetä kuva lopussa')]
+          ].map((x) => ({ href: guideHref('brunnslock') + '&typ=' + x[0], title: x[2], sub: x[3], i_betong: x[1] === 'betong', i_slat: x[1] === 'slat', i_korr: x[1] === 'korr', i_hal: x[1] === 'hal', i_vet: x[1] === 'vet' })),
+          otherTitle: L('Fler produktguider', 'Muut tuoteapurit'),
+          guides: [['luckor', 'https://www.svenskabrunnslock.se/wp-content/uploads/overfalsad_lucka_1.png', L('Överfalsad lucka i varmförzinkat stål', 'Kuumasinkitty limiluukku')], ['kabel', 'https://www.svenskabrunnslock.se/wp-content/uploads/oxpro_2.jpg', L('Kompositbrunn OXPRO', 'Komposiittikaivo OXPRO')], ['fundament', 'https://www.svenskabrunnslock.se/wp-content/uploads/Betongplint-TP-400-1.jpg', L('Betongplint TP', 'Betoniplintti TP')]].map((x) => ({ href: guideHref(x[0]), title: GUIDES[x[0]].hub[0], text: GUIDES[x[0]].hub[1], meta: GUIDES[x[0]].hub[2], img: x[1], alt: x[2], imgStyle: 'width: calc(100% + 48px); margin: -24px -24px 6px; aspect-ratio: 16 / 10; background: #f5f5f4 url("' + x[1] + '") center / cover no-repeat; border-bottom: 1px solid #e2e2e0' })),
+          matTitle: L('Mäta brunnen: ett mått räcker', 'Mittaa kaivo: yksi mitta riittää'), matSvg: L('Ring sedd ovanifrån: innermåttet är hålet, yttermåttet är ringens ytterkant', 'Rengas ylhäältä: sisämitta on aukko, ulkomitta on renkaan ulkoreuna'),
+          matInner: L('Innermått', 'Sisämitta'), matOuter: L('Yttermått', 'Ulkomitta'),
+          matSteps: brunnslock.mg.steps, matNote: L('Innermåttet räcker för att hitta ett lätt lock. Med yttermåttet blir förslaget säkrare.', 'Sisämitta riittää kevyen kannen löytämiseen. Ulkomitan kanssa ehdotus on varmempi.'),
+          matCta: L('Har du måttet? Starta guiden', 'Onko mitta valmiina? Aloita apuri'),
+          noneTitle: L('Ingen guide för det du söker?', 'Etsimällesi ei ole apuria?'),
+          none: [
+            { title: L('Gatubetäckningar och galler (Trafik)', 'Katukannet ja ritilät (Liikenne)'), text: L('Du vet ofta klass och modell. Filtrera på klass, mått och ram.', 'Luokka ja malli ovat usein tiedossa. Suodata luokan, mitan ja kehyksen mukaan.'), cta: L('Till Trafik', 'Liikenteeseen') },
+            { title: L('Järnväg och ställverk', 'Rautatie ja sähköasemat'), text: L('Produkter enligt Trafikverkets krav. Filtrera på modell.', 'Trafikverketin vaatimusten mukaiset tuotteet. Suodata mallin mukaan.'), cta: L('Till Järnväg', 'Rautatiehen') },
+            { title: L('Avskiljare, pumpar och tankar', 'Erottimet, pumput ja säiliöt'), text: L('Dimensionering kräver beräkning. Skicka uppgifterna, så dimensionerar vi.', 'Mitoitus vaatii laskentaa. Lähetä tiedot, niin mitoitamme.'), cta: L('Skicka uppgifter', 'Lähetä tiedot') }
+          ],
+          helpTitle: L('Osäker ändå?', 'Epävarma silti?'), helpText: L('Skicka ett foto och ett mått, eller ring oss. Vi hjälper dig välja, och dina svar följer med så att du inte behöver upprepa något.', 'Lähetä kuva ja yksi mitta tai soita. Autamme valitsemaan, ja vastauksesi kulkevat mukana, joten mitään ei tarvitse toistaa.'), helpPhoto: L('Skicka foto och mått', 'Lähetä kuva ja mitat'),
+          faqTitle: L('Vanliga frågor', 'Usein kysyttyä'),
+          faq: [
+            { q: L('Vilket mått ska jag mäta?', 'Mikä mitta mitataan?'), a: L('Ringens innermått, alltså hålet. Mät gärna yttermåttet också. Varje lock visar vilka mått det passar.', 'Renkaan sisämitta eli aukko. Mittaa myös ulkomitta, jos voit. Jokaisessa kannessa näkyy, mihin mittoihin se sopii.') },
+            { q: L('Vad betyder A15, B125 och D400?', 'Mitä A15, B125 ja D400 tarkoittavat?'), a: L('Belastningsklass enligt EN 124. A15 klarar gång och gräsmatta, B125 personbil och uppfart, D400 väg med tung trafik.', 'Kuormitusluokka EN 124 -standardin mukaan. A15 kestää kävelyn ja nurmikon, B125 henkilöauton ja pihatien, D400 raskaan liikenteen.') },
+            { q: L('Kan jag beställa på mått?', 'Voinko tilata mittojen mukaan?'), a: L('Ja. Lätta lock och luckor tillverkar vi efter mått. Guiden föreslår det när inget standardmått passar.', 'Kyllä. Valmistamme kevyitä kansia ja luukkuja mittojen mukaan. Apuri ehdottaa sitä, kun vakiomitta ei sovi.') },
+            { q: L('Varför ska locket vara lätt?', 'Miksi kannen pitäisi olla kevyt?'), a: L('Arbetsmiljöverket begränsar hur tungt ett lock får vara för den som tömmer brunnen, och många kommuner tar extra avgift för tunga lock.', 'Työsuojelu rajoittaa, kuinka painava kansi saa olla tyhjentäjälle, ja monet kunnat perivät lisämaksun raskaista kansista.') }
+          ]
+        },
         g: { crumb: '' }, tabs: [], answers: [], chips: [], q: {}, m: {}, r: {}, f: {}
       });
     }
@@ -1038,6 +1194,13 @@ class Component extends DCLogic {
     // gate: erikoistuotteet näkyvät vain, kun käyttäjä pyytää niiden ominaisuutta
     const gate = G.gate || (() => true);
     const filterWith = (ans, mm, skipM) => { const qs = visible(ans); return ALL.filter((p) => gate(p, ans) && qs.every((qq) => passQ(qq, p, ans, mm, skipM))); };
+    // ?<kysymys>=<vaihtoehto> esivalitsee vastauksen ja aloittaa ensimmäisestä vastaamattomasta (esim. etusivun kaivotyyppilaatat)
+    if (!this.__preset && params && !params.get('step')) {
+      this.__preset = true;
+      const pre = {};
+      G.questions.forEach((qq) => { const v = params.get(qq.id); const o = v && qq.kind === 'single' ? optOf(qq, v) : null; if (v === 'vet' || o) { pre[qq.id] = v; if (o && o.patch) Object.assign(this.state, o.patch(this.state)); } });
+      if (Object.keys(pre).length) { const open = visible(pre).find((qq) => pre[qq.id] == null); Object.assign(this.state, { ans: pre, step: open ? open.id : 'result' }); }
+    }
     const A = S.ans;
     const matches = filterWith(A, S.m, S.skipM);
     const countWith = (patchAns, patchM) => filterWith(Object.assign({}, A, patchAns || {}), Object.assign({}, S.m, patchM || {}), S.skipM).length;
@@ -1168,6 +1331,9 @@ class Component extends DCLogic {
     const summary = answers.map((a) => ({ group: a.group, value: a.value }));
     if (top) summary.push({ group: T.best, value: name(top) });
     const total = ALL.length, n = matches.length;
+    // Sama tuotekortti kuin kategoriasivulla (luokkamerkki, nimi, sopivuus, ominaisuudet, koot, hinta, normaalihinta, rahti).
+    const chipStyle = (known) => 'align-self: flex-start; border-radius: 4px; padding: 0 8px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 13px; line-height: 1.6; ' + (known ? 'border: 1.5px solid #111111; color: #111111;' : 'border: 1.5px dashed #8a8a88; color: #5c5c5c; font-family: Inter, sans-serif; font-weight: 500;');
+    const card = (p, best) => { const c = G.cls(p); return { name: name(p), href: p.href || '#', imgAlt: T.imgPh + ': ' + name(p), clsLabel: c || T.noCls, clsStyle: chipStyle(!!c), fit: G.fit(p, ctx), meta: G.meta(p, ctx), sizesTxt: '', priced: p.price != null, quote: p.price == null, price: fmt(p.price), wasTxt: p.reg ? T.was + fmt(p.reg) : '', badge: best ? T.best : '' }; };
     const vatLabel = S.vat === 'exkl' ? L('exkl. moms', 'alv 0') : L('inkl. moms', 'sis. alv');
 
     return Object.assign(base, {
@@ -1190,16 +1356,14 @@ class Component extends DCLogic {
         title: exitOpt ? T.resExitTitle : n ? T.resTitle : T.resNoneTitle, lead: exitOpt ? '' : n ? (G.resLead ? G.resLead(n) : T.resLead(n)) : T.resNoneLead,
         exit: exitOpt ? exitOpt.exit : null,
         help: unknownN > 0 && !exitOpt, helpText: T.helpText(unknownN), openFoto: () => openForm('foto'),
-        none: n === 0 && !exitOpt, noneCart: G.none.action === 'cart', noneOffert: G.none.action === 'offert', relax: relax,
-        addCustom: () => { if (typeof window !== 'undefined' && window.SBCart) window.SBCart.add('mittakansi', 1); }, openKontakt: () => openForm('kontakt'),
+        none: n === 0 && !exitOpt, noneOffert: G.none.action === 'offert', relax: relax,
+        openKontakt: () => openForm('kontakt'),
         offert: offert, openOffert: () => openForm('offert'), note: note,
         hasRecs: recsRaw.length > 0,
-        recs: recsRaw.map((p, i) => ({ name: name(p), tag: G.tag(p, G), reasons: G.reasons(p, ctx), priced: p.price != null, quote: p.price == null, price: fmt(p.price), badge: i === 0 ? T.best : '', imgAlt: T.imgPh + ': ' + name(p),
-          cardStyle: 'border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; background: #ffffff; ' + (i === 0 ? 'border: 2px solid #111111;' : 'border: 1px solid #e2e2e0;'),
-          ctaStyle: 'min-height: 48px; display: inline-flex; align-items: center; justify-content: center; padding: 0 16px; border-radius: 6px; font: inherit; font-weight: 600; font-size: 15px; text-decoration: none; cursor: pointer; ' + (i === 0 ? 'background: #111111; color: #ffffff; border: 0;' : 'border: 1.5px solid #111111; color: #111111; background: #ffffff;') })),
+        recs: recsRaw.map((p, i) => card(p, i === 0)),
         hasAcc: acc.length > 0 && !S.form, acc: acc.map((a) => ({ name: a.name, why: a.why, price: a.price == null ? (G.allQuote ? '' : T.quotePrice) : fmt(a.price) })),
         hasAll: n > 3, allTitle: T.allTitle(n - 3),
-        all: ranked.slice(3).map((p) => ({ name: name(p), price: p.price == null ? T.quotePrice : fmt(p.price), line: G.line(p, G) })),
+        all: ranked.slice(3).map((p) => card(p, false)),
         showFotoLink: unknownN === 0 && n > 0 && !exitOpt
       },
       formOpen: !!S.form,
