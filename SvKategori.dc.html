@@ -20,7 +20,7 @@ a{color:#111111}a:hover{color:#474747}
 
 <nav aria-label="Du är här" style="font-size: 14px; color: #474747; display: flex; gap: 6px; flex-wrap: wrap">
 <a href="SvStartsida.dc.html" style="text-decoration: none; padding: 10px 0">Startsida</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
-<a href="#" style="text-decoration: none; padding: 10px 0">Brunnslock och luckor</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
+<a href="SvSortiment.dc.html?kat=lock" style="text-decoration: none; padding: 10px 0">Brunnslock och luckor</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
 <span aria-current="page" style="padding: 10px 0; color: #111111; font-weight: 600">Lätta brunnslock</span>
 </nav>
 
@@ -38,13 +38,13 @@ a{color:#111111}a:hover{color:#474747}
 
 <nav class="m-cats" aria-labelledby="cat-h" style="border: 1px solid #e2e2e0; border-radius: 10px; padding: 24px">
 <h2 id="cat-h" style="margin: 0 0 8px; padding-bottom: 14px; border-bottom: 1px solid #e2e2e0; font-size: 15px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #111111">Kategorier</h2>
-<a href="#" style="display: flex; align-items: center; gap: 6px; min-height: 40px; padding: 4px 0; text-decoration: none; font-size: 15px; font-weight: 600; color: #111111; border-bottom: 1px solid #ececea"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>Brunnslock och luckor<span style="margin-left: auto; font-size: 13px; font-weight: 400; color: #5c5c5c">(171)</span></a>
+<a href="SvSortiment.dc.html?kat=lock" style="display: flex; align-items: center; gap: 6px; min-height: 40px; padding: 4px 0; text-decoration: none; font-size: 15px; font-weight: 600; color: #111111; border-bottom: 1px solid #ececea"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>Brunnslock och luckor<span style="margin-left: auto; font-size: 13px; font-weight: 400; color: #5c5c5c">(171)</span></a>
 <ul style="margin: 0; padding: 0; list-style: none">
 <sc-for list="{{ drill }}" as="s" hint-placeholder-count="11">
 <li style="border-bottom: 1px solid #ececea"><a href="{{ s.href }}" aria-current="{{ s.current }}" style="{{ s.style }}"><span>{{ s.mark }}{{ s.label }}</span><span style="font-size: 13px; color: #5c5c5c; font-weight: 400">{{ s.count }}</span></a></li>
 </sc-for>
 </ul>
-<a href="#" style="display: inline-flex; align-items: center; min-height: 40px; margin-top: 8px; font-size: 14px; font-weight: 600">Hela sortimentet</a>
+<a href="SvSortiment.dc.html" style="display: inline-flex; align-items: center; min-height: 40px; margin-top: 8px; font-size: 14px; font-weight: 600">Hela sortimentet</a>
 </nav>
 
 <div class="m-filters" data-open="{{ fOpen }}" style="border: 1px solid #e2e2e0; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 24px">

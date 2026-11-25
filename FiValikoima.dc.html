@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<title>Valikoima</title>
+<script src="./support.js"></script>
+<script src="./catalog.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#111111}a:hover{color:#474747}
+.st-opt:hover{color:#111111}
+.st-btn:focus-visible,.st-opt:focus-within{outline:3px solid #111111;outline-offset:2px}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 100vh; background: #ffffff; color: #1a1a1a; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.55">
+<dc-import name="FiHeader" cart="{{ cart }}" current="sortiment" vat="{{ vat }}" on-vat="{{ setVat }}" hint-size="100%,180px"></dc-import>
+<main style="max-width: 1240px; margin: 0 auto; padding: 16px 24px 72px; display: flex; flex-direction: column; gap: 32px">
+
+<nav aria-label="{{ t.crumbAria }}" style="font-size: 14px; color: #474747; display: flex; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{ crumbs }}" as="c" hint-placeholder-count="3">
+<a href="{{ c.href }}" style="text-decoration: none; padding: 10px 0">{{ c.label }}</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
+</sc-for>
+<span aria-current="page" style="padding: 10px 0; color: #111111; font-weight: 600">{{ title }}</span>
+</nav>
+
+<header style="display: flex; flex-direction: column; gap: 10px; max-width: 760px">
+<h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 44px; line-height: 1.08; letter-spacing: -0.015em; color: #111111">{{ title }}</h1>
+<p style="margin: 0; font-size: 18px; color: #474747">{{ lead }}</p>
+<sc-if value="{{ curated }}" hint-placeholder-val="{{ false }}"><a href="{{ curatedHref }}" style="font-size: 15px; font-weight: 600">{{ t.curated }}</a></sc-if>
+</header>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ false }}">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 16px">
+<sc-for list="{{ home }}" as="h" hint-placeholder-count="6">
+<a href="{{ h.href }}" style="border: 1px solid #e2e2e0; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; background: #ffffff">
+<b style="font-family: Archivo, Inter, sans-serif; font-size: 22px; line-height: 1.2; color: #111111">{{ h.label }}</b>
+<span style="font-size: 14px; color: #5c5c5c">{{ h.count }}</span>
+<span style="font-size: 15px; color: #474747">{{ h.subs }}</span>
+</a>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ isCat }}" hint-placeholder-val="{{ true }}">
+<div class="m-stack" style="display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 40px; align-items: start">
+
+<aside aria-label="{{ t.asideAria }}" style="display: flex; flex-direction: column; gap: 24px; min-width: 0">
+
+<nav class="m-cats" aria-labelledby="cat-h" style="border: 1px solid #e2e2e0; border-radius: 10px; padding: 24px">
+<h2 id="cat-h" style="margin: 0 0 8px; padding-bottom: 14px; border-bottom: 1px solid #e2e2e0; font-size: 15px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #111111">{{ catLabel }}</h2>
+<ul style="margin: 0; padding: 0; list-style: none">
+<sc-for list="{{ subs }}" as="s" hint-placeholder-count="8">
+<li style="border-bottom: 1px solid #ececea"><a href="{{ s.href }}" onClick="{{ s.pick }}" aria-current="{{ s.current }}" style="{{ s.style }}"><span>{{ s.label }}</span><span style="font-size: 13px; color: #5c5c5c; font-weight: 400">{{ s.count }}</span></a></li>
+</sc-for>
+</ul>
+<a href="{{ homeHref }}" style="display: inline-flex; align-items: center; min-height: 40px; margin-top: 8px; font-size: 14px; font-weight: 600">{{ t.allCats }}</a>
+</nav>
+
+<sc-if value="{{ hasFilters }}" hint-placeholder-val="{{ true }}">
+<div class="m-filters" data-open="{{ fOpen }}" style="border: 1px solid #e2e2e0; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 24px">
+<div class="m-only m-fhead" style="display: none; justify-content: space-between; align-items: center"><b style="font-family: Archivo, Inter, sans-serif; font-size: 20px; color: #111111">{{ t.filter }}</b><button type="button" onClick="{{ closeF }}" style="min-height: 44px; padding: 0 12px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ t.close }}</button></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid #e2e2e0">
+<h2 style="margin: 0; font-size: 15px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #111111">{{ t.filter }}</h2>
+<sc-if value="{{ hasActive }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ reset }}" style="border: 0; background: none; padding: 0; font: inherit; font-size: 13px; font-weight: 600; text-decoration: underline; cursor: pointer">{{ t.clear }}</button></sc-if>
+</div>
+
+<sc-for list="{{ filters }}" as="f" hint-placeholder-count="3">
+<div role="group" aria-label="{{ f.label }}" style="display: flex; flex-direction: column; gap: 6px">
+<h3 style="margin: 0 0 2px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #111111">{{ f.label }}</h3>
+<sc-if value="{{ f.isButtons }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{ f.opts }}" as="o" hint-placeholder-count="6">
+<button type="button" class="st-btn" onClick="{{ o.toggle }}" aria-pressed="{{ o.on }}" aria-label="{{ o.aria }}" style="{{ o.btnStyle }}">{{ o.label }}</button>
+</sc-for>
+</div>
+<sc-if value="{{ f.hasOther }}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{ f.toggleOther }}" aria-expanded="{{ f.otherOpen }}" style="align-self: flex-start; border: 0; background: none; padding: 0; min-height: 32px; font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; cursor: pointer">{{ t.otherSize }}</button>
+<sc-if value="{{ f.otherOpenB }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; gap: 6px; align-items: center">
+<sc-for list="{{ f.fields }}" as="x" hint-placeholder-count="1">
+<input value="{{ x.value }}" onInput="{{ x.onInput }}" inputmode="numeric" aria-label="{{ x.aria }}" placeholder="{{ x.ph }}" style="width: 100%; min-width: 0; min-height: 40px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 10px; font: inherit; font-size: 15px; background: #ffffff">
+</sc-for>
+</div>
+</sc-if>
+</sc-if>
+<sc-if value="{{ f.hasHow }}" hint-placeholder-val="{{ false }}"><a href="FiTuoteapuri.dc.html" style="font-size: 13px; font-weight: 600">{{ t.how }}</a></sc-if>
+</sc-if>
+<sc-if value="{{ f.isList }}" hint-placeholder-val="{{ true }}">
+<sc-for list="{{ f.opts }}" as="o" hint-placeholder-count="3">
+<label class="st-opt" style="display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; gap: 10px; align-items: center; min-height: 34px; padding: 2px 0; cursor: pointer; font-size: 15px"><input type="checkbox" checked="{{ o.on }}" onChange="{{ o.toggle }}" style="width: 16px; height: 16px; margin: 0; accent-color: #111111"><span>{{ o.label }} <span style="color: #5c5c5c">{{ o.text }}</span></span><span style="font-size: 13px; color: #5c5c5c">{{ o.count }}</span></label>
+</sc-for>
+</sc-if>
+</div>
+</sc-for>
+
+<div class="m-only m-fshow" style="display: none"><button type="button" onClick="{{ closeF }}" style="width: 100%; min-height: 52px; border: 0; border-radius: 6px; background: #111111; color: #ffffff; font: inherit; font-weight: 600; font-size: 16px; cursor: pointer">{{ showLabel }}</button></div>
+</div>
+</sc-if>
+</aside>
+
+<section aria-labelledby="list-h" style="min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap">
+<sc-if value="{{ hasFilters }}" hint-placeholder-val="{{ true }}"><button type="button" class="m-only m-fbtn" onClick="{{ openF }}" style="display: none; min-height: 44px; padding: 0 16px; border: 1.5px solid #111111; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ t.filter }}{{ activeN }}</button></sc-if>
+<form role="search" onSubmit="{{ noSubmit }}" style="flex: 1 1 320px; max-width: 560px; display: flex; border: 1.5px solid #bdbdbb; border-radius: 6px; overflow: hidden; background: #ffffff">
+<input type="search" value="{{ q }}" onInput="{{ typeQ }}" aria-label="{{ searchPh }}" placeholder="{{ searchPh }}" style="flex: 1; min-width: 0; border: 0; padding: 0 12px; min-height: 44px; font: inherit; font-size: 15px; outline: none">
+<button type="submit" aria-label="{{ t.search }}" style="width: 52px; border: 0; background: #111111; color: #ffffff; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
+</form>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; border-bottom: 1px solid #e2e2e0; padding-bottom: 12px">
+<h2 id="list-h" aria-live="polite" style="margin: 0; font-size: 15px; font-weight: 500; color: #474747">{{ countLabel }}</h2>
+<span style="font-size: 14px; color: #5c5c5c">{{ t.sorted }}</span>
+</div>
+<sc-if value="{{ hasActive }}" hint-placeholder-val="{{ false }}">
+<div role="group" aria-label="{{ t.activeAria }}" style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+<sc-for list="{{ active }}" as="a" hint-placeholder-count="2">
+<button type="button" onClick="{{ a.remove }}" aria-label="{{ a.aria }}" style="min-height: 36px; display: inline-flex; align-items: center; gap: 8px; padding: 0 12px; border: 1px solid #111111; border-radius: 999px; background: #ffffff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer">{{ a.label }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+</sc-for>
+<button type="button" onClick="{{ reset }}" style="border: 0; background: none; font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; cursor: pointer; min-height: 36px">{{ t.clearAll }}</button>
+</div>
+</sc-if>
+<sc-if value="{{ hasMissing }}" hint-placeholder-val="{{ false }}">
+<p role="status" style="margin: 0; padding: 10px 14px; border: 1.5px dashed #bdbdbb; border-radius: 8px; font-size: 14px; color: #474747">{{ missingTxt }}</p>
+</sc-if>
+<sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+<div style="border: 1.5px dashed #bdbdbb; border-radius: 12px; padding: 32px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start">
+<b style="font-size: 18px; color: #111111">{{ t.emptyH }}</b>
+<span style="color: #474747">{{ t.emptyT }}</span>
+<button type="button" onClick="{{ reset }}" style="min-height: 44px; padding: 0 18px; border-radius: 6px; border: 1.5px solid #bdbdbb; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ t.clearF }}</button>
+</div>
+</sc-if>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 16px">
+<sc-for list="{{ cards }}" as="p" hint-placeholder-count="6">
+<a href="{{ p.href }}" style="border: 1px solid #e2e2e0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; background: #ffffff">
+<div role="img" aria-label="{{ p.imgAlt }}" style="aspect-ratio: 4 / 3; background: #ececea; border-bottom: 1.5px dashed #b9b9b7; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #474747">{{ t.img }}</div>
+<div style="padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1">
+<span style="{{ p.clsStyle }}">{{ p.clsLabel }}</span>
+<b style="font-family: Archivo, Inter, sans-serif; font-size: 18px; line-height: 1.25; color: #111111">{{ p.name }}</b>
+<span style="font-size: 14px; color: #474747">{{ p.fit }}</span>
+<span style="font-size: 14px; color: #474747">{{ p.meta }}</span>
+<span style="font-size: 14px; color: #474747">{{ p.sizesTxt }}</span>
+<div style="margin-top: auto; padding-top: 16px; display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">{{ p.priceTxt }} <span style="font-family: Inter, sans-serif; font-weight: 400; font-size: 13px; color: #474747">{{ p.vat }}</span></span>
+<span style="font-size: 13px; color: #5c5c5c">{{ p.note }}</span>
+<span style="font-size: 13px; color: #5c5c5c">{{ p.freight }}</span>
+</div>
+</div>
+</a>
+</sc-for>
+</div>
+<sc-if value="{{ hasMore }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ more }}" style="align-self: center; min-height: 48px; padding: 0 24px; border: 1.5px solid #111111; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ moreLabel }}</button></sc-if>
+</section>
+</div>
+</sc-if>
+
+</main>
+<dc-import name="FiFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3200}}'>
+// Yleinen kategoriasivu: jokainen IA v2 -kategoria ja sen alakategoriat datasta catalog.js (tuotedata-master.xlsx).
+// Suodattimet: enintään 3 per tuoteryhmä, vain must have -kentistä. ?kat=<kategoria>&sub=<alakategoria>.
+// FiValikoima.dc.html generoidaan tästä: tools/build-sortiment-fi.sh.
+const LANG = 'fi';
+const TXT = {
+  sv: { home: 'Startsida', all: 'Sortiment', crumbAria: 'Du är här', asideAria: 'Kategorier och filter', allCats: 'Alla kategorier', allIn: 'Alla', filter: 'Filtrera', close: 'Stäng', clear: 'Rensa', clearAll: 'Rensa alla', clearF: 'Rensa filtren', search: 'Sök', searchIn: (x) => 'Sök i ' + x.toLowerCase(), sorted: 'Populärast först', activeAria: 'Valda filter', img: 'Produktbild', otherSize: 'Annat mått', how: 'Så mäter du',
+    count: (n) => n + (n === 1 ? ' produkt' : ' produkter'), show: (n) => 'Visa ' + n + (n === 1 ? ' produkt' : ' produkter'), more: (n) => 'Visa fler (' + n + ' till)',
+    lead: (n, s) => n + ' produkter i ' + s + ' produktgrupper. Välj en produktgrupp eller sök.', leadSub: (n) => n + (n === 1 ? ' produkt' : ' produkter') + '. Filtrera eller sök.', homeLead: 'Sex kategorier efter användning. Välj en kategori.',
+    missing: (n, f) => n + (n === 1 ? ' produkt saknar uppgift om ' : ' produkter saknar uppgift om ') + f.toLowerCase() + ' och visas inte med filtret.',
+    emptyH: 'Inga produkter matchar.', emptyT: 'Ta bort något filter eller sök på något annat. Du kan också ringa oss på 0920-52 00 56.',
+    curated: 'Se också den färdiga kategorisidan för lätta brunnslock', sizes: (n) => n + ' storlekar', sizesList: (s) => 'Storlekar: ' + s, from: 'från ', quote: 'Pris på offert', someQuote: 'Vissa storlekar på offert', incl: 'inkl. moms', exkl: 'exkl. moms', noCls: 'Klass saknas',
+    f: { ring: 'Passar ring (innermått)', open: 'Fri öppning', inner: 'Invändigt mått', model: 'Modell', h: 'Höjd', mat: 'Material', cls: 'Belastningsklass' },
+    fit: { ring: (a, b) => 'Passar ring ' + (a === b ? a : a + ' till ' + b) + ' mm', open: (s) => 'Fri öppning ' + s + ' mm', inner: (s) => 'Invändigt ' + s + ' mm', h: (s) => 'Höjd ' + s + ' mm' },
+    kg: (a, b) => (a === b ? a : a + ' till ' + b) + ' kg', ph: { w: 'Bredd', l: 'Längd', mm: 'mm, t.ex. 600' }, chipH: (v) => 'Höjd ' + v + ' mm', chipRing: (v) => 'Passar ' + v + ' mm',
+    removeAria: (x) => 'Ta bort filter ' + x },
+  fi: { home: 'Etusivu', all: 'Valikoima', crumbAria: 'Olet tässä', asideAria: 'Kategoriat ja suodattimet', allCats: 'Kaikki kategoriat', allIn: 'Kaikki', filter: 'Suodata', close: 'Sulje', clear: 'Tyhjennä', clearAll: 'Tyhjennä kaikki', clearF: 'Tyhjennä suodattimet', search: 'Hae', searchIn: (x) => 'Hae: ' + x.toLowerCase(), sorted: 'Suosituimmat ensin', activeAria: 'Valitut suodattimet', img: 'Tuotekuva', otherSize: 'Muu mitta', how: 'Näin mittaat',
+    count: (n) => n + ' tuotetta', show: (n) => 'Näytä ' + n + ' tuotetta', more: (n) => 'Näytä lisää (' + n + ' jäljellä)',
+    lead: (n, s) => n + ' tuotetta, ' + s + ' tuoteryhmää. Valitse tuoteryhmä tai hae.', leadSub: (n) => n + ' tuotetta. Suodata tai hae.', homeLead: 'Kuusi kategoriaa käyttötarkoituksen mukaan. Valitse kategoria.',
+    missing: (n, f) => n + ' tuotteelta puuttuu tieto: ' + f.toLowerCase() + '. Niitä ei näytetä suodattimen kanssa.',
+    emptyH: 'Yksikään tuote ei vastaa valintoja.', emptyT: 'Poista jokin suodatin tai hae muulla sanalla. Voit myös soittaa meille: 0920-52 00 56.',
+    curated: 'Katso myös valmis kategoriasivu kevyille kaivonkansille', sizes: (n) => n + ' kokoa', sizesList: (s) => 'Koot: ' + s, from: 'alkaen ', quote: 'Hinta tarjouksella', someQuote: 'Osa koista tarjouksella', incl: 'sis. alv', exkl: 'alv 0', noCls: 'Luokka puuttuu',
+    f: { ring: 'Sopii renkaaseen (sisämitta)', open: 'Vapaa aukko', inner: 'Sisämitta', model: 'Malli', h: 'Korkeus', mat: 'Materiaali', cls: 'Kuormitusluokka' },
+    fit: { ring: (a, b) => 'Sopii renkaaseen ' + (a === b ? a : a + '-' + b) + ' mm', open: (s) => 'Vapaa aukko ' + s + ' mm', inner: (s) => 'Sisämitta ' + s + ' mm', h: (s) => 'Korkeus ' + s + ' mm' },
+    kg: (a, b) => (a === b ? a : a + '-' + b) + ' kg', ph: { w: 'Leveys', l: 'Pituus', mm: 'mm, esim. 600' }, chipH: (v) => 'Korkeus ' + v + ' mm', chipRing: (v) => 'Sopii ' + v + ' mm',
+    removeAria: (x) => 'Poista suodatin ' + x }
+};
+const MAT = { 'Cast iron': ['Gjutjärn', 'Valurauta'], 'Concrete': ['Betong', 'Betoni'], 'Galvanised steel': ['Varmförzinkat stål', 'Kuumasinkitty teräs'], 'Plastic': ['Plast', 'Muovi'], 'Composite': ['Komposit', 'Komposiitti'], 'Glass fibre': ['Glasfiber', 'Lasikuitu'], 'Stainless steel': ['Rostfritt stål', 'Ruostumaton teräs'], 'Aluminium': ['Aluminium', 'Alumiini'], 'Steel': ['Stål', 'Teräs'] };
+const CLS = { A15: ['Gång och gräsmatta', 'Kävely ja nurmikko'], B125: ['Gångbana och personbil', 'Kävelytie ja henkilöauto'], C250: ['Parkering och kantsten', 'Pysäköinti ja reunakivi'], D400: ['Väg och gata', 'Tie ja katu'], E600: ['Industri och truck', 'Teollisuus ja trukki'], F900: ['Hamn och flygplats', 'Satama ja lentokenttä'] };
+const MODEL = { 'Ground screw': ['Markskruv', 'Maaruuvi'], 'Post shoe': ['Stolpsko', 'Pylväskenkä'] };
+const CLS_ORDER = ['A15', 'B125', 'C250', 'D400', 'E600', 'F900'];
+const RING_STD = [110, 160, 200, 250, 315, 400, 500, 600, 700, 800, 900, 1000, 1200, 1500, 2000];
+// Tuoteryhmän suodattimet (enintään 3, must have -data)
+const GROUPS = { kannet: ['ring', 'mat', 'cls'], luukut: ['open', 'cls', 'mat'], kabel: ['inner', 'cls', 'mat'], plintar: ['model', 'h', 'mat'], clsmat: ['cls', 'mat'], mat: ['mat'], none: [] };
+const groupOf = (cat, sub) => {
+  if (cat === 'lock') return !sub ? 'clsmat' : ['latta', 'plastbrunn', 'plast', 'betong', 'gjutjarn'].indexOf(sub) >= 0 ? 'kannet' : ['luckor', 'golv', 'sakerhet', 'kund'].indexOf(sub) >= 0 ? 'luukut' : 'none';
+  if (cat === 'el') return sub === 'kabelbrunn' ? 'kabel' : 'none';
+  if (cat === 'bygg') return sub === 'plintar' ? 'plintar' : 'none';
+  if (cat === 'trafik') return 'clsmat';
+  if (cat === 'jvg' || cat === 'ent') return 'mat';
+  return 'none';
+};
+const PAGE = { sv: 'SvSortiment.dc.html', fi: 'FiValikoima.dc.html' }[LANG];
+const HOME = { sv: 'SvStartsida.dc.html', fi: 'FiEtusivu.dc.html' }[LANG];
+const PROD = { sv: 'SvProdukt.dc.html', fi: 'FiTuote.dc.html' }[LANG];
+const CURATED = { sv: 'SvKategori.dc.html', fi: 'FiKategoria.dc.html' }[LANG];
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let kat = '', sub = '';
+    try { const qp = new URLSearchParams(location.search); kat = qp.get('kat') || ''; sub = qp.get('sub') || ''; } catch (e) {}
+    this.state = { kat: kat, sub: sub, vat: 'inkl', q: '', f: {}, other: {}, fOpen: false, limit: 24 };
+  }
+  renderVals() {
+    const S = this.state, T = TXT[LANG], li = LANG === 'fi' ? 1 : 0;
+    const C = (typeof window !== 'undefined' && window.SB_CATALOG) || { cats: [], fams: {}, items: [] };
+    const cat = C.cats.find((c) => c.id === S.kat);
+    const sub = cat && cat.subs.find((s) => s.id === S.sub) ? S.sub : '';
+    const ex = S.vat === 'exkl';
+    const fmt = (n) => Math.round(ex ? n / 1.25 : n).toLocaleString(LANG === 'fi' ? 'fi-FI' : 'sv-SE') + ' kr';
+    const href = (k, s) => PAGE + (k ? '?kat=' + k + (s ? '&sub=' + s : '') : '');
+    const go = (k, s) => (e) => { if (e && e.preventDefault) e.preventDefault(); try { history.replaceState(null, '', href(k, s)); } catch (er) {} this.setState({ kat: k, sub: s, f: {}, other: {}, q: '', limit: 24 }); };
+    const base = { cart: 0, vat: S.vat, setVat: (v) => this.setState({ vat: v }), t: T };
+    // kortit: yksi kortti per kokoperhe
+    const cardsOf = (items) => { const m = {}, out = []; items.forEach((it) => { const k = it.fam || ('p' + it.id); if (!m[k]) { m[k] = { key: k, fam: it.fam, items: [] }; out.push(m[k]); } m[k].items.push(it); }); return out; };
+    const catItems = (k) => C.items.filter((i) => i.cat === k);
+    if (!cat) {
+      if (typeof document !== 'undefined') document.title = T.all;
+      return Object.assign(base, { isHome: true, isCat: false, title: T.all, lead: T.homeLead, crumbs: [{ label: T.home, href: HOME }], curated: false,
+        home: C.cats.map((c) => { const n = cardsOf(catItems(c.id)).length; return { label: c[LANG], href: href(c.id), count: T.count(n), subs: c.subs.filter((s) => C.items.some((i) => i.cat === c.id && i.sub === s.id)).map((s) => s[LANG]).join(' · ') }; }) });
+    }
+    const group = groupOf(cat.id, sub), FIDS = GROUPS[group];
+    const scopeAll = catItems(cat.id).filter((i) => !sub || i.sub === sub);
+    const ql = S.q.trim().toLowerCase();
+    const scope = ql ? scopeAll.filter((i) => (i.n + ' ' + (i.sku || '')).toLowerCase().indexOf(ql) >= 0) : scopeAll;
+    // ---------- suodattimet ----------
+    const pair = (a, b) => (a && b ? a + '×' + b : '');
+    const DEF = {
+      ring: { kind: 'size1', has: (i) => i.rlo != null, test: (i, v) => v >= i.rlo && v <= (i.rhi != null ? i.rhi : i.rlo) },
+      open: { kind: 'size2', has: (i) => !!(i.ow && i.ol), a: 'ow', b: 'ol' },
+      inner: { kind: 'size2', has: (i) => !!(i.il && i.iw), a: 'il', b: 'iw' },
+      model: { kind: 'list', has: (i) => !!i.model, vals: (i) => [i.model], label: (v) => (MODEL[v] ? MODEL[v][li] : v) },
+      h: { kind: 'btn', has: (i) => i.h != null, vals: (i) => [String(i.h)], label: (v) => v + ' mm', sort: (a, b) => a - b },
+      mat: { kind: 'list', has: (i) => (i.mat || []).length > 0, vals: (i) => i.mat, label: (v) => (MAT[v] ? MAT[v][li] : v) },
+      cls: { kind: 'list', has: (i) => (i.cls || []).length > 0, vals: (i) => i.cls, label: (v) => v, text: (v) => (CLS[v] ? CLS[v][li] : ''), sort: (a, b) => CLS_ORDER.indexOf(a) - CLS_ORDER.indexOf(b) }
+    };
+    Object.keys(DEF).forEach((k) => { const d = DEF[k]; if (d.kind === 'size2') { d.vals = (i) => [pair(i[d.a], i[d.b])]; d.label = (v) => v; d.sort = (x, y) => { const [a1, b1] = x.split('×').map(Number), [a2, b2] = y.split('×').map(Number); return a1 * b1 - a2 * b2 || a1 - a2; }; } });
+    const F = S.f, O = S.other;
+    // tuotteen täsmäys yhteen suodattimeen (aktiivisena). Arvon puuttuminen pudottaa tuotteen vain, kun suodatin on päällä.
+    const passOne = (k, i) => {
+      const d = DEF[k], v = F[k];
+      if (d.kind === 'size1') { const n = parseInt(v, 10); return !n || (d.has(i) && d.test(i, n)); }
+      if (d.kind === 'size2' && v && v.other) { const w = parseInt(v.w, 10), l = parseInt(v.l, 10); if (!w && !l) return true; if (!d.has(i)) return false; const A = i[d.a], B = i[d.b], ok = (x, y) => (!w || Math.abs(x - w) <= 50) && (!l || Math.abs(y - l) <= 50); return ok(A, B) || ok(B, A); }
+      const sel = Array.isArray(v) ? v : v ? [v] : [];
+      if (!sel.length) return true;
+      if (!d.has(i)) return false;
+      if (d.kind === 'size2') { const p = pair(i[d.a], i[d.b]), r = pair(i[d.b], i[d.a]); return sel.indexOf(p) >= 0 || sel.indexOf(r) >= 0; }
+      return d.vals(i).some((x) => sel.indexOf(x) >= 0);
+    };
+    const isOn = (k) => { const v = F[k]; if (v == null) return false; if (Array.isArray(v)) return v.length > 0; if (typeof v === 'object') return !!(parseInt(v.w, 10) || parseInt(v.l, 10)); return !!parseInt(v, 10) || !!v; };
+    const passAll = (i, skip) => FIDS.every((k) => k === skip || passOne(k, i));
+    const famCount = (items) => cardsOf(items).length;
+    const filters = [];
+    FIDS.forEach((k) => {
+      const d = DEF[k];
+      const pool = scope.filter((i) => passAll(i, k));
+      const on = isOn(k);
+      let opts = [];
+      if (d.kind === 'size1') {
+        // yleisimmät rengasmitat, joihin jokin tuote sopii
+        opts = RING_STD.map((v) => ({ v: String(v), n: famCount(pool.filter((i) => d.has(i) && d.test(i, v))) })).filter((o) => o.n > 0).sort((a, b) => b.n - a.n).slice(0, 8).sort((a, b) => a.v - b.v);
+      } else {
+        const cnt = {};
+        pool.forEach((i) => { if (!d.has(i)) return; d.vals(i).forEach((x) => { if (!x) return; (cnt[x] = cnt[x] || []).push(i); }); });
+        opts = Object.keys(cnt).map((v) => ({ v: v, n: famCount(cnt[v]) }));
+        if (d.kind === 'size2') opts = opts.sort((a, b) => b.n - a.n).slice(0, 8);
+        opts = opts.sort((a, b) => (d.sort ? d.sort(a.v, b.v) : b.n - a.n || String(a.v).localeCompare(String(b.v))));
+      }
+      // yhden arvon suodatinta tai suodatinta, jonka mikään vaihtoehto ei rajaa, ei näytetä
+      const poolN = famCount(pool);
+      if (!on && (opts.length < 2 || opts.every((o) => o.n === poolN))) return;
+      const sel = Array.isArray(F[k]) ? F[k] : F[k] && typeof F[k] !== 'object' ? [String(F[k])] : [];
+      const setF = (val) => this.setState({ f: Object.assign({}, F, { [k]: val }), limit: 24 });
+      const btn = (onB) => 'min-height: 36px; min-width: 48px; padding: 0 10px; border-radius: 6px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; ' + (onB ? 'border: 1.5px solid #111111; background: #111111; color: #ffffff;' : 'border: 1.5px solid #bdbdbb; background: #ffffff; color: #111111;');
+      const isButtons = d.kind !== 'list';
+      const single = d.kind === 'size1' || d.kind === 'btn' || d.kind === 'size2';
+      const otherOpen = !!O[k];
+      filters.push({
+        id: k, label: T.f[k], isButtons: isButtons, isList: !isButtons,
+        opts: opts.map((o) => { const onO = sel.indexOf(o.v) >= 0; return { label: d.kind === 'size1' ? o.v : d.label(o.v), text: d.text ? d.text(o.v) : '', count: '(' + o.n + ')', aria: (d.kind === 'size1' ? o.v + ' mm' : d.label(o.v)) + ', ' + T.count(o.n), on: onO, btnStyle: btn(onO),
+          toggle: () => setF(single ? (onO ? null : o.v) : (onO ? sel.filter((x) => x !== o.v) : sel.concat([o.v]))) }; }),
+        hasOther: d.kind === 'size1' || d.kind === 'size2', otherOpen: String(otherOpen), otherOpenB: otherOpen, hasHow: d.kind === 'size1',
+        toggleOther: () => this.setState({ other: Object.assign({}, O, { [k]: !otherOpen }) }),
+        fields: d.kind === 'size1'
+          ? [{ value: sel.length && RING_STD.indexOf(Number(sel[0])) < 0 ? sel[0] : '', ph: T.ph.mm, aria: T.f[k] + ', mm', onInput: (e) => setF(e.target.value.replace(/\D/g, '')) }]
+          : ['w', 'l'].map((x) => ({ value: F[k] && F[k].other ? F[k][x] || '' : '', ph: T.ph[x] + ', mm', aria: T.f[k] + ', ' + T.ph[x] + ', mm', onInput: (e) => setF(Object.assign({ other: true }, F[k] && F[k].other ? F[k] : {}, { [x]: e.target.value.replace(/\D/g, '') })) }))
+      });
+    });
+    // ---------- tulos ----------
+    const matched = scope.filter((i) => passAll(i, null));
+    const cards = cardsOf(matched).sort((a, b) => b.items.reduce((s, i) => s + (i.sold || 0), 0) - a.items.reduce((s, i) => s + (i.sold || 0), 0));
+    // tuotteet, jotka putoavat pois vain puuttuvan arvon takia
+    const missing = [];
+    FIDS.forEach((k) => { if (!isOn(k)) return; const d = DEF[k]; const lost = cardsOf(scope.filter((i) => passAll(i, k) && !d.has(i))).length; if (lost) missing.push(T.missing(lost, T.f[k])); });
+    const vals = (arr) => Array.from(new Set(arr));
+    const card = (c) => {
+      const its = c.items, fam = c.fam && C.fams[c.fam];
+      const allFam = c.fam ? C.items.filter((i) => i.fam === c.fam) : its;
+      const dflt = (fam && its.find((i) => i.id === fam.dflt)) || its[0];
+      const cls = vals([].concat.apply([], its.map((i) => i.cls || []))).sort((a, b) => CLS_ORDER.indexOf(a) - CLS_ORDER.indexOf(b));
+      const clsLabel = !cls.length ? T.noCls : cls.length > 3 ? cls[0] + (LANG === 'fi' ? '-' : ' till ') + cls[cls.length - 1] : cls.join(', ');
+      // Kuormaluokka ei koske kaikkia tuotteita: puuttuva luokka merkitään vain, jos ryhmä suodattaa luokalla. Plinteillä merkki kertoo mallin.
+      const models = vals(its.map((i) => i.model).filter(Boolean)).map((m) => (MODEL[m] ? MODEL[m][li] : m));
+      const chip = cls.length ? clsLabel : FIDS.indexOf('cls') >= 0 ? T.noCls : models.join(', ');
+      const mats = vals([].concat.apply([], its.map((i) => i.mat || []))).map((m) => (MAT[m] ? MAT[m][li] : m));
+      const kgs = its.map((i) => i.kg).filter((x) => x != null);
+      let fit = '';
+      if (group === 'kannet') { const lo = Math.min.apply(null, its.filter((i) => i.rlo != null).map((i) => i.rlo)), hi = Math.max.apply(null, its.filter((i) => i.rlo != null).map((i) => i.rhi != null ? i.rhi : i.rlo)); if (isFinite(lo)) fit = T.fit.ring(lo, hi); }
+      else if (group === 'luukut') { const s = vals(its.map((i) => pair(i.ow, i.ol)).filter(Boolean)); if (s.length) fit = T.fit.open(s.length > 3 ? s.slice(0, 3).join(', ') + ' …' : s.join(', ')); }
+      else if (group === 'kabel') { const s = vals(its.map((i) => pair(i.il, i.iw)).filter(Boolean)); if (s.length) fit = T.fit.inner(s.length > 3 ? s.slice(0, 3).join(', ') + ' …' : s.join(', ')); }
+      else if (group === 'plintar') { const s = vals(its.map((i) => i.h).filter((x) => x != null)).sort((a, b) => a - b); if (s.length) fit = T.fit.h(s.join(', ')); }
+      const priced = its.filter((i) => i.price != null), minP = priced.length ? Math.min.apply(null, priced.map((i) => i.price)) : null;
+      const sizes = its.map((i) => i.sz).filter(Boolean);
+      const fr = (priced.find((i) => i.price === minP) || dflt).fr;
+      const FRP = typeof window !== 'undefined' && window.SBFreight ? window.SBFreight.profiles : {};
+      const name = fam ? fam.name : dflt.n;
+      let link = '#';
+      if (c.fam && /^SF02\b/.test(c.fam)) link = PROD + '?p=durk&size=' + ((dflt.sz || '').replace('×', 'x'));
+      else if (c.fam && /^SF19\b/.test(c.fam)) link = PROD + '?size=' + (String(dflt.sz || '').replace(/\D/g, '') || '1050');
+      return {
+        href: link, name: name, imgAlt: T.img + ': ' + name, clsLabel: chip,
+        clsStyle: 'align-self: flex-start; border-radius: 4px; padding: 0 8px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 13px; line-height: 1.6; ' + (!chip ? 'display: none;' : cls.length || models.length ? 'border: 1.5px solid #111111; color: #111111;' : 'border: 1.5px dashed #8a8a88; color: #5c5c5c;'),
+        fit: fit, meta: [mats.join(', '), kgs.length ? T.kg(Math.min.apply(null, kgs), Math.max.apply(null, kgs)) : ''].filter(Boolean).join(', '),
+        sizesTxt: sizes.length > 1 ? T.sizesList(sizes.length > 6 ? sizes.slice(0, 6).join(', ') + ' …' : sizes.join(', ')) + (allFam.length > its.length ? ' (' + T.sizes(allFam.length) + ')' : '') : '',
+        priceTxt: minP == null ? T.quote : (priced.length < its.length || its.length > 1 ? T.from : '') + fmt(minP), vat: minP == null ? '' : (ex ? T.exkl : T.incl),
+        note: minP != null && priced.length < its.length ? T.someQuote : '', freight: (FRP[fr] || {})[LANG] || ''
+      };
+    };
+    const subList = [{ id: '', label: T.allIn + ' ' + cat[LANG].toLowerCase() }].concat(cat.subs.map((s) => ({ id: s.id, label: s[LANG] })))
+      .map((s) => ({ ...s, n: famCount(catItems(cat.id).filter((i) => !s.id || i.sub === s.id)) })).filter((s) => s.n > 0)
+      .map((s) => { const on = s.id === sub; return { label: s.label, count: String(s.n), href: href(cat.id, s.id), current: on ? 'page' : 'false', pick: go(cat.id, s.id),
+        style: 'display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 34px; padding: 6px 0; text-decoration: none; font-size: 14px; line-height: 1.35; color: ' + (on ? '#111111; font-weight: 700;' : '#474747; font-weight: 400;') }; });
+    const subObj = sub && cat.subs.find((s) => s.id === sub);
+    const title = subObj ? subObj[LANG] : cat[LANG];
+    if (typeof document !== 'undefined') document.title = title;
+    const active = [];
+    FIDS.forEach((k) => {
+      if (!isOn(k)) return; const d = DEF[k], v = F[k];
+      const rm = (x) => () => this.setState({ f: Object.assign({}, F, { [k]: x === undefined ? null : (Array.isArray(v) ? v.filter((y) => y !== x) : null) }) });
+      let labels = [];
+      if (d.kind === 'size1') labels = [[T.chipRing(v), undefined]];
+      else if (d.kind === 'size2' && v.other) labels = [[T.f[k] + ' ' + [v.w, v.l].filter(Boolean).join('×') + ' mm', undefined]];
+      else if (d.kind === 'btn') labels = [[k === 'h' ? T.chipH(v) : d.label(v), undefined]];
+      else (Array.isArray(v) ? v : [v]).forEach((x) => labels.push([d.label(x), x]));
+      labels.forEach((l) => active.push({ label: l[0], aria: T.removeAria(l[0]), remove: rm(l[1]) }));
+    });
+    const shown = cards.slice(0, S.limit);
+    const nAll = famCount(scopeAll);
+    return Object.assign(base, {
+      isHome: false, isCat: true, title: title, catLabel: cat[LANG],
+      lead: subObj ? T.leadSub(nAll) : T.lead(nAll, subList.length - 1),
+      crumbs: [{ label: T.home, href: HOME }, { label: T.all, href: PAGE }].concat(subObj ? [{ label: cat[LANG], href: href(cat.id) }] : []),
+      curated: cat.id === 'lock' && sub === 'latta', curatedHref: CURATED,
+      subs: subList, homeHref: PAGE,
+      hasFilters: filters.length > 0, filters: filters, fOpen: String(S.fOpen), openF: () => this.setState({ fOpen: true }), closeF: () => this.setState({ fOpen: false }),
+      hasActive: active.length > 0, active: active, activeN: active.length ? ' (' + active.length + ')' : '', reset: () => this.setState({ f: {}, other: {}, q: '' }),
+      hasMissing: missing.length > 0, missingTxt: missing.join(' '),
+      q: S.q, typeQ: (e) => this.setState({ q: e.target.value, limit: 24 }), noSubmit: (e) => e.preventDefault(), searchPh: T.searchIn(title),
+      countLabel: T.count(cards.length), showLabel: T.show(cards.length), empty: cards.length === 0,
+      cards: shown.map(card), hasMore: cards.length > shown.length, moreLabel: T.more(cards.length - shown.length), more: () => this.setState({ limit: S.limit + 24 })
+    });
+  }
+}
+</script>
+</body>
+</html>

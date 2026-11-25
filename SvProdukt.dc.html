@@ -23,7 +23,7 @@ summary::-webkit-details-marker{display:none}
 <section aria-labelledby="p-title" style="max-width: 1240px; margin: 0 auto; padding: 16px 24px 64px">
 <nav aria-label="Du är här" style="font-size: 14px; color: #474747; display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px">
 <a href="SvStartsida.dc.html" style="text-decoration: none; padding: 10px 0">Startsida</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
-<a href="#" style="text-decoration: none; padding: 10px 0">Brunnslock och luckor</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
+<a href="SvSortiment.dc.html?kat=lock" style="text-decoration: none; padding: 10px 0">Brunnslock och luckor</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
 <a href="{{ crumbHref }}" style="text-decoration: none; padding: 10px 0">{{ crumbCat }}</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
 <span aria-current="page" style="padding: 10px 0; color: #111111; font-weight: 600">{{ name }}</span>
 </nav>
@@ -362,7 +362,7 @@ class Component extends DCLogic {
     return {
       cart: 0, vat: S.vat, setVat: (v) => this.setState({ vat: v }),
       isLid: false, isDurk: true, isBuy: !q, isQuote: q, hasAddons: false, hasCls: false, cls: '',
-      crumbCat: 'Durkplåtsluckor', crumbHref: '#', imgAlt: 'Produktbild: durkplåtslucka i ett betonggolv',
+      crumbCat: 'Durkplåtsluckor', crumbHref: 'SvSortiment.dc.html?kat=lock&sub=luckor', imgAlt: 'Produktbild: durkplåtslucka i ett betonggolv',
       thumbs: ['I golvet', 'Måttskiss', 'Ram och skruvar', 'Öppen lucka'].map((l, i) => ({ label: l, on: String(i === 0), style: i === 0 ? 'aspect-ratio: 1; border: 2px solid #111111; background: #ececea; border-radius: 10px; font: inherit; font-size: 12px; color: #474747; cursor: pointer' : 'aspect-ratio: 1; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 10px; font: inherit; font-size: 12px; color: #474747; cursor: pointer' })),
       T: { compare: 'Jämför storlekar', cSize: 'Storlek', cIn: 'Fri öppning', cOut: 'Vikt', cPrice: 'Pris' }, name: c['sv'], art: c.sku, sub: 'Fri öppning ' + c.label + ' mm. För golv och vägg, inomhus och utomhus.',
       bullets: ['Fri öppning ' + c.label + ' mm.', 'Pulverlackerad i svart, för inomhus och utomhus.', 'Locket låses med infällda skruvar.', 'Väger ' + c.kg + ' kg.'].map((x) => ({ t: x })),
