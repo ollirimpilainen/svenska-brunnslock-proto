@@ -178,12 +178,14 @@
   window.SBFreight.profiles = FR;
 
   // ---------- rahdin rajat (rahtimalli.md 3.2, esimerkkiarvot, SB vahvistaa) ----------
-  var FREIGHT_OMBUD_MAX_KG = 20;    // koko kori enintään 20 kg: paketti noutopisteeseen
-  var FREIGHT_HOME_MAX_KG = 70;     // koko kori enintään 70 kg: kotiinkuljetus (esimerkkiarvo, voi poistua)
+  var FREIGHT_OMBUD_MAX_KG = 20;    // koko kori enintään 20 kg: paketti noutopisteeseen (kaikkien ombud-palveluiden raja)
+  var FREIGHT_HOME_MAX_KG = 30;     // koko kori enintään 30 kg: kotiinkuljetus pakettina (DSV 30, DHL Parcel Connect 31,5, PostNord 35)
+  var FREIGHT_HEAVY_MAX_KG = 150;   // koko kori enintään 150 kg: tung kotiinkuljetus rahtina kotiovelle (uusi porras, SB päättää)
   var FREIGHT_RIDER_MAX_KG = 1000;  // muut tuotteet kulkevat lavojen mukana enintään 1 000 kg, sen yli lisää yleislavoja
   var FREIGHT_PALLET_MAX_KG = 1000; // yleislava enintään 1 000 kg
   var FREIGHT_MAX_PALLETS = 5;      // yli 5 lavaa: rahti offeroidaan, ei lisätä summaan
   var FREIGHT_OMBUD_PRICE = 172, FREIGHT_HOME_PRICE = 590;
+  var FREIGHT_HEAVY_PRICE = 1240;   // nykyisen "Hemleverans pall" -tavan hinta
 
   // ---------- lavatyypit ja lavakapasiteetit (rahtimalli.md 1 ja 3.1, nykyisen kaupan rahtiluokat; SB vahvistaa) ----------
   // Lavatyyppi määrää lavan hinnan. Tuote täyttää lavasta osuuden 1 / per; osuudet summataan saman tyypin sisällä ja pyöristetään ylöspäin.
@@ -293,8 +295,9 @@
       var ls = (lines || this.lines(lang)).filter(function (l) { return !l.quote; });
       if (!ls.length) return { price: 0, label: '', options: [] };
       // Painoportaat koko korille (rahtimalli.md 3.2, esimerkkiarvot, SB vahvistaa):
-      // ombud enintään 20 kg, kotiinkuljetus enintään 70 kg, sen yli lava; lavalla kulkee muita tuotteita enintään 1 000 kg; yli 5 lavaa tarjoukseen.
-      var OMB_KG = FREIGHT_OMBUD_MAX_KG, HOME_KG = FREIGHT_HOME_MAX_KG, RIDER_KG = FREIGHT_RIDER_MAX_KG, PALL_KG = FREIGHT_PALLET_MAX_KG, MAX_PALL = FREIGHT_MAX_PALLETS, PT = PALLET_TYPES;
+      // ombud enintään 20 kg, kotiinkuljetus pakettina enintään 30 kg, tung kotiinkuljetus enintään 150 kg, sen yli lava;
+      // lavalla kulkee muita tuotteita enintään 1 000 kg; yli 5 lavaa tarjoukseen.
+      var OMB_KG = FREIGHT_OMBUD_MAX_KG, HOME_KG = FREIGHT_HOME_MAX_KG, HEAVY_KG = FREIGHT_HEAVY_MAX_KG, RIDER_KG = FREIGHT_RIDER_MAX_KG, PALL_KG = FREIGHT_PALLET_MAX_KG, MAX_PALL = FREIGHT_MAX_PALLETS, PT = PALLET_TYPES;
       var W = 0, riderKg = 0, unknownPall = false, noKg = [], has = {}, share = {};
       ls.forEach(function (l) {
         var kg = l.kg == null ? 0 : l.kg * l.qty, pa = null;
@@ -319,13 +322,18 @@
       // Tuote ilman painoa lasketaan 0 kg:ksi (tuotedatasta puuttuu paino), joten rahti voi tarkentua: kerrotaan se asiakkaalle.
       var nk = noKg.filter(Boolean).length ? ' ' + T('Vikt saknas för ' + noKg.filter(Boolean).join(', ') + ', så frakten kan justeras.', 'Painotieto puuttuu tuotteelta ' + noKg.filter(Boolean).join(', ') + ', joten rahti voi tarkentua.') : '';
       var home = function (txt) { return { price: FREIGHT_HOME_PRICE, key: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), note: same + nk, options: [{ id: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), text: txt + same + nk, price: FREIGHT_HOME_PRICE }] }; };
+      var heavyLbl = T('Hemleverans, tungt gods', 'Kotiinkuljetus, raskas tavara');
+      var heavy = function (txt) { return { price: FREIGHT_HEAVY_PRICE, key: 'tung', label: heavyLbl, note: same + nk, options: [{ id: 'tung', label: heavyLbl, text: txt + same + nk, price: FREIGHT_HEAVY_PRICE }] }; };
       var hasPall = Object.keys(share).length > 0;
-      // 1 Koko kori enintään 70 kg: kotiinkuljetus, myös lavatuotteilla (kevyt lavatilaus)
-      if (W <= HOME_KG && !unknownPall && (hasPall || has.skrym || W > OMB_KG)) return home(T('Ordern väger ' + kgTxt + '. ', 'Tilaus painaa ' + kgTxt + '. '));
-      if (hasPall || W > HOME_KG) {
+      var wTxt = T('Ordern väger ' + kgTxt + '. ', 'Tilaus painaa ' + kgTxt + '. ');
+      // 1 Koko kori enintään 30 kg: kotiinkuljetus pakettina, myös lavatuotteilla (kevyt lavatilaus)
+      if (W <= HOME_KG && !unknownPall && (hasPall || has.skrym || W > OMB_KG)) return home(wTxt);
+      // 2b Koko kori yli 30 kg mutta enintään 150 kg: tung kotiinkuljetus rahtina kotiovelle, myös lavatuotteilla
+      if (W > HOME_KG && W <= HEAVY_KG && !unknownPall) return heavy(T('Ordern väger ' + kgTxt + ' och körs hem som gods. ', 'Tilaus painaa ' + kgTxt + ' ja ajetaan kotiin rahtina. '));
+      if (hasPall || W > HEAVY_KG) {
         // 2 Lavat: lavatuotteet osuuksina lavatyypeittäin (summa pyöristetään ylöspäin), eri tyypit lasketaan yhteen.
         // Muut tuotteet kulkevat lavojen mukana enintään 1 000 kg; sen yli ne vievät lisää yleislavoja.
-        // Ilman lavatuotteita yli 70 kg:n kori menee yleislavoille painon mukaan (enintään 1 000 kg per lava).
+        // Ilman lavatuotteita yli 150 kg:n kori menee yleislavoille painon mukaan (enintään 1 000 kg per lava).
         var n = {};
         Object.keys(share).forEach(function (k) { n[k] = Math.ceil(share[k] - 1e-9); });
         var extra = hasPall ? (riderKg > RIDER_KG ? Math.ceil((riderKg - RIDER_KG) / PALL_KG) : 0) : Math.ceil(W / PALL_KG);
@@ -353,7 +361,7 @@
 
   // Rahtiteksti yhdelle kappaleelle (kategoriakortti, tuotesivu): sama tulos kuin korissa yhdellä kappaleella.
   // it: catalog.js-tuote { n, fr, kg, price } tai tuoteapurin tuote. vat: 'exkl' näyttää hinnan ilman arvonlisäveroa (oletus SBVat).
-  // Palauttaa esim. "Frakt från 172 kr", "Frakt 590 kr" tai "Pallfrakt från 2 400 kr".
+  // Palauttaa esim. "Frakt från 172 kr", "Frakt 590 kr", "Hemleverans, tungt gods 1 240 kr" tai "Pallfrakt från 2 400 kr".
   window.SBFreight.unit = function (it, lang, vat) {
     lang = lang === 'sv' ? 'sv' : 'fi';
     if (!it) return '';
@@ -367,6 +375,7 @@
     var sv = lang === 'sv';
     if (f.key === 'ombud') return (sv ? 'Frakt från ' : 'Rahti alkaen ') + kr;
     if (f.key === 'skrym') return (sv ? 'Frakt ' : 'Rahti ') + kr;
+    if (f.key === 'tung') return (sv ? 'Hemleverans, tungt gods ' : 'Kotiinkuljetus, raskas tavara ') + kr;
     return (sv ? 'Pallfrakt från ' : 'Lavarahti alkaen ') + kr;
   };
 
