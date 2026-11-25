@@ -781,7 +781,7 @@ class Component extends DCLogic {
         return (ring ? L('Passar ring med innermått ', 'Sopii renkaaseen, sisämitta ') : L('Passar rör med innermått ', 'Sopii putkeen, sisämitta ')) + r + you;
       },
       meta: (p, c) => {
-        const A = c.A, out = [c.g.mats[p.mat] + ', ' + (p.kgEst ? L('cirka ', 'noin ') : '') + p.kg + ' kg'];
+        const A = c.A, out = [c.g.mats[p.mat] + ', ' + (p.kgEst ? L('cirka ', 'noin ') : '') + String(p.kg).replace('.', ',') + ' kg'];
         out.push(p.kg <= 15 ? L('du lyfter det själv', 'nostat itse') : p.kg <= 25 ? L('en person lyfter det', 'yksi ihminen nostaa') : L('lyfts med maskin', 'nostetaan koneella'));
         const FW = { las: L('låsbart', 'lukittava'), iso: L('isolerat', 'eristetty'), vent: L('med ventil', 'venttiili valmiina'), ventOpt: L('ventil som tillval', 'venttiili lisävarusteena'), pump: L('hål för gårdspump', 'reikä pihapumpulle'), manhal: L('manhål', 'huoltoaukko'), tat: L('tätt med packning', 'tiivis'), tatOpt: L('tätningsring som tillval', 'tiivisterengas lisävarusteena') };
         const ex = c.asked.indexOf('extras') >= 0 && (A.extras || []).length ? A.extras : p.f.filter((x) => x === 'las');
@@ -927,7 +927,7 @@ class Component extends DCLogic {
       },
       meta: (p, c) => {
         const A = c.A, out = [];
-        out.push((c.g.mats[p.mat] || L('Valfritt material', 'Vapaa materiaali')) + (p.kg ? ', ' + L('locket ', 'kansi ') + p.kg + ' kg' : ''));
+        out.push((c.g.mats[p.mat] || L('Valfritt material', 'Vapaa materiaali')) + (p.kg ? ', ' + L('locket ', 'kansi ') + String(p.kg).replace('.', ',') + ' kg' : ''));
         const MW = { plan: L('plan', 'tasainen'), over: L('överfalsad', 'limiluukku'), infill: 'infill' };
         if (MW[p.mont]) out.push(MW[p.mont]);
         const KW = { las: L('låsbar', 'lukittava'), lyft: L('lyfthjälp', 'nostoapu'), iso: L('isolerad', 'eristetty'), tat: L('vatten- och gastät', 'vesi- ja kaasutiivis'), fall: L('fallskyddsgaller', 'putoamissuoja'), brand: L('brandklassad', 'paloluokiteltu'), inbrott: L('inbrottsskydd RC4', 'murtosuoja RC4'), utrym: L('utrymning', 'evakuointi') };
@@ -1337,7 +1337,9 @@ class Component extends DCLogic {
     }
     const A = S.ans;
     const matches = filterWith(A, S.m, S.skipM);
-    const countWith = (patchAns, patchM) => filterWith(Object.assign({}, A, patchAns || {}), Object.assign({}, S.m, patchM || {}), S.skipM).length;
+    // Määrät tuotekortteina (kokoperhe = yksi kortti), samoin kuin kategoriasivun listassa
+    const famN = (list) => new Set(list.map((p) => p.fam || 'p' + p.id)).size;
+    const countWith = (patchAns, patchM) => famN(filterWith(Object.assign({}, A, patchAns || {}), Object.assign({}, S.m, patchM || {}), S.skipM));
 
     const qs = visible(A);
     const steps = qs.map((qq) => qq.id);
@@ -1391,7 +1393,7 @@ class Component extends DCLogic {
         const pr = parse(cur, A, S.m);
         const v = pr.v, raw = pr.raw;
         const setRaw = (patch) => this.setState({ m: Object.assign({}, S.m, { [cur.id]: Object.assign({}, raw, patch) }), skipM: Object.assign({}, S.skipM, { [cur.id]: false }) });
-        const n = matches.length;
+        const n = famN(matches);
         const disp0 = v.active && cur.display ? cur.display(v, A) : '';
         const disp = /^[A-Z]/.test(disp0) ? disp0.charAt(0).toLowerCase() + disp0.slice(1) : disp0;
         const qb = (on) => 'min-height: 40px; min-width: 56px; padding: 0 10px; border-radius: 6px; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; ' + (on ? 'border: 1.5px solid #111111; background: #111111; color: #ffffff;' : 'border: 1.5px solid #bdbdbb; background: #ffffff; color: #111111;');
@@ -1465,7 +1467,7 @@ class Component extends DCLogic {
     const openForm = (mode) => { this.setState({ form: mode, sent: false }); setTimeout(() => { const el = document.getElementById('pg-form'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 30); };
     const summary = answers.map((a) => ({ group: a.group, value: a.value }));
     if (top) summary.push({ group: T.best, value: name(top) });
-    const total = ALL.length, n = matches.length;
+    const total = famN(ALL), n = famN(matches);
     // Sama tuotekortti kuin kategoriasivulla (luokkamerkki, nimi, sopivuus, ominaisuudet, koot, hinta, normaalihinta, rahti).
     const chipStyle = (known) => 'align-self: flex-start; border-radius: 4px; padding: 0 8px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 13px; line-height: 1.6; ' + (known ? 'border: 1.5px solid #111111; color: #111111;' : 'border: 1.5px dashed #8a8a88; color: #5c5c5c; font-family: Inter, sans-serif; font-weight: 500;');
     // Rahti rahtiprofiilin mukaan (support.js SBFreight, service-design/rahtimalli.md 3.3), sama hinta koko Ruotsissa.

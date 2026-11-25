@@ -31,7 +31,7 @@ a{color:#111111}a:hover{color:#474747}
 <header style="display: flex; flex-direction: column; gap: 10px; max-width: 760px">
 <h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 44px; line-height: 1.08; letter-spacing: -0.015em; color: #111111">{{ title }}</h1>
 <p style="margin: 0; font-size: 18px; color: #474747">{{ lead }}</p>
-<sc-if value="{{ hasGuide }}" hint-placeholder-val="{{ false }}"><a href="{{ guideHref }}" style="align-self: flex-start; display: flex; align-items: center; gap: 16px; min-height: 56px; margin-top: 6px; padding: 8px 12px 8px 16px; border-radius: 10px; border: 1.5px solid #111111; text-decoration: none; background: #f5f5f4"><span style="display: flex; flex-direction: column; line-height: 1.35"><b style="font-size: 16px; color: #111111">{{ guideTitle }}</b><span style="font-size: 14px; color: #474747">{{ guideText }}</span></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></sc-if>
+<sc-if value="{{ hasGuide }}" hint-placeholder-val="{{ false }}"><a href="{{ guideHref }}" onClick="{{ openGuide }}" style="align-self: flex-start; display: flex; align-items: center; gap: 16px; min-height: 56px; margin-top: 6px; padding: 8px 12px 8px 16px; border-radius: 10px; border: 1.5px solid #111111; text-decoration: none; background: #f5f5f4"><span style="display: flex; flex-direction: column; line-height: 1.35"><b style="font-size: 16px; color: #111111">{{ guideTitle }}</b><span style="font-size: 14px; color: #474747">{{ guideText }}</span></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></sc-if>
 </header>
 
 <sc-if value="{{ isHome }}" hint-placeholder-val="{{ false }}">
@@ -157,6 +157,25 @@ a{color:#111111}a:hover{color:#474747}
 </div>
 </sc-if>
 
+<sc-if value="{{ gOpen }}" hint-placeholder-val="{{ false }}">
+<aside role="dialog" aria-modal="false" aria-labelledby="gp-h" style="position: fixed; top: 0; right: 0; bottom: 0; width: min(100%, 420px); z-index: 50; background: #ffffff; border-left: 1.5px solid #111111; box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12); display: flex; flex-direction: column; gap: 16px; padding: 24px; overflow-y: auto; box-sizing: border-box">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><span style="font-size: 13px; font-weight: 600; color: #5c5c5c">{{ g.stepTxt }}</span><button type="button" onClick="{{ g.close }}" style="min-height: 44px; padding: 0 12px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ t.close }}</button></div>
+<h2 id="gp-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 24px; line-height: 1.2; color: #111111">{{ g.title }}</h2>
+<p style="margin: 0; font-size: 15px; color: #474747">{{ g.help }}</p>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{ g.opts }}" as="o" hint-placeholder-count="3">
+<button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="{{ o.style }}"><b style="font-size: 16px">{{ o.label }}</b><span style="font-size: 13px; font-weight: 400; color: #5c5c5c">{{ o.text }}</span></button>
+</sc-for>
+</div>
+<p role="status" aria-live="polite" style="margin: 0; font-size: 16px; font-weight: 700; color: #111111">{{ g.countTxt }}</p>
+<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto">
+<sc-if value="{{ g.hasBack }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ g.back }}" style="min-height: 48px; padding: 0 16px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ g.backTxt }}</button></sc-if>
+<sc-if value="{{ g.hasNext }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ g.next }}" style="min-height: 48px; padding: 0 16px; border: 1.5px solid #111111; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ g.nextTxt }}</button></sc-if>
+<button type="button" onClick="{{ g.close }}" style="flex: 1; min-height: 48px; padding: 0 16px; border: 0; border-radius: 6px; background: #111111; color: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ g.showTxt }}</button>
+</div>
+<a href="{{ g.pageHref }}" style="font-size: 13px; font-weight: 600; align-self: flex-start">{{ g.pageTxt }}</a>
+</aside>
+</sc-if>
 </main>
 <dc-import name="SvFooter" hint-size="100%,420px"></dc-import>
 </div>
@@ -212,6 +231,31 @@ const GUIDE = { sv: 'SvProduktguide.dc.html', fi: 'FiTuoteapuri.dc.html' }[LANG]
 // Apurimainos: kansien ja luukkujen näkymissä (apurit kysyvät 3 kysymystä, jokainen vastaus = yksi suodatin)
 const GUIDE_OF = { latta: 'brunnslock', plastbrunn: 'brunnslock', plast: 'brunnslock', luckor: 'luckor', golv: 'luckor', sakerhet: 'luckor' };
 
+// Tuoteapuri paneelina listauksen päällä: 3 kysymystä, jokainen vastaus rajaa listaa heti (sama logiikka kuin SvProduktguide.dc.html:n apureissa).
+// Mitat: renkaan sisämitta osuu kannen välille rlo..rhi; luukun aukko ±50 mm, sama toleranssi kuin luukkuapurissa.
+const L2 = (sv, fi) => (LANG === 'fi' ? fi : sv);
+const clsAtLeast = (i, k) => k === 'A15' || (i.cls || []).some((c) => CLS_ORDER.indexOf(c) >= CLS_ORDER.indexOf(k));
+const GDEF = {
+  brunnslock: { subs: ['latta', 'plastbrunn', 'plast'], qs: [
+    { id: 'typ', title: L2('Vilken typ av brunn har du?', 'Millainen kaivo sinulla on?'), help: L2('Svaret väljer lätta lock för betongbrunnar eller lock för plastbrunnar.', 'Vastaus valitsee kevyet kannet betonikaivoihin tai kannet muovikaivoihin.'),
+      opts: [{ v: 'betong', l: L2('Betongbrunn', 'Betonikaivo'), t: L2('Betongring eller kona', 'Betonirengas tai kartio'), test: (i) => i.sub === 'latta' },
+        { v: 'plast', l: L2('Plastbrunn', 'Muovikaivo'), t: L2('Slätt eller korrugerat plaströr', 'Sileä tai korrugoitu muoviputki'), test: (i) => i.sub !== 'latta' }] },
+    { id: 'last', title: L2('Vad ska köra över locket?', 'Mitä kannen yli ajetaan?'), help: L2('Det avgör belastningsklassen.', 'Se ratkaisee kuormitusluokan.'),
+      opts: [['A15', L2('Ingenting, gräs eller rabatt', 'Ei mitään, nurmikko tai kukkapenkki'), 'A15'], ['B125', L2('Personbil, uppfart', 'Henkilöauto, piha'), 'B125'], ['C250', L2('Lätt lastbil, parkering', 'Kevyt kuorma-auto, pysäköinti'), 'C250'], ['D400', L2('Tung trafik, väg', 'Raskas liikenne, tie'), 'D400']].map((r) => ({ v: r[0], l: r[1], t: r[2], test: (i) => clsAtLeast(i, r[0]) })) },
+    { id: 'mm', title: L2('Hur stort är hålet i ringen?', 'Kuinka suuri renkaan aukko on?'), help: L2('Mät ringens innermått från kant till kant.', 'Mittaa renkaan sisämitta reunasta reunaan.'),
+      sizes: (A) => (A.typ === 'plast' ? [315, 400, 600] : [600, 800, 900, 1000]), test: (i, v) => i.rlo != null && v >= i.rlo && v <= (i.rhi != null ? i.rhi : i.rlo), chip: (v) => L2('Ring ', 'Rengas ') + v + ' mm' } ] },
+  luckor: { subs: ['luckor', 'golv', 'sakerhet'], qs: [
+    { id: 'plats', title: L2('Var ska luckan sitta?', 'Mihin luukku tulee?'), help: L2('Svaret väljer produktgrupp.', 'Vastaus valitsee tuoteryhmän.'),
+      opts: [{ v: 'mark', l: L2('Utomhus i mark', 'Ulos maahan'), t: L2('Gård, väg, brunn eller grönyta', 'Piha, tie, kaivo tai viheralue'), test: (i) => i.sub === 'luckor' },
+        { v: 'golv', l: L2('Golv, vägg eller krypgrund', 'Lattia, seinä tai ryömintätila'), t: L2('Inspektions- och golvluckor', 'Tarkastus- ja lattialuukut'), test: (i) => i.sub === 'golv' },
+        { v: 'sakerhet', l: L2('Säkerhet och utrymning', 'Turva ja poistuminen'), t: L2('Evakueringslucka', 'Evakuointiluukku'), test: (i) => i.sub === 'sakerhet' }] },
+    { id: 'last', title: L2('Vad ska passera över luckan?', 'Mitä luukun yli kulkee?'), help: L2('Välj det tyngsta som kan hamna på luckan.', 'Valitse raskain, mitä luukun päälle voi tulla.'),
+      opts: [['A15', L2('Bara personer', 'Vain ihmisiä'), 'A15'], ['B125', L2('Personbil', 'Henkilöauto'), 'B125'], ['C250', L2('Lastbil, gata', 'Kuorma-auto, katu'), 'C250'], ['E600', L2('Truck, industri', 'Trukki, teollisuus'), 'E600'], ['F900', L2('Hamn, flygplats', 'Satama, lentokenttä'), 'F900']].map((r) => ({ v: r[0], l: r[1], t: r[2], test: (i) => clsAtLeast(i, r[0]) })) },
+    { id: 'mm', title: L2('Hur stor är öppningen?', 'Kuinka suuri aukko on?'), help: L2('Fyrkantig öppning, sidans längd. Vi visar luckor inom ±50 mm.', 'Neliön muotoinen aukko, sivun pituus. Näytämme luukut ±50 mm:n sisällä.'),
+      sizes: () => [500, 600, 700, 800, 900], test: (i, v) => !!(i.ow && i.ol) && Math.abs(i.ow - v) <= 50 && Math.abs(i.ol - v) <= 50, chip: (v) => L2('Öppning ', 'Aukko ') + v + ' × ' + v + ' mm' } ] }
+};
+const gPass = (gid, A) => (i) => { const D = GDEF[gid]; if (!D) return true; if (D.subs.indexOf(i.sub) < 0) return false; return D.qs.every((q) => { const v = A[q.id]; if (v == null) return true; if (q.sizes) return q.test(i, v); const o = q.opts.find((x) => x.v === v); return !o || o.test(i); }); };
+
 class Component extends DCLogic {
   constructor(props) {
     super(props);
@@ -238,7 +282,7 @@ class Component extends DCLogic {
     const ex = S.vat === 'exkl';
     const fmt = (n) => Math.round(ex ? n / 1.25 : n).toLocaleString(LANG === 'fi' ? 'fi-FI' : 'sv-SE') + ' kr';
     const href = (k, s) => PAGE + (k ? '?kat=' + k + (s ? '&sub=' + s : '') : '');
-    const go = (k, s) => (e) => { if (e && e.preventDefault) e.preventDefault(); try { history.replaceState(null, '', href(k, s)); } catch (er) {} this.setState({ kat: k, sub: s, f: {}, other: {}, q: '', limit: 24 }); };
+    const go = (k, s) => (e) => { if (e && e.preventDefault) e.preventDefault(); try { history.replaceState(null, '', href(k, s)); } catch (er) {} this.setState({ kat: k, sub: s, f: {}, other: {}, q: '', limit: 24, gId: null, gA: {}, gOpen: false }); };
     const base = { cart: 0, vat: S.vat, setVat: (v) => { if (typeof window !== 'undefined' && window.SBVat) window.SBVat.set(v); this.setState({ vat: v }); }, t: T };
     // kortit: yksi kortti per kokoperhe
     const cardsOf = (items) => { const m = {}, out = []; items.forEach((it) => { const k = it.fam || ('p' + it.id); if (!m[k]) { m[k] = { key: k, fam: it.fam, items: [] }; out.push(m[k]); } m[k].items.push(it); }); return out; };
@@ -249,7 +293,8 @@ class Component extends DCLogic {
         home: C.cats.map((c) => { const n = cardsOf(catItems(c.id)).length; return { label: c[LANG], href: href(c.id), count: T.count(n), subs: c.subs.filter((s) => C.items.some((i) => i.cat === c.id && i.sub === s.id)).map((s) => s[LANG]).join(' · ') }; }) });
     }
     const group = groupOf(cat.id, sub), FIDS = GROUPS[group];
-    const scopeAll = catItems(cat.id).filter((i) => !sub || i.sub === sub);
+    const GA = S.gId && cat.id === 'lock' && !sub ? S.gA || {} : null;
+    const scopeAll = catItems(cat.id).filter((i) => !sub || i.sub === sub).filter(GA ? gPass(S.gId, GA) : () => true);
     const ql = S.q.trim().toLowerCase();
     // Jokaisen hakusanan on löydyttävä nimestä tai artikelnumerosta
     const qt = ql.split(/\s+/).filter(Boolean);
@@ -353,7 +398,7 @@ class Component extends DCLogic {
       return {
         href: link, name: name, imgAlt: T.img + ': ' + name, clsLabel: chip,
         clsStyle: 'align-self: flex-start; border-radius: 4px; padding: 0 8px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 13px; line-height: 1.6; ' + (!chip ? 'display: none;' : cls.length || models.length ? 'border: 1.5px solid #111111; color: #111111;' : 'border: 1.5px dashed #8a8a88; color: #5c5c5c;'),
-        fit: fit, meta: [mats.join(', '), kgs.length ? T.kg(Math.min.apply(null, kgs), Math.max.apply(null, kgs)) : ''].filter(Boolean).join(', '),
+        fit: fit, meta: [mats.join(', '), kgs.length ? T.kg(String(Math.min.apply(null, kgs)).replace('.', ','), String(Math.max.apply(null, kgs)).replace('.', ',')) : ''].filter(Boolean).join(', '),
         sizesTxt: sizes.length > 1 ? T.sizesList(sizes.length > 6 ? sizes.slice(0, 6).join(', ') + ' …' : sizes.join(', ')) + (allFam.length > its.length ? ' (' + T.sizes(allFam.length) + ')' : '') : '',
         priceTxt: minP == null ? T.quote : (priced.length < its.length || its.length > 1 ? T.from : '') + fmt(minP), vat: minP == null ? '' : (ex ? T.exkl : T.incl),
         note: minP != null && priced.length < its.length ? T.someQuote : '', freight: frTxt
@@ -367,6 +412,8 @@ class Component extends DCLogic {
     const title = subObj ? subObj[LANG] : cat[LANG];
     if (typeof document !== 'undefined') document.title = title;
     const active = [];
+    // Apurin vastaukset näkyvät aktiivisina suodattimina, ja ne voi poistaa yksitellen
+    if (GA) GDEF[S.gId].qs.forEach((q) => { const v = GA[q.id]; if (v == null) return; const lab = q.sizes ? q.chip(v) : (q.opts.find((o) => o.v === v) || {}).l; active.push({ label: lab, aria: T.removeAria(lab), remove: () => this.setState({ gA: Object.assign({}, GA, { [q.id]: null }) }) }); });
     FIDS.forEach((k) => {
       if (!isOn(k)) return; const d = DEF[k], v = F[k];
       const rm = (x) => () => this.setState({ f: Object.assign({}, F, { [k]: x === undefined ? null : (Array.isArray(v) ? v.filter((y) => y !== x) : null) }) });
@@ -382,12 +429,27 @@ class Component extends DCLogic {
     const gId = cat.id === 'lock' ? GUIDE_OF[sub] || (sub ? '' : 'brunnslock') : '';
     return Object.assign(base, {
       isHome: false, isCat: true, title: title, catLabel: cat[LANG],
-      hasGuide: !!gId, guideHref: GUIDE + '?g=' + gId, guideTitle: gId === 'luckor' ? T.guideLu : T.guideBl, guideText: T.guideText,
+      hasGuide: !!gId, guideHref: GUIDE + '?g=' + gId,
+      openGuide: (e) => { if (e && e.preventDefault) e.preventDefault(); try { history.replaceState(null, '', href('lock', '')); } catch (er) {} this.setState({ kat: 'lock', sub: '', f: {}, other: {}, q: '', limit: 24, gId: gId, gA: {}, gStep: 0, gOpen: true }); },
+      gOpen: !!(S.gOpen && GA), g: (() => {
+        if (!S.gOpen || !GA) return {};
+        const D = GDEF[S.gId], st = S.gStep || 0, q = D.qs[st];
+        const setA = (v) => this.setState({ gA: Object.assign({}, GA, { [q.id]: v }), gStep: Math.min(st + 1, D.qs.length - 1) });
+        const ost = (on) => 'display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; min-height: 56px; padding: 10px 14px; border-radius: 8px; font: inherit; cursor: pointer; color: #111111; ' + (on ? 'border: 2px solid #111111; background: #f5f5f4' : 'border: 1px solid #bdbdbb; background: #ffffff');
+        const opts = q.sizes ? q.sizes(GA).map((v) => ({ v: v, l: v + ' mm', t: '' })) : q.opts;
+        return { stepTxt: L2('Fråga ', 'Kysymys ') + (st + 1) + L2(' av ', ' / ') + D.qs.length, title: q.title, help: q.help,
+          opts: opts.map((o) => ({ label: o.l, text: o.t, on: String(GA[q.id] === o.v), style: ost(GA[q.id] === o.v), pick: () => setA(GA[q.id] === o.v ? null : o.v) }))
+            .concat([{ label: L2('Vet inte', 'En tiedä'), text: L2('Hoppa över frågan', 'Ohita kysymys'), on: 'false', style: ost(false), pick: () => setA(null) }]),
+          countTxt: T.count(cards.length) + L2(' passar', ' sopii'), showTxt: T.show(cards.length),
+          hasBack: st > 0, back: () => this.setState({ gStep: st - 1 }), backTxt: L2('Tillbaka', 'Takaisin'),
+          hasNext: st < D.qs.length - 1, next: () => this.setState({ gStep: st + 1 }), nextTxt: L2('Nästa fråga', 'Seuraava kysymys'),
+          close: () => this.setState({ gOpen: false }), pageHref: GUIDE + '?g=' + S.gId, pageTxt: L2('Öppna guiden som egen sida', 'Avaa apuri omana sivunaan') };
+      })(), guideTitle: gId === 'luckor' ? T.guideLu : T.guideBl, guideText: T.guideText,
       lead: SEARCH ? (LANG === 'fi' ? 'Haku: "' + S.q.trim() + '"' : 'Sökning: "' + S.q.trim() + '"') : subObj ? T.leadSub(nAll) : T.lead(nAll, subList.length - 1),
       crumbs: [{ label: T.home, href: HOME }, { label: T.all, href: PAGE }].concat(subObj ? [{ label: cat[LANG], href: href(cat.id) }] : []),
       subs: subList, homeHref: PAGE,
       hasFilters: filters.length > 0, filters: filters, fOpen: String(S.fOpen), openF: () => this.setState({ fOpen: true }), closeF: () => this.setState({ fOpen: false }),
-      hasActive: active.length > 0, active: active, activeN: active.length ? ' (' + active.length + ')' : '', reset: () => this.setState({ f: {}, other: {}, q: '' }),
+      hasActive: active.length > 0, active: active, activeN: active.length ? ' (' + active.length + ')' : '', reset: () => this.setState({ f: {}, other: {}, q: '', gA: {} }),
       hasMissing: missing.length > 0, missingTxt: missing.join(' '),
       q: S.q, typeQ: (e) => this.setState({ q: e.target.value, limit: 24 }), noSubmit: (e) => e.preventDefault(), searchPh: T.searchIn(title),
       countLabel: T.count(cards.length), showLabel: T.show(cards.length), empty: cards.length === 0,
