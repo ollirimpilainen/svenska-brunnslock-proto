@@ -19,7 +19,7 @@ a{color:#111111}a:hover{color:#474747}
 <main style="max-width: 1240px; margin: 0 auto; padding: 40px 24px 80px; display: flex; flex-direction: column; gap: 32px">
 <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap">
 <h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 40px; color: #111111">Varukorg</h1>
-<a href="SvKategori.dc.html" style="font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Fortsätt handla</a>
+<a href="SvSortiment.dc.html?kat=lock&amp;sub=latta" style="font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Fortsätt handla</a>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start">
@@ -28,7 +28,7 @@ a{color:#111111}a:hover{color:#474747}
 <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
 <div style="border: 1.5px dashed #bdbdbb; border-radius: 12px; padding: 32px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start">
 <b style="font-size: 18px; color: #111111">Varukorgen är tom.</b>
-<a href="SvKategori.dc.html" style="min-height: 44px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 6px; border: 1.5px solid #bdbdbb; font-weight: 600; text-decoration: none">Till lätta brunnslock</a>
+<a href="SvSortiment.dc.html?kat=lock&amp;sub=latta" style="min-height: 44px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 6px; border: 1.5px solid #bdbdbb; font-weight: 600; text-decoration: none">Till lätta brunnslock</a>
 </div>
 </sc-if>
 <sc-for list="{{ lines }}" as="l" hint-placeholder-count="2">

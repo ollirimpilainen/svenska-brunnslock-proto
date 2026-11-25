@@ -602,7 +602,7 @@ class Component extends DCLogic {
   renderVals() {
     const LANG = 'fi';
     const L = (sv, fi) => (LANG === 'fi' ? fi : sv);
-    const PAGES = { sv: { self: 'SvProduktguide.dc.html', home: 'SvStartsida.dc.html', cat: 'SvKategori.dc.html', product: 'SvProdukt.dc.html', cart: 'SvVarukorg.dc.html', locale: 'sv-SE' }, fi: { self: 'FiTuoteapuri.dc.html', home: 'FiEtusivu.dc.html', cat: 'FiKategoria.dc.html', product: 'FiTuote.dc.html', cart: 'FiOstoskori.dc.html', locale: 'fi-FI' } };
+    const PAGES = { sv: { self: 'SvProduktguide.dc.html', home: 'SvStartsida.dc.html', cat: 'SvSortiment.dc.html', product: 'SvProdukt.dc.html', cart: 'SvVarukorg.dc.html', locale: 'sv-SE' }, fi: { self: 'FiTuoteapuri.dc.html', home: 'FiEtusivu.dc.html', cat: 'FiValikoima.dc.html', product: 'FiTuote.dc.html', cart: 'FiOstoskori.dc.html', locale: 'fi-FI' } };
     const P = PAGES[LANG];
     const S = this.state;
     const loc = P.locale;
@@ -696,7 +696,7 @@ class Component extends DCLogic {
       lead: L('Svara på några frågor om din brunn. Varje svar filtrerar sortimentet, så du ser direkt hur många lock som passar. Mätningen kommer sist, och vi visar hur du gör.', 'Vastaa muutamaan kysymykseen kaivostasi. Jokainen vastaus rajaa valikoimaa, joten näet heti, montako kantta sopii. Mittaus tulee viimeisenä, ja näytämme, miten se tehdään.'),
       proSkip: L('Vet du redan mått och klass? Gå direkt till filtren', 'Tiedätkö jo mitat ja luokan? Siirry suoraan suodattimiin'),
       hub: [L('Brunnslock', 'Kaivonkansi'), L('Brunnstyp, mått och vad som går över locket. Lätta lock som du lyfter själv.', 'Kaivotyyppi, mitat ja mitä kannen yli kulkee. Kevyet kannet, jotka nostat itse.'), L('Högst 5 frågor', 'Enintään 5 kysymystä')],
-      noun: L('brunnslock', 'kaivonkannesta'), cat: true,
+      noun: L('brunnslock', 'kaivonkannesta'), cat: 'kat=lock&sub=latta',
       mg: { title: L('Så mäter du brunnen', 'Näin mittaat kaivon'), img: L('Bild: tumstock över betongringen, innermått och yttermått', 'Kuva: mittakeppi betonirenkaan päällä, sisämitta ja ulkomitta'),
         steps: L(['Lyft av det gamla locket och borsta rent kanten.', 'Lägg tumstocken över hålet, rakt genom mitten. Det är innermåttet.', 'Mät från ytterkant till ytterkant på ringen. Det är yttermåttet.'], ['Nosta vanha kansi pois ja harjaa reuna puhtaaksi.', 'Aseta mittakeppi aukon yli, suoraan keskeltä. Se on sisämitta.', 'Mittaa renkaan ulkoreunasta ulkoreunaan. Se on ulkomitta.']),
         note: L('Ett mått räcker för att börja. Med båda blir förslaget säkrare.', 'Yksi mitta riittää alkuun. Kahdella mitalla ehdotus on varmempi.'), later: L('Mäter senare', 'Mittaan myöhemmin') },
@@ -817,7 +817,7 @@ class Component extends DCLogic {
     const LU_INDOOR_WALL = ['vagg', 'kryp'];
     const luFit = (ow, ol, a, b) => (Math.abs(ow - a) <= 60 && Math.abs(ol - b) <= 60) || (Math.abs(ow - b) <= 60 && Math.abs(ol - a) <= 60);
     const luckor = {
-      id: 'luckor', tab: L('Luckor', 'Luukut'), crumb: L('Luckor', 'Luukut'),
+      id: 'luckor', cat: 'kat=lock&sub=luckor', tab: L('Luckor', 'Luukut'), crumb: L('Luckor', 'Luukut'),
       h1: L('Hitta rätt lucka', 'Löydä oikea luukku'),
       lead: L('Berätta var luckan ska sitta, vad som ska passera över den och hur stor öppningen är. Vi visar luckorna som passar och tar fram en lucka på mått om ingen standardlucka räcker.', 'Kerro, mihin luukku tulee, mitä sen yli kulkee ja kuinka suuri aukko on. Näytämme sopivat luukut ja teemme mittatilausluukun, jos vakiomalli ei riitä.'),
       proSkip: L('Vet du redan klass och mått? Gå direkt till filtren', 'Tiedätkö jo luokan ja mitat? Siirry suoraan suodattimiin'),
@@ -949,7 +949,7 @@ class Component extends DCLogic {
     // ---------- 3. kabelbrunnar ----------
     const KB_SIZES = ['600x600', '900x600', '900x900', '1200x600', '1200x1200', '1500x750', '2250x750'];
     const kabel = {
-      id: 'kabel', tab: L('Kabelbrunnar', 'Kaapelikaivot'), crumb: L('Kabelbrunnar', 'Kaapelikaivot'),
+      id: 'kabel', cat: 'kat=el&sub=kabelbrunn', tab: L('Kabelbrunnar', 'Kaapelikaivot'), crumb: L('Kabelbrunnar', 'Kaapelikaivot'),
       h1: L('Hitta rätt kabelbrunn', 'Löydä oikea kaapelikaivo'),
       lead: L('Svara på användning, placering och mått. Kabelbrunnar offererar vi, så resultatet blir en ifylld offertförfrågan med rätt modell, och du skriver ingenting två gånger.', 'Vastaa käytöstä, sijainnista ja mitoista. Kaapelikaivot myydään tarjouksella, joten tulos on valmiiksi täytetty tarjouspyyntö oikealla mallilla, eikä mitään tarvitse kirjoittaa kahdesti.'),
       proSkip: L('Vet du redan modell och mått? Gå direkt till listan', 'Tiedätkö jo mallin ja mitat? Siirry suoraan listaan'),
@@ -1033,7 +1033,7 @@ class Component extends DCLogic {
     // ---------- 4. fundament ----------
     const FU_BANDS = { nara: [200, 300], mid: [400, 600], hog: [700, 1000] };
     const fundament = {
-      id: 'fundament', tab: L('Fundament', 'Perustukset'), crumb: L('Fundament', 'Perustukset'),
+      id: 'fundament', cat: 'kat=bygg&sub=plintar', tab: L('Fundament', 'Perustukset'), crumb: L('Fundament', 'Perustukset'),
       h1: L('Hitta rätt fundament', 'Löydä oikea perustus'),
       lead: L('Berätta vad du ska bygga, hur tungt det blir och hur högt det ska stå. Vi visar plintar och markskruvar som passar, med rätt beslag.', 'Kerro, mitä rakennat, kuinka raskas siitä tulee ja kuinka korkealle se nousee. Näytämme sopivat plintit ja maaruuvit oikeine kiinnikkeineen.'),
       proSkip: L('Vet du redan modell och höjd? Gå direkt till listan', 'Tiedätkö jo mallin ja korkeuden? Siirry suoraan listaan'),
@@ -1371,7 +1371,8 @@ class Component extends DCLogic {
     });
 
     const ctx = { A: A, mv: mv, mDisplay: mDisplay, g: G, asked: steps };
-    const catHref = G.cat ? P.cat + ((G.catParams ? G.catParams(ctx) : []).length ? '?' + G.catParams(ctx).join('&') : '') : '#';
+    // "Visa i listan" avaa yleisen kategorianäkymän; kansiapurin vastaukset (mitta, luokka, materiaali) kulkevat suodattimiksi
+    const catHref = G.cat ? P.cat + '?' + G.cat + ((G.catParams ? G.catParams(ctx) : []).map((x) => '&' + x).join('')) : '#';
 
     // ---------- tulos ----------
     const exitOpt = qs.map((qq) => (qq.kind === 'single' ? optOf(qq, A[qq.id]) : null)).find((o) => o && o.exit);

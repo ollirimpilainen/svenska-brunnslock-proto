@@ -91,8 +91,8 @@ class Component extends DCLogic {
     const off = 'border: 0; background: transparent; color: #e6e6e6; font: inherit; font-weight: 600; font-size: 13px; padding: 0 12px; min-height: 32px; border-radius: 999px; cursor: pointer';
     const nav = 'display: inline-flex; align-items: center; gap: 6px; border-top: 0; border-left: 0; border-right: 0; background: none; font-family: inherit; color: #111111; cursor: pointer; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid ' + (this.props.current === 'sortiment' ? '#111111' : 'transparent');
     const cart = (typeof window !== 'undefined' && window.SBCart) ? window.SBCart.count() : (this.props.cart ?? 0);
-    // Alakategoriat avautuvat yleiselle kategoriasivulle (FiValikoima.dc.html?kat=&sub=). Kevyillä kansilla on oma valmis kategoriasivunsa.
-    const K = (kat, ids) => (a) => a.map((x, i) => ({ label: x, href: x === 'Kevyet kaivonkannet' ? 'FiKategoria.dc.html' : ids[i] ? 'FiValikoima.dc.html?kat=' + kat + '&sub=' + ids[i] : 'FiValikoima.dc.html?kat=' + kat }));
+    // Alakategoriat avautuvat yleiselle kategoriasivulle (FiValikoima.dc.html?kat=&sub=). Vanha Lätta brunnslock -sivu ohjaa samaan näkymään.
+    const K = (kat, ids) => (a) => a.map((x, i) => ({ label: x, href: ids[i] ? 'FiValikoima.dc.html?kat=' + kat + '&sub=' + ids[i] : 'FiValikoima.dc.html?kat=' + kat }));
 
     const cats = [
       { title: 'Kaivonkannet ja luukut', href: 'FiValikoima.dc.html?kat=lock', subs: K('lock', ['latta', 'plastbrunn', 'plast', 'betong', 'gjutjarn', 'luckor', 'golv', 'sakerhet', 'kund', 'tillbehor'])(['Kevyet kaivonkannet', 'Kevyet kannet muovikaivoihin', 'Muovikannet', 'Betonikannet', 'Valurautakannet ja sihdit', 'Luukut', 'Lattia- ja ryömintätilan luukut', 'Turva- ja poistumisluukut', 'Mittatilausluukut', 'Kannennostimet ja tarvikkeet']) },

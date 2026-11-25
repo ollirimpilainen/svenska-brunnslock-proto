@@ -37,10 +37,12 @@ CATS = [
 ]
 IA = {c[3]: c[0] for c in CATS}
 
-def sub_of(cat, c0, name, mat):
+def sub_of(cat, c0, name, mat, allc=''):
     n = name.lower()
     if cat == 'lock':
         if 'Avluftningsventil' in c0 or 'Locköppnare' in c0: return 'tillbehor'
+        # Moni tuote on useassa kategoriassa; kevyiden kansien kategoria voittaa, vaikka se ei olisi ensimmäinen
+        if re.search(r'Lätta Brunnslock > (Lätta brunnslock för betongbrunnar|Betongring)', allc): return 'latta'
         if c0.startswith('Lätta Brunnslock'): return 'latta'
         if c0.startswith('Gjutjärns betäckningar'): return 'latta' if 'Composite' in mat else 'gjutjarn'
         if c0.startswith('Brunnslock plast'): return 'plastbrunn' if re.search(r'rör|korrug|slät', n) else 'plast'
@@ -99,7 +101,7 @@ for r in P:
     price = num(g(r, 10)) or num(g(r, 9))
     if not price: quote = True
     kg = num(g(r, 94)) or (num(g(r, 16)) or None)
-    it = dict(id=g(r, 0), n=name, sku=g(r, 60) or g(r, 6), cat=cat, sub=sub_of(cat, c0, name, mat),
+    it = dict(id=g(r, 0), n=name, sku=g(r, 60) or g(r, 6), cat=cat, sub=sub_of(cat, c0, name, mat, g(r, 14) or ''),
               cls=multi(g(r, 88)), mat=mat, price=None if quote else price, q=quote, kg=kg,
               rlo=num(g(r, 105)), rhi=num(g(r, 107)), ow=num(g(r, 125)), ol=num(g(r, 127)), il=num(g(r, 145)), iw=num(g(r, 147)),
               model=g(r, 159), h=num(g(r, 161)), fam=g(r, 207), sz=g(r, 209), dflt=g(r, 213) == 'Yes', sold=num(g(r, 215)) or 0,

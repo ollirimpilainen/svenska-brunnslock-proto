@@ -31,7 +31,6 @@ a{color:#111111}a:hover{color:#474747}
 <header style="display: flex; flex-direction: column; gap: 10px; max-width: 760px">
 <h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 44px; line-height: 1.08; letter-spacing: -0.015em; color: #111111">{{ title }}</h1>
 <p style="margin: 0; font-size: 18px; color: #474747">{{ lead }}</p>
-<sc-if value="{{ curated }}" hint-placeholder-val="{{ false }}"><a href="{{ curatedHref }}" style="font-size: 15px; font-weight: 600">{{ t.curated }}</a></sc-if>
 </header>
 
 <sc-if value="{{ isHome }}" hint-placeholder-val="{{ false }}">
@@ -172,7 +171,7 @@ const TXT = {
     lead: (n, s) => n + ' produkter i ' + s + ' produktgrupper. Välj en produktgrupp eller sök.', leadSub: (n) => n + (n === 1 ? ' produkt' : ' produkter') + '. Filtrera eller sök.', homeLead: 'Sex kategorier efter användning. Välj en kategori.',
     missing: (n, f) => n + (n === 1 ? ' produkt saknar uppgift om ' : ' produkter saknar uppgift om ') + f.toLowerCase() + ' och visas inte med filtret.',
     emptyH: 'Inga produkter matchar.', emptyT: 'Ta bort något filter eller sök på något annat. Du kan också ringa oss på 0920-52 00 56.',
-    curated: 'Se också den färdiga kategorisidan för lätta brunnslock', sizes: (n) => n + ' storlekar', sizesList: (s) => 'Storlekar: ' + s, from: 'från ', quote: 'Pris på offert', someQuote: 'Vissa storlekar på offert', incl: 'inkl. moms', exkl: 'exkl. moms', noCls: 'Klass saknas',
+    sizes: (n) => n + ' storlekar', sizesList: (s) => 'Storlekar: ' + s, from: 'från ', quote: 'Pris på offert', someQuote: 'Vissa storlekar på offert', incl: 'inkl. moms', exkl: 'exkl. moms', noCls: 'Klass saknas',
     f: { ring: 'Passar ring (innermått)', open: 'Fri öppning', inner: 'Invändigt mått', model: 'Modell', h: 'Höjd', mat: 'Material', cls: 'Belastningsklass' },
     fit: { ring: (a, b) => 'Passar ring ' + (a === b ? a : a + ' till ' + b) + ' mm', open: (s) => 'Fri öppning ' + s + ' mm', inner: (s) => 'Invändigt ' + s + ' mm', h: (s) => 'Höjd ' + s + ' mm' },
     kg: (a, b) => (a === b ? a : a + ' till ' + b) + ' kg', ph: { w: 'Bredd', l: 'Längd', mm: 'mm, t.ex. 600' }, chipH: (v) => 'Höjd ' + v + ' mm', chipRing: (v) => 'Passar ' + v + ' mm',
@@ -182,7 +181,7 @@ const TXT = {
     lead: (n, s) => n + ' tuotetta, ' + s + ' tuoteryhmää. Valitse tuoteryhmä tai hae.', leadSub: (n) => n + ' tuotetta. Suodata tai hae.', homeLead: 'Kuusi kategoriaa käyttötarkoituksen mukaan. Valitse kategoria.',
     missing: (n, f) => n + ' tuotteelta puuttuu tieto: ' + f.toLowerCase() + '. Niitä ei näytetä suodattimen kanssa.',
     emptyH: 'Yksikään tuote ei vastaa valintoja.', emptyT: 'Poista jokin suodatin tai hae muulla sanalla. Voit myös soittaa meille: 0920-52 00 56.',
-    curated: 'Katso myös valmis kategoriasivu kevyille kaivonkansille', sizes: (n) => n + ' kokoa', sizesList: (s) => 'Koot: ' + s, from: 'alkaen ', quote: 'Hinta tarjouksella', someQuote: 'Osa koista tarjouksella', incl: 'sis. alv', exkl: 'alv 0', noCls: 'Luokka puuttuu',
+    sizes: (n) => n + ' kokoa', sizesList: (s) => 'Koot: ' + s, from: 'alkaen ', quote: 'Hinta tarjouksella', someQuote: 'Osa koista tarjouksella', incl: 'sis. alv', exkl: 'alv 0', noCls: 'Luokka puuttuu',
     f: { ring: 'Sopii renkaaseen (sisämitta)', open: 'Vapaa aukko', inner: 'Sisämitta', model: 'Malli', h: 'Korkeus', mat: 'Materiaali', cls: 'Kuormitusluokka' },
     fit: { ring: (a, b) => 'Sopii renkaaseen ' + (a === b ? a : a + '-' + b) + ' mm', open: (s) => 'Vapaa aukko ' + s + ' mm', inner: (s) => 'Sisämitta ' + s + ' mm', h: (s) => 'Korkeus ' + s + ' mm' },
     kg: (a, b) => (a === b ? a : a + '-' + b) + ' kg', ph: { w: 'Leveys', l: 'Pituus', mm: 'mm, esim. 600' }, chipH: (v) => 'Korkeus ' + v + ' mm', chipRing: (v) => 'Sopii ' + v + ' mm',
@@ -206,14 +205,20 @@ const groupOf = (cat, sub) => {
 const PAGE = { sv: 'SvSortiment.dc.html', fi: 'FiValikoima.dc.html' }[LANG];
 const HOME = { sv: 'SvStartsida.dc.html', fi: 'FiEtusivu.dc.html' }[LANG];
 const PROD = { sv: 'SvProdukt.dc.html', fi: 'FiTuote.dc.html' }[LANG];
-const CURATED = { sv: 'SvKategori.dc.html', fi: 'FiKategoria.dc.html' }[LANG];
 
 class Component extends DCLogic {
   constructor(props) {
     super(props);
     let kat = '', sub = '';
-    try { const qp = new URLSearchParams(location.search); kat = qp.get('kat') || ''; sub = qp.get('sub') || ''; } catch (e) {}
-    this.state = { kat: kat, sub: sub, vat: 'inkl', q: '', f: {}, other: {}, fOpen: false, limit: 24 };
+    const f = {};
+    try {
+      const qp = new URLSearchParams(location.search); kat = qp.get('kat') || ''; sub = qp.get('sub') || '';
+      // Tuoteapurin "Visa i listan": mm = renkaan sisämitta, klass = vähintään tämä luokka, lock = materiaali
+      const mm = parseInt(qp.get('mm'), 10); if (mm) f.ring = String(mm);
+      const k = CLS_ORDER.indexOf(qp.get('klass') || ''); if (k >= 0) f.cls = CLS_ORDER.slice(k);
+      const LOCK = { latt: ['Composite', 'Plastic'], betong: ['Concrete'], gjut: ['Cast iron'] }; if (LOCK[qp.get('lock')]) f.mat = LOCK[qp.get('lock')];
+    } catch (e) {}
+    this.state = { kat: kat, sub: sub, vat: 'inkl', q: '', f: f, other: {}, fOpen: false, limit: 24 };
   }
   renderVals() {
     const S = this.state, T = TXT[LANG], li = LANG === 'fi' ? 1 : 0;
@@ -230,7 +235,7 @@ class Component extends DCLogic {
     const catItems = (k) => C.items.filter((i) => i.cat === k);
     if (!cat) {
       if (typeof document !== 'undefined') document.title = T.all;
-      return Object.assign(base, { isHome: true, isCat: false, title: T.all, lead: T.homeLead, crumbs: [{ label: T.home, href: HOME }], curated: false,
+      return Object.assign(base, { isHome: true, isCat: false, title: T.all, lead: T.homeLead, crumbs: [{ label: T.home, href: HOME }],
         home: C.cats.map((c) => { const n = cardsOf(catItems(c.id)).length; return { label: c[LANG], href: href(c.id), count: T.count(n), subs: c.subs.filter((s) => C.items.some((i) => i.cat === c.id && i.sub === s.id)).map((s) => s[LANG]).join(' · ') }; }) });
     }
     const group = groupOf(cat.id, sub), FIDS = GROUPS[group];
@@ -355,7 +360,7 @@ class Component extends DCLogic {
       if (d.kind === 'size1') labels = [[T.chipRing(v), undefined]];
       else if (d.kind === 'size2' && v.other) labels = [[T.f[k] + ' ' + [v.w, v.l].filter(Boolean).join('×') + ' mm', undefined]];
       else if (d.kind === 'btn') labels = [[k === 'h' ? T.chipH(v) : d.label(v), undefined]];
-      else (Array.isArray(v) ? v : [v]).forEach((x) => labels.push([d.label(x), x]));
+      else (Array.isArray(v) ? v : [v]).filter((x) => scopeAll.some((i) => d.has(i) && d.vals(i).indexOf(x) >= 0)).forEach((x) => labels.push([d.label(x), x]));
       labels.forEach((l) => active.push({ label: l[0], aria: T.removeAria(l[0]), remove: rm(l[1]) }));
     });
     const shown = cards.slice(0, S.limit);
@@ -364,7 +369,6 @@ class Component extends DCLogic {
       isHome: false, isCat: true, title: title, catLabel: cat[LANG],
       lead: subObj ? T.leadSub(nAll) : T.lead(nAll, subList.length - 1),
       crumbs: [{ label: T.home, href: HOME }, { label: T.all, href: PAGE }].concat(subObj ? [{ label: cat[LANG], href: href(cat.id) }] : []),
-      curated: cat.id === 'lock' && sub === 'latta', curatedHref: CURATED,
       subs: subList, homeHref: PAGE,
       hasFilters: filters.length > 0, filters: filters, fOpen: String(S.fOpen), openF: () => this.setState({ fOpen: true }), closeF: () => this.setState({ fOpen: false }),
       hasActive: active.length > 0, active: active, activeN: active.length ? ' (' + active.length + ')' : '', reset: () => this.setState({ f: {}, other: {}, q: '' }),
