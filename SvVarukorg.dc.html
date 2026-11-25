@@ -73,6 +73,11 @@ a{color:#111111}a:hover{color:#474747}
 <div style="display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 18px; color: #111111"><span>Totalt</span><span>{{ totalLabel }}</span></div>
 <sc-if value="{{ noQuote }}" hint-placeholder-val="{{ true }}">
 <a href="{{ checkoutHref }}" style="min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">Till kassan</a>
+<!-- Rajan (esimerkkiarvo 5 000 kr) ylittävä kori: selvä toissijainen painike tarjouspyyntöön -->
+<sc-if value="{{ overLimit }}" hint-placeholder-val="{{ false }}">
+<a href="SvOffert.dc.html" style="min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 6px; border: 1.5px solid #111111; background: #ffffff; color: #111111; font-weight: 600; font-size: 17px; text-decoration: none">Skicka som offertförfrågan</a>
+<p style="margin: -6px 0 0; font-size: 13px; color: #5c5c5c; text-align: center">Offerten innehåller frakt och lossning</p>
+</sc-if>
 </sc-if>
 <sc-if value="{{ hasQuote }}" hint-placeholder-val="{{ false }}">
 <p style="margin: 0; font-size: 14px; color: #1a1a1a; background: #f5f5f4; border-radius: 8px; padding: 12px">Varukorgen innehåller produkter med pris på offert. Vi skickar hela varukorgen som offertförfrågan, och offerten innehåller även frakt och lossning.</p>
@@ -84,8 +89,7 @@ a{color:#111111}a:hover{color:#474747}
 <li>14 dagars ångerrätt</li>
 </ul>
 <sc-if value="{{ noQuote }}" hint-placeholder-val="{{ true }}">
-<sc-if value="{{ overLimit }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 14px; color: #474747; border-top: 1px solid #e2e2e0; padding-top: 12px">Köper du till ett projekt eller en hel pall? <a href="SvOffert.dc.html" style="font-weight: 600">Skicka varukorgen som offertförfrågan</a>. Offerten innehåller frakt och lossning, och du godkänner den med ett klick.</p></sc-if>
-<sc-if value="{{ underLimit }}" hint-placeholder-val="{{ true }}"><p style="margin: 0; font-size: 14px; color: #474747; border-top: 1px solid #e2e2e0; padding-top: 12px">Över 5 000 kr kan du skicka varukorgen som offertförfrågan.</p></sc-if>
+<sc-if value="{{ underLimit }}" hint-placeholder-val="{{ true }}"><p style="margin: 0; font-size: 14px; color: #474747; border-top: 1px solid #e2e2e0; padding-top: 12px">Över 5 000 kr kan du skicka varukorgen som offertförfrågan ({{ leftTxt }}).</p></sc-if>
 </sc-if>
 </aside>
 </div>
@@ -130,7 +134,7 @@ class Component extends DCLogic {
         remove: () => save(S.lines.filter((x) => x.id !== l.id)) })),
       hasSugg: sugg.length > 0,
       sugg: sugg.map((g) => ({ name: g.name, text: g.text, price: '+ ' + fmt(g.price), add: () => add({ id: g.id, name: g.name, meta: g.meta, price: g.price, href: '#' }) })),
-      hasQuote: hasQuote, noQuote: !hasQuote, hasPriced: priced.length > 0, stripQuote: () => save(priced), overLimit: sum >= 5000, underLimit: sum < 5000,
+      hasQuote: hasQuote, noQuote: !hasQuote, hasPriced: priced.length > 0, stripQuote: () => save(priced), overLimit: sum >= 5000, underLimit: sum < 5000, leftTxt: fmt(5000 - sum) + ' kvar',
       prodLabel: 'Produkter, ' + pCount + ' st' + (hasQuote ? ' + offertprodukter' : ''), prodSum: fmt(sum),
       vatSum: Math.round(sum - sum / 1.25).toLocaleString('sv-SE') + ' kr',
       ...(() => { const f = typeof window !== 'undefined' && window.SBCart && window.SBCart.freight ? window.SBCart.freight(priced.map((l) => ({ fr: l.fr || 'skrym', kg: l.kg, qty: l.qty })), 'sv') : { price: 590, label: '' }; return { hasFr: priced.length > 0, frLabel: 'Frakt' + (f.label ? ', ' + f.label.toLowerCase() : ''), frNote: 'Samma pris i hela Sverige.', frSum: fmt(f.price), totalLabel: fmt(sum + f.price), vatSum: Math.round((sum + f.price) - (sum + f.price) / 1.25).toLocaleString('sv-SE') + ' kr' }; })(),
