@@ -395,7 +395,7 @@ a{color:#111111}a:hover{color:#474747}
 <div style="margin-top: auto; padding-top: 16px; display: flex; flex-direction: column; gap: 4px">
 <span style="font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">{{ p.price }} <span style="font-family: Inter, sans-serif; font-weight: 400; font-size: 13px; color: #474747">{{ vatLabel }}</span></span>
 <span style="font-size: 13px; color: #5c5c5c; text-decoration: line-through">{{ p.wasTxt }}</span>
-<span style="font-size: 13px; color: #5c5c5c">{{ t.freight }}</span>
+<span style="font-size: 13px; color: #5c5c5c">{{ p.freight }}</span>
 </div>
 </div>
 </a>
@@ -520,7 +520,7 @@ a{color:#111111}a:hover{color:#474747}
 <div style="margin-top: auto; padding-top: 16px; display: flex; flex-direction: column; gap: 4px">
 <span style="font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">{{ p.price }} <span style="font-family: Inter, sans-serif; font-weight: 400; font-size: 13px; color: #474747">{{ vatLabel }}</span></span>
 <span style="font-size: 13px; color: #5c5c5c; text-decoration: line-through">{{ p.wasTxt }}</span>
-<span style="font-size: 13px; color: #5c5c5c">{{ t.freight }}</span>
+<span style="font-size: 13px; color: #5c5c5c">{{ p.freight }}</span>
 </div>
 </div>
 </a>
@@ -626,7 +626,7 @@ class Component extends DCLogic {
       mQuick: 'Yleiset mitat', mEmpty: 'Kirjoita mitta, niin näet heti, montako tuotetta sopii.', mBad: 'Kirjoita mitta millimetreinä, esimerkiksi 600.', mFit: (n, v) => n + (n === 1 ? ' tuote sopii: ' : ' tuotetta sopii: ') + v + '.', mNone: (v) => 'Mikään valikoiman tuote ei sovi: ' + v + '. Jatka silti, niin etsimme ratkaisun.',
       gDone: 'Olen mitannut', gSkip: 'En pysty mittaamaan nyt',
       resTitle: 'Nämä sopivat vastauksiisi', resLead: (n) => (n === 1 ? '1 tuote sopii vastauksiisi.' : n + ' tuotetta sopii vastauksiisi. Nämä ehdotamme ensin.'), resNoneTitle: 'Valmista tuotetta ei löytynyt', resNoneLead: 'Mikään valikoiman tuote ei sovi kaikkiin vastauksiisi, mutta ratkaisu löytyy.', resExitTitle: 'Tähän on oma polkunsa',
-      best: 'Paras vastine', freight: 'Rahti lasketaan postinumerostasi', quoteAdd: 'Lisää tarjouspyyntöön', was: 'Norm. ', noCls: 'Luokka vahvistetaan', viewProduct: 'Näytä tuote', imgPh: 'Tuotekuva', view: 'Näytä', quotePrice: 'Hinta tarjouksella', quoteCta: 'Pyydä tarjous tästä',
+      best: 'Paras vastine', quoteAdd: 'Lisää tarjouspyyntöön', was: 'Norm. ', noCls: 'Luokka vahvistetaan', viewProduct: 'Näytä tuote', imgPh: 'Tuotekuva', view: 'Näytä', quotePrice: 'Hinta tarjouksella', quoteCta: 'Pyydä tarjous tästä',
       helpTitle: 'Epävarma jostain? Lähetä kuva ja mitat, autamme', helpText: (k) => 'Vastasit En tiedä ' + k + ' kysymykseen. Ehdotukset perustuvat siihen, mitä tiesit. Vastauksesi kulkevat mukana, joten mitään ei tarvitse kirjoittaa kahdesti.', helpBtn: 'Lähetä kuva ja mitat',
       noneContact: 'Ota yhteyttä vastauksillasi', noneRelax: 'Tai muuta yhtä vastausta:', relax: (g) => 'Poista: ' + g,
       allTitle: (n) => 'Muut ' + n + ' sopivaa', openCat: 'Avaa kategoriassa samoilla suodattimilla', chipsLabel: 'Valitut suodattimet', removeAria: (l) => 'Poista suodatin ' + l,
@@ -646,7 +646,7 @@ class Component extends DCLogic {
       mQuick: 'Vanliga mått', mEmpty: 'Skriv måttet, så ser du direkt hur många produkter som passar.', mBad: 'Skriv måttet i millimeter, till exempel 600.', mFit: (n, v) => n + (n === 1 ? ' produkt passar ' : ' produkter passar ') + v + '.', mNone: (v) => 'Ingen produkt i sortimentet passar ' + v + '. Fortsätt ändå, så hittar vi en lösning.',
       gDone: 'Jag har mätt', gSkip: 'Jag kan inte mäta nu',
       resTitle: 'Det här passar dina svar', resLead: (n) => (n === 1 ? '1 produkt passar dina svar.' : n + ' produkter passar dina svar. Här är de vi föreslår först.'), resNoneTitle: 'Vi hittar ingen färdig produkt', resNoneLead: 'Ingen produkt i sortimentet passar alla dina svar, men vi har en lösning.', resExitTitle: 'Det här har en egen väg',
-      best: 'Bäst match', freight: 'Frakt räknas på ditt postnummer', quoteAdd: 'Lägg till i offertförfrågan', was: 'Ord. ', noCls: 'Klass bekräftas', viewProduct: 'Visa produkten', imgPh: 'Produktbild', view: 'Visa', quotePrice: 'Pris på offert', quoteCta: 'Begär offert på den här',
+      best: 'Bäst match', quoteAdd: 'Lägg till i offertförfrågan', was: 'Ord. ', noCls: 'Klass bekräftas', viewProduct: 'Visa produkten', imgPh: 'Produktbild', view: 'Visa', quotePrice: 'Pris på offert', quoteCta: 'Begär offert på den här',
       helpTitle: 'Osäker på något? Skicka foto och mått, vi hjälper dig', helpText: (k) => 'Du svarade Vet inte på ' + k + (k === 1 ? ' fråga' : ' frågor') + '. Förslagen bygger på det du visste. Dina svar följer med, så du skriver ingenting två gånger.', helpBtn: 'Skicka foto och mått',
       noneContact: 'Kontakta oss med dina svar', noneRelax: 'Eller ändra ett svar:', relax: (g) => 'Ta bort: ' + g,
       allTitle: (n) => 'Övriga ' + n + ' som också passar', openCat: 'Öppna i kategorin med samma filter', chipsLabel: 'Valda filter', removeAria: (l) => 'Ta bort filter ' + l,
@@ -695,7 +695,7 @@ class Component extends DCLogic {
       h1: L('Hitta rätt brunnslock', 'Löydä oikea kaivonkansi'),
       lead: L('Svara på några frågor om din brunn. Varje svar filtrerar sortimentet, så du ser direkt hur många lock som passar. Mätningen kommer sist, och vi visar hur du gör.', 'Vastaa muutamaan kysymykseen kaivostasi. Jokainen vastaus rajaa valikoimaa, joten näet heti, montako kantta sopii. Mittaus tulee viimeisenä, ja näytämme, miten se tehdään.'),
       proSkip: L('Vet du redan mått och klass? Gå direkt till filtren', 'Tiedätkö jo mitat ja luokan? Siirry suoraan suodattimiin'),
-      hub: [L('Brunnslock', 'Kaivonkansi'), L('Brunnstyp, mått och vad som går över locket. Lätta lock som du lyfter själv.', 'Kaivotyyppi, mitat ja mitä kannen yli kulkee. Kevyet kannet, jotka nostat itse.'), L('4 frågor och 2 frivilliga', '4 kysymystä ja 2 vapaaehtoista')],
+      hub: [L('Brunnslock', 'Kaivonkansi'), L('Brunnstyp, mått och vad som går över locket. Lätta lock som du lyfter själv.', 'Kaivotyyppi, mitat ja mitä kannen yli kulkee. Kevyet kannet, jotka nostat itse.'), L('Högst 5 frågor', 'Enintään 5 kysymystä')],
       noun: L('brunnslock', 'kaivonkannesta'), cat: true,
       mg: { title: L('Så mäter du brunnen', 'Näin mittaat kaivon'), img: L('Bild: tumstock över betongringen, innermått och yttermått', 'Kuva: mittakeppi betonirenkaan päällä, sisämitta ja ulkomitta'),
         steps: L(['Lyft av det gamla locket och borsta rent kanten.', 'Lägg tumstocken över hålet, rakt genom mitten. Det är innermåttet.', 'Mät från ytterkant till ytterkant på ringen. Det är yttermåttet.'], ['Nosta vanha kansi pois ja harjaa reuna puhtaaksi.', 'Aseta mittakeppi aukon yli, suoraan keskeltä. Se on sisämitta.', 'Mittaa renkaan ulkoreunasta ulkoreunaan. Se on ulkomitta.']),
@@ -743,7 +743,7 @@ class Component extends DCLogic {
             { id: 'C250', t: L(['Parkering, lätt lastbil', 'C250, klarar 25 ton'], ['Pysäköintialue, kevyt kuorma-auto', 'C250, kestää 25 tonnia']) },
             { id: 'D400', t: L(['Väg, tung trafik', 'D400, klarar 40 ton'], ['Tie, raskas liikenne', 'D400, kestää 40 tonnia']) }
           ].map((o) => Object.assign(o, { chip: o.id, test: (p) => rank(p.cls || 'A15') >= rank(o.id) })) },
-        { id: 'mat', kind: 'single', vet: true, group: L('Material och vikt', 'Materiaali ja paino'), title: L('Vilket lock vill du ha?', 'Millaisen kannen haluat?'), help: L('Tänk på vem som lyfter locket när brunnen töms.', 'Mieti, kuka nostaa kannen, kun kaivo tyhjennetään.'),
+        { id: 'mat', kind: 'single', vet: true, hideZero: true, group: L('Material och vikt', 'Materiaali ja paino'), title: L('Vilket lock vill du ha?', 'Millaisen kannen haluat?'), help: L('Tänk på vem som lyfter locket när brunnen töms.', 'Mieti, kuka nostaa kannen, kun kaivo tyhjennetään.'),
           opts: [
             { id: 'latt', badge: L('Vanligaste valet', 'Yleisin valinta'), t: L(['Lätt lock som en person lyfter', 'Plast eller komposit, under 25 kg'], ['Kevyt kansi, jonka yksi ihminen nostaa', 'Muovia tai komposiittia, alle 25 kg']), test: (p) => p.kg <= 25 && p.mat !== 'betong' },
             { id: 'betong', t: L(['Betonglock', 'Tungt och permanent, lyfts med maskin'], ['Betonikansi', 'Raskas ja pysyvä, nostetaan koneella']), test: (p) => p.mat === 'betong' },
@@ -771,13 +771,7 @@ class Component extends DCLogic {
             { id: 'pump', t: L(['Hål för gårdspump', 'Förborrat hål 160 mm'], ['Reikä pihapumpulle', 'Valmiiksi porattu 160 mm:n reikä']) },
             { id: 'manhal', t: L(['Manhål för nedstigning', 'Öppning 646 mm i locket'], ['Huoltoaukko kaivoon laskeutumiseen', 'Kannessa 646 mm:n aukko']) },
             { id: 'tat', t: L(['Tätt mot lukt', 'Packning eller tätningsring'], ['Tiivis hajuja vastaan', 'Tiiviste tai tiivisterengas']) }
-          ].map((o) => Object.assign(o, { test: (p) => p.f.indexOf(o.id) >= 0 || (p.opt || []).indexOf(o.id) >= 0 })) },
-        { id: 'hojd', kind: 'single', optional: true, show: (A) => BL_CONCRETE.indexOf(A.typ) >= 0, group: L('Höjning', 'Korotus'), title: L('Behöver brunnen höjas?', 'Pitääkö kaivoa korottaa?'), help: L('Hamnar locket under marknivå kan du höja brunnen med en förhöjningsring.', 'Jos kansi jää maanpinnan alle, kaivoa voi korottaa korotusrenkaalla.'),
-          opts: [
-            { id: 'nej', t: L(['Nej', 'Brunnen når marknivå'], ['Ei', 'Kaivo ulottuu maanpintaan']) },
-            { id: 'ja', t: L(['Ja, ungefär så här mycket', 'Skriv höjningen i millimeter'], ['Kyllä, suunnilleen näin paljon', 'Kirjoita korotus millimetreinä']), input: { label: L('Höjning, mm', 'Korotus, mm'), ph: L('t.ex. 100', 'esim. 100'), note: L('Förhöjningsringar finns i 50, 75, 100 och 150 mm.', 'Korotusrenkaita on 50, 75, 100 ja 150 mm:n korkuisina.'), value: (v) => L('Ja, cirka ', 'Kyllä, noin ') + v + ' mm' } },
-            { id: 'vet', t: L(['Vet inte', 'Vi tar det i slutet'], ['En tiedä', 'Palataan tähän lopussa']), vetLike: true }
-          ].map((o) => Object.assign(o, { noChip: true })) }
+          ].map((o) => Object.assign(o, { test: (p) => p.f.indexOf(o.id) >= 0 || (p.opt || []).indexOf(o.id) >= 0 })) }
       ],
       // Kortti: sama kuin kategoriasivulla. Sopivuusrivi kertoo mitan ja oman mittauksen, ominaisuusrivi materiaalin, painon ja valitut lisät.
       fit: (p, c) => {
@@ -791,7 +785,7 @@ class Component extends DCLogic {
         const A = c.A, out = [c.g.mats[p.mat] + ', ' + (p.kgEst ? L('cirka ', 'noin ') : '') + p.kg + ' kg'];
         out.push(p.kg <= 15 ? L('du lyfter det själv', 'nostat itse') : p.kg <= 25 ? L('en person lyfter det', 'yksi ihminen nostaa') : L('lyfts med maskin', 'nostetaan koneella'));
         const FW = { las: L('låsbart', 'lukittava'), iso: L('isolerat', 'eristetty'), vent: L('med ventil', 'venttiili valmiina'), ventOpt: L('ventil som tillval', 'venttiili lisävarusteena'), pump: L('hål för gårdspump', 'reikä pihapumpulle'), manhal: L('manhål', 'huoltoaukko'), tat: L('tätt med packning', 'tiivis'), tatOpt: L('tätningsring som tillval', 'tiivisterengas lisävarusteena') };
-        const ex = (A.extras || []).length ? A.extras : p.f.filter((x) => x === 'las');
+        const ex = c.asked.indexOf('extras') >= 0 && (A.extras || []).length ? A.extras : p.f.filter((x) => x === 'las');
         ex.forEach((x) => { if (p.f.indexOf(x) >= 0) out.push(FW[x]); else if ((p.opt || []).indexOf(x) >= 0) out.push(FW[x + 'Opt']); });
         return out.join(', ');
       },
@@ -805,12 +799,14 @@ class Component extends DCLogic {
           else if (top.lo && top.hi <= 700) add(L('Tätningsring 600/750', 'Tiivisterengas 600/750'), L('Tätar mellan ring och lock, mot lukt och smådjur. Passar innermått 570 till 640 mm.', 'Tiivistää renkaan ja kannen välin hajuja ja pieneläimiä vastaan. Sisämitta 570-640 mm.'), 595);
           else if (top.lo && top.lo >= 850 && top.hi <= 940) add(L('Tätningsring 900/1100', 'Tiivisterengas 900/1100'), L('Tätar mellan ring och lock, mot lukt och smådjur. Passar innermått 880 till 920 mm.', 'Tiivistää renkaan ja kannen välin hajuja ja pieneläimiä vastaan. Sisämitta 880-920 mm.'), 875);
         }
-        const ex = A.extras || [];
+        const ex = A.extras || [], asked = c.asked.indexOf('extras') >= 0;
+        // Lisäominaisuuskysymys ohitetaan, kun se ei rajaa. Silloin tilattavat lisät näytetään tässä, jotta niistä ei jää paitsi.
+        if (!asked && (top.opt || []).indexOf('vent') >= 0) ex.push('vent');
+        if (!asked && top.mat === 'pe' && top.w.indexOf('betong') >= 0) ex.push('las');
         if (ex.indexOf('vent') >= 0 && top.f.indexOf('vent') < 0) add(L('Avluftningsventil', 'Ilmanpoistoventtiili'), L('Monteras ovanpå locket. Justerbar höjd 100 till 700 mm.', 'Asennetaan kannen päälle. Korkeus säädettävissä 100-700 mm.'), ACC_SB.ventil ? ACC_SB.ventil.price : 569);
         if (ex.indexOf('vent') >= 0 && top.seal && ACC_SB.hal) add(L('Förborrat hål för avluftningsventil', 'Esiporattu reikä ilmanpoistoventtiilille'), L('Vi borrar hålet i locket innan leverans.', 'Poraamme reiän kanteen ennen toimitusta.'), ACC_SB.hal.price);
         if (ex.indexOf('las') >= 0 && top.mat === 'pe' && top.w.indexOf('betong') >= 0) add(L('Hänglåsadapter', 'Riippulukkosovitin'), L('Lås locket med hänglås i stället för säkerhetsmutter.', 'Kannen voi lukita riippulukolla turvamutterin sijaan.'), ACC_SB.hanglas ? ACC_SB.hanglas.price : 279);
-        if (BL_CONCRETE.indexOf(A.typ) >= 0 && A.hojd === 'ja') add(v.a && v.a >= 630 && v.a <= 660 ? L('Förhöjningsring B6 800/640x100 mm', 'Korotusrengas B6 800/640x100 mm') : L('Förhöjningsring B6 800/600x100 mm', 'Korotusrengas B6 800/600x100 mm'), L('Höjer brunnen till marknivå. Passdelar finns i 50, 75, 100 och 150 mm.', 'Nostaa kaivon maanpinnan tasolle. Myös 50, 75 ja 150 mm.'), 895);
-        if (BL_CONCRETE.indexOf(A.typ) >= 0 && A.hojd === 'vet') add(L('Förhöjningsringar och passdelar', 'Korotusrenkaat ja sovitusosat'), L('Osäker på höjden? Skicka ett foto så hjälper vi dig välja.', 'Etkö tiedä korotuksen tarvetta? Lähetä kuva, niin autamme valitsemaan.'), null);
+        if (concreteWell && top.w.indexOf('ror') < 0) add(v.a && v.a >= 630 && v.a <= 660 ? L('Förhöjningsring B6 800/640x100 mm', 'Korotusrengas B6 800/640x100 mm') : L('Förhöjningsring B6 800/600x100 mm', 'Korotusrengas B6 800/600x100 mm'), L('Om locket hamnar under marknivå. Finns också i 50, 75 och 150 mm.', 'Jos kansi jää maanpinnan alle. Myös 50, 75 ja 150 mm.'), 895);
         return out;
       },
       offer: (c) => known(c.A.last) && rank(c.A.last) > rank('B125'),
@@ -825,7 +821,7 @@ class Component extends DCLogic {
       h1: L('Hitta rätt lucka', 'Löydä oikea luukku'),
       lead: L('Berätta var luckan ska sitta, vad som ska passera över den och hur stor öppningen är. Vi visar luckorna som passar och tar fram en lucka på mått om ingen standardlucka räcker.', 'Kerro, mihin luukku tulee, mitä sen yli kulkee ja kuinka suuri aukko on. Näytämme sopivat luukut ja teemme mittatilausluukun, jos vakiomalli ei riitä.'),
       proSkip: L('Vet du redan klass och mått? Gå direkt till filtren', 'Tiedätkö jo luokan ja mitat? Siirry suoraan suodattimiin'),
-      hub: [L('Luckor', 'Luukku'), L('Var luckan sitter, vad som passerar över den och öppningens mått.', 'Mihin luukku tulee, mitä sen yli kulkee ja aukon mitat.'), L('3 frågor och 3 frivilliga', '3 kysymystä ja 3 vapaaehtoista')],
+      hub: [L('Luckor', 'Luukku'), L('Var luckan sitter, vad som passerar över den och öppningens mått.', 'Mihin luukku tulee, mitä sen yli kulkee ja aukon mitat.'), L('Högst 6 frågor', 'Enintään 6 kysymystä')],
       noun: L('luckor', 'luukusta'),
       mg: { title: L('Så mäter du öppningen', 'Näin mittaat aukon'), img: L('Bild: tumstock över öppningen, bredd och längd', 'Kuva: mittakeppi aukon päällä, leveys ja pituus'),
         steps: L(['Mät öppningens insida, från kant till kant, där luckan ska ligga.', 'Mät både bredd och längd. Är öppningen rund, mät diametern.', 'Ska luckan gjutas in, mät också hur djupt den kan ligga.'], ['Mittaa aukon sisäpuoli reunasta reunaan siitä kohdasta, johon luukku tulee.', 'Mittaa sekä leveys että pituus. Jos aukko on pyöreä, mittaa halkaisija.', 'Jos luukku valetaan paikalleen, mittaa myös, kuinka syvälle se mahtuu.']),
@@ -904,12 +900,11 @@ class Component extends DCLogic {
             { id: 'infill', icon: 'infill', t: L(['Infill', 'Fylls med plattor eller sten och smälter in'], ['Infill', 'Täytetään laatoilla tai kivellä, sulautuu pintaan']) },
             { id: 'any', t: L(['Spelar ingen roll', 'Visa alla'], ['Ei väliä', 'Näytä kaikki']), noChip: true }
           ].map((o) => Object.assign(o, o.id === 'any' ? {} : { test: (p) => p.mont === o.id || p.mont === 'any' })) },
-        { id: 'miljo', kind: 'single', optional: true, vet: true, group: L('Miljö och material', 'Ympäristö ja materiaali'), title: L('Vilken miljö ska luckan klara?', 'Millaisessa ympäristössä luukku on?'), help: L('Vi väljer material efter miljön, så du behöver inte veta vad som tål vad.', 'Valitsemme materiaalin ympäristön mukaan, joten sinun ei tarvitse tietää, mikä kestää mitäkin.'),
+        { id: 'miljo', kind: 'single', optional: true, vet: true, group: L('Miljö och material', 'Ympäristö ja materiaali'), title: L('Vad ska materialet klara?', 'Mitä materiaalin pitää kestää?'), help: L('Vi väljer material efter miljön, så du behöver inte veta vad som tål vad.', 'Valitsemme materiaalin ympäristön mukaan, joten sinun ei tarvitse tietää, mikä kestää mitäkin.'),
           opts: [
             { id: 'vanlig', t: L(['Vanlig utomhusmiljö', 'Varmförzinkat stål räcker'], ['Tavallinen ulkoympäristö', 'Kuumasinkitty teräs riittää']), noChip: true },
             { id: 'fukt', t: L(['Fukt, avlopp, kemikalier eller havsnära', 'Rostfritt, syrafast eller aluminium'], ['Kosteus, viemäri, kemikaalit tai meren läheisyys', 'Haponkestävä teräs tai alumiini']), test: (p) => ['rostfri', 'alu', 'komposit', 'any'].indexOf(p.mat) >= 0 },
-            { id: 'latt', t: L(['Luckan ska vara lätt att lyfta', 'Aluminium eller komposit'], ['Luukun pitää olla kevyt nostaa', 'Alumiini tai komposiitti']), test: (p) => ['alu', 'komposit', 'any'].indexOf(p.mat) >= 0 },
-            { id: 'gata', t: L(['Trafik på gata', 'Gjutjärn'], ['Liikenne kadulla', 'Valurauta']), test: (p) => ['gjut', 'any'].indexOf(p.mat) >= 0 }
+            { id: 'latt', t: L(['Luckan ska vara lätt att lyfta', 'Aluminium eller komposit'], ['Luukun pitää olla kevyt nostaa', 'Alumiini tai komposiitti']), test: (p) => ['alu', 'komposit', 'any'].indexOf(p.mat) >= 0 }
           ] },
         { id: 'krav', kind: 'multi', optional: true, group: L('Särskilda krav', 'Erityisvaatimukset'), title: L('Har du särskilda krav?', 'Onko erityisvaatimuksia?'), help: L('Välj allt som gäller, eller hoppa över frågan.', 'Valitse kaikki sopivat, tai ohita kysymys.'), empty: L('Inga särskilda krav', 'Ei erityisvaatimuksia'),
           opts: [
@@ -958,7 +953,7 @@ class Component extends DCLogic {
       h1: L('Hitta rätt kabelbrunn', 'Löydä oikea kaapelikaivo'),
       lead: L('Svara på användning, placering och mått. Kabelbrunnar offererar vi, så resultatet blir en ifylld offertförfrågan med rätt modell, och du skriver ingenting två gånger.', 'Vastaa käytöstä, sijainnista ja mitoista. Kaapelikaivot myydään tarjouksella, joten tulos on valmiiksi täytetty tarjouspyyntö oikealla mallilla, eikä mitään tarvitse kirjoittaa kahdesti.'),
       proSkip: L('Vet du redan modell och mått? Gå direkt till listan', 'Tiedätkö jo mallin ja mitat? Siirry suoraan listaan'),
-      hub: [L('Kabelbrunn', 'Kaapelikaivo'), L('Användning, belastning, innermått och djup. Resultatet blir en ifylld offertförfrågan.', 'Käyttö, kuormitus, sisämitta ja syvyys. Tuloksena valmis tarjouspyyntö.'), L('5 frågor och 1 frivillig', '5 kysymystä ja 1 vapaaehtoinen')],
+      hub: [L('Kabelbrunn', 'Kaapelikaivo'), L('Användning, belastning, innermått och djup. Resultatet blir en ifylld offertförfrågan.', 'Käyttö, kuormitus, sisämitta ja syvyys. Tuloksena valmis tarjouspyyntö.'), L('Högst 5 frågor', 'Enintään 5 kysymystä')],
       noun: L('kabelbrunnar', 'kaapelikaivosta'), allQuote: true,
       mg: { title: '', img: '', steps: [], note: '', later: '' },
       zero: L('Ingen standardbrunn, vi offererar ditt mått', 'Ei vakiokaivoa, tarjoamme mittasi mukaan'),
@@ -1003,17 +998,11 @@ class Component extends DCLogic {
         { id: 'matt', kind: 'single', vet: true, group: L('Invändigt mått', 'Sisämitta'), title: L('Vilket invändigt mått behövs?', 'Mikä sisämitta tarvitaan?'), help: L('Längd × bredd på insidan. UC och OXPRO kan byggas ut till andra mått.', 'Pituus × leveys sisäpuolelta. UC ja OXPRO voidaan laajentaa muihin mittoihin.'),
           vetSub: L('Beskriv antal kablar och rör i nästa steg, så räknar vi.', 'Kerro kaapelien ja putkien määrä seuraavassa vaiheessa, niin laskemme.'),
           opts: KB_SIZES.map((s) => { const [a, b] = s.split('x'); return { id: s, t: [a + ' × ' + b + ' mm', ''], test: (p) => p.size === s || !!p.custom }; }).concat([{ id: 'annat', t: L(['Annat mått', 'Kundanpassad, byggs i moduler'], ['Muu mitta', 'Asiakaskohtainen, rakennetaan moduuleista']), chip: L('Annat mått', 'Muu mitta'), test: (p) => !!p.expand }]) },
-        { id: 'djup', kind: 'single', vet: true, group: L('Djup', 'Syvyys'), title: L('Hur djup ska brunnen vara?', 'Kuinka syvä kaivon pitää olla?'), help: L('NEXUS och OXPRO byggs i varv om 150 mm, så de passar de flesta djup.', 'NEXUS ja OXPRO rakennetaan 150 mm:n kerroksista, joten ne sopivat useimpiin syvyyksiin.'),
+        { id: 'djup', kind: 'single', vet: true, ask: true, group: L('Djup', 'Syvyys'), title: L('Hur djup ska brunnen vara?', 'Kuinka syvä kaivon pitää olla?'), help: L('Djupet följer med i förfrågan, så att vi offererar rätt höjd. UC finns i 750, 900 och 1050 mm, NEXUS och OXPRO byggs i varv om 150 mm.', 'Syvyys kulkee pyynnön mukana, jotta tarjoamme oikean korkeuden. UC:tä on 750, 900 ja 1050 mm, NEXUS ja OXPRO rakennetaan 150 mm:n kerroksista.'),
           opts: [750, 900, 1050].map((h) => ({ id: String(h), t: [h + ' mm', ''], test: (p) => !!p.modular || !!p.custom || (p.hs || []).indexOf(h) >= 0 })).concat([{ id: 'annat', t: L(['Annat djup', 'Vi anpassar höjden'], ['Muu syvyys', 'Sovitamme korkeuden']), noChip: true }]) },
         { id: 'ror', kind: 'info', optional: true, group: L('Rör', 'Putket'), title: L('Hur många rör ansluts, och vilken dimension?', 'Montako putkea liitetään, ja minkä kokoisia?'), help: L('Påverkar inte urvalet, men följer med i förfrågan så att vi förbereder genomföringarna.', 'Ei rajaa valikoimaa, mutta kulkee pyynnön mukana, jotta valmistelemme läpiviennit.'),
           fields: () => [{ k: 'a', label: L('Antal rör', 'Putkien määrä'), ph: L('t.ex. 4', 'esim. 4'), min: 1, max: 60 }, { k: 'b', label: L('Diameter, mm (32 till 160)', 'Halkaisija, mm (32-160)'), ph: L('t.ex. 110', 'esim. 110'), min: 20, max: 200 }],
-          display: (v) => [v.a != null ? v.a + L(' st', ' kpl') : '', v.b != null ? 'Ø ' + v.b + ' mm' : ''].filter(Boolean).join(', ') },
-        { id: 'mont', kind: 'single', group: L('Montage', 'Asennus'), title: L('Hur sker montaget?', 'Miten asennus tehdään?'), help: L('Lätta kompositbrunnar levereras platt och bärs för hand.', 'Kevyet komposiittikaivot toimitetaan litteinä ja kannetaan käsin.'),
-          opts: [
-            { id: 'ingenkran', t: L(['Ingen kran på plats', 'Lätt komposit som levereras platt'], ['Paikalla ei ole nosturia', 'Kevyt komposiitti, toimitetaan litteänä']), chip: L('Utan kran', 'Ilman nosturia'), test: (p) => p.mat !== 'betong' },
-            { id: 'kran', t: L(['Kran eller grävmaskin finns', 'Alla material passar'], ['Nosturi tai kaivinkone on', 'Kaikki materiaalit käyvät']), noChip: true },
-            { id: 'betackning', t: L(['Brunnen ska ha betäckning och låsgaller', 'Vi lägger till lock och lås i förfrågan'], ['Kaivoon tulee kansi ja lukkoritilä', 'Lisäämme kannen ja lukon pyyntöön']), noChip: true }
-          ] }
+          display: (v) => [v.a != null ? v.a + L(' st', ' kpl') : '', v.b != null ? 'Ø ' + v.b + ' mm' : ''].filter(Boolean).join(', ') }
       ],
       sort: (a, b) => (a.custom ? 1 : 0) - (b.custom ? 1 : 0) || a.pop - b.pop,
       fit: (p) => {
@@ -1033,7 +1022,8 @@ class Component extends DCLogic {
       cls: (p) => p.cls,
       acc: (top, c) => {
         const out = [{ name: L('Monteringsanvisning (PDF)', 'Asennusohje (PDF)'), why: L('Skickas med offerten och finns på produktsidan.', 'Lähetetään tarjouksen mukana ja löytyy tuotesivulta.'), price: null }, { name: L('Produktblad (PDF)', 'Tuote-esite (PDF)'), why: L('Mått, laster och material.', 'Mitat, kuormat ja materiaalit.'), price: null }];
-        if (c.A.mont === 'betackning') { out.push({ name: L('Betäckning med låsgaller', 'Kansi ja lukkoritilä'), why: L('Läggs till i förfrågan i rätt klass.', 'Lisätään pyyntöön oikeassa luokassa.'), price: null }); out.push({ name: L('TK-nyckel', 'TK-avain'), why: L('Öppnar lock med TK-lås.', 'Avaa kannet, joissa on TK-lukko.'), price: 1195 }); }
+        out.push({ name: L('Betäckning med låsgaller', 'Kansi ja lukkoritilä'), why: L('Vi offererar betäckning i samma klass som brunnen.', 'Tarjoamme kannen samassa luokassa kuin kaivon.'), price: null });
+        if (rank(top.cls) >= rank('C250')) out.push({ name: L('TK-nyckel', 'TK-avain'), why: L('Öppnar lock med TK-lås.', 'Avaa kannet, joissa on TK-lukko.'), price: 1195 });
         return out;
       },
       offer: () => true,
@@ -1047,7 +1037,7 @@ class Component extends DCLogic {
       h1: L('Hitta rätt fundament', 'Löydä oikea perustus'),
       lead: L('Berätta vad du ska bygga, hur tungt det blir och hur högt det ska stå. Vi visar plintar och markskruvar som passar, med rätt beslag.', 'Kerro, mitä rakennat, kuinka raskas siitä tulee ja kuinka korkealle se nousee. Näytämme sopivat plintit ja maaruuvit oikeine kiinnikkeineen.'),
       proSkip: L('Vet du redan modell och höjd? Gå direkt till listan', 'Tiedätkö jo mallin ja korkeuden? Siirry suoraan listaan'),
-      hub: [L('Plintar och fundament', 'Plintit ja perustukset'), L('Vad du bygger, hur tungt det blir och hur högt det ska stå.', 'Mitä rakennat, kuinka raskas se on ja kuinka korkealle se nousee.'), L('Upp till 5 frågor', 'Enintään 5 kysymystä')],
+      hub: [L('Plintar och fundament', 'Plintit ja perustukset'), L('Vad du bygger, hur tungt det blir och hur högt det ska stå.', 'Mitä rakennat, kuinka raskas se on ja kuinka korkealle se nousee.'), L('Högst 5 frågor', 'Enintään 5 kysymystä')],
       noun: L('fundament', 'perustuksesta'),
       mg: { title: '', img: '', steps: [], note: '', later: '' },
       zero: L('Inget fundament, vi hjälper dig', 'Ei perustusta, autamme'),
@@ -1086,7 +1076,7 @@ class Component extends DCLogic {
             { id: 'staket', t: L(['Staket eller plank', 'Markskruv eller plint'], ['Aita', 'Maaruuvi tai plintti']) },
             { id: 'skylt', t: L(['Skylt, stolpe, laddstolpe, belysning', 'Stolpfundament'], ['Kyltti, pylväs, latauspylväs, valaistus', 'Pylväsperustus']) }
           ].map((o) => Object.assign(o, { test: (p) => p.uses.indexOf(o.id) >= 0 })) },
-        { id: 'tyngd', kind: 'single', show: (A) => A.bygg !== 'skylt', group: L('Last per stödpunkt', 'Kuorma tukipistettä kohti'), title: L('Hur tungt blir det per stödpunkt?', 'Kuinka raskas kuorma tukipistettä kohti on?'), help: L('Ungefär räcker. Tak och snölast gör konstruktionen tyngre.', 'Suunnilleen riittää. Katto ja lumikuorma lisäävät painoa.'),
+        { id: 'tyngd', kind: 'single', show: (A) => ['skylt', 'staket'].indexOf(A.bygg) < 0, group: L('Last per stödpunkt', 'Kuorma tukipistettä kohti'), title: L('Hur tungt blir det per stödpunkt?', 'Kuinka raskas kuorma tukipistettä kohti on?'), help: L('Ungefär räcker. Tak och snölast gör konstruktionen tyngre.', 'Suunnilleen riittää. Katto ja lumikuorma lisäävät painoa.'),
           opts: [
             { id: '900', t: L(['Lätt, upp till 900 kg', 'Betongplint AP'], ['Kevyt, enintään 900 kg', 'Betoniplintti AP']), chip: L('Upp till 900 kg', 'Enint. 900 kg') },
             { id: '1600', t: L(['Medel, upp till 1 600 kg', 'Betongplint TP'], ['Keskiraskas, enintään 1 600 kg', 'Betoniplintti TP']), chip: L('Upp till 1 600 kg', 'Enint. 1 600 kg') },
@@ -1094,7 +1084,7 @@ class Component extends DCLogic {
             { id: '10000', t: L(['Mycket tungt, upp till 10 000 kg', 'Betongplint KP+'], ['Erittäin raskas, enintään 10 000 kg', 'Betoniplintti KP+']), chip: L('Upp till 10 000 kg', 'Enint. 10 000 kg') },
             { id: 'rakna', t: L(['Räkna åt mig', 'Skicka ytan och om det blir tak, så räknar vi'], ['Laske puolestani', 'Kerro pinta-ala ja tuleeko katto, niin laskemme']), vetLike: true, noChip: true }
           ].map((o) => (o.id === 'rakna' ? o : Object.assign(o, { test: (p) => p.cap == null || p.cap >= Number(o.id) }))) },
-        { id: 'hojd', kind: 'single', show: (A) => A.bygg !== 'skylt', group: L('Höjd över mark', 'Korkeus maasta'), title: L('Hur högt ska konstruktionen stå över marken?', 'Kuinka korkealla rakennelma on maasta?'), help: L('Plintens höjd avgör hur mycket du behöver gräva och fylla.', 'Plintin korkeus ratkaisee, kuinka paljon pitää kaivaa ja täyttää.'),
+        { id: 'hojd', kind: 'single', show: (A) => ['skylt', 'staket'].indexOf(A.bygg) < 0, group: L('Höjd över mark', 'Korkeus maasta'), title: L('Hur högt ska konstruktionen stå över marken?', 'Kuinka korkealla rakennelma on maasta?'), help: L('Plintens höjd avgör hur mycket du behöver gräva och fylla.', 'Plintin korkeus ratkaisee, kuinka paljon pitää kaivaa ja täyttää.'),
           opts: [
             { id: 'nara', t: L(['Nära marken, 200 till 300 mm', 'Låg altan eller bod'], ['Lähellä maata, 200-300 mm', 'Matala terassi tai vaja']) },
             { id: 'mid', t: L(['400 till 600 mm', 'Vanligast för altan och carport'], ['400-600 mm', 'Yleisin terassille ja autokatokselle']) },
@@ -1106,13 +1096,13 @@ class Component extends DCLogic {
             { id: 'ja', t: L(['Ja, jag gräver eller schaktar', 'Betongplint'], ['Kyllä, kaivan tai kaivatan', 'Betoniplintti']), chip: L('Betongplint', 'Betoniplintti'), test: (p) => p.dig === true },
             { id: 'nej', t: L(['Nej, helst utan grävning', 'Markskruv'], ['En, mieluiten ilman kaivamista', 'Maaruuvi']), chip: L('Markskruv', 'Maaruuvi'), test: (p) => p.dig === false }
           ] },
-        { id: 'fast', kind: 'single', vet: true, show: (A) => A.bygg !== 'skylt', group: L('Infästning', 'Kiinnitys'), title: L('Hur fästs konstruktionen?', 'Miten rakennelma kiinnitetään?'), help: L('Vi lägger rätt beslag till förslaget.', 'Lisäämme oikeat kiinnikkeet ehdotukseen.'),
+        { id: 'fast', kind: 'single', vet: true, ask: true, show: (A) => A.bygg !== 'skylt', group: L('Infästning', 'Kiinnitys'), title: L('Hur fästs konstruktionen?', 'Miten rakennelma kiinnitetään?'), help: L('Vi lägger rätt beslag till förslaget.', 'Lisäämme oikeat kiinnikkeet ehdotukseen.'),
           opts: [
             { id: 's50', t: L(['Stolpe 50 till 70 mm', 'Stolpsko M20'], ['Pylväs 50-70 mm', 'Pylväskenkä M20']) },
             { id: 's90', t: L(['Stolpe 90 till 140 mm', 'Stolpsko med dolt fäste'], ['Pylväs 90-140 mm', 'Pylväskenkä piilokiinnityksellä']) },
             { id: 'balk', t: L(['Bärlina eller balk', 'Balksko'], ['Kantava palkki', 'Palkkikenkä']) },
             { id: 'regel', t: L(['Regel eller syll direkt', 'Stålplatta'], ['Koolaus tai kynnyshirsi suoraan', 'Teräslevy']) },
-            { id: 'svets', t: L(['Svetsad stålpelare', 'KP+ med svetsplatta'], ['Hitsattu teräspilari', 'KP+ hitsauslevyllä']), test: (p) => p.fix === 'svets' }
+            { id: 'svets', t: L(['Svetsad stålpelare', 'KP+ med svetsplatta'], ['Hitsattu teräspilari', 'KP+ hitsauslevyllä']), show: (A) => A.bygg === 'teknik', test: (p) => p.fix === 'svets' }
           ].map((o) => (o.test ? o : Object.assign(o, { test: (p) => ['m20', 'platta', 'topp'].indexOf(p.fix) >= 0 }))) }
       ],
       sort: (a, b) => (a.cap || 0) - (b.cap || 0) || a.pop - b.pop || (a.h || 0) - (b.h || 0),
@@ -1203,9 +1193,9 @@ class Component extends DCLogic {
     // ?step=<kysymys-id|result> täyttää esimerkkivastaukset ennen kyseistä vaihetta
     // (kuvakaappauksia ja jaettavia linkkejä varten). &open=guide avaa mittausohjeen.
     const DEMO = {
-      brunnslock: { ans: { typ: 'betong', last: 'B125', mat: 'latt', extras: ['las', 'tat'], hojd: 'ja' }, m: { matt: { a: '620', b: '780' } }, extra: { hojd_input: '100' } },
+      brunnslock: { ans: { typ: 'betong', last: 'B125', mat: 'latt', extras: ['las', 'tat'] }, m: { matt: { a: '620', b: '780' } } },
       luckor: { ans: { plats: 'mark', last: 'B125', mont: 'plan', miljo: 'vanlig', krav: ['las'] }, m: { storlek: { shape: 'rect', a: '690', b: '690' } } },
-      kabel: { ans: { anv: 'el', plac: 'vag', matt: '900x600', djup: '900', mont: 'ingenkran' }, m: { ror: { a: '4', b: '110' } } },
+      kabel: { ans: { anv: 'el', plac: 'vag', matt: '900x600', djup: '900' }, m: { ror: { a: '4', b: '110' } } },
       fundament: { ans: { bygg: 'carport', tyngd: '7000', hojd: 'mid', grav: 'ja', fast: 's90' }, m: {} }
     };
     if (!this.__demo && params.get('step')) {
@@ -1221,7 +1211,6 @@ class Component extends DCLogic {
     const ALL = G.products;
     const name = (p) => p.n[LANG === 'fi' ? 1 : 0];
     const optOf = (qq, id) => (qq.opts || []).find((o) => o.id === id);
-    const visible = (ans) => G.questions.filter((qq) => !qq.show || qq.show(ans));
     const parse = (qq, ans, mm) => {
       const raw = mm[qq.id] || {};
       const fields = qq.fields(ans, raw);
@@ -1239,7 +1228,28 @@ class Component extends DCLogic {
     };
     // gate: erikoistuotteet näkyvät vain, kun käyttäjä pyytää niiden ominaisuutta
     const gate = G.gate || (() => true);
-    const filterWith = (ans, mm, skipM) => { const qs = visible(ans); return ALL.filter((p) => gate(p, ans) && qs.every((qq) => passQ(qq, p, ans, mm, skipM))); };
+    // Kysymys kysytään vain, jos jokin sen vaihtoehdoista rajaa edellisten vastausten jälkeen jäljellä olevia tuotteita
+    // (tulos muuttuu eikä mene nollaan). ask: true pitää kysymyksen, jonka vastaus vaikuttaa tarvikkeisiin tai tarjoukseen.
+    const shownOpts = (qq, ans) => (qq.opts || []).filter((o) => !o.show || o.show(ans));
+    const plan = (ans, mm, skipM) => {
+      const kept = [];
+      G.questions.forEach((qq) => {
+        if (qq.show && !qq.show(ans)) return;
+        if (qq.kind === 'single' || qq.kind === 'multi') {
+          const pass = (a2, list) => ALL.filter((p) => gate(p, a2) && list.every((k) => passQ(k, p, a2, mm, skipM)));
+          const base = pass(Object.assign({}, ans, { [qq.id]: qq.kind === 'multi' ? [] : undefined }), kept).map((p) => p.id).join();
+          const res = (o) => { const a2 = Object.assign({}, ans, { [qq.id]: qq.kind === 'multi' ? [o.id] : o.id }); return pass(a2, kept.concat([qq])).map((p) => p.id).join(); };
+          const opts = shownOpts(qq, ans);
+          // ask-kysymys ohitetaan vain, jos yksikään vastaus ei sovi jäljellä oleviin tuotteisiin
+          const keep = qq.ask ? opts.some((o) => !o.test || res(o) !== '') : opts.some((o) => { if (!o.test) return false; const r = res(o); return r !== '' && r !== base; });
+          if (!keep) return;
+        }
+        kept.push(qq);
+      });
+      return kept;
+    };
+    const visible = (ans) => plan(ans, S.m, S.skipM);
+    const filterWith = (ans, mm, skipM) => { const qs = plan(ans, mm, skipM); return ALL.filter((p) => gate(p, ans) && qs.every((qq) => passQ(qq, p, ans, mm, skipM))); };
     // ?<kysymys>=<vaihtoehto> esivalitsee vastauksen ja aloittaa ensimmäisestä vastaamattomasta (esim. etusivun kaivotyyppilaatat)
     if (!this.__preset && params && !params.get('step')) {
       this.__preset = true;
@@ -1277,12 +1287,12 @@ class Component extends DCLogic {
       const hasIcons = (cur.opts || []).some((o) => o.icon);
       if (cur.kind === 'single') {
         q.hasOpts = true;
-        q.opts = cur.opts.map((o) => {
+        q.opts = shownOpts(cur, A).map((o) => {
           const n = o.test ? countWith({ [cur.id]: o.id }) : null;
           const on = A[cur.id] === o.id;
           const pick = () => { const extra = o.patch ? o.patch(S) : {}; if (o.input) setAns(cur.id, o.id, extra); else if (o.exit) { setAns(cur.id, o.id, extra); go('result'); } else advanceWith(cur.id, o.id, extra); };
           return Object.assign(icon(o.icon), { title: o.t[0], sub: o.t[1], badge: o.badge || '', count: n == null ? '' : cnt(n), pressed: String(on), style: optStyle(on, n === 0, !hasIcons && !o.t[1]), pick: pick });
-        });
+       }).filter((o, i, arr) => !cur.hideZero || o.count !== zeroTxt);
         if (cur.vetCard) q.opts.push(Object.assign(icon('vet'), { title: T.vet, sub: cur.vetSub || '', badge: '', count: '', pressed: String(A[cur.id] === 'vet'), style: optStyle(A[cur.id] === 'vet', false), pick: () => advanceWith(cur.id, 'vet') }));
         else if (cur.vet) { q.vetLabel = T.vet; q.vetPressed = String(A[cur.id] === 'vet'); q.vet = () => advanceWith(cur.id, 'vet'); }
         if (cur.optional) { q.skipLabel = T.skip; q.skip = () => advanceWith(cur.id, '__skip'); }
@@ -1295,7 +1305,7 @@ class Component extends DCLogic {
       } else if (cur.kind === 'multi') {
         q.hasOpts = true;
         const sel = A[cur.id] || [];
-        q.opts = cur.opts.map((o) => { const on = sel.indexOf(o.id) >= 0; const n = countWith({ [cur.id]: on ? sel : sel.concat([o.id]) }); return { hasIcon: false, title: o.t[0], sub: o.t[1], badge: '', count: cnt(n), pressed: String(on), style: optStyle(on, !on && n === 0, true), pick: () => setAns(cur.id, on ? sel.filter((x) => x !== o.id) : sel.concat([o.id])) }; });
+        q.opts = shownOpts(cur, A).map((o) => { const on = sel.indexOf(o.id) >= 0; const n = countWith({ [cur.id]: on ? sel : sel.concat([o.id]) }); return { hasIcon: false, title: o.t[0], sub: o.t[1], badge: '', count: cnt(n), pressed: String(on), style: optStyle(on, !on && n === 0, true), pick: () => setAns(cur.id, on ? sel.filter((x) => x !== o.id) : sel.concat([o.id])) }; });
         q.skipLabel = sel.length ? '' : T.skip; q.skip = () => { const ans = setAns(cur.id, [], { done: Object.assign({}, S.done, { [cur.id]: true }) }); go(nextAfter(cur.id, ans)); };
         q.nextLabel = lastStep(A) ? T.toResult : T.next; q.next = () => { this.setState({ done: Object.assign({}, S.done, { [cur.id]: true }) }); go(nextAfter(cur.id, A)); };
       } else if (cur.kind === 'measure' || cur.kind === 'info') {
@@ -1360,7 +1370,7 @@ class Component extends DCLogic {
       }
     });
 
-    const ctx = { A: A, mv: mv, mDisplay: mDisplay, g: G };
+    const ctx = { A: A, mv: mv, mDisplay: mDisplay, g: G, asked: steps };
     const catHref = G.cat ? P.cat + ((G.catParams ? G.catParams(ctx) : []).length ? '?' + G.catParams(ctx).join('&') : '') : '#';
 
     // ---------- tulos ----------
@@ -1379,12 +1389,15 @@ class Component extends DCLogic {
     const total = ALL.length, n = matches.length;
     // Sama tuotekortti kuin kategoriasivulla (luokkamerkki, nimi, sopivuus, ominaisuudet, koot, hinta, normaalihinta, rahti).
     const chipStyle = (known) => 'align-self: flex-start; border-radius: 4px; padding: 0 8px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 13px; line-height: 1.6; ' + (known ? 'border: 1.5px solid #111111; color: #111111;' : 'border: 1.5px dashed #8a8a88; color: #5c5c5c; font-family: Inter, sans-serif; font-weight: 500;');
-    const card = (p, best) => { const c = G.cls(p); return { name: name(p), href: p.href || '#', imgAlt: T.imgPh + ': ' + name(p), clsLabel: c || T.noCls, clsStyle: chipStyle(!!c), fit: G.fit(p, ctx), meta: G.meta(p, ctx), sizesTxt: '', priced: p.price != null, quote: p.price == null, price: fmt(p.price), wasTxt: p.reg ? T.was + fmt(p.reg) : '', badge: best ? T.best : '' }; };
+    // Rahti rahtiprofiilin mukaan (support.js SBFreight, service-design/rahtimalli.md 3.3), sama hinta koko Ruotsissa.
+    const frakt = (p) => { const F = typeof window !== 'undefined' && window.SBFreight; if (!F) return ''; return F({ price: p.price, kg: p.kg, mat: gid === 'luckor' ? 'iron' : p.mat, pallet: /^(TP|KP)/.test(p.series || '') ? 'plint' : null })[LANG === 'fi' ? 'fi' : 'sv']; };
+    const card = (p, best) => { const c = G.cls(p); return { freight: frakt(p), name: name(p), href: p.href || '#', imgAlt: T.imgPh + ': ' + name(p), clsLabel: c || T.noCls, clsStyle: chipStyle(!!c), fit: G.fit(p, ctx), meta: G.meta(p, ctx), sizesTxt: '', priced: p.price != null, quote: p.price == null, price: fmt(p.price), wasTxt: p.reg ? T.was + fmt(p.reg) : '', badge: best ? T.best : '' }; };
     const vatLabel = S.vat === 'exkl' ? L('exkl. moms', 'alv 0') : L('inkl. moms', 'sis. alv');
 
     return Object.assign(base, {
       isHub: false, isGuide: true, g: G, catHref: catHref, productHref: gid === 'brunnslock' ? P.product : '#', vatLabel: vatLabel, hub: [],
       tabs: ORDER.map((id) => ({ label: GUIDES[id].tab, href: guideHref(id), current: id === gid ? 'page' : 'false', style: 'min-height: 40px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 999px; font-size: 15px; font-weight: 600; text-decoration: none; white-space: nowrap; ' + (id === gid ? 'background: #111111; color: #ffffff; border: 1px solid #111111;' : 'border: 1px solid #d4d4d2; color: #111111;') })),
+      _steps: steps, // analyysia ja testejä varten
       inQuestion: inQuestion, isResult: step === 'result',
       progressLabel: inQuestion ? T.progress(idx + 1, steps.length) : '', progressPct: String(inQuestion ? Math.round((idx + 1) / steps.length * 100) : 100),
       progressStyle: 'height: 100%; background: #111111; border-radius: 3px; transition: width 200ms ease; width: ' + (inQuestion ? Math.round((idx + 1) / steps.length * 100) : 100) + '%',

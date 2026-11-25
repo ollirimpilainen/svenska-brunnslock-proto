@@ -67,19 +67,7 @@ a{color:#111111}a:hover{color:#474747}
 <aside aria-labelledby="sum-h" style="flex: 1 1 340px; min-width: 0; max-width: 420px; border: 1px solid #bdbdbb; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
 <h2 id="sum-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">Yhteenveto</h2>
 <div style="display: flex; justify-content: space-between; gap: 10px; font-size: 15px"><span>{{ prodLabel }}</span><b>{{ prodSum }}</b></div>
-<sc-if value="{{ noZip }}" hint-placeholder-val="{{ true }}">
-<form onSubmit="{{ submitZip }}" style="display: flex; flex-direction: column; gap: 8px; background: #f5f5f4; border-radius: 10px; padding: 14px">
-<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Postinumero <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">rahti lasketaan postinumeron mukaan</span>
-<input value="{{ zip }}" onInput="{{ typeZip }}" inputmode="numeric" autocomplete="postal-code" placeholder="123 45" style="min-height: 44px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit; background: #ffffff">
-</label>
-<sc-if value="{{ zipErr }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px; font-weight: 600">Kirjoita viisinumeroinen postinumero.</span></sc-if>
-<button type="submit" style="min-height: 44px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">Näytä rahti ja kokonaishinta</button>
-</form>
-</sc-if>
-<sc-if value="{{ hasZip }}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; justify-content: space-between; gap: 10px; font-size: 15px"><span>Rahti postinumeroon {{ zipShown }}, paketti</span><b>[X] kr</b></div>
-<button type="button" onClick="{{ changeZip }}" style="align-self: flex-start; border: 0; background: none; font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; cursor: pointer; min-height: 44px; padding: 0">Muuta postinumeroa</button>
-</sc-if>
+<sc-if value="{{ hasFr }}" hint-placeholder-val="{{ true }}"><div style="display: flex; justify-content: space-between; gap: 10px; font-size: 15px"><span>{{ frLabel }}<small style="display: block; font-size: 13px; color: #5c5c5c">{{ frNote }}</small></span><b>{{ frSum }}</b></div></sc-if>
 <div style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: #474747"><span>Josta alv 25 %</span><span>{{ vatSum }}</span></div>
 <div style="display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 18px; color: #111111"><span>Yhteensä</span><span>{{ totalLabel }}</span></div>
 <sc-if value="{{ noQuote }}" hint-placeholder-val="{{ true }}">
@@ -144,12 +132,12 @@ class Component extends DCLogic {
       hasQuote: hasQuote, noQuote: !hasQuote, hasPriced: priced.length > 0, stripQuote: () => save(priced), overLimit: sum >= 5000, underLimit: sum < 5000,
       prodLabel: 'Tuotteet, ' + pCount + ' kpl' + (hasQuote ? ' + tarjoustuotteet' : ''), prodSum: fmt(sum),
       vatSum: Math.round(sum - sum / 1.25).toLocaleString('fi-FI') + ' kr',
+      ...(() => { const f = typeof window !== 'undefined' && window.SBCart ? window.SBCart.freight(priced.map((l) => ({ fr: l.fr || 'skrym', kg: l.kg, qty: l.qty })), 'fi') : { price: 0, label: '' }; return { hasFr: priced.length > 0, frLabel: 'Rahti' + (f.label ? ', ' + f.label.toLowerCase() : ''), frNote: 'Sama hinta koko Ruotsiin.', frSum: fmt(f.price), totalLabel: fmt(sum + f.price), vatSum: Math.round((sum + f.price) - (sum + f.price) / 1.25).toLocaleString('fi-FI') + ' kr' }; })(),
       zip: S.zip, typeZip: (e) => this.setState({ zip: e.target.value, zipErr: false }),
       submitZip: (e) => { e.preventDefault(); const v = S.zip.replace(/\s/g, ''); if (/^\d{5}$/.test(v)) { if (typeof window !== 'undefined' && window.SBCart) window.SBCart.setZip(S.zip); this.setState({ zipDone: true, zipErr: false }); } else this.setState({ zipErr: true }); },
       noZip: !S.zipDone, hasZip: S.zipDone, zipErr: S.zipErr,
       zipShown: S.zip.replace(/\s/g, '').replace(/^(\d{3})(\d{2})$/, '$1 $2'),
       changeZip: () => this.setState({ zipDone: false }),
-      totalLabel: S.zipDone ? '[X] kr' : fmt(sum) + ' + rahti',
       checkoutHref: S.lines.length ? 'FiKassa.dc.html' : '#'
     };
   }

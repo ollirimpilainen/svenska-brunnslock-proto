@@ -110,20 +110,8 @@ summary::-webkit-details-marker{display:none}
 </div>
 <div style="background: #f5f5f4; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px; font-size: 15px">
 <div style="display: flex; justify-content: space-between; gap: 10px"><span>{{ prodLabel }}</span><b>{{ prodSum }}</b></div>
-<sc-if value="{{ noZip }}" hint-placeholder-val="{{ true }}">
-<form onSubmit="{{ submitZip }}" style="display: flex; flex-wrap: wrap; gap: 8px; align-items: end">
-<label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Postinumero <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">rahti lasketaan postinumeron mukaan</span>
-<input value="{{ zip }}" onInput="{{ typeZip }}" inputmode="numeric" autocomplete="postal-code" placeholder="123 45" style="min-height: 44px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit; background: #ffffff">
-</label>
-<button type="submit" style="flex: 1 1 auto; min-height: 44px; padding: 0 16px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">Näytä rahti ja kokonaishinta</button>
-</form>
-<sc-if value="{{ zipErr }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px; font-weight: 600">Kirjoita viisinumeroinen postinumero.</span></sc-if>
-</sc-if>
-<sc-if value="{{ hasZip }}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; justify-content: space-between; gap: 10px"><span>Rahti postinumeroon {{ zipShown }}, paketti</span><b>[X] kr</b></div>
-<button type="button" onClick="{{ changeZip }}" style="align-self: flex-start; border: 0; background: none; font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; cursor: pointer; min-height: 44px; padding: 0">Muuta postinumeroa</button>
-<div style="display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid #bdbdbb; padding-top: 10px; font-weight: 700; color: #111111"><span>Yhteensä rahteineen</span><span>[X] kr</span></div>
-</sc-if>
+<div style="display: flex; justify-content: space-between; gap: 10px"><span>{{ frLabel }}<small style="display: block; font-size: 13px; color: #5c5c5c">{{ frNote }}</small></span><b>{{ frSum }}</b></div>
+<div style="display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid #bdbdbb; padding-top: 10px; font-weight: 700; color: #111111"><span>Yhteensä rahteineen</span><span>{{ totalSum }}</span></div>
 </div>
 <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 14px; color: #474747">
 <li>14 päivän peruutusoikeus</li>
@@ -238,7 +226,7 @@ summary::-webkit-details-marker{display:none}
 <details style="border-bottom: 1px solid #bdbdbb">
 <summary style="cursor: pointer; min-height: 64px; display: flex; justify-content: space-between; align-items: center"><h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">Toimitus ja palautus</h2><span aria-hidden="true" style="font-size: 26px">+</span></summary>
 <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px">
-<div><b style="display: block; color: #111111">Suoraan toimittajiltamme</b><span style="font-size: 15px; color: #474747">Kansi lähetetään pakettina toimittajaltamme Ruotsista.</span></div>
+<div><b style="display: block; color: #111111">Suoraan toimittajiltamme</b><span style="font-size: 15px; color: #474747">Kansi toimitetaan kotiin. Rahti on 590 kr tilausta kohti ja maksaa saman koko Ruotsiin.</span></div>
 <div><b style="display: block; color: #111111">Toimitusaika</b><span style="font-size: 15px; color: #474747">Varastotuotteet toimitetaan yleensä [3 to 6] arkipäivässä, joskus pidempään. Isommissa tilauksissa aika kerrotaan tarjouksessa.</span></div>
 <div><b style="display: block; color: #111111">Tilaatko samalla betonirenkaita?</b><span style="font-size: 15px; color: #474747">Silloin kaikki tulee lavalla. Valitsemme kuljetuksen, joka osaa purkaa luonasi nosturilla tai nostolaidalla.</span></div>
 <div><b style="display: block; color: #111111">Peru ostos 14 päivän sisällä</b><span style="font-size: 15px; color: #474747">Yksityisenä sinulla on 14 päivän peruutusoikeus.</span></div>
@@ -289,13 +277,30 @@ summary::-webkit-details-marker{display:none}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4300}}'>
+// Jokaisella koolla on oma osoite, sama slug kuin nykyisessä kaupassa (SB_LIDS.url, data/seo-sailytettavat-sivut.md).
+// Sivu avataan tiedostona (?size=), ja osoiteriville vaihdetaan heti koon slug. <base> pitää suhteelliset linkit proton juuressa.
+// GitHub Pagesissa slugin uudelleenlataus menee 404.html:lle, joka ohjaa takaisin tälle sivulle oikealla koolla.
+const SB_URL_PREFIX = 'fi/';
+function sbSizeUrl(c, mode) {
+  if (typeof window === 'undefined' || !c || !c.url || typeof history === 'undefined') return;
+  const W = window;
+  if (!W.__sbRoot) {
+    W.__sbRoot = location.href.replace(/[?#].*$/, '').replace(/[^/]*$/, '');
+    if (!document.querySelector('base')) { const b = document.createElement('base'); b.href = W.__sbRoot; document.head.prepend(b); }
+  }
+  const target = W.__sbRoot + SB_URL_PREFIX + c.url.replace(/^\//, '');
+  try { if (location.href.replace(/#.*$/, '') !== target) history[mode === 'push' ? 'pushState' : 'replaceState']({ size: c.d }, '', target + location.hash); } catch (e) {}
+  document.title = c['fi'] || document.title;
+}
+const sbSizeFromPath = () => { try { const m = location.pathname.match(/latt-brunnslock-(\d+)-composite/); return m ? parseInt(m[1], 10) : 0; } catch (e) { return 0; } };
 class Component extends DCLogic {
-  constructor(props) { super(props); const SB = typeof window !== 'undefined' ? window.SBCart : null; const z0 = SB ? SB.zip() : ''; let s0 = 0; try { s0 = parseInt(new URLSearchParams(location.search).get('size'), 10) || 0; } catch (e) {} this.state = { size: s0, vat: 'inkl', qty: 1, addons: {}, zip: z0, zipDone: /^\d{5}$/.test(z0.replace(/\s/g, '')), zipErr: false, inMm: '', outMm: '', checkMsg: '', about: false, copied: false }; }
+  constructor(props) { super(props); const SB = typeof window !== 'undefined' ? window.SBCart : null; const z0 = SB ? SB.zip() : ''; let s0 = 0; try { s0 = parseInt(new URLSearchParams(location.search).get('size'), 10) || sbSizeFromPath(); } catch (e) {} this.state = { size: s0, vat: 'inkl', qty: 1, addons: {}, zip: z0, zipDone: /^\d{5}$/.test(z0.replace(/\s/g, '')), zipErr: false, inMm: '', outMm: '', checkMsg: '', about: false, copied: false }; this.__url = false; if (typeof window !== 'undefined') window.addEventListener('popstate', () => { const d = sbSizeFromPath(); if (d) this.setState({ size: d, addons: {} }); }); }
   renderVals() {
     const S = this.state;
     const LD = (typeof window !== 'undefined' && window.SB_LIDS) || { families: { comp: { def: 1050 } }, items: [] };
     const fam = LD.items.filter((i) => i.fam === 'comp').sort((a, b) => a.d - b.d);
     const c = fam.find((i) => i.d === S.size) || fam.find((i) => i.d === LD.families.comp.def) || fam[0] || { d: 1050, sku: '', price: 0, lo: 0, hi: 0, olo: 0, ohi: 0, kg: 0, seal: 0 };
+    if (!this.__url) { this.__url = true; sbSizeUrl(c, 'replace'); } else if (typeof document !== 'undefined' && c['fi']) document.title = c['fi'];
     const base = c.price;
     const rng = (a, b) => a + ' ja ' + b + ' mm:n välillä';
     const T = { compare: 'Vertaa kokoja', cSize: 'Koko', cIn: 'Sisämitta', cOut: 'Ulkomitta', cPrice: 'Hinta' };
@@ -313,10 +318,10 @@ class Component extends DCLogic {
       cart: 0, vat: S.vat, setVat: (v) => this.setState({ vat: v }),
       T: T, name: c['fi'] || '', art: c.sku, sub: 'Betonirenkaaseen, jonka sisämitta on ' + c.lo + ' ja ' + c.hi + ' mm:n välillä. Nostat sen itse sakokaivon tyhjennyksessä.', fitText: 'Sopii betonirenkaaseen, jonka sisämitta on ' + c.lo + ' ja ' + c.hi + ' mm:n välillä ja ulkomitta ' + c.olo + ' ja ' + c.ohi + ' mm:n välillä.', kgText: 'Painaa ' + c.kg + ' kg, joten sen nostaa helposti pois sakokaivon tyhjennyksessä.', lead: 'Kevyt ja lapsiturvallinen kansi betonikaivoihin, joiden renkaan sisämitta on ' + c.lo + ' ja ' + c.hi + ' mm:n välillä, esimerkiksi kolmikammio- ja sakokaivoihin. Kansi painaa ' + c.kg + ' kg, joten sen voi nostaa pois käsin, kun kaivo tyhjennetään.', rangeText: 'Kansi sopii renkaisiin, joiden sisäpuoli A on ' + c.lo + ' ja ' + c.hi + ' mm:n välillä ja ulkopuoli B ' + c.olo + ' ja ' + c.ohi + ' mm:n välillä.',
       inTxt: rng(c.lo, c.hi), outTxt: rng(c.olo, c.ohi), dTxt: String(c.d), kgTxt: c.kg + ' kg (kuvauksen mukaan)',
-      sizes: fam.map((z) => { const on = z.d === c.d; return { label: String(z.d), href: 'FiTuote.dc.html?size=' + z.d, cur: on ? 'page' : 'false', inTxt: rng(z.lo, z.hi), outTxt: rng(z.olo, z.ohi), price: fmt(z.price),
+      sizes: fam.map((z) => { const on = z.d === c.d; return { label: String(z.d), href: z.url ? SB_URL_PREFIX + z.url.replace(/^\//, '') : 'FiTuote.dc.html?size=' + z.d, cur: on ? 'page' : 'false', inTxt: rng(z.lo, z.hi), outTxt: rng(z.olo, z.ohi), price: fmt(z.price),
         rowStyle: on ? 'background: #f5f5f4; font-weight: 600' : '',
         style: 'min-height: 44px; min-width: 64px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: 600; font-size: 15px; text-decoration: none; ' + (on ? 'border: 1.5px solid #111111; background: #111111; color: #ffffff' : 'border: 1.5px solid #bdbdbb; color: #111111'),
-        pick: (e) => { if (e && e.preventDefault) e.preventDefault(); if (on) return; try { const u = new URL(location.href); u.searchParams.set('size', z.d); history.replaceState(null, '', u); } catch (er) {} this.setState({ size: z.d, addons: {} }); } }; }),
+        pick: (e) => { if (e && e.preventDefault) e.preventDefault(); if (on) return; sbSizeUrl(z, 'push'); this.setState({ size: z.d, addons: {} }); } }; }),
       price: fmt(base), vatLabel: ex ? 'alv 0' : 'sis. alv',
       altPrice: ex ? fmtRaw(base) + ' sis. alv' : fmtRaw(base / 1.25) + ' alv 0',
       copyLabel: S.copied ? 'Kopioitu' : 'Kopioi',
@@ -324,6 +329,7 @@ class Component extends DCLogic {
       addons: addonDefs.map((a) => ({ ...a, price: '+ ' + fmt(a.price), on: !!S.addons[a.key], toggle: () => this.setState({ addons: { ...S.addons, [a.key]: !S.addons[a.key] } }) })),
       qty: S.qty, less: () => this.setState({ qty: Math.max(1, S.qty - 1) }), more: () => this.setState({ qty: S.qty + 1 }),
       prodLabel: 'Tuotteet, ' + S.qty + ' kpl', prodSum: fmt(unit * S.qty),
+      ...(() => { const SB = typeof window !== 'undefined' ? window.SBCart : null; const ls = [{ fr: window.SBFreight ? window.SBFreight(c).key : 'skrym', kg: c.kg, qty: S.qty }].concat(addonDefs.filter((a) => S.addons[a.key]).map(() => ({ fr: 'ombud', kg: 1, qty: S.qty }))); const f = SB ? SB.freight(ls, 'fi') : { price: 590, label: '' }; return { frLabel: 'Rahti' + (f.label ? ', ' + f.label.toLowerCase() : ''), frNote: 'Sama hinta koko Ruotsiin, kansien määrästä riippumatta.', frSum: fmt(f.price), totalSum: fmt(unit * S.qty + f.price) }; })(),
       zip: S.zip, typeZip: (e) => this.setState({ zip: e.target.value, zipErr: false }),
       submitZip: (e) => { e.preventDefault(); const v = S.zip.replace(/\s/g, ''); if (/^\d{5}$/.test(v)) { if (typeof window !== 'undefined' && window.SBCart) window.SBCart.setZip(S.zip); this.setState({ zipDone: true, zipErr: false }); } else this.setState({ zipErr: true }); },
       noZip: !S.zipDone, hasZip: S.zipDone, zipErr: S.zipErr,

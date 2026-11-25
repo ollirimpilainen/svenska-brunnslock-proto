@@ -141,7 +141,7 @@ a{color:#111111}a:hover{color:#474747}
 <div style="margin-top: auto; padding-top: 16px; display: flex; flex-direction: column; gap: 4px">
 <span style="font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">{{ p.priceTxt }} <span style="font-family: Inter, sans-serif; font-weight: 400; font-size: 13px; color: #474747">{{ vatLabel }}</span></span>
 <span style="font-size: 13px; color: #5c5c5c; text-decoration: line-through">{{ p.wasTxt }}</span>
-<span style="font-size: 13px; color: #5c5c5c">Frakt räknas på ditt postnummer</span>
+<span style="font-size: 13px; color: #5c5c5c">{{ p.freight }}</span>
 </div>
 </div>
 </a>
@@ -163,7 +163,7 @@ a{color:#111111}a:hover{color:#474747}
 <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 32px; border-top: 1px solid #e2e2e0; padding-top: 32px">
 <div style="display: flex; flex-direction: column; gap: 8px">
 <h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">Frakt och leverans</h2>
-<p style="margin: 0; color: #474747">Lätta lock skickas som paket. Beställer du med betongringar kommer allt på pall, och vi väljer åkeri som kan lossa hos dig. Frakten ser du på produktsidan när du skriver ditt postnummer.</p>
+<p style="margin: 0; color: #474747">Lätta lock levereras hem för 590 kr. Beställer du med betongringar kommer allt på pall, och locken följer med utan extra kostnad. Frakten kostar lika mycket i hela Sverige, och du ser den på varje produkt innan du beställer.</p>
 <a href="#" style="font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Frakt och leverans</a>
 </div>
 <div style="display: flex; flex-direction: column; gap: 4px">
@@ -227,6 +227,7 @@ class Component extends DCLogic {
         meta: [matLabel(target.mat), kgs.length ? T.kg(Math.min.apply(null, kgs), Math.max.apply(null, kgs)) : ''].filter(Boolean).join(', '),
         sizesTxt: p.fam && m.length > 1 ? T.sizesList(m.map((z) => z.d).join(', ')) : '',
         priceTxt: (one ? '' : T.from) + fmt(min.price),
+        freight: typeof window !== 'undefined' && window.SBFreight ? window.SBFreight(target)['sv'] : '',
         wasTxt: one && one.reg ? T.was + fmt(one.reg) : '',
         _pop: m.reduce((a, z) => a + (z.sold || 0), 0), _size: lo, _price: min.price, _kg: kgs.length ? Math.min.apply(null, kgs) : 1e9
       };

@@ -101,7 +101,10 @@ class Component extends DCLogic {
       { title: 'Liikenne', href: '#', subs: L(['Valurautakannet ja katuvalut', 'Lentokenttien ja satamien kannet', 'Kanavaritilät', 'Rumpusilmät', 'Meluesteiden pylväät', 'Perustukset 60 mm:n putkille']) }
     ];
     const PAIRS = [['FiEtusivu', 'SvStartsida'], ['FiKategoria', 'SvKategori'], ['FiTuote', 'SvProdukt'], ['FiOstoskori', 'SvVarukorg'], ['FiKassa', 'SvKassa'], ['FiKiitos', 'SvTack'], ['FiTarjous', 'SvOffert'], ['FiTuoteapuri', 'SvProduktguide']];
-    const page = (typeof location !== 'undefined' ? location.pathname.split('/').pop() : '').replace('.dc.html', '');
+    // Tuotesivun koko näkyy osoitteessa kaupan slugina (/butik/...), joten kielilinkki päätellään siitä
+    const slug = typeof location !== 'undefined' ? location.pathname.match(/\/butik\/.*latt-brunnslock-(\d+)-composite/) : null;
+    const page = slug ? 'SvProdukt' : (typeof location !== 'undefined' ? location.pathname.split('/').pop() : '').replace('.dc.html', '');
+    const qs = slug ? '?size=' + slug[1] : (typeof location !== 'undefined' ? location.search : '');
     const pair = PAIRS.find((p) => p[0] === page || p[1] === page) || PAIRS[0];
     const ME = 'fi';
     const langOn = 'display: inline-flex; align-items: center; min-height: 32px; padding: 0 8px; border-radius: 4px; font-size: 13px; font-weight: 700; text-decoration: none; background: #ffffff; color: #111111';
@@ -112,7 +115,7 @@ class Component extends DCLogic {
       inklStyle: vat === 'inkl' ? on : off, exklStyle: vat === 'exkl' ? on : off,
       setInkl: () => set('inkl'), setExkl: () => set('exkl'),
       navSortiment: nav, cats: cats,
-      fiHref: pair[0] + '.dc.html' + (typeof location !== 'undefined' ? location.search : ''), svHref: pair[1] + '.dc.html' + (typeof location !== 'undefined' ? location.search : ''), fiCur: ME === 'fi' ? 'true' : 'false', svCur: ME === 'sv' ? 'true' : 'false', fiStyle: ME === 'fi' ? langOn : langOff, svStyle: ME === 'sv' ? langOn : langOff,
+      fiHref: pair[0] + '.dc.html' + qs, svHref: pair[1] + '.dc.html' + qs, fiCur: ME === 'fi' ? 'true' : 'false', svCur: ME === 'sv' ? 'true' : 'false', fiStyle: ME === 'fi' ? langOn : langOff, svStyle: ME === 'sv' ? langOn : langOff,
       isOpen: this.state.menu, menuOpen: String(this.state.menu),
       chevron: this.state.menu ? 'transform: rotate(180deg)' : '',
       toggleMenu: () => this.setState({ menu: !this.state.menu })

@@ -65,7 +65,7 @@ a{color:#111111}a:hover{color:#474747}
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; grid-column: 1 / -1">Toimitusosoite tai työmaa
 <input value="{{ f.street }}" onInput="{{ inp.street }}" autocomplete="street-address" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit">
 </label>
-<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Postinumero <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">rahti lasketaan tämän mukaan</span>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Postinumero <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">minne toimitus tulee</span>
 <input value="{{ f.zip }}" onInput="{{ inp.zip }}" inputmode="numeric" autocomplete="postal-code" style="{{ st.zip }}">
 <sc-if value="{{ er.zip }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Kirjoita viisinumeroinen postinumero.</span></sc-if>
 </label>

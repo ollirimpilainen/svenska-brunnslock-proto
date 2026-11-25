@@ -142,7 +142,7 @@ a{color:#111111}a:hover{color:#474747}
 <div style="margin-top: auto; padding-top: 16px; display: flex; flex-direction: column; gap: 4px">
 <span style="font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">{{ p.priceTxt }} <span style="font-family: Inter, sans-serif; font-weight: 400; font-size: 13px; color: #474747">{{ vatLabel }}</span></span>
 <span style="font-size: 13px; color: #5c5c5c; text-decoration: line-through">{{ p.wasTxt }}</span>
-<span style="font-size: 13px; color: #5c5c5c">Rahti lasketaan postinumerostasi</span>
+<span style="font-size: 13px; color: #5c5c5c">{{ p.freight }}</span>
 </div>
 </div>
 </a>
@@ -164,7 +164,7 @@ a{color:#111111}a:hover{color:#474747}
 <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 32px; border-top: 1px solid #e2e2e0; padding-top: 32px">
 <div style="display: flex; flex-direction: column; gap: 8px">
 <h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">Rahti ja toimitus</h2>
-<p style="margin: 0; color: #474747">Kevyet kannet lähetetään pakettina. Jos tilaat samalla betonirenkaita, kaikki tulee lavalla, ja valitsemme kuljetuksen, joka osaa purkaa luonasi. Rahdin näet tuotesivulla, kun kirjoitat postinumerosi.</p>
+<p style="margin: 0; color: #474747">Kevyet kannet toimitetaan kotiin 590 kr:lla. Jos tilaat samalla betonirenkaita, kaikki tulee lavalla, ja kannet kulkevat mukana ilman lisähintaa. Rahti maksaa saman koko Ruotsiin, ja näet sen jokaisessa tuotteessa ennen tilausta.</p>
 <a href="#" style="font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Rahti ja toimitus</a>
 </div>
 <div style="display: flex; flex-direction: column; gap: 4px">
@@ -228,6 +228,7 @@ class Component extends DCLogic {
         meta: [matLabel(target.mat), kgs.length ? T.kg(Math.min.apply(null, kgs), Math.max.apply(null, kgs)) : ''].filter(Boolean).join(', '),
         sizesTxt: p.fam && m.length > 1 ? T.sizesList(m.map((z) => z.d).join(', ')) : '',
         priceTxt: (one ? '' : T.from) + fmt(min.price),
+        freight: typeof window !== 'undefined' && window.SBFreight ? window.SBFreight(target)['fi'] : '',
         wasTxt: one && one.reg ? T.was + fmt(one.reg) : '',
         _pop: m.reduce((a, z) => a + (z.sold || 0), 0), _size: lo, _price: min.price, _kg: kgs.length ? Math.min.apply(null, kgs) : 1e9
       };

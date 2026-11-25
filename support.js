@@ -84,20 +84,42 @@
     ]
   };
 
+  // ---------- rahtiprofiili (service-design/rahtimalli.md, kohdat 3.1 ja 3.3) ----------
+  // Rahti määräytyy tuotteen profiilin mukaan ja on sama koko Ruotsissa, joten postinumeroa ei tarvita.
+  // Hinnat ovat nykyisen kaupan esimerkkejä: Ombud 172 kr, Skrymmande 590 kr, yleislava 1 480 kr / 8 kpl, plinttilava 2 400 kr.
+  var FR = {
+    ombud: { price: 172, sv: 'Frakt från 172 kr', fi: 'Rahti alkaen 172 kr', ship: { sv: 'Paket till ombud eller hem', fi: 'Paketti noutopisteeseen tai kotiin' } },
+    skrym: { price: 590, sv: 'Frakt 590 kr', fi: 'Rahti 590 kr', ship: { sv: 'Hemleverans', fi: 'Kotiinkuljetus' } },
+    pall: { price: 1480, per: 8, sv: 'Pallfrakt från 1 480 kr', fi: 'Lavarahti alkaen 1 480 kr', ship: { sv: 'Pall', fi: 'Lava' } },
+    plint: { price: 2400, per: 20, sv: 'Pallfrakt från 2 400 kr', fi: 'Lavarahti alkaen 2 400 kr', ship: { sv: 'Pall', fi: 'Lava' } },
+    offert: { price: null, sv: 'Frakt ingår i offerten', fi: 'Rahti sisältyy tarjoukseen' }
+  };
+  // p: { price, mat, kg, pallet, small }
+  window.SBFreight = function (p) {
+    var mat = p.mat || '', kg = p.kg || 0, key;
+    if (p.price == null) key = 'offert';
+    else if (p.pallet === 'plint') key = 'plint';
+    else if (['betong', 'iron', 'gjut', 'gjutjarn'].indexOf(mat) >= 0 || kg > 30) key = 'pall';
+    else if (p.small || (p.kg != null && kg <= 3)) key = 'ombud';
+    else key = 'skrym';
+    return Object.assign({ key: key }, FR[key]);
+  };
+  window.SBFreight.profiles = FR;
+
   // ---------- ostoskori (yhteinen kaikille sivuille, localStorage) ----------
   var CART_KEY = 'sb-proto-cart-v1';
   var CATALOG = (function () {
     var c = {}, L = window.SB_LIDS;
     L.items.forEach(function (it) {
       var pg = it.fam === 'comp';
-      c[it.id] = { price: it.price,
+      c[it.id] = { price: it.price, fr: window.SBFreight(it).key, kg: it.kg,
         fi: [it.fi, 'Tuotenro ' + it.sku + (it.lo ? ' · Sopii renkaaseen ' + it.lo + ' ja ' + it.hi + ' mm:n välillä' : ''), pg ? 'FiTuote.dc.html?size=' + it.d : '#'],
         sv: [it.sv, 'Art.nr ' + it.sku + (it.lo ? ' · Passar ring ' + it.lo + ' till ' + it.hi + ' mm' : ''), pg ? 'SvProdukt.dc.html?size=' + it.d : '#'] };
-      if (it.seal) c['seal-' + it.d] = { price: it.seal,
+      if (it.seal) c['seal-' + it.d] = { price: it.seal, fr: 'ombud', kg: 1,
         fi: [it.sealName ? 'Tiivisterengas ' + it.sealName : 'Tiivisterengas koolle ' + it.d, 'Lisävaruste kanteen ' + it.d, '#'],
         sv: [it.sealName ? 'Tätningsring ' + it.sealName : 'Tätningsring till ' + it.d, 'Tillval till lock ' + it.d, '#'] };
     });
-    L.acc.forEach(function (a) { c[a.id] = { price: a.price, fi: [a.fi, 'Lisävaruste kevyisiin kansiin', '#'], sv: [a.sv, 'Tillval till lätta lock', '#'] }; });
+    L.acc.forEach(function (a) { c[a.id] = { price: a.price, fr: 'ombud', kg: 1, fi: [a.fi, 'Lisävaruste kevyisiin kansiin', '#'], sv: [a.sv, 'Tillval till lätta lock', '#'] }; });
     return c;
   })();
   function readCart() {
@@ -115,7 +137,7 @@
       return readCart().items.filter(function (i) { return CATALOG[i.id]; }).map(function (i) {
         var p = CATALOG[i.id], t = p[lang] || p.fi;
         var price = i.agreed != null ? i.agreed : p.price;
-        return { id: i.id, name: t[0], meta: t[1], href: t[2], price: price, qty: i.qty, quote: price == null, agreed: i.agreed != null };
+        return { id: i.id, name: t[0], meta: t[1], href: t[2], price: price, qty: i.qty, quote: price == null, agreed: i.agreed != null, fr: p.fr, kg: p.kg };
       });
     },
     add: function (id, qty) {
@@ -128,7 +150,35 @@
     count: function () { return readCart().items.reduce(function (s, i) { return s + i.qty; }, 0); },
     zip: function () { return readCart().zip || ''; },
     setZip: function (z) { var c = readCart(); c.zip = z; writeCart(c); },
-    clear: function () { writeCart({ items: [], zip: readCart().zip }); schedule(); }
+    clear: function () { writeCart({ items: [], zip: readCart().zip }); schedule(); },
+    // Korin rahti rahtimallin kohdan 3.2 mukaan. lines: [{ fr, kg, qty, quote }]
+    freight: function (lines, lang) {
+      lang = lang || 'fi';
+      var ls = (lines || this.lines(lang)).filter(function (l) { return !l.quote; });
+      if (!ls.length) return { price: 0, label: '', options: [] };
+      var pallKg = 0, pallets = 0, has = {};
+      ['pall', 'plint'].forEach(function (k) {
+        var q = ls.filter(function (l) { return l.fr === k; });
+        if (!q.length) return;
+        has[k] = true;
+        pallKg += q.reduce(function (s, l) { return s + (l.kg || 40) * l.qty; }, 0);
+        pallets += Math.ceil(q.reduce(function (s, l) { return s + l.qty; }, 0) / FR[k].per);
+      });
+      ls.forEach(function (l) { has[l.fr] = true; });
+      var T = function (sv, fi) { return lang === 'sv' ? sv : fi; };
+      var same = T('Samma pris i hela Sverige.', 'Sama hinta koko Ruotsiin.');
+      if (has.pall || has.plint) {
+        // Kevyt lavatilaus (oletusraja 70 kg) menee kotiinkuljetuksena
+        if (pallKg <= 70) return { price: 590, key: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), options: [{ id: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), text: same, price: 590 }] };
+        var pp = (has.plint ? FR.plint.price : FR.pall.price) * pallets;
+        var pl = pallets + ' ' + T(pallets === 1 ? 'pall' : 'pallar', pallets === 1 ? 'lava' : 'lavaa');
+        return { price: pp, key: 'pall', label: T('Pall, ', 'Lava, ') + pl, options: [{ id: 'pall', label: T('Pallfrakt, ', 'Lavarahti, ') + pl, text: T('Lättare produkter följer med pallen utan extra kostnad. ', 'Kevyemmät tuotteet kulkevat lavan mukana ilman lisähintaa. ') + same, price: pp }] };
+      }
+      if (has.skrym) return { price: 590, key: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), options: [{ id: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), text: T('Stora lock levereras hem. ', 'Isot kannet toimitetaan kotiin. ') + same, price: 590 }] };
+      return { price: 172, key: 'ombud', label: T('Paket till ombud', 'Paketti noutopisteeseen'), options: [
+        { id: 'ombud', label: T('Paket till ombud', 'Paketti noutopisteeseen'), text: T('Hämta hos närmaste utlämningsställe.', 'Nouda lähimmästä noutopisteestä.'), price: 172 },
+        { id: 'dorr', label: T('Paket hem till dörren', 'Paketti kotiovelle'), text: T('Lämnas vid dörren eller kvitteras.', 'Jätetään ovelle tai kuitataan.'), price: 590 } ] };
+    }
   };
 
   // ---------- definitions ----------

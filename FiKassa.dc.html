@@ -86,11 +86,11 @@ a{color:#111111}a:hover{color:#474747}
 </label>
 </div>
 <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
-<legend style="font-size: 14px; font-weight: 600; margin-bottom: 8px">Toimitustapa, rahti postinumeroon {{ zipShown }}</legend>
+<legend style="font-size: 14px; font-weight: 600; margin-bottom: 8px">Toimitustapa, sama hinta koko Ruotsiin</legend>
 <sc-for list="{{ ships }}" as="s" hint-placeholder-count="2">
 <label style="{{ s.style }}">
 <span style="display: flex; gap: 10px; align-items: center"><input type="radio" name="ship" checked="{{ s.on }}" onChange="{{ s.pick }}" style="width: 18px; height: 18px; margin: 0; accent-color: #111111"><span><b style="display: block">{{ s.label }}</b><span style="font-size: 13px; color: #5c5c5c">{{ s.text }}</span></span></span>
-<b>[X] kr</b>
+<b>{{ s.priceTxt }}</b>
 </label>
 </sc-for>
 </fieldset>
@@ -132,9 +132,9 @@ a{color:#111111}a:hover{color:#474747}
 <sc-for list="{{ sumLines }}" as="l" hint-placeholder-count="2">
 <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>{{ l.name }}<span style="display: block; font-size: 13px; color: #5c5c5c">{{ l.qtyLabel }}</span></span><b>{{ l.sum }}</b></div>
 </sc-for>
-<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px; border-top: 1px solid #e2e2e0; padding-top: 12px"><span>Rahti postinumeroon {{ zipShown }}</span><b>[X] kr</b></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px; border-top: 1px solid #e2e2e0; padding-top: 12px"><span>{{ frLabel }}</span><b>{{ frSum }}</b></div>
 <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: #474747"><span>Josta alv 25 %</span><span>{{ vatSum }}</span></div>
-<div style="display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 18px; color: #111111"><span>Yhteensä</span><span>[X] kr</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 18px; color: #111111"><span>Yhteensä</span><span>{{ totalSum }}</span></div>
 <p style="margin: 0; font-size: 13px; color: #5c5c5c">{{ vatNote }}</p>
 </aside>
 </div>
@@ -164,7 +164,6 @@ class Component extends DCLogic {
     ['company', 'orgnr', 'email', 'phone', 'name', 'street', 'zip', 'city'].forEach((k) => { st[k] = base + (er[k] ? 'border: 2px solid #111111; background: #f5f5f4' : 'border: 1.5px solid #bdbdbb'); });
     const seg = (on) => 'border: 0; font: inherit; font-weight: 600; font-size: 15px; padding: 0 18px; min-height: 40px; border-radius: 999px; cursor: pointer; ' + (on ? 'background: #111111; color: #ffffff' : 'background: transparent; color: #111111');
     const opt = (on) => 'display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 56px; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-size: 15px; ' + (on ? 'border: 2px solid #111111; background: #f5f5f4' : 'border: 1px solid #e2e2e0; background: #ffffff');
-    const ships = [ { id: 'ombud', label: 'Paketti noutopisteeseen', text: 'Nouda lähimmästä noutopisteestä.' }, { id: 'dorr', label: 'Paketti kotiovelle', text: 'Jätetään ovelle tai kuitataan.' } ];
     const pays = fo
       ? [ { id: 'faktura', label: 'Lasku yrityksille', text: '30 päivää, luottotietojen tarkistuksen jälkeen. Viite näkyy laskussa.' } ]
       : [ { id: 'klarna', label: 'Klarna tai Qliro', text: 'Kortti, Swish, lasku tai osamaksu.' }, { id: 'pfaktura', label: 'Lasku', text: 'Laskutuslisä [X] kr.' } ];
@@ -172,6 +171,10 @@ class Component extends DCLogic {
     const SBc = typeof window !== 'undefined' ? window.SBCart : null;
     const cl = SBc && SBc.items().length ? SBc.lines('fi') : [{ name: 'Kevyt kaivonkansi 1050 komposiitti', price: 2645, qty: 1 }, { name: 'Ilmanpoistoventtiili', price: 569, qty: 1 }];
     const sum = cl.reduce((t, l) => t + (l.price || 0) * l.qty, 0);
+    // Rahti rahtiprofiilin mukaan (support.js SBCart.freight), sama hinta koko Ruotsiin: postinumero on vain toimitusosoite
+    const fr = SBc ? SBc.freight(cl.map((l) => ({ fr: l.fr || 'skrym', kg: l.kg, qty: l.qty, quote: l.price == null })), 'fi') : { options: [{ id: 'skrym', label: 'Kotiinkuljetus', text: '', price: 590 }] };
+    const ships = fr.options.length ? fr.options : [{ id: 'skrym', label: 'Kotiinkuljetus', text: '', price: 590 }];
+    const ship = ships.find((x) => x.id === S.ship) || ships[0];
     const fmt = (n) => Math.round(fo ? n / 1.25 : n).toLocaleString('fi-FI') + ' kr';
     const inp = {};
     ['company', 'orgnr', 'ref', 'email', 'phone', 'name', 'street', 'zip', 'city', 'msg'].forEach((k) => { inp[k] = set(k); });
@@ -181,14 +184,15 @@ class Component extends DCLogic {
       privatPressed: String(!fo), foretagPressed: String(fo), privatStyle: seg(!fo), foretagStyle: seg(fo),
       setPrivat: () => this.setState({ who: 'privat' }), setForetag: () => this.setState({ who: 'foretag' }),
       zipShown: String(F.zip).trim() || '[postinumero]',
-      ships: ships.map((s) => ({ ...s, on: S.ship === s.id, style: opt(S.ship === s.id), pick: () => this.setState({ ship: s.id }) })),
+      ships: ships.map((s) => ({ ...s, priceTxt: fmt(s.price), on: ship.id === s.id, style: opt(ship.id === s.id), pick: () => this.setState({ ship: s.id }) })),
+      frLabel: 'Rahti, ' + ship.label.toLowerCase(), frSum: fmt(ship.price), totalSum: fmt(sum + ship.price),
       pays: pays.map((p) => ({ ...p, on: payNow === p.id, style: opt(payNow === p.id), pick: () => this.setState({ pay: p.id }) })),
       toggleNoSign: () => this.setState({ f: { ...F, noSign: !F.noSign } }),
       toggleTerms: () => this.setState({ f: { ...F, terms: !F.terms } }),
       valid: valid, invalid: !valid, showErr: S.showErr,
       submit: (e) => { e.preventDefault(); this.setState({ showErr: true }); },
       sumLines: cl.map((l) => ({ name: l.name, qtyLabel: l.qty + ' kpl', sum: l.price == null ? 'Tarjouksella' : fmt(l.price * l.qty) })),
-      vatSum: Math.round(sum - sum / 1.25).toLocaleString('fi-FI') + ' kr',
+      vatSum: Math.round((sum + ship.price) - (sum + ship.price) / 1.25).toLocaleString('fi-FI') + ' kr',
       vatNote: fo ? 'Hinnat näytetään yrityksille alv 0.' : 'Hinnat sisältävät alv:n.'
     };
   }

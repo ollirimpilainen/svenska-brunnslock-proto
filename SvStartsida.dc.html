@@ -37,7 +37,7 @@ a{color:#111111}a:hover{color:#474747}
 <ul style="max-width: 1240px; margin: 0 auto; padding: 36px 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr))" class="m-usp">
 <li style="padding: 4px 28px 4px 24px; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 19px; line-height: 1.25; color: #111111">Direkt från leverantören</h3><p style="margin: 0; font-size: 15px; line-height: 1.5; color: #474747">Lagervaror är normalt framme inom [3 till 6] arbetsdagar.</p></li>
 <li style="border-left: 1px solid #d6d6d4; padding: 4px 28px; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 19px; line-height: 1.25; color: #111111">Lossning ordnas</h3><p style="margin: 0; font-size: 15px; line-height: 1.5; color: #474747">Tungt gods kommer med åkeri som har kran eller bakgavellyft.</p></li>
-<li style="border-left: 1px solid #d6d6d4; padding: 4px 28px; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 19px; line-height: 1.25; color: #111111">Frakt före kassan</h3><p style="margin: 0; font-size: 15px; line-height: 1.5; color: #474747">Du ser frakten för ditt postnummer redan på produktsidan.</p></li>
+<li style="border-left: 1px solid #d6d6d4; padding: 4px 28px; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 19px; line-height: 1.25; color: #111111">Frakt före kassan</h3><p style="margin: 0; font-size: 15px; line-height: 1.5; color: #474747">Du ser frakten redan på produktsidan. Samma pris i hela Sverige.</p></li>
 <li style="border-left: 1px solid #d6d6d4; padding: 4px 28px; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 19px; line-height: 1.25; color: #111111">Hjälp även på helger</h3><p style="margin: 0; font-size: 15px; line-height: 1.5; color: #474747">Ring 0920-52 00 56 så hjälper vi dig att välja.</p></li>
 </ul>
 </section>
@@ -79,7 +79,7 @@ a{color:#111111}a:hover{color:#474747}
 <span style="font-size: 14px; color: #474747">{{ p.fit }}</span>
 <div style="margin-top: auto; padding-top: 16px; display: flex; flex-direction: column; gap: 4px">
 <span style="font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">{{ p.price }} <span style="font-family: Inter, sans-serif; font-weight: 400; font-size: 13px; color: #474747">{{ popVat }}</span></span>
-<span style="font-size: 13px; color: #5c5c5c">Frakt räknas på ditt postnummer</span>
+<span style="font-size: 13px; color: #5c5c5c">Frakt 590 kr</span>
 </div>
 </div>
 </a>
@@ -186,10 +186,10 @@ class Component extends DCLogic {
         { name: 'Lätt brunnslock 780 KÖRBART Composite 12,5 ton', cls: 'B125', fit: 'För uppfart och personbil. 15 kg.', price: popFmt(2895), href: '#', img: 'Bild: Lätt brunnslock 780 KÖRBART Composite' }
       ],
       guides: [
-        { href: 'SvProduktguide.dc.html?g=brunnslock', title: 'Brunnslock', text: 'Brunnstyp, mått och vad som går över locket.', steps: '4 frågor' },
-        { href: 'SvProduktguide.dc.html?g=luckor', title: 'Lucka', text: 'Var luckan sitter, öppningens mått och last.', steps: '3 frågor' },
-        { href: 'SvProduktguide.dc.html?g=fundament', title: 'Plintar', text: 'Vad du bygger, ytan och marken.', steps: '5 frågor' },
-        { href: 'SvProduktguide.dc.html?g=kabel', title: 'Kabelbrunn', text: 'Nät, modell, belastning och innermått.', steps: '5 frågor' }
+        { href: 'SvProduktguide.dc.html?g=brunnslock', title: 'Brunnslock', text: 'Brunnstyp, mått och vad som går över locket.', steps: 'Högst 5 frågor' },
+        { href: 'SvProduktguide.dc.html?g=luckor', title: 'Lucka', text: 'Var luckan sitter, öppningens mått och last.', steps: 'Högst 6 frågor' },
+        { href: 'SvProduktguide.dc.html?g=fundament', title: 'Plintar', text: 'Vad du bygger, lasten och höjden.', steps: 'Högst 5 frågor' },
+        { href: 'SvProduktguide.dc.html?g=kabel', title: 'Kabelbrunn', text: 'Användning, belastning, innermått och djup.', steps: 'Högst 5 frågor' }
       ]
     };
   }
