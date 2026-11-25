@@ -397,7 +397,7 @@ const tv = (v) => String(v).split(' | ').map((x) => (VAL[x] ? VAL[x][li] : x)).j
 
 // ---------- P: tuoteperheiden pohjat (kerran per tuoteperhe, ei tuotekohtaisia väitteitä) ----------
 // facts = avaintiedot järjestyksessä; cmp = Jämför storlekar -sarakkeet; check = Passar den min brunn? -kentät; alt = Välj ett annat om;
-// pairs = Passar ihop med (tuotteet haetaan nimellä katalogista); addons = lisävalinnat; faq; guides.
+// faq; guides. Lisävalinnat ja Passar ihop med tulevat lisävarusteiden Passar till -tiedosta (support.js SB_ACCESSORIES).
 const S = (q) => SORT + '?' + q;
 const FAM = {
   kannet: {
@@ -407,8 +407,7 @@ const FAM = {
       [L2('bil kör över brunnen', 'kaivon yli ajetaan autolla'), L2('körbart lock B125', 'ajettava kansi B125'), S('kat=lock&sub=latta&klass=B125')],
       [L2('brunnen är av plast', 'kaivo on muovia'), L2('lock för plastbrunn', 'kansi muovikaivoon'), S('kat=lock&sub=plastbrunn')],
       [L2('brunnen inte töms och locket får vara tungt', 'kaivoa ei tyhjennetä ja kansi saa olla painava'), L2('betonglock', 'betonikansi'), S('kat=lock&sub=betong')]] },
-    addonsTitle: L2('Lägg till tätningsring eller ventil', 'Lisää tiivisterengas tai venttiili'), addons: 'latta',
-    pairs: [/^Tätningsring/, /Avluftningsventil/i, /Hänglås/i],
+    addonsTitle: L2('Lägg till tätningsring eller ventil', 'Lisää tiivisterengas tai venttiili'),
     faq: [[L2('Behöver locket ventilation?', 'Tarvitseeko kansi tuuletuksen?'), L2('Det beror på kommunen och brunnstypen. Slambrunnar behöver ofta luftning. Välj ventil som tillval, eller ring oss så kollar vi.', 'Se riippuu kunnasta ja kaivotyypistä. Sakokaivot tarvitsevat usein tuuletuksen. Valitse venttiili lisävarusteeksi tai soita meille, niin tarkistamme.')],
       [L2('Kan slambilen öppna locket om det är låst?', 'Saako sakoauto kannen auki, jos se on lukittu?'), L2('Nej. Lämna låset öppet inför tömningen, eller kom överens med kommunen om var nyckeln finns.', 'Ei. Jätä lukko auki tyhjennystä varten tai sovi kunnan kanssa, missä avain on.')],
       [L2('Behöver jag borra i betongen?', 'Pitääkö betoniin porata?'), L2('Nej. Locket ligger an mot ringen, och låset fästs i lockets egen ram.', 'Ei. Kansi asettuu renkaan päälle, ja lukko kiinnitetään kannen omaan kehykseen.')]],
@@ -421,7 +420,6 @@ const FAM = {
       [L2('bil eller lastbil kör över luckan', 'luukun yli ajetaan autolla tai kuorma-autolla'), L2('körbara luckor', 'ajettavat luukut'), S('kat=lock&sub=luckor&klass=C250')],
       [L2('luckan sitter i golv eller vägg inomhus', 'luukku tulee sisälle lattiaan tai seinään'), L2('golv- och inspektionsluckor', 'lattia- ja tarkastusluukut'), S('kat=lock&sub=golv')],
       [L2('inget standardmått passar', 'mikään vakiomitta ei sovi'), L2('kundanpassade luckor', 'mittatilausluukut'), S('kat=lock&sub=kund')]] },
-    pairs: [/Universalok|Locköppnare/i, /TK-nyckel/i],
     faq: [[L2('Vilket mått ska jag mäta?', 'Mikä mitta mitataan?'), L2('Mät den fria öppningen, alltså hålet i golvet, väggen eller marken, bredd och längd.', 'Mittaa vapaa aukko eli reikä lattiassa, seinässä tai maassa, leveys ja pituus.')],
       [L2('Vilken belastningsklass behöver jag?', 'Minkä kuormitusluokan tarvitsen?'), L2('Välj efter det tyngsta som kan passera över luckan.', 'Valitse raskaimman luukun yli kulkevan mukaan.')],
       [L2('Kan jag få en lucka i ett annat mått?', 'Saako luukun muun kokoisena?'), L2('Begär offert med dina mått, så återkommer vi.', 'Pyydä tarjous mitoillasi, niin palaamme asiaan.')]],
@@ -433,7 +431,6 @@ const FAM = {
     alt: { title: L2('Välj en annan kabelbrunn om', 'Valitse toinen kaapelikaivo, jos'), items: [
       [L2('du behöver ett annat invändigt mått', 'tarvitset toisen sisämitan'), L2('alla kabelbrunnar', 'kaikki kaapelikaivot'), S('kat=el&sub=kabelbrunn')],
       [L2('du vill ha hjälp att välja', 'haluat apua valintaan'), L2('Hitta rätt kabelbrunn', 'Löydä oikea kaapelikaivo'), GUIDE + '?g=kabel']] },
-    pairs: [/skarvbrunn|Kabelbrunnslock|Brunnslock.*Durkplåt/i, /Märkskylt/i],
     faq: [[L2('Hur väljer jag storlek?', 'Miten valitsen koon?'), L2('Utgå från antal kablar och rör som ska in i brunnen. Är du osäker, använd guiden eller ring oss.', 'Lähde kaivoon tulevien kaapelien ja putkien määrästä. Jos olet epävarma, käytä apuria tai soita meille.')],
       [L2('Vilken belastningsklass behövs?', 'Mikä kuormitusluokka tarvitaan?'), L2('Den beror på var brunnen placeras, från grönyta till väg med tung trafik.', 'Se riippuu kaivon sijainnista, viheralueesta raskaan liikenteen tiehen.')],
       [L2('Hur beställer jag?', 'Miten tilaan?'), L2('Skicka en förfrågan med mått och antal, så får du pris och leveranstid.', 'Lähetä pyyntö mitoin ja määrin, niin saat hinnan ja toimitusajan.')]],
@@ -444,7 +441,6 @@ const FAM = {
     alt: { title: L2('Välj ett annat fundament om', 'Valitse toinen perustus, jos'), items: [
       [L2('du vill slippa gräva', 'haluat välttää kaivamisen'), L2('markskruvar', 'maaruuvit'), S('kat=bygg&sub=markskruv')],
       [L2('du är osäker på lasten', 'olet epävarma kuormasta'), L2('Hitta rätt fundament', 'Löydä oikea perustus'), GUIDE + '?g=fundament']] },
-    pairs: [/^Stolpsko/, /^Balksko/, /^Stålplatta/],
     faq: [[L2('Hur många plintar behöver jag?', 'Montako plinttiä tarvitsen?'), L2('Det beror på konstruktionens storlek och last. Skicka en skiss, så hjälper vi dig.', 'Se riippuu rakennelman koosta ja kuormasta. Lähetä luonnos, niin autamme.')],
       [L2('Hur högt ska fundamentet stå?', 'Kuinka korkealla perustuksen pitää olla?'), L2('Välj höjd efter markens lutning och hur högt konstruktionen ska stå över marken.', 'Valitse korkeus maan kaltevuuden ja rakennelman halutun korkeuden mukaan.')]],
     guides: [[L2('Fundament', 'Perustukset'), L2('Så väljer du plint', 'Näin valitset plintin')], [L2('Montering', 'Asennus'), L2('Montera plintar', 'Plinttien asentaminen')]]
@@ -537,14 +533,10 @@ class Component extends DCLogic {
     // hinta, rahti (T + L)
     const q = it.price == null;
     const SB = W.SBCart || null, FRP = W.SBFreight ? W.SBFreight.profiles : {};
-    // lisävalinnat (P): kansien pohjassa kevyille kansille. Tiivisterengas kokoperheen lisävarusteena, kun se on datassa (SB_LIDS).
-    const LD = W.SB_LIDS || { items: [], acc: [] };
-    let addonDefs = [];
-    if (P.addons && it.sub === P.addons && !q) {
-      const lid = LD.items.find((x) => x.sku === it.sku);
-      if (lid && lid.seal) addonDefs.push({ key: 'seal', id: 'seal-' + lid.d, label: (lid.sealName ? L2('Tätningsring ', 'Tiivisterengas ') + lid.sealName : L2('Tätningsring', 'Tiivisterengas')), price: lid.seal });
-      LD.acc.filter((a) => a.id === 'ventil' || a.id === 'hal').forEach((a) => addonDefs.push({ key: a.id, id: a.id, label: a[LANG], price: a.price }));
-    }
+    // Lisävarusteet (support.js SB_ACCESSORIES): suositus määritellään lisävarusteelle ("Passar till"), ei päätuotteelle.
+    // Näytetään vain varusteet, joiden Passar till kattaa tämän kokoperheen ja koon. Lisävalinnat = addon-varusteet, kun tuote on ostettava.
+    const accs = W.SBAcc ? W.SBAcc.forItem(it) : [];
+    const addonDefs = q ? [] : accs.filter((x) => x.addon).map((x) => ({ key: x.id, id: x.id, label: LANG === 'fi' ? x.nameFi : x.name, price: x.price }));
     const unit = (it.price || 0) + addonDefs.reduce((s, a) => s + (St.addons[a.key] ? a.price : 0), 0);
     const lines = [{ fr: it.fr, kg: it.kg, qty: St.qty }].concat(addonDefs.filter((a) => St.addons[a.key]).map(() => ({ fr: 'ombud', kg: 1, qty: St.qty })));
     const f = !q && SB && SB.freight ? SB.freight(lines, LANG) : { price: 590, label: '' };
@@ -580,17 +572,12 @@ class Component extends DCLogic {
     const docs = (D.doc || []).map((d) => ({ label: T.docs[d[0]] || d[0], url: d[1] }));
     // leverans (Y + L)
     const delivery = [{ h: T.del.fr, t: q ? T.frQ + '. ' + T.frQn : ((FRP[it.fr] || {})[LANG] || '') + T.del.same }, { h: T.del.time[0], t: T.del.time[1] }, { h: T.del.ret[0], t: T.del.ret[1] }];
-    // Passar ihop med (P): katalogin tuotteet nimellä, ensimmäinen osuma per rivi (perheen oletuskoko)
-    const famDefault = (x) => { const fm = x.fam && C.fams[x.fam]; return !fm || fm.dflt === x.id; };
-    // Kokoperheestä valitaan koko, jonka rengasmitta osuu tuotteen mittaan; muuten perheen oletuskoko
-    // (tiivisterenkailla ei ole mittakenttiä, joten niiden sisämitta luetaan koosta, esim. 900/1100 = 900 mm)
-    const ringOf = (x) => (x.rlo != null ? [x.rlo, x.rhi != null ? x.rhi : x.rlo] : (String(x.sz || x.n).match(/(\d{3,4})\s*\//) ? [1, 1].map(() => parseInt(String(x.sz || x.n).match(/(\d{3,4})\s*\//)[1], 10)) : null));
-    const overlap = (x) => { const r = ringOf(x); return it.rlo != null && r && r[0] <= (it.rhi != null ? it.rhi : it.rlo) + 30 && r[1] >= it.rlo - 30; };
-    const related = (P.pairs || []).map((re) => { const hits = C.items.filter((x) => x.id !== it.id && x.fam !== it.fam && re.test(x.n)); return hits.find(overlap) || hits.find(famDefault); }).filter(Boolean).map((x) => {
-      const im = (PR[x.id] && PR[x.id].img || [])[0];
-      return { name: x.n, href: PAGE + '?id=' + x.id, meta: x.sku ? T.art + x.sku : '', price: x.price == null ? T.qPrice : fmt(x.price), canAdd: x.price != null,
-        imgAlt: T.img + ': ' + x.n, imgStyle: 'aspect-ratio: 1; border-radius: 8px; background-color: #ececea; background-size: contain; background-repeat: no-repeat; background-position: center; background-blend-mode: multiply;' + (im ? ' background-image: url(' + im + ');' : ' border: 1.5px dashed #b9b9b7;'),
-        add: () => { if (SB) SB.add('w' + x.id, 1); } };
+    // Passar ihop med: samat sopivat lisävarusteet, joilla on oma tuotesivu
+    const related = accs.filter((x) => x.pid).map((x) => {
+      const im = (PR[x.pid] && PR[x.pid].img || [])[0];
+      return { name: x.name, href: PAGE + '?id=' + x.pid, meta: x.why[li], price: fmt(x.price), canAdd: true,
+        imgAlt: T.img + ': ' + x.name, imgStyle: 'aspect-ratio: 1; border-radius: 8px; background-color: #ececea; background-size: contain; background-repeat: no-repeat; background-position: center; background-blend-mode: multiply;' + (im ? ' background-image: url(' + im + ');' : ' border: 1.5px dashed #b9b9b7;'),
+        add: () => { if (SB) SB.add(x.id, 1); } };
     });
     const addCart = () => { if (!SB) return; SB.add('w' + it.id, St.qty); addonDefs.forEach((a) => { if (St.addons[a.key]) SB.add(a.id, St.qty); }); };
     const addQ = () => { if (SB) SB.add('w' + it.id, St.qty); };
@@ -606,7 +593,7 @@ class Component extends DCLogic {
       hasFacts: facts.length > 0, facts: facts,
       hasSizes: fam.length > 1, sizes: sizes, cmpHead: cmpHead,
       price: q ? T.qPrice : fmt(it.price), vatLabel: q ? '' : (ex ? T.exkl : T.incl), altPrice: q ? T.qAlt : (ex ? fmtRaw(it.price) + ' ' + T.incl : fmtRaw(it.price / 1.25) + ' ' + T.exkl),
-      hasAddons: addonDefs.length > 0, addonsTitle: P.addonsTitle || '', addons: addonDefs.map((a) => ({ label: a.label, price: '+ ' + fmt(a.price), on: !!St.addons[a.key], toggle: () => this.setState({ addons: Object.assign({}, St.addons, { [a.key]: !St.addons[a.key] }) }) })),
+      hasAddons: addonDefs.length > 0, addonsTitle: P.addonsTitle || L2('Lägg till tillbehör', 'Lisää lisävaruste'), addons: addonDefs.map((a) => ({ label: a.label, price: '+ ' + fmt(a.price), on: !!St.addons[a.key], toggle: () => this.setState({ addons: Object.assign({}, St.addons, { [a.key]: !St.addons[a.key] }) }) })),
       qty: St.qty, less: () => this.setState({ qty: Math.max(1, St.qty - 1) }), more: () => this.setState({ qty: St.qty + 1 }),
       isBuy: !q, isQuote: q, cartHref: CART, offertHref: OFFERT, addToCart: addCart, addQuote: addQ, addQuoteStay: () => { addQ(); this.setState({ quoteAdded: true }); }, quoteAdded: St.quoteAdded,
       prodLabel: T.prod(St.qty), prodSum: q ? '' : fmt(unit * St.qty), frLabel: T.fr + (f.label ? ', ' + f.label.toLowerCase() : ''), frSum: fmt(f.price), totalSum: q ? '' : fmt(unit * St.qty + f.price),

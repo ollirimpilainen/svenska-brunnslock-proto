@@ -52,7 +52,7 @@ a{color:#111111}a:hover{color:#474747}
 </sc-for>
 <sc-if value="{{ hasSugg }}" hint-placeholder-val="{{ true }}">
 <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 12px">
-<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">Passar ihop med locket</h2>
+<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; color: #111111">{{ suggTitle }}</h2>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 12px">
 <sc-for list="{{ sugg }}" as="g" hint-placeholder-count="2">
 <div style="border: 1px solid #e2e2e0; border-radius: 10px; padding: 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px">
@@ -121,10 +121,18 @@ class Component extends DCLogic {
     const pCount = priced.reduce((s, l) => s + l.qty, 0);
     const hasQuote = S.lines.some((l) => l.price == null);
     const CAT = (typeof window !== 'undefined' && window.SBCart && window.SBCart.catalog) || {};
-    const lid = S.lines.find((l) => /^comp-/.test(l.id));
-    const suggIds = (lid ? ['seal-' + lid.id.slice(5)] : []).concat(['ventil', 'hanglas']);
-    const suggText = { seal: 'För dricksvattenbrunn.', ventil: 'Om kommunen kräver luftning.', hanglas: 'Lås locket med hänglås.' };
-    const sugg = suggIds.filter((id) => CAT[id] && !S.lines.find((l) => l.id === id)).slice(0, 2).map((id) => ({ id: id, name: CAT[id].sv[0], meta: CAT[id].sv[1], price: CAT[id].price, text: suggText[id.split('-')[0]] }));
+    // Lisävarusteehdotukset (support.js SB_ACCESSORIES, "Passar till"): vain korin päätuotteisiin sopivat, ei jo korissa olevia.
+    // Jos korissa on vain lisävarusteita, ehdotuksia ei näytetä.
+    const AC = typeof window !== 'undefined' ? window.SBAcc : null;
+    const mains = AC ? S.lines.filter((l) => !AC.isAcc(l.id)).map((l) => AC.itemOf(l.id)).filter(Boolean) : [];
+    const inCart = (ids) => ids.some((id) => S.lines.find((l) => l.id === id));
+    const seen = {}, suggAll = [];
+    // vuorotellen päätuotteista, jotta jokainen päätuote saa ehdotuksensa
+    const per = mains.map((it) => AC.forItem(it));
+    for (let r = 0; r < 6; r++) per.forEach((list) => { const x = list[r]; if (!x || seen[x.id] || inCart(x.ids)) return; seen[x.id] = true; suggAll.push(x); });
+    const sugg = suggAll.slice(0, 3).map((x) => ({ id: x.id, name: x.name, meta: x.sku ? 'Art.nr ' + x.sku : '', price: x.price, text: x.why[0] }));
+    const mainNames = Array.from(new Set(mains.map((it) => it.n)));
+    const suggTitle = mainNames.length === 1 ? 'Passar ihop med ' + mainNames[0] : 'Passar ihop med det du har i varukorgen';
     return {
       vat: S.vat, setVat: (v) => this.setState({ vat: v }),
       count: count, empty: S.lines.length === 0,
@@ -132,7 +140,7 @@ class Component extends DCLogic {
         less: () => setQty(l.id, -1), more: () => setQty(l.id, 1),
         lessLabel: 'Minska antal, ' + l.name, moreLabel: 'Öka antal, ' + l.name,
         remove: () => save(S.lines.filter((x) => x.id !== l.id)) })),
-      hasSugg: sugg.length > 0,
+      hasSugg: sugg.length > 0, suggTitle: suggTitle,
       sugg: sugg.map((g) => ({ name: g.name, text: g.text, price: '+ ' + fmt(g.price), add: () => add({ id: g.id, name: g.name, meta: g.meta, price: g.price, href: '#' }) })),
       hasQuote: hasQuote, noQuote: !hasQuote, hasPriced: priced.length > 0, stripQuote: () => save(priced), overLimit: sum >= 5000, underLimit: sum < 5000, leftTxt: fmt(5000 - sum) + ' kvar',
       prodLabel: 'Produkter, ' + pCount + ' st' + (hasQuote ? ' + offertprodukter' : ''), prodSum: fmt(sum),

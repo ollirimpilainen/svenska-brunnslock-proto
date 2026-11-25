@@ -92,6 +92,69 @@
     items: [{"id": "durk-300x300", "key": "300x300", "label": "300×300", "w": 300, "l": 300, "sku": "236200", "price": 1968, "quote": false, "kg": 5, "fr": "ombud", "sold": 19, "def": true, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-300x300-golv-vagg", "sv": "Durkplåtslucka 300×300 Golv/vägg", "fi": "Durkplåtiluukku 300×300, lattia/seinä"}, {"id": "durk-300x400", "key": "300x400", "label": "300×400", "w": 300, "l": 400, "sku": "236340", "price": 2625, "quote": false, "kg": 8, "fr": "ombud", "sold": 6, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-300x400-golv-vagg", "sv": "Durkplåtslucka 300×400 Golv/vägg", "fi": "Durkplåtiluukku 300×400, lattia/seinä"}, {"id": "durk-400x400", "key": "400x400", "label": "400×400", "w": 400, "l": 400, "sku": "236400", "price": null, "quote": true, "kg": 9, "fr": "offert", "sold": 14, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-400x400-golv-vagg", "sv": "Durkplåtslucka 400×400 Golv/vägg", "fi": "Durkplåtiluukku 400×400, lattia/seinä"}, {"id": "durk-400x500", "key": "400x500", "label": "400×500", "w": 400, "l": 500, "sku": "236500", "price": 3150, "quote": false, "kg": 14, "fr": "skrym", "sold": 15, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-400x500-golv-vagg", "sv": "Durkplåtslucka 400×500 Golv/vägg", "fi": "Durkplåtiluukku 400×500, lattia/seinä"}, {"id": "durk-400x600", "key": "400x600", "label": "400×600", "w": 400, "l": 600, "sku": "236600", "price": 3750, "quote": false, "kg": 16, "fr": "skrym", "sold": 2, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-400x600-golv-vagg", "sv": "Durkplåtslucka 400×600 Golv/vägg", "fi": "Durkplåtiluukku 400×600, lattia/seinä"}, {"id": "durk-500x500", "key": "500x500", "label": "500×500", "w": 500, "l": 500, "sku": "236550", "price": 3750, "quote": false, "kg": 14, "fr": "skrym", "sold": 3, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-500x500-golv-vagg", "sv": "Durkplåtslucka 500×500 Golv/vägg", "fi": "Durkplåtiluukku 500×500, lattia/seinä"}, {"id": "durk-600x600", "key": "600x600", "label": "600×600", "w": 600, "l": 600, "sku": "236700", "price": 3976, "quote": false, "kg": 21, "fr": "pall", "sold": 9, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-600x600-golv-vagg", "sv": "Durkplåtslucka 600×600 Golv/vägg", "fi": "Durkplåtiluukku 600×600, lattia/seinä"}, {"id": "durk-600x700", "key": "600x700", "label": "600×700", "w": 600, "l": 700, "sku": "236770", "price": 4595, "quote": false, "kg": 23, "fr": "pall", "sold": 2, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-600x700-golv-vagg", "sv": "Durkplåtslucka 600×700 Golv/vägg", "fi": "Durkplåtiluukku 600×700, lattia/seinä"}, {"id": "durk-600x800", "key": "600x800", "label": "600×800", "w": 600, "l": 800, "sku": "236800", "price": 5157, "quote": false, "kg": 27, "fr": "pall", "sold": 14, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-600x800-golv-vagg", "sv": "Durkplåtslucka 600×800 Golv/vägg", "fi": "Durkplåtiluukku 600×800, lattia/seinä"}, {"id": "durk-800x1000", "key": "800x1000", "label": "800×1000", "w": 800, "l": 1000, "sku": "236900", "price": 7406, "quote": false, "kg": 41, "fr": "pall", "sold": 5, "def": false, "url": "/butik/luckor/durkplatsluckor/durkplatslucka-800x1000-golv-vagg", "sv": "Durkplåtslucka 800×1000 Golv/vägg", "fi": "Durkplåtiluukku 800×1000, lattia/seinä"}]
   };
 
+  // ---------- lisävarusteet ja "Passar till" (suositus määritellään lisävarusteelle, ei päätuotteelle) ----------
+  // Lähde: tuotedata-masterin kategoria "Locköppnare och tillbehör" ja tuotesivun lisävalinnat (SB_LIDS.acc, tiivisterengas SB_LIDS.sealName).
+  // fits = lista ehdoista; tuote sopii, jos jokin ehto täsmää. Ehto: fam (kokoperhe, esim. 'SF19'), sz (koot), sub (alakategoria),
+  // ring (renkaan sisämitan väli, osuu tuotteen Passar ring -väliin), name (sana tuotteen nimessä), tpl (tuoteperhe), cat (kategoria).
+  // guess: true = ei pääteltävissä datasta, arvaus; SB vahvistaa kotitehtävässä K5.
+  // ids = kaikki koritunnisteet, joilla sama tuote voi olla korissa (catalog.js 'w<id>' ja vanhat SB_LIDS-tunnisteet).
+  window.SB_ACCESSORIES = [
+    { ids: ['w3658', 'seal-750'], pid: '3658', addon: true, why: ['Tätar mellan ring och lock, mot lukt och smådjur.', 'Tiivistää renkaan ja kannen välin hajuja ja pieneläimiä vastaan.'],
+      fits: [{ fam: 'SF19', sz: ['750'] }, { sub: 'latta', ring: [570, 640] }] },   // kuvaus: invändigt 570-640 mm; Composite 750: SB_LIDS
+    { ids: ['w3664', 'seal-1050'], pid: '3664', addon: true, why: ['Tätar mellan ring och lock, mot lukt och smådjur.', 'Tiivistää renkaan ja kannen välin hajuja ja pieneläimiä vastaan.'],
+      fits: [{ fam: 'SF19', sz: ['1050'] }, { sub: 'latta', ring: [880, 920] }] },  // kuvaus: 880-920 mm
+    { ids: ['w3668', 'seal-1150'], pid: '3668', addon: true, why: ['Tätar mellan ring och lock, mot lukt och smådjur.', 'Tiivistää renkaan ja kannen välin hajuja ja pieneläimiä vastaan.'],
+      fits: [{ fam: 'SF19', sz: ['1150'] }, { sub: 'latta', ring: [980, 1030] }] }, // kuvaus: 980-1030 mm
+    { ids: ['w3670', 'seal-1340'], pid: '3670', addon: true, why: ['Tätar mellan ring och lock, mot lukt och smådjur.', 'Tiivistää renkaan ja kannen välin hajuja ja pieneläimiä vastaan.'],
+      fits: [{ fam: 'SF19', sz: ['1340'] }, { sub: 'latta', ring: [1170, 1240] }] }, // kuvaus: 1170-1240 mm
+    { ids: ['w1135', 'ventil'], pid: '1135', addon: true, why: ['Monteras ovanpå locket, justerbar höjd 100 till 700 mm.', 'Asennetaan kannen päälle, korkeus säädettävissä 100-700 mm.'],
+      fits: [{ fam: 'SF19' }, { sub: 'latta', guess: true }] }, // Composite: kaupan lisävalinta ja kuvaus; muut kevyet kannet: arvaus
+    { ids: ['hal'], pid: null, addon: true, name: ['Förborrat hål för avluftningsventil', 'Esiporattu reikä ilmanpoistoventtiilille'], price: 58, why: ['Vi borrar hålet innan leverans.', 'Poraamme reiän ennen toimitusta.'],
+      fits: [{ fam: 'SF19' }] }, // kaupan lisävalinta Composite-kansille (ei omaa tuotesivua)
+    { ids: ['w1128', 'hanglas'], pid: '1128', why: ['Lås locket med hänglås i stället för säkerhetsmuttern.', 'Kansi lukitaan riippulukolla turvamutterin sijaan.'],
+      fits: [{ fam: 'SF20' }] }, // kuvaus: "passar till kupade, lätta brunnslock i PE"
+    { ids: ['w1540'], pid: '1540', why: ['Öppnar de flesta lock och betäckningar med hävstång.', 'Avaa useimmat kannet vipuvarrella.'],
+      fits: [{ tpl: 'kannet', guess: true }, { cat: 'trafik', guess: true }] }, // kuvaus: "de flesta brunnslock och betäckningar", rajaus arvaus
+    { ids: ['w1543'], pid: '1543', why: ['För lock med nyckelhål.', 'Kansille, joissa on avaimenreikä.'],
+      fits: [{ sub: 'betong', guess: true }] }, // kuvaus: lock med nyckelhål; mitkä kannet, ei datassa
+    { ids: ['w16670'], pid: '16670', why: ['Öppnar lås och lock med TK-låsning.', 'Avaa TK-lukitut lukot ja kannet.'],
+      fits: [{ name: 'TK-' }] }, // kuvaus: TK-låsning; tuotteet, joiden nimessä TK-
+    { ids: ['w1235'], pid: '1235', why: ['Förlänger brunnen, levereras med lätt låsbart lock.', 'Jatkaa kaivoa, mukana kevyt lukittava kansi.'],
+      fits: [{ sub: 'plastbrunn', ring: [580, 620], guess: true }, { sub: 'plast', ring: [580, 620], guess: true }] } // 600 mm kaula muovikaivoon: arvaus
+  ];
+  window.SBAcc = {
+    // onko koritunniste lisävaruste (myös vanhat SB_LIDS-tunnisteet)
+    isAcc: function (id) { return /^(seal-|ventil$|hal$|hanglas$)/.test(id) || window.SB_ACCESSORIES.some(function (a) { return a.ids.indexOf(id) >= 0; }); },
+    fits: function (a, it) {
+      if (!it) return false;
+      return a.fits.some(function (f) {
+        if (f.fam && !(it.fam && it.fam.indexOf(f.fam + ' ') === 0)) return false;
+        if (f.sz && f.sz.indexOf(String(it.sz)) < 0) return false;
+        if (f.sub && it.sub !== f.sub) return false;
+        if (f.tpl && it.tpl !== f.tpl) return false;
+        if (f.cat && it.cat !== f.cat) return false;
+        if (f.name && String(it.n).indexOf(f.name) < 0) return false;
+        if (f.ring) { if (it.rlo == null) return false; var hi = it.rhi != null ? it.rhi : it.rlo; if (!(it.rlo <= f.ring[1] && hi >= f.ring[0])) return false; }
+        return true;
+      });
+    },
+    // lisävarusteet tuotteelle; catalog.js-tieto (nimi, hinta) liitetään mukaan
+    forItem: function (it) {
+      var C = window.SB_CATALOG ? window.SB_CATALOG.items : [];
+      return window.SB_ACCESSORIES.filter(function (a) { return a.pid !== it.id && window.SBAcc.fits(a, it); }).map(function (a) {
+        var p = a.pid ? C.filter(function (x) { return x.id === a.pid; })[0] : null;
+        return { a: a, id: a.ids[0], ids: a.ids, pid: a.pid, addon: !!a.addon, name: p ? p.n : (a.name || ['', ''])[0], nameFi: p ? p.n : (a.name || ['', ''])[1], price: p ? p.price : a.price, sku: p ? p.sku : '', why: a.why };
+      }).filter(function (x) { return x.name && x.price != null; });
+    },
+    // koririvin päätuote catalog.js:stä (w<id> tai vanha SB_LIDS-kansi artikkelinumeron kautta)
+    itemOf: function (lineId) {
+      var C = window.SB_CATALOG ? window.SB_CATALOG.items : [];
+      if (/^w\d+$/.test(lineId)) return C.filter(function (x) { return x.id === lineId.slice(1); })[0] || null;
+      var L = window.SB_LIDS ? window.SB_LIDS.items.filter(function (x) { return x.id === lineId; })[0] : null;
+      return L ? C.filter(function (x) { return x.sku === L.sku; })[0] || null : null;
+    }
+  };
+
   // ---------- rahtiprofiili (service-design/rahtimalli.md, kohdat 3.1 ja 3.3) ----------
   // Rahti määräytyy tuotteen profiilin mukaan ja on sama koko Ruotsissa, joten postinumeroa ei tarvita.
   // Hinnat ovat nykyisen kaupan esimerkkejä: Ombud 172 kr, Skrymmande 590 kr, yleislava 1 480 kr / 8 kpl, plinttilava 2 400 kr.
