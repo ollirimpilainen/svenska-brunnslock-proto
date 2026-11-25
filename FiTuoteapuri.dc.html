@@ -998,6 +998,24 @@ class Component extends DCLogic {
 
     // ---------- moottori ----------
     const G = GUIDES[gid];
+    // ?step=<kysymys-id|result> täyttää esimerkkivastaukset ennen kyseistä vaihetta
+    // (kuvakaappauksia ja jaettavia linkkejä varten). &open=guide avaa mittausohjeen.
+    const DEMO = {
+      brunnslock: { ans: { typ: 'betong', last: 'B125', mat: 'latt', extras: ['las', 'tat'], hojd: 'ja' }, m: { matt: { a: '620', b: '780' } }, extra: { hojd_input: '100' } },
+      luckor: { ans: { plats: 'mark', last: 'B125', mont: 'plan', miljo: 'vanlig', krav: ['las'] }, m: { storlek: { shape: 'rect', a: '690', b: '690' } } },
+      kabel: { ans: { anv: 'el', plac: 'vag', matt: '900x600', djup: '900', mont: 'ingenkran' }, m: { ror: { a: '4', b: '110' } } },
+      fundament: { ans: { bygg: 'carport', tyngd: '7000', hojd: 'mid', grav: 'ja', fast: 's90' }, m: {} }
+    };
+    if (!this.__demo && params.get('step')) {
+      this.__demo = true;
+      const target = params.get('step'), d = DEMO[gid];
+      const ids = G.questions.map((qq) => qq.id);
+      const cut = target === 'result' ? ids.length : Math.max(0, ids.indexOf(target));
+      const keep = ids.slice(0, cut);
+      const pick = (o) => Object.keys(o || {}).filter((k) => keep.indexOf(k.replace('_input', '')) >= 0).reduce((r, k) => Object.assign(r, { [k]: o[k] }), {});
+      const done = {}; keep.forEach((k) => { if (Array.isArray(d.ans[k])) done[k] = true; });
+      Object.assign(this.state, { ans: pick(d.ans), m: pick(d.m), extra: pick(d.extra), done: done, step: target, guideOpen: params.get('open') === 'guide' });
+    }
     const ALL = G.products;
     const name = (p) => p.n[LANG === 'fi' ? 1 : 0];
     const optOf = (qq, id) => (qq.opts || []).find((o) => o.id === id);
