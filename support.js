@@ -116,7 +116,9 @@
 
   // ---------- ostoskori (yhteinen kaikille sivuille, localStorage) ----------
   var CART_KEY = 'sb-proto-cart-v1';
-  var CATALOG = (function () {
+  var CATALOG_ = null;
+  function catalog() { if (!CATALOG_) CATALOG_ = buildCatalog(); return CATALOG_; }
+  function buildCatalog() {
     var c = {}, L = window.SB_LIDS;
     L.items.forEach(function (it) {
       var pg = it.fam === 'comp';
@@ -134,8 +136,13 @@
         sv: [it.sv, 'Art.nr ' + it.sku + ' · Fri öppning ' + it.label + ' mm', 'SvProdukt.dc.html?' + q] };
     });
     L.acc.forEach(function (a) { c[a.id] = { price: a.price, fr: 'ombud', kg: 1, fi: [a.fi, 'Lisävaruste kevyisiin kansiin', '#'], sv: [a.sv, 'Tillval till lätta lock', '#'] }; });
+    // Kaikki siirrettävät tuotteet (catalog.js), tunniste w<WooCommerce-id>
+    if (window.SB_CATALOG) window.SB_CATALOG.items.forEach(function (it) {
+      c['w' + it.id] = { price: it.price, fr: it.fr, kg: it.kg,
+        sv: [it.n, 'Art.nr ' + (it.sku || ''), 'SvProdukt.dc.html?id=' + it.id], fi: [it.n, 'Tuotenro ' + (it.sku || ''), 'FiTuote.dc.html?id=' + it.id] };
+    });
     return c;
-  })();
+  }
   function readCart() {
     try { var c = JSON.parse(localStorage.getItem(CART_KEY) || 'null'); if (c && c.items) return c; } catch (e) {}
     return { items: [], zip: '' };
@@ -145,11 +152,11 @@
     writeCart({ items: [{ id: 'comp-1050', qty: 1 }, { id: 'ventil', qty: 1 }], zip: '' });
   }
   window.SBCart = {
-    catalog: CATALOG,
+    get catalog() { return catalog(); },
     items: function () { return readCart().items; },
     lines: function (lang) {
-      return readCart().items.filter(function (i) { return CATALOG[i.id]; }).map(function (i) {
-        var p = CATALOG[i.id], t = p[lang] || p.fi;
+      return readCart().items.filter(function (i) { return catalog()[i.id]; }).map(function (i) {
+        var p = catalog()[i.id], t = p[lang] || p.fi;
         var price = i.agreed != null ? i.agreed : p.price;
         return { id: i.id, name: t[0], meta: t[1], href: t[2], price: price, qty: i.qty, quote: price == null, agreed: i.agreed != null, fr: p.fr, kg: p.kg };
       });
@@ -160,7 +167,7 @@
       writeCart(c); schedule();
     },
     setItems: function (items) { var c = readCart(); c.items = items.map(function (i) { var o = { id: i.id, qty: i.qty }; if (i.agreed) o.agreed = i.price; return o; }); writeCart(c); schedule(); },
-    hasQuote: function () { return readCart().items.some(function (i) { return CATALOG[i.id] && CATALOG[i.id].price == null && i.agreed == null; }); },
+    hasQuote: function () { return readCart().items.some(function (i) { return catalog()[i.id] && catalog()[i.id].price == null && i.agreed == null; }); },
     count: function () { return readCart().items.reduce(function (s, i) { return s + i.qty; }, 0); },
     zip: function () { return readCart().zip || ''; },
     setZip: function (z) { var c = readCart(); c.zip = z; writeCart(c); },

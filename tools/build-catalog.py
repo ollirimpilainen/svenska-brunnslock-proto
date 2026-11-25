@@ -91,6 +91,9 @@ def fr_of(cl, quote, model):
     return 'pall'
 
 P = [r for r in rows[2:] if (r.get(216) or '').startswith(('Yes', 'Check'))]
+# Tuoteperheen pohja (sarake 57) ja avaintietokenttien tarkistussarakkeet
+TPL = {'Covers and lids (3.1)': 'kannet', 'Hatches (3.2)': 'luukut', 'Cable wells (3.3)': 'kabel', 'Foundations and plinths (3.4)': 'plintar'}
+NC = {'cls': 88, 'mat': 92, 'kg': 94, 'rlo': 105, 'rhi': 107, 'ow': 125, 'ol': 127, 'il': 145, 'iw': 147, 'h': 161}
 items = []
 for r in P:
     cat = IA[g(r, 56)]
@@ -105,7 +108,9 @@ for r in P:
               cls=multi(g(r, 88)), mat=mat, price=None if quote else price, q=quote, kg=kg,
               rlo=num(g(r, 105)), rhi=num(g(r, 107)), ow=num(g(r, 125)), ol=num(g(r, 127)), il=num(g(r, 145)), iw=num(g(r, 147)),
               model=g(r, 159), h=num(g(r, 161)), fam=g(r, 207), sz=g(r, 209), dflt=g(r, 213) == 'Yes', sold=num(g(r, 215)) or 0,
-              fr=fr_of(g(r, 20), quote, g(r, 159)))
+              fr=fr_of(g(r, 20), quote, g(r, 159)),
+              u=(g(r, 3) or '').replace('https://www.svenskabrunnslock.se', ''), tpl=TPL.get(g(r, 57), 'muut'),
+              nc=[k for k, c in NC.items() if 'NEEDS HUMAN CHECK' in str(r.get(c + 1) or '')])
     items.append({k: v for k, v in it.items() if v not in (None, [], False, '') or k in ('price',)})
 
 def famname(pat, d, lst):
@@ -135,6 +140,49 @@ for f, lst in fams.items():
     d = next((x for x in lst if x.get('dflt')), None) or max(lst, key=lambda x: x.get('sold', 0))
     fam_out[f] = dict(name=famname(f, d, lst), dflt=d['id'])
 cats = [dict(id=c[0], sv=c[1], fi=c[2], subs=[dict(id=s[0], sv=s[1], fi=s[2]) for s in c[4]]) for c in CATS]
+import html as _html, glob, os
+_HERE = os.path.dirname(__file__)
+store = {}
+for f in sorted(glob.glob(os.path.join(_HERE, '../../data/scripts/work/raw/store_*.json'))):
+    for x in json.load(open(f, encoding='utf-8-sig')): store[str(x['id'])] = x
+def paras(h):
+    # HTML -> kappaleet. Ajatusviivat (Ollin sääntö): rivin alussa luetelmamerkiksi, muualla yhdysmerkiksi.
+    if not h: return []
+    h = re.sub(r'(?i)(?<!>)(?<!^)<strong', '\n<strong', h)  # lihavoitu väliotsikko omalle rivilleen
+    h = re.sub(r'(?i)<br\b[^>]*>', '\n', h); h = re.sub(r'(?i)</(p|div|li|h\d)>', '\n\n', h); h = re.sub(r'(?i)<li[^>]*>', '\n• ', h)
+    t = _html.unescape(re.sub(r'<[^>]+>', '', h)).replace('\xa0', ' ')
+    out = []
+    for blk in re.split(r'\n\s*\n', t):
+        lines = [re.sub(r'^[\u2013\u2014-]\s+', '• ', l.strip()) for l in blk.split('\n') if l.strip()]
+        # Välit (1000 to 1100) yhdysmerkillä, välilyönnein erotettu viiva pilkuksi, muut yhdysmerkiksi
+        lines = [re.sub(r'(?<=\w)[\u2013\u2014](?=\w)', '-', l) for l in lines]
+        lines = [re.sub(r'\s+[\u2013\u2014]\s+', ', ', l).replace('\u2013', '-').replace('\u2014', '-') for l in lines]
+        if lines: out.append('\n'.join(lines))
+    return out
+# Tekninen data: tuoteperheen rivit sarakejärjestyksessä (yleiset kentät, sitten perheen osio). Parit yhdistetään yhdeksi riviksi.
+SECTIONS = {'kannet': range(103, 121, 2), 'luukut': range(121, 143, 2), 'kabel': range(143, 157, 2), 'plintar': range(157, 171, 2),
+            'Street castings and gratings (3.5)': range(171, 185, 2), 'Pipes and channels (3.6)': range(185, 193, 2),
+            'Separators, tanks and pumps (3.7)': range(193, 197, 2), 'Railway profiles (3.8)': range(197, 201, 2)}
+GLOBAL = [60, 64, 66, 68, 70, 74, 86, 88, 90, 92, 94, 96, 98]
+PAIRS = {105: 107, 125: 127, 129: 131, 145: 147, 163: 165, 171: 173, 175: 177}
+PAIRED = set(PAIRS.values())
+prod = {}
+for r in P:
+    pid = g(r, 0); st = store.get(pid, {})
+    fam57 = g(r, 57); tpl = TPL.get(fam57, 'muut')
+    cols = GLOBAL + list(SECTIONS.get(tpl if tpl != 'muut' else fam57, []))
+    tech = []
+    ok = lambda c: g(r, c) is not None and 'NEEDS HUMAN CHECK' not in str(r.get(c + 1) or '')
+    for c in cols:
+        if c in PAIRED or not ok(c): continue
+        if c in PAIRS and ok(PAIRS[c]): tech.append([c, g(r, c), g(r, PAIRS[c])])
+        else: tech.append([c, g(r, c)])
+    docs = [[k, g(r, c)] for k, c in (('datablad', 76), ('ritning', 78), ('montering', 80), ('certifikat', 82), ('epd', 84)) if g(r, c) and str(g(r, c)).startswith('http')]
+    imgs = [i.get('src') for i in st.get('images', []) if i.get('src')][:6]
+    prod[pid] = {k: v for k, v in dict(s=paras(st.get('short_description')), d=paras(st.get('description')), img=imgs, doc=docs, t=tech).items() if v}
+pout = 'window.SB_PRODUCT = ' + json.dumps(prod, ensure_ascii=False, separators=(',', ':')) + ';\n'
+open(os.path.join(_HERE, '../catalog-product.js'), 'w').write('// Tuotesivun data: lyhyt kuvaus ja kuvaus (nykyinen kauppa, Store API 25.11.2026), kuvat, dokumentit (tuotedata-master) ja tekninen data.\n// Generoitu: python3 tools/build-catalog.py. Älä muokkaa käsin.\n' + pout)
+print('product data', round(len(pout) / 1024), 'kB, store matches', sum(1 for r in P if g(r, 0) in store))
 out = 'window.SB_CATALOG = ' + json.dumps(dict(cats=cats, fams=fam_out, items=items), ensure_ascii=False, separators=(',', ':')) + ';\n'
 hdr = '// Yleisen kategoriasivun data: data/tuotedata-master.xlsx, sheet Products, siirrettävät tuotteet (sarake 216 Yes tai Check).\n// Generoitu: python3 tools/build-catalog.py. Älä muokkaa käsin.\n'
 open(__import__('os').path.join(__import__('os').path.dirname(__file__), '../catalog.js'), 'w').write(hdr + out)

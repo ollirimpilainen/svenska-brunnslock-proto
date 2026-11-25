@@ -333,9 +333,8 @@ class Component extends DCLogic {
       const fr = (priced.find((i) => i.price === minP) || dflt).fr;
       const FRP = typeof window !== 'undefined' && window.SBFreight ? window.SBFreight.profiles : {};
       const name = fam ? fam.name : dflt.n;
-      let link = '#';
-      if (c.fam && /^SF02\b/.test(c.fam)) link = PROD + '?p=durk&size=' + ((dflt.sz || '').replace('×', 'x'));
-      else if (c.fam && /^SF19\b/.test(c.fam)) link = PROD + '?size=' + (String(dflt.sz || '').replace(/\D/g, '') || '1050');
+      // Jokainen kortti avaa tuotesivupohjan perheen oletuskoolla (tai suodattimen mukaisella ensimmäisellä koolla)
+      const link = PROD + '?id=' + (its.find((i) => i.id === (fam && fam.dflt)) || its[0]).id;
       return {
         href: link, name: name, imgAlt: T.img + ': ' + name, clsLabel: chip,
         clsStyle: 'align-self: flex-start; border-radius: 4px; padding: 0 8px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 13px; line-height: 1.6; ' + (!chip ? 'display: none;' : cls.length || models.length ? 'border: 1.5px solid #111111; color: #111111;' : 'border: 1.5px dashed #8a8a88; color: #5c5c5c;'),

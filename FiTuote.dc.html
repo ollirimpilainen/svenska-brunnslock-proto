@@ -2,8 +2,10 @@
 <html lang="fi">
 <head>
 <meta charset="utf-8">
-<title>Kevyt kaivonkansi Composite</title>
+<title>Tuote</title>
 <script src="./support.js"></script>
+<script src="./catalog.js"></script>
+<script src="./catalog-product.js"></script>
 </head>
 <body>
 <x-dc>
@@ -12,53 +14,70 @@
 <style>
 body{margin:0}
 a{color:#111111}a:hover{color:#474747}
-summary{list-style:none}
-summary::-webkit-details-marker{display:none}
+.tp-sec{scroll-margin-top:16px}
 </style>
 </helmet>
 <div style="width: 100%; min-height: 100vh; background: #ffffff; color: #1a1a1a; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.55">
 <dc-import name="FiHeader" cart="{{ cart }}" current="sortiment" vat="{{ vat }}" on-vat="{{ setVat }}" hint-size="100%,180px"></dc-import>
 <main>
 
+<!-- 1-11: produktens överdel -->
 <section aria-labelledby="p-title" style="max-width: 1240px; margin: 0 auto; padding: 16px 24px 64px">
-<nav aria-label="Olet tässä" style="font-size: 14px; color: #474747; display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px">
-<a href="FiEtusivu.dc.html" style="text-decoration: none; padding: 10px 0">Etusivu</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
-<a href="FiValikoima.dc.html?kat=lock" style="text-decoration: none; padding: 10px 0">Kaivonkannet ja luukut</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
-<a href="{{ crumbHref }}" style="text-decoration: none; padding: 10px 0">{{ crumbCat }}</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
+<!-- 1 Murupolku (L) -->
+<nav aria-label="{{ t.crumbAria }}" style="font-size: 14px; color: #474747; display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px">
+<sc-for list="{{ crumbs }}" as="c" hint-placeholder-count="3">
+<a href="{{ c.href }}" style="text-decoration: none; padding: 10px 0">{{ c.label }}</a><span style="padding: 10px 0; color: #bdbdbb">/</span>
+</sc-for>
 <span aria-current="page" style="padding: 10px 0; color: #111111; font-weight: 600">{{ name }}</span>
 </nav>
 <div style="display: flex; flex-wrap: wrap; gap: 64px; align-items: flex-start">
 
+<!-- 2 Kuvat (T) -->
 <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
-<div role="img" aria-label="{{ imgAlt }}" style="aspect-ratio: 1 / 1; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #474747; font-size: 14px; text-align: center; padding: 16px">{{ imgAlt }}</div>
-<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
+<div role="img" aria-label="{{ imgAlt }}" style="{{ mainImgStyle }}">{{ imgPh }}</div>
+<sc-if value="{{ hasThumbs }}" hint-placeholder-val="{{ true }}">
+<div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px">
 <sc-for list="{{ thumbs }}" as="th" hint-placeholder-count="4">
-<button type="button" aria-pressed="{{ th.on }}" style="{{ th.style }}">{{ th.label }}</button>
+<button type="button" onClick="{{ th.pick }}" aria-pressed="{{ th.on }}" aria-label="{{ th.aria }}" style="{{ th.style }}"></button>
 </sc-for>
 </div>
+</sc-if>
 </div>
 
 <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
-<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<!-- 3 Tuotenimi (T) -->
 <h1 id="p-title" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 40px; line-height: 1.1; letter-spacing: -0.015em; color: #111111">{{ name }}</h1>
-<p style="margin: 0; font-size: 17px; color: #474747">{{ sub }}</p>
+<!-- 5 Kuormitusluokka ja Art.nr (T) -->
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 14px; color: #5c5c5c">
-<sc-if value="{{ hasCls }}" hint-placeholder-val="{{ true }}"><span style="border: 1.5px solid #111111; border-radius: 4px; padding: 0 8px; font-family: Archivo, Inter, sans-serif; font-weight: 700; color: #111111">{{ cls }}</span></sc-if>
-<span>Tuotenro {{ art }}</span>
-<button type="button" onClick="{{ copyArt }}" style="border: 0; background: none; font: inherit; font-weight: 600; color: #111111; text-decoration: underline; cursor: pointer; min-height: 44px">{{ copyLabel }}</button>
+<sc-for list="{{ clsChips }}" as="k" hint-placeholder-count="1"><span style="border: 1.5px solid #111111; border-radius: 4px; padding: 0 8px; font-family: Archivo, Inter, sans-serif; font-weight: 700; color: #111111">{{ k }}</span></sc-for>
+<sc-if value="{{ hasArt }}" hint-placeholder-val="{{ true }}"><span>{{ artLabel }}</span>
+<button type="button" onClick="{{ copyArt }}" style="border: 0; background: none; font: inherit; font-weight: 600; color: #111111; text-decoration: underline; cursor: pointer; min-height: 44px">{{ copyLabel }}</button></sc-if>
 </div>
+<!-- 4 Ingressi = nykyinen lyhyt kuvaus sellaisenaan (T) -->
+<sc-if value="{{ hasLead }}" hint-placeholder-val="{{ true }}">
+<div style="{{ leadStyle }}">
+<sc-for list="{{ lead }}" as="x" hint-placeholder-count="2"><p style="margin: 0 0 8px; font-size: 16px; color: #474747; white-space: pre-line">{{ x }}</p></sc-for>
+</div>
+<sc-if value="{{ leadLong }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ toggleLead }}" aria-expanded="{{ leadOpen }}" style="align-self: flex-start; border: 0; background: none; padding: 0; font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; cursor: pointer; min-height: 32px">{{ leadLabel }}</button></sc-if>
+</sc-if>
 </div>
 
-<ul style="margin: 0; padding: 16px 0; list-style: none; border-top: 1px solid #e2e2e0; border-bottom: 1px solid #e2e2e0; display: flex; flex-direction: column; gap: 10px; font-size: 15px">
-<sc-for list="{{ bullets }}" as="b" hint-placeholder-count="4">
-<li style="display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.2" aria-hidden="true" style="margin-top: 2px"><path d="m5 12 5 5 9-10"/></svg><span>{{ b.t }}</span></li>
+<!-- 6 Avaintiedot nimettyinä arvoina (T + P) -->
+<sc-if value="{{ hasFacts }}" hint-placeholder-val="{{ true }}">
+<dl style="margin: 0; padding: 16px 0; border-top: 1px solid #e2e2e0; border-bottom: 1px solid #e2e2e0; display: grid; grid-template-columns: minmax(0, 40%) minmax(0, 1fr); gap: 8px 16px; font-size: 15px">
+<sc-for list="{{ facts }}" as="f" hint-placeholder-count="4">
+<dt style="color: #474747">{{ f.k }}</dt><dd style="margin: 0; color: #111111; font-weight: 600">{{ f.v }}</dd>
 </sc-for>
-</ul>
+</dl>
+</sc-if>
 
+<!-- 7 Kokopainikkeet ja Jämför storlekar (L) -->
+<sc-if value="{{ hasSizes }}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
-<b id="size-l" style="font-size: 15px">Koko</b>
-<a href="#sec-fit" style="font-size: 14px; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Näin mittaat</a>
+<b id="size-l" style="font-size: 15px">{{ t.size }}</b>
+<sc-if value="{{ hasCheck }}" hint-placeholder-val="{{ false }}"><a href="#sec-fit" style="font-size: 14px; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">{{ t.howMeasure }}</a></sc-if>
 </div>
 <div role="group" aria-labelledby="size-l" style="display: flex; flex-wrap: wrap; gap: 8px">
 <sc-for list="{{ sizes }}" as="z" hint-placeholder-count="5">
@@ -66,32 +85,34 @@ summary::-webkit-details-marker{display:none}
 </sc-for>
 </div>
 <details style="margin-top: 4px">
-<summary style="cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; font-size: 14px; font-weight: 600; text-decoration: underline">{{ T.compare }}</summary>
+<summary style="cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; font-size: 14px; font-weight: 600; text-decoration: underline">{{ t.compare }}</summary>
 <div style="overflow-x: auto; margin-top: 6px">
 <div role="table" style="display: grid; grid-template-columns: repeat(4, auto); font-size: 14px; white-space: nowrap; min-width: max-content">
-<div role="row" style="display: contents"><span role="columnheader" style="padding: 8px 10px; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0; padding-left: 0">{{ T.cSize }}</span><span role="columnheader" style="padding: 8px 10px; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0">{{ T.cIn }}</span><span role="columnheader" style="padding: 8px 10px; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0">{{ T.cOut }}</span><span role="columnheader" style="padding: 8px 10px; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0; padding-right: 0; text-align: right">{{ T.cPrice }}</span></div>
+<div role="row" style="display: contents"><sc-for list="{{ cmpHead }}" as="h" hint-placeholder-count="4"><span role="columnheader" style="{{ h.style }}">{{ h.label }}</span></sc-for></div>
 <sc-for list="{{ sizes }}" as="z" hint-placeholder-count="5">
-<div role="row" style="display: contents"><span role="cell" style="padding: 8px 10px; border-bottom: 1px solid #e2e2e0; {{ z.rowStyle }}; padding-left: 0"><a href="{{ z.href }}" onClick="{{ z.pick }}" style="font-weight: 600">{{ z.label }}</a></span><span role="cell" style="padding: 8px 10px; border-bottom: 1px solid #e2e2e0; {{ z.rowStyle }}">{{ z.inTxt }}</span><span role="cell" style="padding: 8px 10px; border-bottom: 1px solid #e2e2e0; {{ z.rowStyle }}">{{ z.outTxt }}</span><span role="cell" style="padding: 8px 10px; border-bottom: 1px solid #e2e2e0; {{ z.rowStyle }}; padding-right: 0; text-align: right">{{ z.price }}</span></div>
+<div role="row" style="display: contents"><span role="cell" style="{{ z.c0 }}"><a href="{{ z.href }}" onClick="{{ z.pick }}" style="font-weight: 600">{{ z.label }}</a></span><span role="cell" style="{{ z.c1 }}">{{ z.v1 }}</span><span role="cell" style="{{ z.c1 }}">{{ z.v2 }}</span><span role="cell" style="{{ z.c3 }}">{{ z.price }}</span></div>
 </sc-for>
 </div>
 </div>
 </details>
 </div>
+</sc-if>
 
+<!-- 8-10 Hinta, lisävalinnat, määrä ja painike (T + P + L) -->
 <div style="display: flex; flex-direction: column; gap: 16px">
 <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
 <span style="font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 38px; line-height: 1; color: #111111">{{ price }}</span>
 <span style="font-size: 15px; color: #474747">{{ vatLabel }}</span>
 <span style="width: 100%; font-size: 13px; color: #5c5c5c">{{ altPrice }}</span>
 </div>
-<sc-if value="{{ hasAddons }}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{ hasAddons }}" hint-placeholder-val="{{ false }}">
 <details style="border: 1px solid #e2e2e0; border-radius: 6px">
-<summary style="cursor: pointer; min-height: 44px; padding: 0 12px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 15px">Lisää tiivisterengas tai venttiili <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+<summary style="cursor: pointer; min-height: 44px; padding: 0 12px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 15px">{{ addonsTitle }}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
 <div style="padding: 0 8px 8px; display: flex; flex-direction: column; gap: 2px">
 <sc-for list="{{ addons }}" as="a" hint-placeholder-count="3">
 <label style="display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 10px; align-items: center; min-height: 44px; padding: 4px 6px; border-radius: 6px; cursor: pointer; font-size: 15px">
 <input type="checkbox" checked="{{ a.on }}" onChange="{{ a.toggle }}" style="width: 18px; height: 18px; margin: 0; accent-color: #111111">
-<span>{{ a.label }}<small style="display: block; font-size: 13px; color: #5c5c5c">{{ a.text }}</small></span>
+<span>{{ a.label }}</span>
 <b style="font-weight: 600">{{ a.price }}</b>
 </label>
 </sc-for>
@@ -100,222 +121,207 @@ summary::-webkit-details-marker{display:none}
 </sc-if>
 <div style="display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px">
 <div style="display: inline-flex; align-items: center; border: 1.5px solid #bdbdbb; border-radius: 6px">
-<button type="button" onClick="{{ less }}" aria-label="Vähennä määrää" style="width: 44px; min-height: 48px; border: 0; background: transparent; font: inherit; font-size: 20px; cursor: pointer">−</button>
+<button type="button" onClick="{{ less }}" aria-label="{{ t.less }}" style="width: 44px; min-height: 48px; border: 0; background: transparent; font: inherit; font-size: 20px; cursor: pointer">−</button>
 <span aria-live="polite" style="width: 40px; text-align: center; font-weight: 600">{{ qty }}</span>
-<button type="button" onClick="{{ more }}" aria-label="Lisää määrää" style="width: 44px; min-height: 48px; border: 0; background: transparent; font: inherit; font-size: 20px; cursor: pointer">+</button>
+<button type="button" onClick="{{ more }}" aria-label="{{ t.more }}" style="width: 44px; min-height: 48px; border: 0; background: transparent; font: inherit; font-size: 20px; cursor: pointer">+</button>
 </div>
 <sc-if value="{{ isBuy }}" hint-placeholder-val="{{ true }}">
-<a href="FiOstoskori.dc.html" onClick="{{ addToCart }}" style="min-height: 52px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 4h2l2.5 11h10l2-7H7"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>Lisää ostoskoriin</a>
+<a href="{{ cartHref }}" onClick="{{ addToCart }}" style="min-height: 52px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 4h2l2.5 11h10l2-7H7"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>{{ t.addCart }}</a>
 </sc-if>
 </div>
 <sc-if value="{{ isQuote }}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 8px">
-<a href="{{ Q.offertHref }}" onClick="{{ addQuote }}" style="min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">{{ Q.cta }}</a>
-<button type="button" onClick="{{ addQuoteStay }}" style="min-height: 48px; border: 1.5px solid #111111; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; font-size: 16px; color: #111111; cursor: pointer">{{ Q.add }}</button>
+<a href="{{ offertHref }}" onClick="{{ addQuote }}" style="min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">{{ t.qCta }}</a>
+<button type="button" onClick="{{ addQuoteStay }}" style="min-height: 48px; border: 1.5px solid #111111; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; font-size: 16px; color: #111111; cursor: pointer">{{ t.qAdd }}</button>
 </div>
 </sc-if>
+<!-- 10 Rahtirivi ja yhteensä (L) -->
 <sc-if value="{{ isBuy }}" hint-placeholder-val="{{ true }}">
 <div style="background: #f5f5f4; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px; font-size: 15px">
 <div style="display: flex; justify-content: space-between; gap: 10px"><span>{{ prodLabel }}</span><b>{{ prodSum }}</b></div>
-<div style="display: flex; justify-content: space-between; gap: 10px"><span>{{ frLabel }}<small style="display: block; font-size: 13px; color: #5c5c5c">{{ frNote }}</small></span><b>{{ frSum }}</b></div>
-<div style="display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid #bdbdbb; padding-top: 10px; font-weight: 700; color: #111111"><span>Yhteensä rahteineen</span><span>{{ totalSum }}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 10px"><span>{{ frLabel }}<small style="display: block; font-size: 13px; color: #5c5c5c">{{ t.frSame }}</small></span><b>{{ frSum }}</b></div>
+<div style="display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid #bdbdbb; padding-top: 10px; font-weight: 700; color: #111111"><span>{{ t.total }}</span><span>{{ totalSum }}</span></div>
 </div>
 </sc-if>
 <sc-if value="{{ isQuote }}" hint-placeholder-val="{{ false }}">
 <div style="background: #f5f5f4; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 6px; font-size: 15px">
-<b style="color: #111111">{{ Q.fr }}</b>
-<span style="font-size: 14px; color: #474747">{{ Q.frNote }}</span>
-<sc-if value="{{ quoteAdded }}" hint-placeholder-val="{{ false }}"><p role="status" style="margin: 6px 0 0; font-weight: 600; color: #111111">{{ Q.added }} <a href="{{ Q.cartHref }}">{{ Q.view }}</a></p></sc-if>
+<b style="color: #111111">{{ t.frQ }}</b>
+<span style="font-size: 14px; color: #474747">{{ t.frQn }}</span>
+<sc-if value="{{ quoteAdded }}" hint-placeholder-val="{{ false }}"><p role="status" style="margin: 6px 0 0; font-weight: 600; color: #111111">{{ t.qAdded }} <a href="{{ cartHref }}">{{ t.qView }}</a></p></sc-if>
 </div>
 </sc-if>
+<!-- 11 Yhteinen: ångerrätt, maksutavat, projekti (Y) -->
 <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 14px; color: #474747">
-<li>14 päivän peruutusoikeus</li>
-<li>Klarna tai Qliro, lasku yrityksille</li>
+<li>{{ t.usp1 }}</li>
+<li>{{ t.usp2 }}</li>
 </ul>
-<sc-if value="{{ isBuy }}" hint-placeholder-val="{{ true }}"><p style="margin: 0; font-size: 15px; color: #474747">Ostatko useamman tai projektiin? <a href="#" style="font-weight: 600">Pyydä tarjous</a></p></sc-if>
+<sc-if value="{{ isBuy }}" hint-placeholder-val="{{ true }}"><p style="margin: 0; font-size: 15px; color: #474747">{{ t.project }} <a href="{{ offertHref }}" style="font-weight: 600">{{ t.qCta }}</a></p></sc-if>
 </div>
 
+<!-- 11 Puhelinlaatikko (Y) -->
 <div style="border: 1px solid #bdbdbb; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
 <div style="display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 12px; align-items: center">
 <div aria-hidden="true" style="width: 44px; height: 44px; border-radius: 50%; border: 1.5px dashed #b9b9b7; background: #ececea"></div>
-<div><b style="display: block; color: #111111">Epävarma? Soita ennen kuin tilaat.</b><span style="font-size: 14px; color: #474747">Autamme valitsemaan.</span></div>
+<div><b style="display: block; color: #111111">{{ t.phoneH }}</b><span style="font-size: 14px; color: #474747">{{ t.phoneT }}</span></div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: center">
 <a href="tel:+46920520056" style="font-weight: 700; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center">0920-52 00 56</a>
-<span style="font-size: 14px; color: #474747">Arkisin [X] to [X], viikonloppuisin [X] to [X]</span>
+<span style="font-size: 14px; color: #474747">{{ t.hours }}</span>
 </div>
 </div>
 </div>
 </div>
 </section>
 
-<sc-if value="{{ isLid }}" hint-placeholder-val="{{ true }}">
-<section aria-labelledby="about-h" style="border-top: 1px solid #e2e2e0">
+<!-- 12 Om: nykyinen tuotekuvaus sellaisenaan (T) -->
+<sc-if value="{{ hasAbout }}" hint-placeholder-val="{{ true }}">
+<section class="tp-sec" aria-labelledby="about-h" style="border-top: 1px solid #e2e2e0">
 <div style="max-width: 1240px; margin: 0 auto; padding: 64px 24px 0">
 <div style="max-width: 920px; display: flex; flex-direction: column; gap: 12px">
-<h2 id="about-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 26px; color: #111111">Tietoa tuotteesta {{ name }}</h2>
+<h2 id="about-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 26px; color: #111111">{{ aboutH }}</h2>
 <div style="{{ aboutStyle }}">
-<p style="margin: 0 0 12px; font-size: 18px; color: #1a1a1a; max-width: 68ch">{{ lead }}</p>
-<h3 style="margin: 16px 0 6px; font-size: 17px; color: #111111">Käyttö</h3>
-<p style="margin: 0; color: #474747; max-width: 68ch">Kansi on tehty pihan ja nurmikon kaivoihin, joiden yli ei ajeta, kuormitusluokka A15. Tiivisterenkaan kanssa se sopii myös juomavesikaivoon. Jos kaivon yli ajetaan autolla, tarvitset ajettavan kannen.</p>
-<h3 style="margin: 16px 0 6px; font-size: 17px; color: #111111">Asennus</h3>
-<p style="margin: 0; color: #474747; max-width: 68ch">Kansi asetetaan suoraan renkaan päälle, eikä työkaluja tarvita. Lukko kiinnitetään kannen omaan kehykseen, joten betoniin ei porata. Jos rengas on liian matalalla, sitä voi korottaa korotusrenkaalla.</p>
-<h3 style="margin: 16px 0 6px; font-size: 17px; color: #111111">Materiaali ja hoito</h3>
-<p style="margin: 0; color: #474747; max-width: 68ch">Kansi ei ruostu ja kestää pakkasta. Jos käytät lukkoa, voitele se syksyllä. Jätä kansi lukitsematta tyhjennystä varten.</p>
+<sc-for list="{{ about }}" as="x" hint-placeholder-count="3"><p style="margin: 0 0 12px; color: #1a1a1a; max-width: 68ch; white-space: pre-line">{{ x }}</p></sc-for>
 </div>
-<button type="button" onClick="{{ toggleAbout }}" aria-expanded="{{ aboutOpen }}" style="align-self: flex-start; border: 0; background: none; font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer; min-height: 44px; padding: 0">{{ aboutLabel }}</button>
+<sc-if value="{{ aboutLong }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ toggleAbout }}" aria-expanded="{{ aboutOpen }}" style="align-self: flex-start; border: 0; background: none; font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer; min-height: 44px; padding: 0">{{ aboutLabel }}</button></sc-if>
 </div>
 </div>
 </section>
+</sc-if>
 
-<section aria-label="Lisää tuotteesta" style="max-width: 1240px; margin: 0 auto; padding: 48px 24px 64px">
-<div style="max-width: 920px">
+<section aria-label="{{ t.moreAria }}" style="max-width: 1240px; margin: 0 auto; padding: 48px 24px 64px">
+<div style="max-width: 920px; border-top: 1px solid #bdbdbb">
 
-<details id="sec-fit" open style="border-top: 1px solid #bdbdbb; border-bottom: 1px solid #bdbdbb">
-<summary style="cursor: pointer; min-height: 64px; display: flex; justify-content: space-between; align-items: center; gap: 16px"><h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">Sopiiko se kaivooni?</h2><span aria-hidden="true" style="font-size: 26px">−</span></summary>
-<div style="padding-bottom: 32px; display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
-<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<!-- 13-15 Passar den min brunn? (P + T), Välj ett annat om (P), kuormitusluokka (Y) -->
+<sc-if value="{{ hasFitSec }}" hint-placeholder-val="{{ true }}">
+<details id="sec-fit" class="tp-sec" open style="border-bottom: 1px solid #bdbdbb">
+<summary style="cursor: pointer; min-height: 64px; display: flex; justify-content: space-between; align-items: center; gap: 16px"><h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">{{ fitH }}</h2><span aria-hidden="true" style="font-size: 26px">+</span></summary>
+<div style="padding-bottom: 32px; display: flex; flex-direction: column; gap: 24px">
+<sc-if value="{{ hasCheck }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+<sc-if value="{{ hasFigure }}" hint-placeholder-val="{{ false }}">
+<div style="flex: 1 1 360px; min-width: 0">
 <figure style="position: relative; margin: 0; border-radius: 10px; overflow: hidden">
-<img src="img/mattskiss-ring.jpg" alt="Betonirengas ylhäältä. A on renkaan sisäpuoli, mitattuna suoraan aukon yli. B on renkaan ulkopuoli, mitattuna ulkoreunasta ulkoreunaan." style="display: block; width: 100%; height: auto">
+<img src="img/mattskiss-ring.jpg" alt="{{ t.figAlt }}" style="display: block; width: 100%; height: auto">
 <svg viewBox="0 0 1200 896" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%">
-<defs><marker id="ahfi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 1 L9 5 L0 9 z" fill="#ffd60a" stroke="#111111" stroke-width="1.2"/></marker></defs>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 1 L9 5 L0 9 z" fill="#ffd60a" stroke="#111111" stroke-width="1.2"/></marker></defs>
 <line x1="231" y1="442" x2="231" y2="14" stroke="#111111" stroke-width="8.4"/><line x1="231" y1="442" x2="231" y2="14" stroke="#ffd60a" stroke-width="3.6" stroke-dasharray="10 8"/>
 <line x1="973" y1="442" x2="973" y2="14" stroke="#111111" stroke-width="8.4"/><line x1="973" y1="442" x2="973" y2="14" stroke="#ffd60a" stroke-width="3.6" stroke-dasharray="10 8"/>
-<line x1="316" y1="442" x2="888" y2="442" stroke="#111111" stroke-width="13" stroke-linecap="round"/><line x1="312" y1="442" x2="892" y2="442" stroke="#ffd60a" stroke-width="6" marker-start="url(#ahfi)" marker-end="url(#ahfi)"/>
-<line x1="235" y1="38" x2="969" y2="38" stroke="#111111" stroke-width="13" stroke-linecap="round"/><line x1="231" y1="38" x2="973" y2="38" stroke="#ffd60a" stroke-width="6" marker-start="url(#ahfi)" marker-end="url(#ahfi)"/>
-<rect x="467" y="403" width="270" height="78" rx="39" fill="#ffd60a" stroke="#111111" stroke-width="3"/><text x="602" y="456" text-anchor="middle" font-size="41" font-family="Inter, sans-serif" font-weight="700" fill="#111111">A  Sisäpuoli</text>
-<rect x="455" y="-1" width="294" height="78" rx="39" fill="#ffd60a" stroke="#111111" stroke-width="3"/><text x="602" y="52" text-anchor="middle" font-size="41" font-family="Inter, sans-serif" font-weight="700" fill="#111111">B  Ulkopuoli</text>
+<line x1="316" y1="442" x2="888" y2="442" stroke="#111111" stroke-width="13" stroke-linecap="round"/><line x1="312" y1="442" x2="892" y2="442" stroke="#ffd60a" stroke-width="6" marker-start="url(#ah)" marker-end="url(#ah)"/>
+<line x1="235" y1="38" x2="969" y2="38" stroke="#111111" stroke-width="13" stroke-linecap="round"/><line x1="231" y1="38" x2="973" y2="38" stroke="#ffd60a" stroke-width="6" marker-start="url(#ah)" marker-end="url(#ah)"/>
+<rect x="490" y="403" width="224" height="78" rx="39" fill="#ffd60a" stroke="#111111" stroke-width="3"/><text x="602" y="456" text-anchor="middle" font-size="41" font-family="Inter, sans-serif" font-weight="700" fill="#111111">A  Insida</text>
+<rect x="487" y="-1" width="230" height="78" rx="39" fill="#ffd60a" stroke="#111111" stroke-width="3"/><text x="602" y="52" text-anchor="middle" font-size="41" font-family="Inter, sans-serif" font-weight="700" fill="#111111">B  Utsida</text>
 </svg>
 </figure>
-<p style="margin: 0; font-size: 15px">{{ rangeText }}</p>
 </div>
+</sc-if>
 <form onSubmit="{{ check }}" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
-<h3 style="margin: 0; font-size: 18px; color: #111111">Tarkista mittasi</h3>
-<p style="margin: 0; font-size: 15px; color: #474747">Usein yksi mitta riittää. Jos sinulla on molemmat, kirjoita molemmat.</p>
+<h3 style="margin: 0; font-size: 18px; color: #111111">{{ t.checkH }}</h3>
+<p style="margin: 0; font-size: 15px; color: #474747">{{ checkIntro }}</p>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px">
-<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Sisäpuoli A, mm<input value="{{ inMm }}" onInput="{{ typeIn }}" inputmode="numeric" placeholder="esim. 600" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit"></label>
-<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Ulkopuoli B, mm<input value="{{ outMm }}" onInput="{{ typeOut }}" inputmode="numeric" placeholder="esim. 720" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit"></label>
-</div>
-<button type="submit" style="align-self: flex-start; min-height: 44px; padding: 0 18px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">Tarkista</button>
-<p role="status" aria-live="polite" style="margin: 0; font-size: 15px; font-weight: 600; color: #111111">{{ checkMsg }}</p>
-<div style="border-top: 1px solid #e2e2e0; padding-top: 12px; font-size: 15px; color: #474747; display: flex; flex-direction: column; gap: 4px">
-<b style="color: #111111">Valitse toinen kansi, jos</b>
-<span>kaivon yli ajetaan autolla: <a href="#" style="font-weight: 600">ajettava kansi B125</a></span>
-<span>kaivo on muovia: <a href="#" style="font-weight: 600">kansi muovikaivoon</a></span>
-<span>kaivoa ei tyhjennetä ja kansi saa olla painava: <a href="#" style="font-weight: 600">betonikansi</a></span>
-</div>
-</form>
-</div>
-<p style="margin: 0 0 8px; font-size: 15px; color: #474747">A15 kestää kävelyn, pyöräilyn ja nurmikon. Seuraava luokka, B125, kestää pihatien ja henkilöauton. <a href="#" style="font-weight: 600">Kuormitusluokat selitettynä</a></p>
-<p style="margin: 0 0 32px; font-size: 15px; color: #474747">Etkö tiedä, minkä kannen tarvitset? <a href="#" style="font-weight: 600">Apu kaivonkannen valintaan</a></p>
-</details>
-
-<details style="border-bottom: 1px solid #bdbdbb">
-<summary style="cursor: pointer; min-height: 64px; display: flex; justify-content: space-between; align-items: center"><h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">Tekniset tiedot</h2><span aria-hidden="true" style="font-size: 26px">+</span></summary>
-<table style="width: 100%; border-collapse: collapse; font-size: 15px; margin-bottom: 32px">
-<caption style="text-align: left; font-weight: 700; padding: 0 0 6px">Mitat, kuorma ja materiaali</caption>
-<tbody>
-<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0; width: 45%">Sopii renkaaseen, sisämitta</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">{{ inTxt }}</td></tr>
-<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Sopii renkaaseen, ulkomitta</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">{{ outTxt }}</td></tr>
-<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Koko</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">{{ dTxt }}</td></tr>
-<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Paino</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">{{ kgTxt }}</td></tr>
-<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Kuormitusluokka</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">A15 (15 kN), EN 124</td></tr>
-<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Materiaali</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">Komposiitti tai HD-PE (vahvistetaan)</td></tr>
-<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Lukko ja tuuletus</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">Lapsiturvallinen lukko, ilmanpoistoventtiili lisävarusteena</td></tr>
-<tr><th scope="row" style="text-align: left; font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">Tuotenumero</th><td style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">{{ art }}</td></tr>
-</tbody>
-</table>
-</details>
-
-<details style="border-bottom: 1px solid #bdbdbb">
-<summary style="cursor: pointer; min-height: 64px; display: flex; justify-content: space-between; align-items: center"><h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">Dokumentit</h2><span aria-hidden="true" style="font-size: 26px">+</span></summary>
-<div style="display: flex; flex-direction: column; margin-bottom: 32px">
-<a href="#" style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; border-bottom: 1px solid #e2e2e0; text-decoration: none"><span><b>Datalehti</b> <small style="color: #5c5c5c">PDF, 240 kt</small></span><span aria-hidden="true">↓</span></a>
-<a href="#" style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; border-bottom: 1px solid #e2e2e0; text-decoration: none"><span><b>Mittapiirustus</b> <small style="color: #5c5c5c">PDF ja DWG</small></span><span aria-hidden="true">↓</span></a>
-<a href="#" style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; border-bottom: 1px solid #e2e2e0; text-decoration: none"><span><b>Asennusohje</b> <small style="color: #5c5c5c">PDF, 1,1 Mt</small></span><span aria-hidden="true">↓</span></a>
-<a href="#" style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; border-bottom: 1px solid #e2e2e0; text-decoration: none"><span><b>EN 124 -todistus</b> <small style="color: #5c5c5c">PDF, 180 kt</small></span><span aria-hidden="true">↓</span></a>
-<a href="#" style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; border-bottom: 1px solid #e2e2e0; text-decoration: none"><span><b>EPD, ympäristöseloste</b> <small style="color: #5c5c5c">PDF, 600 kt</small></span><span aria-hidden="true">↓</span></a>
-<p style="margin: 12px 0 0; font-size: 14px; color: #474747">Lataa ilman kirjautumista.</p>
-</div>
-</details>
-
-<details style="border-bottom: 1px solid #bdbdbb">
-<summary style="cursor: pointer; min-height: 64px; display: flex; justify-content: space-between; align-items: center"><h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">Toimitus ja palautus</h2><span aria-hidden="true" style="font-size: 26px">+</span></summary>
-<div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px">
-<div><b style="display: block; color: #111111">Suoraan toimittajiltamme</b><span style="font-size: 15px; color: #474747">Kansi toimitetaan kotiin. Rahti on 590 kr tilausta kohti ja maksaa saman koko Ruotsiin.</span></div>
-<div><b style="display: block; color: #111111">Toimitusaika</b><span style="font-size: 15px; color: #474747">Varastotuotteet toimitetaan yleensä [3 to 6] arkipäivässä, joskus pidempään. Isommissa tilauksissa aika kerrotaan tarjouksessa.</span></div>
-<div><b style="display: block; color: #111111">Tilaatko samalla betonirenkaita?</b><span style="font-size: 15px; color: #474747">Silloin kaikki tulee lavalla. Valitsemme kuljetuksen, joka osaa purkaa luonasi nosturilla tai nostolaidalla.</span></div>
-<div><b style="display: block; color: #111111">Peru ostos 14 päivän sisällä</b><span style="font-size: 15px; color: #474747">Yksityisenä sinulla on 14 päivän peruutusoikeus.</span></div>
-</div>
-</details>
-
-<details style="border-bottom: 1px solid #bdbdbb">
-<summary style="cursor: pointer; min-height: 64px; display: flex; justify-content: space-between; align-items: center"><h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">Usein kysytyt</h2><span aria-hidden="true" style="font-size: 26px">+</span></summary>
-<div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; font-size: 15px">
-<div><b style="display: block; color: #111111">Tarvitseeko kansi tuuletuksen?</b><span style="color: #474747">Se riippuu kunnasta ja kaivotyypistä. Sakokaivot tarvitsevat usein tuuletuksen. Valitse venttiili lisävarusteeksi tai soita meille, niin tarkistamme.</span></div>
-<div><b style="display: block; color: #111111">Saako sakoauto kannen auki, jos se on lukittu?</b><span style="color: #474747">Ei. Jätä lukko auki tyhjennystä varten tai sovi kunnan kanssa, missä avain on.</span></div>
-<div><b style="display: block; color: #111111">Pitääkö betoniin porata?</b><span style="color: #474747">Ei. Kansi asettuu renkaan päälle, ja lukko kiinnitetään kannen omaan kehykseen.</span></div>
-</div>
-</details>
-</div>
-</section>
-
-<section aria-labelledby="guides-h" style="max-width: 1240px; margin: 0 auto; padding: 0 24px 64px; display: flex; flex-direction: column; gap: 24px">
-<div style="display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap">
-<h2 id="guides-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 30px; color: #111111">Oppaat</h2>
-<a href="#" style="font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Kaikki oppaat</a>
-</div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px">
-<a href="#" style="text-decoration: none; display: flex; flex-direction: column; gap: 12px"><div role="img" aria-label="Kuva: mittanauha betonirenkaan yli" style="aspect-ratio: 16 / 9; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #474747">Kuva: mittanauha betonirenkaan yli</div><small style="font-size: 13px; font-weight: 600; color: #5c5c5c">Mittausopas</small><b style="font-family: Archivo, Inter, sans-serif; font-size: 19px; color: #111111">Kaivon mittaaminen: sisä- ja ulkopuoli</b></a>
-<a href="#" style="text-decoration: none; display: flex; flex-direction: column; gap: 12px"><div role="img" aria-label="Kuva: kansi nostetaan tyhjennyksessä" style="aspect-ratio: 16 / 9; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #474747">Kuva: kansi nostetaan tyhjennyksessä</div><small style="font-size: 13px; font-weight: 600; color: #5c5c5c">Sakokaivon tyhjennys</small><b style="font-family: Archivo, Inter, sans-serif; font-size: 19px; color: #111111">Tyhjennyksen painoraja ja kannen valinta</b></a>
-<a href="#" style="text-decoration: none; display: flex; flex-direction: column; gap: 12px"><div role="img" aria-label="Kuva: lukittu kansi pihalla" style="aspect-ratio: 16 / 9; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #474747">Kuva: lukittu kansi pihalla</div><small style="font-size: 13px; font-weight: 600; color: #5c5c5c">Turvallisuus</small><b style="font-family: Archivo, Inter, sans-serif; font-size: 19px; color: #111111">Lapsiturvallinen kaivonkansi: mitä vaaditaan?</b></a>
-</div>
-</section>
-
-<section aria-labelledby="rel-h" style="max-width: 1240px; margin: 0 auto; padding: 0 24px 80px; display: flex; flex-direction: column; gap: 24px">
-<h2 id="rel-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 30px; color: #111111">Sopii yhteen</h2>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px">
-<sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
-<div style="border: 1px solid #e2e2e0; border-radius: 10px; padding: 16px; display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; align-items: center">
-<div role="img" aria-label="{{ r.img }}" style="aspect-ratio: 1; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #474747">Kuva</div>
-<div style="display: flex; flex-direction: column; gap: 2px">
-<a href="#" style="font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 16px; text-decoration: none">{{ r.title }}</a>
-<span style="font-size: 13px; color: #5c5c5c">{{ r.text }}</span>
-<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px"><b>{{ r.price }}</b><a href="FiOstoskori.dc.html" onClick="{{ r.add }}" style="font-size: 14px; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">Lisää</a></div>
-</div>
-</div>
+<sc-for list="{{ checkFields }}" as="x" hint-placeholder-count="1">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">{{ x.label }}<input value="{{ x.value }}" onInput="{{ x.onInput }}" inputmode="numeric" placeholder="{{ x.ph }}" style="min-height: 48px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 0 12px; font: inherit; background: #ffffff"></label>
 </sc-for>
 </div>
-</section>
-
-</sc-if>
-<sc-if value="{{ isDurk }}" hint-placeholder-val="{{ false }}">
-<section aria-labelledby="about-h" style="border-top: 1px solid #e2e2e0">
-<div style="max-width: 1240px; margin: 0 auto; padding: 64px 24px 80px">
-<div style="max-width: 920px; display: flex; flex-direction: column; gap: 40px">
-<div style="display: flex; flex-direction: column; gap: 12px">
-<h2 id="about-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 26px; color: #111111">{{ D.aboutH }}</h2>
-<p style="margin: 0; font-size: 18px; color: #1a1a1a; max-width: 68ch">{{ D.lead }}</p>
-<h3 style="margin: 16px 0 6px; font-size: 17px; color: #111111">{{ D.useH }}</h3>
-<p style="margin: 0; color: #474747; max-width: 68ch">{{ D.use }}</p>
-<h3 style="margin: 16px 0 6px; font-size: 17px; color: #111111">{{ D.mountH }}</h3>
-<p style="margin: 0; color: #474747; max-width: 68ch">{{ D.mount }}</p>
+<button type="submit" style="align-self: flex-start; min-height: 44px; padding: 0 18px; border: 1.5px solid #bdbdbb; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ t.checkBtn }}</button>
+<p role="status" aria-live="polite" style="margin: 0; font-size: 15px; font-weight: 600; color: #111111">{{ checkMsg }}</p>
+</form>
 </div>
-<div id="sec-fit" style="display: flex; flex-direction: column; gap: 12px">
-<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 26px; color: #111111">{{ D.specH }}</h2>
-<div role="table" style="display: grid; grid-template-columns: minmax(0, 45%) minmax(0, 1fr); font-size: 15px">
-<sc-for list="{{ D.spec }}" as="r" hint-placeholder-count="6">
+</sc-if>
+<sc-if value="{{ hasAlt }}" hint-placeholder-val="{{ true }}">
+<div style="font-size: 15px; color: #474747; display: flex; flex-direction: column; gap: 4px">
+<b style="color: #111111">{{ altTitle }}</b>
+<sc-for list="{{ alt }}" as="a" hint-placeholder-count="3"><span>{{ a.t }}: <a href="{{ a.href }}" style="font-weight: 600">{{ a.l }}</a></span></sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ hasClsInfo }}" hint-placeholder-val="{{ true }}">
+<div style="font-size: 15px; color: #474747; display: flex; flex-direction: column; gap: 4px">
+<b style="color: #111111">{{ t.clsH }}</b>
+<sc-for list="{{ clsInfo }}" as="k" hint-placeholder-count="1"><span>{{ k }}</span></sc-for>
+<a href="#" style="font-weight: 600">{{ t.clsLink }}</a>
+</div>
+</sc-if>
+</div>
+</details>
+</sc-if>
+
+<!-- 16 Teknisk data (T + P) -->
+<sc-if value="{{ hasTech }}" hint-placeholder-val="{{ true }}">
+<details class="tp-sec" style="border-bottom: 1px solid #bdbdbb">
+<summary style="cursor: pointer; min-height: 64px; display: flex; justify-content: space-between; align-items: center"><h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">{{ t.techH }}</h2><span aria-hidden="true" style="font-size: 26px">+</span></summary>
+<div role="table" style="display: grid; grid-template-columns: minmax(0, 45%) minmax(0, 1fr); font-size: 15px; margin-bottom: 32px">
+<sc-for list="{{ tech }}" as="r" hint-placeholder-count="6">
 <div role="row" style="display: contents"><span role="rowheader" style="font-weight: 500; color: #474747; padding: 10px 12px 10px 0; border-bottom: 1px solid #e2e2e0">{{ r.k }}</span><span role="cell" style="padding: 10px 0; border-bottom: 1px solid #e2e2e0">{{ r.v }}</span></div>
 </sc-for>
 </div>
+</details>
+</sc-if>
+
+<!-- 17 Dokument (T), vain olemassa olevat -->
+<sc-if value="{{ hasDocs }}" hint-placeholder-val="{{ true }}">
+<details class="tp-sec" style="border-bottom: 1px solid #bdbdbb">
+<summary style="cursor: pointer; min-height: 64px; display: flex; justify-content: space-between; align-items: center"><h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">{{ t.docsH }}</h2><span aria-hidden="true" style="font-size: 26px">+</span></summary>
+<div style="display: flex; flex-direction: column; margin-bottom: 32px">
+<sc-for list="{{ docs }}" as="d" hint-placeholder-count="2">
+<a href="{{ d.url }}" target="_blank" rel="noopener" style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; border-bottom: 1px solid #e2e2e0; text-decoration: none"><span><b>{{ d.label }}</b> <small style="color: #5c5c5c">PDF</small></span><span aria-hidden="true">↓</span></a>
+</sc-for>
 </div>
-<div style="display: flex; flex-direction: column; gap: 16px">
-<h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 26px; color: #111111">{{ D.delH }}</h2>
-<sc-for list="{{ D.del }}" as="d" hint-placeholder-count="2">
+</details>
+</sc-if>
+
+<!-- 18 Leverans och retur (Y + L) -->
+<details class="tp-sec" style="border-bottom: 1px solid #bdbdbb">
+<summary style="cursor: pointer; min-height: 64px; display: flex; justify-content: space-between; align-items: center"><h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">{{ t.delH }}</h2><span aria-hidden="true" style="font-size: 26px">+</span></summary>
+<div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px">
+<sc-for list="{{ delivery }}" as="d" hint-placeholder-count="3">
 <div><b style="display: block; color: #111111">{{ d.h }}</b><span style="font-size: 15px; color: #474747">{{ d.t }}</span></div>
 </sc-for>
 </div>
+</details>
+
+<!-- 19 Vanliga frågor (P) -->
+<sc-if value="{{ hasFaq }}" hint-placeholder-val="{{ true }}">
+<details class="tp-sec" style="border-bottom: 1px solid #bdbdbb">
+<summary style="cursor: pointer; min-height: 64px; display: flex; justify-content: space-between; align-items: center"><h2 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 22px; color: #111111">{{ t.faqH }}</h2><span aria-hidden="true" style="font-size: 26px">+</span></summary>
+<div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; font-size: 15px">
+<sc-for list="{{ faq }}" as="q" hint-placeholder-count="3">
+<div><b style="display: block; color: #111111">{{ q.q }}</b><span style="color: #474747">{{ q.a }}</span></div>
+</sc-for>
 </div>
+</details>
+</sc-if>
+</div>
+</section>
+
+<!-- 20 Guider (P) -->
+<sc-if value="{{ hasGuides }}" hint-placeholder-val="{{ true }}">
+<section aria-labelledby="guides-h" style="max-width: 1240px; margin: 0 auto; padding: 0 24px 64px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap">
+<h2 id="guides-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 30px; color: #111111">{{ t.guidesH }}</h2>
+<a href="#" style="font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">{{ t.allGuides }}</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px">
+<sc-for list="{{ guides }}" as="g" hint-placeholder-count="3">
+<a href="#" style="text-decoration: none; display: flex; flex-direction: column; gap: 12px"><div aria-hidden="true" style="aspect-ratio: 16 / 9; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 10px"></div><small style="font-size: 13px; font-weight: 600; color: #5c5c5c">{{ g.k }}</small><b style="font-family: Archivo, Inter, sans-serif; font-size: 19px; color: #111111">{{ g.t }}</b></a>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<!-- 21 Passar ihop med (P) -->
+<sc-if value="{{ hasRelated }}" hint-placeholder-val="{{ true }}">
+<section aria-labelledby="rel-h" style="max-width: 1240px; margin: 0 auto; padding: 0 24px 80px; display: flex; flex-direction: column; gap: 24px">
+<h2 id="rel-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 30px; color: #111111">{{ t.relH }}</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px">
+<sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+<div style="border: 1px solid #e2e2e0; border-radius: 10px; padding: 16px; display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; align-items: center">
+<div role="img" aria-label="{{ r.imgAlt }}" style="{{ r.imgStyle }}"></div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<a href="{{ r.href }}" style="font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 16px; text-decoration: none">{{ r.name }}</a>
+<span style="font-size: 13px; color: #5c5c5c">{{ r.meta }}</span>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px"><b>{{ r.price }}</b><sc-if value="{{ r.canAdd }}" hint-placeholder-val="{{ true }}"><a href="{{ cartHref }}" onClick="{{ r.add }}" style="font-size: 14px; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center">{{ t.add }}</a></sc-if></div>
+</div>
+</div>
+</sc-for>
 </div>
 </section>
 </sc-if>
@@ -325,133 +331,295 @@ summary::-webkit-details-marker{display:none}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4300}}'>
-// Jokaisella koolla on oma osoite, sama slug kuin nykyisessä kaupassa (SB_LIDS.url, data/seo-sailytettavat-sivut.md).
-// Sivu avataan tiedostona (?size=), ja osoiteriville vaihdetaan heti koon slug. <base> pitää suhteelliset linkit proton juuressa.
-// GitHub Pagesissa slugin uudelleenlataus menee 404.html:lle, joka ohjaa takaisin tälle sivulle oikealla koolla.
-const SB_URL_PREFIX = 'fi/';
-function sbSizeUrl(c, mode) {
-  if (typeof window === 'undefined' || !c || !c.url || typeof history === 'undefined') return;
+// Tuotesivupohja: kaikki siirrettävät tuotteet samasta pohjasta. Ei mitään käsin tuotteittain (service-design/tuotesivun-rakenne.md).
+// T = tuotteen kenttä (catalog.js, catalog-product.js), P = tuoteperheen pohja (FAM alla), Y = yhteinen sisältö (TXT), L = laskettu.
+// Avaus: ?id=<WooCommerce-id>, ?u=</butik/...>, kaupan slug-polku (404.html) tai vanhat ?size=1050 ja ?p=durk&size=400x400.
+// FiTuote.dc.html generoidaan tästä: tools/build-tuote-fi.sh.
+const LANG = 'fi';
+const li = LANG === 'fi' ? 1 : 0;
+const L2 = (sv, fi) => (LANG === 'fi' ? fi : sv);
+const PAGE = L2('SvProdukt.dc.html', 'FiTuote.dc.html'), SORT = L2('SvSortiment.dc.html', 'FiValikoima.dc.html'), HOME = L2('SvStartsida.dc.html', 'FiEtusivu.dc.html');
+const CART = L2('SvVarukorg.dc.html', 'FiOstoskori.dc.html'), OFFERT = L2('SvOffert.dc.html', 'FiTarjous.dc.html'), GUIDE = L2('SvProduktguide.dc.html', 'FiTuoteapuri.dc.html');
+const URL_PREFIX = L2('', 'fi/');
+
+// ---------- Y: yhteinen sisältö ----------
+const TXT = {
+  sv: { crumbAria: 'Du är här', home: 'Startsida', size: 'Storlek', howMeasure: 'Så mäter du', compare: 'Jämför storlekar', less: 'Minska antal', more: 'Öka antal', addCart: 'Lägg i varukorgen', add: 'Lägg till',
+    qCta: 'Begär offert', qAdd: 'Lägg till i offertförfrågan', qAdded: 'Tillagd i offertförfrågan.', qView: 'Visa förfrågan', qPrice: 'Pris enligt offert', qAlt: 'Den här produkten säljer vi på offert. Du får pris och leveranstid i offerten.',
+    frQ: 'Frakt ingår i offerten', frQn: 'Vi räknar frakten när du skickar förfrågan. Samma pris i hela Sverige.', fr: 'Frakt', frSame: 'Samma pris i hela Sverige.', total: 'Totalt med frakt', prod: (n) => 'Produkter, ' + n + ' st',
+    usp1: '14 dagars ångerrätt', usp2: 'Klarna eller Qliro, faktura för företag', project: 'Köper du fler eller till ett projekt?', phoneH: 'Osäker? Ring oss innan du beställer.', phoneT: 'Vi hjälper dig välja.', hours: 'Vardagar [X] till [X], helger [X] till [X]',
+    incl: 'inkl. moms', exkl: 'exkl. moms', copy: 'Kopiera', copied: 'Kopierat', art: 'Art.nr ', imgPh: 'Produktbild', img: 'Produktbild', imgN: (n) => 'Bild ' + n,
+    leadMore: 'Visa mer', leadLess: 'Visa mindre', about: (n) => 'Om ' + n, aboutMore: 'Läs hela beskrivningen', aboutLess: 'Visa mindre', moreAria: 'Mer om produkten',
+    checkH: 'Kontrollera dina mått', figAlt: 'Betongring ovanifrån. A är ringens insida, mätt rakt över hålet. B är ringens utsida.', checkBtn: 'Kontrollera', checkNone: 'Skriv minst ett mått i millimeter.', clsH: 'Belastningsklass', clsLink: 'Belastningsklasser förklarade',
+    techH: 'Teknisk data', docsH: 'Dokument', delH: 'Leverans och retur', faqH: 'Vanliga frågor', guidesH: 'Guider', allGuides: 'Alla guider', relH: 'Passar ihop med', fitDefault: 'Belastningsklass', altH: 'Andra alternativ',
+    docs: { datablad: 'Datablad', ritning: 'Måttritning', montering: 'Monteringsanvisning', certifikat: 'Certifikat', epd: 'EPD, miljövarudeklaration' },
+    del: { time: ['Leveranstid', 'Lagervaror levereras normalt inom [3 till 6] arbetsdagar, ibland längre. För större beställningar får du tiden i offerten.'], ret: ['Ångra köpet inom 14 dagar', 'Som privatperson har du 14 dagars ångerrätt.'], fr: 'Frakt', same: ', samma pris i hela Sverige.' },
+    range: (a, b) => (a === b ? a : a + ' till ' + b) + ' mm', mm: ' mm', kg: ' kg' },
+  fi: { crumbAria: 'Olet tässä', home: 'Etusivu', size: 'Koko', howMeasure: 'Näin mittaat', compare: 'Vertaa kokoja', less: 'Vähennä määrää', more: 'Lisää määrää', addCart: 'Lisää ostoskoriin', add: 'Lisää',
+    qCta: 'Pyydä tarjous', qAdd: 'Lisää tarjouspyyntöön', qAdded: 'Lisätty tarjouspyyntöön.', qView: 'Näytä pyyntö', qPrice: 'Hinta tarjouksen mukaan', qAlt: 'Tätä tuotetta myydään tarjouksella. Saat hinnan ja toimitusajan tarjouksessa.',
+    frQ: 'Rahti sisältyy tarjoukseen', frQn: 'Laskemme rahdin, kun lähetät pyynnön. Sama hinta koko Ruotsiin.', fr: 'Rahti', frSame: 'Sama hinta koko Ruotsiin.', total: 'Yhteensä rahteineen', prod: (n) => 'Tuotteet, ' + n + ' kpl',
+    usp1: '14 päivän peruutusoikeus', usp2: 'Klarna tai Qliro, lasku yrityksille', project: 'Ostatko useamman tai projektiin?', phoneH: 'Epävarma? Soita ennen kuin tilaat.', phoneT: 'Autamme valitsemaan.', hours: 'Arkisin [X] to [X], viikonloppuisin [X] to [X]',
+    incl: 'sis. alv', exkl: 'alv 0', copy: 'Kopioi', copied: 'Kopioitu', art: 'Tuotenro ', imgPh: 'Tuotekuva', img: 'Tuotekuva', imgN: (n) => 'Kuva ' + n,
+    leadMore: 'Näytä lisää', leadLess: 'Näytä vähemmän', about: (n) => 'Tietoa tuotteesta ' + n, aboutMore: 'Lue koko kuvaus', aboutLess: 'Näytä vähemmän', moreAria: 'Lisää tuotteesta',
+    checkH: 'Tarkista mittasi', figAlt: 'Betonirengas ylhäältä. A on renkaan sisäpuoli suoraan aukon yli mitattuna. B on renkaan ulkopuoli.', checkBtn: 'Tarkista', checkNone: 'Kirjoita vähintään yksi mitta millimetreinä.', clsH: 'Kuormitusluokka', clsLink: 'Kuormitusluokat selitettynä',
+    techH: 'Tekniset tiedot', docsH: 'Dokumentit', delH: 'Toimitus ja palautus', faqH: 'Usein kysytyt', guidesH: 'Oppaat', allGuides: 'Kaikki oppaat', relH: 'Sopii yhteen', fitDefault: 'Kuormitusluokka', altH: 'Muut vaihtoehdot',
+    docs: { datablad: 'Tuote-esite', ritning: 'Mittapiirustus', montering: 'Asennusohje', certifikat: 'Sertifikaatti', epd: 'EPD, ympäristöseloste' },
+    del: { time: ['Toimitusaika', 'Varastotuotteet toimitetaan yleensä [3 to 6] arkipäivässä, joskus pidempään. Isommissa tilauksissa aika kerrotaan tarjouksessa.'], ret: ['Peru ostos 14 päivän sisällä', 'Yksityisenä sinulla on 14 päivän peruutusoikeus.'], fr: 'Rahti', same: ', sama hinta koko Ruotsiin.' },
+    range: (a, b) => (a === b ? a : a + '-' + b) + ' mm', mm: ' mm', kg: ' kg' }
+};
+// EN 124 -kuormitusluokat, kerran per luokka (Y)
+const EN124 = { A15: ['A15: gång, cykel och gräsmatta (15 kN)', 'A15: kävely, pyöräily ja nurmikko (15 kN)'], B125: ['B125: gångbana, uppfart och personbil (125 kN)', 'B125: kävelytie, piha ja henkilöauto (125 kN)'],
+  C250: ['C250: parkering och kantsten (250 kN)', 'C250: pysäköinti ja reunakivi (250 kN)'], D400: ['D400: väg och gata (400 kN)', 'D400: tie ja katu (400 kN)'],
+  E600: ['E600: industri och truck (600 kN)', 'E600: teollisuus ja trukki (600 kN)'], F900: ['F900: hamn och flygplats (900 kN)', 'F900: satama ja lentokenttä (900 kN)'] };
+const CLS_ORDER = ['A15', 'B125', 'C250', 'D400', 'E600', 'F900'];
+
+// ---------- Teknisk data: rivien nimet ja arvojen käännökset (tuotedata-masterin sarakkeet) ----------
+const COL = { 60: ['Artikelnummer', 'Tuotenumero'], 64: ['Säljs per', 'Myyntiyksikkö'], 66: ['EAN', 'EAN'], 68: ['E-nummer', 'E-numero'], 70: ['RSK-nummer', 'RSK-numero'], 74: ['Antal per pall', 'Kpl per lava'],
+  86: ['Måttbeställning', 'Mittatilaus'], 88: ['Belastningsklass', 'Kuormitusluokka'], 90: ['Bärförmåga', 'Kantavuus'], 92: ['Material', 'Materiaali'], 94: ['Vikt', 'Paino'], 96: ['Standard', 'Standardi'], 98: ['Trafikverkets krav', 'Trafikverketin vaatimukset'],
+  103: ['Typ av brunn', 'Kaivotyyppi'], 105: ['Passar invändigt mått', 'Sopii sisämittaan'], 109: ['Utvändigt mått', 'Ulkomitta'], 111: ['Typ av betäckning', 'Kansityyppi'], 113: ['Låsbar', 'Lukittava'], 115: ['Låstyp', 'Lukkotyyppi'], 117: ['Egenskaper', 'Ominaisuudet'], 119: ['Storlek', 'Koko'],
+  121: ['Placering', 'Sijainti'], 123: ['Form', 'Muoto'], 125: ['Fri öppning', 'Vapaa aukko'], 129: ['Yttermått', 'Ulkomitat'], 133: ['Montering', 'Asennus'], 135: ['Miljö', 'Ympäristö'], 137: ['Egenskaper', 'Ominaisuudet'], 139: ['Brandklass', 'Paloluokka'], 141: ['Justeringsmån', 'Säätövara'],
+  143: ['Användning', 'Käyttö'], 145: ['Invändigt mått', 'Sisämitta'], 149: ['Höjd', 'Korkeus'], 151: ['Modulär', 'Modulaarinen'], 153: ['Max rörgenomföring', 'Suurin putkiläpivienti'], 155: ['Lock ingår', 'Kansi sisältyy'],
+  157: ['Serie', 'Sarja'], 159: ['Modell', 'Malli'], 161: ['Höjd', 'Korkeus'], 163: ['Bottenmått', 'Pohjan mitat'], 167: ['Infästning', 'Kiinnitys'], 169: ['Storlek', 'Koko'],
+  171: ['Fri öppning', 'Vapaa aukko'], 175: ['Ramens yttermått', 'Kehyksen ulkomitat'], 179: ['Ramhöjd', 'Kehyksen korkeus'], 181: ['Genomströmningsarea', 'Läpivirtausala'], 183: ['Gångjärn', 'Saranat'],
+  185: ['Ytterdiameter', 'Ulkohalkaisija'], 187: ['Längd', 'Pituus'], 189: ['Tryckklass', 'Paineluokka'], 191: ['Färg', 'Väri'], 193: ['Volym', 'Tilavuus'], 195: ['Nominell storlek NS', 'Nimelliskoko NS'], 197: ['Profiltyp', 'Profiilityyppi'], 199: ['Längd', 'Pituus'] };
+const UNIT = { 90: ' kg', 94: ' kg', 105: ' mm', 109: ' mm', 125: ' mm', 129: ' mm', 141: ' mm', 145: ' mm', 149: ' mm', 153: ' mm', 161: ' mm', 163: ' mm', 171: ' mm', 175: ' mm', 179: ' mm', 181: ' cm²', 185: ' mm', 187: ' m', 193: ' l', 195: ' l/s', 199: ' m' };
+const VAL = { Piece: ['st', 'kpl'], Pallet: ['Pall', 'Lava'], Yes: ['Ja', 'Kyllä'], No: ['Nej', 'Ei'],
+  'Cast iron': ['Gjutjärn', 'Valurauta'], Concrete: ['Betong', 'Betoni'], 'Galvanised steel': ['Varmförzinkat stål', 'Kuumasinkitty teräs'], Plastic: ['Plast', 'Muovi'], Composite: ['Komposit', 'Komposiitti'], 'Glass fibre': ['Glasfiber', 'Lasikuitu'], 'Stainless steel': ['Rostfritt stål', 'Ruostumaton teräs'], Aluminium: ['Aluminium', 'Alumiini'], Steel: ['Stål', 'Teräs'],
+  'Concrete well': ['Betongbrunn', 'Betonikaivo'], 'Plastic well corrugated': ['Plastbrunn, korrugerad', 'Muovikaivo, korrugoitu'], 'Plastic well smooth': ['Plastbrunn, slät', 'Muovikaivo, sileä'], Pipe: ['Rör', 'Putki'], 'Plastic well': ['Plastbrunn', 'Muovikaivo'], 'Socket pipe': ['Muffrör', 'Muhviputki'],
+  'Tät': ['Tät', 'Umpinainen'], Sil: ['Sil', 'Siivilä'], Galler: ['Galler', 'Ritilä'], 'Låsarmar': ['Låsarmar', 'Lukitusvarret'], Skruv: ['Skruv', 'Ruuvi'], Insexskruv: ['Insexskruv', 'Kuusiokoloruuvi'], 'Flexlås': ['Flexlås', 'Flexlukko'], 'Hänglås': ['Hänglås', 'Riippulukko'],
+  'Child safe': ['Barnsäker', 'Lapsiturvallinen'], 'Lifting aid': ['Lyfthjälp', 'Nostoapu'], Manhole: ['Manhål', 'Huoltoaukko'], 'Pump outlet': ['Utlopp för pump', 'Pumpun läpivienti'], Ventilated: ['Ventilerad', 'Tuuletettu'], Insulated: ['Isolerad', 'Eristetty'], Lockable: ['Låsbar', 'Lukittava'],
+  'Ground outdoors': ['Mark utomhus', 'Maa ulkona'], Floor: ['Golv', 'Lattia'], Inspection: ['Inspektion', 'Tarkastus'], 'Safety and evacuation': ['Säkerhet och utrymning', 'Turva ja poistuminen'], 'Crawl space': ['Krypgrund', 'Ryömintätila'],
+  Square: ['Kvadratisk', 'Neliö'], Rectangular: ['Rektangulär', 'Suorakaide'], Round: ['Rund', 'Pyöreä'], Infill: ['Infill', 'Infill'], Overlapping: ['Överfalsad', 'Limiluukku'], Flush: ['Plan', 'Tasainen'], Outdoor: ['Utomhus', 'Ulkona'], Indoor: ['Inomhus', 'Sisällä'],
+  Hinged: ['Gångjärn', 'Saranoitu'], 'Fall protection': ['Fallskydd', 'Putoamissuoja'], Watertight: ['Vattentät', 'Vesitiivis'], 'Odour tight': ['Lukttät', 'Hajutiivis'], 'Telecom and fibre': ['Tele och fiber', 'Tele ja kuitu'], Power: ['El', 'Sähkö'],
+  'Ground screw': ['Markskruv', 'Maaruuvi'], 'Post shoe': ['Stolpsko', 'Pylväskenkä'], 'M20 bolt': ['M20-bult', 'M20-pultti'], '60 mm post tube': ['Stolprör 60 mm', 'Pylväsputki 60 mm'], 'Weld plate': ['Svetsplatta', 'Hitsauslevy'],
+  'U profile': ['U-profil', 'U-profiili'], 'L profile': ['L-profil', 'L-profiili'], Gul: ['Gul', 'Keltainen'], 'Grön': ['Grön', 'Vihreä'], Orange: ['Orange', 'Oranssi'], 'Röd': ['Röd', 'Punainen'], Svart: ['Svart', 'Musta'], 'Blå': ['Blå', 'Sininen'] };
+const tv = (v) => String(v).split(' | ').map((x) => (VAL[x] ? VAL[x][li] : x)).join(', ');
+
+// ---------- P: tuoteperheiden pohjat (kerran per tuoteperhe, ei tuotekohtaisia väitteitä) ----------
+// facts = avaintiedot järjestyksessä; cmp = Jämför storlekar -sarakkeet; check = Passar den min brunn? -kentät; alt = Välj ett annat om;
+// pairs = Passar ihop med (tuotteet haetaan nimellä katalogista); addons = lisävalinnat; faq; guides.
+const S = (q) => SORT + '?' + q;
+const FAM = {
+  kannet: {
+    facts: ['ring', 'cls', 'kg', 'mat'], cmp: ['ring', 'kg'], fitH: L2('Passar den min brunn?', 'Sopiiko se kaivooni?'),
+    check: { figure: true, intro: L2('Mät ringens insida A, rakt över hålet.', 'Mittaa renkaan sisäpuoli A suoraan aukon yli.'), fields: [['a', L2('Insida A, mm', 'Sisäpuoli A, mm'), L2('t.ex. 600', 'esim. 600')]] },
+    alt: { title: L2('Välj ett annat lock om', 'Valitse toinen kansi, jos'), items: [
+      [L2('bil kör över brunnen', 'kaivon yli ajetaan autolla'), L2('körbart lock B125', 'ajettava kansi B125'), S('kat=lock&sub=latta&klass=B125')],
+      [L2('brunnen är av plast', 'kaivo on muovia'), L2('lock för plastbrunn', 'kansi muovikaivoon'), S('kat=lock&sub=plastbrunn')],
+      [L2('brunnen inte töms och locket får vara tungt', 'kaivoa ei tyhjennetä ja kansi saa olla painava'), L2('betonglock', 'betonikansi'), S('kat=lock&sub=betong')]] },
+    addonsTitle: L2('Lägg till tätningsring eller ventil', 'Lisää tiivisterengas tai venttiili'), addons: 'latta',
+    pairs: [/^Tätningsring/, /Avluftningsventil/i, /Hänglås/i],
+    faq: [[L2('Behöver locket ventilation?', 'Tarvitseeko kansi tuuletuksen?'), L2('Det beror på kommunen och brunnstypen. Slambrunnar behöver ofta luftning. Välj ventil som tillval, eller ring oss så kollar vi.', 'Se riippuu kunnasta ja kaivotyypistä. Sakokaivot tarvitsevat usein tuuletuksen. Valitse venttiili lisävarusteeksi tai soita meille, niin tarkistamme.')],
+      [L2('Kan slambilen öppna locket om det är låst?', 'Saako sakoauto kannen auki, jos se on lukittu?'), L2('Nej. Lämna låset öppet inför tömningen, eller kom överens med kommunen om var nyckeln finns.', 'Ei. Jätä lukko auki tyhjennystä varten tai sovi kunnan kanssa, missä avain on.')],
+      [L2('Behöver jag borra i betongen?', 'Pitääkö betoniin porata?'), L2('Nej. Locket ligger an mot ringen, och låset fästs i lockets egen ram.', 'Ei. Kansi asettuu renkaan päälle, ja lukko kiinnitetään kannen omaan kehykseen.')]],
+    guides: [[L2('Mätguide', 'Mittausopas'), L2('Mät brunnen: insida och utsida', 'Kaivon mittaaminen: sisä- ja ulkopuoli')], [L2('Slamtömning', 'Sakokaivon tyhjennys'), L2('Viktgränsen vid slamtömning och hur du väljer lock', 'Tyhjennyksen painoraja ja kannen valinta')], [L2('Säkerhet', 'Turvallisuus'), L2('Barnsäkert brunnslock: vad gäller?', 'Lapsiturvallinen kaivonkansi: mitä vaaditaan?')]]
+  },
+  luukut: {
+    facts: ['open', 'cls', 'kg', 'mat'], cmp: ['open', 'kg'], fitH: L2('Passar luckan din öppning?', 'Sopiiko luukku aukkoosi?'),
+    check: { intro: L2('Mät öppningens bredd och längd. Vi jämför med luckans fria öppning.', 'Mittaa aukon leveys ja pituus. Vertaamme niitä luukun vapaaseen aukkoon.'), fields: [['b', L2('Bredd, mm', 'Leveys, mm'), L2('t.ex. 600', 'esim. 600')], ['l', L2('Längd, mm', 'Pituus, mm'), L2('t.ex. 600', 'esim. 600')]] },
+    alt: { title: L2('Välj en annan lucka om', 'Valitse toinen luukku, jos'), items: [
+      [L2('bil eller lastbil kör över luckan', 'luukun yli ajetaan autolla tai kuorma-autolla'), L2('körbara luckor', 'ajettavat luukut'), S('kat=lock&sub=luckor&klass=C250')],
+      [L2('luckan sitter i golv eller vägg inomhus', 'luukku tulee sisälle lattiaan tai seinään'), L2('golv- och inspektionsluckor', 'lattia- ja tarkastusluukut'), S('kat=lock&sub=golv')],
+      [L2('inget standardmått passar', 'mikään vakiomitta ei sovi'), L2('kundanpassade luckor', 'mittatilausluukut'), S('kat=lock&sub=kund')]] },
+    pairs: [/Universalok|Locköppnare/i, /TK-nyckel/i],
+    faq: [[L2('Vilket mått ska jag mäta?', 'Mikä mitta mitataan?'), L2('Mät den fria öppningen, alltså hålet i golvet, väggen eller marken, bredd och längd.', 'Mittaa vapaa aukko eli reikä lattiassa, seinässä tai maassa, leveys ja pituus.')],
+      [L2('Vilken belastningsklass behöver jag?', 'Minkä kuormitusluokan tarvitsen?'), L2('Välj efter det tyngsta som kan passera över luckan.', 'Valitse raskaimman luukun yli kulkevan mukaan.')],
+      [L2('Kan jag få en lucka i ett annat mått?', 'Saako luukun muun kokoisena?'), L2('Begär offert med dina mått, så återkommer vi.', 'Pyydä tarjous mitoillasi, niin palaamme asiaan.')]],
+    guides: [[L2('Belastning', 'Kuormitus'), L2('Belastningsklasser förklarade', 'Kuormitusluokat selitettynä')], [L2('Mätguide', 'Mittausopas'), L2('Mät öppningen för en lucka', 'Luukun aukon mittaaminen')]]
+  },
+  kabel: {
+    facts: ['inner', 'cls', 'kg', 'mat'], cmp: ['inner', 'kg'], fitH: L2('Räcker brunnens mått?', 'Riittävätkö kaivon mitat?'),
+    check: { intro: L2('Skriv det invändiga mått du behöver minst.', 'Kirjoita tarvitsemasi vähimmäissisämitta.'), fields: [['l', L2('Längd, mm', 'Pituus, mm'), L2('t.ex. 900', 'esim. 900')], ['b', L2('Bredd, mm', 'Leveys, mm'), L2('t.ex. 600', 'esim. 600')]] },
+    alt: { title: L2('Välj en annan kabelbrunn om', 'Valitse toinen kaapelikaivo, jos'), items: [
+      [L2('du behöver ett annat invändigt mått', 'tarvitset toisen sisämitan'), L2('alla kabelbrunnar', 'kaikki kaapelikaivot'), S('kat=el&sub=kabelbrunn')],
+      [L2('du vill ha hjälp att välja', 'haluat apua valintaan'), L2('Hitta rätt kabelbrunn', 'Löydä oikea kaapelikaivo'), GUIDE + '?g=kabel']] },
+    pairs: [/skarvbrunn|Kabelbrunnslock|Brunnslock.*Durkplåt/i, /Märkskylt/i],
+    faq: [[L2('Hur väljer jag storlek?', 'Miten valitsen koon?'), L2('Utgå från antal kablar och rör som ska in i brunnen. Är du osäker, använd guiden eller ring oss.', 'Lähde kaivoon tulevien kaapelien ja putkien määrästä. Jos olet epävarma, käytä apuria tai soita meille.')],
+      [L2('Vilken belastningsklass behövs?', 'Mikä kuormitusluokka tarvitaan?'), L2('Den beror på var brunnen placeras, från grönyta till väg med tung trafik.', 'Se riippuu kaivon sijainnista, viheralueesta raskaan liikenteen tiehen.')],
+      [L2('Hur beställer jag?', 'Miten tilaan?'), L2('Skicka en förfrågan med mått och antal, så får du pris och leveranstid.', 'Lähetä pyyntö mitoin ja määrin, niin saat hinnan ja toimitusajan.')]],
+    guides: [[L2('Kabelbrunnar', 'Kaapelikaivot'), L2('Så väljer du kabelbrunn', 'Näin valitset kaapelikaivon')], [L2('Montering', 'Asennus'), L2('Montera en kabelbrunn', 'Kaapelikaivon asentaminen')]]
+  },
+  plintar: {
+    facts: ['h', 'kg', 'mat'], cmp: ['h', 'kg'], fitH: L2('Välj rätt fundament', 'Valitse oikea perustus'),
+    alt: { title: L2('Välj ett annat fundament om', 'Valitse toinen perustus, jos'), items: [
+      [L2('du vill slippa gräva', 'haluat välttää kaivamisen'), L2('markskruvar', 'maaruuvit'), S('kat=bygg&sub=markskruv')],
+      [L2('du är osäker på lasten', 'olet epävarma kuormasta'), L2('Hitta rätt fundament', 'Löydä oikea perustus'), GUIDE + '?g=fundament']] },
+    pairs: [/^Stolpsko/, /^Balksko/, /^Stålplatta/],
+    faq: [[L2('Hur många plintar behöver jag?', 'Montako plinttiä tarvitsen?'), L2('Det beror på konstruktionens storlek och last. Skicka en skiss, så hjälper vi dig.', 'Se riippuu rakennelman koosta ja kuormasta. Lähetä luonnos, niin autamme.')],
+      [L2('Hur högt ska fundamentet stå?', 'Kuinka korkealla perustuksen pitää olla?'), L2('Välj höjd efter markens lutning och hur högt konstruktionen ska stå över marken.', 'Valitse korkeus maan kaltevuuden ja rakennelman halutun korkeuden mukaan.')]],
+    guides: [[L2('Fundament', 'Perustukset'), L2('Så väljer du plint', 'Näin valitset plintin')], [L2('Montering', 'Asennus'), L2('Montera plintar', 'Plinttien asentaminen')]]
+  },
+  muut: {
+    facts: ['kg', 'mat'], cmp: ['art', 'kg'], fitH: '',
+    faq: [[L2('Hur beställer jag?', 'Miten tilaan?'), L2('Lägg produkten i varukorgen, eller begär offert om du köper till ett projekt.', 'Lisää tuote ostoskoriin tai pyydä tarjous, jos ostat projektiin.')],
+      [L2('Vad kostar frakten?', 'Paljonko rahti maksaa?'), L2('Frakten visas på produkten och i varukorgen. Samma pris i hela Sverige.', 'Rahti näkyy tuotteella ja ostoskorissa. Sama hinta koko Ruotsiin.')]],
+    guides: []
+  }
+};
+const FACT = { ring: L2('Passar ring (innermått)', 'Sopii renkaaseen (sisämitta)'), open: L2('Fri öppning', 'Vapaa aukko'), inner: L2('Invändigt mått', 'Sisämitta'), h: L2('Höjd', 'Korkeus'), cls: L2('Belastningsklass', 'Kuormitusluokka'), kg: L2('Vikt', 'Paino'), mat: L2('Material', 'Materiaali'), art: L2('Art.nr', 'Tuotenro') };
+
+// ---------- osoite: tuotteen oma slug osoiteriville (kuten nykyisessä kaupassa) ----------
+function syncUrl(it, mode) {
+  if (typeof window === 'undefined' || !it || !it.u || typeof history === 'undefined') return;
   const W = window;
   if (!W.__sbRoot) {
-    W.__sbRoot = location.href.replace(/[?#].*$/, '').replace(/[^/]*$/, '');
+    const p = location.href.replace(/[?#].*$/, '');
+    const i = p.indexOf('/butik/');
+    W.__sbRoot = i >= 0 ? p.slice(0, i).replace(/\/fi$/, '') + '/' : p.replace(/[^/]*$/, '');
     if (!document.querySelector('base')) { const b = document.createElement('base'); b.href = W.__sbRoot; document.head.prepend(b); }
   }
-  const target = W.__sbRoot + SB_URL_PREFIX + c.url.replace(/^\//, '');
-  try { if (location.href.replace(/#.*$/, '') !== target) history[mode === 'push' ? 'pushState' : 'replaceState']({ size: c.d }, '', target + location.hash); } catch (e) {}
-  document.title = c['fi'] || document.title;
+  const target = W.__sbRoot + URL_PREFIX + it.u.replace(/^\//, '');
+  try { if (location.href.replace(/#.*$/, '') !== target) history[mode === 'push' ? 'pushState' : 'replaceState']({ id: it.id }, '', target); } catch (e) {}
+  document.title = it.n;
 }
-const sbDurkFromPath = () => { try { const m = location.pathname.match(/durkplatslucka-(\d+x\d+)-golv-vagg/); return m ? m[1] : ''; } catch (e) { return ''; } };
-const sbSizeFromPath = () => { try { const m = location.pathname.match(/latt-brunnslock-(\d+)-composite/); return m ? parseInt(m[1], 10) : 0; } catch (e) { return 0; } };
+const numKey = (s) => String(s || '').match(/\d+/g) || [];
+const bySize = (a, b) => { const x = numKey(a.sz).map(Number), y = numKey(b.sz).map(Number); for (let i = 0; i < Math.max(x.length, y.length); i++) { if ((x[i] || 0) !== (y[i] || 0)) return (x[i] || 0) - (y[i] || 0); } return 0; };
+function findItem(C) {
+  const items = C.items;
+  let qp; try { qp = new URLSearchParams(location.search); } catch (e) { qp = new URLSearchParams(''); }
+  const path = typeof location !== 'undefined' ? location.pathname : '';
+  const byId = (id) => items.find((i) => i.id === String(id));
+  if (qp.get('id') && byId(qp.get('id'))) return byId(qp.get('id'));
+  const u = qp.get('u') || (path.indexOf('/butik/') >= 0 ? path.slice(path.indexOf('/butik/')) : '');
+  if (u) { const hit = items.find((i) => i.u === u.replace(/\/$/, '')); if (hit) return hit; }
+  if (qp.get('p') === 'durk') { const sz = (qp.get('size') || '').replace('x', '×'); const hit = items.find((i) => /^SF02\b/.test(i.fam || '') && i.sz === sz); if (hit) return hit; }
+  if (qp.get('size')) { const hit = items.find((i) => /^SF19\b/.test(i.fam || '') && String(i.sz) === qp.get('size')); if (hit) return hit; }
+  return byId('1266') || items[0];
+}
+
 class Component extends DCLogic {
-  constructor(props) { super(props); const SB = typeof window !== 'undefined' ? window.SBCart : null; const z0 = SB ? SB.zip() : ''; let s0 = 0, fam0 = 'comp'; try { const qp = new URLSearchParams(location.search); fam0 = qp.get('p') === 'durk' || sbDurkFromPath() ? 'durk' : 'comp'; s0 = fam0 === 'durk' ? (qp.get('size') || sbDurkFromPath() || '') : (parseInt(qp.get('size'), 10) || sbSizeFromPath()); } catch (e) {} this.state = { fam: fam0, quoteAdded: false, size: s0, vat: 'inkl', qty: 1, addons: {}, zip: z0, zipDone: /^\d{5}$/.test(z0.replace(/\s/g, '')), zipErr: false, inMm: '', outMm: '', checkMsg: '', about: false, copied: false }; this.__url = false; if (typeof window !== 'undefined') window.addEventListener('popstate', () => { const k = sbDurkFromPath(), d = sbSizeFromPath(); if (k) this.setState({ fam: 'durk', size: k, quoteAdded: false }); else if (d) this.setState({ fam: 'comp', size: d, addons: {} }); }); }
-  // Luukkuperhe SF02: sama sivu, oma data. Tarjouskoossa (quote) ostopainikkeen tilalla tarjouspyyntö ja rahti tarjouksessa.
-  durkVals() {
-    const S = this.state, W = typeof window !== 'undefined' ? window : {};
-    const DK = W.SB_DURK || { items: [], def: '' };
-    const fam = DK.items;
-    const c = fam.find((i) => i.key === S.size) || fam.find((i) => i.key === DK.def) || fam[0] || { key: '', label: '', kg: 0, sku: '', price: 0, quote: false, fr: 'ombud', sv: '', fi: '' };
-    if (!this.__url) { this.__url = true; sbSizeUrl(c, 'replace'); } else if (typeof document !== 'undefined' && c['fi']) document.title = c['fi'];
-    const ex = S.vat === 'exkl', q = !!c.quote;
-    const fmt = (n) => Math.round(ex ? n / 1.25 : n).toLocaleString('fi-FI') + ' kr';
-    const fmtRaw = (n) => Math.round(n).toLocaleString('fi-FI') + ' kr';
-    const SB = W.SBCart || null;
-    const ls = [{ fr: c.fr, kg: c.kg, qty: S.qty }];
-    const f = !q && SB && SB.freight ? SB.freight(ls, 'fi') : { price: 0, label: '' };
-    const frText = W.SBFreight ? (W.SBFreight.profiles[c.fr] || {})['fi'] : '';
-    const addQ = () => { if (SB) SB.add(c.id, S.qty); };
-    return {
-      cart: 0, vat: S.vat, setVat: (v) => this.setState({ vat: v }),
-      isLid: false, isDurk: true, isBuy: !q, isQuote: q, hasAddons: false, hasCls: false, cls: '',
-      crumbCat: 'Durkplåtiluukut', crumbHref: 'FiValikoima.dc.html?kat=lock&sub=luckor', imgAlt: 'Tuotekuva: durkplåtiluukku betonilattiassa',
-      thumbs: ['Lattiassa', 'Mittakuva', 'Kehys ja ruuvit', 'Avoin luukku'].map((l, i) => ({ label: l, on: String(i === 0), style: i === 0 ? 'aspect-ratio: 1; border: 2px solid #111111; background: #ececea; border-radius: 10px; font: inherit; font-size: 12px; color: #474747; cursor: pointer' : 'aspect-ratio: 1; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 10px; font: inherit; font-size: 12px; color: #474747; cursor: pointer' })),
-      T: { compare: 'Vertaa kokoja', cSize: 'Koko', cIn: 'Vapaa aukko', cOut: 'Paino', cPrice: 'Hinta' }, name: c['fi'], art: c.sku, sub: 'Vapaa aukko ' + c.label + ' mm. Lattiaan ja seinään, sisälle ja ulos.',
-      bullets: ['Vapaa aukko ' + c.label + ' mm.', 'Jauhemaalattu mustaksi, sisä- ja ulkokäyttöön.', 'Kansi lukitaan upotetuilla ruuveilla.', 'Painaa ' + c.kg + ' kg.'].map((x) => ({ t: x })),
-      copyLabel: S.copied ? 'Kopioitu' : 'Kopioi', copyArt: () => { try { navigator.clipboard.writeText(c.sku); } catch (e) {} this.setState({ copied: true }); },
-      sizes: fam.map((z) => { const on = z.key === c.key; return { label: z.label, href: SB_URL_PREFIX + z.url.replace(/^\//, ''), cur: on ? 'page' : 'false', inTxt: z.label + ' mm', outTxt: z.kg + ' kg', price: z.quote ? 'Tarjous' : fmt(z.price),
-        rowStyle: on ? 'background: #f5f5f4; font-weight: 600' : '', style: 'min-height: 44px; min-width: 64px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: 600; font-size: 15px; text-decoration: none; ' + (on ? 'border: 1.5px solid #111111; background: #111111; color: #ffffff' : 'border: 1.5px solid #bdbdbb; color: #111111'),
-        pick: (e) => { if (e && e.preventDefault) e.preventDefault(); if (on) return; sbSizeUrl(z, 'push'); this.setState({ size: z.key, quoteAdded: false }); } }; }),
-      price: q ? 'Hinta tarjouksen mukaan' : fmt(c.price), vatLabel: q ? '' : (ex ? 'alv 0' : 'sis. alv'),
-      altPrice: q ? 'Tätä kokoa myydään tarjouksella. Saat hinnan ja toimitusajan tarjouksessa.' : (ex ? fmtRaw(c.price) + ' ' + 'sis. alv' : fmtRaw(c.price / 1.25) + ' ' + 'alv 0'),
-      qty: S.qty, less: () => this.setState({ qty: Math.max(1, S.qty - 1) }), more: () => this.setState({ qty: S.qty + 1 }),
-      addToCart: () => { if (SB) SB.add(c.id, S.qty); },
-      prodLabel: 'Tuotteet, ' + S.qty + ' kpl', prodSum: q ? '' : fmt(c.price * S.qty),
-      frLabel: 'Rahti' + (f.label ? ', ' + f.label.toLowerCase() : ''), frNote: 'Sama hinta koko Ruotsiin.', frSum: fmt(f.price), totalSum: q ? '' : fmt(c.price * S.qty + f.price),
-      Q: { cta: 'Pyydä tarjous', add: 'Lisää tarjouspyyntöön', added: 'Lisätty tarjouspyyntöön.', view: 'Näytä pyyntö', fr: 'Rahti sisältyy tarjoukseen', frNote: 'Laskemme rahdin, kun lähetät pyynnön. Sama hinta koko Ruotsiin.', offertHref: 'FiTarjous.dc.html', cartHref: 'FiOstoskori.dc.html' },
-      quoteAdded: S.quoteAdded, addQuote: addQ, addQuoteStay: () => { addQ(); this.setState({ quoteAdded: true }); },
-      D: { aboutH: 'Tietoa tuotteesta ' + c.fi, lead: 'Durkplåtiluukku lattiaan ja seinään. Jauhemaalattu mustaksi, sopii sekä sisä- että ulkokäyttöön. Kansi lukitaan upotetuilla ruuveilla.', useH: 'Käyttö', use: 'Lattiaan ja seinään, sisälle ja ulos. Valmistamme luukkuja myös muihin kokoihin toiveiden mukaan.', mountH: 'Asennus', mount: 'Luukussa on upotettu kehys, joten sen voi asentaa sekä lattiaan että seinään. Kehyksen sisäpuolella on valmiit reiät, joten sen voi kiinnittää ruuveilla puu- tai betonivälipohjaan tai valaa betoniin.', specH: 'Mitat ja materiaali', delH: 'Toimitus',
-        spec: [['Vapaa aukko', c.label + ' mm'], ['Paino', c.kg + ' kg'], ['Materiaali', 'Teräs, jauhemaalattu mustaksi'], ['Sijainti', 'Lattia ja seinä, sisällä ja ulkona'], ['Lukitus', 'Upotetut ruuvit'], ['Tuotenumero', c.sku]].map((r) => ({ k: r[0], v: r[1] })),
-        del: [{ h: 'Rahti', t: q ? 'Rahti sisältyy tarjoukseen' + '. ' + 'Laskemme rahdin, kun lähetät pyynnön. Sama hinta koko Ruotsiin.' : frText + ', sama hinta koko Ruotsiin.' }, { h: 'Muut koot', t: 'Valmistamme luukkuja muihin kokoihin toiveiden mukaan. Pyydä tarjous mitoillasi.' }] }
-    };
+  constructor(props) {
+    super(props);
+    const C = (typeof window !== 'undefined' && window.SB_CATALOG) || { items: [], cats: [], fams: {} };
+    const it = findItem(C) || { id: '' };
+    this.state = { id: it.id, vat: 'inkl', qty: 1, addons: {}, img: 0, copied: false, leadOpen: false, aboutOpen: false, chk: {}, checkMsg: '', quoteAdded: false };
+    this.__url = false;
+    if (typeof window !== 'undefined') window.addEventListener('popstate', () => { const n = findItem(C); if (n) this.setState({ id: n.id, img: 0, addons: {}, checkMsg: '', chk: {}, quoteAdded: false }); });
   }
   renderVals() {
-    const S = this.state;
-    if (S.fam === 'durk') return this.durkVals();
-    const LD = (typeof window !== 'undefined' && window.SB_LIDS) || { families: { comp: { def: 1050 } }, items: [] };
-    const fam = LD.items.filter((i) => i.fam === 'comp').sort((a, b) => a.d - b.d);
-    const c = fam.find((i) => i.d === S.size) || fam.find((i) => i.d === LD.families.comp.def) || fam[0] || { d: 1050, sku: '', price: 0, lo: 0, hi: 0, olo: 0, ohi: 0, kg: 0, seal: 0 };
-    if (!this.__url) { this.__url = true; sbSizeUrl(c, 'replace'); } else if (typeof document !== 'undefined' && c['fi']) document.title = c['fi'];
-    const base = c.price;
-    const rng = (a, b) => a + ' ja ' + b + ' mm:n välillä';
-    const T = { compare: 'Vertaa kokoja', cSize: 'Koko', cIn: 'Sisämitta', cOut: 'Ulkomitta', cPrice: 'Hinta' };
-    const ex = S.vat === 'exkl';
-    const fmt = (n) => Math.round(ex ? n / 1.25 : n).toLocaleString('fi-FI') + ' kr';
-    const fmtRaw = (n) => Math.round(n).toLocaleString('fi-FI') + ' kr';
-    const addonDefs = [
-      { key: 'seal', id: 'seal-' + c.d, label: c.sealName ? 'Tiivisterengas ' + c.sealName : 'Tiivisterengas', text: 'Juomavesikaivoon.', price: c.seal },
-      { key: 'ventil', id: 'ventil', label: 'Ilmanpoistoventtiili', text: 'Jos kunta vaatii tuuletuksen.', price: 569 },
-      { key: 'hal', id: 'hal', label: 'Esiporattu reikä ilmanpoistoventtiilille', text: 'Jos asennat venttiilin myöhemmin.', price: 58 }
-    ];
-    const unit = base + addonDefs.reduce((s, a) => s + (S.addons[a.key] ? a.price : 0), 0);
-    const ok = (v) => v >= 200 && v <= 2000;
-    const OUT = {
-      crumbCat: 'Kevyet kaivonkannet', crumbHref: 'FiValikoima.dc.html?kat=lock&sub=latta', imgAlt: 'Tuotekuva: kansi betonirenkaan päällä nurmikolla', hasCls: true, cls: 'A15', hasAddons: true, isBuy: true, isQuote: false, isLid: true, isDurk: false, quoteAdded: false,
-      thumbs: ['Kaivon päällä', 'Mittakuva', 'Lukko ja alapuoli', 'Nousee yhdellä kädellä'].map((l, i) => ({ label: l, on: String(i === 0), style: i === 0 ? 'aspect-ratio: 1; border: 2px solid #111111; background: #ececea; border-radius: 10px; font: inherit; font-size: 12px; color: #474747; cursor: pointer' : 'aspect-ratio: 1; border: 1.5px dashed #b9b9b7; background: #ececea; border-radius: 10px; font: inherit; font-size: 12px; color: #474747; cursor: pointer' })),
-      cart: 0, vat: S.vat, setVat: (v) => this.setState({ vat: v }),
-      T: T, name: c['fi'] || '', art: c.sku, sub: 'Betonirenkaaseen, jonka sisämitta on ' + c.lo + ' ja ' + c.hi + ' mm:n välillä. Nostat sen itse sakokaivon tyhjennyksessä.', fitText: 'Sopii betonirenkaaseen, jonka sisämitta on ' + c.lo + ' ja ' + c.hi + ' mm:n välillä ja ulkomitta ' + c.olo + ' ja ' + c.ohi + ' mm:n välillä.', kgText: 'Painaa ' + c.kg + ' kg, joten sen nostaa helposti pois sakokaivon tyhjennyksessä.', lead: 'Kevyt ja lapsiturvallinen kansi betonikaivoihin, joiden renkaan sisämitta on ' + c.lo + ' ja ' + c.hi + ' mm:n välillä, esimerkiksi kolmikammio- ja sakokaivoihin. Kansi painaa ' + c.kg + ' kg, joten sen voi nostaa pois käsin, kun kaivo tyhjennetään.', rangeText: 'Kansi sopii renkaisiin, joiden sisäpuoli A on ' + c.lo + ' ja ' + c.hi + ' mm:n välillä ja ulkopuoli B ' + c.olo + ' ja ' + c.ohi + ' mm:n välillä.',
-      inTxt: rng(c.lo, c.hi), outTxt: rng(c.olo, c.ohi), dTxt: String(c.d), kgTxt: c.kg + ' kg (kuvauksen mukaan)',
-      sizes: fam.map((z) => { const on = z.d === c.d; return { label: String(z.d), href: z.url ? SB_URL_PREFIX + z.url.replace(/^\//, '') : 'FiTuote.dc.html?size=' + z.d, cur: on ? 'page' : 'false', inTxt: rng(z.lo, z.hi), outTxt: rng(z.olo, z.ohi), price: fmt(z.price),
-        rowStyle: on ? 'background: #f5f5f4; font-weight: 600' : '',
-        style: 'min-height: 44px; min-width: 64px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: 600; font-size: 15px; text-decoration: none; ' + (on ? 'border: 1.5px solid #111111; background: #111111; color: #ffffff' : 'border: 1.5px solid #bdbdbb; color: #111111'),
-        pick: (e) => { if (e && e.preventDefault) e.preventDefault(); if (on) return; sbSizeUrl(z, 'push'); this.setState({ size: z.d, addons: {} }); } }; }),
-      price: fmt(base), vatLabel: ex ? 'alv 0' : 'sis. alv',
-      altPrice: ex ? fmtRaw(base) + ' sis. alv' : fmtRaw(base / 1.25) + ' alv 0',
-      copyLabel: S.copied ? 'Kopioitu' : 'Kopioi',
-      copyArt: () => { try { navigator.clipboard.writeText(c.sku); } catch (e) {} this.setState({ copied: true }); },
-      addons: addonDefs.map((a) => ({ ...a, price: '+ ' + fmt(a.price), on: !!S.addons[a.key], toggle: () => this.setState({ addons: { ...S.addons, [a.key]: !S.addons[a.key] } }) })),
-      qty: S.qty, less: () => this.setState({ qty: Math.max(1, S.qty - 1) }), more: () => this.setState({ qty: S.qty + 1 }),
-      prodLabel: 'Tuotteet, ' + S.qty + ' kpl', prodSum: fmt(unit * S.qty),
-      ...(() => { const SB = typeof window !== 'undefined' ? window.SBCart : null; const ls = [{ fr: window.SBFreight ? window.SBFreight(c).key : 'skrym', kg: c.kg, qty: S.qty }].concat(addonDefs.filter((a) => S.addons[a.key]).map(() => ({ fr: 'ombud', kg: 1, qty: S.qty }))); const f = SB && SB.freight ? SB.freight(ls, 'fi') : { price: 590, label: '' }; return { frLabel: 'Rahti' + (f.label ? ', ' + f.label.toLowerCase() : ''), frNote: 'Sama hinta koko Ruotsiin, kansien määrästä riippumatta.', frSum: fmt(f.price), totalSum: fmt(unit * S.qty + f.price) }; })(),
-      zip: S.zip, typeZip: (e) => this.setState({ zip: e.target.value, zipErr: false }),
-      submitZip: (e) => { e.preventDefault(); const v = S.zip.replace(/\s/g, ''); if (/^\d{5}$/.test(v)) { if (typeof window !== 'undefined' && window.SBCart) window.SBCart.setZip(S.zip); this.setState({ zipDone: true, zipErr: false }); } else this.setState({ zipErr: true }); },
-      noZip: !S.zipDone, hasZip: S.zipDone, zipErr: S.zipErr,
-      zipShown: S.zip.replace(/\s/g, '').replace(/^(\d{3})(\d{2})$/, '$1 $2'),
-      changeZip: () => this.setState({ zipDone: false }),
-      aboutStyle: S.about ? 'max-width: 68ch' : 'max-width: 68ch; max-height: 9.5em; overflow: hidden; -webkit-mask-image: linear-gradient(#000 55%, transparent); mask-image: linear-gradient(#000 55%, transparent)',
-      aboutOpen: String(S.about), aboutLabel: S.about ? 'Näytä vähemmän' : 'Lue koko kuvaus', toggleAbout: () => this.setState({ about: !S.about }),
-      inMm: S.inMm, outMm: S.outMm,
-      typeIn: (e) => this.setState({ inMm: e.target.value }), typeOut: (e) => this.setState({ outMm: e.target.value }),
-      checkMsg: S.checkMsg,
-      check: (e) => {
-        e.preventDefault();
-        const vi = parseInt(S.inMm, 10), vo = parseInt(S.outMm, 10);
-        if (!ok(vi) && !ok(vo)) { this.setState({ checkMsg: 'Kirjoita vähintään yksi mitta millimetreinä, esimerkiksi 900.' }); return; }
-        const out = [];
-        let bad = false;
-        if (ok(vi)) { const inside = vi >= c.lo && vi <= c.hi; if (!inside) bad = true; out.push('Sisäpuoli A ' + vi + ' mm ' + (inside ? 'on kannen mittojen sisällä.' : 'on kannen mittojen ulkopuolella (' + c.lo + ' ja ' + c.hi + ' mm:n välillä).')); }
-        if (ok(vo)) { const inside = vo >= c.olo && vo <= c.ohi; if (!inside) bad = true; out.push('Ulkopuoli B ' + vo + ' mm ' + (inside ? 'on kannen mittojen sisällä.' : 'on kannen mittojen ulkopuolella (' + c.olo + ' ja ' + c.ohi + ' mm:n välillä).')); }
-        if (!bad && ok(vi) !== ok(vo)) out.push('Mittaa varmuuden vuoksi myös ' + (ok(vi) ? 'ulkopuoli B.' : 'sisäpuoli A.'));
-        if (bad) out.push('Vertaa yllä olevia kokoja.');
-        this.setState({ checkMsg: out.join(' ') });
-      },
-      addToCart: () => { const SB = typeof window !== 'undefined' ? window.SBCart : null; if (!SB) return; SB.add('comp-' + c.d, S.qty); addonDefs.forEach((a) => { if (S.addons[a.key]) SB.add(a.id, S.qty); }); if (S.zipDone) SB.setZip(S.zip); },
-      related: [
-        { title: c.sealName ? 'Tiivisterengas ' + c.sealName : 'Tiivisterengas koolle ' + c.d, text: 'Tiivistää kannen renkaaseen, juomavesikaivoon.', price: fmt(c.seal), id: 'seal-' + c.d, img: 'Kuva: tiivisterengas' },
-        { title: 'Ilmanpoistoventtiili', text: 'Jos kunta vaatii kaivon tuuletuksen.', price: fmt(569), id: 'ventil', img: 'Kuva: ilmanpoistoventtiili' },
-        { title: 'Riippulukkosovitin', text: 'Kun haluat lukita kannen riippulukolla.', price: fmt(279), id: 'hanglas', img: 'Kuva: riippulukkosovitin' }
-      ].map((r) => ({ ...r, add: () => { if (typeof window !== 'undefined' && window.SBCart) window.SBCart.add(r.id, 1); } }))
+    const St = this.state, T = TXT[LANG];
+    const W = typeof window !== 'undefined' ? window : {};
+    const C = W.SB_CATALOG || { items: [], cats: [], fams: {} }, PR = W.SB_PRODUCT || {};
+    const it = C.items.find((i) => i.id === St.id) || C.items[0] || { id: '', n: '', fr: 'ombud' };
+    const D = PR[it.id] || {};
+    if (!this.__url) { this.__url = true; syncUrl(it, 'replace'); } else if (typeof document !== 'undefined') document.title = it.n;
+    const P = FAM[it.tpl] || FAM.muut;
+    const nc = it.nc || [];
+    const okv = (k) => it[k] != null && nc.indexOf(k) < 0 && !(Array.isArray(it[k]) && !it[k].length);
+    const ex = St.vat === 'exkl', loc = LANG === 'fi' ? 'fi-FI' : 'sv-SE';
+    const fmt = (n) => Math.round(ex ? n / 1.25 : n).toLocaleString(loc) + ' kr';
+    const fmtRaw = (n) => Math.round(n).toLocaleString(loc) + ' kr';
+    const pair = (a, b) => (a && b ? a + ' × ' + b + ' mm' : '');
+    const fv = {
+      ring: (x) => (x.rlo != null && nc.indexOf('rlo') < 0 ? T.range(x.rlo, x.rhi != null ? x.rhi : x.rlo) : ''),
+      open: (x) => (nc.indexOf('ow') < 0 ? pair(x.ow, x.ol) : ''), inner: (x) => (nc.indexOf('il') < 0 ? pair(x.il, x.iw) : ''),
+      h: (x) => (x.h != null && nc.indexOf('h') < 0 ? x.h + ' mm' : ''), kg: (x) => (x.kg != null && nc.indexOf('kg') < 0 ? String(x.kg).replace('.', ',') + ' kg' : ''),
+      cls: (x) => (okv('cls') ? x.cls.slice().sort((a, b) => CLS_ORDER.indexOf(a) - CLS_ORDER.indexOf(b)).join(', ') : ''),
+      mat: (x) => (okv('mat') ? tv(x.mat.join(' | ')) : ''), art: (x) => x.sku || ''
     };
-    OUT.bullets = [OUT.fitText, 'Kestää kävelyn ja nurmikon (A15), mutta ei autoa.', OUT.kgText, 'Lapsiturvallinen ja lukittava, joten lapset eivät saa kantta auki.'].map((x) => ({ t: x }));
-    return OUT;
+    // kategoria ja murupolku (L)
+    const cat = C.cats.find((c) => c.id === it.cat), sub = cat && cat.subs.find((s) => s.id === it.sub);
+    const crumbs = [{ label: T.home, href: HOME }].concat(cat ? [{ label: cat[LANG], href: SORT + '?kat=' + cat.id }] : []).concat(sub ? [{ label: sub[LANG], href: SORT + '?kat=' + cat.id + '&sub=' + sub.id }] : []);
+    // kokoperhe (L)
+    const fam = it.fam ? C.items.filter((i) => i.fam === it.fam).sort(bySize) : [it];
+    const pick = (z) => (e) => { if (e && e.preventDefault) e.preventDefault(); if (z.id === it.id) return; syncUrl(z, 'push'); this.setState({ id: z.id, img: 0, addons: {}, checkMsg: '', quoteAdded: false }); };
+    const cellH = 'padding: 8px 10px; font-weight: 600; color: #474747; border-bottom: 1px solid #e2e2e0;';
+    const sizes = fam.map((z) => { const on = z.id === it.id, cell = 'padding: 8px 10px; border-bottom: 1px solid #e2e2e0;' + (on ? ' background: #f5f5f4; font-weight: 600;' : '');
+      return { label: z.sz || z.n, href: PAGE + '?id=' + z.id, cur: on ? 'page' : 'false', pick: pick(z), price: z.price == null ? L2('Offert', 'Tarjous') : fmt(z.price),
+        v1: fv[P.cmp[0]](z), v2: fv[P.cmp[1]](z), c0: cell + ' padding-left: 0;', c1: cell, c3: cell + ' padding-right: 0; text-align: right;',
+        style: 'min-height: 44px; min-width: 64px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: 600; font-size: 15px; text-decoration: none; ' + (on ? 'border: 1.5px solid #111111; background: #111111; color: #ffffff' : 'border: 1.5px solid #bdbdbb; color: #111111') }; });
+    const cmpHead = [T.size, FACT[P.cmp[0]], FACT[P.cmp[1]], L2('Pris', 'Hinta')].map((l, i) => ({ label: l, style: cellH + (i === 0 ? ' padding-left: 0;' : '') + (i === 3 ? ' padding-right: 0; text-align: right;' : '') }));
+    // kuvat (T)
+    const imgs = D.img || [], cur = imgs[Math.min(St.img, imgs.length - 1)];
+    const imgBox = 'aspect-ratio: 1 / 1; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #474747; font-size: 14px; background-color: #ececea; background-repeat: no-repeat; background-position: center; background-size: contain; background-blend-mode: multiply;';
+    // avaintiedot (T + P)
+    const facts = P.facts.map((k) => ({ k: FACT[k], v: k === 'cls' && fv.cls(it) ? fv.cls(it) : fv[k](it) })).filter((f) => f.v);
+    // hinta, rahti (T + L)
+    const q = it.price == null;
+    const SB = W.SBCart || null, FRP = W.SBFreight ? W.SBFreight.profiles : {};
+    // lisävalinnat (P): kansien pohjassa kevyille kansille. Tiivisterengas kokoperheen lisävarusteena, kun se on datassa (SB_LIDS).
+    const LD = W.SB_LIDS || { items: [], acc: [] };
+    let addonDefs = [];
+    if (P.addons && it.sub === P.addons && !q) {
+      const lid = LD.items.find((x) => x.sku === it.sku);
+      if (lid && lid.seal) addonDefs.push({ key: 'seal', id: 'seal-' + lid.d, label: (lid.sealName ? L2('Tätningsring ', 'Tiivisterengas ') + lid.sealName : L2('Tätningsring', 'Tiivisterengas')), price: lid.seal });
+      LD.acc.filter((a) => a.id === 'ventil' || a.id === 'hal').forEach((a) => addonDefs.push({ key: a.id, id: a.id, label: a[LANG], price: a.price }));
+    }
+    const unit = (it.price || 0) + addonDefs.reduce((s, a) => s + (St.addons[a.key] ? a.price : 0), 0);
+    const lines = [{ fr: it.fr, kg: it.kg, qty: St.qty }].concat(addonDefs.filter((a) => St.addons[a.key]).map(() => ({ fr: 'ombud', kg: 1, qty: St.qty })));
+    const f = !q && SB && SB.freight ? SB.freight(lines, LANG) : { price: 590, label: '' };
+    // kuvaus (T)
+    const lead = D.s || [], about = D.d || [];
+    const len = (a) => a.join(' ').length;
+    const mask = (open) => open ? 'max-width: 68ch' : 'max-width: 68ch; max-height: 9.5em; overflow: hidden; -webkit-mask-image: linear-gradient(#000 55%, transparent); mask-image: linear-gradient(#000 55%, transparent)';
+    // mittatarkistin (P + T)
+    const chkOk = P.check && ((it.tpl === 'kannet' && fv.ring(it)) || (it.tpl === 'luukut' && fv.open(it)) || (it.tpl === 'kabel' && fv.inner(it)));
+    const check = (e) => {
+      e.preventDefault();
+      const v = {}; (P.check.fields || []).forEach((fd) => { const n = parseInt(St.chk[fd[0]], 10); if (n >= 50 && n <= 5000) v[fd[0]] = n; });
+      if (!Object.keys(v).length) { this.setState({ checkMsg: T.checkNone }); return; }
+      let ok = false, msg = '';
+      if (it.tpl === 'kannet') { const hi = it.rhi != null ? it.rhi : it.rlo; ok = v.a >= it.rlo && v.a <= hi; msg = ok ? L2(v.a + ' mm ligger inom lockets mått (' + T.range(it.rlo, hi) + ').', v.a + ' mm on kannen mittojen sisällä (' + T.range(it.rlo, hi) + ').') : L2(v.a + ' mm ligger utanför lockets mått (' + T.range(it.rlo, hi) + '). Jämför storlekarna ovan.', v.a + ' mm on kannen mittojen ulkopuolella (' + T.range(it.rlo, hi) + '). Vertaa kokoja yllä.'); }
+      if (it.tpl === 'luukut') { const fit = (a, b) => (!v.b || Math.abs(a - v.b) <= 20) && (!v.l || Math.abs(b - v.l) <= 20); ok = fit(it.ow, it.ol) || fit(it.ol, it.ow); msg = ok ? L2('Luckans fria öppning ' + pair(it.ow, it.ol) + ' passar ditt mått.', 'Luukun vapaa aukko ' + pair(it.ow, it.ol) + ' sopii mittaasi.') : L2('Luckans fria öppning är ' + pair(it.ow, it.ol) + '. Jämför storlekarna ovan.', 'Luukun vapaa aukko on ' + pair(it.ow, it.ol) + '. Vertaa kokoja yllä.'); }
+      if (it.tpl === 'kabel') { const fit = (a, b) => (!v.l || a >= v.l) && (!v.b || b >= v.b); ok = fit(it.il, it.iw) || fit(it.iw, it.il); msg = ok ? L2('Invändigt mått ' + pair(it.il, it.iw) + ' räcker.', 'Sisämitta ' + pair(it.il, it.iw) + ' riittää.') : L2('Invändigt mått är ' + pair(it.il, it.iw) + '. Välj en större storlek.', 'Sisämitta on ' + pair(it.il, it.iw) + '. Valitse suurempi koko.'); }
+      this.setState({ checkMsg: msg });
+    };
+    // Välj ett annat om (P), kuormitusluokka (Y)
+    const alt = P.alt ? P.alt.items.map((a) => ({ t: a[0], l: a[1], href: a[2] })) : [];
+    const clsInfo = okv('cls') ? it.cls.slice().sort((a, b) => CLS_ORDER.indexOf(a) - CLS_ORDER.indexOf(b)).map((k) => (EN124[k] ? EN124[k][li] : k)) : [];
+    // Teknisk data (T + P): täytetyt ja tarkistetut, perheen rivijärjestyksessä
+    const tech = (D.t || []).filter((r) => COL[r[0]]).map((r) => {
+      const u = UNIT[r[0]] || '';
+      let v;
+      if (r.length === 3) v = r[0] === 105 ? T.range(r[1], r[2]) : r[1] + ' × ' + r[2] + u;
+      else v = tv(r[1]) + (u && /^[\d.,]+$/.test(r[1]) ? u.replace('.', ',') : '');
+      if (r[0] === 94 || r[0] === 90) v = String(r[1]).replace('.', ',') + u;
+      return { k: COL[r[0]][li], v: v };
+    });
+    // dokumentit (T)
+    const docs = (D.doc || []).map((d) => ({ label: T.docs[d[0]] || d[0], url: d[1] }));
+    // leverans (Y + L)
+    const delivery = [{ h: T.del.fr, t: q ? T.frQ + '. ' + T.frQn : ((FRP[it.fr] || {})[LANG] || '') + T.del.same }, { h: T.del.time[0], t: T.del.time[1] }, { h: T.del.ret[0], t: T.del.ret[1] }];
+    // Passar ihop med (P): katalogin tuotteet nimellä, ensimmäinen osuma per rivi (perheen oletuskoko)
+    const famDefault = (x) => { const fm = x.fam && C.fams[x.fam]; return !fm || fm.dflt === x.id; };
+    // Kokoperheestä valitaan koko, jonka rengasmitta osuu tuotteen mittaan; muuten perheen oletuskoko
+    // (tiivisterenkailla ei ole mittakenttiä, joten niiden sisämitta luetaan koosta, esim. 900/1100 = 900 mm)
+    const ringOf = (x) => (x.rlo != null ? [x.rlo, x.rhi != null ? x.rhi : x.rlo] : (String(x.sz || x.n).match(/(\d{3,4})\s*\//) ? [1, 1].map(() => parseInt(String(x.sz || x.n).match(/(\d{3,4})\s*\//)[1], 10)) : null));
+    const overlap = (x) => { const r = ringOf(x); return it.rlo != null && r && r[0] <= (it.rhi != null ? it.rhi : it.rlo) + 30 && r[1] >= it.rlo - 30; };
+    const related = (P.pairs || []).map((re) => { const hits = C.items.filter((x) => x.id !== it.id && x.fam !== it.fam && re.test(x.n)); return hits.find(overlap) || hits.find(famDefault); }).filter(Boolean).map((x) => {
+      const im = (PR[x.id] && PR[x.id].img || [])[0];
+      return { name: x.n, href: PAGE + '?id=' + x.id, meta: x.sku ? T.art + x.sku : '', price: x.price == null ? T.qPrice : fmt(x.price), canAdd: x.price != null,
+        imgAlt: T.img + ': ' + x.n, imgStyle: 'aspect-ratio: 1; border-radius: 8px; background-color: #ececea; background-size: contain; background-repeat: no-repeat; background-position: center; background-blend-mode: multiply;' + (im ? ' background-image: url(' + im + ');' : ' border: 1.5px dashed #b9b9b7;'),
+        add: () => { if (SB) SB.add('w' + x.id, 1); } };
+    });
+    const addCart = () => { if (!SB) return; SB.add('w' + it.id, St.qty); addonDefs.forEach((a) => { if (St.addons[a.key]) SB.add(a.id, St.qty); }); };
+    const addQ = () => { if (SB) SB.add('w' + it.id, St.qty); };
+    return {
+      cart: 0, vat: St.vat, setVat: (v) => this.setState({ vat: v }), t: T,
+      crumbs: crumbs, name: it.n,
+      imgAlt: T.img + ': ' + it.n, imgPh: cur ? '' : T.imgPh, mainImgStyle: imgBox + (cur ? ' background-image: url(' + cur + ');' : ' border: 1.5px dashed #b9b9b7;'),
+      hasThumbs: imgs.length > 1, thumbs: imgs.map((src, i) => ({ aria: T.imgN(i + 1), on: String(i === St.img), pick: () => this.setState({ img: i }),
+        style: 'aspect-ratio: 1; border-radius: 10px; cursor: pointer; background: #ececea url(' + src + ') center / contain no-repeat; background-blend-mode: multiply; ' + (i === St.img ? 'border: 2px solid #111111;' : 'border: 1px solid #d4d4d2;') })),
+      clsChips: okv('cls') && it.cls.length <= 3 ? it.cls : okv('cls') ? [it.cls[0] + L2(' till ', '-') + it.cls[it.cls.length - 1]] : [],
+      hasArt: !!it.sku, artLabel: T.art + (it.sku || ''), copyLabel: St.copied ? T.copied : T.copy, copyArt: () => { try { navigator.clipboard.writeText(it.sku); } catch (e) {} this.setState({ copied: true }); },
+      hasLead: lead.length > 0, lead: lead, leadLong: len(lead) > 360, leadOpen: String(St.leadOpen), leadStyle: len(lead) > 360 ? mask(St.leadOpen) : 'max-width: 68ch', leadLabel: St.leadOpen ? T.leadLess : T.leadMore, toggleLead: () => this.setState({ leadOpen: !St.leadOpen }),
+      hasFacts: facts.length > 0, facts: facts,
+      hasSizes: fam.length > 1, sizes: sizes, cmpHead: cmpHead,
+      price: q ? T.qPrice : fmt(it.price), vatLabel: q ? '' : (ex ? T.exkl : T.incl), altPrice: q ? T.qAlt : (ex ? fmtRaw(it.price) + ' ' + T.incl : fmtRaw(it.price / 1.25) + ' ' + T.exkl),
+      hasAddons: addonDefs.length > 0, addonsTitle: P.addonsTitle || '', addons: addonDefs.map((a) => ({ label: a.label, price: '+ ' + fmt(a.price), on: !!St.addons[a.key], toggle: () => this.setState({ addons: Object.assign({}, St.addons, { [a.key]: !St.addons[a.key] }) }) })),
+      qty: St.qty, less: () => this.setState({ qty: Math.max(1, St.qty - 1) }), more: () => this.setState({ qty: St.qty + 1 }),
+      isBuy: !q, isQuote: q, cartHref: CART, offertHref: OFFERT, addToCart: addCart, addQuote: addQ, addQuoteStay: () => { addQ(); this.setState({ quoteAdded: true }); }, quoteAdded: St.quoteAdded,
+      prodLabel: T.prod(St.qty), prodSum: q ? '' : fmt(unit * St.qty), frLabel: T.fr + (f.label ? ', ' + f.label.toLowerCase() : ''), frSum: fmt(f.price), totalSum: q ? '' : fmt(unit * St.qty + f.price),
+      hasAbout: about.length > 0, aboutH: T.about(it.n), about: about, aboutLong: len(about) > 600, aboutOpen: String(St.aboutOpen), aboutStyle: len(about) > 600 ? mask(St.aboutOpen) : 'max-width: 68ch', aboutLabel: St.aboutOpen ? T.aboutLess : T.aboutMore, toggleAbout: () => this.setState({ aboutOpen: !St.aboutOpen }),
+      hasFitSec: !!(chkOk || alt.length || clsInfo.length), fitH: chkOk ? P.fitH : clsInfo.length ? T.fitDefault : T.altH,
+      hasCheck: !!chkOk, hasFigure: !!(chkOk && P.check.figure), checkIntro: chkOk ? P.check.intro : '', check: check, checkMsg: St.checkMsg,
+      checkFields: chkOk ? P.check.fields.map((fd) => ({ label: fd[1], ph: fd[2], value: St.chk[fd[0]] || '', onInput: (e) => this.setState({ chk: Object.assign({}, St.chk, { [fd[0]]: e.target.value }) }) })) : [],
+      hasAlt: alt.length > 0, altTitle: P.alt ? P.alt.title : '', alt: alt, hasClsInfo: clsInfo.length > 0, clsInfo: clsInfo,
+      hasTech: tech.length > 0, tech: tech, hasDocs: docs.length > 0, docs: docs, delivery: delivery,
+      hasFaq: (P.faq || []).length > 0, faq: (P.faq || []).map((x) => ({ q: x[0], a: x[1] })),
+      hasGuides: (P.guides || []).length > 0, guides: (P.guides || []).map((g) => ({ k: g[0], t: g[1] })),
+      hasRelated: related.length > 0, related: related
+    };
   }
 }
 </script>
