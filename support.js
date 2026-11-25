@@ -177,15 +177,60 @@
   };
   window.SBFreight.profiles = FR;
 
+  // ---------- rahdin rajat (rahtimalli.md 3.2, esimerkkiarvot, SB vahvistaa) ----------
+  var FREIGHT_OMBUD_MAX_KG = 20;    // koko kori enintään 20 kg: paketti noutopisteeseen
+  var FREIGHT_HOME_MAX_KG = 70;     // koko kori enintään 70 kg: kotiinkuljetus (esimerkkiarvo, voi poistua)
+  var FREIGHT_RIDER_MAX_KG = 1000;  // muut tuotteet kulkevat lavojen mukana enintään 1 000 kg, sen yli lisää yleislavoja
+  var FREIGHT_PALLET_MAX_KG = 1000; // yleislava enintään 1 000 kg
+  var FREIGHT_MAX_PALLETS = 5;      // yli 5 lavaa: rahti offeroidaan, ei lisätä summaan
+  var FREIGHT_OMBUD_PRICE = 172, FREIGHT_HOME_PRICE = 590;
+
+  // ---------- lavatyypit ja lavakapasiteetit (rahtimalli.md 1 ja 3.1, nykyisen kaupan rahtiluokat; SB vahvistaa) ----------
+  // Lavatyyppi määrää lavan hinnan. Tuote täyttää lavasta osuuden 1 / per; osuudet summataan saman tyypin sisällä ja pyöristetään ylöspäin.
+  var PALLET_TYPES = {
+    general: { price: 1480, sv: 'pall', fi: 'lava' },              // yleislava (Pall-luokka)
+    plint: { price: 2400, sv: 'plintpall', fi: 'plinttilava' },     // plinttilava (Stor pall): TP, KP, KP+
+    betong1000: { price: 2080, sv: 'pall', fi: 'lava' },           // Betonglock 1000/600 till gårdspump
+    betong1200: { price: 2750, sv: 'pall', fi: 'lava' }            // Betonglock 1200/600 till gårdspump
+  };
+  // Tuotteen lavatyyppi ja kapasiteetti tuotenimen mukaan (catalog.js n). Ensimmäinen osuva sääntö ratkaisee.
+  var PALLET_RULES = [
+    { name: /^Betongplint TP (200|300)\b/, type: 'plint', per: 30 },
+    { name: /^Betongplint TP (400|500|600)\b/, type: 'plint', per: 20 },
+    { name: /^Betongplint KP\+/, type: 'plint', per: 4 },
+    { name: /^Betongplint KP \d/, type: 'plint', per: 8 },          // paikkamerkki: nykyinen kauppa laskee 20, SB vahvistaa
+    { name: /^Betonglock 1000\/600\b/, type: 'betong1000', per: 2 },
+    { name: /^Betonglock 1200\/600\b/, type: 'betong1200', per: 2 }
+  ];
+  var PALLET_DEFAULT = { type: 'general', per: 8 };                // muut lavatuotteet: 8 kpl yleislavalle (1 480 kr)
+  // it: catalog.js-tuote tai korin rivi { n | name, fr, perPall }. Palauttaa { type, per } tai null, jos tuote ei ole lavatuote.
+  function palletOf(it) {
+    if (!it || (it.fr !== 'pall' && it.fr !== 'plint')) return null;
+    var n = String(Array.isArray(it.n) ? it.n[0] : (it.n || it.name || ''));
+    var r = PALLET_RULES.filter(function (x) { return x.name.test(n); })[0];
+    if (r) return { type: r.type, per: r.per };
+    return { type: PALLET_DEFAULT.type, per: it.perPall || PALLET_DEFAULT.per };
+  }
+  window.SBFreight.pallets = { types: PALLET_TYPES, rules: PALLET_RULES, of: palletOf };
+
+  // ---------- hintanäkymä inkl./exkl. moms (muistetaan sivulta toiselle) ----------
+  var VAT_KEY = 'sb-proto-vat';
+  window.SBVat = {
+    get: function () { try { return localStorage.getItem(VAT_KEY) === 'exkl' ? 'exkl' : 'inkl'; } catch (e) { return 'inkl'; } },
+    set: function (v) { try { localStorage.setItem(VAT_KEY, v === 'exkl' ? 'exkl' : 'inkl'); } catch (e) {} }
+  };
+
   // ---------- ostoskori (yhteinen kaikille sivuille, localStorage) ----------
   var CART_KEY = 'sb-proto-cart-v1';
   var CATALOG_ = null;
   function catalog() { if (!CATALOG_) CATALOG_ = buildCatalog(); return CATALOG_; }
   function buildCatalog() {
-    var c = {}, L = window.SB_LIDS;
+    var c = {}, L = window.SB_LIDS, CI = window.SB_CATALOG ? window.SB_CATALOG.items : [];
     L.items.forEach(function (it) {
       var pg = it.fam === 'comp';
-      c[it.id] = { price: it.price, fr: window.SBFreight(it).key, kg: it.kg,
+      // Rahtiprofiili samasta lähteestä kuin tuotesivulla (catalog.js, sama artikkelinumero); arvio vain, jos catalog.js puuttuu
+      var w = CI.filter(function (x) { return x.sku === it.sku; })[0];
+      c[it.id] = { price: it.price, fr: w ? w.fr : window.SBFreight(it).key, kg: it.kg != null ? it.kg : w ? w.kg : null,
         fi: [it.fi, 'Tuotenro ' + it.sku + (it.lo ? ' · Sopii renkaaseen ' + it.lo + ' ja ' + it.hi + ' mm:n välillä' : ''), pg ? 'FiTuote.dc.html?size=' + it.d : '#'],
         sv: [it.sv, 'Art.nr ' + it.sku + (it.lo ? ' · Passar ring ' + it.lo + ' till ' + it.hi + ' mm' : ''), pg ? 'SvProdukt.dc.html?size=' + it.d : '#'] };
       if (it.seal) c['seal-' + it.d] = { price: it.seal, fr: 'ombud', kg: 1,
@@ -204,6 +249,8 @@
       c['w' + it.id] = { price: it.price, fr: it.fr, kg: it.kg,
         sv: [it.n, 'Art.nr ' + (it.sku || ''), 'SvProdukt.dc.html?id=' + it.id], fi: [it.n, 'Tuotenro ' + (it.sku || ''), 'FiTuote.dc.html?id=' + it.id] };
     });
+    // lavatyyppi ja kapasiteetti jokaiselle lavatuotteelle (PALLET_RULES)
+    Object.keys(c).forEach(function (k) { var pa = palletOf({ fr: c[k].fr, n: c[k].sv[0] }); if (pa) { c[k].pt = pa.type; c[k].per = pa.per; } });
     return c;
   }
   function readCart() {
@@ -211,7 +258,8 @@
     return { items: [], zip: '' };
   }
   function writeCart(c) { try { localStorage.setItem(CART_KEY, JSON.stringify(c)); } catch (e) {} }
-  if (/[?&]demo\b/.test(location.search) && !readCart().items.length) {
+  // ?demo korvaa aina korin demokorilla, jotta demolinkissä ei näy aiempien demojen jäänteitä
+  if (/[?&]demo\b/.test(location.search)) {
     writeCart({ items: [{ id: 'comp-1050', qty: 1 }, { id: 'ventil', qty: 1 }], zip: '' });
   }
   window.SBCart = {
@@ -221,7 +269,7 @@
       return readCart().items.filter(function (i) { return catalog()[i.id]; }).map(function (i) {
         var p = catalog()[i.id], t = p[lang] || p.fi;
         var price = i.agreed != null ? i.agreed : p.price;
-        return { id: i.id, name: t[0], meta: t[1], href: t[2], price: price, qty: i.qty, quote: price == null, agreed: i.agreed != null, fr: p.fr, kg: p.kg };
+        return { id: i.id, name: t[0], meta: t[1], href: t[2], price: price, qty: i.qty, quote: price == null, agreed: i.agreed != null, fr: p.fr, kg: p.kg, pt: p.pt, per: p.per };
       });
     },
     add: function (id, qty) {
@@ -235,48 +283,91 @@
     zip: function () { return readCart().zip || ''; },
     setZip: function (z) { var c = readCart(); c.zip = z; writeCart(c); },
     clear: function () { writeCart({ items: [], zip: readCart().zip }); schedule(); },
-    // Korin rahti rahtimallin kohdan 3.2 mukaan. lines: [{ fr, kg, qty, quote }]
+    // Kassan valinnat kiitossivulle (maksutapa, toimitustapa). Tyhjenevät clear():n mukana.
+    setMeta: function (k, v) { var c = readCart(); c.meta = Object.assign({}, c.meta, (function () { var o = {}; o[k] = v; return o; })()); writeCart(c); },
+    meta: function (k) { var m = readCart().meta || {}; return k ? m[k] : m; },
+    // Korin rahti rahtimallin kohdan 3.2 mukaan. lines: [{ id, fr, kg, qty, quote }] (id tai pt/per kertoo lavatyypin)
+    // Palauttaa { price, key, label, note, options, pallets, quote }. quote = true: yli 5 lavaa, rahti offeroidaan (price null).
     freight: function (lines, lang) {
       lang = lang || 'fi';
       var ls = (lines || this.lines(lang)).filter(function (l) { return !l.quote; });
       if (!ls.length) return { price: 0, label: '', options: [] };
       // Painoportaat koko korille (rahtimalli.md 3.2, esimerkkiarvot, SB vahvistaa):
-      // ombud enintään 20 kg, kotiinkuljetus enintään 70 kg, sen yli lava; lava enintään 1 000 kg; yli 5 lavaa tarjoukseen.
-      var OMB_KG = 20, HOME_KG = 70, PALL_KG = 1000, MAX_PALL = 5;
-      var W = 0, unknown = false, has = {}, byType = {};
+      // ombud enintään 20 kg, kotiinkuljetus enintään 70 kg, sen yli lava; lavalla kulkee muita tuotteita enintään 1 000 kg; yli 5 lavaa tarjoukseen.
+      var OMB_KG = FREIGHT_OMBUD_MAX_KG, HOME_KG = FREIGHT_HOME_MAX_KG, RIDER_KG = FREIGHT_RIDER_MAX_KG, PALL_KG = FREIGHT_PALLET_MAX_KG, MAX_PALL = FREIGHT_MAX_PALLETS, PT = PALLET_TYPES;
+      var W = 0, riderKg = 0, unknownPall = false, noKg = [], has = {}, share = {};
       ls.forEach(function (l) {
+        var kg = l.kg == null ? 0 : l.kg * l.qty, pa = null;
         has[l.fr] = true;
-        if (l.kg == null) unknown = true; else W += l.kg * l.qty;
-        if (l.fr === 'pall' || l.fr === 'plint') byType[l.fr] = (byType[l.fr] || 0) + l.qty;
+        W += kg;
+        if (l.fr === 'pall' || l.fr === 'plint') {
+          var c = l.id ? catalog()[l.id] : null;
+          pa = l.pt ? { type: l.pt, per: l.per } : c && c.pt ? { type: c.pt, per: c.per } : palletOf({ fr: l.fr, n: l.name });
+          share[pa.type] = (share[pa.type] || 0) + l.qty / pa.per;
+          // Lavatuote ilman painoa ei pääse kotiinkuljetukseen (3.2 kohta 6). Muu tuote ilman painoa lasketaan 0 kg:ksi.
+          if (l.kg == null) unknownPall = true;
+        } else {
+          riderKg += kg;
+          // Huomautus vain, kun puuttuva paino voi muuttaa rahtia (useampi kappale tai muu kuin pakettituote)
+          if (l.kg == null && (l.qty > 1 || l.fr !== 'ombud') && noKg.indexOf(l.name) < 0) noKg.push(l.name);
+        }
       });
       var T = function (sv, fi) { return lang === 'sv' ? sv : fi; };
       var same = T('Samma pris i hela Sverige.', 'Sama hinta koko Ruotsiin.');
       var kgTxt = Math.round(W).toLocaleString('sv-SE') + ' kg';
-      var home = function (txt) { return { price: 590, key: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), options: [{ id: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), text: txt + same, price: 590 }] }; };
-      var hasPall = has.pall || has.plint;
+      var money = function (n) { return Math.round(n).toLocaleString('sv-SE') + ' kr'; };
+      // Tuote ilman painoa lasketaan 0 kg:ksi (tuotedatasta puuttuu paino), joten rahti voi tarkentua: kerrotaan se asiakkaalle.
+      var nk = noKg.filter(Boolean).length ? ' ' + T('Vikt saknas för ' + noKg.filter(Boolean).join(', ') + ', så frakten kan justeras.', 'Painotieto puuttuu tuotteelta ' + noKg.filter(Boolean).join(', ') + ', joten rahti voi tarkentua.') : '';
+      var home = function (txt) { return { price: FREIGHT_HOME_PRICE, key: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), note: same + nk, options: [{ id: 'skrym', label: T('Hemleverans', 'Kotiinkuljetus'), text: txt + same + nk, price: FREIGHT_HOME_PRICE }] }; };
+      var hasPall = Object.keys(share).length > 0;
       // 1 Koko kori enintään 70 kg: kotiinkuljetus, myös lavatuotteilla (kevyt lavatilaus)
-      if (W <= HOME_KG && (unknown ? (!hasPall && W > OMB_KG) : (hasPall || has.skrym || W > OMB_KG))) return home(T('Ordern väger ' + kgTxt + '. ', 'Tilaus painaa ' + kgTxt + '. '));
+      if (W <= HOME_KG && !unknownPall && (hasPall || has.skrym || W > OMB_KG)) return home(T('Ordern väger ' + kgTxt + '. ', 'Tilaus painaa ' + kgTxt + '. '));
       if (hasPall || W > HOME_KG) {
-        // 2 Lavat: lavatuotteet kappaleosuuksina lavatyypeittäin, muut kulkevat niiden mukana.
-        // Jos lavatuotteita ei ole, yli 70 kg:n kori menee yleislavoille painon mukaan (enintään 1 000 kg per lava).
+        // 2 Lavat: lavatuotteet osuuksina lavatyypeittäin (summa pyöristetään ylöspäin), eri tyypit lasketaan yhteen.
+        // Muut tuotteet kulkevat lavojen mukana enintään 1 000 kg; sen yli ne vievät lisää yleislavoja.
+        // Ilman lavatuotteita yli 70 kg:n kori menee yleislavoille painon mukaan (enintään 1 000 kg per lava).
         var n = {};
-        Object.keys(byType).forEach(function (k) { n[k] = Math.ceil(byType[k] / FR[k].per); });
-        var cnt = (n.pall || 0) + (n.plint || 0), byKg = hasPall ? 0 : Math.ceil(W / PALL_KG);
-        if (byKg > cnt) n.pall = (n.pall || 0) + byKg - cnt;
-        var pallets = (n.pall || 0) + (n.plint || 0);
-        var pp = (n.pall || 0) * FR.pall.price + (n.plint || 0) * FR.plint.price;
+        Object.keys(share).forEach(function (k) { n[k] = Math.ceil(share[k] - 1e-9); });
+        var extra = hasPall ? (riderKg > RIDER_KG ? Math.ceil((riderKg - RIDER_KG) / PALL_KG) : 0) : Math.ceil(W / PALL_KG);
+        if (extra) n.general = (n.general || 0) + extra;
+        var pallets = 0, pp = 0;
+        Object.keys(n).forEach(function (k) { pallets += n[k]; pp += n[k] * PT[k].price; });
         var pl = pallets + ' ' + T(pallets === 1 ? 'pall' : 'pallar', pallets === 1 ? 'lava' : 'lavaa');
-        var why = hasPall ? T('Lättare produkter följer med pallen utan extra kostnad. ', 'Kevyemmät tuotteet kulkevat lavan mukana ilman lisähintaa. ')
+        var why = hasPall ? (riderKg > RIDER_KG ? T('Övriga produkter väger ' + Math.round(riderKg).toLocaleString('sv-SE') + ' kg och behöver egna pallar. ', 'Muut tuotteet painavat ' + Math.round(riderKg).toLocaleString('sv-SE') + ' kg ja tarvitsevat omat lavat. ')
+            : riderKg > 0 ? T('Lättare produkter följer med pallen utan extra kostnad. ', 'Kevyemmät tuotteet kulkevat lavan mukana ilman lisähintaa. ') : '')
           : T('Ordern väger ' + kgTxt + ', så den skickas på pall. ', 'Tilaus painaa ' + kgTxt + ', joten se lähtee lavalla. ');
-        // 3 Yli 5 lavaa: rahti vahvistetaan tarjouksessa
-        if (pallets > MAX_PALL) return { price: pp, key: 'offert', label: T(pl + ', frakten bekräftas i offerten', pl + ', rahti vahvistetaan tarjouksessa'), options: [{ id: 'offert', label: T('Frakt offereras, ', 'Rahti tarjouksessa, ') + pl, text: T('Över ' + MAX_PALL + ' pallar räknar vi frakten åt dig. ', 'Yli ' + MAX_PALL + ' lavan rahdin laskemme puolestasi. ') + same, price: pp }] };
-        return { price: pp, key: 'pall', label: T('Pall, ', 'Lava, ') + pl, options: [{ id: 'pall', label: T('Pallfrakt, ', 'Lavarahti, ') + pl, text: why + same, price: pp }] };
+        // 3 Yli 5 lavaa: rahti offeroidaan, eikä sitä lisätä summaan
+        if (pallets > MAX_PALL) {
+          var qn = T('Över ' + MAX_PALL + ' pallar räknar vi frakten i en offert.', 'Yli ' + MAX_PALL + ' lavan rahdin laskemme tarjouksessa.');
+          return { price: null, quote: true, key: 'offert', pallets: pallets, estimate: pp, label: pl, priceTxt: T('Offereras', 'Tarjouksella'), note: qn,
+            options: [{ id: 'offert', label: T('Frakt offereras, ', 'Rahti tarjouksella, ') + pl, text: qn + ' ' + same, price: null }] };
+        }
+        return { price: pp, key: 'pall', pallets: pallets, label: T('Pall, ', 'Lava, ') + pl, note: same + nk, options: [{ id: 'pall', label: T('Pallfrakt, ', 'Lavarahti, ') + pl, text: why + same + nk, price: pp }] };
       }
       if (has.skrym) return home(T('Stora lock levereras hem. ', 'Isot kannet toimitetaan kotiin. '));
-      return { price: 172, key: 'ombud', label: T('Paket till ombud', 'Paketti noutopisteeseen'), options: [
-        { id: 'ombud', label: T('Paket till ombud', 'Paketti noutopisteeseen'), text: T('Hämta hos närmaste utlämningsställe.', 'Nouda lähimmästä noutopisteestä.'), price: 172 },
-        { id: 'dorr', label: T('Paket hem till dörren', 'Paketti kotiovelle'), text: T('Lämnas vid dörren eller kvitteras.', 'Jätetään ovelle tai kuitataan.'), price: 590 } ] };
+      return { price: FREIGHT_OMBUD_PRICE, key: 'ombud', label: T('Paket till ombud', 'Paketti noutopisteeseen'), note: nk.trim(), options: [
+        { id: 'ombud', label: T('Paket till ombud', 'Paketti noutopisteeseen'), text: T('Hämta hos närmaste utlämningsställe.', 'Nouda lähimmästä noutopisteestä.') + nk, price: FREIGHT_OMBUD_PRICE },
+        { id: 'dorr', label: T('Paket hem till dörren', 'Paketti kotiovelle'), text: T('Lämnas vid dörren eller kvitteras.', 'Jätetään ovelle tai kuitataan.'), price: FREIGHT_HOME_PRICE } ] };
     }
+  };
+
+  // Rahtiteksti yhdelle kappaleelle (kategoriakortti, tuotesivu): sama tulos kuin korissa yhdellä kappaleella.
+  // it: catalog.js-tuote { n, fr, kg, price } tai tuoteapurin tuote. vat: 'exkl' näyttää hinnan ilman arvonlisäveroa (oletus SBVat).
+  // Palauttaa esim. "Frakt från 172 kr", "Frakt 590 kr" tai "Pallfrakt från 2 400 kr".
+  window.SBFreight.unit = function (it, lang, vat) {
+    lang = lang === 'sv' ? 'sv' : 'fi';
+    if (!it) return '';
+    if (it.price == null || it.fr === 'offert') return FR.offert[lang];
+    var ex = (vat || window.SBVat.get()) === 'exkl';
+    var fr = it.fr || window.SBFreight(it).key;
+    var n = Array.isArray(it.n) ? it.n[0] : (it.n || it.name || '');
+    var pa = palletOf({ fr: fr, n: n, perPall: it.perPall });
+    var f = window.SBCart.freight([{ fr: fr, kg: it.kg, qty: 1, name: n, pt: pa && pa.type, per: pa && pa.per }], lang);
+    var kr = Math.round(ex ? f.price / 1.25 : f.price).toLocaleString('sv-SE') + ' kr';
+    var sv = lang === 'sv';
+    if (f.key === 'ombud') return (sv ? 'Frakt från ' : 'Rahti alkaen ') + kr;
+    if (f.key === 'skrym') return (sv ? 'Frakt ' : 'Rahti ') + kr;
+    return (sv ? 'Pallfrakt från ' : 'Lavarahti alkaen ') + kr;
   };
 
   // ---------- definitions ----------

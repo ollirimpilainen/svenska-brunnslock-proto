@@ -103,14 +103,12 @@ a{color:#111111}a:hover{color:#474747}
 <div class="hb-call">
 <span style="font-size: 14px; color: #5c5c5c">{{ h.callPre }}</span>
 <a href="tel:+46920520056" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 26px; line-height: 1.2; text-decoration: none; color: #111111">0920-52 00 56</a>
-<span style="font-size: 14px; color: #5c5c5c">{{ h.callPost }}</span>
 </div>
 </header>
 
 <section aria-labelledby="hb-feat" class="hb-feat">
 <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px">
 <div role="img" aria-label="{{ h.featAlt }}" class="hb-photo" style="{{ h.featImgStyle }}"></div>
-<figcaption style="font-size: 14px; line-height: 1.45; color: #474747; max-width: 44ch">{{ h.featStat }}</figcaption>
 </figure>
 <div style="display: flex; flex-direction: column; gap: 20px; min-width: 0">
 <div style="display: flex; flex-direction: column; gap: 10px">
@@ -174,7 +172,7 @@ a{color:#111111}a:hover{color:#474747}
 <h2 id="hb-none" style="font-family: Archivo, Inter, sans-serif; font-weight: 800; color: #111111; margin: 0; font-size: 22px">{{ h.noneTitle }}</h2>
 <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-top: 1px solid #e2e2e0">
 <sc-for list="{{ h.none }}" as="x" hint-placeholder-count="3">
-<li><a href="#" class="hb-row"><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><b>{{ x.title }}</b><span style="font-size: 14px; color: #474747">{{ x.text }}</span></span><span style="font-size: 14px; font-weight: 600; white-space: nowrap">{{ x.cta }}</span></a></li>
+<li><a href="{{ x.href }}" class="hb-row"><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><b>{{ x.title }}</b><span style="font-size: 14px; color: #474747">{{ x.text }}</span></span><span style="font-size: 14px; font-weight: 600; white-space: nowrap">{{ x.cta }}</span></a></li>
 </sc-for>
 </ul>
 </section>
@@ -598,7 +596,7 @@ a{color:#111111}a:hover{color:#474747}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { step: null, ans: {}, m: {}, skipM: {}, done: {}, extra: {}, guideOpen: false, vat: 'inkl', form: null, sent: false, fName: '', fContact: '', fZip: '', fMsg: '', fPhoto: '' };
+    this.state = { step: null, ans: {}, m: {}, skipM: {}, done: {}, extra: {}, guideOpen: false, vat: (typeof window !== 'undefined' && window.SBVat ? window.SBVat.get() : 'inkl'), form: null, sent: false, fName: '', fContact: '', fZip: '', fMsg: '', fPhoto: '' };
   }
   renderVals() {
     const LANG = 'sv';
@@ -1214,7 +1212,7 @@ class Component extends DCLogic {
     const params = typeof location !== 'undefined' ? new URLSearchParams(location.search) : null;
     const gid = params && GUIDES[params.get('g')] ? params.get('g') : null;
     const guideHref = (id) => P.self + '?g=' + id;
-    const base = { t: T, cart: 0, vat: S.vat, setVat: (v) => this.setState({ vat: v }), homeHref: P.home, hubHref: P.self, cartHref: P.cart, measureHref: guideHref('brunnslock') };
+    const base = { t: T, cart: 0, vat: S.vat, setVat: (v) => { if (typeof window !== 'undefined' && window.SBVat) window.SBVat.set(v); this.setState({ vat: v }); }, homeHref: P.home, hubHref: P.self, cartHref: P.cart, measureHref: guideHref('brunnslock') };
 
     // ---------- valintasivu ----------
     if (!gid) {
@@ -1223,11 +1221,10 @@ class Component extends DCLogic {
         h: {
           h1: L('Hitta rätt produkt', 'Löydä oikea tuote'),
           lead: L('Svara på några frågor, samma som våra säljare ställer i telefon. Varje svar filtrerar sortimentet, så du ser direkt vad som passar. Är något oklart hjälper vi dig.', 'Vastaa muutamaan kysymykseen, samoihin kuin myyjämme kysyvät puhelimessa. Jokainen vastaus rajaa valikoimaa, joten näet heti, mikä sopii. Jos jokin on epäselvää, autamme.'),
-          callPre: L('Hellre prata med någon?', 'Mieluummin puhelimessa?'), callPost: L('Vi svarar även på helger.', 'Vastaamme myös viikonloppuisin.'),
+          callPre: L('Hellre prata med någon?', 'Mieluummin puhelimessa?'),
           featEyebrow: L('Vanligast: byta brunnslock', 'Yleisin: kaivonkannen vaihto'),
           featTitle: L('Vilken typ av brunn har du?', 'Millainen kaivo sinulla on?'),
           featText: L('Börja här. Ditt svar blir första filtret, sedan frågar guiden vad som går över locket och hur du mäter. Det tar ungefär en minut.', 'Aloita tästä. Vastauksesi on ensimmäinen suodatin, sitten apuri kysyy, mitä kannen yli kulkee ja miten mitataan. Se vie noin minuutin.'),
-          featStat: L('6 av 10 som köper lock hos oss på nätet väljer ett lätt lock som de lyfter själva.', '6/10 verkosta kannen ostavista valitsee kevyen kannen, jonka he nostavat itse.'),
           featCta: L('Vet du inte? Starta guiden utan att välja brunnstyp', 'Et tiedä? Aloita apuri valitsematta kaivotyyppiä'), featHref: guideHref('brunnslock'),
           // Tuotekuvat: kaupan omat kuvat (svenskabrunnslock.se), näytetään värillisinä.
           featImg: 'https://www.svenskabrunnslock.se/wp-content/uploads/IsoLockSt%C3%A4ngdRakBrunn.jpg', featAlt: L('Lätt brunnslock på en betongbrunn', 'Kevyt kaivonkansi betonikaivon päällä'),
@@ -1251,9 +1248,9 @@ class Component extends DCLogic {
           matCta: L('Har du måttet? Starta guiden', 'Onko mitta valmiina? Aloita apuri'),
           noneTitle: L('Ingen guide för det du söker?', 'Etsimällesi ei ole apuria?'),
           none: [
-            { title: L('Gatubetäckningar och galler (Trafik)', 'Katukannet ja ritilät (Liikenne)'), text: L('Du vet ofta klass och modell. Filtrera på klass, mått och ram.', 'Luokka ja malli ovat usein tiedossa. Suodata luokan, mitan ja kehyksen mukaan.'), cta: L('Till Trafik', 'Liikenteeseen') },
-            { title: L('Järnväg och ställverk', 'Rautatie ja sähköasemat'), text: L('Produkter enligt Trafikverkets krav. Filtrera på modell.', 'Trafikverketin vaatimusten mukaiset tuotteet. Suodata mallin mukaan.'), cta: L('Till Järnväg', 'Rautatiehen') },
-            { title: L('Avskiljare, pumpar och tankar', 'Erottimet, pumput ja säiliöt'), text: L('Dimensionering kräver beräkning. Skicka uppgifterna, så dimensionerar vi.', 'Mitoitus vaatii laskentaa. Lähetä tiedot, niin mitoitamme.'), cta: L('Skicka uppgifter', 'Lähetä tiedot') }
+            { href: P.cat + '?kat=trafik', title: L('Gatubetäckningar och galler (Trafik)', 'Katukannet ja ritilät (Liikenne)'), text: L('Filtrera på belastningsklass och material.', 'Suodata kuormitusluokan ja materiaalin mukaan.'), cta: L('Till Trafik', 'Liikenteeseen') },
+            { href: P.cat + '?kat=jvg', title: L('Järnväg och ställverk', 'Rautatie ja sähköasemat'), text: L('Kabelbrunnslock, fundament och stegjärn. Filtrera på material.', 'Kaapelikaivon kannet, perustukset ja kiipeilyraudat. Suodata materiaalin mukaan.'), cta: L('Till Järnväg', 'Rautatiehen') },
+            { href: P.cat + '?kat=ent', title: L('Avskiljare, pumpar och tankar', 'Erottimet, pumput ja säiliöt'), text: L('Dimensionering kräver beräkning. Skicka uppgifterna, så dimensionerar vi.', 'Mitoitus vaatii laskentaa. Lähetä tiedot, niin mitoitamme.'), cta: L('Till Entreprenad och mark', 'Urakointiin ja maarakennukseen') }
           ],
           helpTitle: L('Osäker ändå?', 'Epävarma silti?'), helpText: L('Skicka ett foto och ett mått, eller ring oss. Vi hjälper dig välja, och dina svar följer med så att du inte behöver upprepa något.', 'Lähetä kuva ja yksi mitta tai soita. Autamme valitsemaan, ja vastauksesi kulkevat mukana, joten mitään ei tarvitse toistaa.'), helpPhoto: L('Skicka foto och mått', 'Lähetä kuva ja mitat'),
           faqTitle: L('Vanliga frågor', 'Usein kysyttyä'),
@@ -1472,7 +1469,10 @@ class Component extends DCLogic {
     // Sama tuotekortti kuin kategoriasivulla (luokkamerkki, nimi, sopivuus, ominaisuudet, koot, hinta, normaalihinta, rahti).
     const chipStyle = (known) => 'align-self: flex-start; border-radius: 4px; padding: 0 8px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 13px; line-height: 1.6; ' + (known ? 'border: 1.5px solid #111111; color: #111111;' : 'border: 1.5px dashed #8a8a88; color: #5c5c5c; font-family: Inter, sans-serif; font-weight: 500;');
     // Rahti rahtiprofiilin mukaan (support.js SBFreight, service-design/rahtimalli.md 3.3), sama hinta koko Ruotsissa.
-    const frakt = (p) => { const F = typeof window !== 'undefined' && window.SBFreight; if (!F) return ''; return F({ price: p.price, kg: p.kg, mat: gid === 'luckor' ? 'iron' : p.mat, pallet: /^(TP|KP)/.test(p.series || '') ? 'plint' : null })[LANG === 'fi' ? 'fi' : 'sv']; };
+    const frakt = (p) => { const F = typeof window !== 'undefined' && window.SBFreight; if (!F) return '';
+      // Rahti yhdelle kappaleelle samalla laskulla kuin korissa (SBFreight.unit). Katalogituotteilla on oma profiili (fr), vanhoilla apurin tuotteilla profiili arvioidaan.
+      const fr = p.fr || F({ price: p.price, kg: p.kg, mat: gid === 'luckor' ? 'iron' : p.mat, pallet: /^(TP|KP)/.test(p.series || '') ? 'plint' : null }).key;
+      return F.unit ? F.unit({ fr: fr, kg: p.kg, price: p.price, n: p.n }, LANG, S.vat) : ''; };
     const card = (p, best) => { const c = G.cls(p); return { freight: frakt(p), name: name(p), href: p.href || '#', imgAlt: T.imgPh + ': ' + name(p), clsLabel: c || T.noCls, clsStyle: chipStyle(!!c), fit: G.fit(p, ctx), meta: G.meta(p, ctx), sizesTxt: '', priced: p.price != null, quote: p.price == null, price: fmt(p.price), wasTxt: p.reg ? T.was + fmt(p.reg) : '', badge: best ? T.best : '' }; };
     const vatLabel = S.vat === 'exkl' ? L('exkl. moms', 'alv 0') : L('inkl. moms', 'sis. alv');
 

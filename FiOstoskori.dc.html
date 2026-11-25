@@ -69,8 +69,15 @@ a{color:#111111}a:hover{color:#474747}
 <h2 id="sum-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; color: #111111">Yhteenveto</h2>
 <div style="display: flex; justify-content: space-between; gap: 10px; font-size: 15px"><span>{{ prodLabel }}</span><b>{{ prodSum }}</b></div>
 <sc-if value="{{ hasFr }}" hint-placeholder-val="{{ true }}"><div style="display: flex; justify-content: space-between; gap: 10px; font-size: 15px"><span>{{ frLabel }}<small style="display: block; font-size: 13px; color: #5c5c5c">{{ frNote }}</small></span><b>{{ frSum }}</b></div></sc-if>
+<sc-if value="{{ incl }}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: #474747"><span>Josta alv 25 %</span><span>{{ vatSum }}</span></div>
 <div style="display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 18px; color: #111111"><span>Yhteensä</span><span>{{ totalLabel }}</span></div>
+</sc-if>
+<sc-if value="{{ ex }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-size: 15px"><span>Yhteensä alv 0</span><b>{{ totalLabel }}</b></div>
+<div style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: #474747"><span>Alv 25 %</span><span>{{ vatSum }}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 18px; color: #111111"><span>Maksettava</span><span>{{ payLabel }}</span></div>
+</sc-if>
 <sc-if value="{{ noQuote }}" hint-placeholder-val="{{ true }}">
 <a href="{{ checkoutHref }}" style="min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">Kassalle</a>
 <!-- Rajan (esimerkkiarvo 5 000 kr) ylittävä kori: selvä toissijainen painike tarjouspyyntöön -->
@@ -78,6 +85,10 @@ a{color:#111111}a:hover{color:#474747}
 <a href="FiTarjous.dc.html" style="min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 6px; border: 1.5px solid #111111; background: #ffffff; color: #111111; font-weight: 600; font-size: 17px; text-decoration: none">Lähetä tarjouspyyntönä</a>
 <p style="margin: -6px 0 0; font-size: 13px; color: #5c5c5c; text-align: center">Tarjouksessa on rahti ja purku</p>
 </sc-if>
+</sc-if>
+<!-- Yli 5 lavaa: rahti offeroidaan, joten kassan tilalla on tarjouspyyntö -->
+<sc-if value="{{ frQuoteOnly }}" hint-placeholder-val="{{ false }}">
+<a href="FiTarjous.dc.html" style="min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 17px; text-decoration: none">Lähetä tarjouspyyntönä</a>
 </sc-if>
 <sc-if value="{{ hasQuote }}" hint-placeholder-val="{{ false }}">
 <p style="margin: 0; font-size: 14px; color: #1a1a1a; background: #f5f5f4; border-radius: 8px; padding: 12px">Korissa on tuotteita, joiden hinta annetaan tarjouksella. Lähetämme koko korin tarjouspyyntönä, ja tarjouksessa on myös rahti ja purku.</p>
@@ -103,7 +114,7 @@ class Component extends DCLogic {
     super(props);
     const SB = typeof window !== 'undefined' ? window.SBCart : null;
     const z0 = SB ? SB.zip() : '';
-    this.state = { vat: 'inkl', zip: z0, zipDone: /^\d{5}$/.test(z0.replace(/\s/g, '')), zipErr: false, lines: [
+    this.state = { vat: (typeof window !== 'undefined' && window.SBVat ? window.SBVat.get() : 'inkl'), zip: z0, zipDone: /^\d{5}$/.test(z0.replace(/\s/g, '')), zipErr: false, lines: [
       { id: 'comp-1050', name: 'Kevyt kaivonkansi 1050 komposiitti', meta: 'Tuotenro 1055 · Sopii renkaaseen 870 ja 930 mm:n välillä', price: 2645, qty: 1, href: 'FiTuote.dc.html?size=1050' },
       { id: 'ventil', name: 'Ilmanpoistoventtiili', meta: 'Lisävaruste kevyisiin kansiin', price: 569, qty: 1, href: '#' }
     ] };
@@ -134,7 +145,7 @@ class Component extends DCLogic {
     const mainNames = Array.from(new Set(mains.map((it) => it.n)));
     const suggTitle = mainNames.length === 1 ? 'Sopii yhteen: ' + mainNames[0] : 'Sopii yhteen korisi tuotteiden kanssa';
     return {
-      vat: S.vat, setVat: (v) => this.setState({ vat: v }),
+      vat: S.vat, setVat: (v) => { if (typeof window !== 'undefined' && window.SBVat) window.SBVat.set(v); this.setState({ vat: v }); },
       count: count, empty: S.lines.length === 0,
       lines: S.lines.map((l) => ({ ...l, sum: l.price == null ? 'Hinta tarjouksella' : fmt(l.price * l.qty), meta: l.agreed ? l.meta + ' · sovittu hinta' : l.meta, img: 'Kuva: ' + l.name,
         less: () => setQty(l.id, -1), more: () => setQty(l.id, 1),
@@ -145,7 +156,14 @@ class Component extends DCLogic {
       hasQuote: hasQuote, noQuote: !hasQuote, hasPriced: priced.length > 0, stripQuote: () => save(priced), overLimit: sum >= 5000, underLimit: sum < 5000, leftTxt: fmt(5000 - sum) + ' puuttuu',
       prodLabel: 'Tuotteet, ' + pCount + ' kpl' + (hasQuote ? ' + tarjoustuotteet' : ''), prodSum: fmt(sum),
       vatSum: Math.round(sum - sum / 1.25).toLocaleString('fi-FI') + ' kr',
-      ...(() => { const f = typeof window !== 'undefined' && window.SBCart && window.SBCart.freight ? window.SBCart.freight(priced.map((l) => ({ fr: l.fr || 'skrym', kg: l.kg, qty: l.qty })), 'fi') : { price: 590, label: '' }; return { hasFr: priced.length > 0, frLabel: 'Rahti' + (f.label ? ', ' + f.label.toLowerCase() : ''), frNote: 'Sama hinta koko Ruotsiin.', frSum: fmt(f.price), totalLabel: fmt(sum + f.price), vatSum: Math.round((sum + f.price) - (sum + f.price) / 1.25).toLocaleString('fi-FI') + ' kr' }; })(),
+      ...(() => {
+        // Rahti koko korille (support.js SBCart.freight). Yli 5 lavaa: rahti offeroidaan, eikä sitä lisätä summaan.
+        const f = typeof window !== 'undefined' && window.SBCart && window.SBCart.freight ? window.SBCart.freight(priced.map((l) => { const c = CAT[l.id] || {}; return { id: l.id, fr: l.fr || c.fr || 'skrym', kg: l.kg != null ? l.kg : c.kg, qty: l.qty }; }), 'fi') : { price: 590, label: '' };
+        const fq = !!f.quote, gross = sum + (fq ? 0 : f.price), net = Math.round(gross / 1.25), kr = (n) => Math.round(n).toLocaleString('fi-FI') + ' kr';
+        return { hasFr: priced.length > 0, frLabel: 'Rahti' + (f.label ? ', ' + f.label.toLowerCase() : ''), frNote: fq ? f.note : 'Sama hinta koko Ruotsiin.', frSum: fq ? f.priceTxt : fmt(f.price),
+          frQuoteOnly: fq && !hasQuote, noQuote: !hasQuote && !fq, incl: !ex, ex: ex,
+          totalLabel: fmt(gross), payLabel: kr(gross), vatSum: ex ? kr(Math.round(gross) - net) : kr(gross - gross / 1.25) };
+      })(),
       zip: S.zip, typeZip: (e) => this.setState({ zip: e.target.value, zipErr: false }),
       submitZip: (e) => { e.preventDefault(); const v = S.zip.replace(/\s/g, ''); if (/^\d{5}$/.test(v)) { if (typeof window !== 'undefined' && window.SBCart) window.SBCart.setZip(S.zip); this.setState({ zipDone: true, zipErr: false }); } else this.setState({ zipErr: true }); },
       noZip: !S.zipDone, hasZip: S.zipDone, zipErr: S.zipErr,

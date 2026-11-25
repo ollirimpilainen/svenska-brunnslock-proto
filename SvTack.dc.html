@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>Tack för din beställning</title>
 <script src="./support.js"></script>
+<script src="./catalog.js"></script>
 </head>
 <body>
 <x-dc>
@@ -34,7 +35,7 @@ a{color:#111111}a:hover{color:#474747}
 </li>
 <li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0">
 <span style="width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid #111111; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700">2</span>
-<span><b style="display: block; color: #111111">Vi beställer från leverantören</b><span style="color: #474747">Locket skickas direkt från vår leverantör i Sverige. Lagervaror levereras normalt inom [3 till 6] arbetsdagar.</span></span>
+<span><b style="display: block; color: #111111">Vi beställer från leverantören</b><span style="color: #474747">Locket skickas direkt från vår leverantör i Sverige. Leveranstiden är 3 till 6 arbetsdagar för lagervaror.</span></span>
 </li>
 <li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0">
 <span style="width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid #111111; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700">3</span>
@@ -42,7 +43,7 @@ a{color:#111111}a:hover{color:#474747}
 </li>
 <li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0">
 <span style="width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid #111111; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700">4</span>
-<span><b style="display: block; color: #111111">Paketet kommer till ditt ombud</b><span style="color: #474747">Om något dröjer hör vi av oss så tidigt vi kan.</span></span>
+<span><b style="display: block; color: #111111">{{ step4 }}</b><span style="color: #474747">Om något dröjer hör vi av oss så tidigt vi kan.</span></span>
 </li>
 </ol>
 </section>
@@ -59,10 +60,17 @@ a{color:#111111}a:hover{color:#474747}
 <sc-for list="{{ lines }}" as="l" hint-placeholder-count="2">
 <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>{{ l.label }}</span><b>{{ l.sum }}</b></div>
 </sc-for>
-<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>Frakt, paket till ombud</span><b>[X] kr</b></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>{{ frLabel }}</span><b>{{ frSum }}</b></div>
+<sc-if value="{{ incl }}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 17px; color: #111111"><span>Totalt inkl. moms</span><span>{{ total }}</span></div>
+</sc-if>
+<sc-if value="{{ ex }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-size: 15px"><span>Totalt exkl. moms</span><b>{{ total }}</b></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: #474747"><span>Moms 25 %</span><span>{{ vatSum }}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 17px; color: #111111"><span>Att betala</span><span>{{ pay }}</span></div>
+</sc-if>
 <p style="margin: 0; font-size: 14px; color: #474747">Leveransadress: Anna Exempel, Exempelvägen 1, 123 45 Exempelstad</p>
-<p style="margin: 0; font-size: 14px; color: #474747">Betalning: Klarna eller Qliro</p>
+<p style="margin: 0; font-size: 14px; color: #474747">{{ payTxt }}</p>
 </div>
 <div style="background: #f5f5f4; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 6px">
 <b style="color: #111111">Frågor om beställningen?</b>
@@ -80,13 +88,39 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     const SB = typeof window !== 'undefined' ? window.SBCart : null;
-    this.lines = SB && SB.items().length ? SB.lines('sv') : [{ name: 'Lätt Brunnslock 1050 Composite', price: 2645, qty: 1 }, { name: 'Avluftningsventil', price: 569, qty: 1 }];
-    if (SB && SB.items().length) SB.clear();
+    const has = SB && SB.items().length;
+    // Uudelleenlataus tilauksen jälkeen: näytetään sama tilaus (tallennettu ennen korin tyhjennystä)
+    const LAST = 'sb-proto-last-order';
+    let last = null;
+    if (!has) { try { last = JSON.parse(localStorage.getItem(LAST) || 'null'); } catch (e) {} }
+    this.lines = last ? last.lines : has ? SB.lines('sv') : [{ name: 'Lätt Brunnslock 1050 Composite', price: 2645, qty: 1, fr: 'skrym', kg: 10 }, { name: 'Avluftningsventil', price: 569, qty: 1, fr: 'ombud', kg: 1 }];
+    // Rahti samalla koririvien tulkinnalla kuin kassassa (support.js SBCart.freight). Kassan valinnat (maksutapa, toimitustapa) luetaan ennen tyhjennystä.
+    this.fr = SB && SB.freight ? SB.freight(this.lines.map((l) => ({ id: l.id, name: l.name, fr: l.fr || 'skrym', kg: l.kg, pt: l.pt, per: l.per, qty: l.qty, quote: l.price == null })), 'sv') : { price: 590, key: 'skrym', options: [{ id: 'skrym', label: 'Hemleverans', price: 590 }] };
+    this.meta = last ? last.meta : has && SB.meta ? SB.meta() : {};
+    if (last && last.fr) this.fr = last.fr;
+    if (has) { try { localStorage.setItem(LAST, JSON.stringify({ lines: this.lines, meta: this.meta, fr: this.fr })); } catch (e) {} SB.clear(); }
   }
   renderVals() {
-    const f = (n) => Math.round(n).toLocaleString('sv-SE') + ' kr';
-    const sum = this.lines.reduce((t, l) => t + l.price * l.qty, 0);
-    return { zero: 0, lines: this.lines.map((l) => ({ label: l.name + ', ' + l.qty + ' st', sum: f(l.price * l.qty) })), total: f(sum) + ' + frakt' };
+    // Hintanäkymä kassan valinnan mukaan (yritys: exkl. moms), muuten muistettu SBVat
+    const ex = this.meta.vat ? this.meta.vat === 'exkl' : typeof window !== 'undefined' && window.SBVat && window.SBVat.get() === 'exkl';
+    const kr = (n) => Math.round(n).toLocaleString('sv-SE') + ' kr';
+    const f = (n) => kr(ex ? n / 1.25 : n);
+    const lines = this.lines.filter((l) => l.price != null);
+    const sum = lines.reduce((t, l) => t + l.price * l.qty, 0);
+    const opts = this.fr.options || [];
+    const ship = opts.find((o) => o.id === this.meta.ship) || opts[0] || { id: this.fr.key, label: '', price: this.fr.price };
+    const fq = !!this.fr.quote || ship.price == null;
+    const STEP4 = { ombud: () => 'Paketet kommer till ditt ombud', dorr: () => 'Paketet kommer hem till dörren', skrym: () => 'Leveransen kommer hem till dig', pall: (k) => (k === 1 ? 'Pallen levereras' : 'Pallarna levereras') + ' till leveransadressen', offert: () => 'Vi hör av oss om frakten' };
+    const n = this.fr.pallets || 1;
+    return {
+      zero: 0,
+      lines: this.lines.map((l) => ({ label: l.name + ', ' + l.qty + ' st', sum: l.price == null ? 'Offereras' : f(l.price * l.qty) })),
+      frLabel: 'Frakt, ' + String((ship.id === 'pall' || ship.id === 'offert' ? this.fr.label : ship.label) || '').toLowerCase(), frSum: fq ? 'Offereras' : f(ship.price),
+      total: f(sum + (fq ? 0 : ship.price)) + (fq ? ' + frakt' : ''), incl: !ex, ex: ex,
+      vatSum: kr(Math.round(sum + (fq ? 0 : ship.price)) - Math.round((sum + (fq ? 0 : ship.price)) / 1.25)), pay: kr(sum + (fq ? 0 : ship.price)) + (fq ? ' + frakt' : ''),
+      step4: (STEP4[ship.id] || STEP4.skrym)(n),
+      payTxt: this.meta.pay ? 'Betalning: ' + this.meta.pay : 'Betalsätt enligt ditt val i kassan'
+    };
   }
 }
 </script>

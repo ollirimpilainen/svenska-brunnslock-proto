@@ -83,10 +83,10 @@ a{color:#111111}a:hover{color:#474747}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"cart":{"editor":"int","default":0},"current":{"editor":"enum","options":["","sortiment"],"default":""},"vat":{"editor":null},"onVat":{"editor":null},"$preview":{"width":1440,"height":180}}'>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { vat: 'inkl', menu: false }; }
+  constructor(props) { super(props); this.state = { vat: (typeof window !== 'undefined' && window.SBVat ? window.SBVat.get() : 'inkl'), menu: false }; }
   renderVals() {
     const vat = this.props.vat ?? this.state.vat;
-    const set = (v) => { if (this.props.onVat) this.props.onVat(v); else this.setState({ vat: v }); };
+    const set = (v) => { if (typeof window !== 'undefined' && window.SBVat) window.SBVat.set(v); if (this.props.onVat) this.props.onVat(v); else this.setState({ vat: v }); };
     const on = 'border: 0; background: #ffffff; color: #111111; font: inherit; font-weight: 600; font-size: 13px; padding: 0 12px; min-height: 32px; border-radius: 999px; cursor: pointer';
     const off = 'border: 0; background: transparent; color: #e6e6e6; font: inherit; font-weight: 600; font-size: 13px; padding: 0 12px; min-height: 32px; border-radius: 999px; cursor: pointer';
     const nav = 'display: inline-flex; align-items: center; gap: 6px; border-top: 0; border-left: 0; border-right: 0; background: none; font-family: inherit; color: #111111; cursor: pointer; min-height: 48px; padding: 0 12px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid ' + (this.props.current === 'sortiment' ? '#111111' : 'transparent');

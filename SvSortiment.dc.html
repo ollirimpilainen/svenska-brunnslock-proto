@@ -226,7 +226,7 @@ class Component extends DCLogic {
       // Luukkuapurin aukon mitta: b = leveys, l = pituus (Fri öppning, Annat mått ±50 mm)
       const b = parseInt(qp.get('b'), 10), l = parseInt(qp.get('l'), 10); if (b || l) f.open = { other: true, w: b ? String(b) : '', l: l ? String(l) : '' };
     } catch (e) {}
-    this.state = { kat: kat, sub: sub, vat: 'inkl', q: '', f: f, other: f.open ? { open: true } : {}, fOpen: false, limit: 24 };
+    this.state = { kat: kat, sub: sub, vat: (typeof window !== 'undefined' && window.SBVat ? window.SBVat.get() : 'inkl'), q: '', f: f, other: f.open ? { open: true } : {}, fOpen: false, limit: 24 };
   }
   renderVals() {
     const S = this.state, T = TXT[LANG], li = LANG === 'fi' ? 1 : 0;
@@ -237,7 +237,7 @@ class Component extends DCLogic {
     const fmt = (n) => Math.round(ex ? n / 1.25 : n).toLocaleString(LANG === 'fi' ? 'fi-FI' : 'sv-SE') + ' kr';
     const href = (k, s) => PAGE + (k ? '?kat=' + k + (s ? '&sub=' + s : '') : '');
     const go = (k, s) => (e) => { if (e && e.preventDefault) e.preventDefault(); try { history.replaceState(null, '', href(k, s)); } catch (er) {} this.setState({ kat: k, sub: s, f: {}, other: {}, q: '', limit: 24 }); };
-    const base = { cart: 0, vat: S.vat, setVat: (v) => this.setState({ vat: v }), t: T };
+    const base = { cart: 0, vat: S.vat, setVat: (v) => { if (typeof window !== 'undefined' && window.SBVat) window.SBVat.set(v); this.setState({ vat: v }); }, t: T };
     // kortit: yksi kortti per kokoperhe
     const cardsOf = (items) => { const m = {}, out = []; items.forEach((it) => { const k = it.fam || ('p' + it.id); if (!m[k]) { m[k] = { key: k, fam: it.fam, items: [] }; out.push(m[k]); } m[k].items.push(it); }); return out; };
     const catItems = (k) => C.items.filter((i) => i.cat === k);
@@ -306,7 +306,7 @@ class Component extends DCLogic {
         id: k, label: T.f[k], isButtons: isButtons, isList: !isButtons,
         opts: opts.map((o) => { const onO = sel.indexOf(o.v) >= 0; return { label: d.kind === 'size1' ? o.v : d.label(o.v), text: d.text ? d.text(o.v) : '', count: '(' + o.n + ')', aria: (d.kind === 'size1' ? o.v + ' mm' : d.label(o.v)) + ', ' + T.count(o.n), on: onO, btnStyle: btn(onO),
           toggle: () => setF(single ? (onO ? null : o.v) : (onO ? sel.filter((x) => x !== o.v) : sel.concat([o.v]))) }; }),
-        hasOther: d.kind === 'size1' || d.kind === 'size2', otherOpen: String(otherOpen), otherOpenB: otherOpen, hasHow: d.kind === 'size1',
+        hasOther: d.kind === 'size2', otherOpen: String(otherOpen), otherOpenB: otherOpen, hasHow: false,
         toggleOther: () => this.setState({ other: Object.assign({}, O, { [k]: !otherOpen }) }),
         fields: d.kind === 'size1'
           ? [{ value: sel.length && RING_STD.indexOf(Number(sel[0])) < 0 ? sel[0] : '', ph: T.ph.mm, aria: T.f[k] + ', mm', onInput: (e) => setF(e.target.value.replace(/\D/g, '')) }]
@@ -337,9 +337,12 @@ class Component extends DCLogic {
       else if (group === 'kabel') { const s = vals(its.map((i) => pair(i.il, i.iw)).filter(Boolean)); if (s.length) fit = T.fit.inner(s.length > 3 ? s.slice(0, 3).join(', ') + ' …' : s.join(', ')); }
       else if (group === 'plintar') { const s = vals(its.map((i) => i.h).filter((x) => x != null)).sort((a, b) => a - b); if (s.length) fit = T.fit.h(s.join(', ')); }
       const priced = its.filter((i) => i.price != null), minP = priced.length ? Math.min.apply(null, priced.map((i) => i.price)) : null;
-      const sizes = its.map((i) => i.sz).filter(Boolean);
-      const fr = (priced.find((i) => i.price === minP) || dflt).fr;
-      const FRP = typeof window !== 'undefined' && window.SBFreight ? window.SBFreight.profiles : {};
+      // storlekar i numerisk ordning (750, 930, 1050 ...), myös muodot kuten 600x600 ja 1000/600
+      const sizes = its.map((i) => i.sz).filter(Boolean).sort((a, b) => String(a).localeCompare(String(b), 'sv', { numeric: true }));
+      // Rahti yhdelle kappaleelle samalla laskulla kuin korissa (support.js SBFreight.unit), hintanäkymän mukaan inkl./exkl. moms
+      // Kortti avaa perheen oletustuotteen, joten rahti näytetään samalle tuotteelle kuin tuotesivulla
+      const frIt = dflt && dflt.price != null ? dflt : priced.find((i) => i.price === minP) || dflt;
+      const frTxt = typeof window !== 'undefined' && window.SBFreight && window.SBFreight.unit ? window.SBFreight.unit(frIt, LANG, ex ? 'exkl' : 'inkl') : '';
       const name = fam ? fam.name : dflt.n;
       // Jokainen kortti avaa tuotesivupohjan perheen oletuskoolla (tai suodattimen mukaisella ensimmäisellä koolla)
       const link = PROD + '?id=' + (its.find((i) => i.id === (fam && fam.dflt)) || its[0]).id;
@@ -349,7 +352,7 @@ class Component extends DCLogic {
         fit: fit, meta: [mats.join(', '), kgs.length ? T.kg(Math.min.apply(null, kgs), Math.max.apply(null, kgs)) : ''].filter(Boolean).join(', '),
         sizesTxt: sizes.length > 1 ? T.sizesList(sizes.length > 6 ? sizes.slice(0, 6).join(', ') + ' …' : sizes.join(', ')) + (allFam.length > its.length ? ' (' + T.sizes(allFam.length) + ')' : '') : '',
         priceTxt: minP == null ? T.quote : (priced.length < its.length || its.length > 1 ? T.from : '') + fmt(minP), vat: minP == null ? '' : (ex ? T.exkl : T.incl),
-        note: minP != null && priced.length < its.length ? T.someQuote : '', freight: (FRP[fr] || {})[LANG] || ''
+        note: minP != null && priced.length < its.length ? T.someQuote : '', freight: frTxt
       };
     };
     const subList = [{ id: '', label: T.allIn + ' ' + cat[LANG].toLowerCase() }].concat(cat.subs.map((s) => ({ id: s.id, label: s[LANG] })))

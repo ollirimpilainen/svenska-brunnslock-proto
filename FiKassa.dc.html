@@ -59,7 +59,7 @@ a{color:#111111}a:hover{color:#474747}
 <input value="{{ f.email }}" onInput="{{ inp.email }}" type="email" autocomplete="email" style="{{ st.email }}">
 <sc-if value="{{ er.email }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Täytä sähköpostiosoite.</span></sc-if>
 </label>
-<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Matkapuhelin <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">seurantakoodia varten</span>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Matkapuhelin <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">toimitusta varten</span>
 <input value="{{ f.phone }}" onInput="{{ inp.phone }}" type="tel" autocomplete="tel" style="{{ st.phone }}">
 <sc-if value="{{ er.phone }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px">Täytä matkapuhelinnumero.</span></sc-if>
 </label>
@@ -95,10 +95,7 @@ a{color:#111111}a:hover{color:#474747}
 </label>
 </sc-for>
 </fieldset>
-<label style="display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: start; font-size: 15px; cursor: pointer">
-<input type="checkbox" checked="{{ f.noSign }}" onChange="{{ toggleNoSign }}" style="width: 18px; height: 18px; margin: 3px 0 0; accent-color: #111111">
-<span><b>Toimitus ilman kuittausta</b><span style="display: block; font-size: 13px; color: #5c5c5c">Paketin saa jättää, vaikka kukaan ei ole vastaanottamassa. Emme vastaa paketista sen jättämisen jälkeen.</span></span>
-</label>
+<!-- Toimitus ilman kuittausta (KAS6) piilotettu: ei vielä päätetty (P19) -->
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Viesti toimituksesta <span style="font-weight: 400; font-size: 13px; color: #5c5c5c">esimerkiksi viikko, jolloin et ole kotona</span>
 <textarea onInput="{{ inp.msg }}" style="min-height: 88px; border: 1.5px solid #bdbdbb; border-radius: 6px; padding: 12px; font: inherit; resize: vertical">{{ f.msg }}</textarea>
 </label>
@@ -116,11 +113,15 @@ a{color:#111111}a:hover{color:#474747}
 <span>Olen lukenut ja hyväksyn <a href="#" style="font-weight: 600">ostoehdot</a>.<sc-if value="{{ er.terms }}" hint-placeholder-val="{{ false }}"><span role="alert" style="display: block; font-size: 13px; font-weight: 600">Hyväksy ostoehdot viimeistelläksesi tilauksen.</span></sc-if></span>
 </label>
 <sc-if value="{{ valid }}" hint-placeholder-val="{{ true }}">
-<a href="FiKiitos.dc.html" style="min-height: 56px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 18px; text-decoration: none">Viimeistele tilaus</a>
+<a href="FiKiitos.dc.html" onClick="{{ finish }}" style="min-height: 56px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 18px; text-decoration: none">Viimeistele tilaus</a>
 </sc-if>
 <sc-if value="{{ invalid }}" hint-placeholder-val="{{ false }}">
 <button type="submit" style="min-height: 56px; border: 0; border-radius: 6px; background: #111111; color: #ffffff; font: inherit; font-weight: 600; font-size: 18px; cursor: pointer">Viimeistele tilaus</button>
 <sc-if value="{{ showErr }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 0; font-size: 15px; font-weight: 600">Joitakin tietoja puuttuu. Katso merkityt kentät yllä.</p></sc-if>
+</sc-if>
+<sc-if value="{{ frQuote }}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 15px; color: #1a1a1a; background: #f5f5f4; border-radius: 8px; padding: 12px">{{ frNote }}</p>
+<a href="FiTarjous.dc.html" style="min-height: 56px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #111111; color: #ffffff; font-weight: 600; font-size: 18px; text-decoration: none">Lähetä tarjouspyyntönä</a>
 </sc-if>
 </section>
 </form>
@@ -134,8 +135,15 @@ a{color:#111111}a:hover{color:#474747}
 <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span>{{ l.name }}<span style="display: block; font-size: 13px; color: #5c5c5c">{{ l.qtyLabel }}</span></span><b>{{ l.sum }}</b></div>
 </sc-for>
 <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px; border-top: 1px solid #e2e2e0; padding-top: 12px"><span>{{ frLabel }}</span><b>{{ frSum }}</b></div>
+<sc-if value="{{ notForetag }}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: #474747"><span>Josta alv 25 %</span><span>{{ vatSum }}</span></div>
 <div style="display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 18px; color: #111111"><span>Yhteensä</span><span>{{ totalSum }}</span></div>
+</sc-if>
+<sc-if value="{{ isForetag }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-size: 15px"><span>Yhteensä alv 0</span><b>{{ totalSum }}</b></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: #474747"><span>Alv 25 %</span><span>{{ vatSum }}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #bdbdbb; padding-top: 12px; font-weight: 700; font-size: 18px; color: #111111"><span>Maksettava</span><span>{{ paySum }}</span></div>
+</sc-if>
 <p style="margin: 0; font-size: 13px; color: #5c5c5c">{{ vatNote }}</p>
 </aside>
 </div>
@@ -166,17 +174,21 @@ class Component extends DCLogic {
     const seg = (on) => 'border: 0; font: inherit; font-weight: 600; font-size: 15px; padding: 0 18px; min-height: 40px; border-radius: 999px; cursor: pointer; ' + (on ? 'background: #111111; color: #ffffff' : 'background: transparent; color: #111111');
     const opt = (on) => 'display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 56px; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-size: 15px; ' + (on ? 'border: 2px solid #111111; background: #f5f5f4' : 'border: 1px solid #e2e2e0; background: #ffffff');
     const pays = fo
-      ? [ { id: 'faktura', label: 'Lasku yrityksille', text: '30 päivää, luottotietojen tarkistuksen jälkeen. Viite näkyy laskussa.' } ]
+      ? [ { id: 'faktura', label: 'Lasku yrityksille', text: 'Luottotietojen tarkistuksen jälkeen. Viite näkyy laskussa.' } ]
       : [ { id: 'klarna', label: 'Klarna tai Qliro', text: 'Kortti, Swish, lasku tai osamaksu.' }, { id: 'pfaktura', label: 'Lasku', text: 'Laskutuslisä [X] kr.' } ];
     const payNow = pays.find((p) => p.id === S.pay) ? S.pay : pays[0].id;
     const SBc = typeof window !== 'undefined' ? window.SBCart : null;
     const cl = SBc && SBc.items().length ? SBc.lines('fi') : [{ name: 'Kevyt kaivonkansi 1050 komposiitti', price: 2645, qty: 1 }, { name: 'Ilmanpoistoventtiili', price: 569, qty: 1 }];
     const sum = cl.reduce((t, l) => t + (l.price || 0) * l.qty, 0);
     // Rahti rahtiprofiilin mukaan (support.js SBCart.freight), sama hinta koko Ruotsiin: postinumero on vain toimitusosoite
-    const fr = SBc && SBc.freight ? SBc.freight(cl.map((l) => ({ fr: l.fr || 'skrym', kg: l.kg, qty: l.qty, quote: l.price == null })), 'fi') : { options: [{ id: 'skrym', label: 'Kotiinkuljetus', text: '', price: 590 }] };
+    const fr = SBc && SBc.freight ? SBc.freight(cl.map((l) => ({ id: l.id, fr: l.fr || 'skrym', kg: l.kg, qty: l.qty, quote: l.price == null })), 'fi') : { options: [{ id: 'skrym', label: 'Kotiinkuljetus', text: '', price: 590 }] };
     const ships = fr.options.length ? fr.options : [{ id: 'skrym', label: 'Kotiinkuljetus', text: '', price: 590 }];
     const ship = ships.find((x) => x.id === S.ship) || ships[0];
     const fmt = (n) => Math.round(fo ? n / 1.25 : n).toLocaleString('fi-FI') + ' kr';
+    const kr = (n) => Math.round(n).toLocaleString('fi-FI') + ' kr';
+    // Yli 5 lavaa: rahti offeroidaan (price null), eikä sitä lisätä summaan
+    const fq = !!fr.quote, frPrice = fq || ship.price == null ? 0 : ship.price, gross = sum + frPrice, net = Math.round(gross / 1.25);
+    const payLabel = (pays.find((p) => p.id === payNow) || pays[0]).label;
     const inp = {};
     ['company', 'orgnr', 'ref', 'email', 'phone', 'name', 'street', 'zip', 'city', 'msg'].forEach((k) => { inp[k] = set(k); });
     return {
@@ -185,15 +197,16 @@ class Component extends DCLogic {
       privatPressed: String(!fo), foretagPressed: String(fo), privatStyle: seg(!fo), foretagStyle: seg(fo),
       setPrivat: () => this.setState({ who: 'privat' }), setForetag: () => this.setState({ who: 'foretag' }),
       zipShown: String(F.zip).trim() || '[postinumero]',
-      ships: ships.map((s) => ({ ...s, priceTxt: fmt(s.price), on: ship.id === s.id, style: opt(ship.id === s.id), pick: () => this.setState({ ship: s.id }) })),
-      frLabel: 'Rahti, ' + ship.label.toLowerCase(), frSum: fmt(ship.price), totalSum: fmt(sum + ship.price),
+      ships: ships.map((s) => ({ ...s, priceTxt: s.price == null ? fr.priceTxt : fmt(s.price), on: ship.id === s.id, style: opt(ship.id === s.id), pick: () => this.setState({ ship: s.id }) })),
+      frLabel: 'Rahti, ' + ((ship.id === 'pall' || ship.id === 'offert' ? fr.label : ship.label) || '').toLowerCase(), frSum: fq ? fr.priceTxt : fmt(ship.price), totalSum: fmt(gross), paySum: kr(gross), frQuote: fq, frNote: fr.note || '', notForetag: !fo,
+      finish: () => { if (SBc && SBc.setMeta) { SBc.setMeta('pay', payLabel); SBc.setMeta('ship', ship.id); } },
       pays: pays.map((p) => ({ ...p, on: payNow === p.id, style: opt(payNow === p.id), pick: () => this.setState({ pay: p.id }) })),
       toggleNoSign: () => this.setState({ f: { ...F, noSign: !F.noSign } }),
       toggleTerms: () => this.setState({ f: { ...F, terms: !F.terms } }),
-      valid: valid, invalid: !valid, showErr: S.showErr,
+      valid: valid && !fq, invalid: !valid && !fq, showErr: S.showErr,
       submit: (e) => { e.preventDefault(); this.setState({ showErr: true }); },
       sumLines: cl.map((l) => ({ name: l.name, qtyLabel: l.qty + ' kpl', sum: l.price == null ? 'Tarjouksella' : fmt(l.price * l.qty) })),
-      vatSum: Math.round((sum + ship.price) - (sum + ship.price) / 1.25).toLocaleString('fi-FI') + ' kr',
+      vatSum: fo ? kr(Math.round(gross) - net) : kr(gross - gross / 1.25),
       vatNote: fo ? 'Hinnat näytetään yrityksille alv 0.' : 'Hinnat sisältävät alv:n.'
     };
   }
