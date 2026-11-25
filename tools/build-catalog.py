@@ -148,6 +148,9 @@ for f in sorted(glob.glob(os.path.join(_HERE, '../../data/scripts/work/raw/store
 def paras(h):
     # HTML -> kappaleet. Ajatusviivat (Ollin sääntö): rivin alussa luetelmamerkiksi, muualla yhdysmerkiksi.
     if not h: return []
+    # WordPress-shortcodet pois (nykyisen kaupan [themify_button ...]...[/themify_button], [print-me ...])
+    h = re.sub(r'(?is)\[themify_button[^\]]*\].*?\[/themify_button\]', '', h)
+    h = re.sub(r'(?i)\[/?[a-z]+[_-][a-z0-9_-]*(?:\s[^\]]*)?\]', '', h)
     h = re.sub(r'(?i)(?<!>)(?<!^)<strong', '\n<strong', h)  # lihavoitu väliotsikko omalle rivilleen
     h = re.sub(r'(?i)<br\b[^>]*>', '\n', h); h = re.sub(r'(?i)</(p|div|li|h\d)>', '\n\n', h); h = re.sub(r'(?i)<li[^>]*>', '\n• ', h)
     t = _html.unescape(re.sub(r'<[^>]+>', '', h)).replace('\xa0', ' ')
@@ -177,7 +180,8 @@ for r in P:
         if c in PAIRED or not ok(c): continue
         if c in PAIRS and ok(PAIRS[c]): tech.append([c, g(r, c), g(r, PAIRS[c])])
         else: tech.append([c, g(r, c)])
-    docs = [[k, g(r, c)] for k, c in (('datablad', 76), ('ritning', 78), ('montering', 80), ('certifikat', 82), ('epd', 84)) if g(r, c) and str(g(r, c)).startswith('http')]
+    # Useampi " | "-eroteltu osoite samassa solussa: jokainen omaksi linkikseen
+    docs = [[k, u.strip()] for k, c in (('datablad', 76), ('ritning', 78), ('montering', 80), ('certifikat', 82), ('epd', 84)) if g(r, c) for u in str(g(r, c)).split(' | ') if u.strip().startswith('http')]
     imgs = [i.get('src') for i in st.get('images', []) if i.get('src')][:6]
     prod[pid] = {k: v for k, v in dict(s=paras(st.get('short_description')), d=paras(st.get('description')), img=imgs, doc=docs, t=tech).items() if v}
 pout = 'window.SB_PRODUCT = ' + json.dumps(prod, ensure_ascii=False, separators=(',', ':')) + ';\n'

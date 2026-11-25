@@ -585,7 +585,10 @@ class Component extends DCLogic {
       return { k: COL[r[0]][li], v: v };
     });
     // dokumentit (T)
-    const docs = (D.doc || []).map((d) => ({ label: T.docs[d[0]] || d[0], url: d[1] }));
+    // Saman tyypin useampi dokumentti: numeroidaan (Datablad 1, Datablad 2), ja tiedostonimi näkyy
+    const docN = {}; (D.doc || []).forEach((d) => { docN[d[0]] = (docN[d[0]] || 0) + 1; });
+    const docI = {};
+    const docs = (D.doc || []).map((d) => { docI[d[0]] = (docI[d[0]] || 0) + 1; return { label: (T.docs[d[0]] || d[0]) + (docN[d[0]] > 1 ? ' ' + docI[d[0]] + ', ' + decodeURIComponent(String(d[1]).split('/').pop()) : ''), url: d[1] }; });
     // leverans (Y + L)
     const delivery = [{ h: T.del.fr, t: q ? T.frQ + '. ' + T.frQn : (W.SBFreight && W.SBFreight.unit ? W.SBFreight.unit(it, LANG, St.vat) : '') + T.del.same }, { h: T.del.time[0], t: T.del.time[1] }, { h: T.del.ret[0], t: T.del.ret[1] }];
     // Passar ihop med: samat sopivat lisävarusteet, joilla on oma tuotesivu
