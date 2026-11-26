@@ -548,7 +548,8 @@ class Component extends DCLogic {
       crumbs: [{ label: T.home, href: HOME }, { label: T.all, href: PAGE }].concat(subObj ? [{ label: cat[LANG], href: href(cat.id) }] : []).concat(subObj && par(sub) ? [{ label: (cat.subs.find((x) => x.id === par(sub)) || {})[LANG], href: href(cat.id, par(sub)) }] : []),
       hasBack: !!subObj, backHref: subObj ? href(cat.id, par(sub)) : '', backGo: go(cat.id, subObj ? par(sub) : ''), backLabel: subObj ? (par(sub) ? (cat.subs.find((x) => x.id === par(sub)) || {})[LANG] : cat[LANG]) : '',
       catHref: href(cat.id), catGo: go(cat.id, ''), catCurrent: !SEARCH && !sub ? 'page' : 'false',
-      hasKids: kidList.length > 0, hasKidsS: String(kidList.length > 0), kids: kidList, kidsAria: (LANG === 'fi' ? 'Alakategoriat: ' : 'Underkategorier: ') + title,
+      hasKids: false, // alakategoriapillerit pois 26.11. (Olli): alakategoriat löytyvät sivupalkista
+ hasKidsS: String(kidList.length > 0), kids: kidList, kidsAria: (LANG === 'fi' ? 'Alakategoriat: ' : 'Underkategorier: ') + title,
       subs: subList, homeHref: PAGE,
       hasFilters: filters.length > 0, filters: filters, fOpen: String(S.fOpen), openF: () => this.setState({ fOpen: true }), closeF: () => this.setState({ fOpen: false }),
       hasActive: active.length > 0, active: active, activeN: active.length ? ' (' + active.length + ')' : '', reset: () => this.setState({ f: {}, other: {}, q: '', gA: {} }),
