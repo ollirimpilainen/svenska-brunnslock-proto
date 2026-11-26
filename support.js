@@ -365,11 +365,13 @@
       var hasPall = Object.keys(share).length > 0 || hasGeneral;   // lavatavaraa korissa
       var hasOwn = Object.keys(share).length > 0;                    // omia lavatyyppejä (plintit, betonikannet)
       var wTxt = T('Ordern väger ' + kgTxt + '. ', 'Tilaus painaa ' + kgTxt + '. ');
+      // Yli 10 isoa tuotetta ei mahdu pakettina eikä raskaana kotiinkuljetuksena: suoraan lavalle painosta riippumatta.
+      if (largeQty > FREIGHT_LARGE_PER_PALLET) unknownPall = true;
       // 1 Koko kori enintään 30 kg: kotiinkuljetus pakettina, myös lavatuotteilla (kevyt lavatilaus)
       if (W <= HOME_KG && !unknownPall && (hasPall || has.skrym || W > OMB_KG)) return home(wTxt);
       // 2b Koko kori yli 30 kg mutta enintään 150 kg: tung kotiinkuljetus rahtina kotiovelle, myös lavatuotteilla
       if (W > HOME_KG && W <= HEAVY_KG && !unknownPall) return heavy(T('Ordern väger ' + kgTxt + ' och körs hem som gods. ', 'Tilaus painaa ' + kgTxt + ' ja ajetaan kotiin rahtina. '));
-      if (hasPall || W > HEAVY_KG) {
+      if (hasPall || W > HEAVY_KG || largeQty > FREIGHT_LARGE_PER_PALLET) {
         // 2 Lavat: lavatuotteet osuuksina lavatyypeittäin (summa pyöristetään ylöspäin), eri tyypit lasketaan yhteen.
         // Muut tuotteet kulkevat lavojen mukana enintään 1 000 kg; sen yli ne vievät lisää yleislavoja.
         // Ilman lavatuotteita yli 150 kg:n kori menee yleislavoille painon mukaan (enintään 1 000 kg per lava).
@@ -409,8 +411,8 @@
     if (it.price == null || it.fr === 'offert') return FR.offert[lang];
     var ex = (vat || window.SBVat.get()) === 'exkl';
     var fr = it.fr || window.SBFreight(it).key;
-    var n = Array.isArray(it.n) ? it.n[0] : (it.n || it.name || '');
-    var pa = palletOf({ fr: fr, n: n, perPall: it.perPall });
+    var n = Array.isArray(it.n) ? it.n[0] : (it.n || it.name || (it.sv && it.sv[0]) || '');
+    var pa = it.pt ? { type: it.pt, per: it.per } : palletOf({ fr: fr, n: n, perPall: it.perPall });
     var f = window.SBCart.freight([{ fr: fr, kg: it.kg, qty: 1, name: n, pt: pa && pa.type, per: pa && pa.per }], lang);
     var kr = Math.round(ex ? f.price / 1.25 : f.price).toLocaleString('sv-SE') + ' kr';
     var sv = lang === 'sv';
