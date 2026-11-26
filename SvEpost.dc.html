@@ -159,6 +159,10 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 .e-foot{padding:20px;border-top:1px solid var(--line2);background:var(--soft);font-size:12px;color:var(--mut2);display:flex;flex-direction:column;gap:6px}
 .e-foot p{margin:0}
 .e-foot a{color:var(--mut)}
+.sum{padding:14px 16px;border-left:4px solid var(--ink);background:var(--soft);color:var(--txt)!important}
+.ov-why{flex-basis:100%;font-size:13px;color:var(--mut2)}
+.msg-off .client{opacity:.5}
+.msg-off h2{text-decoration:line-through}
 
 </style>
 </head>
@@ -168,14 +172,13 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 <nav class="side" aria-label="Mejl">
 <a href="#mall" class="side-a"><b>Mallen</b></a>
 <a href="#oversikt" class="side-a"><b>Översikt</b></a>
-<ul><li><b>Beställning</b><ul><li><a href="#ny-bestallning">Ny beställning (till SB)</a></li><li><a href="#behandlas">Orderbekräftelse (Behandlas)</a></li>
-<li><a href="#frakt-beraknas">Orderbekräftelse, frakt beräknas av oss</a></li>
-<li><a href="#frakt-betala">Frakt att betala</a></li><li><a href="#pausad">Beställningen väntar (Pausad, faktura)</a></li><li><a href="#kundnotering">Meddelande om beställningen (kundnotering)</a></li><li><a href="#avbruten">Beställningen är avbruten</a></li><li><a href="#misslyckad">Betalningen gick inte igenom (Misslyckad)</a></li><li><a href="#aterbetald">Återbetalning</a></li></ul></li><li><b>Leverans</b><ul><li><a href="#skickad">Din beställning är skickad (Skickad, ny)</a></li><li><a href="#slutford">Tack för ditt köp (Slutförd)</a></li><li><a href="#nshift-track">Leveransaviseringar (nShift Track)</a></li></ul></li><li><b>Offert</b><ul><li><a href="#offert-mottagen">Offertförfrågan mottagen (OF-nummer)</a></li><li><a href="#offert-ny-sb">Ny offertförfrågan (till SB)</a></li><li><a href="#offert-klar">Din offert är klar (godkänn med ett klick)</a></li></ul></li><li><b>Konto</b><ul><li><a href="#nytt-konto">Välkommen, ditt konto är skapat</a></li><li><a href="#aterstall">Återställ lösenord</a></li></ul></li><li><b>Faktura</b><ul><li><a href="#faktura">Faktura (från Fortnox)</a></li></ul></li><li><b>Marknadsföring</b><ul><li><a href="#nyhetsbrev-bekrafta">Bekräfta prenumerationen (dubbel opt-in)</a></li><li><a href="#nyhetsbrev-valkommen">Välkommen till nyhetsbrevet</a></li><li><a href="#overgiven-varukorg">Du har produkter kvar i varukorgen</a></li><li><a href="#feedback">Hur gick det? (feedbackenkät)</a></li></ul></li></ul>
+<ul><li><b>Beställning</b><ul><li><a href="#ny-bestallning">Ny beställning (till SB)</a></li><li><a href="#behandlas">Orderbekräftelse (Behandlas)</a></li><li><a href="#frakt-beraknas">Orderbekräftelse, frakt beräknas av oss</a></li><li><a href="#frakt-betala">Frakt att betala</a></li><li><a href="#pausad">Beställningen väntar (Pausad, faktura)</a></li><li><a href="#kundnotering">Meddelande om beställningen (kundnotering)</a></li><li><a href="#avbruten">Beställningen är avbruten</a></li><li><a href="#aterbetald">Återbetalning</a></li></ul></li><li><b>Leverans</b><ul><li><a href="#skickad">Din beställning är skickad (Skickad, ny)</a></li></ul></li><li><b>Offert</b><ul><li><a href="#offert-mottagen">Offertförfrågan mottagen (OF-nummer)</a></li><li><a href="#offert-ny-sb">Ny offertförfrågan (till SB)</a></li><li><a href="#offert-klar">Din offert är klar (godkänn med ett klick)</a></li></ul></li><li><b>Konto</b><ul><li><a href="#nytt-konto">Välkommen, ditt konto är skapat</a></li><li><a href="#aterstall">Återställ lösenord</a></li></ul></li><li><b>Faktura</b><ul><li><a href="#faktura">Faktura (från Fortnox)</a></li></ul></li><li><b>Marknadsföring</b><ul></ul></li><li><b>Senare</b><ul><li><a href="#nshift-track">Leveransaviseringar (nShift Track)</a></li><li><a href="#nyhetsbrev-valkommen">Välkommen till nyhetsbrevet</a></li><li><a href="#overgiven-varukorg">Du har produkter kvar i varukorgen</a></li><li><a href="#feedback">Hur gick det? (feedbackenkät)</a></li></ul></li><li><b>Skickas inte</b><ul><li><a href="#misslyckad">Betalningen gick inte igenom (Misslyckad)</a></li><li><a href="#slutford">Tack för ditt köp (Slutförd)</a></li><li><a href="#nyhetsbrev-bekrafta">Bekräfta prenumerationen (dubbel opt-in)</a></li></ul></li></ul>
 </nav>
 <main>
 <div class="intro">
 <h1>E-post från butiken</h1>
-<p>Alla 22 meddelanden som butiken skickar, i en och samma mall. Texterna är exempel. Ordernummer, priser och kunder är exempel med riktiga produkter och priser från katalogen. <span class="ph">Streckad ruta</span> = SB bestämmer.</p>
+<p class="sum">Genomgång 26.11.: 22 meddelanden blev <b>13 som skickas vid lansering</b> (2 av dem till SB). 2 slås ihop med Orderbekräftelse, 3 skickas inte och 4 kommer senare. <b>I en vanlig beställning får kunden 2 mejl:</b> Orderbekräftelse och Skickad. Fakturakund: 3, med fakturan från Fortnox. Om frakten beräknas av oss (D24): ett till, Frakt att betala.</p>
+<p>En och samma mall för alla mejl. Texterna är exempel. Ordernummer, priser och kunder är exempel med riktiga produkter och priser från katalogen. <span class="ph">Streckad ruta</span> = SB bestämmer.</p>
 <div class="width" role="group" aria-label="Bredd på mejlen"><span>Visa mejlen i</span><button type="button" data-w="375px">Mobil 375 px</button><button type="button" data-w="600px" aria-pressed="true">Dator 600 px</button></div>
 </div>
 
@@ -197,11 +200,11 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 <div class="fs"><b>Väntar på betalning</b><span>Inget mejl</span></div><span class="arr">→</span>
 <div class="fs"><b>Behandlas</b><span>Orderbekräftelse + Ny beställning till SB</span></div><span class="arr">→</span>
 <div class="fs fs-new"><b>Skickad (ny)</b><span>Spårningslänk</span></div><span class="arr">→</span>
-<div class="fs"><b>Slutförd</b><span>Tack för ditt köp (SB bestämmer)</span></div>
+<div class="fs"><b>Slutförd</b><span>Inget mejl (intern status)</span></div>
 </div>
 <div class="flow-side">
-<div class="fs"><b>Pausad</b><span>Faktura väntar på godkännande</span></div>
-<div class="fs"><b>Misslyckad</b><span>Betala igen</span></div>
+<div class="fs"><b>Pausad</b><span>Orderbekräftelse, fakturavariant</span></div>
+<div class="fs"><b>Misslyckad</b><span>Inget mejl (felet syns i kassan)</span></div>
 <div class="fs"><b>Avbruten</b><span>Beställningen är avbruten</span></div>
 <div class="fs"><b>Återbetald</b><span>Återbetalning</span></div>
 </div></div>
@@ -210,14 +213,15 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 <section id="oversikt" class="block" aria-labelledby="ov-h">
 <h2 id="ov-h">Översikt: utlösare, system, mottagare, ämnesrad</h2>
 <div class="ov-head" aria-hidden="true"><span>Meddelande</span><span>Utlösare</span><span>System</span><span>Mottagare</span><span>Ämnesrad</span></div>
-<div class="ov-group"><h3>Beställning</h3><a class="ov-row" href="#ny-bestallning"><span class="ov-name"><b>Ny beställning (till SB)</b><span class="chip st-launch">Vid lansering</span></span><span class="ov-trig">Kunden lägger en beställning (status Behandlas eller Pausad).</span><span class="ov-sys">WooCommerce</span><span class="ov-to">SB: <span class="ph">orderinkorg, P35</span></span><span class="ov-sub">[Svenska Brunnslock] Ny beställning SB-10232 från Exempel Bygg AB</span></a><a class="ov-row" href="#behandlas"><span class="ov-name"><b>Orderbekräftelse (Behandlas)</b><span class="chip st-launch">Vid lansering</span></span><span class="ov-trig">Betalningen är godkänd och ordern får status Behandlas. Exempel: privatkund, kort.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden (Anna Exempel, privat)</span><span class="ov-sub">Tack för din beställning SB-10231</span></a><a class="ov-row" href="#frakt-beraknas"><span class="ov-name"><b>Orderbekräftelse, frakt beräknas av oss</b><span class="chip st-decide">SB bestämmer (förslag D24)</span></span><span class="ov-trig">En produkt saknar vikt: produkterna betalas nu, frakten senare.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden</span><span class="ov-sub">Tack för din beställning SB-10482</span></a><a class="ov-row" href="#frakt-betala"><span class="ov-name"><b>Frakt att betala</b><span class="chip st-decide">SB bestämmer (förslag D24)</span></span><span class="ov-trig">SB har räknat frakten (inom 1 arbetsdag).</span><span class="ov-sys">Betalpartner</span><span class="ov-to">Kunden</span><span class="ov-sub">Frakt att betala för SB-10482</span></a><a class="ov-row" href="#pausad"><span class="ov-name"><b>Beställningen väntar (Pausad, faktura)</b><span class="chip st-launch">Vid lansering</span></span><span class="ov-trig">Företag väljer faktura. Ordern pausas tills SB har godkänt fakturan (P22, P37).</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden (Exempel Bygg AB)</span><span class="ov-sub">Vi har tagit emot din beställning SB-10232</span></a><a class="ov-row" href="#kundnotering"><span class="ov-name"><b>Meddelande om beställningen (kundnotering)</b><span class="chip st-launch">Vid lansering</span></span><span class="ov-trig">SB skriver en notering till kunden i ordern i admin.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden</span><span class="ov-sub">Ett meddelande om din beställning SB-10232</span></a><a class="ov-row" href="#avbruten"><span class="ov-name"><b>Beställningen är avbruten</b><span class="chip st-launch">Vid lansering</span></span><span class="ov-trig">SB avbryter ordern, eller en obetald order går ut.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden och SB</span><span class="ov-sub">Din beställning SB-10233 är avbruten</span></a><a class="ov-row" href="#misslyckad"><span class="ov-name"><b>Betalningen gick inte igenom (Misslyckad)</b><span class="chip st-launch">Vid lansering</span></span><span class="ov-trig">Betalningen avvisas eller avbryts i betalfönstret.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden och SB</span><span class="ov-sub">Betalningen för SB-10233 gick inte igenom</span></a><a class="ov-row" href="#aterbetald"><span class="ov-name"><b>Återbetalning</b><span class="chip st-launch">Vid lansering</span></span><span class="ov-trig">SB gör en återbetalning i ordern (hela eller del).</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden</span><span class="ov-sub">Återbetalning för beställning SB-10231</span></a></div><div class="ov-group"><h3>Leverans</h3><a class="ov-row" href="#skickad"><span class="ov-name"><b>Din beställning är skickad (Skickad, ny)</b><span class="chip st-launch">Vid lansering</span></span><span class="ov-trig">SB sätter status Skickad och sparar spårningskod och länk på ordern (P55). Koden kan komma från nShift (P54).</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden (Exempel Bygg AB)</span><span class="ov-sub">Din beställning SB-10232 är skickad</span></a><a class="ov-row" href="#slutford"><span class="ov-name"><b>Tack för ditt köp (Slutförd)</b><span class="chip st-decide">SB bestämmer</span></span><span class="ov-trig">SB sätter status Slutförd efter leveransen. Skickas eller stängs av (Skickad har redan informerat).</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden</span><span class="ov-sub">Tack för ditt köp, SB-10231</span></a><a class="ov-row" href="#nshift-track"><span class="ov-name"><b>Leveransaviseringar (nShift Track)</b><span class="chip st-decide">Vid lansering om priset passar</span></span><span class="ov-trig">Transportörens händelser: på väg, levereras i dag, levererad, försenad.</span><span class="ov-sys">nShift Track</span><span class="ov-to">Kunden (e-post, sms senare)</span><span class="ov-sub">Din leverans från Svenska Brunnslock kommer i dag</span></a></div><div class="ov-group"><h3>Offert</h3><a class="ov-row" href="#offert-mottagen"><span class="ov-name"><b>Offertförfrågan mottagen (OF-nummer)</b><span class="chip st-launch">Vid lansering</span></span><span class="ov-trig">Kunden skickar offertformuläret eller en varukorg med offertprodukter.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden (Exempel Bygg AB)</span><span class="ov-sub">Vi har tagit emot din offertförfrågan OF-1042</span></a><a class="ov-row" href="#offert-ny-sb"><span class="ov-name"><b>Ny offertförfrågan (till SB)</b><span class="chip st-launch">Vid lansering</span></span><span class="ov-trig">Samma som ovan. Vart förfrågan går är öppet (P35).</span><span class="ov-sys">WooCommerce</span><span class="ov-to">SB: <span class="ph">offertinkorg, P35</span></span><span class="ov-sub">[Svenska Brunnslock] Ny offertförfrågan OF-1042 från Exempel Bygg AB</span></a><a class="ov-row" href="#offert-klar"><span class="ov-name"><b>Din offert är klar (godkänn med ett klick)</b><span class="chip st-launch">Vid lansering</span></span><span class="ov-trig">SB skickar offerten. Kunden godkänner med ett klick och offerten blir en order.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden (Exempel Bygg AB)</span><span class="ov-sub">Din offert OF-1042 är klar</span></a></div><div class="ov-group"><h3>Konto</h3><a class="ov-row" href="#nytt-konto"><span class="ov-name"><b>Välkommen, ditt konto är skapat</b><span class="chip st-launch">Vid lansering</span></span><span class="ov-trig">Kunden skapar konto i kassan, på Tack-sidan eller på Mina sidor.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden</span><span class="ov-sub">Ditt konto hos Svenska Brunnslock är skapat</span></a><a class="ov-row" href="#aterstall"><span class="ov-name"><b>Återställ lösenord</b><span class="chip st-launch">Vid lansering</span></span><span class="ov-trig">Kunden klickar ”Glömt lösenord?” och anger sin e-post.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden</span><span class="ov-sub">Återställ ditt lösenord hos Svenska Brunnslock</span></a></div><div class="ov-group"><h3>Faktura</h3><a class="ov-row" href="#faktura"><span class="ov-name"><b>Faktura (från Fortnox)</b><span class="chip st-launch">Vid lansering</span></span><span class="ov-trig">SB skapar fakturan i Fortnox från ordern (TIK1) och skickar den med e-post. Gäller företag på faktura. Privatpersonens faktura kommer från betalpartnern (MAK3).</span><span class="ov-sys">Fortnox</span><span class="ov-to">Kundens fakturaadress (Exempel Bygg AB)</span><span class="ov-sub">Faktura <span class="ph">nr</span> från Svenska Brunnslock</span></a></div><div class="ov-group"><h3>Marknadsföring</h3><a class="ov-row" href="#nyhetsbrev-bekrafta"><span class="ov-name"><b>Bekräfta prenumerationen (dubbel opt-in)</b><span class="chip st-decide">SB bestämmer</span></span><span class="ov-trig">Kunden kryssar i nyhetsbrevet i kassan eller anmäler sig i sidfoten (VIE6). Används om SB väljer dubbel opt-in.</span><span class="ov-sys">Klaviyo</span><span class="ov-to">Den som anmälde sig</span><span class="ov-sub">Bekräfta din prenumeration</span></a><a class="ov-row" href="#nyhetsbrev-valkommen"><span class="ov-name"><b>Välkommen till nyhetsbrevet</b><span class="chip st-launch">Vid lansering</span></span><span class="ov-trig">Prenumerationen är bekräftad (eller direkt, utan dubbel opt-in).</span><span class="ov-sys">Klaviyo</span><span class="ov-to">Prenumeranten</span><span class="ov-sub">Välkommen till nyhetsbrevet från Svenska Brunnslock</span></a><a class="ov-row" href="#overgiven-varukorg"><span class="ov-name"><b>Du har produkter kvar i varukorgen</b><span class="chip st-later">Senare</span></span><span class="ov-trig">Varukorg med e-post (inloggad eller ifylld i kassan) utan beställning efter <span class="ph">tid</span> (VIE7). Bara enligt samtycke.</span><span class="ov-sys">Klaviyo</span><span class="ov-to">Kunden</span><span class="ov-sub">Du har produkter kvar i varukorgen</span></a><a class="ov-row" href="#feedback"><span class="ov-name"><b>Hur gick det? (feedbackenkät)</b><span class="chip st-later">Senare</span></span><span class="ov-trig"><span class="ph">antal dagar</span> efter Slutförd. Verktyg och frågor är öppna (K36).</span><span class="ov-sys">Klaviyo</span><span class="ov-to">Kunden</span><span class="ov-sub">Hur gick det med ditt lock?</span></a></div>
+<div class="ov-group"><h3>Beställning</h3><a class="ov-row" href="#ny-bestallning"><span class="ov-name"><b>Ny beställning (till SB)</b><span class="chip st-launch">Skickas</span></span><span class="ov-trig">Kunden lägger en beställning (status Behandlas eller Pausad).</span><span class="ov-sys">WooCommerce</span><span class="ov-to">SB: <span class="ph">orderinkorg, P35</span></span><span class="ov-sub">[Svenska Brunnslock] Ny beställning SB-10232 från Exempel Bygg AB</span></a><a class="ov-row" href="#behandlas"><span class="ov-name"><b>Orderbekräftelse (Behandlas)</b><span class="chip st-launch">Skickas</span></span><span class="ov-trig">Betalningen är godkänd och ordern får status Behandlas. Exempel: privatkund, kort.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden (Anna Exempel, privat)</span><span class="ov-sub">Tack för din beställning SB-10231</span></a><a class="ov-row" href="#frakt-beraknas"><span class="ov-name"><b>Orderbekräftelse, frakt beräknas av oss</b><span class="chip st-decide">Slås ihop med Orderbekräftelse</span><small class="ov-why">Variant av Orderbekräftelse: samma mejl, fraktraden säger Beräknas av oss (D24).</small></span><span class="ov-trig">En produkt i ordern saknar vikt, så frakten räknas inte automatiskt. Produkterna är betalda (kort) eller fakturerade. Exempel: privatkund, kort.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden (Anna Exempel, privat)</span><span class="ov-sub">Tack för din beställning SB-10482</span></a><a class="ov-row" href="#frakt-betala"><span class="ov-name"><b>Frakt att betala</b><span class="chip st-launch">Skickas</span></span><span class="ov-trig">SB har räknat frakten för en order med Frakt beräknas av oss. Kortkunder får en betalningslänk; fakturakunder får beloppet och frakten läggs på fakturan.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden (Anna Exempel, privat)</span><span class="ov-sub">Frakt att betala för SB-10482</span></a><a class="ov-row" href="#pausad"><span class="ov-name"><b>Beställningen väntar (Pausad, faktura)</b><span class="chip st-decide">Slås ihop med Orderbekräftelse</span><small class="ov-why">Variant av Orderbekräftelse för fakturakunder. Inget extra mejl när SB godkänner fakturan.</small></span><span class="ov-trig">Företag väljer faktura. Ordern pausas tills SB har godkänt fakturan (P22, P37).</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden (Exempel Bygg AB)</span><span class="ov-sub">Vi har tagit emot din beställning SB-10232</span></a><a class="ov-row" href="#kundnotering"><span class="ov-name"><b>Meddelande om beställningen (kundnotering)</b><span class="chip st-launch">Skickas</span></span><span class="ov-trig">SB skriver en notering till kunden i ordern i admin.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden</span><span class="ov-sub">Ett meddelande om din beställning SB-10232</span></a><a class="ov-row" href="#avbruten"><span class="ov-name"><b>Beställningen är avbruten</b><span class="chip st-launch">Skickas</span></span><span class="ov-trig">SB avbryter ordern, eller en obetald order går ut.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden och SB</span><span class="ov-sub">Din beställning SB-10233 är avbruten</span></a><a class="ov-row" href="#aterbetald"><span class="ov-name"><b>Återbetalning</b><span class="chip st-launch">Skickas</span></span><span class="ov-trig">SB gör en återbetalning i ordern (hela eller del).</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden</span><span class="ov-sub">Återbetalning för beställning SB-10231</span></a></div><div class="ov-group"><h3>Leverans</h3><a class="ov-row" href="#skickad"><span class="ov-name"><b>Din beställning är skickad (Skickad, ny)</b><span class="chip st-launch">Skickas</span></span><span class="ov-trig">SB sätter status Skickad och sparar spårningskod och länk på ordern (P55). Koden kan komma från nShift (P54).</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden (Exempel Bygg AB)</span><span class="ov-sub">Din beställning SB-10232 är skickad</span></a></div><div class="ov-group"><h3>Offert</h3><a class="ov-row" href="#offert-mottagen"><span class="ov-name"><b>Offertförfrågan mottagen (OF-nummer)</b><span class="chip st-launch">Skickas</span></span><span class="ov-trig">Kunden skickar offertformuläret eller en varukorg med offertprodukter.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden (Exempel Bygg AB)</span><span class="ov-sub">Vi har tagit emot din offertförfrågan OF-1042</span></a><a class="ov-row" href="#offert-ny-sb"><span class="ov-name"><b>Ny offertförfrågan (till SB)</b><span class="chip st-launch">Skickas</span></span><span class="ov-trig">Samma som ovan. Vart förfrågan går är öppet (P35).</span><span class="ov-sys">WooCommerce</span><span class="ov-to">SB: <span class="ph">offertinkorg, P35</span></span><span class="ov-sub">[Svenska Brunnslock] Ny offertförfrågan OF-1042 från Exempel Bygg AB</span></a><a class="ov-row" href="#offert-klar"><span class="ov-name"><b>Din offert är klar (godkänn med ett klick)</b><span class="chip st-launch">Skickas</span></span><span class="ov-trig">SB skickar offerten. Kunden godkänner med ett klick och offerten blir en order.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden (Exempel Bygg AB)</span><span class="ov-sub">Din offert OF-1042 är klar</span></a></div><div class="ov-group"><h3>Konto</h3><a class="ov-row" href="#nytt-konto"><span class="ov-name"><b>Välkommen, ditt konto är skapat</b><span class="chip st-launch">Skickas</span></span><span class="ov-trig">Kunden skapar konto i kassan, på Tack-sidan eller på Mina sidor.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden</span><span class="ov-sub">Ditt konto hos Svenska Brunnslock är skapat</span></a><a class="ov-row" href="#aterstall"><span class="ov-name"><b>Återställ lösenord</b><span class="chip st-launch">Skickas</span></span><span class="ov-trig">Kunden klickar ”Glömt lösenord?” och anger sin e-post.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden</span><span class="ov-sub">Återställ ditt lösenord hos Svenska Brunnslock</span></a></div><div class="ov-group"><h3>Faktura</h3><a class="ov-row" href="#faktura"><span class="ov-name"><b>Faktura (från Fortnox)</b><span class="chip st-launch">Skickas</span></span><span class="ov-trig">SB skapar fakturan i Fortnox från ordern (TIK1) och skickar den med e-post. Gäller företag på faktura. Privatpersonens faktura kommer från betalpartnern (MAK3).</span><span class="ov-sys">Fortnox</span><span class="ov-to">Kundens fakturaadress (Exempel Bygg AB)</span><span class="ov-sub">Faktura <span class="ph">nr</span> från Svenska Brunnslock</span></a></div><div class="ov-group"><h3>Marknadsföring</h3></div><div class="ov-group"><h3>Senare</h3><a class="ov-row" href="#nshift-track"><span class="ov-name"><b>Leveransaviseringar (nShift Track)</b><span class="chip st-later">Senare</span><small class="ov-why">Dubblerar Skickad. Bara om priset passar (K54), och då utan ett eget skickat-mejl.</small></span><span class="ov-trig">Transportörens händelser: på väg, levereras i dag, levererad, försenad.</span><span class="ov-sys">nShift Track</span><span class="ov-to">Kunden (e-post, sms senare)</span><span class="ov-sub">Din leverans från Svenska Brunnslock kommer i dag</span></a><a class="ov-row" href="#nyhetsbrev-valkommen"><span class="ov-name"><b>Välkommen till nyhetsbrevet</b><span class="chip st-later">Senare</span><small class="ov-why">Behövs när SB börjar skicka nyhetsbrev, inte vid lansering.</small></span><span class="ov-trig">Prenumerationen är bekräftad (eller direkt, utan dubbel opt-in).</span><span class="ov-sys">Klaviyo</span><span class="ov-to">Prenumeranten</span><span class="ov-sub">Välkommen till nyhetsbrevet från Svenska Brunnslock</span></a><a class="ov-row" href="#overgiven-varukorg"><span class="ov-name"><b>Du har produkter kvar i varukorgen</b><span class="chip st-later">Senare</span><small class="ov-why">Efter lansering, när det finns trafik att mäta.</small></span><span class="ov-trig">Varukorg med e-post (inloggad eller ifylld i kassan) utan beställning efter <span class="ph">tid</span> (VIE7). Bara enligt samtycke.</span><span class="ov-sys">Klaviyo</span><span class="ov-to">Kunden</span><span class="ov-sub">Du har produkter kvar i varukorgen</span></a><a class="ov-row" href="#feedback"><span class="ov-name"><b>Hur gick det? (feedbackenkät)</b><span class="chip st-later">Senare</span><small class="ov-why">Verktyg och frågor öppna (K36). Efter lansering.</small></span><span class="ov-trig"><span class="ph">antal dagar</span> efter Slutförd. Verktyg och frågor är öppna (K36).</span><span class="ov-sys">Klaviyo</span><span class="ov-to">Kunden</span><span class="ov-sub">Hur gick det med ditt lock?</span></a></div><div class="ov-group"><h3>Skickas inte</h3><a class="ov-row" href="#misslyckad"><span class="ov-name"><b>Betalningen gick inte igenom (Misslyckad)</b><span class="chip st-later">Skickas inte</span><small class="ov-why">Kunden ser felet direkt i kassan och betalar igen där. Standardmejlet till SB stängs av.</small></span><span class="ov-trig">Betalningen avvisas eller avbryts i betalfönstret.</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden och SB</span><span class="ov-sub">Betalningen för SB-10233 gick inte igenom</span></a><a class="ov-row" href="#slutford"><span class="ov-name"><b>Tack för ditt köp (Slutförd)</b><span class="chip st-later">Skickas inte</span><small class="ov-why">Upprepar Skickad utan något nytt att göra. Status Slutförd blir intern.</small></span><span class="ov-trig">SB sätter status Slutförd efter leveransen. Skickas eller stängs av (Skickad har redan informerat).</span><span class="ov-sys">WooCommerce</span><span class="ov-to">Kunden</span><span class="ov-sub">Tack för ditt köp, SB-10231</span></a><a class="ov-row" href="#nyhetsbrev-bekrafta"><span class="ov-name"><b>Bekräfta prenumerationen (dubbel opt-in)</b><span class="chip st-later">Skickas inte</span><small class="ov-why">Enkel opt-in med kryssruta räcker (SB bekräftar). Ett steg mindre för kunden.</small></span><span class="ov-trig">Kunden kryssar i nyhetsbrevet i kassan eller anmäler sig i sidfoten (VIE6). Används om SB väljer dubbel opt-in.</span><span class="ov-sys">Klaviyo</span><span class="ov-to">Den som anmälde sig</span><span class="ov-sub">Bekräfta din prenumeration</span></a></div>
 </section>
 
 <div class="grp" id="grp-order"><h2 class="grp-h">Beställning</h2><section class="msg" id="ny-bestallning" aria-labelledby="ny-bestallning-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-launch">Vid lansering</span><span class="chip chip-sys">WooCommerce</span></div>
+<div class="msg-top"><span class="chip st-launch">Skickas</span><span class="chip chip-sys">WooCommerce</span></div>
 <h2 id="ny-bestallning-h">Ny beställning (till SB)</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>SB:s signal att agera. WooCommerce-standard, kostar inget.</dd></div>
 <div><dt>Utlösare</dt><dd>Kunden lägger en beställning (status Behandlas eller Pausad).</dd></div>
 <div><dt>System</dt><dd>WooCommerce <span class="muted">(Ny beställning (standard))</span></dd></div>
 <div><dt>Mottagare</dt><dd>SB: <span class="ph">orderinkorg, P35</span></dd></div>
@@ -234,9 +238,10 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 </section>
 <section class="msg" id="behandlas" aria-labelledby="behandlas-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-launch">Vid lansering</span><span class="chip chip-sys">WooCommerce</span></div>
+<div class="msg-top"><span class="chip st-launch">Skickas</span><span class="chip chip-sys">WooCommerce</span></div>
 <h2 id="behandlas-h">Orderbekräftelse (Behandlas)</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Krävs: orderbekräftelse och kvitto. En mall med två varianter (faktura, frakt beräknas av oss).</dd></div>
 <div><dt>Utlösare</dt><dd>Betalningen är godkänd och ordern får status Behandlas. Exempel: privatkund, kort.</dd></div>
 <div><dt>System</dt><dd>WooCommerce <span class="muted">(Behandlar order (standard))</span></dd></div>
 <div><dt>Mottagare</dt><dd>Kunden (Anna Exempel, privat)</dd></div>
@@ -253,9 +258,10 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 </section>
 <section class="msg" id="frakt-beraknas" aria-labelledby="frakt-beraknas-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-decide">SB bestämmer (förslag D24)</span><span class="chip chip-sys">WooCommerce</span></div>
+<div class="msg-top"><span class="chip st-decide">Slås ihop med Orderbekräftelse</span><span class="chip chip-sys">WooCommerce</span></div>
 <h2 id="frakt-beraknas-h">Orderbekräftelse, frakt beräknas av oss</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Variant av Orderbekräftelse: samma mejl, fraktraden säger Beräknas av oss (D24).</dd></div>
 <div><dt>Utlösare</dt><dd>En produkt i ordern saknar vikt, så frakten räknas inte automatiskt. Produkterna är betalda (kort) eller fakturerade. Exempel: privatkund, kort.</dd></div>
 <div><dt>System</dt><dd>WooCommerce <span class="muted">(Behandlar order (standard))</span></dd></div>
 <div><dt>Mottagare</dt><dd>Kunden (Anna Exempel, privat)</dd></div>
@@ -272,11 +278,12 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 </section>
 <section class="msg" id="frakt-betala" aria-labelledby="frakt-betala-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-decide">SB bestämmer (förslag D24)</span><span class="chip chip-sys"><span class="ph">betalpartner, MAK1</span></span></div>
+<div class="msg-top"><span class="chip st-launch">Skickas</span><span class="chip chip-sys">WooCommerce</span></div>
 <h2 id="frakt-betala-h">Frakt att betala</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Kunden måste betala frakten. Behövs bara om SB väljer D24.</dd></div>
 <div><dt>Utlösare</dt><dd>SB har räknat frakten för en order med Frakt beräknas av oss. Kortkunder får en betalningslänk; fakturakunder får beloppet och frakten läggs på fakturan.</dd></div>
-<div><dt>System</dt><dd>WooCommerce <span class="muted">(Behandlar order (standard))</span></dd></div>
+<div><dt>System</dt><dd>WooCommerce <span class="muted">(Nytt mejl med betalningslänk från <span class="ph">betalpartner, MAK1</span>)</span></dd></div>
 <div><dt>Mottagare</dt><dd>Kunden (Anna Exempel, privat)</dd></div>
 <div><dt>Ämnesrad</dt><dd><b>Frakt att betala för SB-10482</b></dd></div>
 </dl>
@@ -291,9 +298,10 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 </section>
 <section class="msg" id="pausad" aria-labelledby="pausad-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-launch">Vid lansering</span><span class="chip chip-sys">WooCommerce</span></div>
+<div class="msg-top"><span class="chip st-decide">Slås ihop med Orderbekräftelse</span><span class="chip chip-sys">WooCommerce</span></div>
 <h2 id="pausad-h">Beställningen väntar (Pausad, faktura)</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Variant av Orderbekräftelse för fakturakunder. Inget extra mejl när SB godkänner fakturan.</dd></div>
 <div><dt>Utlösare</dt><dd>Företag väljer faktura. Ordern pausas tills SB har godkänt fakturan (P22, P37).</dd></div>
 <div><dt>System</dt><dd>WooCommerce <span class="muted">(Pausad order (standard))</span></dd></div>
 <div><dt>Mottagare</dt><dd>Kunden (Exempel Bygg AB)</dd></div>
@@ -306,13 +314,14 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 <div><span>Till</span><span>Kunden (Exempel Bygg AB)</span></div>
 <div><span>Ämne</span><b>Vi har tagit emot din beställning SB-10232</b></div>
 <div class="client-pre"><span>Förhandstext</span><span>Vi kontrollerar fakturaunderlaget och hör av oss, sedan beställer vi.</span></div>
-</div><div class="client-body"><div class="email"><div class="e-head"><span class="e-logo">LOGO Svenska Brunnslock</span><a class="e-headlink" href="SvKonto.dc.html">Mina sidor</a></div><div class="e-body"><div class="e-title"><h3>Vi har tagit emot din beställning</h3><p>Hej Johan, tack för beställningen. Ni har valt faktura, så vi kontrollerar uppgifterna innan vi beställer från leverantören. Det tar <span class="ph">tid som SB bestämmer</span>.</p></div><div class="e-order"><div class="e-order-h"><b>Beställning SB-10232</b><span>26 november 2026</span></div><div class="e-line"><img src="https://www.svenskabrunnslock.se/wp-content/uploads/Betongplint-TP-600.jpg" alt="" width="56" height="56"><div class="e-line-t"><b>Betongplint TP 600</b><span>Art.nr 600450 · 3 st à 736,80 kr</span></div><b class="e-sum">2 210,40 kr</b></div><div class="e-line"><img src="https://www.svenskabrunnslock.se/wp-content/uploads/7015067.jpg" alt="" width="56" height="56"><div class="e-line-t"><b>Lätt brunnslock 580-670 A15 i gjutjärn</b><span>Art.nr 7015067 · 1 st à 2 316 kr</span></div><b class="e-sum">2 316 kr</b></div><div class="e-row"><span>Frakt: 1 pall (plintpall)<small>Kori 232 kg: plintpall, locket följer med (regel 5)</small></span><b>1 920 kr</b></div><div class="e-row e-sep"><span>Summa exkl. moms</span><b>6 446,40 kr</b></div><div class="e-row e-muted"><span>Moms 25 %</span><span>1 611,60 kr</span></div><div class="e-row e-total"><span>Att betala</span><span>8 058 kr</span></div><div class="e-info"><div class="e-kv"><span>Företag</span><span>Exempel Bygg AB, org.nr 556000-0000 (exempel)</span></div><div class="e-kv"><span>Er referens</span><span>Projekt Exempelgatan, Johan Exempel</span></div><div class="e-kv"><span>Leveransadress</span><span>Arbetsplats Exempelgatan 5, 123 45 Exempelstad</span></div><div class="e-kv"><span>Kontakt på plats</span><span>Johan Exempel, 070-123 45 67</span></div><div class="e-kv"><span>Betalning</span><span>Faktura, <span class="ph">betalningsvillkor, P22</span></span></div></div></div><div class="e-steps"><b class="e-h2">Så går det till nu</b><ol><li><span class="e-num on">1</span><span><b>Beställningen är mottagen</b></span></li><li><span class="e-num">2</span><span><b>Vi godkänner fakturaunderlaget</b><span>Du får ett mejl när ordern går vidare. Går det inte, ringer vi.</span></span></li><li><span class="e-num">3</span><span><b>Vi beställer och skickar</b><span>Spårningslänk med e-post när pallen lämnar leverantören.</span></span></li><li><span class="e-num">4</span><span><b>Faktura från Fortnox</b><span>Kommer i ett separat mejl, med PDF.</span></span></li></ol></div><div class="e-contact"><b>Frågor om beställningen?</b><span>Svara på det här mejlet eller ring oss och uppge ordernumret.</span><a href="tel:+46920520056">0920-52 00 56</a></div></div><div class="e-foot"><p><b>Svenska Brunnslock</b> · <span class="ph">bolagsnamn, org.nr och adress</span></p><p>0920-52 00 56 · <span class="ph">e-postadress</span></p><p><a href="#">Köpvillkor</a> · <a href="#">Frakt och leverans</a> · <a href="#">Integritetspolicy</a></p><p>Du får det här mejlet för att du har handlat eller skapat konto hos oss. Det innehåller ingen marknadsföring.</p></div></div></div></div>
+</div><div class="client-body"><div class="email"><div class="e-head"><span class="e-logo">LOGO Svenska Brunnslock</span><a class="e-headlink" href="SvKonto.dc.html">Mina sidor</a></div><div class="e-body"><div class="e-title"><h3>Vi har tagit emot din beställning</h3><p>Hej Johan, tack för beställningen. Ni har valt faktura, så vi kontrollerar uppgifterna innan vi beställer från leverantören. Det tar <span class="ph">tid som SB bestämmer</span>.</p></div><div class="e-order"><div class="e-order-h"><b>Beställning SB-10232</b><span>26 november 2026</span></div><div class="e-line"><img src="https://www.svenskabrunnslock.se/wp-content/uploads/Betongplint-TP-600.jpg" alt="" width="56" height="56"><div class="e-line-t"><b>Betongplint TP 600</b><span>Art.nr 600450 · 3 st à 736,80 kr</span></div><b class="e-sum">2 210,40 kr</b></div><div class="e-line"><img src="https://www.svenskabrunnslock.se/wp-content/uploads/7015067.jpg" alt="" width="56" height="56"><div class="e-line-t"><b>Lätt brunnslock 580-670 A15 i gjutjärn</b><span>Art.nr 7015067 · 1 st à 2 316 kr</span></div><b class="e-sum">2 316 kr</b></div><div class="e-row"><span>Frakt: 1 pall (plintpall)<small>Kori 232 kg: plintpall, locket följer med (regel 5)</small></span><b>1 920 kr</b></div><div class="e-row e-sep"><span>Summa exkl. moms</span><b>6 446,40 kr</b></div><div class="e-row e-muted"><span>Moms 25 %</span><span>1 611,60 kr</span></div><div class="e-row e-total"><span>Att betala</span><span>8 058 kr</span></div><div class="e-info"><div class="e-kv"><span>Företag</span><span>Exempel Bygg AB, org.nr 556000-0000 (exempel)</span></div><div class="e-kv"><span>Er referens</span><span>Projekt Exempelgatan, Johan Exempel</span></div><div class="e-kv"><span>Leveransadress</span><span>Arbetsplats Exempelgatan 5, 123 45 Exempelstad</span></div><div class="e-kv"><span>Kontakt på plats</span><span>Johan Exempel, 070-123 45 67</span></div><div class="e-kv"><span>Betalning</span><span>Faktura, <span class="ph">betalningsvillkor, P22</span></span></div></div></div><div class="e-steps"><b class="e-h2">Så går det till nu</b><ol><li><span class="e-num on">1</span><span><b>Beställningen är mottagen</b></span></li><li><span class="e-num">2</span><span><b>Vi godkänner fakturaunderlaget</b><span>Inget nytt mejl när det är klart. Går det inte, ringer vi.</span></span></li><li><span class="e-num">3</span><span><b>Vi beställer och skickar</b><span>Spårningslänk med e-post när pallen lämnar leverantören.</span></span></li><li><span class="e-num">4</span><span><b>Faktura från Fortnox</b><span>Kommer i ett separat mejl, med PDF.</span></span></li></ol></div><div class="e-contact"><b>Frågor om beställningen?</b><span>Svara på det här mejlet eller ring oss och uppge ordernumret.</span><a href="tel:+46920520056">0920-52 00 56</a></div></div><div class="e-foot"><p><b>Svenska Brunnslock</b> · <span class="ph">bolagsnamn, org.nr och adress</span></p><p>0920-52 00 56 · <span class="ph">e-postadress</span></p><p><a href="#">Köpvillkor</a> · <a href="#">Frakt och leverans</a> · <a href="#">Integritetspolicy</a></p><p>Du får det här mejlet för att du har handlat eller skapat konto hos oss. Det innehåller ingen marknadsföring.</p></div></div></div></div>
 </section>
 <section class="msg" id="kundnotering" aria-labelledby="kundnotering-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-launch">Vid lansering</span><span class="chip chip-sys">WooCommerce</span></div>
+<div class="msg-top"><span class="chip st-launch">Skickas</span><span class="chip chip-sys">WooCommerce</span></div>
 <h2 id="kundnotering-h">Meddelande om beställningen (kundnotering)</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Bara när SB skriver något, t.ex. delad leverans. Standard, kostar inget.</dd></div>
 <div><dt>Utlösare</dt><dd>SB skriver en notering till kunden i ordern i admin.</dd></div>
 <div><dt>System</dt><dd>WooCommerce <span class="muted">(Kundnotering (standard))</span></dd></div>
 <div><dt>Mottagare</dt><dd>Kunden</dd></div>
@@ -329,9 +338,10 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 </section>
 <section class="msg" id="avbruten" aria-labelledby="avbruten-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-launch">Vid lansering</span><span class="chip chip-sys">WooCommerce</span></div>
+<div class="msg-top"><span class="chip st-launch">Skickas</span><span class="chip chip-sys">WooCommerce</span></div>
 <h2 id="avbruten-h">Beställningen är avbruten</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Kunden måste veta att ordern inte kommer. Bara till kunden, SB:s kopia stängs av.</dd></div>
 <div><dt>Utlösare</dt><dd>SB avbryter ordern, eller en obetald order går ut.</dd></div>
 <div><dt>System</dt><dd>WooCommerce <span class="muted">(Avbruten order (standard till SB, kundversion föreslås))</span></dd></div>
 <div><dt>Mottagare</dt><dd>Kunden och SB</dd></div>
@@ -346,30 +356,12 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 <div class="client-pre"><span>Förhandstext</span><span>Beställningen går inte vidare. Vill du beställa igen?</span></div>
 </div><div class="client-body"><div class="email"><div class="e-head"><span class="e-logo">LOGO Svenska Brunnslock</span><a class="e-headlink" href="SvKonto.dc.html">Mina sidor</a></div><div class="e-body"><div class="e-title"><h3>Din beställning är avbruten</h3><p>Hej Anna, beställning SB-10233 är avbruten och skickas inte. <span class="ph">orsak, om SB skriver en</span></p></div><div class="e-order"><div class="e-order-h"><b>Beställning SB-10233</b><span>26 november 2026</span></div><div class="e-line"><img src="https://www.svenskabrunnslock.se/wp-content/uploads/PLASTLOCK1050-RAK-BRUNN-ST%C3%84NGD.jpg" alt="" width="56" height="56"><div class="e-line-t"><b>Lätt Brunnslock 1050 Composite</b><span>Art.nr 1055 · 1 st à 2 645 kr</span></div><b class="e-sum">2 645 kr</b></div><div class="e-line"><img src="https://www.svenskabrunnslock.se/wp-content/uploads/T%C3%A4tningslister.png" alt="" width="56" height="56"><div class="e-line-t"><b>Tätningsring 900/1100</b><span>Art.nr 30010 · 1 st à 875 kr</span></div><b class="e-sum">875 kr</b></div><div class="e-row"><span>Frakt: hemleverans, paket</span><b>590 kr</b></div><div class="e-row e-sep e-total"><span>Totalt inkl. moms</span><span>4 110 kr</span></div><div class="e-row e-muted"><span>varav moms 25 %</span><span>822 kr</span></div></div><div class="e-btnwrap"><a class="e-btn" href="SvVarukorg.dc.html">Beställ igen</a><span class="e-btnsub">Lägger samma produkter i varukorgen.</span></div><div class="e-contact"><b>Var det fel?</b><span>Svara på det här mejlet eller ring oss och uppge ordernumret.</span><a href="tel:+46920520056">0920-52 00 56</a></div></div><div class="e-foot"><p><b>Svenska Brunnslock</b> · <span class="ph">bolagsnamn, org.nr och adress</span></p><p>0920-52 00 56 · <span class="ph">e-postadress</span></p><p><a href="#">Köpvillkor</a> · <a href="#">Frakt och leverans</a> · <a href="#">Integritetspolicy</a></p><p>Du får det här mejlet för att du har handlat eller skapat konto hos oss. Det innehåller ingen marknadsföring.</p></div></div></div></div>
 </section>
-<section class="msg" id="misslyckad" aria-labelledby="misslyckad-h">
-<div class="msg-meta">
-<div class="msg-top"><span class="chip st-launch">Vid lansering</span><span class="chip chip-sys">WooCommerce</span></div>
-<h2 id="misslyckad-h">Betalningen gick inte igenom (Misslyckad)</h2>
-<dl>
-<div><dt>Utlösare</dt><dd>Betalningen avvisas eller avbryts i betalfönstret.</dd></div>
-<div><dt>System</dt><dd>WooCommerce <span class="muted">(Misslyckad order (standard till SB, kundversion föreslås))</span></dd></div>
-<div><dt>Mottagare</dt><dd>Kunden och SB</dd></div>
-<div><dt>Ämnesrad</dt><dd><b>Betalningen för SB-10233 gick inte igenom</b></dd></div>
-</dl>
-<a class="toplink" href="#oversikt">Till översikten</a>
-</div>
-<div class="client"><div class="client-meta">
-<div><span>Från</span><span>Svenska Brunnslock &lt;<span class="ph">order-adress</span>&gt;</span></div>
-<div><span>Till</span><span>Kunden och SB</span></div>
-<div><span>Ämne</span><b>Betalningen för SB-10233 gick inte igenom</b></div>
-<div class="client-pre"><span>Förhandstext</span><span>Beställningen är sparad. Du kan försöka igen med samma eller ett annat betalsätt.</span></div>
-</div><div class="client-body"><div class="email"><div class="e-head"><span class="e-logo">LOGO Svenska Brunnslock</span><a class="e-headlink" href="SvKonto.dc.html">Mina sidor</a></div><div class="e-body"><div class="e-title"><h3>Betalningen gick inte igenom</h3><p>Hej Anna, vi fick inte betalningen för beställning SB-10233. Beställningen är sparad, så du behöver inte börja om.</p></div><div class="e-order"><div class="e-order-h"><b>Beställning SB-10233</b><span>26 november 2026</span></div><div class="e-line"><img src="https://www.svenskabrunnslock.se/wp-content/uploads/PLASTLOCK1050-RAK-BRUNN-ST%C3%84NGD.jpg" alt="" width="56" height="56"><div class="e-line-t"><b>Lätt Brunnslock 1050 Composite</b><span>Art.nr 1055 · 1 st à 2 645 kr</span></div><b class="e-sum">2 645 kr</b></div><div class="e-line"><img src="https://www.svenskabrunnslock.se/wp-content/uploads/T%C3%A4tningslister.png" alt="" width="56" height="56"><div class="e-line-t"><b>Tätningsring 900/1100</b><span>Art.nr 30010 · 1 st à 875 kr</span></div><b class="e-sum">875 kr</b></div><div class="e-row"><span>Frakt: hemleverans, paket</span><b>590 kr</b></div><div class="e-row e-sep e-total"><span>Totalt inkl. moms</span><span>4 110 kr</span></div><div class="e-row e-muted"><span>varav moms 25 %</span><span>822 kr</span></div></div><div class="e-btnwrap"><a class="e-btn" href="SvKassa.dc.html">Betala nu</a><span class="e-btnsub">Öppnar betalningen för samma beställning.</span></div><div class="e-contact"><b>Fungerar det inte?</b><span>Svara på det här mejlet eller ring oss och uppge ordernumret.</span><a href="tel:+46920520056">0920-52 00 56</a></div></div><div class="e-foot"><p><b>Svenska Brunnslock</b> · <span class="ph">bolagsnamn, org.nr och adress</span></p><p>0920-52 00 56 · <span class="ph">e-postadress</span></p><p><a href="#">Köpvillkor</a> · <a href="#">Frakt och leverans</a> · <a href="#">Integritetspolicy</a></p><p>Du får det här mejlet för att du har handlat eller skapat konto hos oss. Det innehåller ingen marknadsföring.</p></div></div></div></div>
-</section>
 <section class="msg" id="aterbetald" aria-labelledby="aterbetald-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-launch">Vid lansering</span><span class="chip chip-sys">WooCommerce</span></div>
+<div class="msg-top"><span class="chip st-launch">Skickas</span><span class="chip chip-sys">WooCommerce</span></div>
 <h2 id="aterbetald-h">Återbetalning</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Bekräftar återbetalningen. Standard, kostar inget.</dd></div>
 <div><dt>Utlösare</dt><dd>SB gör en återbetalning i ordern (hela eller del).</dd></div>
 <div><dt>System</dt><dd>WooCommerce <span class="muted">(Återbetald order (standard, hel eller delvis))</span></dd></div>
 <div><dt>Mottagare</dt><dd>Kunden</dd></div>
@@ -386,9 +378,10 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 </section></div>
 <div class="grp" id="grp-leverans"><h2 class="grp-h">Leverans</h2><section class="msg" id="skickad" aria-labelledby="skickad-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-launch">Vid lansering</span><span class="chip chip-sys">WooCommerce</span></div>
+<div class="msg-top"><span class="chip st-launch">Skickas</span><span class="chip chip-sys">WooCommerce</span></div>
 <h2 id="skickad-h">Din beställning är skickad (Skickad, ny)</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Spårningslänken. Det enda leveransmejlet vid lansering.</dd></div>
 <div><dt>Utlösare</dt><dd>SB sätter status Skickad och sparar spårningskod och länk på ordern (P55). Koden kan komma från nShift (P54).</dd></div>
 <div><dt>System</dt><dd>WooCommerce <span class="muted">(Ny status och nytt mejl: Skickad)</span></dd></div>
 <div><dt>Mottagare</dt><dd>Kunden (Exempel Bygg AB)</dd></div>
@@ -402,50 +395,13 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 <div><span>Ämne</span><b>Din beställning SB-10232 är skickad</b></div>
 <div class="client-pre"><span>Förhandstext</span><span>Följ pallen hos transportören. Spårningskoden finns också på Mina sidor.</span></div>
 </div><div class="client-body"><div class="email"><div class="e-head"><span class="e-logo">LOGO Svenska Brunnslock</span><a class="e-headlink" href="SvKonto.dc.html">Mina sidor</a></div><div class="e-body"><div class="e-title"><h3>Din beställning är skickad</h3><p>Hej Johan, pallen med beställning SB-10232 har lämnat leverantören.</p></div><div class="e-order"><div class="e-info"><div class="e-kv"><span>Transportör</span><span><span class="ph">transportör, t.ex. DHL</span></span></div><div class="e-kv"><span>Spårningskod</span><span>00340434161094015902 (exempel)</span></div><div class="e-kv"><span>Leveransadress</span><span>Arbetsplats Exempelgatan 5, 123 45 Exempelstad</span></div><div class="e-kv"><span>Kontakt på plats</span><span>Johan Exempel, 070-123 45 67</span></div></div></div><div class="e-btnwrap"><a class="e-btn" href="#">Spåra försändelsen</a><span class="e-btnsub">Öppnar transportörens spårningssida.</span></div><a class="e-btn2" href="SvKonto.dc.html">Se ordern på Mina sidor</a><div class="e-steps"><b class="e-h2">Leveransen</b><ol><li><span class="e-num on">1</span><span><b>Skickad</b><span>I dag</span></span></li><li><span class="e-num">2</span><span><b>Transportören kontaktar dig</b><span>Om tid för lossning: <span class="ph">hur, enligt transportör</span></span></span></li><li><span class="e-num">3</span><span><b>Pallen levereras</b><span>Lossning vid gatan. Kranbil eller bakgavellyft om det är valt (P28).</span></span></li></ol></div><div class="e-order"><div class="e-order-h"><b>Det här skickas</b><span>26 november 2026</span></div><div class="e-line"><img src="https://www.svenskabrunnslock.se/wp-content/uploads/Betongplint-TP-600.jpg" alt="" width="56" height="56"><div class="e-line-t"><b>Betongplint TP 600</b><span>Art.nr 600450 · 3 st à 736,80 kr</span></div><b class="e-sum">2 210,40 kr</b></div><div class="e-line"><img src="https://www.svenskabrunnslock.se/wp-content/uploads/7015067.jpg" alt="" width="56" height="56"><div class="e-line-t"><b>Lätt brunnslock 580-670 A15 i gjutjärn</b><span>Art.nr 7015067 · 1 st à 2 316 kr</span></div><b class="e-sum">2 316 kr</b></div><div class="e-row"><span>Frakt: 1 pall (plintpall)</span><b>1 920 kr</b></div><div class="e-row e-sep"><span>Summa exkl. moms</span><b>6 446,40 kr</b></div><div class="e-row e-muted"><span>Moms 25 %</span><span>1 611,60 kr</span></div><div class="e-row e-total"><span>Att betala</span><span>8 058 kr</span></div></div><div class="e-contact"><b>Frågor om leveransen?</b><span>Svara på det här mejlet eller ring oss och uppge ordernumret.</span><a href="tel:+46920520056">0920-52 00 56</a></div></div><div class="e-foot"><p><b>Svenska Brunnslock</b> · <span class="ph">bolagsnamn, org.nr och adress</span></p><p>0920-52 00 56 · <span class="ph">e-postadress</span></p><p><a href="#">Köpvillkor</a> · <a href="#">Frakt och leverans</a> · <a href="#">Integritetspolicy</a></p><p>Du får det här mejlet för att du har handlat eller skapat konto hos oss. Det innehåller ingen marknadsföring.</p></div></div></div></div>
-</section>
-<section class="msg" id="slutford" aria-labelledby="slutford-h">
-<div class="msg-meta">
-<div class="msg-top"><span class="chip st-decide">SB bestämmer</span><span class="chip chip-sys">WooCommerce</span></div>
-<h2 id="slutford-h">Tack för ditt köp (Slutförd)</h2>
-<dl>
-<div><dt>Utlösare</dt><dd>SB sätter status Slutförd efter leveransen. Skickas eller stängs av (Skickad har redan informerat).</dd></div>
-<div><dt>System</dt><dd>WooCommerce <span class="muted">(Slutförd order (standard))</span></dd></div>
-<div><dt>Mottagare</dt><dd>Kunden</dd></div>
-<div><dt>Ämnesrad</dt><dd><b>Tack för ditt köp, SB-10231</b></dd></div>
-</dl>
-<a class="toplink" href="#oversikt">Till översikten</a>
-</div>
-<div class="client"><div class="client-meta">
-<div><span>Från</span><span>Svenska Brunnslock &lt;<span class="ph">order-adress</span>&gt;</span></div>
-<div><span>Till</span><span>Kunden</span></div>
-<div><span>Ämne</span><b>Tack för ditt köp, SB-10231</b></div>
-<div class="client-pre"><span>Förhandstext</span><span>Beställningen är klar. Här hittar du produktblad och anvisningar.</span></div>
-</div><div class="client-body"><div class="email"><div class="e-head"><span class="e-logo">LOGO Svenska Brunnslock</span><a class="e-headlink" href="SvKonto.dc.html">Mina sidor</a></div><div class="e-body"><div class="e-title"><h3>Tack för ditt köp</h3><p>Hej Anna, beställning SB-10231 är levererad och avslutad.</p></div><div class="e-order"><div class="e-order-h"><b>Du har köpt</b><span>26 november 2026</span></div><div class="e-line"><img src="https://www.svenskabrunnslock.se/wp-content/uploads/PLASTLOCK1050-RAK-BRUNN-ST%C3%84NGD.jpg" alt="" width="56" height="56"><div class="e-line-t"><b>Lätt Brunnslock 1050 Composite</b><span>Art.nr 1055 · 1 st à 2 645 kr</span></div><b class="e-sum">2 645 kr</b></div><div class="e-line"><img src="https://www.svenskabrunnslock.se/wp-content/uploads/Avluftningsventil.jpg" alt="" width="56" height="56"><div class="e-line-t"><b>Avluftningsventil</b><span>Art.nr 1008 · 1 st à 569 kr</span></div><b class="e-sum">569 kr</b></div><div class="e-row"><span>Frakt: hemleverans, paket</span><b>590 kr</b></div><div class="e-row e-sep e-total"><span>Totalt inkl. moms</span><span>3 804 kr</span></div><div class="e-row e-muted"><span>varav moms 25 %</span><span>760,80 kr</span></div></div><div class="e-text"><p><b>Produktblad och anvisningar</b> finns på produktsidan för varje produkt. Kunden kan också öppna dem från ordern på Mina sidor.</p></div><div class="e-btnwrap"><a class="e-btn" href="SvKonto.dc.html">Se din beställning</a></div><div class="e-contact"><b>Något som inte stämmer?</b><span>Svara på det här mejlet eller ring oss och uppge ordernumret.</span><a href="tel:+46920520056">0920-52 00 56</a></div></div><div class="e-foot"><p><b>Svenska Brunnslock</b> · <span class="ph">bolagsnamn, org.nr och adress</span></p><p>0920-52 00 56 · <span class="ph">e-postadress</span></p><p><a href="#">Köpvillkor</a> · <a href="#">Frakt och leverans</a> · <a href="#">Integritetspolicy</a></p><p>Du får det här mejlet för att du har handlat eller skapat konto hos oss. Det innehåller ingen marknadsföring.</p></div></div></div></div>
-</section>
-<section class="msg" id="nshift-track" aria-labelledby="nshift-track-h">
-<div class="msg-meta">
-<div class="msg-top"><span class="chip st-decide">Vid lansering om priset passar (K54), annars senare</span><span class="chip chip-sys">nShift Track</span></div>
-<h2 id="nshift-track-h">Leveransaviseringar (nShift Track)</h2>
-<dl>
-<div><dt>Utlösare</dt><dd>Transportörens händelser: på väg, levereras i dag, levererad, försenad.</dd></div>
-<div><dt>System</dt><dd>nShift Track</dd></div>
-<div><dt>Mottagare</dt><dd>Kunden (e-post, sms senare)</dd></div>
-<div><dt>Ämnesrad</dt><dd><b>Din leverans från Svenska Brunnslock kommer i dag</b></dd></div>
-</dl>
-<a class="toplink" href="#oversikt">Till översikten</a>
-</div>
-<div class="client"><div class="client-meta">
-<div><span>Från</span><span>Svenska Brunnslock via nShift</span></div>
-<div><span>Till</span><span>Kunden (e-post, sms senare)</span></div>
-<div><span>Ämne</span><b>Din leverans från Svenska Brunnslock kommer i dag</b></div>
-<div class="client-pre"><span>Förhandstext</span><span>Beställning SB-10231. Följ paketet live.</span></div>
-</div><div class="client-body"><div class="email"><div class="e-head"><span class="e-logo">LOGO Svenska Brunnslock</span><span class="e-headlink">Spårning via nShift</span></div><div class="e-body"><div class="e-title"><h3>Din leverans kommer i dag</h3><p>Hej Anna, paketet med beställning SB-10231 är ute för leverans.</p></div><div class="e-steps"><b class="e-h2">Paketets väg</b><ol><li><span class="e-num on">1</span><span><b>Skickad</b><span><span class="ph">datum</span></span></span></li><li><span class="e-num on">2</span><span><b>På väg</b><span><span class="ph">datum</span></span></span></li><li><span class="e-num on">3</span><span><b>Ute för leverans</b><span>I dag</span></span></li><li><span class="e-num">4</span><span><b>Levererad</b></span></li></ol></div><div class="e-btnwrap"><a class="e-btn" href="#">Följ leveransen</a><span class="e-btnsub">nShift Track-sida med Svenska Brunnslocks logga.</span></div><div class="e-contact"><b>Frågor om leveransen?</b><span>Svara på det här mejlet eller ring oss och uppge ordernumret.</span><a href="tel:+46920520056">0920-52 00 56</a></div></div><div class="e-foot"><p><b>Svenska Brunnslock</b> · <span class="ph">bolagsnamn, org.nr och adress</span></p><p>0920-52 00 56 · <span class="ph">e-postadress</span></p><p>Skickas av nShift Track för Svenska Brunnslock. Bara om leveransen, ingen marknadsföring.</p></div></div></div></div>
 </section></div>
 <div class="grp" id="grp-offert"><h2 class="grp-h">Offert</h2><section class="msg" id="offert-mottagen" aria-labelledby="offert-mottagen-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-launch">Vid lansering</span><span class="chip chip-sys">WooCommerce</span></div>
+<div class="msg-top"><span class="chip st-launch">Skickas</span><span class="chip chip-sys">WooCommerce</span></div>
 <h2 id="offert-mottagen-h">Offertförfrågan mottagen (OF-nummer)</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Kunden får OF-numret och vet att förfrågan kom fram.</dd></div>
 <div><dt>Utlösare</dt><dd>Kunden skickar offertformuläret eller en varukorg med offertprodukter.</dd></div>
 <div><dt>System</dt><dd>WooCommerce <span class="muted">(Nytt mejl (offertformuläret))</span></dd></div>
 <div><dt>Mottagare</dt><dd>Kunden (Exempel Bygg AB)</dd></div>
@@ -462,9 +418,10 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 </section>
 <section class="msg" id="offert-ny-sb" aria-labelledby="offert-ny-sb-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-launch">Vid lansering</span><span class="chip chip-sys">WooCommerce</span></div>
+<div class="msg-top"><span class="chip st-launch">Skickas</span><span class="chip chip-sys">WooCommerce</span></div>
 <h2 id="offert-ny-sb-h">Ny offertförfrågan (till SB)</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Så når förfrågan SB (P35).</dd></div>
 <div><dt>Utlösare</dt><dd>Samma som ovan. Vart förfrågan går är öppet (P35).</dd></div>
 <div><dt>System</dt><dd>WooCommerce <span class="muted">(Nytt mejl (offertformuläret))</span></dd></div>
 <div><dt>Mottagare</dt><dd>SB: <span class="ph">offertinkorg, P35</span></dd></div>
@@ -481,9 +438,10 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 </section>
 <section class="msg" id="offert-klar" aria-labelledby="offert-klar-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-launch">Vid lansering</span><span class="chip chip-sys">WooCommerce</span></div>
+<div class="msg-top"><span class="chip st-launch">Skickas</span><span class="chip chip-sys">WooCommerce</span></div>
 <h2 id="offert-klar-h">Din offert är klar (godkänn med ett klick)</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Kunden måste godkänna offerten.</dd></div>
 <div><dt>Utlösare</dt><dd>SB skickar offerten. Kunden godkänner med ett klick och offerten blir en order.</dd></div>
 <div><dt>System</dt><dd>WooCommerce <span class="muted">(Nytt mejl (förslag, P35 och P36 öppna))</span></dd></div>
 <div><dt>Mottagare</dt><dd>Kunden (Exempel Bygg AB)</dd></div>
@@ -504,9 +462,10 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 </section></div>
 <div class="grp" id="grp-konto"><h2 class="grp-h">Konto</h2><section class="msg" id="nytt-konto" aria-labelledby="nytt-konto-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-launch">Vid lansering</span><span class="chip chip-sys">WooCommerce</span></div>
+<div class="msg-top"><span class="chip st-launch">Skickas</span><span class="chip chip-sys">WooCommerce</span></div>
 <h2 id="nytt-konto-h">Välkommen, ditt konto är skapat</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Standard: bekräftar kontot och inloggningen. Kostar inget.</dd></div>
 <div><dt>Utlösare</dt><dd>Kunden skapar konto i kassan, på Tack-sidan eller på Mina sidor.</dd></div>
 <div><dt>System</dt><dd>WooCommerce <span class="muted">(Nytt konto (standard))</span></dd></div>
 <div><dt>Mottagare</dt><dd>Kunden</dd></div>
@@ -523,9 +482,10 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 </section>
 <section class="msg" id="aterstall" aria-labelledby="aterstall-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-launch">Vid lansering</span><span class="chip chip-sys">WooCommerce</span></div>
+<div class="msg-top"><span class="chip st-launch">Skickas</span><span class="chip chip-sys">WooCommerce</span></div>
 <h2 id="aterstall-h">Återställ lösenord</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Behövs för att inloggningen ska fungera.</dd></div>
 <div><dt>Utlösare</dt><dd>Kunden klickar ”Glömt lösenord?” och anger sin e-post.</dd></div>
 <div><dt>System</dt><dd>WooCommerce <span class="muted">(Återställ lösenord (standard))</span></dd></div>
 <div><dt>Mottagare</dt><dd>Kunden</dd></div>
@@ -542,9 +502,10 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 </section></div>
 <div class="grp" id="grp-faktura"><h2 class="grp-h">Faktura</h2><section class="msg" id="faktura" aria-labelledby="faktura-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-launch">Vid lansering</span><span class="chip chip-sys">Fortnox</span></div>
+<div class="msg-top"><span class="chip st-launch">Skickas</span><span class="chip chip-sys">Fortnox</span></div>
 <h2 id="faktura-h">Faktura (från Fortnox)</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Krävs för fakturakunder. Fortnox mall, ingen egen design.</dd></div>
 <div><dt>Utlösare</dt><dd>SB skapar fakturan i Fortnox från ordern (TIK1) och skickar den med e-post. Gäller företag på faktura. Privatpersonens faktura kommer från betalpartnern (MAK3).</dd></div>
 <div><dt>System</dt><dd>Fortnox <span class="muted">(Fortnox e-postfaktura, inte butiken)</span></dd></div>
 <div><dt>Mottagare</dt><dd>Kundens fakturaadress (Exempel Bygg AB)</dd></div>
@@ -559,30 +520,33 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 <div class="client-pre"><span>Förhandstext</span><span>Faktura för beställning SB-10232, 8 058 kr. Förfaller <span class="ph">datum</span>.</span></div>
 </div><div class="client-body"><div class="email"><div class="e-head"><span class="e-logo">LOGO Svenska Brunnslock</span><a class="e-headlink" href="SvKonto.dc.html">Mina sidor</a></div><div class="e-body"><div class="e-title"><h3>Faktura från Svenska Brunnslock</h3><p>Hej, här kommer fakturan för beställning SB-10232. Fakturan finns som PDF i mejlet.</p></div><div class="e-attach"><span class="e-pdf">PDF</span><span><b>Faktura_<span class="ph">nr</span>.pdf</b><small>Bifogad fil, skapad i Fortnox</small></span></div><div class="e-order"><div class="e-info"><div class="e-kv"><span>Fakturanummer</span><span><span class="ph">nr från Fortnox</span></span></div><div class="e-kv"><span>Er referens</span><span>Projekt Exempelgatan, Johan Exempel</span></div><div class="e-kv"><span>Ordernummer</span><span>SB-10232</span></div><div class="e-kv"><span>Fakturadatum</span><span><span class="ph">datum</span></span></div><div class="e-kv"><span>Förfallodatum</span><span><span class="ph">betalningsvillkor, P22</span></span></div><div class="e-kv"><span>Att betala</span><span>8 058 kr (varav moms 1 611,60 kr)</span></div><div class="e-kv"><span>Betala till</span><span>Bankgiro <span class="ph">nr</span>, OCR <span class="ph">nr</span></span></div></div></div><div class="e-text"><p><b>PDF:en innehåller:</b> fakturarader som i ordern (Betongplint TP 600, 3 st, Lätt brunnslock 580-670 A15 i gjutjärn, 1 st, frakt 1 pall), belopp exkl. moms, moms 25 %, att betala, SB:s org.nr och momsreg.nr, dröjsmålsränta enligt <span class="ph">villkor</span>.</p></div><div class="e-text"><p class="e-small">Mejlet följer Fortnox mall: logga, text och avsändarnamn går att ändra, layouten inte.</p></div></div><div class="e-foot"><p><b>Svenska Brunnslock</b> · <span class="ph">bolagsnamn, org.nr och adress</span></p><p>0920-52 00 56 · <span class="ph">e-postadress</span></p><p><a href="#">Köpvillkor</a> · <a href="#">Frakt och leverans</a> · <a href="#">Integritetspolicy</a></p><p>Du får det här mejlet för att du har handlat eller skapat konto hos oss. Det innehåller ingen marknadsföring.</p></div></div></div></div>
 </section></div>
-<div class="grp" id="grp-mkt"><h2 class="grp-h">Marknadsföring</h2><section class="msg" id="nyhetsbrev-bekrafta" aria-labelledby="nyhetsbrev-bekrafta-h">
+<div class="grp" id="grp-mkt"><h2 class="grp-h">Marknadsföring</h2></div>
+<div class="grp" id="grp-later"><h2 class="grp-h">Senare</h2><section class="msg" id="nshift-track" aria-labelledby="nshift-track-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-decide">SB bestämmer</span><span class="chip chip-sys">Klaviyo</span></div>
-<h2 id="nyhetsbrev-bekrafta-h">Bekräfta prenumerationen (dubbel opt-in)</h2>
+<div class="msg-top"><span class="chip st-later">Senare</span><span class="chip chip-sys">nShift Track</span></div>
+<h2 id="nshift-track-h">Leveransaviseringar (nShift Track)</h2>
 <dl>
-<div><dt>Utlösare</dt><dd>Kunden kryssar i nyhetsbrevet i kassan eller anmäler sig i sidfoten (VIE6). Används om SB väljer dubbel opt-in.</dd></div>
-<div><dt>System</dt><dd>Klaviyo</dd></div>
-<div><dt>Mottagare</dt><dd>Den som anmälde sig</dd></div>
-<div><dt>Ämnesrad</dt><dd><b>Bekräfta din prenumeration</b></dd></div>
+<div><dt>Beslut 26.11.</dt><dd>Dubblerar Skickad. Bara om priset passar (K54), och då utan ett eget skickat-mejl.</dd></div>
+<div><dt>Utlösare</dt><dd>Transportörens händelser: på väg, levereras i dag, levererad, försenad.</dd></div>
+<div><dt>System</dt><dd>nShift Track</dd></div>
+<div><dt>Mottagare</dt><dd>Kunden (e-post, sms senare)</dd></div>
+<div><dt>Ämnesrad</dt><dd><b>Din leverans från Svenska Brunnslock kommer i dag</b></dd></div>
 </dl>
 <a class="toplink" href="#oversikt">Till översikten</a>
 </div>
 <div class="client"><div class="client-meta">
-<div><span>Från</span><span>Svenska Brunnslock &lt;<span class="ph">nyhetsbrev-adress</span>&gt;</span></div>
-<div><span>Till</span><span>Den som anmälde sig</span></div>
-<div><span>Ämne</span><b>Bekräfta din prenumeration</b></div>
-<div class="client-pre"><span>Förhandstext</span><span>Ett klick, sedan är du med.</span></div>
-</div><div class="client-body"><div class="email"><div class="e-head"><span class="e-logo">LOGO Svenska Brunnslock</span><a class="e-headlink" href="SvKonto.dc.html">Mina sidor</a></div><div class="e-body"><div class="e-title"><h3>Bekräfta din prenumeration</h3><p>Klicka på knappen så börjar vi skicka nyhetsbrevet till anna@exempel.se.</p></div><div class="e-btnwrap"><a class="e-btn" href="#">Ja, jag vill ha nyhetsbrevet</a></div><div class="e-text"><p>Har du inte anmält dig? Då kan du strunta i mejlet.</p></div></div><div class="e-foot"><p><b>Svenska Brunnslock</b> · <span class="ph">bolagsnamn, org.nr och adress</span></p><p>0920-52 00 56 · <span class="ph">e-postadress</span></p><p><a href="#">Köpvillkor</a> · <a href="#">Frakt och leverans</a> · <a href="#">Integritetspolicy</a></p><p>Du får det här mejlet för att du har anmält dig till vårt nyhetsbrev. <a href="#">Avregistrera dig</a> · <a href="#">Ändra inställningar</a></p></div></div></div></div>
+<div><span>Från</span><span>Svenska Brunnslock via nShift</span></div>
+<div><span>Till</span><span>Kunden (e-post, sms senare)</span></div>
+<div><span>Ämne</span><b>Din leverans från Svenska Brunnslock kommer i dag</b></div>
+<div class="client-pre"><span>Förhandstext</span><span>Beställning SB-10231. Följ paketet live.</span></div>
+</div><div class="client-body"><div class="email"><div class="e-head"><span class="e-logo">LOGO Svenska Brunnslock</span><span class="e-headlink">Spårning via nShift</span></div><div class="e-body"><div class="e-title"><h3>Din leverans kommer i dag</h3><p>Hej Anna, paketet med beställning SB-10231 är ute för leverans.</p></div><div class="e-steps"><b class="e-h2">Paketets väg</b><ol><li><span class="e-num on">1</span><span><b>Skickad</b><span><span class="ph">datum</span></span></span></li><li><span class="e-num on">2</span><span><b>På väg</b><span><span class="ph">datum</span></span></span></li><li><span class="e-num on">3</span><span><b>Ute för leverans</b><span>I dag</span></span></li><li><span class="e-num">4</span><span><b>Levererad</b></span></li></ol></div><div class="e-btnwrap"><a class="e-btn" href="#">Följ leveransen</a><span class="e-btnsub">nShift Track-sida med Svenska Brunnslocks logga.</span></div><div class="e-contact"><b>Frågor om leveransen?</b><span>Svara på det här mejlet eller ring oss och uppge ordernumret.</span><a href="tel:+46920520056">0920-52 00 56</a></div></div><div class="e-foot"><p><b>Svenska Brunnslock</b> · <span class="ph">bolagsnamn, org.nr och adress</span></p><p>0920-52 00 56 · <span class="ph">e-postadress</span></p><p>Skickas av nShift Track för Svenska Brunnslock. Bara om leveransen, ingen marknadsföring.</p></div></div></div></div>
 </section>
 <section class="msg" id="nyhetsbrev-valkommen" aria-labelledby="nyhetsbrev-valkommen-h">
 <div class="msg-meta">
-<div class="msg-top"><span class="chip st-launch">Vid lansering</span><span class="chip chip-sys">Klaviyo</span></div>
+<div class="msg-top"><span class="chip st-later">Senare</span><span class="chip chip-sys">Klaviyo</span></div>
 <h2 id="nyhetsbrev-valkommen-h">Välkommen till nyhetsbrevet</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Behövs när SB börjar skicka nyhetsbrev, inte vid lansering.</dd></div>
 <div><dt>Utlösare</dt><dd>Prenumerationen är bekräftad (eller direkt, utan dubbel opt-in).</dd></div>
 <div><dt>System</dt><dd>Klaviyo</dd></div>
 <div><dt>Mottagare</dt><dd>Prenumeranten</dd></div>
@@ -602,6 +566,7 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 <div class="msg-top"><span class="chip st-later">Senare</span><span class="chip chip-sys">Klaviyo</span></div>
 <h2 id="overgiven-varukorg-h">Du har produkter kvar i varukorgen</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Efter lansering, när det finns trafik att mäta.</dd></div>
 <div><dt>Utlösare</dt><dd>Varukorg med e-post (inloggad eller ifylld i kassan) utan beställning efter <span class="ph">tid</span> (VIE7). Bara enligt samtycke.</dd></div>
 <div><dt>System</dt><dd>Klaviyo</dd></div>
 <div><dt>Mottagare</dt><dd>Kunden</dd></div>
@@ -621,6 +586,7 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 <div class="msg-top"><span class="chip st-later">Senare</span><span class="chip chip-sys">Klaviyo</span></div>
 <h2 id="feedback-h">Hur gick det? (feedbackenkät)</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>Verktyg och frågor öppna (K36). Efter lansering.</dd></div>
 <div><dt>Utlösare</dt><dd><span class="ph">antal dagar</span> efter Slutförd. Verktyg och frågor är öppna (K36).</dd></div>
 <div><dt>System</dt><dd>Klaviyo</dd></div>
 <div><dt>Mottagare</dt><dd>Kunden</dd></div>
@@ -634,6 +600,66 @@ main{min-width:0;display:flex;flex-direction:column;gap:56px}
 <div><span>Ämne</span><b>Hur gick det med ditt lock?</b></div>
 <div class="client-pre"><span>Förhandstext</span><span>En fråga, tar tio sekunder.</span></div>
 </div><div class="client-body"><div class="email"><div class="e-head"><span class="e-logo">LOGO Svenska Brunnslock</span><a class="e-headlink" href="SvKonto.dc.html">Mina sidor</a></div><div class="e-body"><div class="e-title"><h3>Hur gick det?</h3><p>Hej Anna, passade Lätt Brunnslock 1050 Composite din brunn?</p></div><div class="e-scale"><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a></div><div class="e-scale-l"><span>Inte alls</span><span>Perfekt</span></div><div class="e-text"><p>Ett klick räcker. Vill du skriva mer kommer du till en kort sida.</p></div></div><div class="e-foot"><p><b>Svenska Brunnslock</b> · <span class="ph">bolagsnamn, org.nr och adress</span></p><p>0920-52 00 56 · <span class="ph">e-postadress</span></p><p><a href="#">Köpvillkor</a> · <a href="#">Frakt och leverans</a> · <a href="#">Integritetspolicy</a></p><p>Du får det här mejlet för att du har anmält dig till vårt nyhetsbrev. <a href="#">Avregistrera dig</a> · <a href="#">Ändra inställningar</a></p></div></div></div></div>
+</section></div>
+<div class="grp" id="grp-drop"><h2 class="grp-h">Skickas inte</h2><section class="msg msg-off" id="misslyckad" aria-labelledby="misslyckad-h">
+<div class="msg-meta">
+<div class="msg-top"><span class="chip st-later">Skickas inte</span><span class="chip chip-sys">WooCommerce</span></div>
+<h2 id="misslyckad-h">Betalningen gick inte igenom (Misslyckad)</h2>
+<dl>
+<div><dt>Beslut 26.11.</dt><dd>Kunden ser felet direkt i kassan och betalar igen där. Standardmejlet till SB stängs av.</dd></div>
+<div><dt>Utlösare</dt><dd>Betalningen avvisas eller avbryts i betalfönstret.</dd></div>
+<div><dt>System</dt><dd>WooCommerce <span class="muted">(Misslyckad order (standard till SB, kundversion föreslås))</span></dd></div>
+<div><dt>Mottagare</dt><dd>Kunden och SB</dd></div>
+<div><dt>Ämnesrad</dt><dd><b>Betalningen för SB-10233 gick inte igenom</b></dd></div>
+</dl>
+<a class="toplink" href="#oversikt">Till översikten</a>
+</div>
+<div class="client"><div class="client-meta">
+<div><span>Från</span><span>Svenska Brunnslock &lt;<span class="ph">order-adress</span>&gt;</span></div>
+<div><span>Till</span><span>Kunden och SB</span></div>
+<div><span>Ämne</span><b>Betalningen för SB-10233 gick inte igenom</b></div>
+<div class="client-pre"><span>Förhandstext</span><span>Beställningen är sparad. Du kan försöka igen med samma eller ett annat betalsätt.</span></div>
+</div><div class="client-body"><div class="email"><div class="e-head"><span class="e-logo">LOGO Svenska Brunnslock</span><a class="e-headlink" href="SvKonto.dc.html">Mina sidor</a></div><div class="e-body"><div class="e-title"><h3>Betalningen gick inte igenom</h3><p>Hej Anna, vi fick inte betalningen för beställning SB-10233. Beställningen är sparad, så du behöver inte börja om.</p></div><div class="e-order"><div class="e-order-h"><b>Beställning SB-10233</b><span>26 november 2026</span></div><div class="e-line"><img src="https://www.svenskabrunnslock.se/wp-content/uploads/PLASTLOCK1050-RAK-BRUNN-ST%C3%84NGD.jpg" alt="" width="56" height="56"><div class="e-line-t"><b>Lätt Brunnslock 1050 Composite</b><span>Art.nr 1055 · 1 st à 2 645 kr</span></div><b class="e-sum">2 645 kr</b></div><div class="e-line"><img src="https://www.svenskabrunnslock.se/wp-content/uploads/T%C3%A4tningslister.png" alt="" width="56" height="56"><div class="e-line-t"><b>Tätningsring 900/1100</b><span>Art.nr 30010 · 1 st à 875 kr</span></div><b class="e-sum">875 kr</b></div><div class="e-row"><span>Frakt: hemleverans, paket</span><b>590 kr</b></div><div class="e-row e-sep e-total"><span>Totalt inkl. moms</span><span>4 110 kr</span></div><div class="e-row e-muted"><span>varav moms 25 %</span><span>822 kr</span></div></div><div class="e-btnwrap"><a class="e-btn" href="SvKassa.dc.html">Betala nu</a><span class="e-btnsub">Öppnar betalningen för samma beställning.</span></div><div class="e-contact"><b>Fungerar det inte?</b><span>Svara på det här mejlet eller ring oss och uppge ordernumret.</span><a href="tel:+46920520056">0920-52 00 56</a></div></div><div class="e-foot"><p><b>Svenska Brunnslock</b> · <span class="ph">bolagsnamn, org.nr och adress</span></p><p>0920-52 00 56 · <span class="ph">e-postadress</span></p><p><a href="#">Köpvillkor</a> · <a href="#">Frakt och leverans</a> · <a href="#">Integritetspolicy</a></p><p>Du får det här mejlet för att du har handlat eller skapat konto hos oss. Det innehåller ingen marknadsföring.</p></div></div></div></div>
+</section>
+<section class="msg msg-off" id="slutford" aria-labelledby="slutford-h">
+<div class="msg-meta">
+<div class="msg-top"><span class="chip st-later">Skickas inte</span><span class="chip chip-sys">WooCommerce</span></div>
+<h2 id="slutford-h">Tack för ditt köp (Slutförd)</h2>
+<dl>
+<div><dt>Beslut 26.11.</dt><dd>Upprepar Skickad utan något nytt att göra. Status Slutförd blir intern.</dd></div>
+<div><dt>Utlösare</dt><dd>SB sätter status Slutförd efter leveransen. Skickas eller stängs av (Skickad har redan informerat).</dd></div>
+<div><dt>System</dt><dd>WooCommerce <span class="muted">(Slutförd order (standard))</span></dd></div>
+<div><dt>Mottagare</dt><dd>Kunden</dd></div>
+<div><dt>Ämnesrad</dt><dd><b>Tack för ditt köp, SB-10231</b></dd></div>
+</dl>
+<a class="toplink" href="#oversikt">Till översikten</a>
+</div>
+<div class="client"><div class="client-meta">
+<div><span>Från</span><span>Svenska Brunnslock &lt;<span class="ph">order-adress</span>&gt;</span></div>
+<div><span>Till</span><span>Kunden</span></div>
+<div><span>Ämne</span><b>Tack för ditt köp, SB-10231</b></div>
+<div class="client-pre"><span>Förhandstext</span><span>Beställningen är klar. Här hittar du produktblad och anvisningar.</span></div>
+</div><div class="client-body"><div class="email"><div class="e-head"><span class="e-logo">LOGO Svenska Brunnslock</span><a class="e-headlink" href="SvKonto.dc.html">Mina sidor</a></div><div class="e-body"><div class="e-title"><h3>Tack för ditt köp</h3><p>Hej Anna, beställning SB-10231 är levererad och avslutad.</p></div><div class="e-order"><div class="e-order-h"><b>Du har köpt</b><span>26 november 2026</span></div><div class="e-line"><img src="https://www.svenskabrunnslock.se/wp-content/uploads/PLASTLOCK1050-RAK-BRUNN-ST%C3%84NGD.jpg" alt="" width="56" height="56"><div class="e-line-t"><b>Lätt Brunnslock 1050 Composite</b><span>Art.nr 1055 · 1 st à 2 645 kr</span></div><b class="e-sum">2 645 kr</b></div><div class="e-line"><img src="https://www.svenskabrunnslock.se/wp-content/uploads/Avluftningsventil.jpg" alt="" width="56" height="56"><div class="e-line-t"><b>Avluftningsventil</b><span>Art.nr 1008 · 1 st à 569 kr</span></div><b class="e-sum">569 kr</b></div><div class="e-row"><span>Frakt: hemleverans, paket</span><b>590 kr</b></div><div class="e-row e-sep e-total"><span>Totalt inkl. moms</span><span>3 804 kr</span></div><div class="e-row e-muted"><span>varav moms 25 %</span><span>760,80 kr</span></div></div><div class="e-text"><p><b>Produktblad och anvisningar</b> finns på produktsidan för varje produkt. Kunden kan också öppna dem från ordern på Mina sidor.</p></div><div class="e-btnwrap"><a class="e-btn" href="SvKonto.dc.html">Se din beställning</a></div><div class="e-contact"><b>Något som inte stämmer?</b><span>Svara på det här mejlet eller ring oss och uppge ordernumret.</span><a href="tel:+46920520056">0920-52 00 56</a></div></div><div class="e-foot"><p><b>Svenska Brunnslock</b> · <span class="ph">bolagsnamn, org.nr och adress</span></p><p>0920-52 00 56 · <span class="ph">e-postadress</span></p><p><a href="#">Köpvillkor</a> · <a href="#">Frakt och leverans</a> · <a href="#">Integritetspolicy</a></p><p>Du får det här mejlet för att du har handlat eller skapat konto hos oss. Det innehåller ingen marknadsföring.</p></div></div></div></div>
+</section>
+<section class="msg msg-off" id="nyhetsbrev-bekrafta" aria-labelledby="nyhetsbrev-bekrafta-h">
+<div class="msg-meta">
+<div class="msg-top"><span class="chip st-later">Skickas inte</span><span class="chip chip-sys">Klaviyo</span></div>
+<h2 id="nyhetsbrev-bekrafta-h">Bekräfta prenumerationen (dubbel opt-in)</h2>
+<dl>
+<div><dt>Beslut 26.11.</dt><dd>Enkel opt-in med kryssruta räcker (SB bekräftar). Ett steg mindre för kunden.</dd></div>
+<div><dt>Utlösare</dt><dd>Kunden kryssar i nyhetsbrevet i kassan eller anmäler sig i sidfoten (VIE6). Används om SB väljer dubbel opt-in.</dd></div>
+<div><dt>System</dt><dd>Klaviyo</dd></div>
+<div><dt>Mottagare</dt><dd>Den som anmälde sig</dd></div>
+<div><dt>Ämnesrad</dt><dd><b>Bekräfta din prenumeration</b></dd></div>
+</dl>
+<a class="toplink" href="#oversikt">Till översikten</a>
+</div>
+<div class="client"><div class="client-meta">
+<div><span>Från</span><span>Svenska Brunnslock &lt;<span class="ph">nyhetsbrev-adress</span>&gt;</span></div>
+<div><span>Till</span><span>Den som anmälde sig</span></div>
+<div><span>Ämne</span><b>Bekräfta din prenumeration</b></div>
+<div class="client-pre"><span>Förhandstext</span><span>Ett klick, sedan är du med.</span></div>
+</div><div class="client-body"><div class="email"><div class="e-head"><span class="e-logo">LOGO Svenska Brunnslock</span><a class="e-headlink" href="SvKonto.dc.html">Mina sidor</a></div><div class="e-body"><div class="e-title"><h3>Bekräfta din prenumeration</h3><p>Klicka på knappen så börjar vi skicka nyhetsbrevet till anna@exempel.se.</p></div><div class="e-btnwrap"><a class="e-btn" href="#">Ja, jag vill ha nyhetsbrevet</a></div><div class="e-text"><p>Har du inte anmält dig? Då kan du strunta i mejlet.</p></div></div><div class="e-foot"><p><b>Svenska Brunnslock</b> · <span class="ph">bolagsnamn, org.nr och adress</span></p><p>0920-52 00 56 · <span class="ph">e-postadress</span></p><p><a href="#">Köpvillkor</a> · <a href="#">Frakt och leverans</a> · <a href="#">Integritetspolicy</a></p><p>Du får det här mejlet för att du har anmält dig till vårt nyhetsbrev. <a href="#">Avregistrera dig</a> · <a href="#">Ändra inställningar</a></p></div></div></div></div>
 </section></div>
 </main>
 </div>

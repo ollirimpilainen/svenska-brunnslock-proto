@@ -99,6 +99,7 @@ const GROUPS = [
   ['order', 'Beställning'], ['leverans', 'Leverans'], ['offert', 'Offert'], ['konto', 'Konto'], ['faktura', 'Faktura'], ['mkt', 'Marknadsföring']
 ];
 
+const D24 = JSON.parse(fs.readFileSync(path.join(__dirname, 'epost-d24.json'), 'utf8')); // Förslag D24 (frakt beräknas av oss), tillagt 26.11.
 const M = [
   // ----- Beställning
   { id: 'ny-bestallning', g: 'order', name: 'Ny beställning (till SB)', status: 'launch', sys: 'WooCommerce', woo: 'Ny beställning (standard)',
@@ -113,12 +114,22 @@ const M = [
     body: () => title('Tack för din beställning!', 'Hej Anna, vi har tagit emot din beställning och betalningen. Här är en sammanfattning.') +
       orderBlock(ORDERS.privat, { freightNote: true }) + stepsBlock('Så går det till nu', NEXT_STEPS_ORDER) + btn('Se din beställning', 'SvKonto.dc.html', 'Utan konto: ordernummer och e-post räcker när du hör av dig.') + contact() },
 
+  { id: 'frakt-beraknas', g: 'order', name: 'Orderbekräftelse, frakt beräknas av oss', status: 'decide', sys: 'WooCommerce', woo: 'Behandlar order (standard)',
+    trigger: D24['frakt-beraknas'].trigger, from: FROM, to: 'Kunden (Anna Exempel, privat)',
+    subject: 'Tack för din beställning SB-10482', pre: D24['frakt-beraknas'].pre,
+    body: () => D24['frakt-beraknas'].body },
+
+  { id: 'frakt-betala', g: 'order', name: 'Frakt att betala', status: 'decide', sys: 'WooCommerce', woo: 'Nytt mejl med betalningslänk från {{betalpartner, MAK1}}',
+    trigger: D24['frakt-betala'].trigger, from: FROM, to: 'Kunden (Anna Exempel, privat)',
+    subject: 'Frakt att betala för SB-10482', pre: D24['frakt-betala'].pre,
+    body: () => D24['frakt-betala'].body },
+
   { id: 'pausad', g: 'order', name: 'Beställningen väntar (Pausad, faktura)', status: 'launch', sys: 'WooCommerce', woo: 'Pausad order (standard)',
     trigger: 'Företag väljer faktura. Ordern pausas tills SB har godkänt fakturan (P22, P37).', from: FROM, to: 'Kunden (Exempel Bygg AB)',
     subject: 'Vi har tagit emot din beställning SB-10232', pre: 'Vi kontrollerar fakturaunderlaget och hör av oss, sedan beställer vi.',
     body: () => title('Vi har tagit emot din beställning', 'Hej Johan, tack för beställningen. Ni har valt faktura, så vi kontrollerar uppgifterna innan vi beställer från leverantören. Det tar {{tid som SB bestämmer}}.') +
       orderBlock(ORDERS.foretag, { freightNote: true }) +
-      stepsBlock('Så går det till nu', [['Beställningen är mottagen', ''], ['Vi godkänner fakturaunderlaget', 'Du får ett mejl när ordern går vidare. Går det inte, ringer vi.'], ['Vi beställer och skickar', 'Spårningslänk med e-post när pallen lämnar leverantören.'], ['Faktura från Fortnox', 'Kommer i ett separat mejl, med PDF.']]) +
+      stepsBlock('Så går det till nu', [['Beställningen är mottagen', ''], ['Vi godkänner fakturaunderlaget', 'Inget nytt mejl när det är klart. Går det inte, ringer vi.'], ['Vi beställer och skickar', 'Spårningslänk med e-post när pallen lämnar leverantören.'], ['Faktura från Fortnox', 'Kommer i ett separat mejl, med PDF.']]) +
       contact() },
 
   { id: 'kundnotering', g: 'order', name: 'Meddelande om beställningen (kundnotering)', status: 'launch', sys: 'WooCommerce', woo: 'Kundnotering (standard)',
@@ -247,6 +258,37 @@ const M = [
       text('<p>Ett klick räcker. Vill du skriva mer kommer du till en kort sida.</p>') }
 ];
 
+// Genomgång 26.11.: behövs mejlet? keep = skickas, merge = variant av ett annat mejl, drop = skickas inte, later = senare.
+const V = {
+  'ny-bestallning': ['keep', 'SB:s signal att agera. WooCommerce-standard, kostar inget.'],
+  'behandlas': ['keep', 'Krävs: orderbekräftelse och kvitto. En mall med två varianter (faktura, frakt beräknas av oss).'],
+  'frakt-beraknas': ['merge', 'Variant av Orderbekräftelse: samma mejl, fraktraden säger Beräknas av oss (D24).'],
+  'frakt-betala': ['keep', 'Kunden måste betala frakten. Behövs bara om SB väljer D24.'],
+  'pausad': ['merge', 'Variant av Orderbekräftelse för fakturakunder. Inget extra mejl när SB godkänner fakturan.'],
+  'kundnotering': ['keep', 'Bara när SB skriver något, t.ex. delad leverans. Standard, kostar inget.'],
+  'avbruten': ['keep', 'Kunden måste veta att ordern inte kommer. Bara till kunden, SB:s kopia stängs av.'],
+  'misslyckad': ['drop', 'Kunden ser felet direkt i kassan och betalar igen där. Standardmejlet till SB stängs av.'],
+  'aterbetald': ['keep', 'Bekräftar återbetalningen. Standard, kostar inget.'],
+  'skickad': ['keep', 'Spårningslänken. Det enda leveransmejlet vid lansering.'],
+  'slutford': ['drop', 'Upprepar Skickad utan något nytt att göra. Status Slutförd blir intern.'],
+  'nshift-track': ['later', 'Dubblerar Skickad. Bara om priset passar (K54), och då utan ett eget skickat-mejl.'],
+  'offert-mottagen': ['keep', 'Kunden får OF-numret och vet att förfrågan kom fram.'],
+  'offert-ny-sb': ['keep', 'Så når förfrågan SB (P35).'],
+  'offert-klar': ['keep', 'Kunden måste godkänna offerten.'],
+  'nytt-konto': ['keep', 'Standard: bekräftar kontot och inloggningen. Kostar inget.'],
+  'aterstall': ['keep', 'Behövs för att inloggningen ska fungera.'],
+  'faktura': ['keep', 'Krävs för fakturakunder. Fortnox mall, ingen egen design.'],
+  'nyhetsbrev-bekrafta': ['drop', 'Enkel opt-in med kryssruta räcker (SB bekräftar). Ett steg mindre för kunden.'],
+  'nyhetsbrev-valkommen': ['later', 'Behövs när SB börjar skicka nyhetsbrev, inte vid lansering.'],
+  'overgiven-varukorg': ['later', 'Efter lansering, när det finns trafik att mäta.'],
+  'feedback': ['later', 'Verktyg och frågor öppna (K36). Efter lansering.']
+};
+M.forEach((m) => { if (!V[m.id]) throw new Error('Beslut saknas: ' + m.id); m.v = V[m.id][0]; m.why = V[m.id][1]; });
+const VERD = { keep: ['Skickas', 'st-launch'], merge: ['Slås ihop med Orderbekräftelse', 'st-decide'], drop: ['Skickas inte', 'st-later'], later: ['Senare', 'st-later'] };
+const grpOf = (m) => (m.v === 'drop' ? 'drop' : m.v === 'later' ? 'later' : m.g);
+const GROUPS2 = GROUPS.concat([['later', 'Senare'], ['drop', 'Skickas inte']]);
+const CNT = (v) => M.filter((m) => m.v === v).length;
+
 const STATUS = { launch: ['Vid lansering', 'st-launch'], later: ['Senare', 'st-later'], decide: ['SB bestämmer', 'st-decide'], k54: ['Vid lansering om priset passar (K54), annars senare', 'st-decide'] };
 
 // ---------- Sivu ----------
@@ -266,12 +308,13 @@ function clientHtml(m, anno) {
 }
 
 function section(m) {
-  const [st, cls] = STATUS[m.status];
-  return `<section class="msg" id="${m.id}" aria-labelledby="${m.id}-h">
+  const [st, cls] = VERD[m.v];
+  return `<section class="msg${m.v === 'drop' ? ' msg-off' : ''}" id="${m.id}" aria-labelledby="${m.id}-h">
 <div class="msg-meta">
 <div class="msg-top"><span class="chip ${cls}">${st}</span><span class="chip chip-sys">${m.sys}</span></div>
 <h2 id="${m.id}-h">${m.name}</h2>
 <dl>
+<div><dt>Beslut 26.11.</dt><dd>${m.why}</dd></div>
 <div><dt>Utlösare</dt><dd>${ph(m.trigger)}</dd></div>
 <div><dt>System</dt><dd>${m.sys}${m.woo ? ` <span class="muted">(${ph(m.woo)})</span>` : ''}</dd></div>
 <div><dt>Mottagare</dt><dd>${ph(m.to)}</dd></div>
@@ -284,12 +327,12 @@ ${clientHtml(m)}
 }
 
 const groupName = Object.fromEntries(GROUPS);
-const overview = GROUPS.map(([g, gn]) => `<div class="ov-group"><h3>${gn}</h3>${M.filter((m) => m.g === g).map((m) => {
-  const [st, cls] = STATUS[m.status];
-  return `<a class="ov-row" href="#${m.id}"><span class="ov-name"><b>${m.name}</b><span class="chip ${cls}">${st.split(' (')[0]}</span></span><span class="ov-trig">${ph(m.trigger)}</span><span class="ov-sys">${m.sys}</span><span class="ov-to">${ph(m.to)}</span><span class="ov-sub">${ph(m.subject)}</span></a>`;
+const overview = GROUPS2.map(([g, gn]) => `<div class="ov-group"><h3>${gn}</h3>${M.filter((m) => grpOf(m) === g).map((m) => {
+  const [st, cls] = VERD[m.v];
+  return `<a class="ov-row" href="#${m.id}"><span class="ov-name"><b>${m.name}</b><span class="chip ${cls}">${st}</span>${m.v === 'keep' ? '' : `<small class="ov-why">${m.why}</small>`}</span><span class="ov-trig">${ph(m.trigger)}</span><span class="ov-sys">${m.sys}</span><span class="ov-to">${ph(m.to)}</span><span class="ov-sub">${ph(m.subject)}</span></a>`;
 }).join('')}</div>`).join('');
 
-const nav = GROUPS.map(([g, gn]) => `<li><b>${gn}</b><ul>${M.filter((m) => m.g === g).map((m) => `<li><a href="#${m.id}">${m.name}</a></li>`).join('')}</ul></li>`).join('');
+const nav = GROUPS2.map(([g, gn]) => `<li><b>${gn}</b><ul>${M.filter((m) => grpOf(m) === g).map((m) => `<li><a href="#${m.id}">${m.name}</a></li>`).join('')}</ul></li>`).join('');
 
 const ANNO = [
   ['Sidhuvud', 'Logga (platshållare) och länk till Mina sidor. Internt mejl: ”Till butiken”.'],
@@ -307,11 +350,11 @@ const flow = `<div class="flow" role="img" aria-label="Orderstatus och mejl">
 <div class="fs"><b>Väntar på betalning</b><span>Inget mejl</span></div><span class="arr">→</span>
 <div class="fs"><b>Behandlas</b><span>Orderbekräftelse + Ny beställning till SB</span></div><span class="arr">→</span>
 <div class="fs fs-new"><b>Skickad (ny)</b><span>Spårningslänk</span></div><span class="arr">→</span>
-<div class="fs"><b>Slutförd</b><span>Tack för ditt köp (SB bestämmer)</span></div>
+<div class="fs"><b>Slutförd</b><span>Inget mejl (intern status)</span></div>
 </div>
 <div class="flow-side">
-<div class="fs"><b>Pausad</b><span>Faktura väntar på godkännande</span></div>
-<div class="fs"><b>Misslyckad</b><span>Betala igen</span></div>
+<div class="fs"><b>Pausad</b><span>Orderbekräftelse, fakturavariant</span></div>
+<div class="fs"><b>Misslyckad</b><span>Inget mejl (felet syns i kassan)</span></div>
 <div class="fs"><b>Avbruten</b><span>Beställningen är avbruten</span></div>
 <div class="fs"><b>Återbetald</b><span>Återbetalning</span></div>
 </div></div>`;
@@ -342,7 +385,8 @@ ${CSS}
 <main>
 <div class="intro">
 <h1>E-post från butiken</h1>
-<p>Alla ${M.length} meddelanden som butiken skickar, i en och samma mall. Texterna är exempel. Ordernummer, priser och kunder är exempel med riktiga produkter och priser från katalogen. <span class="ph">Streckad ruta</span> = SB bestämmer.</p>
+<p class="sum">Genomgång 26.11.: ${M.length} meddelanden blev <b>${CNT('keep')} som skickas vid lansering</b> (2 av dem till SB). ${CNT('merge')} slås ihop med Orderbekräftelse, ${CNT('drop')} skickas inte och ${CNT('later')} kommer senare. <b>I en vanlig beställning får kunden 2 mejl:</b> Orderbekräftelse och Skickad. Fakturakund: 3, med fakturan från Fortnox. Om frakten beräknas av oss (D24): ett till, Frakt att betala.</p>
+<p>En och samma mall för alla mejl. Texterna är exempel. Ordernummer, priser och kunder är exempel med riktiga produkter och priser från katalogen. <span class="ph">Streckad ruta</span> = SB bestämmer.</p>
 <div class="width" role="group" aria-label="Bredd på mejlen"><span>Visa mejlen i</span><button type="button" data-w="375px">Mobil 375 px</button><button type="button" data-w="600px" aria-pressed="true">Dator 600 px</button></div>
 </div>
 
@@ -363,7 +407,7 @@ ${flow}
 ${overview}
 </section>
 
-${GROUPS.map(([g, gn]) => `<div class="grp" id="grp-${g}"><h2 class="grp-h">${gn}</h2>${M.filter((m) => m.g === g).map(section).join('\n')}</div>`).join('\n')}
+${GROUPS2.map(([g, gn]) => `<div class="grp" id="grp-${g}"><h2 class="grp-h">${gn}</h2>${M.filter((m) => grpOf(m) === g).map(section).join('\n')}</div>`).join('\n')}
 </main>
 </div>
 <script>
