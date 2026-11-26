@@ -626,7 +626,8 @@ class Component extends DCLogic {
       hasTech: tech.length > 0, tech: tech, hasDocs: docs.length > 0, docs: docs, delivery: delivery,
       hasFaq: (P.faq || []).length > 0, faq: (P.faq || []).map((x) => ({ q: x[0], a: x[1] })),
       hasGuides: (P.guides || []).length > 0, guides: (P.guides || []).map((g) => ({ k: g[0], t: g[1] })),
-      hasRelated: related.length > 0, related: related
+      // Passar ihop med poistettu 26.11.: samat lisävarusteet näkyvät jo lisävalinnoissa (osa 9), turhaa toistoa
+      hasRelated: false, related: related
     };
   }
 }
