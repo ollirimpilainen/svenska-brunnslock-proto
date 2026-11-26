@@ -15,6 +15,7 @@
 body{margin:0}
 a{color:#111111}a:hover{color:#474747}
 .st-opt:hover{color:#111111}
+.st-opt:has(input:disabled):hover{color:#a3a3a1}
 .st-chip:hover{border-color:#111111!important}
 .st-btn:focus-visible,.st-opt:focus-within{outline:3px solid #111111;outline-offset:2px}
 .ct-faq summary{list-style:none}.ct-faq summary::-webkit-details-marker{display:none}
@@ -82,7 +83,7 @@ a{color:#111111}a:hover{color:#474747}
 <sc-if value="{{ f.isButtons }}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-wrap: wrap; gap: 6px">
 <sc-for list="{{ f.opts }}" as="o" hint-placeholder-count="6">
-<button type="button" class="st-btn" onClick="{{ o.toggle }}" aria-pressed="{{ o.on }}" aria-label="{{ o.aria }}" style="{{ o.btnStyle }}">{{ o.label }}</button>
+<button type="button" class="st-btn" onClick="{{ o.toggle }}" disabled="{{ o.off }}" aria-pressed="{{ o.on }}" aria-label="{{ o.aria }}" style="{{ o.btnStyle }}">{{ o.label }}</button>
 </sc-for>
 </div>
 <sc-if value="{{ f.hasOther }}" hint-placeholder-val="{{ false }}">
@@ -99,7 +100,7 @@ a{color:#111111}a:hover{color:#474747}
 </sc-if>
 <sc-if value="{{ f.isList }}" hint-placeholder-val="{{ true }}">
 <sc-for list="{{ f.opts }}" as="o" hint-placeholder-count="3">
-<label class="st-opt" style="display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; gap: 10px; align-items: center; min-height: 34px; padding: 2px 0; cursor: pointer; font-size: 15px"><input type="checkbox" checked="{{ o.on }}" onChange="{{ o.toggle }}" style="width: 16px; height: 16px; margin: 0; accent-color: #111111"><span>{{ o.label }} <span style="color: #5c5c5c">{{ o.text }}</span></span><span style="font-size: 13px; color: #5c5c5c">{{ o.count }}</span></label>
+<label class="st-opt" style="display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; gap: 10px; align-items: center; min-height: 34px; padding: 2px 0; font-size: 15px; {{ o.optStyle }}"><input type="checkbox" checked="{{ o.on }}" disabled="{{ o.off }}" onChange="{{ o.toggle }}" style="width: 16px; height: 16px; margin: 0; accent-color: #111111"><span>{{ o.label }} <span style="{{ o.subStyle }}">{{ o.text }}</span></span><span style="font-size: 13px; {{ o.subStyle }}">{{ o.count }}</span></label>
 </sc-for>
 </sc-if>
 </div>
@@ -380,34 +381,39 @@ class Component extends DCLogic {
     const passAll = (i, skip) => FIDS.every((k) => k === skip || passOne(k, i));
     const famCount = (items) => cardsOf(items).length;
     const filters = [];
+    // Facettihaku: arvot (ja niiden järjestys) tulevat koko kategoriasta ilman suodattimia, joten lista ei hypi.
+    // Arvon määrä = tuotteet, jotka täyttävät MUIDEN suodattimien valinnat ja joilla on tämä arvo (oma valinta ei pienennä omia määriä).
+    // Suodattimen sisällä valinnat yhdistetään TAI-ehdolla, suodattimien välillä JA-ehdolla. Määrä 0 = harmaa, ei valittavissa (paitsi jos jo valittu).
+    const valCount = (d, items, v) => famCount(items.filter((i) => d.has(i) && (d.kind === 'size1' ? d.test(i, Number(v)) : d.vals(i).indexOf(v) >= 0)));
     FIDS.forEach((k) => {
       const d = DEF[k];
       const pool = scope.filter((i) => passAll(i, k));
       const on = isOn(k);
-      let opts = [];
+      let uni = [];
       if (d.kind === 'size1') {
-        // yleisimmät rengasmitat, joihin jokin tuote sopii
-        opts = RING_STD.map((v) => ({ v: String(v), n: famCount(pool.filter((i) => d.has(i) && d.test(i, v))) })).filter((o) => o.n > 0).sort((a, b) => b.n - a.n).slice(0, 8).sort((a, b) => a.v - b.v);
+        // yleisimmät rengasmitat, joihin jokin kategorian tuote sopii
+        uni = RING_STD.map((v) => ({ v: String(v), u: valCount(d, scopeAll, String(v)) })).filter((o) => o.u > 0).sort((a, b) => b.u - a.u).slice(0, 8).sort((a, b) => a.v - b.v);
       } else {
-        const cnt = {};
-        pool.forEach((i) => { if (!d.has(i)) return; d.vals(i).forEach((x) => { if (!x) return; (cnt[x] = cnt[x] || []).push(i); }); });
-        opts = Object.keys(cnt).map((v) => ({ v: v, n: famCount(cnt[v]) }));
-        if (d.kind === 'size2') opts = opts.sort((a, b) => b.n - a.n).slice(0, 8);
-        opts = opts.sort((a, b) => (d.sort ? d.sort(a.v, b.v) : b.n - a.n || String(a.v).localeCompare(String(b.v))));
+        const vs = {};
+        scopeAll.forEach((i) => { if (!d.has(i)) return; d.vals(i).forEach((x) => { if (x) vs[x] = 1; }); });
+        uni = Object.keys(vs).map((v) => ({ v: v, u: valCount(d, scopeAll, v) }));
+        if (d.kind === 'size2') uni = uni.sort((a, b) => b.u - a.u).slice(0, 8);
+        uni = uni.sort((a, b) => (d.sort ? d.sort(a.v, b.v) : b.u - a.u || String(a.v).localeCompare(String(b.v))));
       }
-      // yhden arvon suodatinta tai suodatinta, jonka mikään vaihtoehto ei rajaa, ei näytetä
-      const poolN = famCount(pool);
-      if (!on && (opts.length < 2 || opts.every((o) => o.n === poolN))) return;
+      // yhden arvon suodatinta tai suodatinta, jonka mikään arvo ei rajaa koko kategoriaa, ei näytetä
+      const allN = famCount(scopeAll);
+      if (!on && (uni.length < 2 || uni.every((o) => o.u === allN))) return;
+      const opts = uni.map((o) => ({ v: o.v, n: valCount(d, pool, o.v) }));
       const sel = Array.isArray(F[k]) ? F[k] : F[k] && typeof F[k] !== 'object' ? [String(F[k])] : [];
       const setF = (val) => this.setState({ f: Object.assign({}, F, { [k]: val }), limit: 24 });
-      const btn = (onB) => 'min-height: 36px; min-width: 48px; padding: 0 10px; border-radius: 6px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; ' + (onB ? 'border: 1.5px solid #111111; background: #111111; color: #ffffff;' : 'border: 1.5px solid #bdbdbb; background: #ffffff; color: #111111;');
+      const btn = (onB, off) => 'min-height: 36px; min-width: 48px; padding: 0 10px; border-radius: 6px; font: inherit; font-size: 14px; font-weight: 600; ' + (onB ? 'cursor: pointer; border: 1.5px solid #111111; background: #111111; color: #ffffff;' : off ? 'cursor: not-allowed; border: 1.5px dashed #d4d4d2; background: #f7f7f6; color: #a3a3a1;' : 'cursor: pointer; border: 1.5px solid #bdbdbb; background: #ffffff; color: #111111;');
       const isButtons = d.kind !== 'list';
       const single = d.kind === 'size1' || d.kind === 'btn' || d.kind === 'size2';
       const otherOpen = !!O[k];
       filters.push({
         id: k, label: T.f[k], isButtons: isButtons, isList: !isButtons,
-        opts: opts.map((o) => { const onO = sel.indexOf(o.v) >= 0; return { label: d.kind === 'size1' ? o.v : d.label(o.v), text: d.text ? d.text(o.v) : '', count: '(' + o.n + ')', aria: (d.kind === 'size1' ? o.v + ' mm' : d.label(o.v)) + ', ' + T.count(o.n), on: onO, btnStyle: btn(onO),
-          toggle: () => setF(single ? (onO ? null : o.v) : (onO ? sel.filter((x) => x !== o.v) : sel.concat([o.v]))) }; }),
+        opts: opts.map((o) => { const onO = sel.indexOf(o.v) >= 0, off = o.n === 0 && !onO; return { label: d.kind === 'size1' ? o.v : d.label(o.v), text: d.text ? d.text(o.v) : '', count: '(' + o.n + ')', aria: (d.kind === 'size1' ? o.v + ' mm' : d.label(o.v)) + ', ' + T.count(o.n), on: onO, off: off, btnStyle: btn(onO, off), optStyle: off ? 'color: #a3a3a1; cursor: not-allowed;' : 'cursor: pointer;', subStyle: off ? 'color: #a3a3a1' : 'color: #5c5c5c',
+          toggle: () => off ? null : setF(single ? (onO ? null : o.v) : (onO ? sel.filter((x) => x !== o.v) : sel.concat([o.v]))) }; }),
         hasOther: d.kind === 'size2', otherOpen: String(otherOpen), otherOpenB: otherOpen, hasHow: false,
         toggleOther: () => this.setState({ other: Object.assign({}, O, { [k]: !otherOpen }) }),
         fields: d.kind === 'size1'
