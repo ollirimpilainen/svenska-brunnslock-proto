@@ -23,11 +23,12 @@ a{color:#111111}a:hover{color:#474747}
 <div style="display: flex; flex-direction: column; gap: 12px">
 <span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 999px; background: #111111; color: #ffffff; font-size: 14px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Beställningen är mottagen</span>
 <h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 44px; line-height: 1.1; color: #111111">Tack för din beställning!</h1>
-<p style="margin: 0; font-size: 18px; color: #474747; max-width: 60ch">Ordernummer <b style="color: #111111">SB-[ordernummer]</b>. Vi har skickat en bekräftelse till anna@exempel.se.</p>
+<p style="margin: 0; font-size: 18px; color: #474747; max-width: 60ch">Ordernummer <b style="color: #111111">SB-10482</b>. Vi har skickat en bekräftelse till anna@exempel.se.</p>
 </div>
 
 <section aria-labelledby="next-h" style="display: flex; flex-direction: column; gap: 16px">
 <h2 id="next-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 24px; color: #111111">Så går det till nu</h2>
+<sc-if value="{{ notCalc }}" hint-placeholder-val="{{ true }}">
 <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0">
 <li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0">
 <span style="width: 32px; height: 32px; border-radius: 50%; background: #111111; color: #ffffff; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700">1</span>
@@ -46,6 +47,17 @@ a{color:#111111}a:hover{color:#474747}
 <span><b style="display: block; color: #111111">{{ step4 }}</b><span style="color: #474747">Om något dröjer hör vi av oss så tidigt vi kan.</span></span>
 </li>
 </ol>
+</sc-if>
+<sc-if value="{{ isCalc }}" hint-placeholder-val="{{ false }}">
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0">
+<sc-for list="{{ calcSteps }}" as="s" hint-placeholder-count="5">
+<li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0">
+<span style="{{ s.dot }}">{{ s.n }}</span>
+<span><b style="display: block; color: #111111">{{ s.h }}</b><span style="color: #474747">{{ s.t }}</span></span>
+</li>
+</sc-for>
+</ol>
+</sc-if>
 </section>
 
 <div style="display: flex; gap: 16px 24px; flex-wrap: wrap; align-items: center">
@@ -112,12 +124,24 @@ class Component extends DCLogic {
     const ship = opts.find((o) => o.id === this.meta.ship) || opts[0] || { id: this.fr.key, label: '', price: this.fr.price };
     const fq = !!this.fr.quote || ship.price == null;
     const STEP4 = { ombud: () => 'Paketet kommer till ditt ombud', dorr: () => 'Paketet kommer hem till dörren', skrym: () => 'Leveransen kommer hem till dig', pall: (k) => (k === 1 ? 'Pallen levereras' : 'Pallarna levereras') + ' till leveransadressen', offert: () => 'Vi hör av oss om frakten' };
+    // Rahti puuttuu (tuotteelta puuttuu paino, SBCart.freight key 'calc'): Genero-ehdotus D24. Tuotteet maksetaan nyt, SB laskee rahdin 1 arkipäivässä ja lähettää maksulinkin (fakturalla rahti lisätään laskuun), tilaus lähtee kun rahti on maksettu tai hyväksytty.
+    const isCalc = this.fr.key === 'calc' || !!this.fr.later;
+    const inv = /faktura/i.test(this.meta.pay || '') && !/klarna/i.test(this.meta.pay || '');
+    const dot = (on) => 'width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700; ' + (on ? 'background: #111111; color: #ffffff' : 'border: 1.5px solid #111111');
+    const calcSteps = [
+      ['Orderbekräftelse', inv ? 'Du har fått den på e-post. Produkterna står på fakturan. Frakten ingår inte än.' : 'Du har fått den på e-post. Produkterna är betalda. Frakten ingår inte än.'],
+      ['Vi räknar frakten', inv ? 'Inom 1 arbetsdag mejlar vi fraktkostnaden och lägger den på fakturan.' : 'Inom 1 arbetsdag mejlar vi fraktkostnaden med en betalningslänk (kort, Swish, Klarna eller Qliro).'],
+      [inv ? 'Du godkänner frakten' : 'Du betalar frakten', inv ? 'Svara på mejlet. När du har godkänt frakten skickar vi beställningen.' : 'Betala via länken i mejlet. Sedan skickar vi beställningen.'],
+      ['Spårningskod när paketet skickas', 'Du får den med e-post, så att du kan följa leveransen hos transportören.'],
+      ['Leveransen kommer till dig', 'Om något dröjer hör vi av oss så tidigt vi kan.']
+    ].map((x, i) => ({ n: i + 1, h: x[0], t: x[1], dot: dot(i === 0) }));
     const n = this.fr.pallets || 1;
     return {
       zero: 0,
+      isCalc: isCalc, notCalc: !isCalc, calcSteps: calcSteps,
       noAcc: !(typeof window !== 'undefined' && window.SBAccount && window.SBAccount.get()), hasAcc: !!(typeof window !== 'undefined' && window.SBAccount && window.SBAccount.get()),
       lines: this.lines.map((l) => ({ label: l.name + ', ' + l.qty + ' st', sum: l.price == null ? 'Offereras' : f(l.price * l.qty) })),
-      frLabel: 'Frakt, ' + String((ship.id === 'pall' || ship.id === 'offert' ? this.fr.label : ship.label) || '').toLowerCase(), frSum: fq ? 'Offereras' : f(ship.price),
+      frLabel: isCalc ? 'Frakt' : 'Frakt, ' + String((ship.id === 'pall' || ship.id === 'offert' ? this.fr.label : ship.label) || '').toLowerCase(), frSum: isCalc ? 'Beräknas av oss' : fq ? 'Offereras' : f(ship.price),
       total: f(sum + (fq ? 0 : ship.price)) + (fq ? ' + frakt' : ''), incl: !ex, ex: ex,
       vatSum: kr(Math.round(sum + (fq ? 0 : ship.price)) - Math.round((sum + (fq ? 0 : ship.price)) / 1.25)), pay: kr(sum + (fq ? 0 : ship.price)) + (fq ? ' + frakt' : ''),
       step4: (STEP4[ship.id] || STEP4.skrym)(n),

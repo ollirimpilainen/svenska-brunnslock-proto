@@ -23,11 +23,12 @@ a{color:#111111}a:hover{color:#474747}
 <div style="display: flex; flex-direction: column; gap: 12px">
 <span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 999px; background: #111111; color: #ffffff; font-size: 14px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Tilaus on vastaanotettu</span>
 <h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 44px; line-height: 1.1; color: #111111">Kiitos tilauksestasi!</h1>
-<p style="margin: 0; font-size: 18px; color: #474747; max-width: 60ch">Tilausnumero <b style="color: #111111">SB-[tilausnumero]</b>. Lähetimme vahvistuksen osoitteeseen anna@esimerkki.fi.</p>
+<p style="margin: 0; font-size: 18px; color: #474747; max-width: 60ch">Tilausnumero <b style="color: #111111">SB-10482</b>. Lähetimme vahvistuksen osoitteeseen anna@esimerkki.fi.</p>
 </div>
 
 <section aria-labelledby="next-h" style="display: flex; flex-direction: column; gap: 16px">
 <h2 id="next-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 24px; color: #111111">Näin tilaus etenee</h2>
+<sc-if value="{{ notCalc }}" hint-placeholder-val="{{ true }}">
 <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0">
 <li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0">
 <span style="width: 32px; height: 32px; border-radius: 50%; background: #111111; color: #ffffff; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700">1</span>
@@ -46,6 +47,17 @@ a{color:#111111}a:hover{color:#474747}
 <span><b style="display: block; color: #111111">{{ step4 }}</b><span style="color: #474747">Jos jokin viivästyy, otamme yhteyttä niin aikaisin kuin voimme.</span></span>
 </li>
 </ol>
+</sc-if>
+<sc-if value="{{ isCalc }}" hint-placeholder-val="{{ false }}">
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0">
+<sc-for list="{{ calcSteps }}" as="s" hint-placeholder-count="5">
+<li style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid #e2e2e0">
+<span style="{{ s.dot }}">{{ s.n }}</span>
+<span><b style="display: block; color: #111111">{{ s.h }}</b><span style="color: #474747">{{ s.t }}</span></span>
+</li>
+</sc-for>
+</ol>
+</sc-if>
 </section>
 
 <div style="display: flex; gap: 16px 24px; flex-wrap: wrap; align-items: center">
@@ -84,7 +96,7 @@ class Component extends DCLogic {
     const has = SB && SB.items().length;
     this.lines = has ? SB.lines('fi') : [{ name: 'Kevyt kaivonkansi 1050 komposiitti', price: 2645, qty: 1, fr: 'skrym', kg: 10 }, { name: 'Ilmanpoistoventtiili', price: 569, qty: 1, fr: 'ombud', kg: 1 }];
     // Rahti samalla koririvien tulkinnalla kuin kassassa (support.js SBCart.freight). Kassan valinnat (maksutapa, toimitustapa) luetaan ennen tyhjennystä.
-    this.fr = SB && SB.freight ? SB.freight(this.lines.map((l) => ({ id: l.id, fr: l.fr || 'skrym', kg: l.kg, qty: l.qty, quote: l.price == null })), 'fi') : { price: 590, key: 'skrym', options: [{ id: 'skrym', label: 'Kotiinkuljetus', price: 590 }] };
+    this.fr = SB && SB.freight ? SB.freight(this.lines.map((l) => ({ id: l.id, name: l.name, fr: l.fr || 'skrym', kg: l.kg, pt: l.pt, per: l.per, qty: l.qty, quote: l.price == null })), 'fi') : { price: 590, key: 'skrym', options: [{ id: 'skrym', label: 'Kotiinkuljetus', price: 590 }] };
     this.meta = has && SB.meta ? SB.meta() : {};
     if (has) SB.clear();
   }
@@ -96,11 +108,23 @@ class Component extends DCLogic {
     const ship = opts.find((o) => o.id === this.meta.ship) || opts[0] || { id: this.fr.key, label: '', price: this.fr.price };
     const fq = !!this.fr.quote || ship.price == null;
     const STEP4 = { ombud: () => 'Paketti saapuu noutopisteeseesi', dorr: () => 'Paketti tuodaan kotiovellesi', skrym: () => 'Toimitus tuodaan kotiisi', pall: (k) => (k === 1 ? 'Lava toimitetaan' : 'Lavat toimitetaan') + ' toimitusosoitteeseen', offert: () => 'Otamme yhteyttä rahdista' };
+    // Rahti puuttuu (tuotteelta puuttuu paino, SBCart.freight key 'calc'): Genero-ehdotus D24.
+    const isCalc = this.fr.key === 'calc' || !!this.fr.later;
+    const inv = /lasku|faktura/i.test(this.meta.pay || '') && !/klarna/i.test(this.meta.pay || '');
+    const dot = (on) => 'width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: Archivo, Inter, sans-serif; font-weight: 700; ' + (on ? 'background: #111111; color: #ffffff' : 'border: 1.5px solid #111111');
+    const calcSteps = [
+      ['Tilausvahvistus', inv ? 'Saat sen sähköpostiin. Tuotteet ovat laskulla. Rahti ei ole vielä mukana.' : 'Saat sen sähköpostiin. Tuotteet on maksettu. Rahti ei ole vielä mukana.'],
+      ['Laskemme rahdin', inv ? 'Lähetämme rahdin hinnan sähköpostilla 1 arkipäivän kuluessa ja lisäämme sen laskuun.' : 'Lähetämme rahdin hinnan sähköpostilla 1 arkipäivän kuluessa, mukana maksulinkki (kortti, Swish, Klarna tai Qliro).'],
+      [inv ? 'Hyväksyt rahdin' : 'Maksat rahdin', inv ? 'Vastaa viestiin. Kun olet hyväksynyt rahdin, lähetämme tilauksen.' : 'Maksa viestin linkistä. Sen jälkeen lähetämme tilauksen.'],
+      ['Seurantakoodi, kun lähetys lähtee', 'Saat sen sähköpostiin ja voit seurata toimitusta kuljetusyhtiön sivulla.'],
+      ['Toimitus tulee perille', 'Jos jokin viivästyy, kerromme siitä mahdollisimman aikaisin.']
+    ].map((x, i) => ({ n: i + 1, h: x[0], t: x[1], dot: dot(i === 0) }));
     const n = this.fr.pallets || 1;
     return {
       zero: 0,
+      isCalc: isCalc, notCalc: !isCalc, calcSteps: calcSteps,
       lines: this.lines.map((l) => ({ label: l.name + ', ' + l.qty + ' kpl', sum: l.price == null ? 'Tarjouksella' : f(l.price * l.qty) })),
-      frLabel: 'Rahti, ' + String((ship.id === 'pall' || ship.id === 'offert' ? this.fr.label : ship.label) || '').toLowerCase(), frSum: fq ? 'Tarjouksella' : f(ship.price),
+      frLabel: isCalc ? 'Rahti' : 'Rahti, ' + String((ship.id === 'pall' || ship.id === 'offert' ? this.fr.label : ship.label) || '').toLowerCase(), frSum: isCalc ? 'Lasketaan erikseen' : fq ? 'Tarjouksella' : f(ship.price),
       total: f(sum + (fq ? 0 : ship.price)) + (fq ? ' + rahti' : ''),
       step4: (STEP4[ship.id] || STEP4.skrym)(n),
       payTxt: this.meta.pay ? 'Maksu: ' + this.meta.pay : 'Maksutapa kassalla tekemäsi valinnan mukaan'
