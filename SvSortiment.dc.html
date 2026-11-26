@@ -5,6 +5,7 @@
 <title>Sortiment</title>
 <script src="./support.js"></script>
 <script src="./catalog.js"></script>
+<script src="./category-texts.js"></script>
 </head>
 <body>
 <x-dc>
@@ -14,7 +15,11 @@
 body{margin:0}
 a{color:#111111}a:hover{color:#474747}
 .st-opt:hover{color:#111111}
+.st-chip:hover{border-color:#111111!important}
 .st-btn:focus-visible,.st-opt:focus-within{outline:3px solid #111111;outline-offset:2px}
+.ct-faq summary{list-style:none}.ct-faq summary::-webkit-details-marker{display:none}
+.ct-faq summary::after{content:"+";flex:none;font-size:22px;line-height:1;font-weight:400;color:#474747}.ct-faq details[open] summary::after{content:"\2212"}
+.ct-faq summary:focus-visible,.ct-more:focus-visible{outline:3px solid #111111;outline-offset:2px}
 </style>
 </helmet>
 <div style="width: 100%; min-height: 100vh; background: #ffffff; color: #1a1a1a; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.55">
@@ -29,8 +34,9 @@ a{color:#111111}a:hover{color:#474747}
 </nav>
 
 <header style="display: flex; flex-direction: column; gap: 10px; max-width: 760px">
-<h1 style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 44px; line-height: 1.08; letter-spacing: -0.015em; color: #111111">{{ title }}</h1>
-<p style="margin: 0; font-size: 18px; color: #474747">{{ lead }}</p>
+<h1 class="st-h1" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 44px; line-height: 1.08; letter-spacing: -0.015em; color: #111111">{{ title }}</h1>
+<p style="margin: 0; font-size: 18px; color: #474747">{{ lead }}<sc-if value="{{ introDraft }}" hint-placeholder-val="{{ false }}"> <span title="{{ t.draftTitle }}" style="{{ badgeStyle }}">{{ t.draft }}</span></sc-if></p>
+<sc-if value="{{ hasIntro }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 14px; color: #5c5c5c">{{ countLead }}</p></sc-if>
 <sc-if value="{{ hasGuide }}" hint-placeholder-val="{{ false }}"><a href="{{ guideHref }}" onClick="{{ openGuide }}" style="align-self: flex-start; display: flex; align-items: center; gap: 16px; min-height: 56px; margin-top: 6px; padding: 8px 12px 8px 16px; border-radius: 10px; border: 1.5px solid #111111; text-decoration: none; background: #f5f5f4"><span style="display: flex; flex-direction: column; line-height: 1.35"><b style="font-size: 16px; color: #111111">{{ guideTitle }}</b><span style="font-size: 14px; color: #474747">{{ guideText }}</span></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></sc-if>
 </header>
 
@@ -51,11 +57,12 @@ a{color:#111111}a:hover{color:#474747}
 
 <aside aria-label="{{ t.asideAria }}" style="display: flex; flex-direction: column; gap: 24px; min-width: 0">
 
-<nav class="m-cats" aria-labelledby="cat-h" style="border: 1px solid #e2e2e0; border-radius: 10px; padding: 24px">
-<h2 id="cat-h" style="margin: 0 0 8px; padding-bottom: 14px; border-bottom: 1px solid #e2e2e0; font-size: 15px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #111111">{{ catLabel }}</h2>
+<nav class="m-cats" data-kids="{{ hasKidsS }}" aria-labelledby="cat-h" style="border: 1px solid #e2e2e0; border-radius: 10px; padding: 24px">
+<sc-if value="{{ hasBack }}" hint-placeholder-val="{{ false }}"><a class="m-back" href="{{ backHref }}" onClick="{{ backGo }}" style="display: inline-flex; align-items: center; gap: 6px; min-height: 40px; margin: -8px 0 8px; font-size: 14px; font-weight: 600; text-decoration: none; color: #111111"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>{{ backLabel }}</a></sc-if>
+<h2 id="cat-h" style="margin: 0 0 8px; padding-bottom: 14px; border-bottom: 1px solid #e2e2e0; font-size: 15px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #111111"><a href="{{ catHref }}" onClick="{{ catGo }}" aria-current="{{ catCurrent }}" style="color: inherit; text-decoration: none">{{ catLabel }}</a></h2>
 <ul style="margin: 0; padding: 0; list-style: none">
 <sc-for list="{{ subs }}" as="s" hint-placeholder-count="8">
-<li style="border-bottom: 1px solid #ececea"><a href="{{ s.href }}" onClick="{{ s.pick }}" aria-current="{{ s.current }}" style="{{ s.style }}"><span>{{ s.label }}</span><span style="font-size: 13px; color: #5c5c5c; font-weight: 400">{{ s.count }}</span></a></li>
+<li data-m="{{ s.m }}" style="border-bottom: 1px solid #ececea"><a href="{{ s.href }}" onClick="{{ s.pick }}" aria-current="{{ s.current }}" style="{{ s.style }}"><span>{{ s.label }}</span><span style="font-size: 13px; color: #5c5c5c; font-weight: 400">{{ s.count }}</span></a></li>
 </sc-for>
 </ul>
 <a href="{{ homeHref }}" style="display: inline-flex; align-items: center; min-height: 40px; margin-top: 8px; font-size: 14px; font-weight: 600">{{ t.allCats }}</a>
@@ -104,6 +111,13 @@ a{color:#111111}a:hover{color:#474747}
 </aside>
 
 <section aria-labelledby="list-h" style="min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<sc-if value="{{ hasKids }}" hint-placeholder-val="{{ false }}">
+<nav aria-label="{{ kidsAria }}" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{ kids }}" as="k" hint-placeholder-count="5">
+<a href="{{ k.href }}" onClick="{{ k.pick }}" class="st-chip" style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border: 1.5px solid #bdbdbb; border-radius: 999px; background: #ffffff; text-decoration: none; font-size: 14px; font-weight: 600; color: #111111">{{ k.label }}<span style="font-weight: 400; color: #5c5c5c">{{ k.count }}</span></a>
+</sc-for>
+</nav>
+</sc-if>
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap">
 <sc-if value="{{ hasFilters }}" hint-placeholder-val="{{ true }}"><button type="button" class="m-only m-fbtn" onClick="{{ openF }}" style="display: none; min-height: 44px; padding: 0 16px; border: 1.5px solid #111111; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ t.filter }}{{ activeN }}</button></sc-if>
 <form role="search" onSubmit="{{ noSubmit }}" style="flex: 1 1 320px; max-width: 560px; display: flex; border: 1.5px solid #bdbdbb; border-radius: 6px; overflow: hidden; background: #ffffff">
@@ -153,6 +167,32 @@ a{color:#111111}a:hover{color:#474747}
 </sc-for>
 </div>
 <sc-if value="{{ hasMore }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ more }}" style="align-self: center; min-height: 48px; padding: 0 24px; border: 1.5px solid #111111; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ moreLabel }}</button></sc-if>
+<sc-if value="{{ hasText }}" hint-placeholder-val="{{ false }}">
+<div class="ct" style="margin-top: 40px; padding-top: 32px; border-top: 1px solid #e2e2e0; max-width: 760px; display: flex; flex-direction: column; gap: 14px">
+<h2 class="ct-h" style="margin: 0; font-family: Archivo, Inter, sans-serif; font-weight: 800; font-size: 28px; line-height: 1.15; letter-spacing: -0.01em; color: #111111">{{ ctH }}</h2>
+<div id="ct-body" style="display: flex; flex-direction: column; gap: 14px">
+<sc-for list="{{ ctBlocks }}" as="b" hint-placeholder-count="4">
+<sc-if value="{{ b.badge }}" hint-placeholder-val="{{ false }}"><span title="{{ t.draftTitle }}" style="{{ b.badgeStyle }}">{{ t.draftLong }}</span></sc-if>
+<sc-if value="{{ b.isH3 }}" hint-placeholder-val="{{ false }}"><h3 style="{{ b.style }}">{{ b.x }}</h3></sc-if>
+<sc-if value="{{ b.isH4 }}" hint-placeholder-val="{{ false }}"><h4 style="{{ b.style }}">{{ b.x }}</h4></sc-if>
+<sc-if value="{{ b.isP }}" hint-placeholder-val="{{ true }}"><p style="{{ b.style }}">{{ b.x }}</p></sc-if>
+<sc-if value="{{ b.isUl }}" hint-placeholder-val="{{ false }}"><ul style="{{ b.style }}"><sc-for list="{{ b.items }}" as="li" hint-placeholder-count="3"><li>{{ li.x }}</li></sc-for></ul></sc-if>
+</sc-for>
+</div>
+<sc-if value="{{ ctLong }}" hint-placeholder-val="{{ false }}"><button type="button" class="ct-more" aria-expanded="{{ ctOpenS }}" aria-controls="ct-body" onClick="{{ ctToggle }}" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1.5px solid #111111; border-radius: 6px; background: #ffffff; font: inherit; font-weight: 600; cursor: pointer">{{ ctMore }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true" style="{{ ctChevron }}"><path d="m6 9 6 6 6-6"/></svg></button></sc-if>
+<sc-if value="{{ hasFaq }}" hint-placeholder-val="{{ false }}">
+<div class="ct-faq" style="margin-top: 24px; display: flex; flex-direction: column">
+<h3 style="margin: 0 0 8px; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 22px; line-height: 1.25; color: #111111">{{ t.faqH }}</h3>
+<sc-for list="{{ faq }}" as="f" hint-placeholder-count="3">
+<details style="border-top: 1px solid #e2e2e0">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 52px; padding: 12px 0; cursor: pointer; font-weight: 600; font-size: 16px; line-height: 1.4; color: #111111">{{ f.q }}</summary>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 0 0 16px; font-size: 15px; line-height: 1.6; color: #333333"><sc-for list="{{ f.a }}" as="ap" hint-placeholder-count="1"><p style="margin: 0">{{ ap.x }}</p></sc-for></div>
+</details>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</sc-if>
 </section>
 </div>
 </sc-if>
@@ -196,7 +236,9 @@ const TXT = {
     f: { ring: 'Passar ring (innermått)', open: 'Fri öppning', inner: 'Invändigt mått', model: 'Modell', h: 'Höjd', mat: 'Material', cls: 'Belastningsklass' },
     fit: { ring: (a, b) => 'Passar ring ' + (a === b ? a : a + ' till ' + b) + ' mm', open: (s) => 'Fri öppning ' + s + ' mm', inner: (s) => 'Invändigt ' + s + ' mm', h: (s) => 'Höjd ' + s + ' mm' },
     kg: (a, b) => (a === b ? a : a + ' till ' + b) + ' kg', ph: { w: 'Bredd', l: 'Längd', mm: 'mm, t.ex. 600' }, chipH: (v) => 'Höjd ' + v + ' mm', chipRing: (v) => 'Passar ' + v + ' mm',
-    removeAria: (x) => 'Ta bort filter ' + x },
+    removeAria: (x) => 'Ta bort filter ' + x,
+    countCat: (n, s) => n + ' produkter i ' + s + ' produktgrupper', ctH: (x) => 'Om ' + x.toLowerCase(), more2: 'Läs mer', less: 'Visa mindre', faqH: 'Vanliga frågor',
+    draft: 'Utkast', draftLong: 'Utkast (Genero)', draftTitle: 'Textutkast av Genero, granskas av Svenska Brunnslock' },
   fi: { home: 'Etusivu', all: 'Valikoima', crumbAria: 'Olet tässä', asideAria: 'Kategoriat ja suodattimet', allCats: 'Kaikki kategoriat', allIn: 'Kaikki', filter: 'Suodata', close: 'Sulje', clear: 'Tyhjennä', clearAll: 'Tyhjennä kaikki', clearF: 'Tyhjennä suodattimet', search: 'Hae', searchIn: (x) => 'Hae: ' + x.toLowerCase(), sorted: 'Suosituimmat ensin', activeAria: 'Valitut suodattimet', img: 'Tuotekuva', otherSize: 'Muu mitta', how: 'Näin mittaat',
     guideBl: 'Epävarma? Löydä oikea kaivonkansi', guideLu: 'Epävarma? Löydä oikea luukku', guideText: 'Vastaa 3 kysymykseen, niin suodatamme puolestasi',
     count: (n) => n + ' tuotetta', show: (n) => 'Näytä ' + n + ' tuotetta', more: (n) => 'Näytä lisää (' + n + ' jäljellä)',
@@ -207,7 +249,9 @@ const TXT = {
     f: { ring: 'Sopii renkaaseen (sisämitta)', open: 'Vapaa aukko', inner: 'Sisämitta', model: 'Malli', h: 'Korkeus', mat: 'Materiaali', cls: 'Kuormitusluokka' },
     fit: { ring: (a, b) => 'Sopii renkaaseen ' + (a === b ? a : a + '-' + b) + ' mm', open: (s) => 'Vapaa aukko ' + s + ' mm', inner: (s) => 'Sisämitta ' + s + ' mm', h: (s) => 'Korkeus ' + s + ' mm' },
     kg: (a, b) => (a === b ? a : a + '-' + b) + ' kg', ph: { w: 'Leveys', l: 'Pituus', mm: 'mm, esim. 600' }, chipH: (v) => 'Korkeus ' + v + ' mm', chipRing: (v) => 'Sopii ' + v + ' mm',
-    removeAria: (x) => 'Poista suodatin ' + x }
+    removeAria: (x) => 'Poista suodatin ' + x,
+    countCat: (n, s) => n + ' tuotetta, ' + s + ' tuoteryhmää', ctH: (x) => 'Tietoa: ' + x.toLowerCase(), more2: 'Lue lisää', less: 'Näytä vähemmän', faqH: 'Usein kysytyt kysymykset',
+    draft: 'Luonnos', draftLong: 'Luonnos (Genero)', draftTitle: 'Genero on luonnostellut tekstin, Svenska Brunnslock tarkistaa sen' }
 };
 const MAT = { 'Cast iron': ['Gjutjärn', 'Valurauta'], 'Concrete': ['Betong', 'Betoni'], 'Galvanised steel': ['Varmförzinkat stål', 'Kuumasinkitty teräs'], 'Plastic': ['Plast', 'Muovi'], 'Composite': ['Komposit', 'Komposiitti'], 'Glass fibre': ['Glasfiber', 'Lasikuitu'], 'Stainless steel': ['Rostfritt stål', 'Ruostumaton teräs'], 'Aluminium': ['Aluminium', 'Alumiini'], 'Steel': ['Stål', 'Teräs'] };
 const CLS = { A15: ['Gång och gräsmatta', 'Kävely ja nurmikko'], B125: ['Gångbana och personbil', 'Kävelytie ja henkilöauto'], C250: ['Parkering och kantsten', 'Pysäköinti ja reunakivi'], D400: ['Väg och gata', 'Tie ja katu'], E600: ['Industri och truck', 'Teollisuus ja trukki'], F900: ['Hamn och flygplats', 'Satama ja lentokenttä'] };
@@ -217,6 +261,8 @@ const RING_STD = [110, 160, 200, 250, 315, 400, 500, 600, 700, 800, 900, 1000, 1
 // Tuoteryhmän suodattimet (enintään 3, must have -data)
 const GROUPS = { kannet: ['ring', 'mat', 'cls'], luukut: ['open', 'cls', 'mat'], kabel: ['inner', 'cls', 'mat'], plintar: ['model', 'h', 'mat'], clsmat: ['cls', 'mat'], mat: ['mat'], none: [] };
 const groupOf = (cat, sub) => {
+  // Pääkategorian koko listaus: luokka ja materiaali (suodatin piiloutuu, jos se ei rajaa mitään)
+  if (!sub && cat !== '*') return 'clsmat';
   if (cat === 'lock') return !sub ? 'clsmat' : ['latta', 'plastbrunn', 'plast', 'betong', 'gjutjarn'].indexOf(sub) >= 0 ? 'kannet' : ['luckor', 'golv', 'sakerhet', 'kund'].indexOf(sub) >= 0 ? 'luukut' : 'none';
   if (cat === 'el') return sub === 'kabelbrunn' ? 'kabel' : 'none';
   if (cat === 'bygg') return sub === 'plintar' ? 'plintar' : 'none';
@@ -229,6 +275,8 @@ const HOME = { sv: 'SvStartsida.dc.html', fi: 'FiEtusivu.dc.html' }[LANG];
 const PROD = { sv: 'SvProdukt.dc.html', fi: 'FiTuote.dc.html' }[LANG];
 const GUIDE = { sv: 'SvProduktguide.dc.html', fi: 'FiTuoteapuri.dc.html' }[LANG];
 // Apurimainos: kansien ja luukkujen näkymissä (apurit kysyvät 3 kysymystä, jokainen vastaus = yksi suodatin)
+// Kolmas taso (Ollin vaatimus, Miro 1.2): alakategorian yläkategoria saman pääkategorian sisällä. Muut alakategoriat ovat suoraan pääkategorian alla.
+const PARENT = { 'lock/golv': 'luckor', 'lock/sakerhet': 'luckor', 'lock/kund': 'luckor' };
 const GUIDE_OF = { latta: 'brunnslock', plastbrunn: 'brunnslock', plast: 'brunnslock', luckor: 'luckor', golv: 'luckor', sakerhet: 'luckor' };
 
 // Tuoteapuri paneelina listauksen päällä: 3 kysymystä, jokainen vastaus rajaa listaa heti (sama logiikka kuin SvProduktguide.dc.html:n apureissa).
@@ -282,7 +330,7 @@ class Component extends DCLogic {
     const ex = S.vat === 'exkl';
     const fmt = (n) => Math.round(ex ? n / 1.25 : n).toLocaleString(LANG === 'fi' ? 'fi-FI' : 'sv-SE') + ' kr';
     const href = (k, s) => PAGE + (k ? '?kat=' + k + (s ? '&sub=' + s : '') : '');
-    const go = (k, s) => (e) => { if (e && e.preventDefault) e.preventDefault(); try { history.replaceState(null, '', href(k, s)); } catch (er) {} this.setState({ kat: k, sub: s, f: {}, other: {}, q: '', limit: 24, gId: null, gA: {}, gOpen: false }); };
+    const go = (k, s) => (e) => { if (e && e.preventDefault) e.preventDefault(); try { history.replaceState(null, '', href(k, s)); } catch (er) {} this.setState({ kat: k, sub: s, f: {}, other: {}, q: '', limit: 24, gId: null, gA: {}, gOpen: false, ctOpen: false }); };
     const base = { cart: 0, vat: S.vat, setVat: (v) => { if (typeof window !== 'undefined' && window.SBVat) window.SBVat.set(v); this.setState({ vat: v }); }, t: T };
     // kortit: yksi kortti per kokoperhe
     const cardsOf = (items) => { const m = {}, out = []; items.forEach((it) => { const k = it.fam || ('p' + it.id); if (!m[k]) { m[k] = { key: k, fam: it.fam, items: [] }; out.push(m[k]); } m[k].items.push(it); }); return out; };
@@ -294,7 +342,12 @@ class Component extends DCLogic {
     }
     const group = groupOf(cat.id, sub), FIDS = GROUPS[group];
     const GA = S.gId && cat.id === 'lock' && !sub ? S.gA || {} : null;
-    const scopeAll = catItems(cat.id).filter((i) => !sub || i.sub === sub).filter(GA ? gPass(S.gId, GA) : () => true);
+    // Hierarkia: yläkategoria näyttää kaikkien jälkeläistensä tuotteet
+    const par = (sid) => PARENT[cat.id + '/' + sid] || '';
+    const kidsOf = (sid) => cat.subs.filter((s) => par(s.id) === sid);
+    const desc = (sid) => [sid].concat(kidsOf(sid).map((s) => s.id));
+    const inSub = (i, sid) => !sid || desc(sid).indexOf(i.sub) >= 0;
+    const scopeAll = catItems(cat.id).filter((i) => inSub(i, sub)).filter(GA ? gPass(S.gId, GA) : () => true);
     const ql = S.q.trim().toLowerCase();
     // Jokaisen hakusanan on löydyttävä nimestä tai artikelnumerosta
     const qt = ql.split(/\s+/).filter(Boolean);
@@ -404,10 +457,21 @@ class Component extends DCLogic {
         note: minP != null && priced.length < its.length ? T.someQuote : '', freight: frTxt
       };
     };
-    const subList = [{ id: '', label: T.allIn + ' ' + cat[LANG].toLowerCase() }].concat(cat.subs.map((s) => ({ id: s.id, label: s[LANG] })))
-      .map((s) => ({ ...s, n: SEARCH ? famCount(scope) : famCount(catItems(cat.id).filter((i) => !s.id || i.sub === s.id)) })).filter((s) => s.n > 0)
-      .map((s) => { const on = s.id === sub; return { label: s.label, count: String(s.n), href: href(cat.id, s.id), current: on ? 'page' : 'false', pick: go(cat.id, s.id),
-        style: 'display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 34px; padding: 6px 0; text-decoration: none; font-size: 14px; line-height: 1.35; color: ' + (on ? '#111111; font-weight: 700;' : '#474747; font-weight: 400;') }; });
+    const subN = (sid) => famCount(catItems(cat.id).filter((i) => inSub(i, sid)));
+    const branch = sub ? par(sub) || sub : '';
+    const rowStyle = (on, lvl) => 'display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 34px; padding: 6px 0 6px ' + (lvl > 1 ? 16 : 0) + 'px; text-decoration: none; font-size: 14px; line-height: 1.35; color: ' + (on ? '#111111; font-weight: 700;' : '#474747; font-weight: 400;') + (on ? ' box-shadow: inset 3px 0 0 #111111; padding-left: ' + (lvl > 1 ? 16 : 10) + 'px;' : '');
+    const rows = [];
+    if (SEARCH) rows.push({ id: '', label: T.allIn + ' ' + cat[LANG].toLowerCase(), lvl: 1, n: famCount(scope) });
+    cat.subs.filter((s) => !par(s.id)).forEach((s) => {
+      rows.push({ id: s.id, label: s[LANG], lvl: 1, n: subN(s.id) });
+      if (branch === s.id) kidsOf(s.id).forEach((k) => rows.push({ id: k.id, label: k[LANG], lvl: 2, n: subN(k.id) }));
+    });
+    // Avoimen haaran yläkategoria (esim. Luckor alasivulla) tummana, jotta polku näkyy
+    const subList = rows.filter((r) => r.n > 0).map((r) => { const on = r.id === sub, anc = !on && r.id && r.id === branch; return { label: r.label, count: String(r.n), href: href(cat.id, r.id), current: on ? 'page' : 'false', m: sub && (r.lvl === 2) !== !!par(sub) ? 'off' : 'on', pick: go(cat.id, r.id), style: rowStyle(on, r.lvl) + (anc ? ' color: #111111; font-weight: 600;' : '') }; });
+    const nGroups = cat.subs.filter((s) => !par(s.id) && subN(s.id) > 0).length;
+    // Lapsikategoriat listan yläpuolella: pääkategorialla sen alakategoriat, välitasolla (Luckor) sen lapset
+    const kidList = SEARCH ? [] : (sub ? kidsOf(sub) : cat.subs.filter((s) => !par(s.id))).map((s) => ({ id: s.id, label: s[LANG], n: subN(s.id) })).filter((k) => k.n > 0)
+      .map((k) => ({ label: k.label, count: String(k.n), href: href(cat.id, k.id), pick: go(cat.id, k.id) }));
     const subObj = sub && cat.subs.find((s) => s.id === sub);
     const title = subObj ? subObj[LANG] : cat[LANG];
     if (typeof document !== 'undefined') document.title = title;
@@ -425,6 +489,31 @@ class Component extends DCLogic {
       labels.forEach((l) => active.push({ label: l[0], aria: T.removeAria(l[0]), remove: rm(l[1]) }));
     });
     const shown = cards.slice(0, S.limit);
+    // Kategoriateksti (category-texts.js): intro H1:n alle, leipäteksti ja FAQ listauksen alle, pitkä teksti Läs mer -taitolla.
+    // Piilotetut kappaleet jäävät DOMiin (display: none), kuten tuotannossa: hakukone näkee koko tekstin.
+    const TX = (typeof window !== 'undefined' && window.SB_CATTEXT) || {};
+    const tx = SEARCH ? null : TX[cat.id + (sub ? '/' + sub : '')];
+    const tl = tx && tx[LANG] && tx[LANG].intro ? tx[LANG] : null;
+    const wc = (b) => ((b.x || (b.items || []).join(' ')).match(/[0-9A-Za-zÅÄÖåäöÉé]+/g) || []).length;
+    const badgeStyle = 'display: inline-block; vertical-align: 2px; padding: 1px 8px; border: 1.5px dashed #8a8a88; border-radius: 4px; font-family: Inter, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #474747; line-height: 1.6';
+    const ctBlocks = [];
+    let ctLong = false;
+    if (tl) {
+      const total = tl.blocks.reduce((a, b) => a + wc(b), 0);
+      ctLong = total > 180;
+      let acc = 0, cut = -1;
+      tl.blocks.forEach((b, i) => { if (ctLong && cut < 0) { acc += wc(b); if (acc >= 110 && b.t !== 'h3' && b.t !== 'h4') cut = i; } });
+      ctLong = ctLong && cut >= 0 && cut < tl.blocks.length - 1;
+      const BST = { h3: 'margin: 14px 0 0; font-family: Archivo, Inter, sans-serif; font-weight: 700; font-size: 20px; line-height: 1.25; color: #111111;', h4: 'margin: 6px 0 0; font-size: 16px; font-weight: 700; line-height: 1.35; color: #111111;',
+        p: 'margin: 0; font-size: 16px; line-height: 1.6; color: #333333;', ul: 'margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; font-size: 16px; line-height: 1.55; color: #333333;' };
+      tl.blocks.forEach((b, i) => {
+        const hidden = ctLong && !S.ctOpen && cut >= 0 && i > cut;
+        const prevD = i > 0 && tl.blocks[i - 1].d;
+        ctBlocks.push({ isH3: b.t === 'h3', isH4: b.t === 'h4', isP: b.t === 'p', isUl: b.t === 'ul', x: b.x || '', items: (b.items || []).map((x) => ({ x: x })),
+          badge: !!b.d && !prevD, badgeStyle: badgeStyle + (hidden ? '; display: none' : '; align-self: flex-start; margin-top: 10px'),
+          style: BST[b.t] + (b.d ? ' border-left: 3px dashed #bdbdbb; padding-left: ' + (b.t === 'ul' ? '36px;' : '14px;') : '') + (hidden ? ' display: none;' : '') });
+      });
+    }
     const nAll = famCount(scopeAll);
     const gId = cat.id === 'lock' ? GUIDE_OF[sub] || (sub ? '' : 'brunnslock') : '';
     return Object.assign(base, {
@@ -445,8 +534,15 @@ class Component extends DCLogic {
           hasNext: st < D.qs.length - 1, next: () => this.setState({ gStep: st + 1 }), nextTxt: L2('Nästa fråga', 'Seuraava kysymys'),
           close: () => this.setState({ gOpen: false }), pageHref: GUIDE + '?g=' + S.gId, pageTxt: L2('Öppna guiden som egen sida', 'Avaa apuri omana sivunaan') };
       })(), guideTitle: gId === 'luckor' ? T.guideLu : T.guideBl, guideText: T.guideText,
-      lead: SEARCH ? (LANG === 'fi' ? 'Haku: "' + S.q.trim() + '"' : 'Sökning: "' + S.q.trim() + '"') : subObj ? T.leadSub(nAll) : T.lead(nAll, subList.length - 1),
-      crumbs: [{ label: T.home, href: HOME }, { label: T.all, href: PAGE }].concat(subObj ? [{ label: cat[LANG], href: href(cat.id) }] : []),
+      lead: SEARCH ? (LANG === 'fi' ? 'Haku: "' + S.q.trim() + '"' : 'Sökning: "' + S.q.trim() + '"') : tl ? tl.intro : subObj ? T.leadSub(nAll) : T.lead(nAll, nGroups),
+      hasIntro: !!tl, introDraft: !!(tl && tl.introDraft), badgeStyle: badgeStyle + '; margin-left: 4px', countLead: subObj ? T.count(nAll) : T.countCat(nAll, nGroups),
+      hasText: !!tl && (ctBlocks.length > 0 || tl.faq.length > 0), ctH: tl ? (LANG === 'fi' && tl.h ? tl.h : T.ctH(title)) : '', ctBlocks: ctBlocks,
+      ctLong: ctLong, ctOpenS: String(!!S.ctOpen), ctMore: S.ctOpen ? T.less : T.more2, ctToggle: () => this.setState({ ctOpen: !S.ctOpen }), ctChevron: S.ctOpen ? 'transform: rotate(180deg)' : '',
+      hasFaq: !!tl && tl.faq.length > 0, faq: tl ? tl.faq.map((f) => ({ q: f.q, a: f.a.map((x) => ({ x: x })) })) : [],
+      crumbs: [{ label: T.home, href: HOME }, { label: T.all, href: PAGE }].concat(subObj ? [{ label: cat[LANG], href: href(cat.id) }] : []).concat(subObj && par(sub) ? [{ label: (cat.subs.find((x) => x.id === par(sub)) || {})[LANG], href: href(cat.id, par(sub)) }] : []),
+      hasBack: !!subObj, backHref: subObj ? href(cat.id, par(sub)) : '', backGo: go(cat.id, subObj ? par(sub) : ''), backLabel: subObj ? (par(sub) ? (cat.subs.find((x) => x.id === par(sub)) || {})[LANG] : cat[LANG]) : '',
+      catHref: href(cat.id), catGo: go(cat.id, ''), catCurrent: !SEARCH && !sub ? 'page' : 'false',
+      hasKids: kidList.length > 0, hasKidsS: String(kidList.length > 0), kids: kidList, kidsAria: (LANG === 'fi' ? 'Alakategoriat: ' : 'Underkategorier: ') + title,
       subs: subList, homeHref: PAGE,
       hasFilters: filters.length > 0, filters: filters, fOpen: String(S.fOpen), openF: () => this.setState({ fOpen: true }), closeF: () => this.setState({ fOpen: false }),
       hasActive: active.length > 0, active: active, activeN: active.length ? ' (' + active.length + ')' : '', reset: () => this.setState({ f: {}, other: {}, q: '', gA: {} }),

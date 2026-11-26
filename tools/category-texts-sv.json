@@ -1,0 +1,2763 @@
+{
+ "lock": {
+  "intro": "Enligt Arbetsmiljöverkets regler får ett brunnslock i betong inte väga mer än 25 kg. Våra lätta brunnslock väger endast några kilo, men är lika hållbara och säkra som traditionella, tyngre brunnslock.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Lätta brunnslock som är barnsäkra och låsbara"
+   },
+   {
+    "t": "p",
+    "x": "De används till olika typer av brunnar, såsom avloppsbrunnar, inspektionsbrunnar, vattenbrunnar och mätarbrunnar med flera."
+   },
+   {
+    "t": "p",
+    "x": "Är ni osäkra på vilken storlek av brunnslock som passar er brunn, tveka inte att kontakta oss. Vi hjälper gärna till. Antingen via vårt Kontaktformulär eller på telefon 0920-520056"
+   }
+  ],
+  "faq": [
+   {
+    "q": "Vad är ett lätt brunnslock och varför ska jag välja det?",
+    "a": [
+     "Ett lätt brunnslock tillverkas i komposit, polyeten (PE) eller glasfiber och väger 3-12 kg jämfört med ett betonglock 60-120 kg. Det uppfyller Arbetsmiljöverkets krav på att ett brunnslock inte får väga mer än 25 kg vid manuell hantering. Du får samma hållbarhet och säkerhet som ett tungt betonglock, men kan öppna det själv vid inspektion eller slamtömning."
+    ]
+   },
+   {
+    "q": "Vilka storlekar finns lätta brunnslock i?",
+    "a": [
+     "Vi har lätta brunnslock i storlekarna 590, 660, 750, 780, 790, 900, 930, 1000, 1050, 1150 och 1340 mm. De passar betongbrunnar med utvändigt mått 500-1 450 mm och invändigt mått 451-1 290 mm. Använd filtreringen ovan för att hitta rätt storlek baserat på din brunns mått."
+    ]
+   },
+   {
+    "q": "Hur tungt får ett lätt brunnslock vara?",
+    "a": [
+     "Enligt Arbetsmiljöverkets föreskrifter (AFS 2012:2) bör manuell hantering av tunga lock undvikas. Ett brunnslock i betong väger normalt 60-120 kg och kräver lyfthjälpmedel. Våra lätta brunnslock väger 3-12 kg och kan öppnas av en person utan verktyg eller lyfthjälp."
+    ]
+   },
+   {
+    "q": "Vilken bärighet ska jag välja, A15, B125, C250 eller D400?",
+    "a": [
+     "Bärigheten anges i belastningsklass enligt EN 124. A15 (1,5 ton) passar grönområden och gångytor utan biltrafik. B125 (12,5 ton) passar gårdsplan, garageinfart och parkering för personbil. C250 (25 ton) passar mindre lastbilstrafik och industriområden. D400 (40 ton) är vår högsta klass och klarar tung lastbilstrafik på gata och industriinfart."
+    ]
+   },
+   {
+    "q": "Passar lätta brunnslock till min trekammarbrunn?",
+    "a": [
+     "Ja. Lätta brunnslock passar alla vanliga trekammarbrunnar och slamavskiljare i betong med rund öppning mellan 500 och 1 450 mm. De vanligaste storlekarna för trekammarbrunn är 600, 900 och 1 000 mm. Behöver du även en tätningsring för att stoppa lukt och insekter hittar du det i samma kategoriträd."
+    ]
+   },
+   {
+    "q": "Är lätta brunnslock barnsäkra och låsbara?",
+    "a": [
+     "Ja. Samtliga lätta brunnslock i vårt sortiment har en låsfunktion som hindrar barn och obehöriga från att öppna locket. Våra körbara modeller uppfyller säkerhetsstandard EN 124 och är godkända för montering i offentlig och privat miljö."
+    ]
+   },
+   {
+    "q": "Hur monterar jag ett lätt brunnslock på en betongbrunn?",
+    "a": [
+     "Locket placeras direkt på betongringens överkant. För täthet mot vatten, lukt och insekter rekommenderar vi att en tätningsring monteras mellan betongringen och locket. Behöver du höja brunnen till markens nivå används en förhöjningsring i betong. Vid trafikerad yta gjuts en bärlast-ram runt locket."
+    ]
+   },
+   {
+    "q": "Vad kostar ett lätt brunnslock?",
+    "a": [
+     "Priset varierar med storlek, bärighet och material. Mindre composite-lock för avloppsbrunn (590-780 mm) kostar 1 749-2 895 kr. Körbara lock i klass B125 (900 mm) kostar från 7 722 kr. Lätt körbart lock 1 000 mm i klass D400 (40 ton) kostar 17 690 kr. Jämfört med tunga gjutjärnsbetäckningar är priset jämförbart eller lägre, med betydligt lättare hantering."
+    ]
+   },
+   {
+    "q": "Hur skiljer sig ert lätta brunnslock från Byggmax, Biltema och Jula?",
+    "a": [
+     "Våra körbara lock (klass B125 och uppåt) är CE-märkta och certifierade enligt EN 124 för bärighet upp till klass D400 (40 ton). I klass A15 är vissa modeller certifierade enligt EN 124. Hela sortimentet är tillverkat för professionellt bruk. Vi har också större storlekar (upp till 1 340 mm) som inte finns hos byggvaruhusen. Behöver du ett lock som klarar lastbilstrafik eller en specifik storlek över 800 mm är vårt sortiment den primära kanalen i Sverige."
+    ]
+   }
+  ]
+ },
+ "lock/latta": {
+  "intro": "Lätta brunnslock för betongbrunnar i composite, polyeten och gjutjärn, körbara modeller upp till 40 ton, barnsäkra och låsbara. Våra lock väger under 25 kg enligt Arbetsmiljöverkets regler och passar alla vanliga betongbrunnar mellan 500 och 1 450 mm.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Här hittar du både plana brunnslock för avloppsbrunn, trekammarbrunn och vattenmätarbrunn, och förstärkta körbara lock för infart, gårdsplan och industriområde."
+   },
+   {
+    "t": "p",
+    "x": "Behöver du hjälp att välja rätt storlek? Mät ditt invändiga eller utvändiga mått på betongringen och filtrera nedan, eller ring oss på 0920-520056 så hjälper vi dig att matcha rätt lock till din brunn."
+   },
+   {
+    "t": "h3",
+    "x": "Varför välja ett lätt brunnslock?"
+   },
+   {
+    "t": "p",
+    "x": "Ett traditionellt betonglock väger ofta 60-120 kg, vilket gör det tungt att lyfta vid inspektion och slamtömning. Lätta brunnslock i composite eller PE väger 3-12 kg och uppfyller Arbetsmiljöverkets 25 kg-gräns för manuell hantering. De har samma bärighet som tunga betonglock, från 1,5 ton för grönområden till 40 ton (klass D400) för körbara ytor, men kan öppnas av en person utan lyfthjälpmedel."
+   },
+   {
+    "t": "h4",
+    "x": "Lätt brunnslock för trekammarbrunn och avloppsbrunn"
+   },
+   {
+    "t": "p",
+    "x": "Våra lätta brunnslock passar trekammarbrunnar, slamavskiljare, avloppsbrunnar, dagvattenbrunnar och vattenmätarbrunnar. Modellerna 590, 750, 780, 790, 900, 930, 1050, 1150 och 1340 mm täcker både små inspektionsbrunnar och större slambrunnar. Behöver du även tätningsring eller förhöjningsring i betong hittar du det i samma kategoriträd."
+   },
+   {
+    "t": "h4",
+    "x": "Körbara lätta brunnslock"
+   },
+   {
+    "t": "p",
+    "x": "För infart, gårdsplan och industriområde har vi körbara lätta brunnslock i klass B125 (12,5 ton), C250 (25 ton) och D400 (40 ton). Locken är förstärkta med stålarmering eller composite-konstruktion och certifierade enligt EN 124. Det körbara locket 590 Composite väger under 12 kg men klarar 12,5 ton, ett tydligt alternativ till tunga gjutjärnsbetäckningar."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Vad är ett lätt brunnslock och varför ska jag välja det?",
+    "a": [
+     "Ett lätt brunnslock tillverkas i komposit, polyeten (PE) eller glasfiber och väger 3-12 kg jämfört med ett betonglock 60-120 kg. Det uppfyller Arbetsmiljöverkets krav på att ett brunnslock inte får väga mer än 25 kg vid manuell hantering. Du får samma hållbarhet och säkerhet som ett tungt betonglock, men kan öppna det själv vid inspektion eller slamtömning."
+    ]
+   },
+   {
+    "q": "Vilka storlekar finns lätta brunnslock i?",
+    "a": [
+     "Vi har lätta brunnslock i storlekarna 590, 660, 750, 780, 790, 900, 930, 1000, 1050, 1150 och 1340 mm. De passar betongbrunnar med utvändigt mått 500-1 450 mm och invändigt mått 451-1 290 mm. Använd filtreringen ovan för att hitta rätt storlek baserat på din brunns mått."
+    ]
+   },
+   {
+    "q": "Hur tungt får ett lätt brunnslock vara?",
+    "a": [
+     "Enligt Arbetsmiljöverkets föreskrifter (AFS 2012:2) bör manuell hantering av tunga lock undvikas. Ett brunnslock i betong väger normalt 60-120 kg och kräver lyfthjälpmedel. Våra lätta brunnslock väger 3-12 kg och kan öppnas av en person utan verktyg eller lyfthjälp."
+    ]
+   },
+   {
+    "q": "Vilken bärighet ska jag välja, A15, B125, C250 eller D400?",
+    "a": [
+     "Bärigheten anges i belastningsklass enligt EN 124. A15 (1,5 ton) passar grönområden och gångytor utan biltrafik. B125 (12,5 ton) passar gårdsplan, garageinfart och parkering för personbil. C250 (25 ton) passar mindre lastbilstrafik och industriområden. D400 (40 ton) är vår högsta klass och klarar tung lastbilstrafik på gata och industriinfart."
+    ]
+   },
+   {
+    "q": "Passar lätta brunnslock till min trekammarbrunn?",
+    "a": [
+     "Ja. Lätta brunnslock passar alla vanliga trekammarbrunnar och slamavskiljare i betong med rund öppning mellan 500 och 1 450 mm. De vanligaste storlekarna för trekammarbrunn är 600, 900 och 1 000 mm. Behöver du även en tätningsring för att stoppa lukt och insekter hittar du det i samma kategoriträd."
+    ]
+   },
+   {
+    "q": "Är lätta brunnslock barnsäkra och låsbara?",
+    "a": [
+     "Ja. Samtliga lätta brunnslock i vårt sortiment har en låsfunktion som hindrar barn och obehöriga från att öppna locket. Våra körbara modeller uppfyller säkerhetsstandard EN 124 och är godkända för montering i offentlig och privat miljö."
+    ]
+   },
+   {
+    "q": "Hur monterar jag ett lätt brunnslock på en betongbrunn?",
+    "a": [
+     "Locket placeras direkt på betongringens överkant. För täthet mot vatten, lukt och insekter rekommenderar vi att en tätningsring monteras mellan betongringen och locket. Behöver du höja brunnen till markens nivå används en förhöjningsring i betong. Vid trafikerad yta gjuts en bärlast-ram runt locket."
+    ]
+   },
+   {
+    "q": "Vad kostar ett lätt brunnslock?",
+    "a": [
+     "Priset varierar med storlek, bärighet och material. Mindre composite-lock för avloppsbrunn (590-780 mm) kostar 1 749-2 895 kr. Körbara lock i klass B125 (900 mm) kostar från 7 722 kr. Lätt körbart lock 1 000 mm i klass D400 (40 ton) kostar 17 690 kr. Jämfört med tunga gjutjärnsbetäckningar är priset jämförbart eller lägre, med betydligt lättare hantering."
+    ]
+   },
+   {
+    "q": "Hur skiljer sig ert lätta brunnslock från Byggmax, Biltema och Jula?",
+    "a": [
+     "Våra körbara lock (klass B125 och uppåt) är CE-märkta och certifierade enligt EN 124 för bärighet upp till klass D400 (40 ton). I klass A15 är vissa modeller certifierade enligt EN 124. Hela sortimentet är tillverkat för professionellt bruk. Vi har också större storlekar (upp till 1 340 mm) som inte finns hos byggvaruhusen. Behöver du ett lock som klarar lastbilstrafik eller en specifik storlek över 800 mm är vårt sortiment den primära kanalen i Sverige."
+    ]
+   },
+   {
+    "q": "Vad är fördelen med ett lätt brunnslock för betongringar?",
+    "a": [
+     "Ett lätt brunnslock underlättar hantering och minskar behovet av tung utrustning vid installation och underhåll, vilket sparar både tid och kostnad."
+    ]
+   },
+   {
+    "q": "Vilka dimensioner finns för betongringar med lätta brunnslock?",
+    "a": [
+     "Vi erbjuder betongringar med lätta brunnslock i flera storlekar, från 600 mm upp till 1200 mm i diameter."
+    ]
+   },
+   {
+    "q": "Är brunnslocken säkra att använda i områden med tung trafik?",
+    "a": [
+     "Ja, våra lätta brunnslock för betongringar är designade för att tåla trafikbelastning och uppfyller höga säkerhetsstandarder för sådana miljöer."
+    ]
+   },
+   {
+    "q": "Hur lång är leveranstiden för betongringar med lätt brunnslock?",
+    "a": [
+     "Leveranstiden är vanligtvis 3-6 arbetsdagar, beroende på lagerstatus och destination."
+    ]
+   },
+   {
+    "q": "Kan jag beställa betongringar med lätt brunnslock för både privat och företagsbruk?",
+    "a": [
+     "Ja, vi erbjuder betongringar med lätt brunnslock för både privatpersoner och företag. Betalning kan göras via faktura."
+    ]
+   }
+  ]
+ },
+ "lock/plastbrunn": {
+  "intro": "Lätta brunnslock i plast för plastbrunnar med släta eller korrugerade rör. Locken finns för rördimensionerna 315, 400, 425 och 600 mm.",
+  "introDraft": true,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Släta eller korrugerade rör",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Välj lock efter brunnsrörets typ och invändiga diameter. Lock till korrugerade rör finns för invändig diameter 300-340 mm (315), 390-410 mm (400) och 425-450 mm (425). Lock till släta rör finns för invändig diameter 290-315 mm (315), 400 mm och 574-604 mm (600). Locket 400 för korrugerade eller släta rör passar också betongbrunnar med invändigt mått 400 mm.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Belastningsklass och låsning",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Locken är tillverkade i UV-beständigt material som tål solljus. De har belastningsklass A15 (grönområde, 1 500 kg) och är inte körbara med fordon. Locket låses med två skruvar.",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Lock för plastbrunnar som ska klara trafik finns bland gjutjärnsbetäckningar för plastbrunnar under Trafik. Är du osäker på storleken? Mät brunnsrörets invändiga diameter och använd filtret ovan, eller ring oss på 0920-52 00 56.",
+    "d": true
+   }
+  ],
+  "faq": [
+   {
+    "q": "Vad är lätta lock för plastbrunnar och hur används de?",
+    "a": [
+     "Lätta lock för plastbrunnar är specialdesignade för att passa plastbrunnar och är tillverkade i hållbara material som HD-PE. De är enkla att installera och hantera tack vare sin lätta vikt."
+    ]
+   },
+   {
+    "q": "Vilka fördelar har lätta lock för plastbrunnar jämfört med traditionella lock?",
+    "a": [
+     "Dessa lock är lättare, korrosionsbeständiga och tål både minusgrader och solljus. De minskar risken för skador vid hantering och är ofta utformade med säkerhetsfunktioner för att skydda mot obehörig åtkomst."
+    ]
+   },
+   {
+    "q": "Passar lätta lock för plastbrunnar alla typer av plastbrunnar?",
+    "a": [
+     "Ja, de finns i olika storlekar och kan anpassas för att passa olika storlekar på brunnar och användningsområden som avlopp och vattenbrunnar."
+    ]
+   },
+   {
+    "q": "Hur väljer jag rätt storlek på ett lätt brunnslock för plastbrunnar?",
+    "a": [
+     "Det är viktigt att mäta brunnens öppning noggrant. Svenska Brunnslock tillhandahåller vägledning för att hjälpa dig att välja rätt storlek för din brunn."
+    ]
+   },
+   {
+    "q": "Är lätta lock för plastbrunnar säkra och barnsäkra?",
+    "a": [
+     "De flesta lock är utformade med låsfunktioner och följer säkerhetsstandarder för att förhindra obehörig åtkomst och öka tryggheten för barn och husdjur."
+    ]
+   }
+  ]
+ },
+ "lock/plast": {
+  "intro": "När det gäller att skydda din brunn är ett robust och slitstarkt brunnslock i plast en perfekt lösning. Vi erbjuder ett brett sortiment av brunnslock i högkvalitativ plast som kombinerar hållbarhet, funktionalitet och estetik.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Brunnslock plast: hållbara och funktionella lösningar för din brunn"
+   },
+   {
+    "t": "p",
+    "x": "Våra plastlock är särskilt framtagna för att möta kraven i både privata och kommersiella miljöer, oavsett om det gäller en dricksvattenbrunn, avloppsbrunn eller annan typ av brunnsinstallation."
+   },
+   {
+    "t": "h3",
+    "x": "Varför välja ett brunnslock i plast?"
+   },
+   {
+    "t": "p",
+    "x": "Plastlock för brunnar har flera fördelar som gör dem till ett populärt val bland husägare, entreprenörer och fastighetsägare. Här är några av de främsta anledningarna till varför vi rekommenderar våra brunnslock i plast:"
+   },
+   {
+    "t": "ul",
+    "items": [
+     "Lättvikt och enkel installation: Till skillnad från tunga lock i metall eller betong är plastlock betydligt lättare att hantera och installera. Detta gör dem perfekta för dem som vill ha en smidig och snabb installation utan behov av specialutrustning.",
+     "Rostfritt och underhållsfritt: Våra brunnslock i plast rostar inte och kräver minimalt underhåll, vilket innebär att du sparar både tid och pengar i längden. Det tåliga materialet klarar av extrema väderförhållanden och håller sig i gott skick år efter år.",
+     "Anpassningsbara och diskreta: Brunnslock i plast finns i olika färger och storlekar, vilket gör det enkelt att hitta ett lock som passar din specifika brunn. Deras diskreta design gör att de smälter in i sin omgivning, oavsett om det är i en trädgård, vid en uppfart eller på en gård."
+    ]
+   },
+   {
+    "t": "h3",
+    "x": "Hållbara material för långvarig användning"
+   },
+   {
+    "t": "p",
+    "x": "Våra brunnslock i plast är tillverkade av UV-resistent och slagtålig plast, vilket säkerställer att de behåller sin styrka och färg över tid. Detta gör dem till en pålitlig och kostnadseffektiv lösning för dig som vill ha ett brunnslock som klarar påfrestningar från både väder och tung trafik. Oavsett om du behöver ett lock för en vanlig trädgårdsbrunn eller för mer industriella tillämpningar har vi alternativ som passar dina behov."
+   },
+   {
+    "t": "h3",
+    "x": "Välj rätt plastlock för din brunn"
+   },
+   {
+    "t": "p",
+    "x": "Att välja rätt brunnslock i plast är en viktig del i att säkerställa säkerheten och funktionaliteten i din brunn. Vi erbjuder ett brett utbud av lock med olika dimensioner och egenskaper för att passa olika brunnstyper. Om du är osäker på vilken modell som är bäst för dig, hjälper vi gärna till med rådgivning för att hitta det bästa alternativet för din installation."
+   },
+   {
+    "t": "p",
+    "x": "Utforska vårt sortiment och hitta det perfekta plastlocket för din brunn hos Svenska Brunnslock. Vi är här för att hjälpa dig att göra det bästa valet för både säkerhet och estetik."
+   }
+  ],
+  "faq": []
+ },
+ "lock/betong": {
+  "intro": "På Svenska Brunnslock förstår vi vikten av pålitliga och hållbara lösningar för att skydda vattenbrunnar och andra nedgrävda installationer.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Våra betonglock är utformade för att möta dessa behov och kombinerar styrka och hållbarhet i en produkt som står emot tidens tand. Men vad är det egentligen som gör betonglock till ett föredraget val i många projekt, och vilka unika egenskaper erbjuder de?"
+   },
+   {
+    "t": "h3",
+    "x": "Vad är betonglock?"
+   },
+   {
+    "t": "p",
+    "x": "Betonglock används för att säkra tillträdet till brunnar, schakt och andra nedgrävda utrymmen där det finns behov av ett robust och långvarigt skydd. De är tillverkade av högkvalitativ, armerad betong, och erbjuder exceptionell styrka och motståndskraft mot både fysiska påfrestningar och väderrelaterad erosion. Deras tyngd garanterar att de inte enkelt kan flyttas eller tas bort, vilket är en kritisk egenskap i många säkerhetssammanhang."
+   },
+   {
+    "t": "h4",
+    "x": "Fördelar med betonglock"
+   },
+   {
+    "t": "p",
+    "x": "Installationen av betonglock i infrastruktur- och industriella projekt såväl som på en fastighet erbjuder många fördelar. Den främsta är deras långvariga hållbarhet. Betong är välkänt för sin förmåga att stå emot hårda väderförhållanden, vilket är idealiskt för svenska klimatförhållanden som kan variera från heta somrar till iskalla vintrar. Betonglock är också mycket kostnadseffektiva, särskilt med tanke på deras långa livslängd och minimala underhållsbehov."
+   },
+   {
+    "t": "p",
+    "x": "Dessa är dessutom säkra. Deras vikt och robusta konstruktion gör dem svåra att manipulera eller forcera, vilket erbjuder ett effektivt skydd mot obehörig åtkomst till kritiska infrastrukturtillgångar."
+   },
+   {
+    "t": "h4",
+    "x": "Välja rätt betonglock"
+   },
+   {
+    "t": "p",
+    "x": "Att välja rätt betonglock innebär att överväga flera faktorer, såsom storlek, form och specifika säkerhetskrav. På Svenska Brunnslock har vi ett brett sortiment av betonglock som passar olika applikationer och uppfyller diverse tekniska krav. Vårt team av experter är redo att assistera dig med att välja rätt produkt som passar just dina behov och förutsättningar."
+   },
+   {
+    "t": "h4",
+    "x": "Investera i betonglock från Svenska Brunnslock"
+   },
+   {
+    "t": "p",
+    "x": "Genom att investera i betonglock från Svenska Brunnslock kan du vara säker på att du får en lösning som inte bara är hållbar och pålitlig, utan också kostnadseffektiv. Våra produkter är designade för att erbjuda maximal säkerhet och hållbarhet, vilket minskar behovet av frekventa byten eller underhåll."
+   },
+   {
+    "t": "p",
+    "x": "Kontakta oss idag för att diskutera dina behov och hur våra betonglock kan ge dig den säkerhet och hållbarhet du behöver för dina vattenbrunnar och andra infrastrukturtillgångar. Välj Svenska Brunnslock för kvalitet och pålitlighet som varar."
+   },
+   {
+    "t": "h3",
+    "x": "Betonglock till gårdspump"
+   },
+   {
+    "t": "p",
+    "x": "Brunnslock i betong passar till de flesta gårdspumpar på marknaden, exempelvis Kronans gårdspump nr 12."
+   },
+   {
+    "t": "h3",
+    "x": "Betonglock med ingjuten lucka"
+   },
+   {
+    "t": "p",
+    "x": "Vi tillverkar olika typer av specialanpassade betonglock med ingjutna luckor. Från luckor i segjärn, stål eller aluminium. Kan tillverka i alla belastningsklasser från A15 till F900"
+   },
+   {
+    "t": "p",
+    "x": "Levereras med ingjutna lyftöglor så man enkelt kan lyfta betonglocken på plats."
+   }
+  ],
+  "faq": []
+ },
+ "lock/gjutjarn": {
+  "intro": "Lock eller sil i gjutjärn är avsedda att placeras i ytor där små eller inga trafiklaster förekommer. Det normala användningsområdet är i tomtmark och på gångbanor eller cykelvägar där snöröjning och annat underhåll görs med lättare maskiner.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Klarar en belastning på 3 ton."
+   },
+   {
+    "t": "h3",
+    "x": "Lock och sil till betäckning: effektiv vattenhantering"
+   },
+   {
+    "t": "p",
+    "x": "Lock och sil till betäckning är viktiga komponenter för att säkerställa effektiv vattenhantering i avloppssystem och andra underjordiska installationer. På Svenska Brunnslock erbjuder vi högkvalitativa lock och silar som ger pålitlig prestanda och hållbarhet. Här diskuterar vi fördelarna med våra produkter, vilka alternativ vi erbjuder och deras användning."
+   },
+   {
+    "t": "h3",
+    "x": "Fördelar med lock och sil till betäckning"
+   },
+   {
+    "t": "p",
+    "x": "Lock och silar hjälper till att förhindra att skräp och stora föremål kommer in i avloppssystemet, vilket minskar risken för blockeringar och översvämningar. De är avgörande för att upprätthålla effektiv vattenavrinning och skydda infrastrukturen. Genom att använda lock och silar från Svenska Brunnslock kan du säkerställa att ditt avloppssystem fungerar optimalt och kräver mindre underhåll."
+   },
+   {
+    "t": "h3",
+    "x": "Våra produkter"
+   },
+   {
+    "t": "p",
+    "x": "Vi erbjuder lock och silar till betäckning i olika storlekar och material, inklusive gjutjärn och komposit, för att passa olika tillämpningar och miljöer. Våra produkter är tillverkade av hållbara material som tål tuffa förhållanden och säkerställer långvarig prestanda. Oavsett dina specifika krav har vi rätt lösning för dig."
+   },
+   {
+    "t": "h3",
+    "x": "Användning och installation"
+   },
+   {
+    "t": "p",
+    "x": "Lock och silar är enkla att installera och underhålla. Våra produkter levereras med detaljerade installationsanvisningar för att säkerställa korrekt montering och effektiv funktion. Genom att följa dessa anvisningar kan du snabbt och enkelt förbättra vattenhanteringen och skyddet för ditt avloppssystem."
+   },
+   {
+    "t": "h3",
+    "x": "Sil-lock till spygatter"
+   },
+   {
+    "t": "p",
+    "x": "Finns även som körbar som är belastningstestad med 3 tons punktbelastning. Lämpliga miljöer är bland annat stall, parkeringsgarage och pannrum."
+   },
+   {
+    "t": "h4",
+    "x": "Sil-lock till spygatter: skydda dina avloppssystem"
+   },
+   {
+    "t": "p",
+    "x": "Sil-lock till spygatter är en viktig komponent för att skydda avloppssystem genom att förhindra att skräp och stora föremål tränger in. På Svenska Brunnslock erbjuder vi högkvalitativa sil-lock som säkerställer effektiv funktion och långvarig hållbarhet."
+   }
+  ],
+  "faq": []
+ },
+ "lock/luckor": {
+  "intro": "Vi har ett stort sortiment på körbara luckor med alla belastningsklasser enligt europastandard EN 124.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Belastningsklass och användningsområde."
+   },
+   {
+    "t": "ul",
+    "items": [
+     "Lättare biltrafik - parkeringar och garage B125 och C250",
+     "Tung trafik - normal trafik klarar bussar och lastbilar D400",
+     "Riktigt tung trafik - hamnar, industrier och flygplatser E600 och F900"
+    ]
+   },
+   {
+    "t": "h3",
+    "x": "Körbara luckor: hållbara och tåliga för trafikerade områden"
+   },
+   {
+    "t": "p",
+    "x": "Körbara luckor är designade för att klara tung trafik och tuffa förhållanden, vilket gör dem idealiska för användning i områden som vägar, parkeringsplatser och industriella miljöer. På Svenska Brunnslock erbjuder vi högkvalitativa körbara luckor som kombinerar styrka och hållbarhet med enkel installation. Här går vi igenom fördelarna med våra produkter, de olika alternativen och deras användning."
+   },
+   {
+    "t": "h3",
+    "x": "Fördelar med körbara luckor"
+   },
+   {
+    "t": "p",
+    "x": "Körbara luckor är utformade för att klara höga belastningar och intensiv trafik. Deras robusta konstruktion säkerställer att de tål vikten av tunga fordon, vilket gör dem perfekta för installation i vägar och andra trafikerade områden. Genom att använda körbara luckor från Svenska Brunnslock kan du säkerställa att dina infrastrukturer förblir säkra och funktionella under lång tid."
+   },
+   {
+    "t": "h3",
+    "x": "Våra produkter"
+   },
+   {
+    "t": "p",
+    "x": "Vi erbjuder körbara luckor i olika storlekar och material, inklusive gjutjärn och stål, för att passa olika behov och applikationer. Våra produkter är tillverkade av högkvalitativa material som garanterar lång livslängd och pålitlig prestanda. Oavsett om du behöver luckor för en väg, en parkeringsplats eller ett industriområde, har vi rätt lösning för dig."
+   },
+   {
+    "t": "h3",
+    "x": "Användning och installation"
+   },
+   {
+    "t": "p",
+    "x": "Körbara luckor är enkla att installera och underhålla. Våra produkter levereras med detaljerade installationsanvisningar för att säkerställa korrekt montering och optimal funktion. Genom att följa dessa anvisningar kan du snabbt och enkelt förbättra säkerheten och hållbarheten i din infrastruktur."
+   },
+   {
+    "t": "h3",
+    "x": "Användningsområden"
+   },
+   {
+    "t": "p",
+    "x": "Dessa luckor är mångsidiga och kan användas i en mängd olika miljöer. De är perfekta för användning på vägar, parkeringsplatser, industriområden och andra platser där tung trafik förekommer. Deras robusta konstruktion och hållbara material gör dem till en pålitlig lösning för alla dina behov."
+   },
+   {
+    "t": "h3",
+    "x": "Plana luckor"
+   },
+   {
+    "t": "p",
+    "x": "Plana luckor används både inom- och utomhus som golvlucka och inspektionslucka kan även användas som vägglucka. Vid beställning av komplett lucka ingår ram för ingjutning eller eftermontage. Exempel på användningsområden: nedstigningsluckor, inspektionslucka, vägglucka, manlucka, lucka för pumpstationer."
+   },
+   {
+    "t": "h4",
+    "x": "Plana luckor: diskreta och funktionella"
+   },
+   {
+    "t": "p",
+    "x": "Plana luckor är designade för att vara diskreta och funktionella, vilket gör dem idealiska för användning i en mängd olika miljöer. På Svenska Brunnslock erbjuder vi plana luckor som kombinerar estetik med prestanda."
+   },
+   {
+    "t": "h3",
+    "x": "Överfalsade luckor"
+   },
+   {
+    "t": "p",
+    "x": "Vi levererar luckorna i rostfritt, aluminium eller varmförzinkat stål. Användningsområde för en överfalsade luckor kan vara som nedstigningslucka på olika platser, olika typer av inspektionsluckor, rökevakueringsluckor för fastigheter, lucka för pumpstationer eller för nödutrymning, olika typer av manlucka eller vägglucka samt fjärrvärmelucka."
+   },
+   {
+    "t": "h4",
+    "x": "Överfalsad lucka: säker och tätslutande"
+   },
+   {
+    "t": "p",
+    "x": "En överfalsad lucka är utformad för att ge en säker och tätslutande lösning för en mängd olika applikationer. På Svenska Brunnslock erbjuder vi överfalsade luckor som kombinerar hållbarhet med enkel installation."
+   },
+   {
+    "t": "h3",
+    "x": "Durkplåtsluckor"
+   },
+   {
+    "t": "p",
+    "x": "Användningsområden för en plan durkplåtslucka är bland annat som -nedstignings, inspektions-, vägg-, manlucka, eller lucka för pumpstationer."
+   },
+   {
+    "t": "p",
+    "x": "Används ofta som inspektionslucka i källare."
+   },
+   {
+    "t": "h4",
+    "x": "Durkplåtsluckor: hållbara och halksäkra"
+   },
+   {
+    "t": "p",
+    "x": "Durkplåtsluckor är robusta och halksäkra luckor som används i en mängd olika industriella och kommersiella miljöer. På Svenska Brunnslock erbjuder vi durkplåtsluckor som är designade för att vara hållbara och säkra."
+   }
+  ],
+  "faq": []
+ },
+ "lock/golv": {
+  "intro": "Krypgrundslucka eller \"lucka till torpargrund\" som de också kallas är tillverkade i stålplåt som ytbehandlats, för utomhusmiljö tål vatten, vind och UV-ljus. Luckorna levereras med vridlås och nyckel.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Ramen har monteringshål för att man enkelt skall kunna montera locken med skruvar."
+   },
+   {
+    "t": "p",
+    "x": "Finns i 2 st. olika storlekar. Luckorna är inte isolerade, vi rekommenderar att man isolerar öppningen med cellplast eller annan likvärdig isolering."
+   },
+   {
+    "t": "p",
+    "x": "Levereras i GRÅ kulör RAL 7040."
+   },
+   {
+    "t": "h3",
+    "x": "Golvlucka i aluminium"
+   },
+   {
+    "t": "p",
+    "x": "Inspektionslucka i aluminium. Gas- och vattentät. För inom- och utomhusbruk."
+   }
+  ],
+  "faq": []
+ },
+ "lock/sakerhet": {
+  "intro": "Vi har ett stort utbud på måttanpassade säkerhetsluckor efter önskemål. Luckorna kan anpassas utifrån säkerhetsklass 1 till 4 och belastningsklass enligt EN124 från A15 kN - F900 kN.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Tillverkas enligt ISO 9001 och ISO 14001."
+   },
+   {
+    "t": "p",
+    "x": "Luckorna kan tillverkas i en mängd olika material som:"
+   },
+   {
+    "t": "ul",
+    "items": [
+     "Galvaniserat stål",
+     "Rostfritt stål",
+     "Aluminium",
+     "Segjärn (gjutjärn)",
+     "Kompositmaterial."
+    ]
+   },
+   {
+    "t": "h3",
+    "x": "Säkerhetslucka: optimal skydd och säkerhet"
+   },
+   {
+    "t": "p",
+    "x": "En säkerhetslucka är en kritisk komponent för att säkerställa säkerhet och skydd i olika miljöer, inklusive industriella anläggningar, tekniska rum och underjordiska utrymmen. På Svenska Brunnslock erbjuder vi säkerhetsluckor som kombinerar robusthet med avancerade säkerhetsfunktioner. Här går vi igenom fördelarna med våra produkter, de olika alternativen och deras användning."
+   },
+   {
+    "t": "h3",
+    "x": "Fördelar med säkerhetsluckor"
+   },
+   {
+    "t": "p",
+    "x": "Säkerhetsluckor erbjuder skydd mot obehörig åtkomst och förhindrar olyckor genom att ge en säker och kontrollerad åtkomst till kritiska utrymmen. De är utformade för att vara hållbara och motståndskraftiga mot intrång, vilket gör dem idealiska för användning i känsliga och högsäkerhetsmiljöer. Genom att använda säkerhetsluckor från Svenska Brunnslock kan du säkerställa högsta nivå av skydd och säkerhet för dina anläggningar."
+   },
+   {
+    "t": "h3",
+    "x": "Våra produkter"
+   },
+   {
+    "t": "p",
+    "x": "Vi erbjuder säkerhetsluckor i olika storlekar och material, inklusive stål och aluminium, för att passa olika behov och applikationer. Våra produkter är utrustade med avancerade låssystem och säkerhetsfunktioner som garanterar maximal säkerhet och pålitlighet. Oavsett dina specifika krav har vi rätt lösning för dig."
+   },
+   {
+    "t": "h3",
+    "x": "Användning och installation"
+   },
+   {
+    "t": "p",
+    "x": "Säkerhetsluckor är enkla att installera och använda. Våra produkter levereras med detaljerade installationsanvisningar för att säkerställa korrekt montering och optimal säkerhet. Genom att följa dessa anvisningar kan du snabbt och enkelt förbättra skyddet och säkerheten i dina anläggningar."
+   },
+   {
+    "t": "h3",
+    "x": "Användningsområden"
+   },
+   {
+    "t": "p",
+    "x": "Säkerhetsluckor är mångsidiga och kan användas i en mängd olika miljöer. De är perfekta för användning i industriella anläggningar, tekniska rum, underjordiska utrymmen och andra platser där hög säkerhet är avgörande. Deras robusta konstruktion och avancerade säkerhetsfunktioner gör dem till en pålitlig lösning för alla dina behov."
+   },
+   {
+    "t": "h3",
+    "x": "Evakueringsluckor"
+   },
+   {
+    "t": "p",
+    "x": "Kundanpassade evakueringsluckor för utrymning. Luckorna kan anpassas utifrån belastningsklass från A15 upp till F900. Finns som runda och fyrkantiga."
+   },
+   {
+    "t": "p",
+    "x": "Tillverkas enligt ISO 9001 och ISO 14001."
+   },
+   {
+    "t": "p",
+    "x": "Luckorna levereras med lås och gasfjädrar för att underlätta öppning och stängning."
+   },
+   {
+    "t": "h4",
+    "x": "Evakueringslucka: snabb och säker utrymning"
+   },
+   {
+    "t": "p",
+    "x": "En evakueringslucka är en kritisk komponent för att säkerställa snabb och säker utrymning i nödsituationer. På Svenska Brunnslock erbjuder vi evakueringsluckor som är designade för att ge enkel åtkomst och snabb evakuering."
+   },
+   {
+    "t": "h4",
+    "x": "Fördelar med evakueringsluckor"
+   },
+   {
+    "t": "p",
+    "x": "Evakueringsluckor är utformade för att möjliggöra snabb och säker utrymning i händelse av nödsituationer, såsom bränder, gasläckor eller andra faror. De är lätta att öppna och ger en tydlig och snabb väg ut, vilket minskar risken för panik och skador. Genom att använda evakueringsluckor från Svenska Brunnslock kan du säkerställa att dina anläggningar är förberedda för alla eventualiteter."
+   }
+  ],
+  "faq": []
+ },
+ "lock/kund": {
+  "intro": "Trots vårt breda sortiment av luckor och betäckningar så förekommer det, relativt ofta, att de standardluckor vi har inte passar för avsett ändamål. Kundanpassade luckor är i de fallen en lösning.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Dessa finns med belastningsklass A15 till F900 enligt EN124."
+   },
+   {
+    "t": "p",
+    "x": "De senaste 10 åren har vi levererat kundspecifika luckor runtom i hela Skandinavien, till industrier, kommuner, entreprenörer och privatpersoner. Ett större känt projekt är Förbifart Stockholm dit har vi levererat mer än 50 st. körbara luckor med höga belastningskrav."
+   }
+  ],
+  "faq": []
+ },
+ "lock/tillbehor": {
+  "intro": "En locköppnare är ett oumbärligt verktyg för att enkelt och säkert öppna och stänga brunnslock. På Svenska Brunnslock erbjuder vi locköppnare som är designade för att göra arbetet smidigare och säkrare.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Lyftnyckel, verktyg för öppning av brunnslock i gjutjärn/segjärn"
+   },
+   {
+    "t": "h3",
+    "x": "Locköppnare: enkel och säker hantering av brunnslock"
+   },
+   {
+    "t": "p",
+    "x": "Här går vi igenom fördelarna med våra produkter, de olika alternativen och deras användning."
+   },
+   {
+    "t": "h3",
+    "x": "Fördelar med locköppnare"
+   },
+   {
+    "t": "p",
+    "x": "Locköppnare gör det möjligt att enkelt och säkert hantera tunga brunnslock, vilket minskar risken för skador och underlättar underhållsarbete. De är särskilt användbara för kommuner, industrier och andra organisationer som regelbundet behöver öppna och stänga brunnslock. Genom att använda locköppnare från Svenska Brunnslock kan du effektivisera ditt arbete och förbättra säkerheten."
+   },
+   {
+    "t": "h3",
+    "x": "Våra produkter"
+   },
+   {
+    "t": "p",
+    "x": "Vi erbjuder locköppnare i olika modeller och storlekar för att passa olika typer av brunnslock. Våra produkter är tillverkade av robusta material som garanterar lång hållbarhet och pålitlig prestanda. Oavsett dina specifika behov har vi rätt locköppnare för dig."
+   },
+   {
+    "t": "h3",
+    "x": "Användning och installation"
+   },
+   {
+    "t": "p",
+    "x": "Locköppnare är enkla att använda och kräver ingen omfattande utbildning. Våra produkter levereras med tydliga instruktioner för att säkerställa korrekt användning och maximal effektivitet. Genom att följa dessa anvisningar kan du snabbt och enkelt hantera brunnslock på ett säkert och effektivt sätt."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Vilken funktion har en avluftningsventil i ett brunnslock?",
+    "a": [
+     "En avluftningsventil förhindrar övertryck i brunnsystemet och säkerställer korrekt ventilation, dels vid toalettspolning för avloppsbrunnar."
+    ]
+   },
+   {
+    "q": "Vilka storlekar finns tillgängliga för tätningslister?",
+    "a": [
+     "Vi erbjuder tätningslister i storlekar från 600 mm upp till 1340 mm i diameter för att passa olika brunnsdimensioner."
+    ]
+   },
+   {
+    "q": "Är tätningslisterna vattentäta?",
+    "a": [
+     "Ja, våra tätningslister är vattentäta och förhindrar att smuts och vatten tränger in i brunnen."
+    ]
+   },
+   {
+    "q": "Kan jag installera en avluftningsventil själv?",
+    "a": [
+     "Installation av avluftningsventilen är enkel och kan utföras av de flesta utan professionell hjälp, men vid tveksamheter rekommenderas fackman."
+    ]
+   },
+   {
+    "q": "Finns det extra tillbehör till avluftningsventiler?",
+    "a": [
+     "Ja, vi erbjuder bland annat en hänglåsadapter som tillval för att ytterligare säkra avluftningsventilen."
+    ]
+   }
+  ]
+ },
+ "el": {
+  "intro": "Kabelbrunnar, skarvbrunnar, kabelrännor och kabelskyddsrör för el-, tele- och datanät i mark, längs väg och järnväg. Vi levererar bland annat till järnvägar, ställverk och vindkraftsparker.",
+  "introDraft": true,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Kabelbrunnar",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Kabelbrunnar finns i komposit och betong. Kompositbrunnarna UC och OXPRO klarar belastningar på 40 ton (D400) utan motgjutning, OXPRO upp till 90 ton (F900). NEXUS är dimensionerad för upp till 25 ton (C250) och har modulär konstruktion.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Skarv- och optobrunnar",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Skarvlådor och dragbrunnar i betong med gjutjärnsbetäckning, samt optobrunnar och slingbrunnar med vattentätt lock för optisk kabel.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Kabelrännor, kabelskyddsrör och flerfackskanaler",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Kabelrännor och kabelkanaler finns i komposit, aluminium och betong, även körbara betongrännor för överfarter och tung trafik. Kabelskyddsrör finns som släta rör enligt Verksnorm 5200 och som delbara rör för redan installerad kabel. Flerfackskanaler används som tvärkanalisation under vägar och järnvägar.",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Välj en produktgrupp ovan, eller ring oss på 0920-52 00 56 om du vill ha hjälp att välja.",
+    "d": true
+   }
+  ],
+  "faq": []
+ },
+ "el/kabelbrunn": {
+  "intro": "Vi levererar olika typer av kabelbrunnar till ett flertal infrastrukturområden som till järnvägar, ställverk, vindkraftsparker, mm.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Kabelbrunn: central komponent för effektiv kabelhantering"
+   },
+   {
+    "t": "p",
+    "x": "På Svenska Brunnslock är vi experter på infrastrukturlösningar och förstår vikten av effektiv kabelhantering i moderna byggprojekt och stadsutveckling. Vår produktkategori för kabelbrunn är speciellt utvecklad för att tillgodose behovet av säker och organiserad kabeldragning. Vad är en kabelbrunn och vilka är de avgörande fördelarna med att använda dem i ditt projekt?"
+   },
+   {
+    "t": "h4",
+    "x": "Vad är en kabelbrunn?"
+   },
+   {
+    "t": "p",
+    "x": "En kabelbrunn är en underjordisk installation som används för att husera och skydda elektriska kablar och ledningar. Det är en viktig del av infrastrukturen för el-, tele-, och datanät, vilket möjliggör enkel åtkomst för underhåll samt skydd mot yttre påverkan. Kabelbrunnar från Svenska Brunnslock är tillverkade av hållbara material som betong, plast eller aluminium och är designade för att tåla de påfrestningar som kan uppstå från såväl miljön som mänsklig aktivitet."
+   },
+   {
+    "t": "h4",
+    "x": "Fördelar med kabelbrunnar från Svenska Brunnslock"
+   },
+   {
+    "t": "p",
+    "x": "Att investera i kabelbrunnar från Svenska Brunnslock innebär flera konkreta fördelar:"
+   },
+   {
+    "t": "p",
+    "x": "Skydd: Våra kabelbrunnar ger överlägset skydd för känsliga kablar och ledningar, vilket minskar risken för skador och förlänga deras livslängd."
+   },
+   {
+    "t": "p",
+    "x": "Tillgänglighet: Genom att använda kabelbrunnar underlättas underhållsarbeten, eftersom tekniker enkelt kan få åtkomst till kablarna utan att behöva gräva."
+   },
+   {
+    "t": "p",
+    "x": "Organisering: De hjälper till att hålla kablar organiserade, vilket förenklar både diagnostik av problem och framtida uppgraderingar av nätverket."
+   },
+   {
+    "t": "p",
+    "x": "Säkerhet: Korrekt installerade kabelbrunnar minskar risken för olyckor och skador för både personal och allmänheten."
+   },
+   {
+    "t": "h4",
+    "x": "Välja rätt kabelbrunn"
+   },
+   {
+    "t": "p",
+    "x": "Att välja rätt kabelbrunn är avgörande för projektets framgång. På Svenska Brunnslock erbjuder vi kabelbrunnar i olika storlekar och modeller för att matcha de specifika behoven i ditt projekt, oavsett om det är stora infrastrukturprojekt eller mindre installationer. Vårt expertteam kan hjälpa dig att välja rätt modell baserat på dina krav och de tekniska specifikationerna för ditt projekt."
+   },
+   {
+    "t": "p",
+    "x": "Våra modeller:"
+   },
+   {
+    "t": "ul",
+    "items": [
+     "Kabelbrunn OXPRO",
+     "Kabelbrunn i komposit",
+     "Kabelbrunn NEXUS",
+     "Kabelbrunn i betong",
+     "Kabelbrunn skarvlåda 3-lock",
+     "Optobrunn och slingbrunn"
+    ]
+   },
+   {
+    "t": "h4",
+    "x": "Investera i kabelbrunnar från Svenska Brunnslock"
+   },
+   {
+    "t": "p",
+    "x": "Genom att investera i kabelbrunnar från Svenska Brunnslock säkerställer du att ditt projekt är utrustat med en lösning som erbjuder hållbarhet, effektivitet och hög prestanda. Kontakta oss idag för att diskutera hur våra kabelbrunnar kan integreras i ditt nästa projekt och bidra till en säkrare och mer organiserad infrastruktur."
+   },
+   {
+    "t": "p",
+    "x": "Hos Svenska Brunnslock är vi engagerade i att leverera högkvalitativa lösningar som möter och överträffar våra kunders förväntningar. Vår dedikation till innovation och kvalitet gör oss till en pålitlig partner i ditt projekt."
+   },
+   {
+    "t": "h3",
+    "x": "Kabelbrunn i komposit UC"
+   },
+   {
+    "t": "p",
+    "x": "Ultima Connect är en modulär och skalbar brunnslösning som enkelt monteras på plats."
+   },
+   {
+    "t": "p",
+    "x": "Brunnen tillverkas i GRP (glasfiberarmerad polyester), bestående av glasfiber, polyester och gelcoat. Materialet ger hög kemikalie- och temperaturbeständighet. Modulerna levereras “flat packed” för en smart och yteffektiv logistik."
+   },
+   {
+    "t": "p",
+    "x": "Brunnen är dimensionerad för att klara belastningar upp till 40 ton (D400) utan behov av motgjutning."
+   },
+   {
+    "t": "h3",
+    "x": "Kabelbrunn OXPRO i komposit"
+   },
+   {
+    "t": "p",
+    "x": "Marknadens kraftigaste och mest prisvärda kompositbrunn! Den klarar en belastning från 40 ton (D400) upp till 90 ton (F900) utan motgjutning och är därmed den starkaste och effektivaste kompositbrunnen som finns på marknaden."
+   },
+   {
+    "t": "h4",
+    "x": "Så väljer du rätt OXPRO i 3 steg"
+   },
+   {
+    "t": "ul",
+    "items": [
+     "Välj invändigt mått utifrån hur mycket utrymme du behöver för skarvar, kabelslingor och montage. OXPRO finns i bl.a. 600×600, 750×750, 900×600, 900×900, 1200×600, 1200×1200, 1500×750, 1500×1500, 2250×750.",
+     "Välj höjd/djup genom att bygga brunnen i 150 mm-moduler tills du når önskat mått."
+    ]
+   },
+   {
+    "t": "p",
+    "x": "Välj lucka/lock utifrån placering och inspektionsbehov (t.ex. gångjärn för frekvent öppning). Vi har luckor för brunnens alla storlekar och era behov."
+   },
+   {
+    "t": "h3",
+    "x": "Kabelbrunn NEXUS"
+   },
+   {
+    "t": "p",
+    "x": "En mycket konkurrenskraftig kabelbrunn i komposit med dubbelväggs konstruktion, dimensionerad för att klara belastningar upp till 25 ton (C250) utan behov av motgjutning."
+   },
+   {
+    "t": "p",
+    "x": "Brunnen är lämplig för användning i exempelvis grönområden, parkeringar, trottoarer och vägar, och fungerar utmärkt som installations- och dragbrunn för kablar m.m. Den finns i flera olika storlekar och kan levereras med betäckning."
+   },
+   {
+    "t": "p",
+    "x": "Nexus-brunnen har en modulär konstruktion som möjliggör anpassning i både storlek och höjd efter behov."
+   },
+   {
+    "t": "h3",
+    "x": "Kabelbrunn i betong"
+   },
+   {
+    "t": "p",
+    "x": "Brunnsringar i betong sätts ihop av flera ringar till önskad höjd. Vi har brunnsringar med innerdiameter från 500, 3000mm."
+   },
+   {
+    "t": "h4",
+    "x": "Brunnsring: viktig komponent för kabelbrunnar"
+   },
+   {
+    "t": "p",
+    "x": "En brunnsring är en central del av kabelbrunnar, som bidrar till strukturell integritet och skydd av kablar. På Svenska Brunnslock erbjuder vi högkvalitativa brunnsringar som är utformade för att möta de stränga kraven på hållbarhet och prestanda."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Vad är syftet med en kabelbrunn?",
+    "a": [
+     "En kabelbrunn skyddar elektriska och kommunikationskablar under marken och gör dem lätt åtkomliga för underhåll och reparation."
+    ]
+   },
+   {
+    "q": "Vilka storlekar finns för kabelbrunnar?",
+    "a": [
+     "Våra kabelbrunnar finns i storlekar från 500 mm till 3000 mm i innerdiameter för att passa olika installationsbehov."
+    ]
+   },
+   {
+    "q": "Är kabelbrunnar väderbeständiga?",
+    "a": [
+     "Ja, våra kabelbrunnar är konstruerade för att klara tuffa väderförhållanden och ge långvarigt skydd."
+    ]
+   },
+   {
+    "q": "Hur installeras en kabelbrunn?",
+    "a": [
+     "Installationen är relativt enkel och våra kabelbrunnar levereras med tydliga installationsanvisningar för korrekt montering."
+    ]
+   }
+  ]
+ },
+ "el/skarv": {
+  "intro": "Kabelbrunn typ K-Prefabs Skarvlåda 3-lock förberedd med 8st hål Ø110 eller 160mm i varje gavel eller motsvarande, inklusive körbar beteckning.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Optobrunn och slingbrunn"
+   },
+   {
+    "t": "p",
+    "x": "Optobrunn/slingbrunn/kopplingsbrunn."
+   },
+   {
+    "t": "p",
+    "x": "Anslutningskammare för optisk kabel med vattentätt lock med gummitätning för underjordiska installationer."
+   },
+   {
+    "t": "h3",
+    "x": "Dragbrunn och skarvbrunn i betong",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Rektangulär kabelbrunn av typ skarvlåda i våtgjuten betong utan botten, med 8 hål Ø120 mm i varje gavel. De fyra nedersta hålen har slits och kan avlägsnas vid montage på befintlig kabeldragning. Brunnen är dimensionerad för trafiklast upp till 40 ton och har flytande gjutjärnsbetäckning med stålram och tre lock för enkel nivåanpassning. Nyckel till låsgallret finns som tillbehör.",
+    "d": true
+   }
+  ],
+  "faq": []
+ },
+ "el/rannor": {
+  "intro": "Vi levererar ett antal olika kabelkanaler och rännor i komposit-, aluminium- och betongmaterial. Användningsområden sträcker sig från järnvägar, broar, gasledningar, bensinstationer, el-ställverk mm.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Vi är unika när det gäller körbara kabelkanaler i form av betongrännor och lock som klarar en belastning upp till 57,5kN (beräknat/hjularea) används vid överfarter eller där det förekommer tung trafik. Vid riktigt tung trafik som vid hamnar och flygplatser kan vi leverera körbara kabelkanaler med upp till 70kN (beräknat/hjularea)"
+   },
+   {
+    "t": "h3",
+    "x": "Kabelrännor: effektiva lösningar för kabelhantering och skydd"
+   },
+   {
+    "t": "p",
+    "x": "På Svenska Brunnslock är vi specialister på att erbjuda genomtänkta och hållbara lösningar för infrastrukturella behov. Våra kabelrännor är designade för att effektivt skydda och organisera kablar och ledningar, vilket är avgörande för säkerheten och funktionaliteten i såväl offentliga som privata miljöer. Men vad är det som gör våra kabelrännor till ett idealiskt val, och vilka fördelar medför de för ditt projekt?"
+   },
+   {
+    "t": "h4",
+    "x": "Vad är kabelrännor?"
+   },
+   {
+    "t": "p",
+    "x": "Kabelrännor är konstruktioner avsedda för att säkert leda och skydda elektriska kablar och ledningar. De är essentiella komponenter i byggprojekt och underhåll av infrastruktur, där de bidrar till att förebygga skador och hålla kablage organiserat och lättåtkomligt. Tillverkade från hållbara material som stål, betong eller komposit, erbjuder våra kabelrännor en robust lösning som står emot både mekanisk påverkan och väderförhållanden."
+   },
+   {
+    "t": "h4",
+    "x": "Fördelar med kabelrännor från Svenska Brunnslock"
+   },
+   {
+    "t": "p",
+    "x": "Investering i kabelrännor från Svenska Brunnslock kommer med flera signifikanta fördelar:"
+   },
+   {
+    "t": "ul",
+    "items": [
+     "Skydd: Våra kabelrännor skyddar dyrbara kablar från yttre skador såsom tryck, stötar och väderpåverkan. Detta förlänger kablagets livslängd och minskar kostnaderna för underhåll och reparationer.",
+     "Organisering: De bidrar till en bättre organisering av kablar, vilket underlättar underhåll och eventuell felsökning. Ett välorganiserat kabelsystem är enklare att uppgradera eller ändra vid behov.",
+     "Säkerhet: Genom att minska risken för trassel och skador på kablar förbättras även säkerheten för både anläggningen och de personer som arbetar i dess närhet.",
+     "Estetik: Ett välorganiserat kabelsystem ser inte bara bättre ut, det kan också bidra till en mer professionell uppfattning av arbetsplatsen eller den offentliga miljön."
+    ]
+   },
+   {
+    "t": "h4",
+    "x": "Välja rätt kabelrännor"
+   },
+   {
+    "t": "p",
+    "x": "Att välja rätt kabelrännor kräver en förståelse för både de specifika behoven i ditt projekt och de miljöer där de ska installeras. På Svenska Brunnslock erbjuder vi en rad olika modeller som kan anpassas för att möta dessa krav, oavsett om det gäller lätta installationer för kontorsmiljöer eller tunga system för väg och järnvägsprojekt samt industriella tillämpningar."
+   },
+   {
+    "t": "h4",
+    "x": "Investera i kabelrännor från Svenska Brunnslock"
+   },
+   {
+    "t": "p",
+    "x": "Genom att investera i kabelrännor från Svenska Brunnslock säkerställer du inte bara en hållbar och effektiv hantering av ditt kablage, utan även en långsiktig lösning som skyddar din investering över tid. Våra produkter är konstruerade för att möta de högsta standarderna i hållbarhet och funktionalitet."
+   },
+   {
+    "t": "p",
+    "x": "Kontakta oss idag för att lära dig mer om vårt sortiment av kabelrännor och hur vi kan assistera i att hitta den bästa lösningen för ditt projekt. På Svenska Brunnslock är vi dedikerade till att erbjuda förstklassiga produkter som förbättrar både säkerhet och effektivitet i alla typer av installationsprojekt."
+   },
+   {
+    "t": "h3",
+    "x": "Broränna och kabelränna"
+   },
+   {
+    "t": "p",
+    "x": "Kabelrännan används som:"
+   },
+   {
+    "t": "ul",
+    "items": [
+     "Broränna på broar utmed järnvägar",
+     "Kanalisation till ställverk, eller annan verksamhet."
+    ]
+   },
+   {
+    "t": "h3",
+    "x": "Broränna för järnväg"
+   },
+   {
+    "t": "p",
+    "x": "Brorännor i aluminium inklusive lock, tillverkas enligt Trafikverkets ritning. Tillverkad så att den kan jordas."
+   },
+   {
+    "t": "p",
+    "x": "Bredd invändigt: 200 mm Höjd invändigt: 150 mm."
+   },
+   {
+    "t": "h4",
+    "x": "Vikt inklusive lock: 7 kg/m"
+   },
+   {
+    "t": "p",
+    "x": "Vi tillverkar även brorännor i samma utförande med valfritt innermått samt med en- eller flera mellanväggar. Rännorna är slät invändigt och skadar inte elkabel."
+   },
+   {
+    "t": "h4",
+    "x": "Broränna: hållbara lösningar för järnvägsapplikationer"
+   },
+   {
+    "t": "p",
+    "x": "En broränna är en viktig komponent för att hantera vattenavrinning och skydda järnvägsinfrastruktur. På Svenska Brunnslock erbjuder vi robusta och hållbara brorännor som är designade för att uppfylla de specifika behoven inom järnvägsindustrin."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Vad används en broränna till inom järnvägsinfrastruktur?",
+    "a": [
+     "En broränna används för att effektivt hantera vattenavrinning kring järnvägsspår och broar, vilket förhindrar erosion och skyddar infrastrukturen från skador."
+    ]
+   },
+   {
+    "q": "Vilka dimensioner finns för brorännor?",
+    "a": [
+     "Standarddimensionerna är 200 mm i bredd och 150 mm i höjd, men vi erbjuder också anpassade mått med en eller flera mellanväggar."
+    ]
+   },
+   {
+    "q": "Vilka material används för brorännor?",
+    "a": [
+     "Våra brorännor tillverkas i aluminium och är designade för att kunna jordas, vilket gör dem hållbara och motståndskraftiga mot korrosion."
+    ]
+   },
+   {
+    "q": "Är det enkelt att installera en broränna?",
+    "a": [
+     "Ja, våra brorännor är lätta att installera och levereras med tydliga instruktioner för säker och effektiv montering."
+    ]
+   }
+  ]
+ },
+ "el/skyddsror": {
+  "intro": "Delat kabelskyddsrör för skydd av redan installerade kabel samt temporär förläggning.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Delbara kabelskyddsrör"
+   },
+   {
+    "t": "p",
+    "x": "Kan även användas som reparationskit för släta eller korrugerade kabelskyddsrör."
+   },
+   {
+    "t": "p",
+    "x": "Tillverkas i återvunnen PP plast."
+   },
+   {
+    "t": "h3",
+    "x": "OPI distanshållare"
+   },
+   {
+    "t": "p",
+    "x": "OPI distanshållare eller klämmor för kabelskyddsrör 50, 110 och 160 mm rör. Används när det skall förläggas flera rör i samma kabelschakt och man efterfrågar en flexibel lösning"
+   },
+   {
+    "t": "h3",
+    "x": "Släta kabelskyddsrör SRN och SRS",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Släta kabelskyddsrör med konmuff, märkta Kraftkabel SRN eller SRS, uppfyller Verksnorm 5200. Rören är tillverkade av återvunnet material och levereras i längder om 6 m, i dimensioner från 50 till 200 mm beroende på typ. Det finns även SRS-rör utan muff för tryckning.",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Korrugerade kabelrör i HDPE med slät insida finns för elkraft (gul) och för svagström och opto (grön). I samma produktgrupp finns inspektions- och kopplingsbrunnar för PUS, jordning och åskledare.",
+    "d": true
+   }
+  ],
+  "faq": []
+ },
+ "el/flerfack": {
+  "intro": "Systemet används främst som tvärkanalisation under vägar och järnvägar, där påfrestningarna gör det omöjligt att förlägga vanliga rör. Det har sedan 1998 varit föreskrivet av Trafikverket som tvärkanalisation.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "I förfrågningsunderlagen benämns QA-kanalen som flerfackskanal eller flerfackskanaler."
+   },
+   {
+    "t": "p",
+    "x": "Vid förläggning kan man med fördel sammanfoga tre till fyra kanaler sida vid sida och därefter montera dem i schaktet. På så sätt kan installationstiden avsevärt förkortas."
+   }
+  ],
+  "faq": []
+ },
+ "bygg": {
+  "intro": "Grundläggning och tillbehör för byggen i mark: betongplintar, stolpfundament och stolpskor, markskruvar, glasfiberstegar och fallskydd för brunnar.",
+  "introDraft": true,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Betongplintar",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Betongplintar med bred fot finns i fyra modeller, från AP med maxbelastning 900 kg till KP+ med maxbelastning 10 000 kg. De används för altaner, friggebodar, carportar, sommarstugor, teknikhus och andra byggnader.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Stolpskor och stolpfundament",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Stolpskor, balkskor, monteringsplattor och vinkeljärn passar AP-, TP- och KP-plintar. Stolpfundament PP passar vägmärken, laddningsstolpar för elbilar, värmestolpar, lyktstolpar och lättare staket.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Markskruvar",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Markskruvar i varmförzinkat stål skruvas ner direkt i marken och används som grund för staket, altaner och mindre byggnader, utan gjutning.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Stegar och fallskydd",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Glasfiberstegar leder inte ström och används ofta av elektriker. Fallskydd i rostfritt stål monteras i brunnar för att förhindra fallolyckor.",
+    "d": true
+   }
+  ],
+  "faq": []
+ },
+ "bygg/plintar": {
+  "intro": "Marknadens stadigaste betongplintar, med bred fot. Finns i 2 st. olika modeller.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Modell TP med en bärighet upp till 1600 kg och modell KP för bärighet upp till 5000 kg. Se även betongplint KP+ och betongplint TP 200. Användningsområde: carportar, altaner med tak, sommarstugor större bastu byggnader, byggbaracker, mindre hus, teknikhus, pumphus."
+   },
+   {
+    "t": "h3",
+    "x": "Betongplint AP"
+   },
+   {
+    "t": "p",
+    "x": "Betongplint AP är den minsta modellen med en bottenplatta på 330 × 330 mm och maxbelastning 900 kg. Den är smidig och lätt att hantera, passar för lättare konstruktioner som altaner, mindre friggebodar, utedass och bastur."
+   },
+   {
+    "t": "h3",
+    "x": "Betongplint TP"
+   },
+   {
+    "t": "p",
+    "x": "Betongplint TP är modellen med en bottenplatta på 450 × 450 mm och maxbelastning 1 600 kg. Den passar för något tyngre konstruktioner altaner, friggebodar och byggnader upp till 40 m2."
+   },
+   {
+    "t": "h3",
+    "x": "Betongplint KP"
+   },
+   {
+    "t": "p",
+    "x": "Betongplint KP är den kraftigare modellen med en bottenplatta på 600 × 600 mm och maxbelastning 7000 kg. Den passar för tyngre byggen som carportar, altaner med tak, sommarstugor, små gårdsbyggnader och teknikhus."
+   },
+   {
+    "t": "h3",
+    "x": "Betongplint KP+"
+   },
+   {
+    "t": "p",
+    "x": "Betongplint KP +1000 är den kraftigaste modellen med en bottenplatta på 800x800 mm och maxbelastning 10 000 kg. Kan levereras med ingjutna gänghylsor (M20) eller en ingjuten svetsplatta i toppen. Passar till större hus och byggnader, teknikhus, pumpstationer, modulhus och även som fundament till bullerskydd."
+   }
+  ],
+  "faq": []
+ },
+ "bygg/stolp": {
+  "intro": "Passar till AP-, TP- och KP- plintar. Beroende på användningsområde kan du välja mellan stolpskor, balkskor, monteringsplattor eller vinkeljärn för att stabilisera strukturen.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Kombinationen av plintar och tillbehör gör att du enkelt hittar lösningar som passar olika monteringsbehov. Med lyftöglan förflyttar du plintarna enkelt och smidigt."
+   },
+   {
+    "t": "h3",
+    "x": "Stolpfundament PP"
+   },
+   {
+    "t": "p",
+    "x": "Ett stabilt fundament för olika stolpar. Passar utmärkt för vägmärken, laddningsstolpar för elbilar, värmestolpar för bilar, lyktstolpar och som fundament för lättare staket."
+   }
+  ],
+  "faq": []
+ },
+ "bygg/markskruv": {
+  "intro": "Markskruvar i varmförzinkat stål som skruvas ner direkt i marken och fungerar som grund utan gjutning. De används som grundförankring för exempelvis staket, altaner och mindre byggnader.",
+  "introDraft": true,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Eftersom marken bara påverkas vid infästningspunkten passar markskruvar särskilt bra i marina miljöer, trädgårdar och grönområden där omgivande ytor ska bevaras.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Modeller",
+    "d": true
+   },
+   {
+    "t": "ul",
+    "items": [
+     "Arctic markskruv med fast platta: längd 800, 1 000 eller 1 250 mm, diameter 76 mm.",
+     "Aurora markskruv V-76, förlängningsbar: längd 800 eller 1 250 mm. Kan kombineras med förlängning (500 eller 1 050 mm) och topp för att öka förankringsdjupet.",
+     "Polar rörskruv G3: längd 800 eller 1 250 mm, för exempelvis belysningsstolpar och skyltar. Stolpröret förs ner i skruven och fixeras med tre M16-bultar."
+    ],
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Tillbehör",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Justerbara stolpskor för reglar och stolpar (43-53, 62-77 och 84-104 mm), förstoringsplatta 300 × 300 mm för jämnare lastfördelning och L-konsol för infästning.",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Bärigheten påverkas av markförhållanden och förutsätter korrekt installation. Uppgifter om bärighet finns på respektive produkt.",
+    "d": true
+   }
+  ],
+  "faq": []
+ },
+ "bygg/stegar": {
+  "intro": "Glasfiberstegar används vanligtvis av elektriker, eftersom stegarna är lätta att bära runt på och samtidigt inte leder elektricitet/ström.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Kan levereras med väggfäste"
+   },
+   {
+    "t": "h3",
+    "x": "Längder och väggfäste",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Glasfiberstegen finns i längderna 2 000, 2 500, 3 000 och 3 500 mm. Stegen är lätt att bära med sig och leder inte elektricitet, vilket minskar riskerna vid arbete nära strömförande installationer.",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Som tillval finns väggfästen i syrafast stål: 2 st. till stegarna på 2 000 och 2 500 mm, 3 st. till 3 000 mm och 4 st. till 3 500 mm.",
+    "d": true
+   }
+  ],
+  "faq": []
+ },
+ "bygg/fallskydd": {
+  "intro": "Fallskydd i rostfritt, syrafast stål (SS 316) som monteras i brunnen för att förhindra fallolyckor. Olyckor i oskyddade brunnar drabbar i många fall barn.",
+  "introDraft": true,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Storlekar",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Fallskydden passar betong- och plastbrunnar med innerdiameter 280-315, 350-410, 470-510, 550-610 och 950-1 100 mm. Det finns även modeller för korrugerade plastbrunnsrör med innerdiameter 315 och 425 mm, och en modell för betong- och plastkonor med innermått 600-655 mm.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Material och funktion",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Fallskydden tål aggressiva miljöer utan att rosta och uppfyller hälso- och miljökraven i BASTA. De har öppningsmöjlighet för spolning, de större modellerna även för sugning. RSK-nummer finns på respektive produkt.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Krav på skydd i brunnar",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Enligt ordningslagen från 1993 krävs en säkerhetsanordning på brunnar, med särskilt fokus på områden där barn vistas. Kravet gäller både nya och befintliga brunnar.",
+    "d": true
+   }
+  ],
+  "faq": []
+ },
+ "trafik": {
+  "intro": "Gjutjärnsbetäckningar, gatugods och produkter för väg och trafikmiljö: betäckningar för betong- och plastbrunnar, kanalgaller, betäckningar för flygplatser och hamnar, trumögon och stolpar för bullerskärmar.",
+  "introDraft": true,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Gjutjärnsbetäckningar och gatugods",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Betäckningar och gatugods i gjutjärn och segjärn för gator, trottoarer och industriområden. Kanalgaller finns i belastningsklass C250, D400 och F900 enligt EN 124, och teleskoprör används för att anpassa betäckningens höjd.",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Belastningsklassen visar var betäckningen kan användas: C250 för parkering och kantsten, D400 för väg och gata och F900 för hamn och flygplats. Klassen anges på varje produkt.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Flygplatser och hamnar",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "För de tyngsta belastningarna finns betäckningar för flygplatser och hamnar i gjutjärn och komposit.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Trumögon och stolpar för bullerskärmar",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Trumögon i rostfritt stål monteras i dagvattenledningens in- och utlopp för att förhindra drunkningsolyckor. Stolpar för bullerskärmar tillverkas enligt Trafikverkets regler för användning utmed vägar och järnvägar.",
+    "d": true
+   }
+  ],
+  "faq": []
+ },
+ "trafik/gjutjarn": {
+  "intro": "Gjutjärnsbetäckningar för gatugods är en viktig del av stadens infrastruktur, utformade för att säkerställa hållbarhet och pålitlighet i trafikmiljöer. På Svenska Brunnslock erbjuder vi högkvalitativa gjutjärnsbetäckningar som uppfyller de strängaste kraven för säkerhet och hållbarhet.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Gjutjärnsbetäckningar för gatugods: hållbara och pålitliga"
+   },
+   {
+    "t": "p",
+    "x": "Här går vi igenom fördelarna med våra produkter, de olika alternativen och hur de används."
+   },
+   {
+    "t": "h3",
+    "x": "Fördelar med gjutjärnsbetäckningar"
+   },
+   {
+    "t": "p",
+    "x": "Gjutjärnsbetäckningar är kända för sin styrka och hållbarhet, vilket gör dem idealiska för användning i områden med tung trafik, såsom gator, trottoarer och industriområden. De är resistenta mot slitage, korrosion och extrema väderförhållanden. Genom att använda gjutjärnsbetäckningar från Svenska Brunnslock, kan du säkerställa långvarig prestanda och minimalt underhåll."
+   },
+   {
+    "t": "h3",
+    "x": "Våra produkter"
+   },
+   {
+    "t": "p",
+    "x": "Vi erbjuder ett brett utbud av gjutjärnsbetäckningar i olika storlekar och utföranden för att passa olika behov och tillämpningar. Våra betäckningar är designade för att vara lätta att installera och underhålla, samtidigt som de erbjuder maximalt skydd och stabilitet."
+   },
+   {
+    "t": "h3",
+    "x": "Användning och installation"
+   },
+   {
+    "t": "p",
+    "x": "Gjutjärnsbetäckningar är enkla att installera och kräver minimal underhåll. Våra produkter kommer med detaljerade installationsanvisningar för att säkerställa korrekt montering och långvarig prestanda. Genom att följa dessa anvisningar kan du snabbt och enkelt förbättra säkerheten och hållbarheten i din infrastruktur."
+   },
+   {
+    "t": "h3",
+    "x": "Betäckningar för betongbrunn: starka och pålitliga lösningar"
+   },
+   {
+    "t": "p",
+    "x": "Betäckningar för betongbrunn är avgörande för att skydda brunnar och säkerställa deras funktionalitet. På Svenska Brunnslock erbjuder vi betäckningar som kombinerar styrka och hållbarhet för att möta alla dina behov."
+   },
+   {
+    "t": "h3",
+    "x": "Betäckningar för plastbrunn: lätta och hållbara"
+   },
+   {
+    "t": "p",
+    "x": "Betäckningar för plastbrunn erbjuder en lätt och hållbar lösning för skydd och säkerhet. På Svenska Brunnslock erbjuder vi högkvalitativa betäckningar som är designade för att passa olika typer av plastbrunnar."
+   },
+   {
+    "t": "h3",
+    "x": "Teleskoprör: flexibla och justerbara lösningar"
+   },
+   {
+    "t": "p",
+    "x": "Teleskoprör är en mångsidig komponent som används för att anpassa höjden på brunnslock och andra betäckningar. På Svenska Brunnslock erbjuder vi högkvalitativa teleskoprör som ger flexibilitet och enkel justering för dina behov."
+   },
+   {
+    "t": "h3",
+    "x": "Kanalgaller"
+   },
+   {
+    "t": "p",
+    "x": "Kanalgaller och ram tillverkas i segjärn och finns i belastningsklass C250, D400 och F900 enligt EN 124."
+   },
+   {
+    "t": "p",
+    "x": "Gallren används främst som rännstenskanter på vägar och motorvägar samt i gatukorsningar där trafiken går långsamt, till exempel vid trafikplatser, korsningar och bilparkeringar"
+   }
+  ],
+  "faq": []
+ },
+ "trafik/flyg": {
+  "intro": "Betäckningar för flygplatser och hamnar är utformade för att klara extremt tunga belastningar och hårda miljöförhållanden. På Svenska Brunnslock erbjuder vi specialiserade betäckningar som möter de stränga kraven inom dessa områden.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Betäckningar för flygplatser och hamnar: hög belastningskapacitet och säkerhet"
+   },
+   {
+    "t": "p",
+    "x": "Här diskuterar vi fördelarna med våra produkter, våra alternativ och hur de används."
+   },
+   {
+    "t": "h3",
+    "x": "Fördelar med betäckningar för flygplatser och hamnar"
+   },
+   {
+    "t": "p",
+    "x": "Betäckningar för flygplatser och hamnar är konstruerade för att hantera hög trafikintensitet och tunga laster, såsom flygplan och stora fartyg. De erbjuder överlägsen styrka och hållbarhet, vilket säkerställer säkerheten och funktionaliteten i dessa kritiska infrastrukturer. Genom att använda våra betäckningar kan du säkerställa långvarig prestanda och minimera underhållsbehovet."
+   },
+   {
+    "t": "h3",
+    "x": "Våra produkter"
+   },
+   {
+    "t": "p",
+    "x": "Vi erbjuder betäckningar för flygplatser och hamnar i olika storlekar och material, inklusive gjutjärn och kompositmaterial. Våra produkter är designade för att vara korrosionsbeständiga och hållbara, vilket garanterar lång livslängd och pålitlig prestanda under de mest krävande förhållanden."
+   },
+   {
+    "t": "h3",
+    "x": "Användning och installation"
+   },
+   {
+    "t": "p",
+    "x": "Betäckningar för flygplatser och hamnar är enkla att installera och använda. Våra produkter levereras med detaljerade installationsanvisningar för att säkerställa korrekt montering och optimal funktion. Genom att följa dessa anvisningar kan du snabbt och enkelt förbättra säkerheten och hållbarheten i dina infrastrukturer."
+   }
+  ],
+  "faq": []
+ },
+ "trafik/trumogon": {
+  "intro": "Trumögon är galler som monteras i dagvattenledningens in- och utlopp, exempelvis i ett dike eller en trumma. De är framtagna för att förhindra drunkningsolyckor i dagvattenledningar och trummor, som i de flesta fall drabbar barn.",
+  "introDraft": true,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Storlekar",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Trumögon finns för rör och trummor med innerdiameter 190-250, 290-310, 390-430, 470-510, 550-610, 750-900 och 950-1 100 mm. Mät rörets eller trummans innerdiameter och välj den storlek som täcker måttet.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Material",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Trumögonen tillverkas enligt Trafikverkets krav i rostfritt, syrafast stål SS 316, vilket ger hög beständighet mot korrosion. Produkterna uppfyller hälso- och miljökraven i BASTA.",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Behöver du skydd i en brunn i stället för i en ledning? Se fallskydd under Bygg.",
+    "d": true
+   }
+  ],
+  "faq": []
+ },
+ "trafik/stolpar": {
+  "intro": "Stolpar för bullerplank och bullerskärmar, främst för användning utmed vägar och järnvägar. Stolparna tillverkas i enlighet med Trafikverkets regler.",
+  "introDraft": true,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Montering",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Stolparna passar de flesta fundament och kan även monteras direkt i fast underlag, exempelvis betong. Betongplint KP+ under Bygg kan användas som fundament till bullerskydd.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Material och utförande",
+    "d": true
+   },
+   {
+    "t": "ul",
+    "items": [
+     "Stolpe: HEA 160 eller UNP 160, S235JR",
+     "Fästöra: S235JR",
+     "Fotplåt: S355N Z3",
+     "Utförandeklass EXC3, svetsning enligt SS-EN 1090-2, 7.4.2"
+    ],
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Stolparna kan även tillverkas i andra utföranden och längder. Pris lämnas på offert.",
+    "d": true
+   }
+  ],
+  "faq": []
+ },
+ "jvg": {
+  "intro": "Svenska Brunnslock levererar material och tillbehör till kabelbrunnar för järnväg, ställverk, tunnelbana och kanalisation. Sortimentet är anpassat för entreprenörer och anläggningsbolag som arbetar under Trafikverkets krav och behöver produkter med dokumenterad bärighet och lång livslängd.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Här hittar du allt tillbehörsmaterial på ett ställe, från betongfundament och stolpfundament till skavskydd, pendelskena och märkskylt för kabelbrunn."
+   },
+   {
+    "t": "h3",
+    "x": "Betongfundament och KTL-fundament för järnvägsanläggning"
+   },
+   {
+    "t": "p",
+    "x": "Betongfundament och KTL-fundament används som fäste för kontaktledningsstolpar, sugtransformatorer och bryggstolpar längs järnvägsspår. Fundamenten är tillverkade i armerad betong och dimensionerade för att klara de belastningar och vibrationer som uppstår i järnvägsmiljö. Vi erbjuder stolpfundament i flera utföranden, anpassade för olika markförhållanden och stolpdiametrar. Kontaktledningsfundament och sugtransformatorfundament levereras med dokumenterade bärighetsdata och är direktanpassade för KTL-installationer (kontaktledningsanläggningar)."
+   },
+   {
+    "t": "h3",
+    "x": "Trälock för tunnelbana och kanalisation"
+   },
+   {
+    "t": "p",
+    "x": "Trälock för brunnar används i tunnelbane- och kanalisationsmiljöer där kabelbrunnens lock ska integreras med omgivande markbeläggning. Locken är robusta och anpassade för de specifika öppningsmått som förekommer i tunnelbane- och spårtrafikprojekt. Används av entreprenörer som arbetar mot SL, Trafikverket och kommunala infrastrukturprojekt."
+   },
+   {
+    "t": "h3",
+    "x": "Pendelskena för kabelupphängning"
+   },
+   {
+    "t": "p",
+    "x": "Pendelskena används för att hänga upp och ordna kablar inuti kabelbrunnar och kabelkanaler längs järnväg och i ställverk. Skenan monteras på brunnens innervägg och håller kablar på rätt höjd och i rätt läge, vilket underlättar underhåll och inspektion. Levereras i standardlängder och kan kombineras med övriga fästdetaljer i sortimentet."
+   },
+   {
+    "t": "h3",
+    "x": "Skavskydd och gummiduk"
+   },
+   {
+    "t": "p",
+    "x": "Skavskydd och gummiduk monteras i kabelbrunnens genomföringar och öppningar för att skydda kablar mot mekanisk åverkan. Produkterna reducerar risken för isolationsskador och förläng kabelns livslängd i anläggningar med höga krav på driftsäkerhet, till exempel järnväg och kraftdistribution."
+   },
+   {
+    "t": "h3",
+    "x": "Aluminiumlock, durkplåtslock och övriga brunnslock"
+   },
+   {
+    "t": "p",
+    "x": "För kabelbrunnar som kräver ett hållbart och lätt lock erbjuder vi brunnslock i aluminium och durkplåt. Aluminiumlock är korrosionsbeständiga och lämpliga för utemiljöer med krav på låg vikt kombinerat med tillräcklig bärighet. Aluminiumlock används i regel till kabelbrunnar med en innerdiameter om 1200 mm och 1500 mm. Durkplåtslock används till kabelbrunnar med en innerdiameter från 600 mm och upp till 1200 mm."
+   },
+   {
+    "t": "h3",
+    "x": "Märkskylt, plattform för kabelskåp och övriga tillbehör"
+   },
+   {
+    "t": "p",
+    "x": "Märkskylt för kabelbrunn används för att identifiera brunnar i fältarbete och underlättar dokumentation och underhållsplanering. Plattform för kabelskåp ger ett stabilt och justerat underlag för kabelskåp i mark- och järnvägsanläggningar. Vi erbjuder också grod- och kräldjursevakueringsanordningar som uppfyller miljökrav vid banarbete nära vattendrag och naturmiljöer."
+   },
+   {
+    "t": "p",
+    "x": "Har du frågor om vilket material som passar ditt projekt? Kontakta oss så hjälper vi dig att välja rätt produkt för din kabelbrunn och anläggningstyp."
+   }
+  ],
+  "faq": []
+ },
+ "jvg/lock": {
+  "intro": "Brunnslock i durkplåt är en pålitlig och robust lösning för kabelbrunnar och andra liknande tillämpningar. På Svenska Brunnslock erbjuder vi ett brett sortiment av brunnslock tillverkade av durkplåt, kända för sin hållbarhet och styrka.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Brunnslock i durkplåt: robust och hållbart"
+   },
+   {
+    "t": "p",
+    "x": "Här diskuterar vi varför du bör välja brunnslock i durkplåt, vilka produkter vi erbjuder och hur de används."
+   },
+   {
+    "t": "h3",
+    "x": "Varför välja brunnslock i durkplåt?"
+   },
+   {
+    "t": "p",
+    "x": "Brunnslock i durkplåt är idealiska för områden med hög belastning och trafik, såsom industriområden, parkeringsplatser och trottoarer. Durkplåtens räfflade yta ger utmärkt halkskydd, vilket gör den säker att använda i både våta och torra förhållanden. Dessutom är durkplåt extremt hållbart och kan motstå tung belastning och slitage över tid."
+   },
+   {
+    "t": "h3",
+    "x": "Våra produkter"
+   },
+   {
+    "t": "p",
+    "x": "Vi erbjuder brunnslock i durkplåt i olika storlekar och utföranden för att passa olika behov och tillämpningar. Våra brunnslock är tillverkade av högkvalitativt stål, vilket garanterar lång livslängd och motståndskraft mot korrosion. Oavsett om du behöver ett litet brunnslock för en gångväg eller ett stort lock för en industribrunn, har vi rätt produkt för dig."
+   },
+   {
+    "t": "h3",
+    "x": "Användning och installation"
+   },
+   {
+    "t": "p",
+    "x": "Brunnslock i durkplåt är enkla att installera och använda. De kan monteras på befintliga brunnar med minimal ansträngning och kräver lite underhåll. Våra produkter levereras med tydliga installationsanvisningar för att säkerställa korrekt montering och långvarig prestanda."
+   },
+   {
+    "t": "h3",
+    "x": "Brunnslock i aluminium: lättvikt och hållbarhet"
+   },
+   {
+    "t": "p",
+    "x": "Brunnslock i aluminium är en utmärkt lösning för applikationer där låg vikt och hög hållbarhet är avgörande. På Svenska Brunnslock erbjuder vi förstärkta brunnslock i aluminium som kombinerar dessa egenskaper med enkel hantering."
+   },
+   {
+    "t": "h4",
+    "x": "Fördelar med brunnslock i aluminium"
+   },
+   {
+    "t": "p",
+    "x": "Aluminium är känt för sin låga vikt och höga hållbarhet, vilket gör det till ett idealiskt material för brunnslock som ofta behöver lyftas och hanteras. Aluminiumets korrosionsbeständighet gör det också lämpligt för användning i fuktiga eller kemiskt aggressiva miljöer. Brunnslock i aluminium är dessutom lättare att installera och underhålla jämfört med tyngre alternativ."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Varför välja brunnslock i durkplåt?",
+    "a": [
+     "Brunnslock i durkplåt är mycket hållbara, har räfflad yta som halkskydd och klarar hög belastning, vilket gör dem idealiska för kabelbrunnar utmed järnvägar, industriområden och parkeringsplatser."
+    ]
+   },
+   {
+    "q": "Vilka storlekar finns för brunnslock i durkplåt?",
+    "a": [
+     "Vi erbjuder runda lock från dimension 600 mm upp till 2000 mm i diameter, för inspektionsbrunnar och kabelbrunnar."
+    ]
+   },
+   {
+    "q": "Är brunnslock i durkplåt korrosionsbeständiga?",
+    "a": [
+     "Ja, våra durkplåtslock är tillverkade av varmförzinkat stål som motstår korrosion och har lång livslängd."
+    ]
+   },
+   {
+    "q": "Hur installeras ett brunnslock i durkplåt?",
+    "a": [
+     "Installation är enkel, och brunnslocket kan monteras på befintliga brunnar med minimalt underhåll."
+    ]
+   },
+   {
+    "q": "Varför välja ett brunnslock i aluminium?",
+    "a": [
+     "Aluminium är lätt, hållbart och korrosionsbeständigt, vilket gör det idealiskt för områden där locket ofta måste hanteras."
+    ]
+   },
+   {
+    "q": "Vilka storlekar finns för förstärkta aluminiumlock?",
+    "a": [
+     "Våra förstärkta aluminiumlock finns i olika storlekar från 600 mm upp till dimension 2000 mm i diameter för att passa olika kabel- och inspektionsbrunnar."
+    ]
+   },
+   {
+    "q": "Är aluminiumlocken väderbeständiga?",
+    "a": [
+     "Ja, de är konstruerade för att tåla salt och aggressiva miljöer."
+    ]
+   },
+   {
+    "q": "Hur installeras ett förstärkt aluminiumlock?",
+    "a": [
+     "Installationen är enkel och kräver minimal underhåll; detaljerade anvisningar medföljer produkten."
+    ]
+   }
+  ]
+ },
+ "jvg/fundament": {
+  "intro": "Betongfundament för 60 mm stolpe. Ingjuten armerad mantelhylsa för starkast möjliga montage av stolpe ingår.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Åttakantig form ger maximal markstabilitet. Betongfundament för nedgrävning. Enkelt och billigt montage. Man gräver en grop och ställer fundamentet i botten på hålet. Sen fyller man hålet runt fundamentet med fyllnadsmassa så som grus, sand eller dylikt. Detta betongfundament passar våra Ø 60 mm galvade stolpar. Används för installation av papperskorgar, trafikspeglar, parkbänkar mm."
+   },
+   {
+    "t": "h3",
+    "x": "Fundament för järnväg och signal",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Här finns även fundament enligt Trafikverkets ritningar: kontaktledningsfundament med eller utan fot, sugtransformatorfundament, stagankare för kontaktledningar, plint för fällbomsdriv och kioskfundament. Fundament typ A och typ B C ingår i ett modulsystem och har samma bygghöjd som kanalisationen, vilket förenklar markarbetet.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Lätta fundament i återvunnen plast",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Plastgjutna fundament för 60 mm-stolpe och för belysningsstolpar Ø108 mm (höjd 900 mm) är lättare att transportera och hantera än betongfundament. Stolprör 60 × 3,2 mm i galvaniserat stål, längd 3 000 mm, finns som tillbehör.",
+    "d": true
+   }
+  ],
+  "faq": [
+   {
+    "q": "Vilka användningsområden har betongfundament?",
+    "a": [
+     "Betongfundament används för att stabilisera och stödja olika strukturer, som kabelskåp, kontaktledningar och andra byggkonstruktioner inom infrastruktur och järnvägar."
+    ]
+   },
+   {
+    "q": "Vilka typer av betongfundament erbjuder ni?",
+    "a": [
+     "Vi erbjuder flera typer av betongfundament, inklusive fundament för kontaktledningar, kioskfundament, plintar för fällbomsdriv och stagankare."
+    ]
+   },
+   {
+    "q": "Är betongfundament väderbeständiga?",
+    "a": [
+     "Ja, våra betongfundament är designade för att klara tuffa väderförhållanden och ge långvarig stabilitet."
+    ]
+   },
+   {
+    "q": "Är det svårt att installera ett betongfundament?",
+    "a": [
+     "Installationen kan utföras av fackmän och kräver rätt verktyg och säkerhetsföreskrifter, särskilt för större installationer."
+    ]
+   }
+  ]
+ },
+ "jvg/planering": {
+  "intro": "Planeringslåda för makadam och grus, utvecklad för planeringsarbeten vid järnväg och infrastruktur, exempelvis inför läggning av kabelkanal.",
+  "introDraft": true,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Två arbetsbredder",
+    "d": true
+   },
+   {
+    "t": "ul",
+    "items": [
+     "Planeringslåda 550 mm: mått 550 × 950 × 500 mm, vikt ca 174 kg, anpassad för Trafikverkets och SL:s kabelränna 350.",
+     "Planeringslåda 950 mm: mått 950 × 950 × 500 mm, vikt ca 207 kg, anpassad för Trafikverkets och SL:s kabelränna 535."
+    ],
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Material",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Lådan är tillverkad i S355-stål med pulverlackering och har fäste S60. Kantstålen är i HB450 slitstål och är vändbara och utbytbara.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Reservdelar",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Kantstål finns som reservdel för enkelt byte vid arbete med makadam, grus och andra slitande material. Vagnsskruvar, brickor och muttrar ingår.",
+    "d": true
+   }
+  ],
+  "faq": []
+ },
+ "jvg/stegjarn": {
+  "intro": "Stegjärn är viktiga hjälpmedel för säker och bekväm nedstigning i kabelbrunnar och andra underjordiska strukturer. På Svenska Brunnslock erbjuder vi högkvalitativa stegjärn som är designade för att möta de strängaste säkerhetskraven.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Stegjärn: säkerhet och bekvämlighet för nedstigning"
+   },
+   {
+    "t": "p",
+    "x": "Här går vi igenom fördelarna med stegjärn, våra produkter och deras användning."
+   },
+   {
+    "t": "h3",
+    "x": "Fördelar med stegjärn"
+   },
+   {
+    "t": "p",
+    "x": "Stegjärn ger ett säkert och stabilt fotfäste vid nedstigning i kabelbrunnar, vilket minskar risken för olyckor och skador. De är särskilt viktiga i djupa eller trånga brunnar där traditionella stegar inte är praktiska. Genom att använda stegjärn från Svenska Brunnslock kan du säkerställa att dina arbetare har en säker och bekväm nedstigning."
+   },
+   {
+    "t": "h3",
+    "x": "Våra produkter"
+   },
+   {
+    "t": "p",
+    "x": "Vi erbjuder stegjärn i olika storlekar och material, inklusive rostfritt stål och aluminium. Våra stegjärn är utformade för att vara hållbara och korrosionsbeständiga, vilket garanterar lång livslängd och pålitlig prestanda. Oavsett dina specifika krav har vi rätt stegjärn för dina behov."
+   },
+   {
+    "t": "h3",
+    "x": "Användning och installation"
+   },
+   {
+    "t": "p",
+    "x": "Stegjärn är enkla att installera och använda. Våra produkter kommer med detaljerade installationsanvisningar för att säkerställa korrekt montering och optimal säkerhet. Genom att följa dessa anvisningar kan du snabbt och effektivt förbättra säkerheten vid nedstigning i dina kabelbrunnar."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Vad är fördelen med att använda stegjärn i kabelbrunnar?",
+    "a": [
+     "Stegjärn ger ett säkert fotfäste vid nedstigning, vilket minskar risken för olyckor, särskilt i djupa eller trånga brunnar där vanliga stegar kan vara opraktiska."
+    ]
+   },
+   {
+    "q": "Vilka material finns stegjärn i?",
+    "a": [
+     "Våra stegjärn tillverkas i hållbart rostfritt stål och aluminium för hög korrosionsbeständighet och lång livslängd."
+    ]
+   },
+   {
+    "q": "Är stegjärn enkla att installera?",
+    "a": [
+     "Ja, stegjärnen levereras med tydliga installationsanvisningar för enkel och säker montering."
+    ]
+   },
+   {
+    "q": "Vilka storlekar finns tillgängliga för stegjärn?",
+    "a": [
+     "Vi erbjuder stegjärn i olika storlekar för att möta specifika installations behov i olika typer av brunnar."
+    ]
+   }
+  ]
+ },
+ "jvg/profiler": {
+  "intro": "U & L profiler är viktiga komponenter för att bygga och förstärka kabelbrunnar och andra strukturer. På Svenska Brunnslock erbjuder vi högkvalitativa U & L profiler som är designade för att ge maximal styrka och flexibilitet.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "U & L profil: mångsidiga lösningar för kabelbrunnar"
+   },
+   {
+    "t": "p",
+    "x": "Här går vi igenom fördelarna med dessa profiler, våra produktalternativ och hur de används."
+   },
+   {
+    "t": "h3",
+    "x": "Fördelar med U & L profiler"
+   },
+   {
+    "t": "p",
+    "x": "U & L profiler erbjuder mångsidiga lösningar för byggnation och förstärkning av kabelbrunnar. Deras design gör dem idealiska för att skapa robusta och stabila strukturer som kan motstå tunga belastningar och påfrestningar. Profilerna är också enkla att anpassa och installera, vilket gör dem till en favorit bland byggare och ingenjörer."
+   },
+   {
+    "t": "h3",
+    "x": "Våra produkter"
+   },
+   {
+    "t": "p",
+    "x": "Vi erbjuder ett brett utbud av U & L profiler i olika storlekar och material, inklusive stål och aluminium. Våra profiler är tillverkade av högkvalitativa material som garanterar lång hållbarhet och motståndskraft mot korrosion. Oavsett om du behöver profiler för små projekt eller stora kommersiella installationer, har vi rätt lösning för dig."
+   },
+   {
+    "t": "h3",
+    "x": "Användning och installation"
+   },
+   {
+    "t": "p",
+    "x": "U & L profiler är enkla att använda och installera. De kan skäras och anpassas för att passa specifika behov och strukturer. Våra produkter levereras med detaljerade installationsanvisningar för att säkerställa korrekt montering och optimal prestanda. Genom att använda våra U & L profiler kan du skapa starka och hållbara konstruktioner för dina kabelbrunnar och andra byggprojekt."
+   },
+   {
+    "t": "h3",
+    "x": "Pendelskena: flexibilitet och funktionalitet för dina kabelbrunnar"
+   },
+   {
+    "t": "p",
+    "x": "En pendelskena är en mångsidig komponent som erbjuder flexibilitet och enkel hantering av kablar i brunnar och andra installationer. På Svenska Brunnslock erbjuder vi pendelskenor som är designade för att möta dina specifika behov."
+   },
+   {
+    "t": "h4",
+    "x": "Fördelar med pendelskena"
+   },
+   {
+    "t": "p",
+    "x": "Pendelskenor möjliggör enkel justering och hantering av kablar, vilket gör dem idealiska för komplexa kabelinstallationer. De erbjuder flexibilitet och hållbarhet, vilket säkerställer att kablarna hålls organiserade och lättillgängliga. Detta minskar risken för skador på kablarna och underlättar framtida underhåll och omkonfigurationer."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Vad används U- och L-profiler till i kabelbrunnar?",
+    "a": [
+     "U- och L-profiler används för att förstärka och stabilisera kabelbrunnar samt andra strukturer, vilket ökar deras hållbarhet och belastningskapacitet."
+    ]
+   },
+   {
+    "q": "Vilka material finns U- och L-profiler i?",
+    "a": [
+     "Våra U- och L-profiler finns i stål och aluminium för att ge hållbarhet och motståndskraft mot korrosion."
+    ]
+   },
+   {
+    "q": "Är U- och L-profiler enkla att installera?",
+    "a": [
+     "Ja, profilerna är utformade för enkel installation och kan justeras för att passa olika strukturer. Installationsanvisningar medföljer produkten."
+    ]
+   },
+   {
+    "q": "Vilka storlekar finns tillgängliga för U- och L-profiler?",
+    "a": [
+     "Vi erbjuder ett brett utbud av storlekar för att passa specifika behov i både små och stora installationsprojekt."
+    ]
+   },
+   {
+    "q": "Vad är en pendelskena?",
+    "a": [
+     "En pendelskena eller kabelstege som man kallar dessa är en flexibel komponent som underlättar hantering och organisering av kablar i brunnar, vilket minskar risken för kabelskador och gör underhåll enklare."
+    ]
+   },
+   {
+    "q": "Var används pendelskenor vanligtvis?",
+    "a": [
+     "Pendelskenor används främst i kabelbrunnar och andra installationsmiljöer där kablar måste hållas organiserade och lättillgängliga."
+    ]
+   },
+   {
+    "q": "Vilka storlekar finns för pendelskenor?",
+    "a": [
+     "Vi erbjuder pendelskenor i olika storlekar och utföranden för att passa specifika installationsbehov."
+    ]
+   },
+   {
+    "q": "Är det svårt att installera en pendelskena?",
+    "a": [
+     "Nej, pendelskenor är enkla att installera och levereras med installationsanvisningar för att säkerställa korrekt montering"
+    ]
+   }
+  ]
+ },
+ "jvg/grod": {
+  "intro": "Evakueringsrör Dim. 110mm för grod- och kräldjur i kabelbrunnar.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Rören är täta med korrugerad insida som gör att kräldjur lättare kan ta sig ut ur brunnar. Materialet är tillverkat i HD-PE, är UV-beständigt, belastningsklass SN8 (normala förhållanden)."
+   },
+   {
+    "t": "p",
+    "x": "Säljs på rulle av 50 meter."
+   },
+   {
+    "t": "h3",
+    "x": "Kräldjur evakuering: skydda djurlivet i kabelbrunnar"
+   },
+   {
+    "t": "p",
+    "x": "Kräldjursevakuering är en viktig åtgärd för att skydda djurlivet, särskilt kräldjur, som ofta kan fastna i kabelbrunnar och andra underjordiska strukturer. På Svenska Brunnslock erbjuder vi lösningar för kräldjursevakuering som hjälper till att säkert och effektivt evakuera djur. Här diskuterar vi varför kräldjursevakuering är viktig, våra produkter och deras användning."
+   },
+   {
+    "t": "h3",
+    "x": "Varför kräldjursevakuering?"
+   },
+   {
+    "t": "p",
+    "x": "Kräldjur som ormar och ödlor kan lätt fastna i kabelbrunnar, vilket kan leda till skador eller dödsfall för djuren. Att installera lösningar för kräldjursevakuering är inte bara en åtgärd för djurskydd, utan också för att förhindra potentiella driftstopp och underhållsproblem. Genom att använda våra produkter kan du säkerställa en säkrare miljö för både djur och människor."
+   },
+   {
+    "t": "h3",
+    "x": "Våra produkter"
+   },
+   {
+    "t": "p",
+    "x": "Vi erbjuder olika typer av kräldjursevakuering, inklusive ramp- och stegsystem som gör det möjligt för djuren att själva ta sig ut ur brunnarna. Våra produkter är tillverkade av hållbara material som tål de påfrestningar som kommer med daglig användning i tuffa miljöer. Oavsett dina specifika behov har vi rätt lösning för att skydda djurlivet i dina kabelbrunnar."
+   },
+   {
+    "t": "h3",
+    "x": "Användning och installation"
+   },
+   {
+    "t": "p",
+    "x": "Kräldjursevakuering är enkel att installera och integrera i befintliga kabelbrunnssystem. Våra produkter kommer med detaljerade installationsanvisningar för att säkerställa korrekt montering och maximal effektivitet. Genom att följa dessa anvisningar kan du säkerställa att dina kabelbrunnar är säkra för både djur och människor."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Vad är syftet med grod- och kräldjursevakuering i kabelbrunnar?",
+    "a": [
+     "Grod- och kräldjursevakuering skyddar djurlivet genom att ge grodor och kräldjur en väg ut ur kabelbrunnar, vilket minskar risken för att de fastnar och skadas."
+    ]
+   },
+   {
+    "q": "Vilket material används för evakueringsrören?",
+    "a": [
+     "Evakueringsrören är tillverkade i HD-PE, vilket gör dem slitstarka och UV-beständiga för att klara olika väderförhållanden."
+    ]
+   },
+   {
+    "q": "Hur installeras evakueringsrören för kräldjur?",
+    "a": [
+     "Rören är enkla att installera i kabelbrunnar och levereras med instruktioner för att säkerställa att de ger effektiv evakuering för djur."
+    ]
+   },
+   {
+    "q": "Vilka dimensioner finns för evakueringsrören?",
+    "a": [
+     "Våra evakueringsrör har en standard diameter på 110 mm och säljs i rullar om 50 meter för enkel hantering."
+    ]
+   }
+  ]
+ },
+ "jvg/ovrigt": {
+  "intro": "Trälock, plattformar för kabelskåp, märkskyltar, skavskydd och bryggstolpar för kabelbrunnar längs järnväg och i kanalisation.",
+  "introDraft": true,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Trälock för tunnelbana och kanalisation"
+   },
+   {
+    "t": "p",
+    "x": "Trälocken tillverkas i tryckimpregnerat virke klass NTR-AB. Virkes dimensioner 28x120 och 28x95 mm. Locken skruvas ihop med träskruv 4,2x45 mm. Träskruv monteras från undersida lock. Tillverkas enligt SL (Stockholms Lokaltrafik) ritnings nr. 0021-6220-0042. Används bl.a i tunnlar som kanalisationslock."
+   },
+   {
+    "t": "h4",
+    "x": "Trälock för brunnar: traditionell och estetisk lösning"
+   },
+   {
+    "t": "p",
+    "x": "Trälock för brunnar erbjuder en estetiskt tilltalande och funktionell lösning för specifika tillämpningar såsom tunnelbanor och kanalisationer. På Svenska Brunnslock erbjuder vi trälock som kombinerar traditionellt utseende med moderna funktioner."
+   },
+   {
+    "t": "h3",
+    "x": "Plattform för kabelskåp"
+   },
+   {
+    "t": "p",
+    "x": "Finns i standardlängder i lager."
+   },
+   {
+    "t": "ul",
+    "items": [
+     "Plattform 2000 mm",
+     "Plattform 3000 mm"
+    ]
+   },
+   {
+    "t": "p",
+    "x": "Vi tillverkar även plattformar i andra bredder efter beställning, exempelvis:"
+   },
+   {
+    "t": "ul",
+    "items": [
+     "Plattform bredd 1000 mm.",
+     "Plattform bredd 2200 mm",
+     "Plattform bredd 6000 mm.",
+     "Plattform bredd 9000 mm."
+    ]
+   },
+   {
+    "t": "p",
+    "x": "BASTA registrerad."
+   },
+   {
+    "t": "p",
+    "x": "Tillverkas enligt trafikverkets ritningsunderlag 7-801 656."
+   },
+   {
+    "t": "p",
+    "x": "Vi varmgalvaniserar alla detaljer enligt SS-EN ISO 1461."
+   },
+   {
+    "t": "h4",
+    "x": "Plattform för kabelskåp: stabil och säker grund"
+   },
+   {
+    "t": "p",
+    "x": "En plattform för kabelskåp är avgörande för att säkerställa en stabil och säker installation av kabelskåp och annan utrustning. På Svenska Brunnslock erbjuder vi plattformar som kombinerar hållbarhet med enkel installation."
+   },
+   {
+    "t": "h3",
+    "x": "Märkskylt för kabelbrunn: enkel och tydlig identifiering"
+   },
+   {
+    "t": "p",
+    "x": "En märkskylt för kabelbrunn är avgörande för att säkerställa enkel och tydlig identifiering av brunnar och deras innehåll. På Svenska Brunnslock erbjuder vi märkplattor som är designade för att vara hållbara och lätta att läsa."
+   },
+   {
+    "t": "h4",
+    "x": "Fördelar med märkskyltar"
+   },
+   {
+    "t": "p",
+    "x": "Märkskyltar gör det enkelt att identifiera kabelbrunnar och dess innehåll, vilket är viktigt för effektiv underhåll och säkerhet. Tydliga och hållbara skyltar minskar risken för misstag och felaktig hantering av kablar och utrustning. Genom att använda märkplattor från Svenska Brunnslock, kan du säkerställa att all nödvändig information alltid är lätt tillgänglig."
+   },
+   {
+    "t": "h3",
+    "x": "Skavskydd brunn: skydda kablar och utrustning"
+   },
+   {
+    "t": "p",
+    "x": "Skavskydd för brunnar är en viktig komponent för att skydda kablar och annan utrustning från slitage och skador. På Svenska Brunnslock erbjuder vi effektiva skavskydd som är designade för att förlänga livslängden på dina kablar och utrustning."
+   },
+   {
+    "t": "h4",
+    "x": "Varför välja skavskydd?"
+   },
+   {
+    "t": "p",
+    "x": "Skavskydd skyddar kablar och utrustning från nötning och mekaniska skador, vilket är särskilt viktigt i miljöer där kablar dras genom trånga utrymmen eller utsätts för rörelse. Genom att använda skavskydd från Svenska Brunnslock, kan du minimera risken för kabelbrott och andra skador, vilket säkerställer pålitlig drift och minskat underhåll."
+   },
+   {
+    "t": "h3",
+    "x": "Bryggstolpe och kontaktledningsstolpe"
+   },
+   {
+    "t": "p",
+    "x": "Kontaktledningsstolpar eller bryggstolpar tillverkas utifrån Trafikverkets ritningsunderlag."
+   },
+   {
+    "t": "ul",
+    "items": [
+     "513 142/0411037 & 0411039",
+     "513 330/0411057",
+     "513 385/0411030",
+     "513 201/0411031",
+     "515 200/0411067"
+    ]
+   }
+  ],
+  "faq": [
+   {
+    "q": "Vilka är fördelarna med trälock för brunnar?",
+    "a": [
+     "Trälock är estetiska, ger naturlig isolering och är ideala för miljöer där man vill undvika elektrisk ledningsförmåga."
+    ]
+   },
+   {
+    "q": "I vilka miljöer används trälock för brunnar?",
+    "a": [
+     "Trälock används ofta i tunnelbanor, kanalisationer och naturskyddsområden där ett naturligt utseende och låg ledningsförmåga behövs."
+    ]
+   },
+   {
+    "q": "Hur underhålls trälock för brunnar?",
+    "a": [
+     "Trälock kräver grundläggande underhåll för att hålla länge, vilket inkluderar att kontrollera skruvar och eventuellt ytbehandling vid behov."
+    ]
+   },
+   {
+    "q": "Är trälocken impregnerade?",
+    "a": [
+     "Ja, våra trälock är tryckimpregnerade för att tåla fukt och slitage över tid."
+    ]
+   },
+   {
+    "q": "Vad är syftet med en plattform för kabelskåp?",
+    "a": [
+     "En plattform för kabelskåp ger en stabil och säker grund för kabelskåp, vilket skyddar dem från markfukt, vibrationer och andra skador."
+    ]
+   },
+   {
+    "q": "Vilka storlekar finns för plattformar till kabelskåp?",
+    "a": [
+     "Vi erbjuder standardlängder på 2000 mm och 3000 mm samt anpassade bredder från 1000 mm till 9000 mm."
+    ]
+   },
+   {
+    "q": "Är plattformarna korrosionsbeständiga?",
+    "a": [
+     "Ja, våra plattformar är varmgalvaniserade enligt SS-EN ISO 1461 för långvarigt skydd mot korrosion."
+    ]
+   },
+   {
+    "q": "Hur installeras en plattform för kabelskåp?",
+    "a": [
+     "Plattformarna är enkla att installera och levereras med tydliga anvisningar för säker montering och stabilitet."
+    ]
+   },
+   {
+    "q": "Vad är syftet med en märkskylt för kabelbrunn?",
+    "a": [
+     "En märkskylt för kabelbrunn säkerställer tydlig och enkel identifiering av brunnar och kablar, vilket underlättar underhåll och ökar säkerheten."
+    ]
+   },
+   {
+    "q": "Vilka material är märkskyltarna gjorda av?",
+    "a": [
+     "Våra märkplattor är tillverkade av hållbara, väderbeständiga, rostfri syrafast stålmaterial som behåller sin läsbarhet över tid."
+    ]
+   },
+   {
+    "q": "Är det enkelt att installera en märkskylt för kabelbrunn?",
+    "a": [
+     "Ja, märkskyltar är enkla att installera och kan fästas på flera typer av ytor. Installationsanvisningar medföljer produkten."
+    ]
+   },
+   {
+    "q": "Vilka storlekar finns tillgängliga för märkplattor?",
+    "a": [
+     "Vi erbjuder märkplattor i olika storlekar, följer Trafikverkets ritningar för att passa både små installationer och större nätverk av kabelbrunnar."
+    ]
+   },
+   {
+    "q": "Vad är syftet med skavskydd i en brunn?",
+    "a": [
+     "Skavskydd skyddar kablar och annan utrustning från slitage och skador, vilket förlänger deras livslängd och minskar risken för driftstopp."
+    ]
+   },
+   {
+    "q": "Vilka material används för skavskydd?",
+    "a": [
+     "Våra skavskydd består huvudsakligen av slitstark gummiduk och andra flexibla material som är anpassade för olika typer av brunnar och installationer."
+    ]
+   },
+   {
+    "q": "Hur installeras skavskydd?",
+    "a": [
+     "Skavskydd är enkla att installera och levereras med tydliga instruktioner för korrekt applicering i brunnar och kabelgenomföringar."
+    ]
+   },
+   {
+    "q": "Vilka storlekar finns tillgängliga för gummiduk?",
+    "a": [
+     "Vi erbjuder skavskydd i olika storlekar och tjocklekar för att passa specifika installations behov och utrymmen."
+    ]
+   }
+  ]
+ },
+ "ent": {
+  "intro": "Produkter för mark, vatten och avlopp: brunnar, pumpar och pumphus, fett- och oljeavskiljare, glasfibertankar, tryckrör i PE, förhöjningsringar, stödmurar, markgaller och plastspont.",
+  "introDraft": true,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Vatten och avlopp",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Vattenmätarbrunnar, bevattningsbrunnar och dagvattenbrunnar i polyeten. Pumpar för borrade och grävda brunnar, pumpbrunnar och isolerade pumphus. Fett- och oljeavskiljare för mark och inomhus, samt slutna tankar och minireningsverk i glasfiber.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Rör och brunnsdelar",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Tryckrör och rördelar i polyeten (PE) för bland annat vattenförsörjning och avlopp. Förhöjningsringar och passdelar i betong för att få brunnens topp till rätt höjd.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Mark och anläggning",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Stödmurar och L-stöd i betong, markgaller och trädgropsfundament i gjutjärn, plastspont för vattentäta spontväggar och sjöledningsvikter i betong.",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Flera produkter i kategorin offereras efter behov. Ring oss på 0920-52 00 56 eller begär offert.",
+    "d": true
+   }
+  ],
+  "faq": []
+ },
+ "ent/brunnar": {
+  "intro": "Vattenmätarbrunn tillverkat i Polyeten, isolerat lock, vattentät, för utomhusbruk med upplyftningsbar vattenslang. Botten är svetsad och hela slangpaketet är utbytbart vid behov.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Vattenmätarbrunnar"
+   },
+   {
+    "t": "p",
+    "x": "Flexibla vattenslangar gör det möjligt att lyfta upp hela mätarkonsolen via en lyftanordning. Livsmedelsgodkända vattenslangar."
+   },
+   {
+    "t": "h3",
+    "x": "Bevattnings- och dagvattenbrunnar",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Bevattningsbrunnar och bevattningsbetäckningar i polyeten med slangkopplingar och avstängningsventiler, för trädgårdar och golfbanor. Bevattningsbrunnen LS 630 är låsbar och rymmer upp till 50 meter slang.",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Dagvattenbrunnen leder bort ytvatten och är utformad så att löv och växtdelar inte täpper igen den. Locket har belastningsklass A15, och överdelen är teleskopisk och kan justeras till önskad höjd.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Fler lösningar för vattenmätare",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Utöver vattenmätarbrunnen med upplyftningsbar slang finns vattenmätarbrunn för nedstigning (höjd 2 000-3 000 mm) och vattenmätarlåda med isolerat lock för sommarbostäder där ledningarna töms inför vintern.",
+    "d": true
+   }
+  ],
+  "faq": []
+ },
+ "ent/pump": {
+  "intro": "Pumpar till både borrade och grävda brunnar, dränkbara länspumpar samt pumpbrunnar.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Pumpbrunnar: effektiva lösningar för vattenhantering"
+   },
+   {
+    "t": "p",
+    "x": "På Svenska Brunnslock är vi specialiserade på att erbjuda hållbara och pålitliga lösningar för vattenhantering. Våra pumpbrunnar är utformade för att möta de krävande behoven hos såväl privata fastigheter som större infrastrukturprojekt. Men vad är en pumpbrunn, och vilka fördelar erbjuder den för effektiv vattenhantering?"
+   },
+   {
+    "t": "h4",
+    "x": "Vad är pumpbrunnar?"
+   },
+   {
+    "t": "p",
+    "x": "Pumpbrunnar är installationer som används för att effektivt hantera och transportera vatten och andra vätskor från en plats till en annan. De är avgörande komponenter i vattenhanteringssystem, särskilt där vatten måste pumpas från lägre liggande områden till högre, eller där det är nödvändigt att övervinna gravitationens begränsningar. Våra pumpbrunnar är tillverkade av högkvalitativa material som säkerställer långvarig hållbarhet och pålitlig prestanda under tuffa förhållanden."
+   },
+   {
+    "t": "h4",
+    "x": "Fördelar med Svenska Brunnslocks pumpbrunnar"
+   },
+   {
+    "t": "p",
+    "x": "Att välja pumpbrunnar från Svenska Brunnslock innebär flera fördelar:"
+   },
+   {
+    "t": "ul",
+    "items": [
+     "Effektivitet: Våra pumpbrunnar är designade för att maximera effektiviteten i vattenflöden, vilket minimerar energiförbrukning och ökar systemets övergripande effektivitet.",
+     "Pålitlighet: Tillverkade med robusta material och avancerad teknologi, våra pumpbrunnar står emot korrosion, slitage och andra miljöpåverkningar som kan försämra funktionaliteten över tid.",
+     "Anpassningsbarhet: Vi erbjuder pumpbrunnar i olika storlekar och konfigurationer för att passa specifika behov och applikationer, från enkla hushållsinstallationer till komplexa industriella system.",
+     "Enkel underhåll: Designade för enkel åtkomst och underhåll, vilket minskar driftstopp och underhållskostnader."
+    ]
+   },
+   {
+    "t": "h4",
+    "x": "Välja rätt pumpbrunn"
+   },
+   {
+    "t": "p",
+    "x": "Att välja rätt pumpbrunn är avgörande för att säkerställa optimal prestanda och kostnadseffektivitet. På Svenska Brunnslock hjälper vi dig att analysera dina behov och rekommenderar den mest lämpliga lösningen baserat på din specifika situation och de tekniska kraven. Vårt team av experter är redo att erbjuda rådgivning och stöd genom hela urvals- och installationsprocessen."
+   },
+   {
+    "t": "h4",
+    "x": "Investera i pumpbrunnar från Svenska Brunnslock"
+   },
+   {
+    "t": "p",
+    "x": "Att investera i denna produkt från Svenska Brunnslock är att säkerställa en långsiktig lösning för dina vattenhanteringsbehov. Med vår expertis och högkvalitativa produkter kan du vara säker på att du får en pålitlig och hållbar installation som kommer att tjäna din fastighet eller ditt projekt väl över tid."
+   },
+   {
+    "t": "p",
+    "x": "Kontakta oss idag för att utforska vårt sortiment av pumpbrunnar och börja din väg mot effektivare och säkrare vattenhantering. Med Svenska Brunnslock får du inte bara produkter av högsta kvalitet, utan också en partner som är engagerad i din framgång."
+   },
+   {
+    "t": "h3",
+    "x": "Brunnsöverbyggnad och pumphus"
+   },
+   {
+    "t": "p",
+    "x": "isoleringen består av 60 mm polyuretanskum. byggnaden enkelt lyftas av."
+   }
+  ],
+  "faq": []
+ },
+ "ent/avskiljare": {
+  "intro": "Vi erbjuder både enklare fettavskiljare för mark och inomhusinstallation och helt automatiska fettavskiljare som sköter hela rengöringsprocessen från början till slut.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Fettavskiljare"
+   },
+   {
+    "t": "p",
+    "x": "Både de markförlagda och inomhusinstallerade avskiljarna kan utrustas med flera olika tillbehör som avskiljarlarm, styrenheter för rengöring, förlängningshalsar för att få rätt markdjup och färdiga installationskit."
+   },
+   {
+    "t": "p",
+    "x": "Större fettavskiljare finns att tillgå även för montering utomhus begär offert"
+   },
+   {
+    "t": "h4",
+    "x": "Oljeavskiljare"
+   },
+   {
+    "t": "p",
+    "x": "Oljeavskiljarna är tillverkade av hög kvalitet och är anpassade allt från den lilla verkstaden till större tvättanläggningar eller parkeringar. Programmet innehåller ett stort spann av storlekar och levereras helt kompletta. Oljeavskiljarna finns med integrerat eller separat slamfång, som klass 1 eller 2."
+   },
+   {
+    "t": "p",
+    "x": "Andra oljeavskiljare finns att tillgå begär offert"
+   }
+  ],
+  "faq": []
+ },
+ "ent/tankar": {
+  "intro": "Vi kan erbjuda glasfibertankar i önskad storlek till olika ändamål.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Slutna tankar och minireningsverk",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Om det inte är lämpligt att släppa ut avloppsvattnet på tomten kan det ledas till en sluten avloppstank som töms med slambil. Vi levererar glasfibertankar från 3 000 upp till 65 000 liter.",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Slutna avloppstankar finns i 3,0 och 5,2 m³ med tömningsrör och nivåvakt. Minireningsverken GRAF och Kemik är kompakta, har inga pumpar i tanken och behöver slamtömning 1-2 gånger per år. Tankar och minireningsverk offereras efter behov.",
+    "d": true
+   }
+  ],
+  "faq": []
+ },
+ "ent/tryckror": {
+  "intro": "Vi har ett komplett sortiment av rör och rördelar i Polyeten PE. Tillverkning sker i Polen hos vår samarbetspartner ELPLAST +.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Vi har tillsammans med vårt dotterbolag i Finland, Suomen Kaivotarvikkeet OY försäljningsagenturen i Norden på hela ELPLAST+ sortiment."
+   },
+   {
+    "t": "p",
+    "x": "I sortimentet finns Tryckrör (Polyetenrör PE) och rördelar till:"
+   },
+   {
+    "t": "ul",
+    "items": [
+     "Vattenförsörjning.",
+     "Avloppssystem.",
+     "Kabelskyddsrör.",
+     "Rör för gruvindustrin.",
+     "Rörsystem till mudderverk med flytkroppar.",
+     "Rörsystem för hockey rinkar och snötillverkning.",
+     "Kulvert rör."
+    ]
+   },
+   {
+    "t": "p",
+    "x": "Produkterna är kvalitetssäkrade enligt PN-EN ISO 9001:2009 och PN-EN ISO 14001:2005."
+   },
+   {
+    "t": "p",
+    "x": "Vi har även tryckrör i PE100 RC-material, som är certifierat av PAS 1075, har exempelvis 17 gånger högre kravnivå än normen vad gäller motståndskraft mot långsam spricktillväxt (SCG)."
+   },
+   {
+    "t": "p",
+    "x": "Våra kunder sträcker sig från återförsäljare, grossister och större entreprenörer och industrier."
+   }
+  ],
+  "faq": []
+ },
+ "ent/forhojning": {
+  "intro": "Passdelar eller förhöjningsringar i betong används i första hand för att få brunnens topp eller brunnslocket till önskad höjd.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "De används även som lastfördelare för brunnar och vertikala rör som inte själva kan ta upp de laster som brunnslock eller betäckningar utsätts för."
+   },
+   {
+    "t": "p",
+    "x": "Om brunnen ligger för lågt och man vill höja brunnen då används förhöjningsringar i betong."
+   },
+   {
+    "t": "p",
+    "x": "Finns även en modell av lätt brunnslock med förhöjningsring."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Vad används förhöjningsringar i betong till?",
+    "a": [
+     "Förhöjningsringar används för att höja brunnen till en önskad höjd om den ligger för lågt."
+    ]
+   },
+   {
+    "q": "Vilka storlekar finns för förhöjningsringar i betong?",
+    "a": [
+     "Vi erbjuder förhöjningsringar i olika storlekar från 600 mm upp till 800 mm i diameter och höjder från 40 mm till 100 mm."
+    ]
+   },
+   {
+    "q": "Kan jag installera förhöjningsringen själv?",
+    "a": [
+     "Förhöjningsringar i betong kan installeras av de flesta med viss erfarenhet av byggarbete, men vid osäkerhet rekommenderas professionell hjälp."
+    ]
+   },
+   {
+    "q": "Är betongförhöjningsringar väderbeständiga?",
+    "a": [
+     "Ja, våra betongförhöjningsringar är tillverkade för att tåla olika väderförhållanden och är anpassade för lång hållbarhet."
+    ]
+   }
+  ]
+ },
+ "ent/stodmurar": {
+  "intro": "Lättmonterade stödmurar som är utvecklade för att klara kuperade markområden och stå emot tidens påverkan. Produkterna tillverkas av högkvalitativa material för lång hållbarhet.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Stenbeklädd stödmur"
+   },
+   {
+    "t": "p",
+    "x": "Varje lösning anpassas efter kundens behov, användningsområde och omgivande miljö."
+   },
+   {
+    "t": "h3",
+    "x": "L-stöd i betong"
+   },
+   {
+    "t": "p",
+    "x": "Lättmonterade L-stöd som är utvecklade för att klara kuperade markområden och stå emot långvarig belastning. Produkterna tillverkas av högkvalitativa material för god hållbarhet."
+   },
+   {
+    "t": "p",
+    "x": "Belastning: Trafiklast 22 kN/m², vilket motsvarar en punktlast på 90 kN."
+   }
+  ],
+  "faq": []
+ },
+ "ent/geo": {
+  "intro": "Markgaller används för att skydda trädets rötter och hindra jorden för att bli alltför kompakt. Genom att jorden behålls ”luftigt” så får trädet lättare luft och vatten vilket underlättar för trädets välmående.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Markgaller"
+   },
+   {
+    "t": "p",
+    "x": "Tillverkat i svart gjutjärn."
+   },
+   {
+    "t": "p",
+    "x": "Gallret är kvadratiskt och finns i måtten 1500 x 1500mm och 1400 x 1400mm med ett mitthål på 700 mm, byggs samman av fyra delar och läggs på"
+   },
+   {
+    "t": "h3",
+    "x": "Trädgropsfundament"
+   },
+   {
+    "t": "p",
+    "x": "Trädgropsfundamentet skyddar trädets rotzon och ger kantstöd mot intilliggande beläggning. Kan med fördel användas ihop med skelettjord. Fundament och galler finns i två storlekar."
+   },
+   {
+    "t": "ul",
+    "items": [
+     "Längd: 1400 x bredd: 1400 höjd: 600 mm",
+     "Längd: 1500 x bredd: 1500 höjd: 600 mm"
+    ]
+   }
+  ],
+  "faq": []
+ },
+ "ent/spont": {
+  "intro": "Plastspont kan användas för hållbara och vattentäta spontväggar i myrar, sjöar eller hamnar. En utmärkt produkt för att återskapa våtmarker.",
+  "introDraft": false,
+  "blocks": [
+   {
+    "t": "p",
+    "x": "Livslängd på 50 år"
+   },
+   {
+    "t": "p",
+    "x": "Plastspont är korrosions- och UV-beständig och kan vibreras, tryckas eller grävas ner. Den kan ersätta stålspont och används bland annat i hamnar, dammar, kanaler, diken och för att stabilisera slänter.",
+    "d": true
+   },
+   {
+    "t": "h3",
+    "x": "Sjöledningsvikter",
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Sjöledningsvikter i betong håller rörledningar på plats på botten. Små vikter finns för rör Ø40, Ø50 och Ø63 mm och levereras med cellplaststoppning och buntband. För rördimensioner 315-800 mm finns vikter som låses med träkilar och levereras med skavskydd.",
+    "d": true
+   }
+  ],
+  "faq": []
+ },
+ "ent/redskap": {
+  "intro": "Stedox balkdragare håller ihop träskarvar medan du fäster dem. Det extra långa spärrhandtaget gör att en person kan rikta in och montera tunga element utan extra hjälp.",
+  "introDraft": true,
+  "blocks": [
+   {
+    "t": "h3",
+    "x": "Två modeller",
+    "d": true
+   },
+   {
+    "t": "ul",
+    "items": [
+     "Hammer Down: smidda krokar som slås in i träet och ger ett stadigt grepp direkt. En extra krok medföljer.",
+     "Screw Down: skruvfästen som minskar risken för sprickbildning i känsliga träslag."
+    ],
+    "d": true
+   },
+   {
+    "t": "p",
+    "x": "Balkdragaren sätts upp på några sekunder och ger täta skarvar utan spår efter slägga i träet.",
+    "d": true
+   }
+  ],
+  "faq": []
+ }
+}

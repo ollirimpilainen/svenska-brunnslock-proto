@@ -1,0 +1,2245 @@
+{
+ "lock": {
+  "h": "Tietoa kaivonkansista ja luukuista",
+  "intro": "Ruotsin työsuojeluviranomaisen (Arbetsmiljöverket) sääntöjen mukaan betonisen kaivonkannen paino saa olla enintään 25 kg. Kevyet kaivonkantemme painavat vain muutaman kilon, mutta ne ovat yhtä kestäviä ja turvallisia kuin perinteiset, painavammat kaivonkannet.",
+  "blocks": [
+   {
+    "x": "Kevyet kaivonkannet, jotka ovat lapsiturvallisia ja lukittavia"
+   },
+   {
+    "x": "Niitä käytetään erityyppisissä kaivoissa, kuten jätevesikaivoissa, tarkastuskaivoissa, vesikaivoissa, mittarikaivoissa ja muissa."
+   },
+   {
+    "x": "Jos olette epävarmoja siitä, minkä kokoinen kaivonkansi sopii kaivoonne, ottakaa rohkeasti yhteyttä. Autamme mielellämme. Joko yhteydenottolomakkeemme kautta tai puhelimitse numerossa 0920-520056"
+   }
+  ],
+  "faq": [
+   {
+    "q": "Mikä on kevyt kaivonkansi ja miksi minun kannattaa valita se?",
+    "a": [
+     "Kevyt kaivonkansi valmistetaan komposiitista, polyeteenistä (PE) tai lasikuidusta, ja se painaa 3-12 kg, kun betonikansi painaa 60-120 kg. Se täyttää Arbetsmiljöverketin vaatimuksen, jonka mukaan kaivonkansi saa käsin käsiteltäessä painaa enintään 25 kg. Saat saman kestävyyden ja turvallisuuden kuin painavalla betonikannella, mutta voit avata kannen itse tarkastuksen tai lietteen tyhjennyksen yhteydessä."
+    ]
+   },
+   {
+    "q": "Missä kooissa kevyitä kaivonkansia on saatavana?",
+    "a": [
+     "Meillä on kevyitä kaivonkansia kokoina 590, 660, 750, 780, 790, 900, 930, 1000, 1050, 1150 ja 1340 mm. Ne sopivat betonikaivoihin, joiden ulkomitta on 500-1 450 mm ja sisämitta 451-1 290 mm. Käytä yllä olevaa suodatusta löytääksesi oikean koon kaivosi mittojen perusteella."
+    ]
+   },
+   {
+    "q": "Kuinka painava kevyt kaivonkansi saa olla?",
+    "a": [
+     "Arbetsmiljöverketin määräysten (AFS 2012:2) mukaan painavien kansien käsittelyä käsin tulisi välttää. Betoninen kaivonkansi painaa tavallisesti 60-120 kg ja vaatii nostoapuvälineen. Kevyet kaivonkantemme painavat 3-12 kg, ja yksi henkilö voi avata ne ilman työkaluja tai nostoapua."
+    ]
+   },
+   {
+    "q": "Mikä kantavuus minun pitäisi valita, A15, B125, C250 vai D400?",
+    "a": [
+     "Kantavuus ilmoitetaan kuormitusluokkana EN 124 -standardin mukaisesti. A15 (1,5 tonnia) sopii viheralueille ja kävelypinnoille, joilla ei ole autoliikennettä. B125 (12,5 tonnia) sopii piha-alueille, autotallin ajoliittymiin ja henkilöautojen pysäköintiin. C250 (25 tonnia) sopii vähäiselle kuorma-autoliikenteelle ja teollisuusalueille. D400 (40 tonnia) on korkein luokkamme, ja se kestää raskasta kuorma-autoliikennettä kaduilla ja teollisuusalueiden ajoliittymissä."
+    ]
+   },
+   {
+    "q": "Sopivatko kevyet kaivonkannet kolmikammiokaivooni?",
+    "a": [
+     "Kyllä. Kevyet kaivonkannet sopivat kaikkiin tavallisiin betonisiin kolmikammiokaivoihin ja saostuskaivoihin, joiden pyöreä aukko on 500 ja 1 450 mm:n välillä. Kolmikammiokaivon yleisimmät koot ovat 600, 900 ja 1 000 mm. Jos tarvitset myös tiivisterenkaan hajujen ja hyönteisten estämiseksi, löydät sen samasta kategoriapuusta."
+    ]
+   },
+   {
+    "q": "Ovatko kevyet kaivonkannet lapsiturvallisia ja lukittavia?",
+    "a": [
+     "Kyllä. Kaikissa valikoimamme kevyissä kaivonkansissa on lukitustoiminto, joka estää lapsia ja asiattomia avaamasta kantta. Ajettavat mallimme täyttävät EN 124 -turvallisuusstandardin, ja ne on hyväksytty asennettaviksi julkisiin ja yksityisiin ympäristöihin."
+    ]
+   },
+   {
+    "q": "Miten asennan kevyen kaivonkannen betonikaivoon?",
+    "a": [
+     "Kansi asetetaan suoraan betonirenkaan yläreunalle. Tiiviyden varmistamiseksi vettä, hajuja ja hyönteisiä vastaan suosittelemme asentamaan tiivisterenkaan betonirenkaan ja kannen väliin. Jos kaivoa pitää korottaa maanpinnan tasolle, käytetään betonista korotusrengasta. Liikennöidyllä pinnalla kannen ympärille valetaan kuormaa kantava kehys."
+    ]
+   },
+   {
+    "q": "Mitä kevyt kaivonkansi maksaa?",
+    "a": [
+     "Hinta vaihtelee koon, kantavuuden ja materiaalin mukaan. Pienemmät komposiittikannet jätevesikaivoon (590-780 mm) maksavat 1 749-2 895 kr. Ajettavat kannet luokassa B125 (900 mm) maksavat alkaen 7 722 kr. Kevyt ajettava kansi 1 000 mm luokassa D400 (40 tonnia) maksaa 17 690 kr. Painaviin valurautakansistoihin verrattuna hinta on samaa tasoa tai alhaisempi, ja käsittely on huomattavasti kevyempää."
+    ]
+   },
+   {
+    "q": "Miten kevyt kaivonkantenne eroaa kansista, joita myyvät Byggmax, Biltema ja Jula?",
+    "a": [
+     "Ajettavat kantemme (luokka B125 ja sitä korkeammat) ovat CE-merkittyjä ja sertifioitu EN 124 -standardin mukaisesti kantavuudeltaan luokkaan D400 (40 tonnia) asti. Luokassa A15 osa malleista on sertifioitu EN 124 -standardin mukaisesti. Koko valikoima on valmistettu ammattikäyttöön. Meillä on myös suurempia kokoja (enintään 1 340 mm), joita rautakaupoista ei löydy. Jos tarvitset kannen, joka kestää kuorma-autoliikennettä, tai tietyn yli 800 mm:n koon, valikoimamme on ensisijainen kanava Ruotsissa."
+    ]
+   }
+  ]
+ },
+ "lock/latta": {
+  "h": "Tietoa kevyistä kaivonkansista",
+  "intro": "Kevyet kaivonkannet betonikaivoihin komposiittia, polyeteeniä ja valurautaa, ajettavat mallit 40 tonniin asti, lapsiturvalliset ja lukittavat. Kantemme painavat alle 25 kg Ruotsin työsuojeluviranomaisen (Arbetsmiljöverket) sääntöjen mukaisesti, ja ne sopivat kaikkiin tavallisiin betonikaivoihin, joiden koko on 500 ja 1 450 mm:n välillä.",
+  "blocks": [
+   {
+    "x": "Täältä löydät sekä tasaisia kaivonkansia jätevesikaivoon, kolmikammiokaivoon ja vesimittarikaivoon että vahvistettuja ajettavia kansia ajoliittymään, piha-alueelle ja teollisuusalueelle."
+   },
+   {
+    "x": "Tarvitsetko apua oikean koon valinnassa? Mittaa betonirenkaan sisä- tai ulkomitta ja suodata alla, tai soita meille numeroon 0920-520056, niin autamme sinua löytämään kaivoosi sopivan kannen."
+   },
+   {
+    "x": "Miksi valita kevyt kaivonkansi?"
+   },
+   {
+    "x": "Perinteinen betonikansi painaa usein 60-120 kg, minkä vuoksi sitä on raskas nostaa tarkastuksen ja lietteen tyhjennyksen yhteydessä. Komposiitista tai PE:stä valmistetut kevyet kaivonkannet painavat 3-12 kg ja täyttävät Arbetsmiljöverketin 25 kg:n rajan käsin käsittelylle. Niillä on sama kantavuus kuin painavilla betonikansilla, 1,5 tonnista viheralueille 40 tonniin (luokka D400) ajettaville pinnoille, mutta yksi henkilö voi avata ne ilman nostoapuvälineitä."
+   },
+   {
+    "x": "Kevyt kaivonkansi kolmikammiokaivoon ja jätevesikaivoon"
+   },
+   {
+    "x": "Kevyet kaivonkantemme sopivat kolmikammiokaivoihin, saostuskaivoihin, jätevesikaivoihin, hulevesikaivoihin ja vesimittarikaivoihin. Mallit 590, 750, 780, 790, 900, 930, 1050, 1150 ja 1340 mm kattavat sekä pienet tarkastuskaivot että suuremmat lietekaivot. Jos tarvitset myös tiivisterenkaan tai betonisen korotusrenkaan, löydät ne samasta kategoriapuusta."
+   },
+   {
+    "x": "Ajettavat kevyet kaivonkannet"
+   },
+   {
+    "x": "Ajoliittymiin, piha-alueille ja teollisuusalueille meillä on ajettavia kevyitä kaivonkansia luokissa B125 (12,5 tonnia), C250 (25 tonnia) ja D400 (40 tonnia). Kannet on vahvistettu teräsraudoituksella tai komposiittirakenteella, ja ne on sertifioitu EN 124 -standardin mukaisesti. Ajettava kansi 590 Composite painaa alle 12 kg mutta kestää 12,5 tonnia, selkeä vaihtoehto painaville valurautakansistoille."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Mikä on kevyt kaivonkansi ja miksi minun kannattaa valita se?",
+    "a": [
+     "Kevyt kaivonkansi valmistetaan komposiitista, polyeteenistä (PE) tai lasikuidusta, ja se painaa 3-12 kg, kun betonikansi painaa 60-120 kg. Se täyttää Arbetsmiljöverketin vaatimuksen, jonka mukaan kaivonkansi saa käsin käsiteltäessä painaa enintään 25 kg. Saat saman kestävyyden ja turvallisuuden kuin painavalla betonikannella, mutta voit avata kannen itse tarkastuksen tai lietteen tyhjennyksen yhteydessä."
+    ]
+   },
+   {
+    "q": "Missä kooissa kevyitä kaivonkansia on saatavana?",
+    "a": [
+     "Meillä on kevyitä kaivonkansia kokoina 590, 660, 750, 780, 790, 900, 930, 1000, 1050, 1150 ja 1340 mm. Ne sopivat betonikaivoihin, joiden ulkomitta on 500-1 450 mm ja sisämitta 451-1 290 mm. Käytä yllä olevaa suodatusta löytääksesi oikean koon kaivosi mittojen perusteella."
+    ]
+   },
+   {
+    "q": "Kuinka painava kevyt kaivonkansi saa olla?",
+    "a": [
+     "Arbetsmiljöverketin määräysten (AFS 2012:2) mukaan painavien kansien käsittelyä käsin tulisi välttää. Betoninen kaivonkansi painaa tavallisesti 60-120 kg ja vaatii nostoapuvälineen. Kevyet kaivonkantemme painavat 3-12 kg, ja yksi henkilö voi avata ne ilman työkaluja tai nostoapua."
+    ]
+   },
+   {
+    "q": "Mikä kantavuus minun pitäisi valita, A15, B125, C250 vai D400?",
+    "a": [
+     "Kantavuus ilmoitetaan kuormitusluokkana EN 124 -standardin mukaisesti. A15 (1,5 tonnia) sopii viheralueille ja kävelypinnoille, joilla ei ole autoliikennettä. B125 (12,5 tonnia) sopii piha-alueille, autotallin ajoliittymiin ja henkilöautojen pysäköintiin. C250 (25 tonnia) sopii vähäiselle kuorma-autoliikenteelle ja teollisuusalueille. D400 (40 tonnia) on korkein luokkamme, ja se kestää raskasta kuorma-autoliikennettä kaduilla ja teollisuusalueiden ajoliittymissä."
+    ]
+   },
+   {
+    "q": "Sopivatko kevyet kaivonkannet kolmikammiokaivooni?",
+    "a": [
+     "Kyllä. Kevyet kaivonkannet sopivat kaikkiin tavallisiin betonisiin kolmikammiokaivoihin ja saostuskaivoihin, joiden pyöreä aukko on 500 ja 1 450 mm:n välillä. Kolmikammiokaivon yleisimmät koot ovat 600, 900 ja 1 000 mm. Jos tarvitset myös tiivisterenkaan hajujen ja hyönteisten estämiseksi, löydät sen samasta kategoriapuusta."
+    ]
+   },
+   {
+    "q": "Ovatko kevyet kaivonkannet lapsiturvallisia ja lukittavia?",
+    "a": [
+     "Kyllä. Kaikissa valikoimamme kevyissä kaivonkansissa on lukitustoiminto, joka estää lapsia ja asiattomia avaamasta kantta. Ajettavat mallimme täyttävät EN 124 -turvallisuusstandardin, ja ne on hyväksytty asennettaviksi julkisiin ja yksityisiin ympäristöihin."
+    ]
+   },
+   {
+    "q": "Miten asennan kevyen kaivonkannen betonikaivoon?",
+    "a": [
+     "Kansi asetetaan suoraan betonirenkaan yläreunalle. Tiiviyden varmistamiseksi vettä, hajuja ja hyönteisiä vastaan suosittelemme asentamaan tiivisterenkaan betonirenkaan ja kannen väliin. Jos kaivoa pitää korottaa maanpinnan tasolle, käytetään betonista korotusrengasta. Liikennöidyllä pinnalla kannen ympärille valetaan kuormaa kantava kehys."
+    ]
+   },
+   {
+    "q": "Mitä kevyt kaivonkansi maksaa?",
+    "a": [
+     "Hinta vaihtelee koon, kantavuuden ja materiaalin mukaan. Pienemmät komposiittikannet jätevesikaivoon (590-780 mm) maksavat 1 749-2 895 kr. Ajettavat kannet luokassa B125 (900 mm) maksavat alkaen 7 722 kr. Kevyt ajettava kansi 1 000 mm luokassa D400 (40 tonnia) maksaa 17 690 kr. Painaviin valurautakansistoihin verrattuna hinta on samaa tasoa tai alhaisempi, ja käsittely on huomattavasti kevyempää."
+    ]
+   },
+   {
+    "q": "Miten kevyt kaivonkantenne eroaa kansista, joita myyvät Byggmax, Biltema ja Jula?",
+    "a": [
+     "Ajettavat kantemme (luokka B125 ja sitä korkeammat) ovat CE-merkittyjä ja sertifioitu EN 124 -standardin mukaisesti kantavuudeltaan luokkaan D400 (40 tonnia) asti. Luokassa A15 osa malleista on sertifioitu EN 124 -standardin mukaisesti. Koko valikoima on valmistettu ammattikäyttöön. Meillä on myös suurempia kokoja (enintään 1 340 mm), joita rautakaupoista ei löydy. Jos tarvitset kannen, joka kestää kuorma-autoliikennettä, tai tietyn yli 800 mm:n koon, valikoimamme on ensisijainen kanava Ruotsissa."
+    ]
+   },
+   {
+    "q": "Mikä on betonirenkaisiin tarkoitetun kevyen kaivonkannen etu?",
+    "a": [
+     "Kevyt kaivonkansi helpottaa käsittelyä ja vähentää raskaan kaluston tarvetta asennuksessa ja kunnossapidossa, mikä säästää sekä aikaa että kustannuksia."
+    ]
+   },
+   {
+    "q": "Missä mitoissa kevyillä kaivonkansilla varustettuja betonirenkaita on saatavana?",
+    "a": [
+     "Tarjoamme kevyillä kaivonkansilla varustettuja betonirenkaita useissa koissa, halkaisijaltaan 600 mm:stä aina 1200 mm:iin."
+    ]
+   },
+   {
+    "q": "Ovatko kaivonkannet turvallisia käyttää alueilla, joilla on raskasta liikennettä?",
+    "a": [
+     "Kyllä, betonirenkaisiin tarkoitetut kevyet kaivonkantemme on suunniteltu kestämään liikennekuormitusta, ja ne täyttävät tällaisten ympäristöjen korkeat turvallisuusstandardit."
+    ]
+   },
+   {
+    "q": "Mikä on kevyellä kaivonkannella varustettujen betonirenkaiden toimitusaika?",
+    "a": [
+     "Toimitusaika on yleensä 3-6 arkipäivää varastotilanteesta ja määränpäästä riippuen."
+    ]
+   },
+   {
+    "q": "Voinko tilata kevyellä kaivonkannella varustettuja betonirenkaita sekä yksityis- että yrityskäyttöön?",
+    "a": [
+     "Kyllä, tarjoamme kevyellä kaivonkannella varustettuja betonirenkaita sekä yksityishenkilöille että yrityksille. Maksaa voi laskulla."
+    ]
+   }
+  ]
+ },
+ "lock/plastbrunn": {
+  "h": "Tietoa kevyistä kansista muovikaivoihin",
+  "intro": "Kevyet muoviset kaivonkannet muovikaivoihin, joissa on sileät tai korrugoidut putket. Kansia on saatavana putkikokoihin 315, 400, 425 ja 600 mm.",
+  "blocks": [
+   {
+    "x": "Sileät tai korrugoidut putket"
+   },
+   {
+    "x": "Valitse kansi kaivoputken tyypin ja sisähalkaisijan mukaan. Korrugoitujen putkien kansia on saatavana sisähalkaisijoille 300-340 mm (315), 390-410 mm (400) ja 425-450 mm (425). Sileiden putkien kansia on saatavana sisähalkaisijoille 290-315 mm (315), 400 mm ja 574-604 mm (600). Korrugoitujen tai sileiden putkien kansi 400 sopii myös betonikaivoihin, joiden sisämitta on 400 mm."
+   },
+   {
+    "x": "Kuormitusluokka ja lukitus"
+   },
+   {
+    "x": "Kannet on valmistettu UV-kestävästä materiaalista, joka kestää auringonvaloa. Niiden kuormitusluokka on A15 (viheralue, 1 500 kg), eivätkä ne ole ajettavia ajoneuvoilla. Kansi lukitaan kahdella ruuvilla."
+   },
+   {
+    "x": "Liikennettä kestäviä kansia muovikaivoihin löytyy muovikaivojen valurautakansistoista kohdasta Liikenne. Etkö ole varma koosta? Mittaa kaivoputken sisähalkaisija ja käytä yllä olevaa suodatinta, tai soita meille numeroon 0920-52 00 56."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Mitä ovat kevyet kannet muovikaivoihin ja miten niitä käytetään?",
+    "a": [
+     "Muovikaivojen kevyet kannet on suunniteltu erityisesti sopimaan muovikaivoihin, ja ne on valmistettu kestävistä materiaaleista, kuten HD-PE:stä. Ne on helppo asentaa ja käsitellä keveytensä ansiosta."
+    ]
+   },
+   {
+    "q": "Mitä etuja muovikaivojen kevyillä kansilla on perinteisiin kansiin verrattuna?",
+    "a": [
+     "Nämä kannet ovat kevyempiä ja korroosionkestäviä, ja ne kestävät sekä pakkasta että auringonvaloa. Ne vähentävät vaurioiden riskiä käsittelyn aikana, ja niissä on usein turvaominaisuuksia, jotka suojaavat luvattomalta pääsyltä."
+    ]
+   },
+   {
+    "q": "Sopivatko muovikaivojen kevyet kannet kaikentyyppisiin muovikaivoihin?",
+    "a": [
+     "Kyllä, niitä on saatavana eri kokoisina, ja ne voidaan mukauttaa sopimaan erikokoisiin kaivoihin ja käyttötarkoituksiin, kuten viemäröintiin ja vesikaivoihin."
+    ]
+   },
+   {
+    "q": "Miten valitsen oikean koon kevyelle kaivonkannelle muovikaivoon?",
+    "a": [
+     "Kaivon aukko on tärkeää mitata huolellisesti. Svenska Brunnslock tarjoaa opastusta, joka auttaa sinua valitsemaan kaivoosi oikean koon."
+    ]
+   },
+   {
+    "q": "Ovatko muovikaivojen kevyet kannet turvallisia ja lapsiturvallisia?",
+    "a": [
+     "Useimmat kannet on varustettu lukitustoiminnoilla, ja ne noudattavat turvallisuusstandardeja, jotka estävät luvattoman pääsyn ja lisäävät lasten ja lemmikkien turvallisuutta."
+    ]
+   }
+  ]
+ },
+ "lock/plast": {
+  "h": "Tietoa muovikansista",
+  "intro": "Kun haluat suojata kaivosi, tukeva ja kulutusta kestävä muovinen kaivonkansi on täydellinen ratkaisu. Tarjoamme laajan valikoiman laadukkaasta muovista valmistettuja kaivonkansia, joissa yhdistyvät kestävyys, toimivuus ja esteettisyys.",
+  "blocks": [
+   {
+    "x": "Muoviset kaivonkannet: kestäviä ja toimivia ratkaisuja kaivoosi"
+   },
+   {
+    "x": "Muovikantemme on kehitetty erityisesti vastaamaan sekä yksityisten että kaupallisten ympäristöjen vaatimuksiin, olipa kyseessä juomavesikaivo, jätevesikaivo tai muu kaivoasennus."
+   },
+   {
+    "x": "Miksi valita muovinen kaivonkansi?"
+   },
+   {
+    "x": "Muovisilla kaivonkansilla on useita etuja, joiden vuoksi ne ovat suosittu valinta talonomistajien, urakoitsijoiden ja kiinteistönomistajien keskuudessa. Tässä on joitakin tärkeimmistä syistä, miksi suosittelemme muovisia kaivonkansiamme:"
+   },
+   {
+    "items": [
+     "Keveys ja helppo asennus: Toisin kuin painavat metalli- tai betonikannet, muovikannet ovat huomattavasti helpompia käsitellä ja asentaa. Tämän ansiosta ne sopivat täydellisesti niille, jotka haluavat sujuvan ja nopean asennuksen ilman erikoisvälineitä.",
+     "Ruostumattomia ja huoltovapaita: Muoviset kaivonkantemme eivät ruostu ja vaativat vain vähän huoltoa, joten säästät pitkällä aikavälillä sekä aikaa että rahaa. Kestävä materiaali kestää äärimmäiset sääolosuhteet ja pysyy hyvässä kunnossa vuodesta toiseen.",
+     "Mukautettavia ja huomaamattomia: Muovisia kaivonkansia on saatavana eri väreissä ja kokoina, joten juuri sinun kaivoosi sopivan kannen löytäminen on helppoa. Niiden huomaamattoman muotoilun ansiosta ne sulautuvat ympäristöönsä, oli kyseessä puutarha, pihatie tai piha."
+    ]
+   },
+   {
+    "x": "Kestävät materiaalit pitkäaikaiseen käyttöön"
+   },
+   {
+    "x": "Muoviset kaivonkantemme on valmistettu UV-kestävästä ja iskunkestävästä muovista, mikä varmistaa, että ne säilyttävät lujuutensa ja värinsä ajan myötä. Tämän ansiosta ne ovat luotettava ja kustannustehokas ratkaisu, kun haluat kaivonkannen, joka kestää sekä sään että raskaan liikenteen rasitukset. Tarvitsitpa kannen tavalliseen puutarhakaivoon tai teollisempiin käyttökohteisiin, meiltä löytyy tarpeisiisi sopivia vaihtoehtoja."
+   },
+   {
+    "x": "Valitse kaivoosi oikea muovikansi"
+   },
+   {
+    "x": "Oikean muovisen kaivonkannen valinta on tärkeä osa kaivosi turvallisuuden ja toimivuuden varmistamista. Tarjoamme laajan valikoiman kansia, joissa on eri mitat ja ominaisuudet eri kaivotyyppeihin. Jos et ole varma, mikä malli sopii sinulle parhaiten, autamme mielellämme neuvonnalla löytääksemme asennukseesi parhaan vaihtoehdon."
+   },
+   {
+    "x": "Tutustu valikoimaamme ja löydä kaivoosi täydellinen muovikansi Svenska Brunnslockilta. Autamme sinua tekemään parhaan valinnan sekä turvallisuuden että esteettisyyden kannalta."
+   }
+  ],
+  "faq": []
+ },
+ "lock/betong": {
+  "h": "Tietoa betonikansista",
+  "intro": "Svenska Brunnslockilla ymmärrämme luotettavien ja kestävien ratkaisujen merkityksen vesikaivojen ja muiden maanalaisten asennusten suojaamisessa.",
+  "blocks": [
+   {
+    "x": "Betonikantemme on suunniteltu vastaamaan näihin tarpeisiin, ja niissä yhdistyvät lujuus ja kestävyys tuotteessa, joka kestää aikaa. Mutta mikä oikeastaan tekee betonikansista suositun valinnan monissa hankkeissa, ja mitä ainutlaatuisia ominaisuuksia niillä on?"
+   },
+   {
+    "x": "Mitä betonikannet ovat?"
+   },
+   {
+    "x": "Betonikansia käytetään turvaamaan pääsy kaivoihin, kuiluihin ja muihin maanalaisiin tiloihin silloin, kun tarvitaan tukevaa ja pitkäikäistä suojaa. Ne on valmistettu laadukkaasta, raudoitetusta betonista, ja niillä on poikkeuksellinen lujuus sekä kestävyys niin fyysisiä rasituksia kuin sääolosuhteiden aiheuttamaa eroosiota vastaan. Niiden paino takaa, ettei niitä voi helposti siirtää tai poistaa, mikä on kriittinen ominaisuus monissa turvallisuusyhteyksissä."
+   },
+   {
+    "x": "Betonikansien edut"
+   },
+   {
+    "x": "Betonikansien asentaminen infrastruktuuri- ja teollisuushankkeisiin sekä kiinteistöille tarjoaa monia etuja. Tärkein niistä on niiden pitkäaikainen kestävyys. Betoni tunnetaan kyvystään kestää ankaria sääolosuhteita, mikä on ihanteellista Ruotsin ilmasto-oloille, jotka voivat vaihdella kuumista kesistä jäätäviin talviin. Betonikannet ovat myös erittäin kustannustehokkaita, etenkin kun otetaan huomioon niiden pitkä käyttöikä ja vähäinen huollon tarve."
+   },
+   {
+    "x": "Ne ovat lisäksi turvallisia. Niiden paino ja tukeva rakenne tekevät niistä vaikeita peukaloida tai murtaa, mikä tarjoaa tehokkaan suojan luvatonta pääsyä vastaan kriittisiin infrastruktuurikohteisiin."
+   },
+   {
+    "x": "Oikean betonikannen valinta"
+   },
+   {
+    "x": "Oikean betonikannen valitseminen edellyttää useiden tekijöiden, kuten koon, muodon ja erityisten turvallisuusvaatimusten, huomioimista. Svenska Brunnslockilla on laaja valikoima betonikansia, jotka sopivat eri käyttökohteisiin ja täyttävät erilaisia teknisiä vaatimuksia. Asiantuntijatiimimme on valmis auttamaan sinua valitsemaan tuotteen, joka sopii juuri sinun tarpeisiisi ja olosuhteisiisi."
+   },
+   {
+    "x": "Investoi Svenska Brunnslockin betonikansiin"
+   },
+   {
+    "x": "Investoimalla Svenska Brunnslockin betonikansiin voit olla varma, että saat ratkaisun, joka ei ole ainoastaan kestävä ja luotettava vaan myös kustannustehokas. Tuotteemme on suunniteltu tarjoamaan maksimaalinen turvallisuus ja kestävyys, mikä vähentää tiheiden vaihtojen tai huoltojen tarvetta."
+   },
+   {
+    "x": "Ota meihin yhteyttä jo tänään, niin keskustellaan tarpeistasi ja siitä, miten betonikantemme voivat antaa sinulle tarvitsemasi turvallisuuden ja kestävyyden vesikaivoillesi ja muille infrastruktuurikohteillesi. Valitse Svenska Brunnslock: laatua ja luotettavuutta, joka kestää."
+   },
+   {
+    "x": "Betonikansi pihapumppuun"
+   },
+   {
+    "x": "Betoniset kaivonkannet sopivat useimpiin markkinoilla oleviin pihapumppuihin, esimerkiksi Kronanin pihapumppuun nro 12."
+   },
+   {
+    "x": "Betonikansi, johon on valettu luukku"
+   },
+   {
+    "x": "Valmistamme erilaisia erikseen mukautettuja betonikansia, joihin on valettu luukku. Luukut voivat olla pallografiittivalurautaa, terästä tai alumiinia. Voimme valmistaa kaikissa kuormitusluokissa A15:stä F900:aan"
+   },
+   {
+    "x": "Toimitetaan valetuilla nostolenkeillä, joten betonikannet on helppo nostaa paikalleen."
+   }
+  ],
+  "faq": []
+ },
+ "lock/gjutjarn": {
+  "h": "Tietoa valurautakansista ja sihdeistä",
+  "intro": "Valurautaiset kannet tai sihdit on tarkoitettu sijoitettaviksi pinnoille, joilla on vähän tai ei lainkaan liikennekuormia. Tavallinen käyttökohde on tonttimaa sekä jalkakäytävät tai pyörätiet, joilla lumenauraus ja muu kunnossapito tehdään kevyemmillä koneilla.",
+  "blocks": [
+   {
+    "x": "Kestää 3 tonnin kuormituksen."
+   },
+   {
+    "x": "Kannet ja sihdit kansistoihin: tehokas vedenhallinta"
+   },
+   {
+    "x": "Kansistojen kannet ja sihdit ovat tärkeitä komponentteja tehokkaan vedenhallinnan varmistamisessa viemärijärjestelmissä ja muissa maanalaisissa asennuksissa. Svenska Brunnslockilla tarjoamme laadukkaita kansia ja sihtejä, jotka tarjoavat luotettavan suorituskyvyn ja kestävyyden. Tässä käsittelemme tuotteidemme etuja, tarjoamiamme vaihtoehtoja ja niiden käyttöä."
+   },
+   {
+    "x": "Kansistojen kansien ja sihtien edut"
+   },
+   {
+    "x": "Kannet ja sihdit auttavat estämään roskien ja suurten esineiden pääsyn viemärijärjestelmään, mikä vähentää tukosten ja tulvien riskiä. Ne ovat ratkaisevan tärkeitä tehokkaan veden poisjohtamisen ylläpitämisessä ja infrastruktuurin suojaamisessa. Käyttämällä Svenska Brunnslockin kansia ja sihtejä voit varmistaa, että viemärijärjestelmäsi toimii optimaalisesti ja vaatii vähemmän huoltoa."
+   },
+   {
+    "x": "Tuotteemme"
+   },
+   {
+    "x": "Tarjoamme kansia ja sihtejä kansistoihin eri kokoina ja materiaaleina, mukaan lukien valurauta ja komposiitti, sopimaan erilaisiin käyttökohteisiin ja ympäristöihin. Tuotteemme on valmistettu kestävistä materiaaleista, jotka kestävät vaativia olosuhteita ja varmistavat pitkäaikaisen suorituskyvyn. Olivatpa erityisvaatimuksesi mitkä tahansa, meiltä löytyy oikea ratkaisu sinulle."
+   },
+   {
+    "x": "Käyttö ja asennus"
+   },
+   {
+    "x": "Kannet ja sihdit on helppo asentaa ja huoltaa. Tuotteidemme mukana toimitetaan yksityiskohtaiset asennusohjeet, jotka varmistavat oikean asennuksen ja tehokkaan toiminnan. Noudattamalla näitä ohjeita voit nopeasti ja helposti parantaa viemärijärjestelmäsi vedenhallintaa ja suojausta."
+   },
+   {
+    "x": "Sihtikansi lattiakaivoon"
+   },
+   {
+    "x": "Saatavana myös ajettavana mallina, joka on kuormitustestattu 3 tonnin pistekuormalla. Sopivia ympäristöjä ovat muun muassa tallit, pysäköintihallit ja kattilahuoneet."
+   },
+   {
+    "x": "Sihtikansi lattiakaivoon: suojaa viemärijärjestelmäsi"
+   },
+   {
+    "x": "Lattiakaivon sihtikansi on tärkeä komponentti viemärijärjestelmien suojaamisessa, koska se estää roskia ja suuria esineitä pääsemästä sisään. Svenska Brunnslockilla tarjoamme laadukkaita sihtikansia, jotka varmistavat tehokkaan toiminnan ja pitkäaikaisen kestävyyden."
+   }
+  ],
+  "faq": []
+ },
+ "lock/luckor": {
+  "h": "Tietoa luukuista",
+  "intro": "Meillä on laaja valikoima ajettavia luukkuja kaikissa eurooppalaisen EN 124 -standardin mukaisissa kuormitusluokissa.",
+  "blocks": [
+   {
+    "x": "Kuormitusluokka ja käyttökohde."
+   },
+   {
+    "items": [
+     "Kevyempi autoliikenne: pysäköintialueet ja autotallit B125 ja C250",
+     "Raskas liikenne: tavallinen liikenne, kestää linja-autot ja kuorma-autot D400",
+     "Erittäin raskas liikenne: satamat, teollisuus ja lentoasemat E600 ja F900"
+    ]
+   },
+   {
+    "x": "Ajettavat luukut: kestäviä ja lujia liikennöidyille alueille"
+   },
+   {
+    "x": "Ajettavat luukut on suunniteltu kestämään raskasta liikennettä ja vaativia olosuhteita, mikä tekee niistä ihanteellisia käytettäviksi esimerkiksi teillä, pysäköintialueilla ja teollisuusympäristöissä. Svenska Brunnslockilla tarjoamme laadukkaita ajettavia luukkuja, joissa yhdistyvät lujuus ja kestävyys sekä helppo asennus. Tässä käymme läpi tuotteidemme edut, eri vaihtoehdot ja niiden käytön."
+   },
+   {
+    "x": "Ajettavien luukkujen edut"
+   },
+   {
+    "x": "Ajettavat luukut on suunniteltu kestämään suuria kuormia ja vilkasta liikennettä. Niiden tukeva rakenne varmistaa, että ne kestävät raskaiden ajoneuvojen painon, mikä tekee niistä täydellisiä asennettaviksi teihin ja muille liikennöidyille alueille. Käyttämällä Svenska Brunnslockin ajettavia luukkuja voit varmistaa, että infrastruktuurisi pysyy turvallisena ja toimivana pitkään."
+   },
+   {
+    "x": "Tuotteemme"
+   },
+   {
+    "x": "Tarjoamme ajettavia luukkuja eri kokoina ja materiaaleina, mukaan lukien valurauta ja teräs, sopimaan erilaisiin tarpeisiin ja käyttökohteisiin. Tuotteemme on valmistettu laadukkaista materiaaleista, jotka takaavat pitkän käyttöiän ja luotettavan suorituskyvyn. Tarvitsitpa luukkuja tielle, pysäköintialueelle tai teollisuusalueelle, meiltä löytyy oikea ratkaisu sinulle."
+   },
+   {
+    "x": "Käyttö ja asennus"
+   },
+   {
+    "x": "Ajettavat luukut on helppo asentaa ja huoltaa. Tuotteidemme mukana toimitetaan yksityiskohtaiset asennusohjeet, jotka varmistavat oikean asennuksen ja optimaalisen toiminnan. Noudattamalla näitä ohjeita voit nopeasti ja helposti parantaa infrastruktuurisi turvallisuutta ja kestävyyttä."
+   },
+   {
+    "x": "Käyttökohteet"
+   },
+   {
+    "x": "Nämä luukut ovat monipuolisia, ja niitä voidaan käyttää monenlaisissa ympäristöissä. Ne sopivat täydellisesti käytettäviksi teillä, pysäköintialueilla, teollisuusalueilla ja muissa paikoissa, joissa on raskasta liikennettä. Niiden tukeva rakenne ja kestävät materiaalit tekevät niistä luotettavan ratkaisun kaikkiin tarpeisiisi."
+   },
+   {
+    "x": "Tasaiset luukut"
+   },
+   {
+    "x": "Tasaisia luukkuja käytetään sekä sisällä että ulkona lattialuukkuina ja tarkastusluukkuina, ja niitä voidaan käyttää myös seinäluukkuina. Kun tilaat kokonaisen luukun, mukana on kehys valuun upotettavaksi tai jälkiasennukseen. Esimerkkejä käyttökohteista: laskeutumisluukut, tarkastusluukku, seinäluukku, miesluukku, luukku pumppaamoihin."
+   },
+   {
+    "x": "Tasaiset luukut: huomaamattomia ja toimivia"
+   },
+   {
+    "x": "Tasaiset luukut on suunniteltu huomaamattomiksi ja toimiviksi, mikä tekee niistä ihanteellisia käytettäviksi monenlaisissa ympäristöissä. Svenska Brunnslockilla tarjoamme tasaisia luukkuja, joissa yhdistyvät esteettisyys ja suorituskyky."
+   },
+   {
+    "x": "Limireunaiset luukut"
+   },
+   {
+    "x": "Toimitamme luukut ruostumattomasta teräksestä, alumiinista tai kuumasinkitystä teräksestä. Limireunaista luukkua voidaan käyttää esimerkiksi laskeutumisluukkuna eri kohteissa, erilaisina tarkastusluukkuina, kiinteistöjen savunpoistoluukkuina, pumppaamojen luukkuna tai hätäpoistumiseen, erilaisina miesluukkuina tai seinäluukkuina sekä kaukolämpöluukkuna."
+   },
+   {
+    "x": "Limireunainen luukku: turvallinen ja tiiviisti sulkeutuva"
+   },
+   {
+    "x": "Limireunainen luukku on suunniteltu tarjoamaan turvallinen ja tiiviisti sulkeutuva ratkaisu monenlaisiin käyttökohteisiin. Svenska Brunnslockilla tarjoamme limireunaisia luukkuja, joissa yhdistyvät kestävyys ja helppo asennus."
+   },
+   {
+    "x": "Kyynellevyluukut"
+   },
+   {
+    "x": "Tasaista kyynellevyluukkua käytetään muun muassa laskeutumis-, tarkastus-, seinä- tai miesluukkuna tai pumppaamojen luukkuna."
+   },
+   {
+    "x": "Käytetään usein tarkastusluukkuna kellareissa."
+   },
+   {
+    "x": "Kyynellevyluukut: kestäviä ja liukastumista estäviä"
+   },
+   {
+    "x": "Kyynellevyluukut ovat tukevia ja liukastumista estäviä luukkuja, joita käytetään monenlaisissa teollisissa ja kaupallisissa ympäristöissä. Svenska Brunnslockilla tarjoamme kyynellevyluukkuja, jotka on suunniteltu kestäviksi ja turvallisiksi."
+   }
+  ],
+  "faq": []
+ },
+ "lock/golv": {
+  "h": "Tietoa lattia- ja ryömintätilan luukuista",
+  "intro": "Ryömintätilan luukut eli \"torpan perustuksen luukut\", kuten niitä myös kutsutaan, on valmistettu pintakäsitellystä teräslevystä, joka ulkoympäristössä kestää vettä, tuulta ja UV-valoa. Luukut toimitetaan kääntölukolla ja avaimella.",
+  "blocks": [
+   {
+    "x": "Kehyksessä on asennusreiät, joten kannet on helppo asentaa ruuveilla."
+   },
+   {
+    "x": "Saatavana 2 eri kokoa. Luukkuja ei ole eristetty, joten suosittelemme aukon eristämistä solumuovilla tai muulla vastaavalla eristeellä."
+   },
+   {
+    "x": "Toimitetaan HARMAANA, sävy RAL 7040."
+   },
+   {
+    "x": "Alumiininen lattialuukku"
+   },
+   {
+    "x": "Alumiininen tarkastusluukku. Kaasu- ja vesitiivis. Sisä- ja ulkokäyttöön."
+   }
+  ],
+  "faq": []
+ },
+ "lock/sakerhet": {
+  "h": "Tietoa turva- ja poistumisluukuista",
+  "intro": "Meillä on laaja valikoima toiveiden mukaan mittatilauksena valmistettavia turvaluukkuja. Luukut voidaan mukauttaa turvallisuusluokan 1-4 ja EN124:n mukaisen kuormitusluokan A15 kN - F900 kN mukaan.",
+  "blocks": [
+   {
+    "x": "Valmistetaan ISO 9001- ja ISO 14001 -standardien mukaisesti."
+   },
+   {
+    "x": "Luukut voidaan valmistaa monista eri materiaaleista, kuten:"
+   },
+   {
+    "items": [
+     "Galvanoitu teräs",
+     "Ruostumaton teräs",
+     "Alumiini",
+     "Pallografiittivalurauta (valurauta)",
+     "Komposiittimateriaali."
+    ]
+   },
+   {
+    "x": "Turvaluukku: optimaalinen suojaus ja turvallisuus"
+   },
+   {
+    "x": "Turvaluukku on kriittinen komponentti turvallisuuden ja suojauksen varmistamisessa erilaisissa ympäristöissä, kuten teollisuuslaitoksissa, teknisissä tiloissa ja maanalaisissa tiloissa. Svenska Brunnslockilla tarjoamme turvaluukkuja, joissa yhdistyvät tukevuus ja edistyneet turvaominaisuudet. Tässä käymme läpi tuotteidemme edut, eri vaihtoehdot ja niiden käytön."
+   },
+   {
+    "x": "Turvaluukkujen edut"
+   },
+   {
+    "x": "Turvaluukut suojaavat luvattomalta pääsyltä ja ehkäisevät onnettomuuksia tarjoamalla turvallisen ja valvotun pääsyn kriittisiin tiloihin. Ne on suunniteltu kestäviksi ja murronkestäviksi, mikä tekee niistä ihanteellisia käytettäviksi herkissä ja korkean turvallisuustason ympäristöissä. Käyttämällä Svenska Brunnslockin turvaluukkuja voit varmistaa laitoksillesi korkeimman tason suojauksen ja turvallisuuden."
+   },
+   {
+    "x": "Tuotteemme"
+   },
+   {
+    "x": "Tarjoamme turvaluukkuja eri kokoina ja materiaaleina, mukaan lukien teräs ja alumiini, sopimaan erilaisiin tarpeisiin ja käyttökohteisiin. Tuotteemme on varustettu edistyneillä lukitusjärjestelmillä ja turvaominaisuuksilla, jotka takaavat maksimaalisen turvallisuuden ja luotettavuuden. Olivatpa erityisvaatimuksesi mitkä tahansa, meiltä löytyy oikea ratkaisu sinulle."
+   },
+   {
+    "x": "Käyttö ja asennus"
+   },
+   {
+    "x": "Turvaluukut on helppo asentaa ja käyttää. Tuotteidemme mukana toimitetaan yksityiskohtaiset asennusohjeet, jotka varmistavat oikean asennuksen ja optimaalisen turvallisuuden. Noudattamalla näitä ohjeita voit nopeasti ja helposti parantaa laitostesi suojausta ja turvallisuutta."
+   },
+   {
+    "x": "Käyttökohteet"
+   },
+   {
+    "x": "Turvaluukut ovat monipuolisia, ja niitä voidaan käyttää monenlaisissa ympäristöissä. Ne sopivat täydellisesti käytettäviksi teollisuuslaitoksissa, teknisissä tiloissa, maanalaisissa tiloissa ja muissa paikoissa, joissa korkea turvallisuus on ratkaisevan tärkeää. Niiden tukeva rakenne ja edistyneet turvaominaisuudet tekevät niistä luotettavan ratkaisun kaikkiin tarpeisiisi."
+   },
+   {
+    "x": "Poistumisluukut"
+   },
+   {
+    "x": "Asiakkaan tarpeisiin mukautetut poistumisluukut hätäpoistumiseen. Luukut voidaan mukauttaa kuormitusluokan mukaan A15:stä aina F900:aan. Saatavana pyöreinä ja nelikulmaisina."
+   },
+   {
+    "x": "Valmistetaan ISO 9001- ja ISO 14001 -standardien mukaisesti."
+   },
+   {
+    "x": "Luukut toimitetaan lukolla ja kaasujousilla, jotka helpottavat avaamista ja sulkemista."
+   },
+   {
+    "x": "Poistumisluukku: nopea ja turvallinen poistuminen"
+   },
+   {
+    "x": "Poistumisluukku on kriittinen komponentti nopean ja turvallisen poistumisen varmistamisessa hätätilanteissa. Svenska Brunnslockilla tarjoamme poistumisluukkuja, jotka on suunniteltu tarjoamaan helppo pääsy ja nopea evakuointi."
+   },
+   {
+    "x": "Poistumisluukkujen edut"
+   },
+   {
+    "x": "Poistumisluukut on suunniteltu mahdollistamaan nopea ja turvallinen poistuminen hätätilanteissa, kuten tulipaloissa, kaasuvuodoissa tai muissa vaaratilanteissa. Ne on helppo avata, ja ne tarjoavat selkeän ja nopean reitin ulos, mikä vähentää paniikin ja loukkaantumisten riskiä. Käyttämällä Svenska Brunnslockin poistumisluukkuja voit varmistaa, että laitoksesi ovat valmistautuneet kaikkiin mahdollisiin tilanteisiin."
+   }
+  ],
+  "faq": []
+ },
+ "lock/kund": {
+  "h": "Tietoa mittatilausluukuista",
+  "intro": "Laajasta luukku- ja kansistovalikoimastamme huolimatta tulee suhteellisen usein vastaan tilanteita, joissa vakioluukkumme eivät sovi aiottuun käyttötarkoitukseen. Mittatilausluukut ovat näissä tapauksissa ratkaisu.",
+  "blocks": [
+   {
+    "x": "Niitä on saatavana kuormitusluokissa A15-F900 EN124:n mukaisesti."
+   },
+   {
+    "x": "Viimeisten 10 vuoden aikana olemme toimittaneet asiakaskohtaisia luukkuja eri puolille Skandinaviaa teollisuudelle, kunnille, urakoitsijoille ja yksityishenkilöille. Suurempi tunnettu hanke on Förbifart Stockholm, johon olemme toimittaneet yli 50 kpl ajettavia luukkuja, joilla on korkeat kuormitusvaatimukset."
+   }
+  ],
+  "faq": []
+ },
+ "lock/tillbehor": {
+  "h": "Tietoa kannennostimista ja tarvikkeista",
+  "intro": "Kannennostin on korvaamaton työkalu kaivonkansien helppoon ja turvalliseen avaamiseen ja sulkemiseen. Svenska Brunnslockilla tarjoamme kannennostimia, jotka on suunniteltu tekemään työstä sujuvampaa ja turvallisempaa.",
+  "blocks": [
+   {
+    "x": "Nostoavain, työkalu valurautaisten tai pallografiittivalurautaisten kaivonkansien avaamiseen"
+   },
+   {
+    "x": "Kannennostin: kaivonkansien helppo ja turvallinen käsittely"
+   },
+   {
+    "x": "Tässä käymme läpi tuotteidemme edut, eri vaihtoehdot ja niiden käytön."
+   },
+   {
+    "x": "Kannennostimien edut"
+   },
+   {
+    "x": "Kannennostimien avulla painavia kaivonkansia voi käsitellä helposti ja turvallisesti, mikä vähentää loukkaantumisriskiä ja helpottaa kunnossapitotyötä. Ne ovat erityisen hyödyllisiä kunnille, teollisuudelle ja muille organisaatioille, joiden täytyy säännöllisesti avata ja sulkea kaivonkansia. Käyttämällä Svenska Brunnslockin kannennostimia voit tehostaa työtäsi ja parantaa turvallisuutta."
+   },
+   {
+    "x": "Tuotteemme"
+   },
+   {
+    "x": "Tarjoamme kannennostimia eri malleina ja kokoina sopimaan erityyppisiin kaivonkansiin. Tuotteemme on valmistettu tukevista materiaaleista, jotka takaavat pitkän kestävyyden ja luotettavan suorituskyvyn. Olivatpa erityistarpeesi mitkä tahansa, meiltä löytyy sinulle oikea kannennostin."
+   },
+   {
+    "x": "Käyttö ja asennus"
+   },
+   {
+    "x": "Kannennostimet ovat helppokäyttöisiä eivätkä vaadi laajaa koulutusta. Tuotteidemme mukana toimitetaan selkeät ohjeet, jotka varmistavat oikean käytön ja maksimaalisen tehokkuuden. Noudattamalla näitä ohjeita voit nopeasti ja helposti käsitellä kaivonkansia turvallisesti ja tehokkaasti."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Mikä tehtävä kaivonkannen ilmanpoistoventtiilillä on?",
+    "a": [
+     "Ilmanpoistoventtiili estää ylipaineen kaivojärjestelmässä ja varmistaa asianmukaisen tuuletuksen, muun muassa jätevesikaivoissa WC:n huuhtelun yhteydessä."
+    ]
+   },
+   {
+    "q": "Missä kooissa tiivistelistoja on saatavana?",
+    "a": [
+     "Tarjoamme tiivistelistoja halkaisijaltaan 600 mm:stä aina 1340 mm:iin sopimaan erilaisiin kaivojen mittoihin."
+    ]
+   },
+   {
+    "q": "Ovatko tiivistelistat vesitiiviitä?",
+    "a": [
+     "Kyllä, tiivistelistamme ovat vesitiiviitä ja estävät lian ja veden pääsyn kaivoon."
+    ]
+   },
+   {
+    "q": "Voinko asentaa ilmanpoistoventtiilin itse?",
+    "a": [
+     "Ilmanpoistoventtiilin asennus on helppoa, ja useimmat pystyvät tekemään sen ilman ammattilaisen apua, mutta epäselvissä tapauksissa suositellaan ammattilaista."
+    ]
+   },
+   {
+    "q": "Onko ilmanpoistoventtiileihin saatavana lisätarvikkeita?",
+    "a": [
+     "Kyllä, tarjoamme muun muassa lisävarusteena riippulukkoadapterin, jolla ilmanpoistoventtiilin voi lukita entistä varmemmin."
+    ]
+   }
+  ]
+ },
+ "el": {
+  "h": "Tietoa sähköinfrasta",
+  "intro": "Kaapelikaivot, jatkoskaivot, kaapelikourut ja kaapelinsuojaputket sähkö-, tele- ja dataverkkoihin maahan sekä teiden ja rautateiden varsille. Toimitamme muun muassa rautateille, sähköasemille ja tuulivoimapuistoihin.",
+  "blocks": [
+   {
+    "x": "Kaapelikaivot"
+   },
+   {
+    "x": "Kaapelikaivoja on saatavana komposiittisina ja betonisina. Komposiittikaivot UC ja OXPRO kestävät 40 tonnin kuormat (D400) ilman vastavalua, OXPRO aina 90 tonniin asti (F900). NEXUS on mitoitettu enintään 25 tonnin kuormille (C250), ja sen rakenne on modulaarinen."
+   },
+   {
+    "x": "Jatkos- ja optokaivot"
+   },
+   {
+    "x": "Betoniset jatkoskaivot ja vetokaivot valurautakansistolla sekä optokaivot ja lenkkikaivot, joissa on vesitiivis kansi optiselle kaapelille."
+   },
+   {
+    "x": "Kaapelikourut, kaapelinsuojaputket ja monikanavaputket"
+   },
+   {
+    "x": "Kaapelikouruja ja kaapelikanavia on saatavana komposiitista, alumiinista ja betonista, myös ajettavina betonikouruina ylityskohtiin ja raskaalle liikenteelle. Kaapelinsuojaputkia on saatavana sileinä putkina Verksnorm 5200 -normin mukaisesti sekä jaettavina putkina jo asennetulle kaapelille. Monikanavaputkia käytetään poikittaiskanavointina teiden ja rautateiden alla."
+   },
+   {
+    "x": "Valitse tuoteryhmä yllä tai soita meille numeroon 0920-52 00 56, jos haluat apua valinnassa."
+   }
+  ],
+  "faq": []
+ },
+ "el/kabelbrunn": {
+  "h": "Tietoa kaapelikaivoista",
+  "intro": "Toimitamme erityyppisiä kaapelikaivoja useille infrastruktuurin osa-alueille, kuten rautateille, sähköasemille, tuulivoimapuistoihin ym.",
+  "blocks": [
+   {
+    "x": "Kaapelikaivo: keskeinen osa tehokasta kaapelinhallintaa"
+   },
+   {
+    "x": "Svenska Brunnslockilla olemme infrastruktuuriratkaisujen asiantuntijoita ja ymmärrämme tehokkaan kaapelinhallinnan merkityksen nykyaikaisissa rakennushankkeissa ja kaupunkikehityksessä. Kaapelikaivojen tuoteryhmämme on kehitetty erityisesti turvallisen ja järjestelmällisen kaapeloinnin tarpeisiin. Mikä kaapelikaivo on, ja mitkä ovat sen käytön ratkaisevat edut hankkeessasi?"
+   },
+   {
+    "x": "Mikä on kaapelikaivo?"
+   },
+   {
+    "x": "Kaapelikaivo on maanalainen asennus, jota käytetään sähkökaapeleiden ja johtojen sijoittamiseen ja suojaamiseen. Se on tärkeä osa sähkö-, tele- ja dataverkkojen infrastruktuuria, ja se mahdollistaa helpon pääsyn huoltoa varten sekä suojan ulkoisilta vaikutuksilta. Svenska Brunnslockin kaapelikaivot on valmistettu kestävistä materiaaleista, kuten betonista, muovista tai alumiinista, ja ne on suunniteltu kestämään rasituksia, joita voi aiheutua sekä ympäristöstä että ihmisen toiminnasta."
+   },
+   {
+    "x": "Svenska Brunnslockin kaapelikaivojen edut"
+   },
+   {
+    "x": "Svenska Brunnslockin kaapelikaivoihin investoiminen tuo useita konkreettisia etuja:"
+   },
+   {
+    "x": "Suojaus: Kaapelikaivomme tarjoavat ylivertaisen suojan herkille kaapeleille ja johdoille, mikä vähentää vaurioiden riskiä ja pidentää niiden käyttöikää."
+   },
+   {
+    "x": "Saavutettavuus: Kaapelikaivot helpottavat huoltotöitä, koska teknikot pääsevät kaapeleihin helposti ilman kaivamista."
+   },
+   {
+    "x": "Järjestys: Ne auttavat pitämään kaapelit järjestyksessä, mikä helpottaa sekä vianmääritystä että verkon tulevia päivityksiä."
+   },
+   {
+    "x": "Turvallisuus: Oikein asennetut kaapelikaivot vähentävät onnettomuuksien ja vahinkojen riskiä sekä henkilöstölle että yleisölle."
+   },
+   {
+    "x": "Oikean kaapelikaivon valinta"
+   },
+   {
+    "x": "Oikean kaapelikaivon valinta on ratkaisevaa hankkeen onnistumiselle. Svenska Brunnslockilla tarjoamme kaapelikaivoja eri kokoina ja malleina hankkeesi erityistarpeisiin, olipa kyseessä suuri infrastruktuurihanke tai pienempi asennus. Asiantuntijatiimimme voi auttaa sinua valitsemaan oikean mallin vaatimustesi ja hankkeesi teknisten määritysten perusteella."
+   },
+   {
+    "x": "Mallimme:"
+   },
+   {
+    "items": [
+     "Kaapelikaivo OXPRO",
+     "Kaapelikaivo komposiitista",
+     "Kaapelikaivo NEXUS",
+     "Kaapelikaivo betonista",
+     "Kaapelikaivo, jatkoskaivo 3 kantta",
+     "Optokaivo ja lenkkikaivo"
+    ]
+   },
+   {
+    "x": "Investoi Svenska Brunnslockin kaapelikaivoihin"
+   },
+   {
+    "x": "Investoimalla Svenska Brunnslockin kaapelikaivoihin varmistat, että hankkeessasi on ratkaisu, joka tarjoaa kestävyyttä, tehokkuutta ja korkean suorituskyvyn. Ota yhteyttä jo tänään, niin keskustellaan siitä, miten kaapelikaivomme voidaan integroida seuraavaan hankkeeseesi ja miten ne voivat edistää turvallisempaa ja järjestelmällisempää infrastruktuuria."
+   },
+   {
+    "x": "Svenska Brunnslockilla olemme sitoutuneet toimittamaan korkealaatuisia ratkaisuja, jotka täyttävät ja ylittävät asiakkaidemme odotukset. Omistautumisemme innovaatioille ja laadulle tekee meistä luotettavan kumppanin hankkeeseesi."
+   },
+   {
+    "x": "Kaapelikaivo komposiitista UC"
+   },
+   {
+    "x": "Ultima Connect on modulaarinen ja skaalautuva kaivoratkaisu, joka on helppo koota paikan päällä."
+   },
+   {
+    "x": "Kaivo valmistetaan GRP:stä (lasikuituvahvisteinen polyesteri), joka koostuu lasikuidusta, polyesteristä ja gelcoatista. Materiaali kestää hyvin kemikaaleja ja lämpötiloja. Moduulit toimitetaan litteinä pakkauksina (“flat packed”), mikä tekee logistiikasta fiksua ja tilatehokasta."
+   },
+   {
+    "x": "Kaivo on mitoitettu kestämään enintään 40 tonnin kuormat (D400) ilman vastavalua."
+   },
+   {
+    "x": "Kaapelikaivo OXPRO komposiitista"
+   },
+   {
+    "x": "Markkinoiden vahvin ja hinta-laatusuhteeltaan paras komposiittikaivo! Se kestää kuormitusta 40 tonnista (D400) aina 90 tonniin (F900) ilman vastavalua ja on siten markkinoiden vahvin ja tehokkain komposiittikaivo."
+   },
+   {
+    "x": "Näin valitset oikean OXPRO:n 3 vaiheessa"
+   },
+   {
+    "items": [
+     "Valitse sisämitta sen mukaan, kuinka paljon tilaa tarvitset jatkoksille, kaapelilenkeille ja asennukselle. OXPRO:ta on saatavana mm. kokoina 600×600, 750×750, 900×600, 900×900, 1200×600, 1200×1200, 1500×750, 1500×1500, 2250×750.",
+     "Valitse korkeus/syvyys rakentamalla kaivo 150 mm:n moduuleista, kunnes saavutat halutun mitan."
+    ]
+   },
+   {
+    "x": "Valitse luukku/kansi sijoituksen ja tarkastustarpeen mukaan (esim. saranat, jos kantta avataan usein). Meillä on luukkuja kaikkiin kaivokokoihin ja tarpeisiinne."
+   },
+   {
+    "x": "Kaapelikaivo NEXUS"
+   },
+   {
+    "x": "Erittäin kilpailukykyinen kaksiseinäinen komposiittikaapelikaivo, joka on mitoitettu kestämään enintään 25 tonnin kuormat (C250) ilman vastavalua."
+   },
+   {
+    "x": "Kaivo soveltuu käytettäväksi esimerkiksi viheralueilla, pysäköintialueilla, jalkakäytävillä ja teillä, ja se toimii erinomaisesti kaapeleiden ym. asennus- ja vetokaivona. Sitä on saatavana useina eri kokoina, ja se voidaan toimittaa kansiston kanssa."
+   },
+   {
+    "x": "Nexus-kaivon modulaarinen rakenne mahdollistaa sekä koon että korkeuden mukauttamisen tarpeen mukaan."
+   },
+   {
+    "x": "Kaapelikaivo betonista"
+   },
+   {
+    "x": "Betoniset kaivonrenkaat kootaan useista renkaista haluttuun korkeuteen. Meillä on kaivonrenkaita sisähalkaisijaltaan 500-3000 mm."
+   },
+   {
+    "x": "Kaivonrengas: tärkeä osa kaapelikaivoja"
+   },
+   {
+    "x": "Kaivonrengas on kaapelikaivojen keskeinen osa, joka lisää rakenteellista eheyttä ja suojaa kaapeleita. Svenska Brunnslockilla tarjoamme korkealaatuisia kaivonrenkaita, jotka on suunniteltu täyttämään kestävyyden ja suorituskyvyn tiukat vaatimukset."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Mikä on kaapelikaivon tarkoitus?",
+    "a": [
+     "Kaapelikaivo suojaa sähkö- ja tietoliikennekaapeleita maan alla ja tekee niistä helposti saavutettavia huoltoa ja korjausta varten."
+    ]
+   },
+   {
+    "q": "Minkä kokoisia kaapelikaivoja on saatavana?",
+    "a": [
+     "Kaapelikaivojamme on saatavana sisähalkaisijaltaan 500 mm:stä 3000 mm:iin erilaisiin asennustarpeisiin."
+    ]
+   },
+   {
+    "q": "Ovatko kaapelikaivot säänkestäviä?",
+    "a": [
+     "Kyllä, kaapelikaivomme on suunniteltu kestämään vaativia sääolosuhteita ja antamaan pitkäaikaisen suojan."
+    ]
+   },
+   {
+    "q": "Miten kaapelikaivo asennetaan?",
+    "a": [
+     "Asennus on suhteellisen helppoa, ja kaapelikaivojemme mukana toimitetaan selkeät asennusohjeet oikeaa kokoamista varten."
+    ]
+   }
+  ]
+ },
+ "el/skarv": {
+  "h": "Tietoa jatkos- ja optokaivoista",
+  "intro": "Kaapelikaivo, tyyppi K-Prefabin jatkoskaivo 3 kantta, valmiiksi varustettu 8 kpl Ø110 tai 160 mm reiällä kummassakin päädyssä tai vastaavalla, sisältää ajettavan kansiston.",
+  "blocks": [
+   {
+    "x": "Optokaivo ja lenkkikaivo"
+   },
+   {
+    "x": "Optokaivo/lenkkikaivo/kytkentäkaivo."
+   },
+   {
+    "x": "Optisen kaapelin liitäntäkammio maanalaisiin asennuksiin, vesitiiviillä kumitiivisteisellä kannella."
+   },
+   {
+    "x": "Vetokaivo ja jatkoskaivo betonista"
+   },
+   {
+    "x": "Suorakaiteen muotoinen jatkoskaivotyyppinen kaapelikaivo märkävalettua betonia ilman pohjaa, 8 reikää Ø120 mm kummassakin päädyssä. Neljä alinta reikää on uritettu, ja ne voidaan irrottaa, kun kaivo asennetaan olemassa olevan kaapeloinnin kohdalle. Kaivo on mitoitettu enintään 40 tonnin liikennekuormalle, ja siinä on kelluva valurautakansisto teräskehyksellä ja kolmella kannella helppoa tasonsovitusta varten. Lukitusritilän avain on saatavana lisävarusteena."
+   }
+  ],
+  "faq": []
+ },
+ "el/rannor": {
+  "h": "Tietoa kaapelikouruista",
+  "intro": "Toimitamme useita erilaisia kaapelikanavia ja kouruja komposiitti-, alumiini- ja betonimateriaaleista. Käyttökohteet ulottuvat rautateistä siltoihin, kaasuputkiin, huoltoasemiin, sähköasemiin ym.",
+  "blocks": [
+   {
+    "x": "Olemme ainutlaatuisia ajettavissa kaapelikanavissa: betonikouruja ja kansia, jotka kestävät enintään 57,5 kN:n kuormituksen (laskettu/pyörän pinta-ala), käytetään ylityskohdissa tai paikoissa, joissa on raskasta liikennettä. Todella raskaaseen liikenteeseen, kuten satamiin ja lentokentille, voimme toimittaa ajettavia kaapelikanavia, jotka kestävät enintään 70 kN (laskettu/pyörän pinta-ala)"
+   },
+   {
+    "x": "Kaapelikourut: tehokkaita ratkaisuja kaapelinhallintaan ja suojaukseen"
+   },
+   {
+    "x": "Svenska Brunnslockilla olemme erikoistuneet tarjoamaan harkittuja ja kestäviä ratkaisuja infrastruktuurin tarpeisiin. Kaapelikourumme on suunniteltu suojaamaan ja järjestämään kaapeleita ja johtoja tehokkaasti, mikä on ratkaisevaa turvallisuuden ja toimivuuden kannalta niin julkisissa kuin yksityisissä ympäristöissä. Mutta mikä tekee kaapelikouruistamme ihanteellisen valinnan, ja mitä etuja ne tuovat hankkeellesi?"
+   },
+   {
+    "x": "Mitä kaapelikourut ovat?"
+   },
+   {
+    "x": "Kaapelikourut ovat rakenteita, jotka on tarkoitettu sähkökaapeleiden ja johtojen turvalliseen ohjaamiseen ja suojaamiseen. Ne ovat olennaisia osia rakennushankkeissa ja infrastruktuurin kunnossapidossa, joissa ne auttavat ehkäisemään vaurioita ja pitämään kaapeloinnin järjestyksessä ja helposti saavutettavana. Kestävistä materiaaleista, kuten teräksestä, betonista tai komposiitista, valmistetut kaapelikourumme tarjoavat järeän ratkaisun, joka kestää sekä mekaanista rasitusta että sääolosuhteita."
+   },
+   {
+    "x": "Svenska Brunnslockin kaapelikourujen edut"
+   },
+   {
+    "x": "Svenska Brunnslockin kaapelikouruihin investoiminen tuo useita merkittäviä etuja:"
+   },
+   {
+    "items": [
+     "Suojaus: Kaapelikourumme suojaavat arvokkaita kaapeleita ulkoisilta vaurioilta, kuten paineelta, iskuilta ja sään vaikutuksilta. Tämä pidentää kaapeloinnin käyttöikää ja vähentää huolto- ja korjauskustannuksia.",
+     "Järjestys: Ne auttavat pitämään kaapelit paremmin järjestyksessä, mikä helpottaa huoltoa ja mahdollista vianetsintää. Hyvin järjestettyä kaapelijärjestelmää on helpompi päivittää tai muuttaa tarvittaessa.",
+     "Turvallisuus: Kun kaapeleiden sotkeutumisen ja vaurioiden riski pienenee, paranee myös sekä laitoksen että sen läheisyydessä työskentelevien ihmisten turvallisuus.",
+     "Estetiikka: Hyvin järjestetty kaapelijärjestelmä ei ainoastaan näytä paremmalta, vaan se voi myös antaa työpaikasta tai julkisesta ympäristöstä ammattimaisemman vaikutelman."
+    ]
+   },
+   {
+    "x": "Oikeiden kaapelikourujen valinta"
+   },
+   {
+    "x": "Oikeiden kaapelikourujen valinta edellyttää ymmärrystä sekä hankkeesi erityistarpeista että ympäristöistä, joihin ne asennetaan. Svenska Brunnslockilla tarjoamme useita erilaisia malleja, jotka voidaan mukauttaa näihin vaatimuksiin, olipa kyse kevyistä asennuksista toimistoympäristöihin tai raskaista järjestelmistä tie- ja rautatiehankkeisiin sekä teollisiin sovelluksiin."
+   },
+   {
+    "x": "Investoi Svenska Brunnslockin kaapelikouruihin"
+   },
+   {
+    "x": "Investoimalla Svenska Brunnslockin kaapelikouruihin varmistat paitsi kaapelointisi kestävän ja tehokkaan hallinnan myös pitkäaikaisen ratkaisun, joka suojaa investointiasi ajan mittaan. Tuotteemme on suunniteltu täyttämään korkeimmat kestävyyden ja toimivuuden standardit."
+   },
+   {
+    "x": "Ota yhteyttä jo tänään saadaksesi lisätietoa kaapelikouruvalikoimastamme ja siitä, miten voimme auttaa löytämään hankkeeseesi parhaan ratkaisun. Svenska Brunnslockilla olemme sitoutuneet tarjoamaan ensiluokkaisia tuotteita, jotka parantavat sekä turvallisuutta että tehokkuutta kaikentyyppisissä asennushankkeissa."
+   },
+   {
+    "x": "Siltakouru ja kaapelikouru"
+   },
+   {
+    "x": "Kaapelikourua käytetään:"
+   },
+   {
+    "items": [
+     "Siltakouruna rautateiden varrella olevilla silloilla",
+     "Kanavointina sähköasemille tai muuhun toimintaan."
+    ]
+   },
+   {
+    "x": "Siltakouru rautateille"
+   },
+   {
+    "x": "Alumiiniset siltakourut kansineen valmistetaan Trafikverketin piirustuksen mukaan. Valmistettu siten, että se voidaan maadoittaa."
+   },
+   {
+    "x": "Sisäleveys: 200 mm Sisäkorkeus: 150 mm."
+   },
+   {
+    "x": "Paino kansineen: 7 kg/m"
+   },
+   {
+    "x": "Valmistamme myös samanlaisia siltakouruja vapaavalintaisella sisämitalla sekä yhdellä tai useammalla väliseinällä. Kourut ovat sisältä sileitä eivätkä vahingoita sähkökaapelia."
+   },
+   {
+    "x": "Siltakouru: kestäviä ratkaisuja rautatiesovelluksiin"
+   },
+   {
+    "x": "Siltakouru on tärkeä osa valumavesien hallintaa ja rautatieinfrastruktuurin suojaamista. Svenska Brunnslockilla tarjoamme järeitä ja kestäviä siltakouruja, jotka on suunniteltu vastaamaan rautatiealan erityistarpeisiin."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Mihin siltakourua käytetään rautatieinfrastruktuurissa?",
+    "a": [
+     "Siltakourulla hallitaan tehokkaasti valumavesiä rautatien raiteiden ja siltojen ympärillä, mikä estää eroosiota ja suojaa infrastruktuuria vaurioilta."
+    ]
+   },
+   {
+    "q": "Mitä mittoja siltakouruista on saatavana?",
+    "a": [
+     "Vakiomitat ovat 200 mm leveys ja 150 mm korkeus, mutta tarjoamme myös mukautettuja mittoja yhdellä tai useammalla väliseinällä."
+    ]
+   },
+   {
+    "q": "Mistä materiaaleista siltakourut valmistetaan?",
+    "a": [
+     "Siltakourumme valmistetaan alumiinista, ja ne on suunniteltu maadoitettaviksi, mikä tekee niistä kestäviä ja korroosionkestäviä."
+    ]
+   },
+   {
+    "q": "Onko siltakourun asentaminen helppoa?",
+    "a": [
+     "Kyllä, siltakourumme on helppo asentaa, ja niiden mukana toimitetaan selkeät ohjeet turvallista ja tehokasta asennusta varten."
+    ]
+   }
+  ]
+ },
+ "el/skyddsror": {
+  "h": "Tietoa kaapelinsuojaputkista",
+  "intro": "Jaettava kaapelinsuojaputki jo asennettujen kaapeleiden suojaamiseen sekä tilapäiseen asentamiseen.",
+  "blocks": [
+   {
+    "x": "Jaettavat kaapelinsuojaputket"
+   },
+   {
+    "x": "Voidaan käyttää myös korjaussarjana sileille tai korrugoiduille kaapelinsuojaputkille."
+   },
+   {
+    "x": "Valmistettu kierrätetystä PP-muovista."
+   },
+   {
+    "x": "OPI-välikkeet"
+   },
+   {
+    "x": "OPI-välikkeet tai pidikkeet 50, 110 ja 160 mm:n kaapelinsuojaputkille. Käytetään, kun samaan kaapelikaivantoon asennetaan useita putkia ja halutaan joustava ratkaisu"
+   },
+   {
+    "x": "Sileät kaapelinsuojaputket SRN ja SRS"
+   },
+   {
+    "x": "Sileät kaapelinsuojaputket kartiomuhvilla, merkinnällä Kraftkabel SRN tai SRS, täyttävät Verksnorm 5200 -normin vaatimukset. Putket on valmistettu kierrätysmateriaalista, ja ne toimitetaan 6 m:n pituisina, kokoina 50-200 mm tyypistä riippuen. Saatavana on myös muhvittomia SRS-putkia tunkkausta varten."
+   },
+   {
+    "x": "Korrugoituja HDPE-kaapeliputkia, joissa on sileä sisäpinta, on saatavana voimakaapeleille (keltainen) sekä heikkovirralle ja optiikalle (vihreä). Samassa tuoteryhmässä on myös tarkastus- ja kytkentäkaivoja PUS:lle, maadoitukselle ja ukkosenjohdattimille."
+   }
+  ],
+  "faq": []
+ },
+ "el/flerfack": {
+  "h": "Tietoa monikanavaputkista",
+  "intro": "Järjestelmää käytetään pääasiassa poikittaiskanavointina teiden ja rautateiden alla, missä rasitukset tekevät tavallisten putkien asentamisen mahdottomaksi. Trafikverket on vuodesta 1998 määrännyt sen poikittaiskanavointiratkaisuksi.",
+  "blocks": [
+   {
+    "x": "Tarjouspyyntöasiakirjoissa QA-kanavasta käytetään nimitystä monikanavaputki tai monikanavaputket."
+   },
+   {
+    "x": "Asennettaessa kolme tai neljä kanavaa voidaan edullisesti liittää yhteen rinnakkain ja asentaa sen jälkeen kaivantoon. Näin asennusaikaa voidaan lyhentää huomattavasti."
+   }
+  ],
+  "faq": []
+ },
+ "bygg": {
+  "h": "Tietoa rakentamisesta",
+  "intro": "Perustukset ja tarvikkeet maahan rakentamiseen: betoniplintit, pylväsperustukset ja pylväskengät, maaruuvit, lasikuitutikkaat ja putoamissuojat kaivoihin.",
+  "blocks": [
+   {
+    "x": "Betoniplintit"
+   },
+   {
+    "x": "Leveäjalkaisia betoniplinttejä on saatavana neljänä mallina, AP:stä, jonka maksimikuormitus on 900 kg, KP+:aan, jonka maksimikuormitus on 10 000 kg. Niitä käytetään terasseihin, pihamajoihin, autokatoksiin, kesämökkeihin, tekniikkarakennuksiin ja muihin rakennuksiin."
+   },
+   {
+    "x": "Pylväskengät ja pylväsperustukset"
+   },
+   {
+    "x": "Pylväskengät, palkkikengät, asennuslevyt ja kulmaraudat sopivat AP-, TP- ja KP-plintteihin. Pylväsperustus PP sopii liikennemerkeille, sähköautojen latauspylväille, lämpötolpille, valaisinpylväille ja kevyemmille aidoille."
+   },
+   {
+    "x": "Maaruuvit"
+   },
+   {
+    "x": "Kuumasinkitystä teräksestä valmistetut maaruuvit ruuvataan suoraan maahan, ja niitä käytetään aitojen, terassien ja pienempien rakennusten perustuksena ilman valua."
+   },
+   {
+    "x": "Tikkaat ja putoamissuojat"
+   },
+   {
+    "x": "Lasikuitutikkaat eivät johda sähköä, ja sähköasentajat käyttävät niitä usein. Ruostumattomasta teräksestä valmistetut putoamissuojat asennetaan kaivoihin putoamisonnettomuuksien estämiseksi."
+   }
+  ],
+  "faq": []
+ },
+ "bygg/plintar": {
+  "h": "Tietoa betoniplinteistä",
+  "intro": "Markkinoiden tukevimmat betoniplintit leveällä jalalla. Saatavana 2 eri mallia.",
+  "blocks": [
+   {
+    "x": "Malli TP, kantavuus enintään 1600 kg, ja malli KP, kantavuus enintään 5000 kg. Katso myös betoniplintti KP+ ja betoniplintti TP 200. Käyttökohteet: autokatokset, katetut terassit, kesämökit, suuremmat saunarakennukset, työmaaparakit, pienet talot, tekniikkarakennukset, pumppuhuoneet."
+   },
+   {
+    "x": "Betoniplintti AP"
+   },
+   {
+    "x": "Betoniplintti AP on pienin malli, jonka pohjalaatta on 330 × 330 mm ja maksimikuormitus 900 kg. Se on kätevä ja helppo käsitellä, ja se sopii kevyemmille rakenteille, kuten terasseille, pienemmille pihamajoille, ulkohuusseille ja saunoille."
+   },
+   {
+    "x": "Betoniplintti TP"
+   },
+   {
+    "x": "Betoniplintti TP on malli, jonka pohjalaatta on 450 × 450 mm ja maksimikuormitus 1 600 kg. Se sopii hieman raskaammille rakenteille, kuten terasseille, pihamajoille ja enintään 40 m2:n rakennuksille."
+   },
+   {
+    "x": "Betoniplintti KP"
+   },
+   {
+    "x": "Betoniplintti KP on järeämpi malli, jonka pohjalaatta on 600 × 600 mm ja maksimikuormitus 7000 kg. Se sopii raskaampiin rakennuskohteisiin, kuten autokatoksiin, katettuihin terasseihin, kesämökkeihin, pieniin piharakennuksiin ja tekniikkarakennuksiin."
+   },
+   {
+    "x": "Betoniplintti KP+"
+   },
+   {
+    "x": "Betoniplintti KP +1000 on järein malli, jonka pohjalaatta on 800x800 mm ja maksimikuormitus 10 000 kg. Se voidaan toimittaa valetuilla kierreholkeilla (M20) tai yläpäähän valetulla hitsauslevyllä. Sopii suurempiin taloihin ja rakennuksiin, tekniikkarakennuksiin, pumppaamoihin, moduulitaloihin ja myös meluesteiden perustukseksi."
+   }
+  ],
+  "faq": []
+ },
+ "bygg/stolp": {
+  "h": "Tietoa pylväsperustuksista ja pylväskengistä",
+  "intro": "Sopii AP-, TP- ja KP-plintteihin. Käyttötarkoituksesta riippuen voit valita pylväskengät, palkkikengät, asennuslevyt tai kulmaraudat rakenteen vakauttamiseen.",
+  "blocks": [
+   {
+    "x": "Plinttien ja tarvikkeiden yhdistelmän ansiosta löydät helposti ratkaisut erilaisiin asennustarpeisiin. Nostolenkin avulla siirrät plinttejä helposti ja kätevästi."
+   },
+   {
+    "x": "Pylväsperustus PP"
+   },
+   {
+    "x": "Vakaa perustus erilaisille pylväille. Sopii erinomaisesti liikennemerkeille, sähköautojen latauspylväille, autojen lämpötolpille, valaisinpylväille ja kevyempien aitojen perustukseksi."
+   }
+  ],
+  "faq": []
+ },
+ "bygg/markskruv": {
+  "h": "Tietoa maaruuveista",
+  "intro": "Kuumasinkitystä teräksestä valmistetut maaruuvit ruuvataan suoraan maahan, ja ne toimivat perustuksena ilman valua. Niitä käytetään perustuksen ankkurointiin esimerkiksi aidoille, terasseille ja pienemmille rakennuksille.",
+  "blocks": [
+   {
+    "x": "Koska maaperään vaikutetaan vain kiinnityskohdassa, maaruuvit sopivat erityisen hyvin meriympäristöihin, puutarhoihin ja viheralueille, joissa ympäröivät pinnat on tarkoitus säilyttää."
+   },
+   {
+    "x": "Mallit"
+   },
+   {
+    "items": [
+     "Arctic-maaruuvi kiinteällä levyllä: pituus 800, 1 000 tai 1 250 mm, halkaisija 76 mm.",
+     "Aurora-maaruuvi V-76, jatkettava: pituus 800 tai 1 250 mm. Voidaan yhdistää jatkokappaleeseen (500 tai 1 050 mm) ja yläosaan ankkurointisyvyyden lisäämiseksi.",
+     "Polar-putkiruuvi G3: pituus 800 tai 1 250 mm, esimerkiksi valaisinpylväille ja kylteille. Pylväsputki viedään ruuvin sisään ja kiinnitetään kolmella M16-pultilla."
+    ]
+   },
+   {
+    "x": "Tarvikkeet"
+   },
+   {
+    "x": "Säädettävät pylväskengät rimoille ja pylväille (43-53, 62-77 ja 84-104 mm), laajennuslevy 300 × 300 mm tasaisempaa kuormanjakoa varten ja L-kannake kiinnitykseen."
+   },
+   {
+    "x": "Kantavuuteen vaikuttavat maaperän olosuhteet, ja se edellyttää oikeaa asennusta. Tiedot kantavuudesta löytyvät kunkin tuotteen kohdalta."
+   }
+  ],
+  "faq": []
+ },
+ "bygg/stegar": {
+  "h": "Tietoa lasikuitutikkaista",
+  "intro": "Lasikuitutikkaita käyttävät yleensä sähköasentajat, koska tikkaat ovat kevyitä kantaa mukana eivätkä samalla johda sähköä/virtaa.",
+  "blocks": [
+   {
+    "x": "Voidaan toimittaa seinäkiinnikkeellä"
+   },
+   {
+    "x": "Pituudet ja seinäkiinnike"
+   },
+   {
+    "x": "Lasikuitutikkaita on saatavana pituuksina 2 000, 2 500, 3 000 ja 3 500 mm. Tikkaat on helppo kantaa mukana, eivätkä ne johda sähköä, mikä vähentää riskejä jännitteisten asennusten lähellä työskenneltäessä."
+   },
+   {
+    "x": "Lisävarusteena on saatavana haponkestävästä teräksestä valmistettuja seinäkiinnikkeitä: 2 kpl 2 000 ja 2 500 mm:n tikkaisiin, 3 kpl 3 000 mm:n tikkaisiin ja 4 kpl 3 500 mm:n tikkaisiin."
+   }
+  ],
+  "faq": []
+ },
+ "bygg/fallskydd": {
+  "h": "Tietoa putoamissuojauksesta",
+  "intro": "Ruostumattomasta, haponkestävästä teräksestä (SS 316) valmistettu putoamissuoja, joka asennetaan kaivoon putoamisonnettomuuksien estämiseksi. Suojaamattomien kaivojen onnettomuudet kohdistuvat monissa tapauksissa lapsiin.",
+  "blocks": [
+   {
+    "x": "Koot"
+   },
+   {
+    "x": "Putoamissuojat sopivat betoni- ja muovikaivoihin, joiden sisähalkaisija on 280-315, 350-410, 470-510, 550-610 ja 950-1 100 mm. Saatavana on myös malleja korrugoiduille muovisille kaivoputkille, joiden sisähalkaisija on 315 ja 425 mm, sekä malli betoni- ja muovikartioille, joiden sisämitta on 600-655 mm."
+   },
+   {
+    "x": "Materiaali ja toiminta"
+   },
+   {
+    "x": "Putoamissuojat kestävät aggressiivisia ympäristöjä ruostumatta ja täyttävät BASTA:n terveys- ja ympäristövaatimukset. Niissä on avausmahdollisuus huuhtelua varten, suuremmissa malleissa myös imua varten. RSK-numero löytyy kunkin tuotteen kohdalta."
+   },
+   {
+    "x": "Kaivojen suojausvaatimukset"
+   },
+   {
+    "x": "Ruotsin järjestyslain (ordningslagen) vuodelta 1993 mukaan kaivoissa on oltava turvalaite, ja erityistä huomiota on kiinnitettävä alueisiin, joilla oleskelee lapsia. Vaatimus koskee sekä uusia että olemassa olevia kaivoja."
+   }
+  ],
+  "faq": []
+ },
+ "trafik": {
+  "h": "Tietoa liikenteestä",
+  "intro": "Valurautakansistot, katuvalut ja tuotteet tie- ja liikenneympäristöihin: kansistot betoni- ja muovikaivoihin, koururitilät, kansistot lentokentille ja satamiin, rumpusilmät sekä meluesteiden pylväät.",
+  "blocks": [
+   {
+    "x": "Valurautakansistot ja katuvalut"
+   },
+   {
+    "x": "Kansistot ja katuvalut valuraudasta ja pallografiittivaluraudasta kaduille, jalkakäytäville ja teollisuusalueille. Koururitilöitä on saatavana kuormitusluokissa C250, D400 ja F900 EN 124 -standardin mukaisesti, ja teleskooppiputkia käytetään kansiston korkeuden sovittamiseen."
+   },
+   {
+    "x": "Kuormitusluokka kertoo, missä kansistoa voidaan käyttää: C250 pysäköintiin ja reunakiven kohdalle, D400 teille ja kaduille ja F900 satamiin ja lentokentille. Luokka on ilmoitettu jokaisen tuotteen kohdalla."
+   },
+   {
+    "x": "Lentokentät ja satamat"
+   },
+   {
+    "x": "Raskaimpiin kuormituksiin on saatavana lentokenttien ja satamien kansistoja valuraudasta ja komposiitista."
+   },
+   {
+    "x": "Rumpusilmät ja meluesteiden pylväät"
+   },
+   {
+    "x": "Ruostumattomasta teräksestä valmistetut rumpusilmät asennetaan hulevesiputken tulo- ja lähtöpäähän hukkumisonnettomuuksien estämiseksi. Meluesteiden pylväät valmistetaan Trafikverketin määräysten mukaisesti käytettäviksi teiden ja rautateiden varrella."
+   }
+  ],
+  "faq": []
+ },
+ "trafik/gjutjarn": {
+  "h": "Tietoa valurautakansista ja katuvaluista",
+  "intro": "Katuvalujen valurautakansistot ovat tärkeä osa kaupungin infrastruktuuria, ja ne on suunniteltu varmistamaan kestävyys ja luotettavuus liikenneympäristöissä. Svenska Brunnslockilla tarjoamme korkealaatuisia valurautakansistoja, jotka täyttävät tiukimmat turvallisuus- ja kestävyysvaatimukset.",
+  "blocks": [
+   {
+    "x": "Katuvalujen valurautakansistot: kestäviä ja luotettavia"
+   },
+   {
+    "x": "Tässä käymme läpi tuotteidemme edut, eri vaihtoehdot ja niiden käytön."
+   },
+   {
+    "x": "Valurautakansistojen edut"
+   },
+   {
+    "x": "Valurautakansistot tunnetaan lujuudestaan ja kestävyydestään, mikä tekee niistä ihanteellisia käytettäviksi raskaan liikenteen alueilla, kuten kaduilla, jalkakäytävillä ja teollisuusalueilla. Ne kestävät kulutusta, korroosiota ja äärimmäisiä sääolosuhteita. Käyttämällä Svenska Brunnslockin valurautakansistoja voit varmistaa pitkäaikaisen suorituskyvyn ja minimaalisen huollon tarpeen."
+   },
+   {
+    "x": "Tuotteemme"
+   },
+   {
+    "x": "Tarjoamme laajan valikoiman valurautakansistoja eri kokoina ja toteutuksina erilaisiin tarpeisiin ja sovelluksiin. Kansistomme on suunniteltu helposti asennettaviksi ja huollettaviksi, ja samalla ne tarjoavat maksimaalisen suojan ja vakauden."
+   },
+   {
+    "x": "Käyttö ja asennus"
+   },
+   {
+    "x": "Valurautakansistot on helppo asentaa, ja ne vaativat vain vähän huoltoa. Tuotteidemme mukana tulevat yksityiskohtaiset asennusohjeet, jotka varmistavat oikean asennuksen ja pitkäaikaisen suorituskyvyn. Noudattamalla näitä ohjeita voit nopeasti ja helposti parantaa infrastruktuurisi turvallisuutta ja kestävyyttä."
+   },
+   {
+    "x": "Kansistot betonikaivoihin: vahvoja ja luotettavia ratkaisuja"
+   },
+   {
+    "x": "Betonikaivojen kansistot ovat ratkaisevan tärkeitä kaivojen suojaamisessa ja niiden toimivuuden varmistamisessa. Svenska Brunnslockilla tarjoamme kansistoja, joissa yhdistyvät lujuus ja kestävyys ja jotka vastaavat kaikkiin tarpeisiisi."
+   },
+   {
+    "x": "Kansistot muovikaivoihin: kevyitä ja kestäviä"
+   },
+   {
+    "x": "Muovikaivojen kansistot tarjoavat kevyen ja kestävän ratkaisun suojaukseen ja turvallisuuteen. Svenska Brunnslockilla tarjoamme korkealaatuisia kansistoja, jotka on suunniteltu sopimaan erityyppisiin muovikaivoihin."
+   },
+   {
+    "x": "Teleskooppiputket: joustavia ja säädettäviä ratkaisuja"
+   },
+   {
+    "x": "Teleskooppiputki on monipuolinen komponentti, jolla sovitetaan kaivonkansien ja muiden kansistojen korkeutta. Svenska Brunnslockilla tarjoamme korkealaatuisia teleskooppiputkia, jotka tuovat joustavuutta ja helppoa säädettävyyttä tarpeisiisi."
+   },
+   {
+    "x": "Koururitilät"
+   },
+   {
+    "x": "Koururitilät ja kehykset valmistetaan pallografiittivaluraudasta, ja niitä on saatavana kuormitusluokissa C250, D400 ja F900 EN 124 -standardin mukaisesti."
+   },
+   {
+    "x": "Ritilöitä käytetään pääasiassa katukourujen reunoissa teillä ja moottoriteillä sekä katuliittymissä, joissa liikenne kulkee hitaasti, esimerkiksi eritasoliittymissä, risteyksissä ja pysäköintialueilla"
+   }
+  ],
+  "faq": []
+ },
+ "trafik/flyg": {
+  "h": "Tietoa lentokenttien ja satamien kansista",
+  "intro": "Lentokenttien ja satamien kansistot on suunniteltu kestämään äärimmäisen raskaita kuormituksia ja ankaria ympäristöolosuhteita. Svenska Brunnslockilla tarjoamme erikoiskansistoja, jotka täyttävät näiden alueiden tiukat vaatimukset.",
+  "blocks": [
+   {
+    "x": "Lentokenttien ja satamien kansistot: suuri kuormituskapasiteetti ja turvallisuus"
+   },
+   {
+    "x": "Tässä käsittelemme tuotteidemme etuja, vaihtoehtojamme ja niiden käyttöä."
+   },
+   {
+    "x": "Lentokenttien ja satamien kansistojen edut"
+   },
+   {
+    "x": "Lentokenttien ja satamien kansistot on rakennettu kestämään suurta liikennemäärää ja raskaita kuormia, kuten lentokoneita ja suuria aluksia. Ne tarjoavat ylivertaista lujuutta ja kestävyyttä, mikä varmistaa näiden kriittisten infrastruktuurien turvallisuuden ja toimivuuden. Käyttämällä kansistojamme voit varmistaa pitkäaikaisen suorituskyvyn ja minimoida huollon tarpeen."
+   },
+   {
+    "x": "Tuotteemme"
+   },
+   {
+    "x": "Tarjoamme lentokenttien ja satamien kansistoja eri kokoina ja materiaaleina, mukaan lukien valurauta ja komposiittimateriaalit. Tuotteemme on suunniteltu korroosionkestäviksi ja kestäviksi, mikä takaa pitkän käyttöiän ja luotettavan suorituskyvyn vaativimmissakin olosuhteissa."
+   },
+   {
+    "x": "Käyttö ja asennus"
+   },
+   {
+    "x": "Lentokenttien ja satamien kansistot on helppo asentaa ja käyttää. Tuotteidemme mukana toimitetaan yksityiskohtaiset asennusohjeet, jotka varmistavat oikean asennuksen ja optimaalisen toiminnan. Noudattamalla näitä ohjeita voit nopeasti ja helposti parantaa infrastruktuuriesi turvallisuutta ja kestävyyttä."
+   }
+  ],
+  "faq": []
+ },
+ "trafik/trumogon": {
+  "h": "Tietoa rumpusilmistä",
+  "intro": "Rumpusilmät ovat ritilöitä, jotka asennetaan hulevesiputken tulo- ja lähtöpäähän, esimerkiksi ojaan tai rumpuun. Ne on kehitetty estämään hulevesiputkissa ja rummuissa tapahtuvia hukkumisonnettomuuksia, jotka useimmissa tapauksissa kohdistuvat lapsiin.",
+  "blocks": [
+   {
+    "x": "Koot"
+   },
+   {
+    "x": "Rumpusilmiä on saatavana putkiin ja rumpuihin, joiden sisähalkaisija on 190-250, 290-310, 390-430, 470-510, 550-610, 750-900 ja 950-1 100 mm. Mittaa putken tai rummun sisähalkaisija ja valitse koko, joka kattaa mitan."
+   },
+   {
+    "x": "Materiaali"
+   },
+   {
+    "x": "Rumpusilmät valmistetaan Trafikverketin vaatimusten mukaisesti ruostumattomasta, haponkestävästä teräksestä SS 316, mikä antaa hyvän korroosionkestävyyden. Tuotteet täyttävät BASTA:n terveys- ja ympäristövaatimukset."
+   },
+   {
+    "x": "Tarvitsetko suojan kaivoon putken sijaan? Katso putoamissuojat kohdasta Rakentaminen."
+   }
+  ],
+  "faq": []
+ },
+ "trafik/stolpar": {
+  "h": "Tietoa meluesteiden pylväistä",
+  "intro": "Pylväät meluaidoille ja meluesteille, pääasiassa käytettäviksi teiden ja rautateiden varrella. Pylväät valmistetaan Trafikverketin määräysten mukaisesti.",
+  "blocks": [
+   {
+    "x": "Asennus"
+   },
+   {
+    "x": "Pylväät sopivat useimpiin perustuksiin, ja ne voidaan asentaa myös suoraan kiinteälle alustalle, esimerkiksi betoniin. Betoniplinttiä KP+ (kohdassa Rakentaminen) voidaan käyttää meluesteen perustuksena."
+   },
+   {
+    "x": "Materiaali ja toteutus"
+   },
+   {
+    "items": [
+     "Pylväs: HEA 160 tai UNP 160, S235JR",
+     "Kiinnityskorvake: S235JR",
+     "Jalkalevy: S355N Z3",
+     "Toteutusluokka EXC3, hitsaus SS-EN 1090-2:n kohdan 7.4.2 mukaisesti"
+    ]
+   },
+   {
+    "x": "Pylväitä voidaan valmistaa myös muina toteutuksina ja pituuksina. Hinta annetaan tarjouksella."
+   }
+  ],
+  "faq": []
+ },
+ "jvg": {
+  "h": "Tietoa rautatiestä",
+  "intro": "Svenska Brunnslock toimittaa materiaaleja ja tarvikkeita kaapelikaivoihin rautateille, kytkinlaitoksille, metroon ja kaapelikanavointiin. Valikoima on suunniteltu urakoitsijoille ja infrarakennusyhtiöille, jotka työskentelevät Trafikverketin vaatimusten mukaisesti ja tarvitsevat tuotteita, joiden kantavuus on dokumentoitu ja käyttöikä pitkä.",
+  "blocks": [
+   {
+    "x": "Täältä löydät kaikki tarvikkeet yhdestä paikasta, betoniperustuksista ja pylväsperustuksista hankaussuojiin, kaapelikiskoihin ja kaapelikaivon merkintäkilpiin."
+   },
+   {
+    "x": "Betoniperustukset ja KTL-perustukset rautatielaitteistoihin"
+   },
+   {
+    "x": "Betoniperustuksia ja KTL-perustuksia käytetään ajojohdinpylväiden, imumuuntajien ja porttipylväiden kiinnitykseen rautatieraiteiden varrella. Perustukset valmistetaan raudoitetusta betonista, ja ne on mitoitettu kestämään rautatieympäristössä syntyvät kuormitukset ja tärinät. Tarjoamme pylväsperustuksia useina eri malleina, jotka on sovitettu erilaisiin maaperäolosuhteisiin ja pylväiden halkaisijoihin. Ajojohdinperustukset ja imumuuntajaperustukset toimitetaan dokumentoiduin kantavuustiedoin, ja ne on sovitettu suoraan KTL-asennuksiin (ajojohdinlaitteistot)."
+   },
+   {
+    "x": "Puukannet metroon ja kaapelikanavointiin"
+   },
+   {
+    "x": "Kaivojen puukansia käytetään metro- ja kaapelikanavointiympäristöissä, joissa kaapelikaivon kansi on sovitettava ympäröivään pinnoitteeseen. Kannet ovat tukevia ja sovitettu metro- ja raideliikennehankkeissa esiintyviin erityisiin aukkomittoihin. Niitä käyttävät urakoitsijat, jotka tekevät töitä SL:lle, Trafikverketille ja kunnallisiin infrastruktuurihankkeisiin."
+   },
+   {
+    "x": "Kaapelikisko kaapelien ripustukseen"
+   },
+   {
+    "x": "Kaapelikiskoa käytetään kaapelien ripustamiseen ja järjestämiseen kaapelikaivoissa ja kaapelikanavissa rautateiden varrella ja kytkinlaitoksissa. Kisko asennetaan kaivon sisäseinään, ja se pitää kaapelit oikealla korkeudella ja oikeassa asennossa, mikä helpottaa huoltoa ja tarkastuksia. Toimitetaan vakiopituuksina, ja sitä voi yhdistää valikoiman muihin kiinnitysosiin."
+   },
+   {
+    "x": "Hankaussuoja ja kumimatto"
+   },
+   {
+    "x": "Hankaussuoja ja kumimatto asennetaan kaapelikaivon läpivienteihin ja aukkoihin suojaamaan kaapeleita mekaanisilta vaurioilta. Tuotteet vähentävät eristysvaurioiden riskiä ja pidentävät kaapelin käyttöikää laitoksissa, joissa käyttövarmuudelle asetetaan korkeat vaatimukset, esimerkiksi rautateillä ja sähkönjakelussa."
+   },
+   {
+    "x": "Alumiinikannet, kyynellevykannet ja muut kaivonkannet"
+   },
+   {
+    "x": "Kaapelikaivoihin, jotka vaativat kestävän ja kevyen kannen, tarjoamme kaivonkansia alumiinista ja kyynellevystä. Alumiinikannet kestävät korroosiota ja sopivat ulkoympäristöihin, joissa vaaditaan pientä painoa yhdistettynä riittävään kantavuuteen. Alumiinikansia käytetään yleensä kaapelikaivoissa, joiden sisähalkaisija on 1200 mm tai 1500 mm. Kyynellevykansia käytetään kaapelikaivoissa, joiden sisähalkaisija on 600 mm:stä aina 1200 mm:iin."
+   },
+   {
+    "x": "Merkintäkilpi, kaapelikaappitaso ja muut tarvikkeet"
+   },
+   {
+    "x": "Kaapelikaivon merkintäkilpeä käytetään kaivojen tunnistamiseen kenttätyössä, ja se helpottaa dokumentointia ja huollon suunnittelua. Kaapelikaappitaso antaa kaapelikaapeille vakaan ja oikeaan tasoon säädetyn alustan maa- ja rautatielaitoksissa. Tarjoamme myös sammakoiden ja matelijoiden poistumisratkaisuja, jotka täyttävät ympäristövaatimukset ratatöissä vesistöjen ja luontoympäristöjen läheisyydessä."
+   },
+   {
+    "x": "Onko sinulla kysyttävää siitä, mikä materiaali sopii hankkeeseesi? Ota meihin yhteyttä, niin autamme sinua valitsemaan oikean tuotteen kaapelikaivoosi ja laitostyyppiisi."
+   }
+  ],
+  "faq": []
+ },
+ "jvg/lock": {
+  "h": "Tietoa alumiini- ja ruutulevykansista",
+  "intro": "Kyynellevystä valmistettu kaivonkansi on luotettava ja tukeva ratkaisu kaapelikaivoihin ja muihin vastaaviin käyttökohteisiin. Svenska Brunnslockilla tarjoamme laajan valikoiman kyynellevystä valmistettuja kaivonkansia, jotka tunnetaan kestävyydestään ja lujuudestaan.",
+  "blocks": [
+   {
+    "x": "Kyynellevykansi: tukeva ja kestävä"
+   },
+   {
+    "x": "Tässä kerromme, miksi kannattaa valita kyynellevystä valmistettu kaivonkansi, mitä tuotteita tarjoamme ja miten niitä käytetään."
+   },
+   {
+    "x": "Miksi valita kyynellevykansi?"
+   },
+   {
+    "x": "Kyynellevykannet sopivat erinomaisesti alueille, joilla on suuri kuormitus ja paljon liikennettä, kuten teollisuusalueille, pysäköintialueille ja jalkakäytäville. Kyynellevyn kuvioitu pinta antaa erinomaisen liukastumissuojan, minkä ansiosta sitä on turvallista käyttää sekä märissä että kuivissa olosuhteissa. Lisäksi kyynellevy on erittäin kestävää ja kestää raskasta kuormitusta ja kulutusta ajan mittaan."
+   },
+   {
+    "x": "Tuotteemme"
+   },
+   {
+    "x": "Tarjoamme kyynellevykansia eri kokoina ja malleina erilaisiin tarpeisiin ja käyttökohteisiin. Kaivonkantemme on valmistettu laadukkaasta teräksestä, mikä takaa pitkän käyttöiän ja korroosionkestävyyden. Tarvitsitpa pienen kaivonkannen kävelytielle tai suuren kannen teollisuuskaivoon, meiltä löytyy sinulle oikea tuote."
+   },
+   {
+    "x": "Käyttö ja asennus"
+   },
+   {
+    "x": "Kyynellevykannet on helppo asentaa ja käyttää. Ne voidaan asentaa olemassa oleviin kaivoihin vähäisellä vaivalla, ja ne vaativat vain vähän huoltoa. Tuotteidemme mukana toimitetaan selkeät asennusohjeet, jotka varmistavat oikean asennuksen ja pitkäaikaisen toimivuuden."
+   },
+   {
+    "x": "Alumiininen kaivonkansi: keveys ja kestävyys"
+   },
+   {
+    "x": "Alumiininen kaivonkansi on erinomainen ratkaisu käyttökohteisiin, joissa pieni paino ja hyvä kestävyys ovat ratkaisevia. Svenska Brunnslockilla tarjoamme vahvistettuja alumiinisia kaivonkansia, joissa nämä ominaisuudet yhdistyvät helppoon käsittelyyn."
+   },
+   {
+    "x": "Alumiinisen kaivonkannen edut"
+   },
+   {
+    "x": "Alumiini tunnetaan keveydestään ja hyvästä kestävyydestään, mikä tekee siitä ihanteellisen materiaalin kaivonkansiin, joita täytyy usein nostaa ja käsitellä. Alumiinin korroosionkestävyys tekee siitä myös sopivan käytettäväksi kosteissa tai kemiallisesti aggressiivisissa ympäristöissä. Alumiiniset kaivonkannet on lisäksi helpompi asentaa ja huoltaa kuin raskaammat vaihtoehdot."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Miksi valita kyynellevykansi?",
+    "a": [
+     "Kyynellevykannet ovat erittäin kestäviä, niiden kuvioitu pinta toimii liukastumissuojana ja ne kestävät suuren kuormituksen, minkä vuoksi ne sopivat erinomaisesti kaapelikaivoihin rautateiden varrella, teollisuusalueille ja pysäköintialueille."
+    ]
+   },
+   {
+    "q": "Missä koissa kyynellevykansia on saatavilla?",
+    "a": [
+     "Tarjoamme pyöreitä kansia halkaisijaltaan 600 mm:stä aina 2000 mm:iin tarkastuskaivoihin ja kaapelikaivoihin."
+    ]
+   },
+   {
+    "q": "Kestävätkö kyynellevykannet korroosiota?",
+    "a": [
+     "Kyllä, kyynellevykantemme on valmistettu kuumasinkitystä teräksestä, joka kestää korroosiota ja jolla on pitkä käyttöikä."
+    ]
+   },
+   {
+    "q": "Miten kyynellevykansi asennetaan?",
+    "a": [
+     "Asennus on helppoa, ja kaivonkansi voidaan asentaa olemassa oleviin kaivoihin vähäisellä huollolla."
+    ]
+   },
+   {
+    "q": "Miksi valita alumiininen kaivonkansi?",
+    "a": [
+     "Alumiini on kevyttä, kestävää ja korroosionkestävää, mikä tekee siitä ihanteellisen alueille, joilla kantta täytyy usein käsitellä."
+    ]
+   },
+   {
+    "q": "Missä koissa vahvistettuja alumiinikansia on saatavilla?",
+    "a": [
+     "Vahvistettuja alumiinikansiamme on saatavilla eri kokoina halkaisijaltaan 600 mm:stä aina 2000 mm:iin, jotta ne sopivat erilaisiin kaapeli- ja tarkastuskaivoihin."
+    ]
+   },
+   {
+    "q": "Kestävätkö alumiinikannet säätä?",
+    "a": [
+     "Kyllä, ne on suunniteltu kestämään suolaa ja aggressiivisia ympäristöjä."
+    ]
+   },
+   {
+    "q": "Miten vahvistettu alumiinikansi asennetaan?",
+    "a": [
+     "Asennus on helppoa ja vaatii vain vähän huoltoa; yksityiskohtaiset ohjeet toimitetaan tuotteen mukana."
+    ]
+   }
+  ]
+ },
+ "jvg/fundament": {
+  "h": "Tietoa betoniperustuksista ja pylväsputkista",
+  "intro": "Betoniperustus 60 mm:n pylväälle. Mukana valettu raudoitettu vaippaholkki pylvään mahdollisimman lujaa asennusta varten.",
+  "blocks": [
+   {
+    "x": "Kahdeksankulmainen muoto antaa maksimaalisen vakauden maassa. Betoniperustus maahan kaivettavaksi. Helppo ja edullinen asennus. Kaivetaan kuoppa ja asetetaan perustus kuopan pohjalle. Sen jälkeen perustuksen ympärillä oleva kuoppa täytetään täyttömaalla, kuten soralla, hiekalla tai vastaavalla. Tämä betoniperustus sopii Ø 60 mm:n sinkittyihin pylväisiimme. Käytetään roska-astioiden, liikennepeilien, puistonpenkkien ym. asennukseen."
+   },
+   {
+    "x": "Perustukset rautateille ja opastimille"
+   },
+   {
+    "x": "Täältä löytyvät myös Trafikverketin piirustusten mukaiset perustukset: ajojohdinpylväsperustukset jalalla tai ilman, imumuuntajaperustukset, harusankkurit ajojohtimille, sokkeli puomikoneistolle ja kioskiperustukset. Perustukset tyyppi A ja tyyppi B C kuuluvat moduulijärjestelmään, ja niillä on sama rakennuskorkeus kuin kaapelikanavoinnilla, mikä helpottaa maanrakennustöitä."
+   },
+   {
+    "x": "Kevyet perustukset kierrätysmuovista"
+   },
+   {
+    "x": "Muovivaletut perustukset 60 mm:n pylväälle ja valaisinpylväille Ø108 mm (korkeus 900 mm) ovat kevyempiä kuljettaa ja käsitellä kuin betoniperustukset. Lisävarusteena on saatavilla pylväsputki 60 × 3,2 mm sinkitystä teräksestä, pituus 3 000 mm."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Mihin betoniperustuksia käytetään?",
+    "a": [
+     "Betoniperustuksia käytetään erilaisten rakenteiden, kuten kaapelikaappien, ajojohtimien ja muiden rakennelmien, vakauttamiseen ja tukemiseen infrastruktuurissa ja rautateillä."
+    ]
+   },
+   {
+    "q": "Millaisia betoniperustuksia tarjoatte?",
+    "a": [
+     "Tarjoamme useita betoniperustustyyppejä, muun muassa ajojohdinperustuksia, kioskiperustuksia, puomikoneistojen sokkeleita ja harusankkureita."
+    ]
+   },
+   {
+    "q": "Kestävätkö betoniperustukset säätä?",
+    "a": [
+     "Kyllä, betoniperustuksemme on suunniteltu kestämään ankaria sääolosuhteita ja antamaan pitkäaikaisen vakauden."
+    ]
+   },
+   {
+    "q": "Onko betoniperustuksen asentaminen vaikeaa?",
+    "a": [
+     "Asennuksen voivat tehdä ammattilaiset, ja se edellyttää oikeita työkaluja ja turvallisuusmääräysten noudattamista, etenkin suuremmissa asennuksissa."
+    ]
+   }
+  ]
+ },
+ "jvg/planering": {
+  "h": "Tietoa sepelilaatikoista",
+  "intro": "Sepelilaatikko sepelille ja soralle, kehitetty rautatie- ja infrastruktuurikohteiden tasaustöihin, esimerkiksi ennen kaapelikanavan asentamista.",
+  "blocks": [
+   {
+    "x": "Kaksi työleveyttä"
+   },
+   {
+    "items": [
+     "Sepelilaatikko 550 mm: mitat 550 × 950 × 500 mm, paino n. 174 kg, sovitettu Trafikverketin ja SL:n kaapelikouruun 350.",
+     "Sepelilaatikko 950 mm: mitat 950 × 950 × 500 mm, paino n. 207 kg, sovitettu Trafikverketin ja SL:n kaapelikouruun 535."
+    ]
+   },
+   {
+    "x": "Materiaali"
+   },
+   {
+    "x": "Laatikko on valmistettu jauhemaalatusta S355-teräksestä, ja siinä on S60-kiinnitys. Reunaterät ovat HB450-kulutusterästä, ja ne ovat käännettäviä ja vaihdettavia."
+   },
+   {
+    "x": "Varaosat"
+   },
+   {
+    "x": "Reunateriä on saatavilla varaosina, joten ne on helppo vaihtaa, kun työskennellään sepelin, soran ja muiden kuluttavien materiaalien kanssa. Lukkopultit, aluslevyt ja mutterit sisältyvät toimitukseen."
+   }
+  ],
+  "faq": []
+ },
+ "jvg/stegjarn": {
+  "h": "Tietoa kiipeilyraudoista ja laskeutumistikkaista",
+  "intro": "Kiipeilyraudat ovat tärkeitä apuvälineitä turvalliseen ja mukavaan laskeutumiseen kaapelikaivoihin ja muihin maanalaisiin rakenteisiin. Svenska Brunnslockilla tarjoamme laadukkaita kiipeilyrautoja, jotka on suunniteltu täyttämään tiukimmatkin turvallisuusvaatimukset.",
+  "blocks": [
+   {
+    "x": "Kiipeilyraudat: turvallisuutta ja mukavuutta laskeutumiseen"
+   },
+   {
+    "x": "Tässä käymme läpi kiipeilyrautojen edut, tuotteemme ja niiden käytön."
+   },
+   {
+    "x": "Kiipeilyrautojen edut"
+   },
+   {
+    "x": "Kiipeilyraudat antavat turvallisen ja vakaan jalansijan kaapelikaivoihin laskeuduttaessa, mikä vähentää onnettomuuksien ja vammojen riskiä. Ne ovat erityisen tärkeitä syvissä tai ahtaissa kaivoissa, joissa perinteiset tikkaat eivät ole käytännöllisiä. Käyttämällä Svenska Brunnslockin kiipeilyrautoja voit varmistaa, että työntekijäsi voivat laskeutua turvallisesti ja mukavasti."
+   },
+   {
+    "x": "Tuotteemme"
+   },
+   {
+    "x": "Tarjoamme kiipeilyrautoja eri kokoina ja materiaaleina, muun muassa ruostumattomasta teräksestä ja alumiinista. Kiipeilyrautamme on suunniteltu kestäviksi ja korroosionkestäviksi, mikä takaa pitkän käyttöiän ja luotettavan toimivuuden. Olivatpa erityisvaatimuksesi mitkä tahansa, meiltä löytyvät oikeat kiipeilyraudat tarpeisiisi."
+   },
+   {
+    "x": "Käyttö ja asennus"
+   },
+   {
+    "x": "Kiipeilyraudat on helppo asentaa ja käyttää. Tuotteidemme mukana tulevat yksityiskohtaiset asennusohjeet, jotka varmistavat oikean asennuksen ja optimaalisen turvallisuuden. Noudattamalla näitä ohjeita voit nopeasti ja tehokkaasti parantaa turvallisuutta kaapelikaivoihin laskeuduttaessa."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Mitä etua kiipeilyrautojen käytöstä kaapelikaivoissa on?",
+    "a": [
+     "Kiipeilyraudat antavat turvallisen jalansijan laskeuduttaessa, mikä vähentää onnettomuuksien riskiä etenkin syvissä tai ahtaissa kaivoissa, joissa tavalliset tikkaat voivat olla epäkäytännöllisiä."
+    ]
+   },
+   {
+    "q": "Mistä materiaaleista kiipeilyrautoja on saatavilla?",
+    "a": [
+     "Kiipeilyrautamme valmistetaan kestävästä ruostumattomasta teräksestä ja alumiinista, joten niillä on hyvä korroosionkestävyys ja pitkä käyttöikä."
+    ]
+   },
+   {
+    "q": "Onko kiipeilyraudat helppo asentaa?",
+    "a": [
+     "Kyllä, kiipeilyrautojen mukana toimitetaan selkeät asennusohjeet helppoa ja turvallista asennusta varten."
+    ]
+   },
+   {
+    "q": "Missä koissa kiipeilyrautoja on saatavilla?",
+    "a": [
+     "Tarjoamme kiipeilyrautoja eri kokoina erilaisten kaivotyyppien erityisiin asennustarpeisiin."
+    ]
+   }
+  ]
+ },
+ "jvg/profiler": {
+  "h": "Tietoa profiileista",
+  "intro": "U- ja L-profiilit ovat tärkeitä komponentteja kaapelikaivojen ja muiden rakenteiden rakentamisessa ja vahvistamisessa. Svenska Brunnslockilla tarjoamme laadukkaita U- ja L-profiileja, jotka on suunniteltu antamaan maksimaalinen lujuus ja joustavuus.",
+  "blocks": [
+   {
+    "x": "U- ja L-profiilit: monipuolisia ratkaisuja kaapelikaivoihin"
+   },
+   {
+    "x": "Tässä käymme läpi näiden profiilien edut, tuotevaihtoehtomme ja niiden käytön."
+   },
+   {
+    "x": "U- ja L-profiilien edut"
+   },
+   {
+    "x": "U- ja L-profiilit tarjoavat monipuolisia ratkaisuja kaapelikaivojen rakentamiseen ja vahvistamiseen. Niiden muotoilu tekee niistä ihanteellisia tukevien ja vakaiden rakenteiden tekemiseen, jotka kestävät raskaita kuormituksia ja rasituksia. Profiilit on myös helppo muokata ja asentaa, minkä vuoksi ne ovat rakentajien ja insinöörien suosikki."
+   },
+   {
+    "x": "Tuotteemme"
+   },
+   {
+    "x": "Tarjoamme laajan valikoiman U- ja L-profiileja eri kokoina ja materiaaleina, muun muassa teräksestä ja alumiinista. Profiilimme on valmistettu laadukkaista materiaaleista, jotka takaavat pitkän kestävyyden ja korroosionkestävyyden. Tarvitsitpa profiileja pieniin hankkeisiin tai suuriin kaupallisiin asennuksiin, meiltä löytyy sinulle oikea ratkaisu."
+   },
+   {
+    "x": "Käyttö ja asennus"
+   },
+   {
+    "x": "U- ja L-profiilit on helppo käyttää ja asentaa. Ne voidaan leikata ja muokata sopimaan tiettyihin tarpeisiin ja rakenteisiin. Tuotteidemme mukana toimitetaan yksityiskohtaiset asennusohjeet, jotka varmistavat oikean asennuksen ja optimaalisen toimivuuden. Käyttämällä U- ja L-profiilejamme voit tehdä vahvoja ja kestäviä rakenteita kaapelikaivoihisi ja muihin rakennushankkeisiisi."
+   },
+   {
+    "x": "Kaapelikisko: joustavuutta ja toimivuutta kaapelikaivoihisi"
+   },
+   {
+    "x": "Kaapelikisko on monipuolinen komponentti, joka tarjoaa joustavuutta ja helpottaa kaapelien käsittelyä kaivoissa ja muissa asennuksissa. Svenska Brunnslockilla tarjoamme kaapelikiskoja, jotka on suunniteltu vastaamaan juuri sinun tarpeitasi."
+   },
+   {
+    "x": "Kaapelikiskon edut"
+   },
+   {
+    "x": "Kaapelikiskojen ansiosta kaapeleita on helppo säätää ja käsitellä, mikä tekee niistä ihanteellisia monimutkaisiin kaapeliasennuksiin. Ne tarjoavat joustavuutta ja kestävyyttä, mikä varmistaa, että kaapelit pysyvät järjestyksessä ja helposti saatavilla. Tämä vähentää kaapelivaurioiden riskiä ja helpottaa tulevia huoltoja ja uudelleenjärjestelyjä."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Mihin U- ja L-profiileja käytetään kaapelikaivoissa?",
+    "a": [
+     "U- ja L-profiileja käytetään kaapelikaivojen ja muiden rakenteiden vahvistamiseen ja vakauttamiseen, mikä lisää niiden kestävyyttä ja kuormituskapasiteettia."
+    ]
+   },
+   {
+    "q": "Mistä materiaaleista U- ja L-profiileja on saatavilla?",
+    "a": [
+     "U- ja L-profiilejamme on saatavilla teräksestä ja alumiinista, jotta ne olisivat kestäviä ja korroosionkestäviä."
+    ]
+   },
+   {
+    "q": "Onko U- ja L-profiilit helppo asentaa?",
+    "a": [
+     "Kyllä, profiilit on suunniteltu helposti asennettaviksi, ja niitä voi säätää sopimaan erilaisiin rakenteisiin. Asennusohjeet toimitetaan tuotteen mukana."
+    ]
+   },
+   {
+    "q": "Missä koissa U- ja L-profiileja on saatavilla?",
+    "a": [
+     "Tarjoamme laajan kokovalikoiman erityistarpeisiin sekä pienissä että suurissa asennushankkeissa."
+    ]
+   },
+   {
+    "q": "Mikä on kaapelikisko?",
+    "a": [
+     "Kaapelikisko (riippukisko) eli kaapelitikas, kuten näitä kutsutaan, on joustava komponentti, joka helpottaa kaapelien käsittelyä ja järjestämistä kaivoissa, mikä vähentää kaapelivaurioiden riskiä ja helpottaa huoltoa."
+    ]
+   },
+   {
+    "q": "Missä kaapelikiskoja tavallisesti käytetään?",
+    "a": [
+     "Kaapelikiskoja käytetään pääasiassa kaapelikaivoissa ja muissa asennusympäristöissä, joissa kaapelit on pidettävä järjestyksessä ja helposti saatavilla."
+    ]
+   },
+   {
+    "q": "Missä koissa kaapelikiskoja on saatavilla?",
+    "a": [
+     "Tarjoamme kaapelikiskoja eri kokoina ja malleina erityisiin asennustarpeisiin."
+    ]
+   },
+   {
+    "q": "Onko kaapelikiskon asentaminen vaikeaa?",
+    "a": [
+     "Ei, kaapelikiskot on helppo asentaa, ja niiden mukana toimitetaan asennusohjeet oikean asennuksen varmistamiseksi."
+    ]
+   }
+  ]
+ },
+ "jvg/grod": {
+  "h": "Tietoa sammakko- ja matelijaesteistä",
+  "intro": "Poistumisputki, koko 110 mm, sammakoille ja matelijoille kaapelikaivoihin.",
+  "blocks": [
+   {
+    "x": "Putket ovat tiiviitä, ja niiden sisäpinta on korrugoitu, jolloin matelijat pääsevät helpommin ulos kaivoista. Materiaali on HD-PE:tä, UV-kestävä, kuormitusluokka SN8 (normaalit olosuhteet)."
+   },
+   {
+    "x": "Myydään 50 metrin rullissa."
+   },
+   {
+    "x": "Matelijoiden poistumisratkaisut: suojele eläimistöä kaapelikaivoissa"
+   },
+   {
+    "x": "Matelijoiden poistumisratkaisut ovat tärkeä toimenpide eläimistön, erityisesti matelijoiden, suojelemiseksi, sillä ne voivat helposti jäädä loukkuun kaapelikaivoihin ja muihin maanalaisiin rakenteisiin. Svenska Brunnslockilla tarjoamme matelijoiden poistumisratkaisuja, jotka auttavat eläimiä pääsemään pois turvallisesti ja tehokkaasti. Tässä kerromme, miksi matelijoiden poistumisratkaisut ovat tärkeitä, sekä esittelemme tuotteemme ja niiden käytön."
+   },
+   {
+    "x": "Miksi matelijoiden poistumisratkaisuja?"
+   },
+   {
+    "x": "Matelijat, kuten käärmeet ja sisiliskot, voivat helposti jäädä loukkuun kaapelikaivoihin, mikä voi johtaa eläinten vahingoittumiseen tai kuolemaan. Matelijoiden poistumisratkaisujen asentaminen ei ole vain eläinsuojelutoimenpide, vaan sillä myös ehkäistään mahdollisia käyttökatkoja ja huolto-ongelmia. Käyttämällä tuotteitamme voit varmistaa turvallisemman ympäristön sekä eläimille että ihmisille."
+   },
+   {
+    "x": "Tuotteemme"
+   },
+   {
+    "x": "Tarjoamme erityyppisiä matelijoiden poistumisratkaisuja, muun muassa ramppi- ja porrasjärjestelmiä, joiden avulla eläimet pääsevät itse ulos kaivoista. Tuotteemme on valmistettu kestävistä materiaaleista, jotka kestävät päivittäisen käytön rasitukset vaativissa ympäristöissä. Olivatpa erityistarpeesi mitkä tahansa, meiltä löytyy oikea ratkaisu eläimistön suojelemiseen kaapelikaivoissasi."
+   },
+   {
+    "x": "Käyttö ja asennus"
+   },
+   {
+    "x": "Matelijoiden poistumisratkaisut on helppo asentaa ja liittää olemassa oleviin kaapelikaivojärjestelmiin. Tuotteidemme mukana tulevat yksityiskohtaiset asennusohjeet, jotka varmistavat oikean asennuksen ja maksimaalisen tehokkuuden. Noudattamalla näitä ohjeita voit varmistaa, että kaapelikaivosi ovat turvallisia sekä eläimille että ihmisille."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Mikä on sammakoiden ja matelijoiden poistumisratkaisujen tarkoitus kaapelikaivoissa?",
+    "a": [
+     "Sammakoiden ja matelijoiden poistumisratkaisut suojelevat eläimistöä antamalla sammakoille ja matelijoille reitin ulos kaapelikaivoista, mikä vähentää riskiä, että ne jäävät loukkuun ja vahingoittuvat."
+    ]
+   },
+   {
+    "q": "Mistä materiaalista poistumisputket on valmistettu?",
+    "a": [
+     "Poistumisputket on valmistettu HD-PE:stä, minkä ansiosta ne ovat kulutusta kestäviä ja UV-kestäviä ja kestävät erilaiset sääolosuhteet."
+    ]
+   },
+   {
+    "q": "Miten matelijoiden poistumisputket asennetaan?",
+    "a": [
+     "Putket on helppo asentaa kaapelikaivoihin, ja niiden mukana toimitetaan ohjeet, joilla varmistetaan, että ne toimivat tehokkaana poistumisreittinä eläimille."
+    ]
+   },
+   {
+    "q": "Missä koissa poistumisputkia on saatavilla?",
+    "a": [
+     "Poistumisputkiemme vakiohalkaisija on 110 mm, ja niitä myydään 50 metrin rullissa käsittelyn helpottamiseksi."
+    ]
+   }
+  ]
+ },
+ "jvg/ovrigt": {
+  "h": "Tietoa muista kaapelikaivotarvikkeista",
+  "intro": "Puukannet, kaapelikaappitasot, merkintäkilvet, hankaussuojat ja porttipylväät kaapelikaivoihin rautateiden varrelle ja kaapelikanavointiin.",
+  "blocks": [
+   {
+    "x": "Puukannet metroon ja kaapelikanavointiin"
+   },
+   {
+    "x": "Puukannet valmistetaan painekyllästetystä puutavarasta, luokka NTR-AB. Puutavaran mitat 28x120 ja 28x95 mm. Kannet kootaan puuruuveilla 4,2x45 mm. Puuruuvit asennetaan kannen alapuolelta. Valmistetaan SL:n (Stockholms Lokaltrafik) piirustuksen nro 0021-6220-0042 mukaisesti. Käytetään mm. tunneleissa kaapelikanavien kansina."
+   },
+   {
+    "x": "Kaivojen puukannet: perinteinen ja esteettinen ratkaisu"
+   },
+   {
+    "x": "Kaivojen puukannet ovat esteettisesti miellyttävä ja toimiva ratkaisu erityisiin käyttökohteisiin, kuten metroihin ja kaapelikanavointeihin. Svenska Brunnslockilla tarjoamme puukansia, joissa perinteinen ulkonäkö yhdistyy nykyaikaisiin toimintoihin."
+   },
+   {
+    "x": "Kaapelikaappitaso"
+   },
+   {
+    "x": "Saatavilla vakiopituuksina varastosta."
+   },
+   {
+    "items": [
+     "Taso 2000 mm",
+     "Taso 3000 mm"
+    ]
+   },
+   {
+    "x": "Valmistamme tilauksesta myös muun levyisiä tasoja, esimerkiksi:"
+   },
+   {
+    "items": [
+     "Taso, leveys 1000 mm.",
+     "Taso, leveys 2200 mm",
+     "Taso, leveys 6000 mm.",
+     "Taso, leveys 9000 mm."
+    ]
+   },
+   {
+    "x": "BASTA-rekisteröity."
+   },
+   {
+    "x": "Valmistetaan Trafikverketin piirustuksen 7-801 656 mukaisesti."
+   },
+   {
+    "x": "Kuumasinkitsemme kaikki osat standardin SS-EN ISO 1461 mukaisesti."
+   },
+   {
+    "x": "Kaapelikaappitaso: vakaa ja turvallinen perusta"
+   },
+   {
+    "x": "Kaapelikaappitaso on ratkaisevan tärkeä kaapelikaappien ja muiden laitteiden vakaan ja turvallisen asennuksen varmistamiseksi. Svenska Brunnslockilla tarjoamme tasoja, joissa kestävyys yhdistyy helppoon asennukseen."
+   },
+   {
+    "x": "Kaapelikaivon merkintäkilpi: helppo ja selkeä tunnistus"
+   },
+   {
+    "x": "Kaapelikaivon merkintäkilpi on ratkaisevan tärkeä kaivojen ja niiden sisällön helpon ja selkeän tunnistamisen varmistamiseksi. Svenska Brunnslockilla tarjoamme merkintälaattoja, jotka on suunniteltu kestäviksi ja helppolukuisiksi."
+   },
+   {
+    "x": "Merkintäkilpien edut"
+   },
+   {
+    "x": "Merkintäkilvet helpottavat kaapelikaivojen ja niiden sisällön tunnistamista, mikä on tärkeää tehokkaan huollon ja turvallisuuden kannalta. Selkeät ja kestävät kilvet vähentävät virheiden sekä kaapelien ja laitteiden väärän käsittelyn riskiä. Käyttämällä Svenska Brunnslockin merkintälaattoja voit varmistaa, että kaikki tarvittava tieto on aina helposti saatavilla."
+   },
+   {
+    "x": "Kaivon hankaussuoja: suojaa kaapeleita ja laitteita"
+   },
+   {
+    "x": "Kaivojen hankaussuoja on tärkeä komponentti, joka suojaa kaapeleita ja muita laitteita kulumiselta ja vaurioilta. Svenska Brunnslockilla tarjoamme tehokkaita hankaussuojia, jotka on suunniteltu pidentämään kaapeliesi ja laitteidesi käyttöikää."
+   },
+   {
+    "x": "Miksi valita hankaussuoja?"
+   },
+   {
+    "x": "Hankaussuoja suojaa kaapeleita ja laitteita hankautumiselta ja mekaanisilta vaurioilta, mikä on erityisen tärkeää ympäristöissä, joissa kaapelit vedetään ahtaiden tilojen läpi tai ne ovat alttiina liikkeelle. Käyttämällä Svenska Brunnslockin hankaussuojia voit minimoida kaapelikatkosten ja muiden vaurioiden riskin, mikä varmistaa luotettavan toiminnan ja vähentää huoltotarvetta."
+   },
+   {
+    "x": "Porttipylväs ja ajojohdinpylväs"
+   },
+   {
+    "x": "Ajojohdinpylväät tai porttipylväät valmistetaan Trafikverketin piirustusten mukaisesti."
+   },
+   {
+    "items": [
+     "513 142/0411037 & 0411039",
+     "513 330/0411057",
+     "513 385/0411030",
+     "513 201/0411031",
+     "515 200/0411067"
+    ]
+   }
+  ],
+  "faq": [
+   {
+    "q": "Mitkä ovat kaivojen puukansien edut?",
+    "a": [
+     "Puukannet ovat esteettisiä, antavat luonnollisen eristyksen ja sopivat ihanteellisesti ympäristöihin, joissa halutaan välttää sähkönjohtavuutta."
+    ]
+   },
+   {
+    "q": "Millaisissa ympäristöissä kaivojen puukansia käytetään?",
+    "a": [
+     "Puukansia käytetään usein metroissa, kaapelikanavoinneissa ja luonnonsuojelualueilla, joissa tarvitaan luonnollista ulkonäköä ja vähäistä johtavuutta."
+    ]
+   },
+   {
+    "q": "Miten kaivojen puukansia huolletaan?",
+    "a": [
+     "Puukannet vaativat perushuoltoa kestääkseen pitkään, mihin kuuluu ruuvien tarkastaminen ja tarvittaessa pintakäsittely."
+    ]
+   },
+   {
+    "q": "Ovatko puukannet kyllästettyjä?",
+    "a": [
+     "Kyllä, puukantemme on painekyllästetty kestämään kosteutta ja kulutusta ajan mittaan."
+    ]
+   },
+   {
+    "q": "Mikä on kaapelikaappitason tarkoitus?",
+    "a": [
+     "Kaapelikaappitaso antaa kaapelikaapeille vakaan ja turvallisen perustan, joka suojaa niitä maakosteudelta, tärinältä ja muilta vaurioilta."
+    ]
+   },
+   {
+    "q": "Missä koissa kaapelikaappitasoja on saatavilla?",
+    "a": [
+     "Tarjoamme vakiopituudet 2000 mm ja 3000 mm sekä mittatilausleveydet 1000 mm:stä 9000 mm:iin."
+    ]
+   },
+   {
+    "q": "Kestävätkö tasot korroosiota?",
+    "a": [
+     "Kyllä, tasomme on kuumasinkitty standardin SS-EN ISO 1461 mukaisesti pitkäaikaista korroosiosuojaa varten."
+    ]
+   },
+   {
+    "q": "Miten kaapelikaappitaso asennetaan?",
+    "a": [
+     "Tasot on helppo asentaa, ja niiden mukana toimitetaan selkeät ohjeet turvallista asennusta ja vakautta varten."
+    ]
+   },
+   {
+    "q": "Mikä on kaapelikaivon merkintäkilven tarkoitus?",
+    "a": [
+     "Kaapelikaivon merkintäkilpi varmistaa kaivojen ja kaapelien selkeän ja helpon tunnistamisen, mikä helpottaa huoltoa ja parantaa turvallisuutta."
+    ]
+   },
+   {
+    "q": "Mistä materiaaleista merkintäkilvet on tehty?",
+    "a": [
+     "Merkintälaattamme on valmistettu kestävästä, säänkestävästä, ruostumattomasta haponkestävästä teräksestä, joka säilyttää luettavuutensa ajan mittaan."
+    ]
+   },
+   {
+    "q": "Onko kaapelikaivon merkintäkilpi helppo asentaa?",
+    "a": [
+     "Kyllä, merkintäkilvet on helppo asentaa, ja ne voidaan kiinnittää monenlaisiin pintoihin. Asennusohjeet toimitetaan tuotteen mukana."
+    ]
+   },
+   {
+    "q": "Missä koissa merkintälaattoja on saatavilla?",
+    "a": [
+     "Tarjoamme merkintälaattoja eri kokoina Trafikverketin piirustusten mukaisesti, jotta ne sopivat sekä pieniin asennuksiin että laajempiin kaapelikaivoverkostoihin."
+    ]
+   },
+   {
+    "q": "Mikä on kaivon hankaussuojan tarkoitus?",
+    "a": [
+     "Hankaussuoja suojaa kaapeleita ja muita laitteita kulumiselta ja vaurioilta, mikä pidentää niiden käyttöikää ja vähentää käyttökatkosten riskiä."
+    ]
+   },
+   {
+    "q": "Mistä materiaaleista hankaussuojat valmistetaan?",
+    "a": [
+     "Hankaussuojamme ovat pääasiassa kulutusta kestävää kumimattoa ja muita joustavia materiaaleja, jotka on sovitettu erityyppisiin kaivoihin ja asennuksiin."
+    ]
+   },
+   {
+    "q": "Miten hankaussuoja asennetaan?",
+    "a": [
+     "Hankaussuojat on helppo asentaa, ja niiden mukana toimitetaan selkeät ohjeet oikeaa asennusta varten kaivoihin ja kaapeliläpivienteihin."
+    ]
+   },
+   {
+    "q": "Missä koissa kumimattoa on saatavilla?",
+    "a": [
+     "Tarjoamme hankaussuojia eri kokoina ja paksuuksina erityisiin asennustarpeisiin ja tiloihin."
+    ]
+   }
+  ]
+ },
+ "ent": {
+  "h": "Tietoa urakoinnista ja maarakennuksesta",
+  "intro": "Tuotteita maarakentamiseen sekä vesi- ja viemärihuoltoon: kaivot, pumput ja pumppukopit, rasva- ja öljynerottimet, lasikuitusäiliöt, PE-paineputket, korotusrenkaat, tukimuurit, puunjuuriritilät ja muoviponttilevyt.",
+  "blocks": [
+   {
+    "x": "Vesi ja viemäri"
+   },
+   {
+    "x": "Polyeteeniset vesimittarikaivot, kastelukaivot ja hulevesikaivot. Pumput porakaivoihin ja kaivettuihin kaivoihin, pumppaamot ja eristetyt pumppukopit. Rasva- ja öljynerottimet maahan ja sisätiloihin sekä lasikuituiset umpisäiliöt ja pienpuhdistamot."
+   },
+   {
+    "x": "Putket ja kaivon osat"
+   },
+   {
+    "x": "Polyeteeniset (PE) paineputket ja putkenosat muun muassa vedenjakeluun ja viemäröintiin. Betoniset korotusrenkaat ja sovitusrenkaat, joilla kaivon yläosa saadaan oikealle korkeudelle."
+   },
+   {
+    "x": "Maa- ja infrarakentaminen"
+   },
+   {
+    "x": "Betoniset tukimuurit ja L-tukimuurit, valurautaiset puunjuuriritilät ja puukuopan reunatuet, muoviponttilevyt vesitiiviisiin ponttiseiniin sekä betoniset vesistöputken painoelementit."
+   },
+   {
+    "x": "Monista kategorian tuotteista tehdään tarjous tarpeen mukaan. Soita meille numeroon 0920-52 00 56 tai pyydä tarjous."
+   }
+  ],
+  "faq": []
+ },
+ "ent/brunnar": {
+  "h": "Tietoa vesi- ja viemärikaivoista",
+  "intro": "Polyeteenistä valmistettu vesimittarikaivo, eristetty kansi, vesitiivis, ulkokäyttöön, ylös nostettavalla vesiletkulla. Pohja on hitsattu, ja koko letkupaketti on tarvittaessa vaihdettavissa.",
+  "blocks": [
+   {
+    "x": "Vesimittarikaivot"
+   },
+   {
+    "x": "Joustavien vesiletkujen ansiosta koko mittarikonsoli voidaan nostaa ylös nostolaitteen avulla. Elintarvikehyväksytyt vesiletkut."
+   },
+   {
+    "x": "Kastelu- ja hulevesikaivot"
+   },
+   {
+    "x": "Polyeteeniset kastelukaivot ja kastelukannet letkuliittimillä ja sulkuventtiileillä puutarhoihin ja golfkentille. Kastelukaivo LS 630 on lukittava, ja siihen mahtuu jopa 50 metriä letkua."
+   },
+   {
+    "x": "Hulevesikaivo johtaa pois pintavedet, ja se on suunniteltu niin, etteivät lehdet ja kasvinosat tuki sitä. Kannen kuormitusluokka on A15, ja yläosa on teleskooppinen ja säädettävissä haluttuun korkeuteen."
+   },
+   {
+    "x": "Lisää ratkaisuja vesimittareille"
+   },
+   {
+    "x": "Ylös nostettavalla letkulla varustetun vesimittarikaivon lisäksi saatavilla on vesimittarikaivo, johon voi laskeutua (korkeus 2 000-3 000 mm), sekä eristetyllä kannella varustettu vesimittarilaatikko kesäasunnoille, joissa putket tyhjennetään talveksi."
+   }
+  ],
+  "faq": []
+ },
+ "ent/pump": {
+  "h": "Tietoa pumppaamoista ja pumpuista",
+  "intro": "Pumput sekä porakaivoihin että kaivettuihin kaivoihin, upotettavat tyhjennyspumput sekä pumppaamot.",
+  "blocks": [
+   {
+    "x": "Pumppaamot: tehokkaita ratkaisuja vedenhallintaan"
+   },
+   {
+    "x": "Svenska Brunnslock on erikoistunut tarjoamaan kestäviä ja luotettavia ratkaisuja vedenhallintaan. Pumppaamomme on suunniteltu vastaamaan sekä yksityiskiinteistöjen että suurempien infrastruktuurihankkeiden vaativiin tarpeisiin. Mutta mikä pumppaamo on, ja mitä etuja se tarjoaa tehokkaassa vedenhallinnassa?"
+   },
+   {
+    "x": "Mitä pumppaamot ovat?"
+   },
+   {
+    "x": "Pumppaamot ovat laitteistoja, joilla vettä ja muita nesteitä käsitellään ja siirretään tehokkaasti paikasta toiseen. Ne ovat ratkaisevan tärkeitä osia vedenhallintajärjestelmissä, erityisesti silloin, kun vettä on pumpattava alempana sijaitsevilta alueilta ylemmäs tai kun on tarpeen voittaa painovoiman rajoitukset. Pumppaamomme on valmistettu laadukkaista materiaaleista, jotka varmistavat pitkäaikaisen kestävyyden ja luotettavan toimivuuden vaativissa olosuhteissa."
+   },
+   {
+    "x": "Svenska Brunnslockin pumppaamojen edut"
+   },
+   {
+    "x": "Svenska Brunnslockin pumppaamojen valitseminen tuo useita etuja:"
+   },
+   {
+    "items": [
+     "Tehokkuus: Pumppaamomme on suunniteltu maksimoimaan vesivirtojen tehokkuus, mikä minimoi energiankulutuksen ja parantaa järjestelmän kokonaistehokkuutta.",
+     "Luotettavuus: Tukevista materiaaleista ja edistyneellä teknologialla valmistetut pumppaamomme kestävät korroosiota, kulumista ja muita ympäristövaikutuksia, jotka voivat ajan mittaan heikentää toimivuutta.",
+     "Sovitettavuus: Tarjoamme pumppaamoja eri kokoina ja kokoonpanoina erityistarpeisiin ja käyttökohteisiin, yksinkertaisista kotitalousasennuksista monimutkaisiin teollisuusjärjestelmiin.",
+     "Helppo huolto: Suunniteltu helppoa pääsyä ja huoltoa varten, mikä vähentää käyttökatkoja ja huoltokustannuksia."
+    ]
+   },
+   {
+    "x": "Oikean pumppaamon valinta"
+   },
+   {
+    "x": "Oikean pumppaamon valitseminen on ratkaisevan tärkeää optimaalisen toimivuuden ja kustannustehokkuuden varmistamiseksi. Svenska Brunnslockilla autamme sinua analysoimaan tarpeesi ja suosittelemme sopivinta ratkaisua juuri sinun tilanteesi ja teknisten vaatimusten perusteella. Asiantuntijatiimimme on valmis tarjoamaan neuvontaa ja tukea koko valinta- ja asennusprosessin ajan."
+   },
+   {
+    "x": "Investoi Svenska Brunnslockin pumppaamoihin"
+   },
+   {
+    "x": "Investoimalla tähän Svenska Brunnslockin tuotteeseen varmistat pitkäaikaisen ratkaisun vedenhallintatarpeisiisi. Asiantuntemuksemme ja laadukkaiden tuotteidemme ansiosta voit olla varma, että saat luotettavan ja kestävän asennuksen, joka palvelee kiinteistöäsi tai hankettasi hyvin pitkään."
+   },
+   {
+    "x": "Ota meihin yhteyttä jo tänään, tutustu pumppaamovalikoimaamme ja ota ensimmäinen askel kohti tehokkaampaa ja turvallisempaa vedenhallintaa. Svenska Brunnslockilta saat paitsi laadultaan huippuluokan tuotteita myös kumppanin, joka on sitoutunut menestykseesi."
+   },
+   {
+    "x": "Kaivon päällysrakenne ja pumppukoppi"
+   },
+   {
+    "x": "Eristys koostuu 60 mm:n polyuretaanivaahdosta. Rakennelman voi nostaa helposti pois paikaltaan."
+   }
+  ],
+  "faq": []
+ },
+ "ent/avskiljare": {
+  "h": "Tietoa rasva- ja öljynerottimista",
+  "intro": "Tarjoamme sekä yksinkertaisempia rasvanerottimia maahan ja sisäasennukseen että täysin automaattisia rasvanerottimia, jotka hoitavat koko puhdistusprosessin alusta loppuun.",
+  "blocks": [
+   {
+    "x": "Rasvanerottimet"
+   },
+   {
+    "x": "Sekä maahan asennettavat että sisätiloihin asennettavat erottimet voidaan varustaa useilla eri lisävarusteilla, kuten erotinhälyttimillä, puhdistuksen ohjausyksiköillä, jatkokauluksilla oikean asennussyvyyden saavuttamiseksi ja valmiilla asennussarjoilla."
+   },
+   {
+    "x": "Suurempia rasvanerottimia on saatavilla myös ulkoasennukseen, pyydä tarjous"
+   },
+   {
+    "x": "Öljynerottimet"
+   },
+   {
+    "x": "Öljynerottimet ovat korkealaatuisia, ja ne on sovitettu kaikkeen pienestä korjaamosta suurempiin pesulaitoksiin tai pysäköintialueisiin. Valikoimassa on laaja kokohaarukka, ja erottimet toimitetaan täysin valmiina. Öljynerottimia on saatavilla integroidulla tai erillisellä lietepesällä, luokan 1 tai 2 erottimina."
+   },
+   {
+    "x": "Muita öljynerottimia on saatavilla, pyydä tarjous"
+   }
+  ],
+  "faq": []
+ },
+ "ent/tankar": {
+  "h": "Tietoa lasikuitusäiliöistä",
+  "intro": "Voimme tarjota lasikuitusäiliöitä halutun kokoisina eri käyttötarkoituksiin.",
+  "blocks": [
+   {
+    "x": "Umpisäiliöt ja pienpuhdistamot"
+   },
+   {
+    "x": "Jos jätevettä ei ole sopivaa johtaa tontille, se voidaan johtaa umpisäiliöön, joka tyhjennetään imuautolla. Toimitamme lasikuitusäiliöitä 3 000 litrasta aina 65 000 litraan."
+   },
+   {
+    "x": "Jäteveden umpisäiliöitä on saatavilla 3,0 ja 5,2 m³:n kokoisina tyhjennysputkella ja pinnankorkeusvahdilla. GRAF- ja Kemik-pienpuhdistamot ovat kompakteja, säiliössä ei ole pumppuja, ja ne tarvitsevat lietteen tyhjennyksen 1-2 kertaa vuodessa. Säiliöistä ja pienpuhdistamoista tehdään tarjous tarpeen mukaan."
+   }
+  ],
+  "faq": []
+ },
+ "ent/tryckror": {
+  "h": "Tietoa paineputkista",
+  "intro": "Meillä on kattava valikoima polyeteenistä (PE) valmistettuja putkia ja putkenosia. Tuotteet valmistaa Puolassa yhteistyökumppanimme ELPLAST +.",
+  "blocks": [
+   {
+    "x": "Meillä on yhdessä Suomen tytäryhtiömme Suomen Kaivotarvikkeet OY:n kanssa koko ELPLAST+-valikoiman myyntiedustus Pohjoismaissa."
+   },
+   {
+    "x": "Valikoimassa on paineputkia (PE-polyeteeniputket) ja putkenosia seuraaviin käyttökohteisiin:"
+   },
+   {
+    "items": [
+     "Vedenjakelu.",
+     "Viemärijärjestelmät.",
+     "Kaapelinsuojaputket.",
+     "Putket kaivosteollisuuteen.",
+     "Kellukkeilla varustetut putkijärjestelmät ruoppaajiin.",
+     "Putkijärjestelmät jääkiekkokaukaloihin ja lumetukseen.",
+     "Kanaaliputket."
+    ]
+   },
+   {
+    "x": "Tuotteiden laatu on varmistettu standardien PN-EN ISO 9001:2009 ja PN-EN ISO 14001:2005 mukaisesti."
+   },
+   {
+    "x": "Meillä on myös PE100 RC -materiaalista valmistettuja paineputkia, jotka on sertifioitu PAS 1075 -määrittelyn mukaisesti; niiden vaatimustaso hitaan särönkasvun (SCG) kestävyydessä on esimerkiksi 17 kertaa normia korkeampi."
+   },
+   {
+    "x": "Asiakkaitamme ovat jälleenmyyjät, tukkukaupat sekä suuremmat urakoitsijat ja teollisuusyritykset."
+   }
+  ],
+  "faq": []
+ },
+ "ent/forhojning": {
+  "h": "Tietoa korotusrenkaista",
+  "intro": "Betonisia sovitusrenkaita tai korotusrenkaita käytetään ensisijaisesti, kun kaivon yläosa tai kaivonkansi halutaan saada halutulle korkeudelle.",
+  "blocks": [
+   {
+    "x": "Niitä käytetään myös kuormanjakajina kaivoissa ja pystyputkissa, jotka eivät itse pysty ottamaan vastaan kaivonkansiin tai kansistoihin kohdistuvia kuormia."
+   },
+   {
+    "x": "Jos kaivo on liian matalalla ja sitä halutaan korottaa, käytetään betonisia korotusrenkaita."
+   },
+   {
+    "x": "Saatavilla on myös kevyt kaivonkansimalli korotusrenkaalla."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Mihin betonisia korotusrenkaita käytetään?",
+    "a": [
+     "Korotusrenkailla kaivo korotetaan haluttuun korkeuteen, jos se on liian matalalla."
+    ]
+   },
+   {
+    "q": "Missä koissa betonisia korotusrenkaita on saatavilla?",
+    "a": [
+     "Tarjoamme korotusrenkaita eri kokoina halkaisijaltaan 600 mm:stä 800 mm:iin ja korkeudeltaan 40 mm:stä 100 mm:iin."
+    ]
+   },
+   {
+    "q": "Voinko asentaa korotusrenkaan itse?",
+    "a": [
+     "Useimmat, joilla on jonkin verran kokemusta rakennustöistä, voivat asentaa betoniset korotusrenkaat, mutta epävarmoissa tilanteissa suositellaan ammattilaisen apua."
+    ]
+   },
+   {
+    "q": "Kestävätkö betoniset korotusrenkaat säätä?",
+    "a": [
+     "Kyllä, betoniset korotusrenkaamme on valmistettu kestämään erilaisia sääolosuhteita, ja ne on suunniteltu pitkäikäisiksi."
+    ]
+   }
+  ]
+ },
+ "ent/stodmurar": {
+  "h": "Tietoa tukimuureista",
+  "intro": "Helposti asennettavia tukimuureja, jotka on kehitetty kestämään mäkisiä maastoja ja ajan vaikutuksia. Tuotteet valmistetaan laadukkaista materiaaleista, joten ne kestävät pitkään.",
+  "blocks": [
+   {
+    "x": "Kiviverhoiltu tukimuuri"
+   },
+   {
+    "x": "Jokainen ratkaisu sovitetaan asiakkaan tarpeiden, käyttötarkoituksen ja ympäröivän ympäristön mukaan."
+   },
+   {
+    "x": "Betoniset L-tukimuurit"
+   },
+   {
+    "x": "Helposti asennettavia L-tukimuureja, jotka on kehitetty kestämään mäkisiä maastoja ja pitkäaikaista kuormitusta. Tuotteet valmistetaan laadukkaista materiaaleista hyvän kestävyyden takaamiseksi."
+   },
+   {
+    "x": "Kuormitus: Liikennekuorma 22 kN/m², mikä vastaa 90 kN:n pistekuormaa."
+   }
+  ],
+  "faq": []
+ },
+ "ent/geo": {
+  "h": "Tietoa geotekstiileistä ja maaritilöistä",
+  "intro": "Puunjuuriritilöitä käytetään suojaamaan puun juuria ja estämään maata tiivistymästä liikaa. Kun maa pysyy ”ilmavana”, puu saa helpommin ilmaa ja vettä, mikä edistää puun hyvinvointia.",
+  "blocks": [
+   {
+    "x": "Puunjuuriritilä"
+   },
+   {
+    "x": "Valmistettu mustasta valuraudasta."
+   },
+   {
+    "x": "Ritilä on neliön muotoinen, ja sitä on saatavilla mitoissa 1500 x 1500 mm ja 1400 x 1400 mm, keskireikä 700 mm. Se kootaan neljästä osasta ja asetetaan paikalleen"
+   },
+   {
+    "x": "Puukuopan reunatuki"
+   },
+   {
+    "x": "Puukuopan reunatuki suojaa puun juuristoaluetta ja antaa reunatuen viereiselle päällysteelle. Sitä voi hyvin käyttää yhdessä kivirunkoisen kasvualustan kanssa. Reunatukea ja ritilää on saatavilla kahta kokoa."
+   },
+   {
+    "items": [
+     "Pituus: 1400 x leveys: 1400 korkeus: 600 mm",
+     "Pituus: 1500 x leveys: 1500 korkeus: 600 mm"
+    ]
+   }
+  ],
+  "faq": []
+ },
+ "ent/spont": {
+  "h": "Tietoa muoviponttilevyistä ja vesijohtopainoista",
+  "intro": "Muoviponttilevyillä voidaan tehdä kestäviä ja vesitiiviitä ponttiseiniä soille, järviin tai satamiin. Erinomainen tuote kosteikkojen ennallistamiseen.",
+  "blocks": [
+   {
+    "x": "Käyttöikä 50 vuotta"
+   },
+   {
+    "x": "Muoviponttilevy kestää korroosiota ja UV-säteilyä, ja se voidaan asentaa täryttämällä, painamalla tai kaivamalla. Se voi korvata teräsponttilevyn, ja sitä käytetään muun muassa satamissa, padoissa, kanavissa, ojissa ja luiskien vakauttamiseen."
+   },
+   {
+    "x": "Vesistöputken painoelementit"
+   },
+   {
+    "x": "Betoniset vesistöputken painoelementit pitävät putkilinjat paikallaan pohjassa. Pieniä painoja on saatavilla putkille Ø40, Ø50 ja Ø63 mm, ja ne toimitetaan solumuovipehmusteella ja nippusiteillä. Putkikokoihin 315-800 mm on saatavilla painoja, jotka lukitaan puukiiloilla ja toimitetaan hankaussuojalla varustettuina."
+   }
+  ],
+  "faq": []
+ },
+ "ent/redskap": {
+  "h": "Tietoa työlaitteista pyöräkuormaajiin ja kaivinkoneisiin",
+  "intro": "Stedox-palkinvetäjä pitää puuliitokset koossa, kun kiinnität ne. Erittäin pitkän räikkäkahvan ansiosta yksi henkilö pystyy suuntaamaan ja asentamaan raskaita elementtejä ilman lisäapua.",
+  "blocks": [
+   {
+    "x": "Kaksi mallia"
+   },
+   {
+    "items": [
+     "Hammer Down: taotut koukut, jotka lyödään puuhun ja jotka antavat heti tukevan otteen. Mukana tulee ylimääräinen koukku.",
+     "Screw Down: ruuvikiinnikkeet, jotka vähentävät halkeilun riskiä herkissä puulajeissa."
+    ]
+   },
+   {
+    "x": "Palkinvetäjä asennetaan muutamassa sekunnissa, ja se antaa tiiviit liitokset ilman lekan jälkiä puussa."
+   }
+  ],
+  "faq": []
+ }
+}

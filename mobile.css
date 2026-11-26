@@ -51,3 +51,20 @@
   .m-rt [role="cell"][data-title=""]::before { content: none; }
   .m-rt [role="cell"][data-title=""] { justify-content: flex-end; }
 }
+
+/* Kategoriateksti (SvSortiment/FiValikoima) */
+@media (max-width: 760px) {
+  .ct { margin-top: 24px !important; padding-top: 24px !important; }
+  .ct-h { font-size: 24px !important; }
+}
+
+/* Kategoriahierarkia: takaisin-linkki näkyy mobiilissa, yläkategorian sivulla lapsisirut korvaavat sivupalkin listan */
+@media (max-width: 760px) {
+  .m-cats > .m-back { display: inline-flex !important; margin: 0 !important; }
+  .m-cats[data-kids="true"] > ul { display: none !important; }
+}
+@media (max-width: 760px) {
+  .st-h1 { font-size: 34px !important; overflow-wrap: break-word; hyphens: auto; }
+  /* Lehtisivulla sirurivi näyttää vain saman tason sisarukset */
+  .m-cats li[data-m="off"] { display: none !important; }
+}
