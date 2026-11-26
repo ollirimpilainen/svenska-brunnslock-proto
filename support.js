@@ -356,7 +356,7 @@
       var T = function (sv, fi) { return lang === 'sv' ? sv : fi; };
       var same = T('Samma pris i hela Sverige.', 'Sama hinta koko Ruotsiin.');
       // Fallback: jos tuotteelta puuttuu paino, rahtia ei arvata. SB laskee rahdin ja ilmoittaa sen ennen lähetystä (rahtimalli.md 3.2).
-      var missing = ls.filter(function (l) { return l.kg == null; }).map(function (l) { return l.name; }).filter(Boolean);
+      var missing = ls.filter(function (l) { return l.kg == null; });
       if (missing.length) {
         var mn = T('Vi räknar frakten och meddelar dig innan vi skickar. Du godkänner frakten innan leverans.', 'Laskemme rahdin ja ilmoitamme sen ennen lähetystä. Hyväksyt rahdin ennen toimitusta.');
         return { price: null, quote: true, later: true, key: 'calc', label: T('beräknas av oss', 'lasketaan erikseen'), priceTxt: T('Beräknas', 'Lasketaan'), note: mn,

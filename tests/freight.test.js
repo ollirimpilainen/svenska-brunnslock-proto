@@ -155,6 +155,7 @@ check('tuotekortin rahti = korin rahti yhdelle kappaleelle', unitMismatch === 0,
 check('57 isoa tuotetta vie aina vähintään 6 lavaa', bigWrong === 0, bigWrong + ' tuotetta: ' + bigEx.join(' | '));
 check('paino puuttuu: SB laskee rahdin (pieni)', run([L('ombud', null, 1)]).kind === 'calc', show(run([L('ombud', null, 1)])));
 check('paino puuttuu: SB laskee rahdin (iso, 57 kpl)', run([L('skrym', null, 57)]).kind === 'calc', show(run([L('skrym', null, 57)])));
+check('paino puuttuu, rivi ilman nimeä (kuten korisivu)', freight([{ fr: 'skrym', kg: undefined, qty: 3 }]).key === 'calc');
 check('paino puuttuu yhdeltä rivilta: koko kori lasketaan erikseen', run([L('plint', 67, 3, OWN.TP600), L('pall', null, 1)]).kind === 'calc');
 check('11 kevyttä isoa (5 kg) menee lavalle', run([L('skrym', 5, 11)]).kind === 'pallet', show(run([L('skrym', 5, 11)])));
 
