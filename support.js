@@ -183,6 +183,7 @@
   var FREIGHT_HEAVY_MAX_KG = 150;   // koko kori enintään 150 kg: tung kotiinkuljetus rahtina kotiovelle (uusi porras, SB päättää)
   var FREIGHT_RIDER_MAX_KG = 1000;  // muut tuotteet kulkevat lavojen mukana enintään 1 000 kg, sen yli lisää yleislavoja
   var FREIGHT_PALLET_MAX_KG = 1000; // yleislava enintään 1 000 kg
+  var FREIGHT_LARGE_PER_PALLET = 10; // isoja tuotteita (esim. Composite-kannet) enintään 10 per lava (esimerkki, SB vahvistaa)
   var FREIGHT_MAX_PALLETS = 5;      // yli 5 lavaa: rahti offeroidaan, ei lisätä summaan
   var FREIGHT_OMBUD_PRICE = 172, FREIGHT_HOME_PRICE = 590;
   var FREIGHT_HEAVY_PRICE = 1240;   // nykyisen "Hemleverans pall" -tavan hinta
@@ -332,7 +333,7 @@
       // ombud enintään 20 kg, kotiinkuljetus pakettina enintään 30 kg, tung kotiinkuljetus enintään 150 kg, sen yli lava;
       // lavalla kulkee muita tuotteita enintään 1 000 kg; yli 5 lavaa tarjoukseen.
       var OMB_KG = FREIGHT_OMBUD_MAX_KG, HOME_KG = FREIGHT_HOME_MAX_KG, HEAVY_KG = FREIGHT_HEAVY_MAX_KG, RIDER_KG = FREIGHT_RIDER_MAX_KG, PALL_KG = FREIGHT_PALLET_MAX_KG, MAX_PALL = FREIGHT_MAX_PALLETS, PT = PALLET_TYPES;
-      var W = 0, riderKg = 0, hasGeneral = false, unknownPall = false, noKg = [], has = {}, share = {};
+      var W = 0, riderKg = 0, largeQty = 0, hasGeneral = false, unknownPall = false, noKg = [], has = {}, share = {};
       ls.forEach(function (l) {
         var kg = l.kg == null ? 0 : l.kg * l.qty, pa = null;
         has[l.fr] = true;
@@ -347,6 +348,7 @@
           if (l.kg == null) unknownPall = true;
         } else {
           riderKg += kg;
+          if (l.fr === 'skrym') largeQty += l.qty;
           // Huomautus vain, kun puuttuva paino voi muuttaa rahtia (useampi kappale tai muu kuin pakettituote)
           if (l.kg == null && (l.qty > 1 || l.fr !== 'ombud') && noKg.indexOf(l.name) < 0) noKg.push(l.name);
         }
@@ -373,7 +375,9 @@
         // Ilman lavatuotteita yli 150 kg:n kori menee yleislavoille painon mukaan (enintään 1 000 kg per lava).
         var n = {};
         Object.keys(share).forEach(function (k) { n[k] = Math.ceil(share[k] - 1e-9); });
-        var extra = hasOwn ? (riderKg > RIDER_KG ? Math.ceil((riderKg - RIDER_KG) / PALL_KG) : 0) : Math.max(1, Math.ceil(W / PALL_KG));
+        // Isot tuotteet vievät tilaa: lavoja vähintään kappalemäärän mukaan (FREIGHT_LARGE_PER_PALLET). Plinttilavojen mukana kulkee enintään 1 000 kg ja 10 isoa tuotetta.
+        var nLarge = Math.ceil(largeQty / FREIGHT_LARGE_PER_PALLET);
+        var extra = hasOwn ? Math.max(riderKg > RIDER_KG ? Math.ceil((riderKg - RIDER_KG) / PALL_KG) : 0, Math.ceil(Math.max(0, largeQty - FREIGHT_LARGE_PER_PALLET) / FREIGHT_LARGE_PER_PALLET)) : Math.max(1, Math.ceil(W / PALL_KG), nLarge);
         if (extra) n.general = (n.general || 0) + extra;
         var pallets = 0, pp = 0;
         Object.keys(n).forEach(function (k) { pallets += n[k]; pp += n[k] * PT[k].price; });
