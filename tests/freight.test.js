@@ -27,6 +27,7 @@ const OWN = { TP200: { type: 'plint', per: 30 }, TP600: { type: 'plint', per: 20
 // ---------- viitetoteutus dokumentista ----------
 // line: { fr: 'ombud'|'skrym'|'pall'|'plint', kg, qty, own: {type, per} | null }
 function oracle(lines) {
+  if (lines.some(l => l.kg == null)) return { kind: 'calc', price: null };                              // paino puuttuu: SB laskee rahdin
   const W = lines.reduce((s, l) => s + (l.kg || 0) * l.qty, 0);
   const smallOnly = lines.every(l => l.fr === 'ombud');
   const largeAll = lines.filter(l => l.fr === 'skrym').reduce((s, l) => s + l.qty, 0);
@@ -50,7 +51,7 @@ function oracle(lines) {
   if (pallets > V.MAX_PALLETS) return { kind: 'quote', price: null, pallets };                        // sääntö 6
   return { kind: 'pallet', price, pallets };
 }
-const KIND = { ombud: 'ombud', skrym: 'home', tung: 'heavy', pall: 'pallet', offert: 'quote' };
+const KIND = { ombud: 'ombud', skrym: 'home', tung: 'heavy', pall: 'pallet', offert: 'quote', calc: 'calc' };
 const toProto = (lines) => lines.map(l => ({ fr: l.fr, kg: l.kg, qty: l.qty, name: l.name || l.fr, pt: l.own ? l.own.type : (l.fr === 'pall' || l.fr === 'plint' ? 'general' : undefined), per: l.own ? l.own.per : 8 }));
 function run(lines) { const r = freight(toProto(lines)); return { kind: KIND[r.key] || r.key, price: r.price == null ? null : r.price, pallets: r.pallets }; }
 
@@ -112,7 +113,7 @@ check('plinttilava + 1 001 kg muuta = 2 lavaa', run([L('plint', 67, 3, OWN.TP600
 // 3 Ominaisuudet satunnaiskoreilla (siemen, jotta tulokset toistuvat)
 let seed = 20261126; const rnd = () => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
 const POOL = [L('ombud', 1, 0), L('ombud', 5, 0), L('ombud', 8, 0), L('skrym', 10, 0), L('skrym', 14, 0), L('pall', 21, 0), L('pall', 31, 0), L('pall', 78, 0),
-  L('plint', 45, 0, OWN.TP200), L('plint', 67, 0, OWN.TP600), L('plint', 144, 0, OWN.KP), L('plint', 360, 0, OWN.KPplus), L('pall', 225, 0, OWN.BL1000), L('pall', 300, 0, OWN.BL1200)];
+  L('plint', 45, 0, OWN.TP200), L('plint', 67, 0, OWN.TP600), L('plint', 144, 0, OWN.KP), L('plint', 360, 0, OWN.KPplus), L('pall', 225, 0, OWN.BL1000), L('pall', 300, 0, OWN.BL1200), L('ombud', null, 0), L('skrym', null, 0)];
 const randCart = () => POOL.map(p => Object.assign({}, p, { qty: rnd() < 0.6 ? 0 : Math.floor(rnd() * (rnd() < 0.25 ? 80 : 6)) + 1 })).filter(l => l.qty > 0);
 const priceOf = (r) => r.price == null ? Infinity : r.price;
 let diffs = 0, mono = 0, oneOutcome = 0, largeOmbud = 0, palletGoodsOmbud = 0, N = 20000;
@@ -120,7 +121,7 @@ for (let i = 0; i < N; i++) {
   const c = randCart(); if (!c.length) continue;
   const r = run(c), o = oracle(c);
   if (!same(r, o)) { diffs++; if (diffs <= 5) fails.push('oracle-ero: ' + JSON.stringify(c.map(l => [l.fr, l.kg, l.qty, l.own && l.own.type])) + ' proto ' + show(r) + ' / oracle ' + show(o)); }
-  if (!['ombud', 'home', 'heavy', 'pallet', 'quote'].includes(r.kind)) oneOutcome++;
+  if (!['ombud', 'home', 'heavy', 'pallet', 'quote', 'calc'].includes(r.kind)) oneOutcome++;
   if (c.some(l => l.fr === 'skrym') && r.kind === 'ombud') largeOmbud++;
   if (c.some(l => l.fr === 'pall' || l.fr === 'plint') && r.kind === 'ombud') palletGoodsOmbud++;
   const j = Math.floor(rnd() * POOL.length), c2 = c.map(l => Object.assign({}, l)); const hit = c2.find(l => l.fr === POOL[j].fr && l.kg === POOL[j].kg);
@@ -148,11 +149,13 @@ for (const id of ids) {
     const p = one.price == null ? null : Math.round(one.price).toLocaleString('sv-SE');
     if (p && txt.replace(/\s/g, ' ').indexOf(p.replace(/\s/g, ' ')) < 0) { unitMismatch++; if (unitEx.length < 5) unitEx.push(`${c.sv ? c.sv[0] : id}: kori ${p} kr, kortti "${txt}"`); }
   }
-  if (c.fr === 'skrym') { const r = freight([{ id, fr: c.fr, kg: c.kg, qty: 57, name: id }]); if (!(r.price == null || (r.pallets || 0) >= 6)) { bigWrong++; if (bigEx.length < 5) bigEx.push('57 x ' + (c.sv ? c.sv[0] : id) + ' kg ' + c.kg + ': ' + r.label); } }
+  if (c.fr === 'skrym' && c.kg != null) { const r = freight([{ id, fr: c.fr, kg: c.kg, qty: 57, name: id }]); if (!(r.price == null || (r.pallets || 0) >= 6)) { bigWrong++; if (bigEx.length < 5) bigEx.push('57 x ' + (c.sv ? c.sv[0] : id) + ' kg ' + c.kg + ': ' + r.label); } }
 }
 check('tuotekortin rahti = korin rahti yhdelle kappaleelle', unitMismatch === 0, unitMismatch + ' tuotetta: ' + unitEx.join(' | '));
 check('57 isoa tuotetta vie aina vähintään 6 lavaa', bigWrong === 0, bigWrong + ' tuotetta: ' + bigEx.join(' | '));
-check('11 isoa ilman painoa menee lavalle', run([L('skrym', null, 11)]).kind === 'pallet', show(run([L('skrym', null, 11)])));
+check('paino puuttuu: SB laskee rahdin (pieni)', run([L('ombud', null, 1)]).kind === 'calc', show(run([L('ombud', null, 1)])));
+check('paino puuttuu: SB laskee rahdin (iso, 57 kpl)', run([L('skrym', null, 57)]).kind === 'calc', show(run([L('skrym', null, 57)])));
+check('paino puuttuu yhdeltä rivilta: koko kori lasketaan erikseen', run([L('plint', 67, 3, OWN.TP600), L('pall', null, 1)]).kind === 'calc');
 check('11 kevyttä isoa (5 kg) menee lavalle', run([L('skrym', 5, 11)]).kind === 'pallet', show(run([L('skrym', 5, 11)])));
 
 // ---------- raportti ----------

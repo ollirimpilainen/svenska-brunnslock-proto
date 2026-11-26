@@ -162,7 +162,7 @@ class Component extends DCLogic {
         const f = typeof window !== 'undefined' && window.SBCart && window.SBCart.freight ? window.SBCart.freight(priced.map((l) => { const c = CAT[l.id] || {}; return { id: l.id, name: l.name, fr: l.fr || c.fr || 'skrym', kg: l.kg != null ? l.kg : c.kg, pt: l.pt || c.pt, per: l.per || c.per, qty: l.qty }; }), 'sv') : { price: 590, label: '' };
         const fq = !!f.quote, gross = sum + (fq ? 0 : f.price), net = Math.round(gross / 1.25), kr = (n) => Math.round(n).toLocaleString('sv-SE') + ' kr';
         return { hasFr: priced.length > 0, frLabel: 'Frakt' + (f.label ? ', ' + f.label.toLowerCase() : ''), frNote: f.note || 'Samma pris i hela Sverige.', frSum: fq ? f.priceTxt : fmt(f.price),
-          frQuoteOnly: fq && !hasQuote, noQuote: !hasQuote && !fq, incl: !ex, ex: ex,
+          frQuoteOnly: fq && !f.later && !hasQuote, noQuote: !hasQuote && (!fq || !!f.later), incl: !ex, ex: ex,
           totalLabel: fmt(gross), payLabel: kr(gross), vatSum: ex ? kr(Math.round(gross) - net) : kr(gross - gross / 1.25) };
       })(),
       zip: S.zip, typeZip: (e) => this.setState({ zip: e.target.value, zipErr: false }),

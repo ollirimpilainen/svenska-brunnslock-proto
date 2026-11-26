@@ -355,6 +355,13 @@
       });
       var T = function (sv, fi) { return lang === 'sv' ? sv : fi; };
       var same = T('Samma pris i hela Sverige.', 'Sama hinta koko Ruotsiin.');
+      // Fallback: jos tuotteelta puuttuu paino, rahtia ei arvata. SB laskee rahdin ja ilmoittaa sen ennen lähetystä (rahtimalli.md 3.2).
+      var missing = ls.filter(function (l) { return l.kg == null; }).map(function (l) { return l.name; }).filter(Boolean);
+      if (missing.length) {
+        var mn = T('Vi räknar frakten och meddelar dig innan vi skickar. Du godkänner frakten innan leverans.', 'Laskemme rahdin ja ilmoitamme sen ennen lähetystä. Hyväksyt rahdin ennen toimitusta.');
+        return { price: null, quote: true, later: true, key: 'calc', label: T('beräknas av oss', 'lasketaan erikseen'), priceTxt: T('Beräknas', 'Lasketaan'), note: mn,
+          options: [{ id: 'calc', label: T('Frakt beräknas av oss', 'Rahti lasketaan erikseen'), text: mn, price: null }] };
+      }
       var kgTxt = Math.round(W).toLocaleString('sv-SE') + ' kg';
       var money = function (n) { return Math.round(n).toLocaleString('sv-SE') + ' kr'; };
       // Tuote ilman painoa lasketaan 0 kg:ksi (tuotedatasta puuttuu paino), joten rahti voi tarkentua: kerrotaan se asiakkaalle.
@@ -414,6 +421,7 @@
     var n = Array.isArray(it.n) ? it.n[0] : (it.n || it.name || (it.sv && it.sv[0]) || '');
     var pa = it.pt ? { type: it.pt, per: it.per } : palletOf({ fr: fr, n: n, perPall: it.perPall });
     var f = window.SBCart.freight([{ fr: fr, kg: it.kg, qty: 1, name: n, pt: pa && pa.type, per: pa && pa.per }], lang);
+    if (f.later) return lang === 'sv' ? 'Frakt beräknas av oss' : 'Rahti lasketaan erikseen';
     var kr = Math.round(ex ? f.price / 1.25 : f.price).toLocaleString('sv-SE') + ' kr';
     var sv = lang === 'sv';
     if (f.key === 'ombud') return (sv ? 'Frakt från ' : 'Rahti alkaen ') + kr;
